@@ -5,3 +5,8 @@ set(CMAKE_CXX_STANDARD 11)
 
 set(SOURCE_FILES main.cpp)
 add_executable(eDSP ${SOURCE_FILES})
+
+SET(BASEPATH "${CMAKE_SOURCE_DIR}")
+
+# add include dirs
+include_directories("${BASEPATH}/third_party/Catch/include/")
