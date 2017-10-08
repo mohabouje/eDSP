@@ -6,10 +6,10 @@
 #define EDSP_VERSION_H
 
 #include "base/types.h
-E_BEGING_NAMESPACE
-    constexpr int VersionMajor           = E_VERSION_MAJOR;
-    constexpr int VersionMinor           = E_VERSION_MINOR;
-    constexpr int VersionBuild           = E_VERSION_BUILD;
+EDSP_BEGING_NAMESPACE
+    constexpr int VersionMajor           = EDSP_VERSION_MAJOR;
+    constexpr int VersionMinor           = EDSP_VERSION_MINOR;
+    constexpr int VersionBuild           = EDSP_VERSION_BUILD;
 
     inline static constexpr String version() {
         return  std::to_string(VersionMajor)
@@ -17,10 +17,10 @@ E_BEGING_NAMESPACE
                 + std::to_string(VersionMinor)
                 + "."
                 + std::to_string(VersionBuild)
-                + E_VERSION_LABEL;
+                + EDSP_VERSION_LABEL;
     }
 
-E_END_NAMESPCE
+EDSP_END_NAMESPCE
 
 
 #endif //EDSP_VERSION_H

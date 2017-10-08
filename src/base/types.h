@@ -14,7 +14,7 @@
 
 #include "config.h"
 
-E_BEGING_NAMESPACE
+EDSP_BEGING_NAMESPACE
 
     using float32  = float;
     using float64  = double;
@@ -55,6 +55,6 @@ E_BEGING_NAMESPACE
     using SharedPtr = std::shared_ptr<T>;
 
 
-E_END_NAMESPCE
+EDSP_END_NAMESPCE
 
 #endif //EDSP_E_TYPES_H
