@@ -16,5 +16,9 @@
 #define E_UNUSED(X)     (void*)X
 #define E_NULLPTR       nullptr
 
+#define OR |
+#define AND &
+#define XOR ^
+
 
 #endif //EDSP_EDSP_H
