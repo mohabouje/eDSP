@@ -20,7 +20,7 @@
 *.mod
 *.smod
 
-# Compiled Static libraries
+# Compiled Static libraries∫
 *.lai
 *.la
 *.a
@@ -33,33 +33,5 @@
 
 # Clion IDE files.
 .idea/
-CMakeLists.txt
-
-cmake-build-debug/CMakeCache.txt
-cmake-build-debug/CMakeFiles/3.8.2/CMakeCCompiler.cmake
-cmake-build-debug/CMakeFiles/3.8.2/CMakeCXXCompiler.cmake
-cmake-build-debug/CMakeFiles/3.8.2/CMakeDetermineCompilerABI_C.bin
-cmake-build-debug/CMakeFiles/3.8.2/CMakeDetermineCompilerABI_CXX.bin
-cmake-build-debug/CMakeFiles/3.8.2/CMakeSystem.cmake
-cmake-build-debug/CMakeFiles/3.8.2/CompilerIdC/CMakeCCompilerId.c
-cmake-build-debug/CMakeFiles/3.8.2/CompilerIdC/tmp/
-cmake-build-debug/CMakeFiles/3.8.2/CompilerIdCXX/CMakeCXXCompilerId.cpp
-cmake-build-debug/CMakeFiles/3.8.2/CompilerIdCXX/tmp/
-cmake-build-debug/CMakeFiles/CMakeDirectoryInformation.cmake
-cmake-build-debug/CMakeFiles/CMakeOutput.log
-cmake-build-debug/CMakeFiles/CMakeTmp/
-cmake-build-debug/CMakeFiles/Makefile.cmake
-cmake-build-debug/CMakeFiles/Makefile2
-cmake-build-debug/CMakeFiles/TargetDirectories.txt
-cmake-build-debug/CMakeFiles/clion-environment.txt
-cmake-build-debug/CMakeFiles/clion-log.txt
-cmake-build-debug/CMakeFiles/cmake.check_cache
-cmake-build-debug/CMakeFiles/eDSP.dir/
-cmake-build-debug/CMakeFiles/feature_tests.bin
-cmake-build-debug/CMakeFiles/feature_tests.c
-cmake-build-debug/CMakeFiles/feature_tests.cxx
-cmake-build-debug/CMakeFiles/progress.marks
-cmake-build-debug/Makefile
-cmake-build-debug/cmake_install.cmake
-cmake-build-debug/eDSP.cbp
+cmake-build-debug/
 
