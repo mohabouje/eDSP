@@ -30,3 +30,8 @@
 *.exe
 *.out
 *.app
+
+# Clion IDE files.
+.idea/
+CMakeLists.txt
+
