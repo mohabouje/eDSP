@@ -16,6 +16,7 @@
 #define UNUSED(X)     (void*)X
 
 #define ENABLE_IF_ARITHMETIC(T)     typename T2 = typename std::enable_if<std::is_arithmetic<T>::value>::type
+#define ENABLE_IF_INTEGER(T)     typename T2 = typename std::enable_if<std::is_integral<T>::value>::type
 #define TEMPLATE_CONTAINER(T)       template <typename T> class Container
 
 #endif //EDSP_EDSP_H

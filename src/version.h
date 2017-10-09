@@ -11,7 +11,7 @@ EDSP_BEGING_NAMESPACE
     constexpr int VersionMinor           = EDSP_VERSION_MINOR;
     constexpr int VersionBuild           = EDSP_VERSION_BUILD;
 
-    inline static constexpr String version() {
+    static constexpr String version() {
         return  std::to_string(VersionMajor)
                 + "."
                 + std::to_string(VersionMinor)
