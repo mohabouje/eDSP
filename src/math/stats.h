@@ -14,7 +14,7 @@ EDSP_BEGING_NAMESPACE
 namespace Math {
     namespace Stat {
 
-        template<TEMPLATE_CONTAINER(T), ENABLE_IF_ARITHMETIC(T)>
+        template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
         constexpr T mode(const Container& container) {
             typedef std::unordered_map<T,unsigned int> Map;
             Map counts;
@@ -33,26 +33,27 @@ namespace Math {
             return pr->first;
         }
 
-        template<TEMPLATE_CONTAINER(T), ENABLE_IF_ARITHMETIC(T)>
+        template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
         constexpr T mean(const Container& container) {
             return  Container::sum(container) / static_cast<T> (container.size());
         }
 
-        template<TEMPLATE_CONTAINER(T), ENABLE_IF_ARITHMETIC(T)>
+        template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
         constexpr T variance(const Container& container) {
             return  (Container::sum_squares(container) - Util::square<T>(Container::sum(container))
                                                           / static_cast<T>(container.size()));
         }
 
-        template<TEMPLATE_CONTAINER(T), ENABLE_IF_ARITHMETIC(T)>
+        template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
         constexpr T standar_desviation(const Container& container) {
             return static_cast<T>(std::sqrt(variance(container)));
         }
 
-        template<TEMPLATE_CONTAINER(T), ENABLE_IF_ARITHMETIC(T)>
+        template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
         constexpr T mean_error(const Container& container) {
             return std::sqrt(variance(container) / static_cast<T>(container.size()));
         }
+
     }
 }
 EDSP_END_NAMESPCE
