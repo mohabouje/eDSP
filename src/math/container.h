@@ -56,6 +56,21 @@ EDSP_BEGING_NAMESPACE
             }
 
 
+            template <EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
+            constexpr Container zeros(size_t size) {
+                Container tmp(size);
+                set(tmp, static_cast<T>(0));
+                return tmp;
+            }
+
+            template <EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
+            constexpr Container ones(size_t size) {
+                Container tmp(size);
+                set(tmp, static_cast<T>(1));
+                return tmp;
+            }
+
+
             template <EDSP_TEMPLATE_CONTAINER(T),  typename T>
             inline void set(const Container& array, const T& value) {
                 std::memset(array.begin(), array.end(), value);
