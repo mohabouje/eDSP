@@ -29,13 +29,13 @@ EDSP_BEGING_NAMESPACE
 
     using Real = float;
     template <typename T>
-    constexpr bool isReal(const T&) const {
+    constexpr bool isReal(const T&) {
         return std::is_same<T, Real>::value;
     }
 
     using String = std::string;
     template <typename T>
-    constexpr bool isString(const T&) const {
+    constexpr bool isString(const T&) {
         return std::is_same<T, String>::value;
     }
 

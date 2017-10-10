@@ -26,59 +26,59 @@ EDSP_BEGING_NAMESPACE
                 y = tmp;
             }
 
-            template<typename T, EDSP_ENABLE_IF_ARITHMETIC(T)>
+            template<typename T>
             constexpr bool isNaN(const T &x) {
                 return (x) != (x);
             }
 
-            template<typename T, EDSP_ENABLE_IF_ARITHMETIC(T)>
+            template<typename T>
             constexpr int sign(const T &x) {
                 return x > 0 ? 1 : 0;
             }
 
-            template<typename T, EDSP_ENABLE_IF_ARITHMETIC(T)>
+            template<typename T>
             constexpr bool isOdd(const T &x) {
                 return (x % 2) == 0;
             }
 
-            template<typename T, EDSP_ENABLE_IF_ARITHMETIC(T)>
+            template<typename T>
             constexpr bool isEven(const T &x) {
                 return !isOdd(x);
             }
 
 
-            template<typename T, EDSP_ENABLE_IF_ARITHMETIC(T)>
+            template<typename T>
             constexpr T square(const T &in) {
                 return in * in;
             }
 
-            template<typename T, EDSP_ENABLE_IF_ARITHMETIC(T)>
+            template<typename T>
             constexpr T random() {
                 return static_cast<T>(std::rand());
             }
 
-            template<typename T, EDSP_ENABLE_IF_ARITHMETIC(T)>
+            template<typename T>
             constexpr T random(const T &min, const T &max) {
                 return min + random<T>() * (max - min);
             }
 
 
-            template<typename T, EDSP_ENABLE_IF_ARITHMETIC(T)>
+            template<typename T>
             constexpr bool isNegative(const T &x) {
                 return x < 0;
             }
 
-            template<typename T, EDSP_ENABLE_IF_ARITHMETIC(T)>
+            template<typename T>
             constexpr bool isZero(const T &x) {
                 return x == 0;
             }
 
-            template<typename T, EDSP_ENABLE_IF_INTEGER(T)>
+            template<typename T>
             constexpr bool isPowerOfTwo(const T &x) {
                 return x != 0 && !(x & (x - 1));
             }
 
-            template<typename T, EDSP_ENABLE_IF_INTEGER(T)>
+            template<typename T>
             constexpr T nextPowerOfTwo(T x) {
                 if (isNegative(x))
                     return 0;

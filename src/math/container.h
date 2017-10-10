@@ -16,87 +16,81 @@ EDSP_BEGING_NAMESPACE
     namespace Math {
         namespace Container {
 
-            template <typename T>
-            constexpr int size(const T* array) {
-                return (array == nullptr) ? 0 : (sizeof(array) / sizeof(T));
-            }
-
-            template<EDSP_TEMPLATE_CONTAINER(T)>
-            constexpr T max(const Container& array) {
+            template<typename T>
+            constexpr T max(const std::vector<T>& array) {
                 return *std::max_element(array.begin(), array.end());
             }
 
-            template<EDSP_TEMPLATE_CONTAINER(T)>
-            constexpr T min(const Container& array) {
+            template<typename T>
+            constexpr T min(const std::vector<T>& array) {
                 return *std::min_element(array.begin(), array.end());
             }
 
-            template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-            constexpr T sum(const Container& array) {
-                return std::accumulate(array.begin(), array.end(), T());
-            }
-
-            template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-            constexpr Container fract(const Container& array) {
-                Container tmp(array);
-                for (int i = 0, size = array.size(); i < size; i++) {
+            template<typename T>
+            constexpr std::vector<T> fract(const std::vector<T>& array) {
+                std::vector<T> tmp(array);
+                for (size_t i = 0, size = array.size(); i < size; i++) {
                     tmp[i] -= std::floor(array[i]);
                 }
                 return tmp;
             }
 
-            template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-            constexpr bool hasNegative(Container& array) {
+            template<typename T>
+            constexpr bool hasNegative(std::vector<T>& array) {
                 return std::find_if(array.begin(), array.end(),  Util::isNegative<T>) != array.end();
             }
 
-            template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-            constexpr bool hasZero(Container& array) {
+            template<typename T>
+            constexpr bool hasZero(std::vector<T>& array) {
                 return std::find_if(array.begin(), array.end(), Util::isZero<T>) != array.end();
             }
 
 
-            template <EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-            constexpr Container zeros(size_t size) {
-                Container tmp(size);
+            template<typename T>
+            inline void set(std::vector<T>& array, const T& value) {
+                std::fill(array.begin(), array.end(), value);
+            }
+
+            template<typename T>
+            inline std::vector<T> zeros(const size_t& size) {
+                std::vector<T> tmp(size);
                 set(tmp, static_cast<T>(0));
                 return tmp;
             }
 
-            template <EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-            constexpr Container ones(size_t size) {
-                Container tmp(size);
-                set(tmp, static_cast<T>(1));
+            template<typename T>
+            inline std::vector<T> ones(const size_t& size) {
+                std::vector<T> tmp(size);
+                set<double>(tmp, static_cast<T>(1));
                 return tmp;
             }
 
-
-            template <EDSP_TEMPLATE_CONTAINER(T),  typename T>
-            inline void set(const Container& array, const T& value) {
-                std::memset(array.begin(), array.end(), value);
+            template<typename T>
+            constexpr T sum(const std::vector<T>& array) {
+                return static_cast<T>(std::accumulate(array.begin(), array.end(), T()));
             }
 
-            template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-            constexpr T sum_squares(const Container& array) {
+            template<typename T>
+            constexpr T sum_squares(const std::vector<T>& array) {
                 return std::inner_product(array.begin(), array.end(), array.begin(), static_cast<T>(0));
             }
 
-            template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-            inline void ceil(Container& array) {
+            template<typename T>
+            inline void ceil(std::vector<T>& array) {
                 std::for_each(array.begin(), array.end(), [](T& value) {
                    value = std::ceil(value);
                 });
             }
 
-            template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-            inline void floor(Container& array) {
+            template<typename T>
+            inline void floor(std::vector<T>& array) {
                 std::for_each(array.begin(), array.end(), [](T& value) {
                     value = std::floor(value);
                 });
             }
 
-            template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-            inline void round(Container& array) {
+            template<typename T>
+            inline void round(std::vector<T>& array) {
                 std::for_each(array.begin(), array.end(), [](T& value) {
                     value = std::round(value);
                 });
@@ -104,7 +98,6 @@ EDSP_BEGING_NAMESPACE
 
         }
     }
-};
 
 EDSP_END_NAMESPCE
 

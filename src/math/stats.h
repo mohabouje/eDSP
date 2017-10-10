@@ -14,11 +14,11 @@ EDSP_BEGING_NAMESPACE
 namespace Math {
     namespace Stat {
 
-        template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-        constexpr T mode(const Container& container) {
+        template<typename T>
+        constexpr T mode(const std::vector<T>& container) {
             typedef std::unordered_map<T,unsigned int> Map;
             Map counts;
-            for (int i = 0, size = container.size(); i < size; ++i) {
+            for (size_t i = 0, size = container.size(); i < size; ++i) {
                 typename Map::iterator it(counts.find(container[i]));
                 (it != counts.end()) ? it->second++ : counts[container[i]] = 1;
             }
@@ -33,24 +33,24 @@ namespace Math {
             return pr->first;
         }
 
-        template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-        constexpr T mean(const Container& container) {
+        template<typename T>
+        constexpr T mean(const std::vector<T>& container) {
             return  Container::sum(container) / static_cast<T> (container.size());
         }
 
-        template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-        constexpr T variance(const Container& container) {
+        template<typename T>
+        constexpr T variance(const std::vector<T>& container) {
             return  (Container::sum_squares(container) - Util::square<T>(Container::sum(container))
                                                           / static_cast<T>(container.size()));
         }
 
-        template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-        constexpr T standar_desviation(const Container& container) {
+        template<typename T>
+        constexpr T standar_desviation(const std::vector<T>& container) {
             return static_cast<T>(std::sqrt(variance(container)));
         }
 
-        template<EDSP_TEMPLATE_CONTAINER(T), EDSP_ENABLE_IF_ARITHMETIC(T)>
-        constexpr T mean_error(const Container& container) {
+        template<typename T>
+        constexpr T mean_error(const std::vector<T>& container) {
             return std::sqrt(variance(container) / static_cast<T>(container.size()));
         }
 
