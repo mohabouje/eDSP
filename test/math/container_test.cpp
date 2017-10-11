@@ -3,7 +3,7 @@
 //
 
 #include "math/container.h"
-#include "test/test_db.h"
+#include "../test_db.h"
 #include <catch.hpp>
 
 using namespace eDSP::Math;

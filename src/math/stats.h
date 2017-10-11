@@ -54,6 +54,20 @@ namespace Math {
             return std::sqrt(variance(container) / static_cast<T>(container.size()));
         }
 
+        template<typename T>
+        constexpr T root_mean_square(const std::vector<T>& container) {
+            return static_cast<T>(std::sqrt(mean(container)));
+        }
+
+        template<typename T>
+        constexpr T median(const std::vector<T>& container) {
+            std::vector<T> tmp(container);
+            std::sort(tmp.begin(), tmp.end());
+            const size_t size = tmp.size();
+            return (Util::isOdd(size))  ? (tmp[uint(size/2 - 1)] + tmp[uint(size/2)]) / 2
+                                  : tmp[uint(size/2)];
+        }
+
     }
 }
 EDSP_END_NAMESPCE

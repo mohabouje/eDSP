@@ -13,7 +13,8 @@
 #define EDSP_BEGING_NAMESPACE  namespace eDSP {
 #define EDSP_END_NAMESPCE      }
 
-#define UNUSED(X)     (void*)X
+#define EDSP_UNUSED(X)     (void*)X
+#define EDSP_INVALID        (–1)
 
 #define EDSP_ENABLE_IF_ARITHMETIC(T)        typename T2 = typename std::enable_if<std::is_arithmetic<T>::value>::type
 #define EDSP_ENABLE_IF_INTEGER(T)           typename T2 = typename std::enable_if<std::is_integral<T>::value>::type

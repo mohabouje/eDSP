@@ -2,9 +2,9 @@
 // Created by Mohammed Boujemaoui on 10/10/2017.
 //
 
-#include <catch.hpp>
-#include "test/test_db.h"
+#include "../test_db.h"
 #include "math/stats.h"
+#include <catch.hpp>
 
 using namespace eDSP::Math;
 SCENARIO("Testing the basic usage of the statistic functions") {
