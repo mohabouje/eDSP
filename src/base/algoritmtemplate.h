@@ -13,8 +13,9 @@ EDSP_BEGING_NAMESPACE
 
 class AlgorithmTemplate : public IErrorNotifier, public IInitializer {
 public:
-    AlgorithmTemplate();
-    virtual ~AlgorithmTemplate() { }
+    AlgorithmTemplate() = default;
+    AlgorithmTemplate(bool state, const Error& error) : state(state), err(error) {}
+    virtual ~AlgorithmTemplate() = default;
 
     inline bool isInitialized() const override { return state; }
     inline bool hasError() const override { return err.id() != EDSP_INVALID; }
@@ -23,12 +24,11 @@ public:
     inline int16 errorId() const override { return err.id(); }
 
 protected:
-    virtual void initialize(bool state) override { AlgorithmTemplate::state = state; }
-    virtual void setError(const Error& error) override  { AlgorithmTemplate::err = error; }
-
+    void initialize(bool state) override { AlgorithmTemplate::state = state; }
+    void setError(const Error& error) override  { AlgorithmTemplate::err = error; }
 private:
     Error err;
-    bool state;
+    bool state{false};
 };
 
 EDSP_END_NAMESPCE
