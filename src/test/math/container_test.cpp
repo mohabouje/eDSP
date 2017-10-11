@@ -10,8 +10,8 @@ using namespace eDSP::Math;
 SCENARIO("Testing math features for standard containers") {
 
     GIVEN("A std::vector with a given size") {
-        constexpr size_t size = 100;
-        std::vector<double> test(size);
+        std::vector<double> test = test::db::ref_vector;
+        const size_t size = test.size();
 
         // Testing set function
         WHEN("We set all the values to a given value") {
