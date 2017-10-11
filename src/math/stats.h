@@ -68,6 +68,32 @@ namespace Math {
                                   : tmp[uint(size/2)];
         }
 
+        template<typename T>
+        constexpr T entropy(const std::vector<T>& container) {
+            static_assert(Container::hasNegative(container), "Trying to compute the entrpy of an array with negative values");
+            T tmp = 0;
+            for (size_t i=0, size = container.size(); i<size; i++) {
+                const T sample = (!container[i]) ? 1 : container[i];
+                tmp -= std::log2(sample) * sample;
+            }
+            return tmp;
+        }
+
+        template <typename T>
+        constexpr T geometric_mean(const std::vector<T> &container) {
+            static_assert(Container::hasNegative(container),
+                        "Trying to compute the geometric mean of an array with "
+                        "negative values");
+            return Container::hasZero(container)
+                     ? static_cast<T>(0)
+                     : std::accumulate(container.begin(), container.end(),
+                                       static_cast<T>(0),
+                                       [](T last, T next) {
+                                         return last += std::log(next);
+                                       }) / static_cast<T>(container.size());
+
+        }
+
     }
 }
 EDSP_END_NAMESPCE

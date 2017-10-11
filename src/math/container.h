@@ -36,12 +36,12 @@ EDSP_BEGING_NAMESPACE
             }
 
             template<typename T>
-            constexpr bool hasNegative(std::vector<T>& array) {
+            constexpr bool hasNegative(const std::vector<T>& array) {
                 return std::find_if(array.begin(), array.end(),  Util::isNegative<T>) != array.end();
             }
 
             template<typename T>
-            constexpr bool hasZero(std::vector<T>& array) {
+            constexpr bool hasZero(const std::vector<T>& array) {
                 return std::find_if(array.begin(), array.end(), Util::isZero<T>) != array.end();
             }
 
