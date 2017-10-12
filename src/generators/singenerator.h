@@ -17,8 +17,12 @@ EDSP_BEGING_NAMESPACE
             virtual ~SinGenerator() = default;
 
             const std::vector<T>& generate();
-        };
+            inline T getPhase() const { return phase; }
+            void setPhase(T phase) { SinGenerator::phase = phase; }
 
+        private:
+            T phase{0};
+        };
     }
 };
 

@@ -48,14 +48,9 @@ EDSP_BEGING_NAMESPACE
                 Generator::amplitude = amplitude;
             }
 
-            virtual inline T getPhase() const { return phase; }
-            virtual void setPhase(T _phase) { Generator::phase = _phase; }
-
-
         protected:
             T sampleRate{0};
             T frequency{0};
-            T phase{0};
             T amplitude{1};
             std::vector<T> data;
         };
