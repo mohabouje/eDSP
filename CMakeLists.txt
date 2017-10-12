@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(SOURCE_FILES test/main.cpp test/math/container_test.cpp src/config.h src/base/types.h src/version.h src/math/math_util.h src/math/container.h src/math/stats.h src/base/constants.h src/math/trig.h)
 
 add_executable(runtest ${SOURCE_FILES})
-add_library(edsp ${SOURCE_FILES} test/test_db.h test/math/stats_test.cpp test/math/trig_test.cpp src/base/algoritmtemplate.h src/base/interface/ierrornotifier.h src/base/interface/iinitializer.h src/base/error.h src/window/window.h src/generators/whitenoise.cpp src/generators/whitenoise.h src/generators/squaregenerator.cpp src/generators/squaregenerator.h src/generators/generator.h)
+add_library(edsp ${SOURCE_FILES} test/test_db.h test/math/stats_test.cpp test/math/trig_test.cpp src/base/algoritmtemplate.h src/base/interface/ierrornotifier.h src/base/interface/iinitializer.h src/base/error.h src/window/window.h src/generators/whitenoise.cpp src/generators/whitenoise.h src/generators/squaregenerator.cpp src/generators/squaregenerator.h src/generators/generator.h src/generators/singenerator.cpp src/generators/singenerator.h)
 
 SET(BASEPATH "${CMAKE_SOURCE_DIR}")
 

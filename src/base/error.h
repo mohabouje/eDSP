@@ -13,8 +13,10 @@
 EDSP_BEGING_NAMESPACE
 class Error {
 public:
-    Error() = default;
     Error::Error(uint16 id, const std::string& description) : _id(id),  _description(description)  { }
+    Error() = default;
+    virtual ~Error() = default;
+
     inline int16 id() const { return _id; }
     inline const std::string& description() const { return _description; }
     inline bool operator==(const Error &rhs) const {
@@ -23,11 +25,10 @@ public:
     inline bool operator!=(const Error &rhs) const {
         return !(rhs == *this);
     }
-
 private:
     int16      _id{EDSP_INVALID};
     std::string _description;
-}
+};
 EDSP_END_NAMESPCE
 
 

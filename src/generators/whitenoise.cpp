@@ -10,7 +10,7 @@ WhiteNoise::WhiteNoise(size_t size) : Generator(size) {
 }
 
 template <typename T>
-const std::vector<T> &WhiteNoise::compute() {
+const std::vector<T> &WhiteNoise::generate() {
     for (size_t i = 0, size = data.size(); i < size; i++) {
         data[i] = std::rand() / static_cast<T>(RAND_MAX);
     }

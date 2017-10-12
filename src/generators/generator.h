@@ -14,9 +14,10 @@ EDSP_BEGING_NAMESPACE
         class Generator : public AlgorithmTemplate {
         public:
             Generator() = default;
-            explicit Generator(size_t size, T sampleRate = 0, T frequency = 0, T amplitude = 0) :
+            explicit Generator(size_t size, T sampleRate = 0, T frequency = 0, T phase = 0, T amplitude = 1) :
                                                                              sampleRate(sampleRate),
                                                                              frequency(frequency),
+                                                                             phase(phase),
                                                                              amplitude(amplitude),
                                                                              data(std::vector<T>(size)),
                                                                              AlgorithmTemplate(true, Error())
@@ -25,33 +26,37 @@ EDSP_BEGING_NAMESPACE
             }
             ~Generator() override = default;
 
-            inline size_t getSize() const {  return data.size(); }
-            void setSize(size_t size) {
+            virtual inline size_t getSize() const {  return data.size(); }
+            virtual void setSize(size_t size) {
                 if (size != data.size()) {
                     data.resize(size);
                 }
             }
 
-            inline T getSampleRate() const { return sampleRate; }
-            void setSampleRate(T sampleRate) {
+            virtual inline T getSampleRate() const { return sampleRate; }
+            virtual void setSampleRate(T sampleRate) {
                 Generator::sampleRate = sampleRate;
             }
 
-            inline T getFrequency() const { return frequency; }
-            void setFrequency(T frequency) {
+            virtual inline T getFrequency() const { return frequency; }
+            virtual void setFrequency(T frequency) {
                 Generator::frequency = frequency;
             }
 
-            inline T getAmplitude() const {  return amplitude; }
-            void setAmplitude(T amplitude) {
+            virtual inline T getAmplitude() const {  return amplitude; }
+            virtual void setAmplitude(T amplitude) {
                 Generator::amplitude = amplitude;
             }
 
+            virtual inline T getPhase() const { return phase; }
+            virtual void setPhase(T _phase) { Generator::phase = _phase; }
+
 
         protected:
-            T sampleRate;
-            T frequency;
-            T amplitude;
+            T sampleRate{0};
+            T frequency{0};
+            T phase{0};
+            T amplitude{1};
             std::vector<T> data;
         };
 

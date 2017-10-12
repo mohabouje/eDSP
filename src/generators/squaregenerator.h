@@ -17,11 +17,14 @@ EDSP_BEGING_NAMESPACE
             SquareGenerator() = default;
             ~SquareGenerator() override = default;
 
-            const std::vector<T>& compute();
-            inline T duttyCycle() const { return dc; }
-            void setDuttyCycle(const T& dc) { SquareGenerator::dc = dc;}
+            const std::vector<T>& generate();
+            inline T getDuttyCycle() const { return duttyCycle; }
+            void setDuttyCycle(const T& dc) { SquareGenerator::duttyCycle = dc;}
+
+            T getPhase() const final = delete;
+            void setPhase(T _phase) final = delete;
         private:
-            T dc;
+            T duttyCycle;
         };
    }
 EDSP_END_NAMESPCE

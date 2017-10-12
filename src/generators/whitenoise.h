@@ -16,8 +16,16 @@ EDSP_BEGING_NAMESPACE
             explicit WhiteNoise(size_t size);
             WhiteNoise() = default;
             ~WhiteNoise() override = default;
-            const std::vector<T>& compute();
+            const std::vector<T>& generate();
+
+            T getSampleRate() const final = delete;
+            T getFrequency() const final = delete;
+            T getAmplitude() const final = delete;
+            void setSampleRate(T sampleRate) final = delete;
+            void setFrequency(T frequency) final = delete;
+            void setAmplitude(T amplitude) final = delete;
         };
+
     }
 EDSP_END_NAMESPCE
 

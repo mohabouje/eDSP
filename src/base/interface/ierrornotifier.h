@@ -12,9 +12,7 @@
 
 EDSP_BEGING_NAMESPACE
 class IErrorNotifier {
-    virtual const std::string& errorDescription() const = 0;
     virtual const Error& error() const = 0;
-    virtual inline int16 errorId() const = 0;
     virtual void setError(const Error& error) = 0;
     virtual bool hasError() const = 0;
 };

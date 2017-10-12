@@ -70,7 +70,7 @@ namespace Math {
 
         template<typename T>
         constexpr T entropy(const std::vector<T>& container) {
-            static_assert(Container::hasNegative(container), "Trying to compute the entrpy of an array with negative values");
+            static_assert(Container::hasNegative(container), "Trying to generate the entrpy of an array with negative values");
             T tmp = 0;
             for (size_t i=0, size = container.size(); i<size; i++) {
                 const T sample = (!container[i]) ? 1 : container[i];
@@ -82,7 +82,7 @@ namespace Math {
         template <typename T>
         constexpr T geometric_mean(const std::vector<T> &container) {
             static_assert(Container::hasNegative(container),
-                        "Trying to compute the geometric mean of an array with "
+                        "Trying to generate the geometric mean of an array with "
                         "negative values");
             return Container::hasZero(container)
                      ? static_cast<T>(0)

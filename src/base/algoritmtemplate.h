@@ -20,8 +20,6 @@ public:
     inline bool isInitialized() const override { return state; }
     inline bool hasError() const override { return err.id() != EDSP_INVALID; }
     inline const Error& error() const override { return err; }
-    inline const std::string& errorDescription() const override { return err.description(); }
-    inline int16 errorId() const override { return err.id(); }
 
 protected:
     void initialize(bool state) override { AlgorithmTemplate::state = state; }
