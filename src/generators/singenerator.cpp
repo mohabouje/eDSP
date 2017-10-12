@@ -3,6 +3,8 @@
 //
 
 #include "singenerator.h"
+#include "base/constants.h"
+
 using namespace eDSP::generators;
 
 template<typename T>

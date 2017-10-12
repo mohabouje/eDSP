@@ -5,17 +5,16 @@
 #ifndef EDSP_WHITENOISE_H
 #define EDSP_WHITENOISE_H
 
-#include "config.h"
 #include "generator.h"
 
 EDSP_BEGING_NAMESPACE
     namespace generators {
         template <typename T>
-        class WhiteNoise : public Generator<T> {
+        class WhiteNoiseGenerator : public Generator<T> {
         public:
-            explicit WhiteNoise(size_t size);
-            WhiteNoise() = default;
-            ~WhiteNoise() override = default;
+            explicit WhiteNoiseGenerator(size_t size);
+            WhiteNoiseGenerator() = default;
+            ~WhiteNoiseGenerator() override = default;
             const std::vector<T>& generate();
 
             T getSampleRate() const final = delete;

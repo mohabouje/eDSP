@@ -5,9 +5,6 @@
 #ifndef EDSP_SINGENERATOR_H
 #define EDSP_SINGENERATOR_H
 
-
-#include <base/constants.h>
-#include "config.h"
 #include "generator.h"
 
 EDSP_BEGING_NAMESPACE
