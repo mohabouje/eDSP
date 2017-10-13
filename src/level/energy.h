@@ -14,6 +14,7 @@ EDSP_BEGING_NAMESPACE
         class Energy : public AlgorithmTemplate {
         public:
             Energy() : AlgorithmTemplate(true, Error()) { }
+            ~Energy() override = default;
             inline T compute(const std::vector<T>& data) const;
         };
     }

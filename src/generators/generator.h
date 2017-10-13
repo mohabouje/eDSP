@@ -12,17 +12,16 @@ EDSP_BEGING_NAMESPACE
         template<typename T>
         class Generator : public AlgorithmTemplate {
         public:
-            Generator() = default;
             explicit Generator(size_t size, T sampleRate = 0, T frequency = 0, T phase = 0, T amplitude = 1) :
                                                                              sampleRate(sampleRate),
                                                                              frequency(frequency),
-                                                                             phase(phase),
                                                                              amplitude(amplitude),
                                                                              data(std::vector<T>(size)),
                                                                              AlgorithmTemplate(true, Error())
             {
 
             }
+            Generator() = default;
             ~Generator() override = default;
 
             virtual inline size_t getSize() const {  return data.size(); }
