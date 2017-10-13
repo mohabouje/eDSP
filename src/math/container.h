@@ -96,6 +96,50 @@ EDSP_BEGING_NAMESPACE
                 });
             }
 
+            template<typename T>
+            inline void ln(std::vector<T>& array) {
+                std::for_each(array.begin(), array.end(), [](T& value) {
+                    value = std::log(value);
+                });
+            }
+
+            template<typename T>
+            inline void log10(std::vector<T>& array) {
+                std::for_each(array.begin(), array.end(), [](T& value) {
+                    value = std::log10(value);
+                });
+            }
+
+            template<typename T>
+            inline void log2(std::vector<T>& array) {
+                std::for_each(array.begin(), array.end(), [](T& value) {
+                    value = std::log2(value);
+                });
+            }
+
+
+            template<typename T>
+            inline void square(std::vector<T>& array) {
+                std::for_each(array.begin(), array.end(), [](T& value) {
+                    value *= value;
+                });
+            }
+
+            template<typename T>
+            inline void inv(std::vector<T>& array) {
+                std::for_each(array.begin(), array.end(), [](T& value) {
+                    value = static_cast<T>(1) / value;
+                });
+            }
+
+            template<typename T>
+            inline void normalize(std::vector<T>& array) {
+                const T x = max(array), y = min(array), invDiff = static_cast<T>(1) / (x - y);
+                std::for_each(array.begin(), array.end(), [&invDiff, &y](T& value) {
+                    value = (value - min) * invDiff;
+                });
+            }
+
         }
     }
 
