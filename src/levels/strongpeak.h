@@ -14,7 +14,7 @@ EDSP_BEGING_NAMESPACE
         public:
             StrongPeak() : AlgorithmTemplate(true, Error()) { }
             ~StrongPeak() override = default;
-            inline T compute(const std::vector<T>& data) const;
+            inline std::pair<int, T> compute(const std::vector<T>& data) const;
         };
 
 

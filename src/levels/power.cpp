@@ -7,6 +7,6 @@
 using namespace eDSP::levels;
 
 template <typename T>
-T Power::compute(const std::vector<T> &data) const {
+T Power<T>::compute(const std::vector<T> &data) const {
     return Math::Container::sum_squares(data) / static_cast<T>(data.size());
 }

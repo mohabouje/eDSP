@@ -8,7 +8,7 @@
 using namespace eDSP::levels;
 
 template <typename T>
-std::pair<int, T> StrongPeak::compute(const std::vector<T> &data) const {
+std::pair<int, T> StrongPeak<T>::compute(const std::vector<T> &data) const {
     const typename std::vector<T>::const_iterator it = std::max_element(data.begin(), data.end());
     return std::pair<int, T>(std::distance(data.begin(), it), *it);
 }

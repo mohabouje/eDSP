@@ -24,7 +24,6 @@ EDSP_BEGING_NAMESPACE
             void setFrequency(T frequency) final = delete;
             void setAmplitude(T amplitude) final = delete;
         };
-
     }
 EDSP_END_NAMESPCE
 

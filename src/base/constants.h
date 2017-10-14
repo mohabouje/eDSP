@@ -32,7 +32,7 @@ EDSP_BEGING_NAMESPACE
         constexpr static T neginfinity = -std::numeric_limits<T>::infinity();
         constexpr static T qnan        = std::numeric_limits<T>::quiet_NaN();
 
-    }
+    };
 
 EDSP_END_NAMESPCE
 

@@ -24,7 +24,5 @@ EDSP_BEGING_NAMESPACE
             T phase{0};
         };
     }
-};
-
 EDSP_END_NAMESPCE
 #endif //EDSP_SINGENERATOR_H

@@ -7,7 +7,7 @@
 using namespace eDSP::levels;
 
 template <typename T>
-T ZeroCrossingRate::compute(const std::vector<T> &data) const {
+T ZeroCrossingRate<T>::compute(const std::vector<T> &data) const {
     int tmp = 0;
     for (size_t i = 0, size = data.size(); i < size; i++) {
         tmp += (Math::Util::sign(data[i]) != Math::Util::sign(data[i - 1])) ? 1 : 0;
@@ -15,6 +15,8 @@ T ZeroCrossingRate::compute(const std::vector<T> &data) const {
     return tmp / static_cast<T>(data.size()) * (norm ? 1 : 100);
 }
 
-ZeroCrossingRate::ZeroCrossingRate(bool normalized) : AlgorithmTemplate(true, Error()), norm(normalized) {}
+template <typename T>
+ZeroCrossingRate<T>::ZeroCrossingRate(bool normalized) : AlgorithmTemplate(true, Error()), norm(normalized) {}
 
-ZeroCrossingRate::ZeroCrossingRate() : AlgorithmTemplate(true, Error()) { }
+template <typename T>
+ZeroCrossingRate<T>::ZeroCrossingRate() : AlgorithmTemplate(true, Error()) { }

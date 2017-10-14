@@ -13,7 +13,7 @@
 EDSP_BEGING_NAMESPACE
 class Error {
 public:
-    Error::Error(uint16 id, const std::string& description) : _id(id),  _description(description)  { }
+    Error(uint16 id, const std::string& description) : _id(id),  _description(description)  { }
     Error() = default;
     virtual ~Error() = default;
 

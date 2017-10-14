@@ -5,16 +5,18 @@
 #include "whitenoisegenerator.h"
 
 using namespace eDSP::generators;
-WhiteNoiseGenerator::WhiteNoiseGenerator(size_t size) : Generator(size) {
+
+template<typename T>
+WhiteNoiseGenerator<T>::WhiteNoiseGenerator(size_t size) : Generator<T>(size) {
 
 }
 
 template <typename T>
-const std::vector<T> &WhiteNoiseGenerator::generate() {
-    for (size_t i = 0, size = data.size(); i < size; i++) {
-        data[i] = std::rand() / static_cast<T>(RAND_MAX);
+const std::vector<T> &WhiteNoiseGenerator<T>::generate() {
+    for (size_t i = 0, size = Generator<T>::data.size(); i < size; i++) {
+        Generator<T>::data[i] = std::rand() / static_cast<T>(RAND_MAX);
     }
-    return data;
+    return Generator<T>::data;
 }
 
 

@@ -7,6 +7,6 @@
 using namespace eDSP::levels;
 
 template <typename T>
-T Energy::compute(const std::vector<T> &data) const {
+T Energy<T>::compute(const std::vector<T> &data) const {
     return Math::Container::sum_squares(data);
 }
