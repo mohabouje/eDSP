@@ -13,6 +13,6 @@ public:
     virtual bool isInitialized() const = 0;
     virtual void initialize(bool state) = 0;
 };
-EDSP_END_NAMESPCE
+EDSP_END_NAMESPACE
 
 #endif //EDSP_IINITIALIZER_H

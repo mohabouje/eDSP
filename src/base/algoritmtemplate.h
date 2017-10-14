@@ -29,6 +29,6 @@ private:
     bool state{false};
 };
 
-EDSP_END_NAMESPCE
+EDSP_END_NAMESPACE
 
 #endif //EDSP_IALGO_H

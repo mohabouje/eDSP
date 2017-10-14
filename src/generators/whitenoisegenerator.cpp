@@ -19,5 +19,5 @@ const std::vector<T> &WhiteNoiseGenerator<T>::generate() {
     return Generator<T>::data;
 }
 
-
-
+EDSP_DCL_TEMPLATE(eDSP::generators::WhiteNoiseGenerator, float);
+EDSP_DCL_TEMPLATE(eDSP::generators::WhiteNoiseGenerator, double);

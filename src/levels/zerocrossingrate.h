@@ -23,5 +23,5 @@ EDSP_BEGING_NAMESPACE
             bool norm{false};
         };
     }
-EDSP_END_NAMESPCE
+EDSP_END_NAMESPACE
 #endif //EDSP_ZEROCROSSINGRATE_H

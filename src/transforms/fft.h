@@ -8,7 +8,7 @@
 
 #include "base/algoritmtemplate.h"
 #include <memory>
-#include <ldap_schema.h>
+#include <fftw3.h>
 
 EDSP_BEGING_NAMESPACE
     namespace transforms {
@@ -16,20 +16,21 @@ EDSP_BEGING_NAMESPACE
         class FFT : public AlgorithmTemplate {
         public:
             explicit FFT(size_t size);
-            FFT();
             ~FFT() override;
             EDSP_DISABLE_COPY(FFT)
 
-            size_t size() const;
+            inline size_t size() const { return input.size(); }
             void setSize(size_t size);
             const std::vector<std::complex<T>> &compute(const std::vector<T> &data);
             const std::vector<std::complex<T>> &compute(const std::vector<std::complex<T>> & data);
         private:
-            class Pimpl;
-            std::unique_ptr<Pimpl> pimpl;
-
+            fftw_plan fftwPlan{nullptr};
+            std::vector<std::complex<T>> input;
+            std::vector<std::complex<T>> fft;
         };
     }
-EDSP_END_NAMESPCE
+EDSP_END_NAMESPACE
+
+
 
 #endif //EDSP_REALFFT_H

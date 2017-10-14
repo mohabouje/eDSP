@@ -38,13 +38,14 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/transforms/fft.h)
 
 set(SOURCE_TEST
+        test/main.cpp
         test/test_db.h
         test/math/stats_test.cpp
         test/math/trig_test.cpp
         test/math/container_test.cpp
         test/transforms/fft_test.cpp)
 
-add_executable(runtest  test/main.cpp ${SOURCE_FILES} ${SOURCE_TEST})
+add_executable(runtest ${SOURCE_FILES} ${SOURCE_TEST})
 add_library(edsp ${SOURCE_FILES})
 
 SET(BASEPATH "${CMAKE_SOURCE_DIR}")
@@ -58,8 +59,6 @@ include_directories("${BASEPATH}/src/")
 include_directories("${BASEPATH}/third_party/Catch/include/")
 
 # FFTW integration
-
-set(USE_SYSTEM_FFTW OFF CACHE BOOL "Use system FFTW")
 include_directories( ${FFTW_INCLUDES} )
 target_link_libraries(edsp ${FFTW_LIBRARIES})
 target_link_libraries(runtest ${FFTW_LIBRARIES})

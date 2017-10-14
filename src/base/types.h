@@ -55,6 +55,6 @@ EDSP_BEGING_NAMESPACE
     using SharedPtr = std::shared_ptr<T>;
 
 
-EDSP_END_NAMESPCE
+EDSP_END_NAMESPACE
 
 #endif //EDSP_E_TYPES_H

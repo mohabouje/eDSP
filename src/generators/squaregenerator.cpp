@@ -23,4 +23,5 @@ const std::vector<T> &SquareGenerator<T>::generate() {
     return Generator<T>::data;
 }
 
-
+EDSP_DCL_TEMPLATE(eDSP::generators::SquareGenerator, float);
+EDSP_DCL_TEMPLATE(eDSP::generators::SquareGenerator, double);

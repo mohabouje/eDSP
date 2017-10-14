@@ -4,8 +4,12 @@
 
 #include <catch.hpp>
 #include "transforms/fft.h"
+
 using namespace eDSP::transforms;
-SCENARIO("Testing the basic usage of the statistic functions") {
-    FFT<double> fft;
+SCENARIO("Testing FFT") {
+
+    FFT<double> fft(512);
+    fft.setSize(45);
+
 
 }

@@ -20,4 +20,5 @@ template<typename T>
 SinGenerator<T>::SinGenerator(size_t size, T sampleRate, T frequency, T phase, T amplitude) : Generator<T>(size, sampleRate,
                                                                                                      frequency, phase,
                                                                                                      amplitude) {}
-
+EDSP_DCL_TEMPLATE(eDSP::generators::SinGenerator, float);
+EDSP_DCL_TEMPLATE(eDSP::generators::SinGenerator, double);

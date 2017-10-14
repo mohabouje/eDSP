@@ -23,7 +23,7 @@ const std::vector<T> &BrownNoiseGenerator<T>::generate() {
                     compute = false;
             }
             return ns * BrownScale;
-        };
+        }();
     }
     return Generator<T>::data;
 }
@@ -31,3 +31,5 @@ const std::vector<T> &BrownNoiseGenerator<T>::generate() {
 template <typename T>
 BrownNoiseGenerator<T>::BrownNoiseGenerator(size_t size) : Generator<T>(size) {}
 
+EDSP_DCL_TEMPLATE(eDSP::generators::BrownNoiseGenerator, float);
+EDSP_DCL_TEMPLATE(eDSP::generators::BrownNoiseGenerator, double);

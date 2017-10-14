@@ -18,5 +18,5 @@ EDSP_BEGING_NAMESPACE
             inline T compute(const std::vector<T>& data) const;
         };
     }
-EDSP_END_NAMESPCE
+EDSP_END_NAMESPACE
 #endif //EDSP_ENERGY_H

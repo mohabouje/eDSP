@@ -11,7 +11,7 @@
 #define EDSP_VERSION_LABEL     ""
 
 #define EDSP_BEGING_NAMESPACE  namespace eDSP {
-#define EDSP_END_NAMESPCE      }
+#define EDSP_END_NAMESPACE      }
 
 #define EDSP_INVALID -1
 
@@ -21,6 +21,13 @@
 
 #define EDSP_DEFAULT_CONSTRUCTOR(Class) \
     Class() = default;
+
+#define EDSP_DCL_TEMPLATE(X, Type) \
+    template class X<Type>;
+
+
+
+#define USE_FFTWD 1
 
 
 #endif //EDSP_EDSP_H

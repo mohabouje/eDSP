@@ -19,5 +19,5 @@ namespace levels {
 
 
 }
-EDSP_END_NAMESPCE
+EDSP_END_NAMESPACE
 #endif //EDSP_POWER_H

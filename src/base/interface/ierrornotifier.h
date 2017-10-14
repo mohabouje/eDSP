@@ -17,6 +17,6 @@ class IErrorNotifier {
     virtual bool hasError() const = 0;
 };
 
-EDSP_END_NAMESPCE
+EDSP_END_NAMESPACE
 
 #endif //EDSP_E_ERROR_H

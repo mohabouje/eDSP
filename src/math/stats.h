@@ -96,5 +96,5 @@ namespace Math {
 
     }
 }
-EDSP_END_NAMESPCE
+EDSP_END_NAMESPACE
 #endif //EDSP_STATS_H
