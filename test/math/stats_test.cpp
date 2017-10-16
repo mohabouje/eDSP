@@ -3,6 +3,7 @@
 //
 
 #include "../test_db.h"
+#include "../test_util.h"
 #include "math/stats.h"
 #include <catch.hpp>
 
@@ -15,7 +16,7 @@ SCENARIO("Testing the basic usage of the statistic functions") {
         // Testing mean function
         WHEN("We want to estimate the mean of the signal") {
             const double mean = Stat::mean(ref);
-            //REQUIRE(mean == test::db::mean_ref_vector);
+            //REQUIRE(test::util::isEqual(mean), test::db::mean_ref_vector);
         }
 
         // Testing mode function

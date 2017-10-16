@@ -37,15 +37,16 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/transforms/fft.cpp
         src/transforms/fft.h)
 
-set(SOURCE_TEST
-        test/main.cpp
-        test/test_db.h
-        test/math/stats_test.cpp
-        test/math/trig_test.cpp
-        test/math/container_test.cpp
-        test/transforms/fft_test.cpp)
+set(TEST_DIR test)
+set(TEST_FILES
+        ${TEST_DIR}/main.cpp
+        ${TEST_DIR}/test_db.h
+        ${TEST_DIR}/math/stats_test.cpp
+        ${TEST_DIR}/math/trig_test.cpp
+        ${TEST_DIR}/math/container_test.cpp
+        ${TEST_DIR}/transforms/fft_test.cpp test/test_util.h src/transforms/ifft.cpp src/transforms/ifft.h)
 
-add_executable(runtest ${SOURCE_FILES} ${SOURCE_TEST})
+add_executable(runtest ${SOURCE_FILES} ${TEST_FILES})
 add_library(edsp ${SOURCE_FILES})
 
 SET(BASEPATH "${CMAKE_SOURCE_DIR}")

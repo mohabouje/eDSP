@@ -80,7 +80,7 @@ SCENARIO("Testing math features for standard containers") {
         WHEN("We want to apply a sum squares") {
             const double total = Container::sum_squares(test::db::ref_vector);
             THEN("The sum should be the correct one") {
-                //REQUIRE(total == test::db::sum_square_ref_vector);
+                //REQUIRE( test::util::isEqual(total), test::db::sum_square_ref_vector);
             }
         }
 
