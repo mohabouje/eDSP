@@ -8,8 +8,6 @@
 
 #include "base/algoritmtemplate.h"
 #include <fftw3.h>
-#include <type_traits>  //include this
-
 EDSP_BEGING_NAMESPACE
     namespace transforms {
         template<typename T>
