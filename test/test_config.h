@@ -5,6 +5,6 @@
 #ifndef EDSP_TEST_CONFIG_H
 #define EDSP_TEST_CONFIG_H
 
-
-#define TEST_TOLERANCE 0.0001
+#include <limits>
+#define TEST_TOLERANCE std::numeric_limits<double>::epsilon() * 100
 #endif //EDSP_TEST_CONFIG_H

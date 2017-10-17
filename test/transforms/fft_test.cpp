@@ -18,11 +18,9 @@ SCENARIO("Testing FFT") {
         WHEN("We apply the FFT") {
             const std::vector<std::complex<double>> data = fft.compute(original);
             THEN("It should be the same as the estimated fft") {
-                for (size_t i = 1, size = data.size(); i < size; i++) {
-                    const Approx real = Approx(data[i].real()).epsilon(TEST_TOLERANCE);
-                    const Approx imag = Approx(data[i].imag()).epsilon(TEST_TOLERANCE);
-                    REQUIRE( real == test::db::fft_ref_vector[i].real());
-                    REQUIRE( imag == test::db::fft_ref_vector[i].imag());
+                for (size_t i = 0, size = data.size(); i < size; i++) {
+                    const Approx abs = Approx( std::abs(data[i])).epsilon(TEST_TOLERANCE);
+                    REQUIRE( abs == std::abs(test::db::fft_ref_vector[i]));
                 }
             }
         }
