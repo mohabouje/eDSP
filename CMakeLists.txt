@@ -44,7 +44,7 @@ set(TEST_FILES
         ${TEST_DIR}/math/stats_test.cpp
         ${TEST_DIR}/math/trig_test.cpp
         ${TEST_DIR}/math/container_test.cpp
-        ${TEST_DIR}/transforms/fft_test.cpp test/test_util.h src/transforms/ifft.cpp src/transforms/ifft.h src/transforms/dct.cpp src/transforms/dct.h src/transforms/idct.cpp src/transforms/idct.h src/transforms/dht.cpp src/transforms/dht.h)
+        ${TEST_DIR}/transforms/fft_test.cpp test/test_util.h src/transforms/ifft.cpp src/transforms/ifft.h src/transforms/dct.cpp src/transforms/dct.h src/transforms/idct.cpp src/transforms/idct.h src/transforms/dht.cpp src/transforms/dht.h test/test_config.h)
 
 add_executable(runtest ${SOURCE_FILES} ${TEST_FILES})
 add_library(edsp ${SOURCE_FILES})

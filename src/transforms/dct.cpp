@@ -51,7 +51,7 @@ void DCT<T>::setSize(size_t size) {
 
 template<typename T>
 const std::vector<T> &DCT<T>::compute(const std::vector<T> &data) {
-    assert(data.size() > input.size());
+    assert(data.size() <= input.size());
     std::copy(data.begin(), data.end(), input.begin());
     fftw_execute(fftwPlan);
     return output;

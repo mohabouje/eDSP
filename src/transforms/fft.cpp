@@ -34,7 +34,7 @@ void FFT<T>::setSize(size_t size) {
 
 template<typename T>
 const std::vector<std::complex<T>> &FFT<T>::compute(const std::vector<T> &data) {
-    assert(data.size() > input.size());
+    assert(data.size() <= input.size());
 
     Math::Container::set(input, std::complex<T>(0,0));
     for (size_t i = 0, size = data.size(); i < size; i++) {
@@ -47,7 +47,7 @@ const std::vector<std::complex<T>> &FFT<T>::compute(const std::vector<T> &data) 
 
 template<typename T>
 const std::vector<std::complex<T>> &FFT<T>::compute(const std::vector<std::complex<T>> &data) {
-    assert(data.size() > input.size());
+    assert(data.size() <= input.size());
     std::copy(data.begin(), data.end(), input.begin());
     fftw_execute(fftwPlan);
     return output;

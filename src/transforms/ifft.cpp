@@ -34,7 +34,7 @@ void IFFT<T>::setSize(size_t size) {
 
 template<typename T>
 const std::vector<std::complex<T>> &IFFT<T>::compute(const std::vector<std::complex<T>> &data) {
-    assert(data.size() > input.size());
+    assert(data.size() <= input.size());
     std::copy(data.begin(), data.end(), input.begin());
     fftw_execute(fftwPlan);
     return output;
