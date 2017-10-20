@@ -4,7 +4,7 @@
 
 #include "loudness.h"
 #include "math/container.h"
-using namespace eDSP::levels;
+using namespace eDSP::properties;
 
 template <typename T>
 T Loudness<T>::compute(const std::vector<T> &data) const {

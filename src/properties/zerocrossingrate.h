@@ -8,7 +8,7 @@
 #include "base/algoritmtemplate.h"
 
 EDSP_BEGING_NAMESPACE
-    namespace levels {
+    namespace properties {
         template<typename T>
         class ZeroCrossingRate : public AlgorithmTemplate {
         public:

@@ -4,7 +4,7 @@
 
 #include "power.h"
 #include "math/container.h"
-using namespace eDSP::levels;
+using namespace eDSP::properties;
 
 template <typename T>
 T Power<T>::compute(const std::vector<T> &data) const {

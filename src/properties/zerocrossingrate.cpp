@@ -4,7 +4,7 @@
 
 #include "levels/zerocrossingrate.h"
 #include "math/math_util.h"
-using namespace eDSP::levels;
+using namespace eDSP::properties;
 
 template <typename T>
 T ZeroCrossingRate<T>::compute(const std::vector<T> &data) const {

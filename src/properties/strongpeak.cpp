@@ -5,7 +5,7 @@
 #include "strongpeak.h"
 #include <iterator>
 #include <algorithm>
-using namespace eDSP::levels;
+using namespace eDSP::properties;
 
 template <typename T>
 std::pair<int, T> StrongPeak<T>::compute(const std::vector<T> &data) const {

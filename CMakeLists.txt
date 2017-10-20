@@ -24,16 +24,16 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/generators/singenerator.h
         src/generators/brownnoisegenerator.cpp
         src/generators/brownnoisegenerator.h
-        src/levels/energy.cpp
-        src/levels/energy.h
-        src/levels/loudness.cpp
-        src/levels/loudness.h
-        src/levels/power.cpp
-        src/levels/power.h
-        src/levels/strongpeak.cpp
-        src/levels/strongpeak.h
-        src/levels/zerocrossingrate.cpp
-        src/levels/zerocrossingrate.h
+        src/properties/energy.cpp
+        src/properties/energy.h
+        src/properties/loudness.cpp
+        src/properties/loudness.h
+        src/properties/power.cpp
+        src/properties/power.h
+        src/properties/strongpeak.cpp
+        src/properties/strongpeak.h
+        src/properties/zerocrossingrate.cpp
+        src/properties/zerocrossingrate.h
         src/transforms/fft.cpp
         src/transforms/fft.h
         src/transforms/ifft.cpp
