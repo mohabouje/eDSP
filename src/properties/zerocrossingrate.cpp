@@ -2,7 +2,7 @@
 // Created by Mohammed Boujemaoui on 13/10/2017.
 //
 
-#include "levels/zerocrossingrate.h"
+#include "zerocrossingrate.h"
 #include "math/math_util.h"
 using namespace eDSP::properties;
 
