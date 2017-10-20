@@ -12,8 +12,8 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/base/constants.h
         src/math/trig.h
         src/base/algoritmtemplate.h
-        src/base/interface/ierrornotifier.h
-        src/base/interface/iinitializer.h
+        src/base/ierrornotifier.h
+        src/base/iinitializer.h
         src/base/error.h src/window/window.h
         src/generators/whitenoisegenerator.cpp
         src/generators/whitenoisegenerator.h

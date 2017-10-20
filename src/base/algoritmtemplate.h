@@ -6,8 +6,8 @@
 #define EDSP_IALGO_H
 
 #include "config.h"
-#include "base/interface/iinitializer.h"
-#include "base/interface/ierrornotifier.h"
+#include "iinitializer.h"
+#include "ierrornotifier.h"
 
 EDSP_BEGING_NAMESPACE
 
