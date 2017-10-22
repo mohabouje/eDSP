@@ -16,8 +16,6 @@ namespace properties {
         ~Power() override = default;
         inline T compute(const std::vector<T>& data) const;
     };
-
-
 }
 EDSP_END_NAMESPACE
 #endif //EDSP_POWER_H

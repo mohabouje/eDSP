@@ -12,11 +12,8 @@ T ZeroCrossingRate<T>::compute(const std::vector<T> &data) const {
     for (size_t i = 0, size = data.size(); i < size; i++) {
         tmp += (Math::Util::sign(data[i]) != Math::Util::sign(data[i - 1])) ? 1 : 0;
     }
-    return tmp / static_cast<T>(data.size()) * (norm ? 1 : 100);
+    return tmp / static_cast<T>(norm ? data.size() : 1);
 }
 
 template <typename T>
 ZeroCrossingRate<T>::ZeroCrossingRate(bool normalized) : AlgorithmTemplate(true, Error()), norm(normalized) {}
-
-template <typename T>
-ZeroCrossingRate<T>::ZeroCrossingRate() : AlgorithmTemplate(true, Error()) { }

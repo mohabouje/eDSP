@@ -22,7 +22,7 @@ EDSP_BEGING_NAMESPACE
             void setType(DCT_Type t);
             const std::vector<T> &compute(const std::vector<T> &data);
         private:
-            DCT_Type t;
+            DCT_Type t{DCT_Type::Type_I};
             fftw_plan fftwPlan{nullptr};
             std::vector<T> input;
             std::vector<T> output;

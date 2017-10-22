@@ -20,10 +20,6 @@ EDSP_BEGING_NAMESPACE
             static constexpr T BrownInterval{static_cast<T>(8.0)};
             static constexpr T BrownScale{static_cast<T>(0.0625)};
         };
-
-
-
-
     }
 EDSP_END_NAMESPACE
 

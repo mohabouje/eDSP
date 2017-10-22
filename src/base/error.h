@@ -27,7 +27,7 @@ public:
     }
 private:
     int16      _id{EDSP_INVALID};
-    std::string _description;
+    std::string _description{};
 };
 EDSP_END_NAMESPACE
 

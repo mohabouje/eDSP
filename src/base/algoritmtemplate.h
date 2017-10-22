@@ -25,7 +25,7 @@ protected:
     void initialize(bool state) override { AlgorithmTemplate::state = state; }
     void setError(const Error& error) override  { AlgorithmTemplate::err = error; }
 private:
-    Error err;
+    Error err{};
     bool state{false};
 };
 

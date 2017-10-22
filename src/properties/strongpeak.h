@@ -16,8 +16,6 @@ EDSP_BEGING_NAMESPACE
             ~StrongPeak() override = default;
             inline std::pair<int, T> compute(const std::vector<T>& data) const;
         };
-
-
     }
 EDSP_END_NAMESPACE
 #endif //EDSP_STRONGPEAK_H

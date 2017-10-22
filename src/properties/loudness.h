@@ -16,8 +16,6 @@ EDSP_BEGING_NAMESPACE
             ~Loudness() override = default;
             inline T compute(const std::vector<T>& data) const;
         };
-
-
     }
 EDSP_END_NAMESPACE
 #endif //EDSP_LOUDNESS_H

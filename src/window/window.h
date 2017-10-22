@@ -28,7 +28,7 @@ EDSP_BEGING_NAMESPACE
             inline std::vector<T> hanning(size_t size) {
                 std::vector<T> vec(size);
                 for (size_t i = 0; i < size; i++) {
-                    vec[i] = 0.53836f - 0.46164f * cos(2 * Constants<T>::pi * i / (size - 1.0f));
+                    vec[i] = 0.5f - 0.5f * std::cos(2 * Constants<T>::pi * i / (size - 1.0f));
                 }
                 return vec;
             }

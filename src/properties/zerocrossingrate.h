@@ -12,11 +12,9 @@ EDSP_BEGING_NAMESPACE
         template<typename T>
         class ZeroCrossingRate : public AlgorithmTemplate {
         public:
-            explicit ZeroCrossingRate(bool normalized);
-            ZeroCrossingRate();
+            explicit ZeroCrossingRate(bool normalized = true);
             ~ZeroCrossingRate() override = default;
             inline T compute(const std::vector<T>& data) const;
-
             inline bool isNormalized() const { return norm; }
             void normalize(bool state) { ZeroCrossingRate::norm = state; }
         private:

@@ -10,7 +10,6 @@
 EDSP_BEGING_NAMESPACE
     namespace transforms {
         enum DCT_Type { Type_I = 0, Type_II, Type_III, Type_IV};
-
         template<typename T>
         class DCT : public AlgorithmTemplate {
         public:
@@ -24,7 +23,7 @@ EDSP_BEGING_NAMESPACE
             void setType(DCT_Type t);
             const std::vector<T> &compute(const std::vector<T> &data);
         private:
-            DCT_Type t;
+            DCT_Type t{DCT_Type::Type_I};
             fftw_plan fftwPlan{nullptr};
             std::vector<T> input;
             std::vector<T> output;
