@@ -6,7 +6,7 @@
 #include "math/math_util.h"
 #include "math/container.h"
 
-using namespace eDSP::Math::Frequency;
+using namespace eDSP::Frequency;
 template <typename T>
 LinearPredictiveCode<T>::LinearPredictiveCode(eDSP::int16 order, size_t size) :
     AlgorithmTemplate(true, Error()),
@@ -60,4 +60,4 @@ LinearPredictiveCode<T>::~LinearPredictiveCode() {
 
 
 
-EDSP_DCL_TEMPLATE(eDSP::Math::Frequency::LinearPredictiveCode, double);
+EDSP_DCL_TEMPLATE(eDSP::Frequency::LinearPredictiveCode, double);

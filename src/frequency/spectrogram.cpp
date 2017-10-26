@@ -6,7 +6,7 @@
 #include "math/math_util.h"
 #include "math/container.h"
 
-using namespace eDSP::Math::Frequency;
+using namespace eDSP::Frequency;
 template <typename T>
 Spectrogram<T>::Spectrogram(size_t size) :
         AlgorithmTemplate(true, Error()),
@@ -31,4 +31,4 @@ Spectrogram<T>::~Spectrogram() {
     AlgorithmTemplate::~AlgorithmTemplate();
 }
 
-EDSP_DCL_TEMPLATE(eDSP::Math::Frequency::Spectrogram, double);
+EDSP_DCL_TEMPLATE(eDSP::Frequency::Spectrogram, double);

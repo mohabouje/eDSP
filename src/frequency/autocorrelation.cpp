@@ -6,7 +6,7 @@
 #include "math/math_util.h"
 #include "math/container.h"
 
-using namespace eDSP::Math::Frequency;
+using namespace eDSP::Frequency;
 
 template <typename T>
 AutoCorrelation<T>::AutoCorrelation(size_t size) :
@@ -40,4 +40,4 @@ AutoCorrelation<T>::~AutoCorrelation() {
     AlgorithmTemplate::~AlgorithmTemplate();
 }
 
-EDSP_DCL_TEMPLATE(eDSP::Math::Frequency::AutoCorrelation, double);
+EDSP_DCL_TEMPLATE(eDSP::Frequency::AutoCorrelation, double);

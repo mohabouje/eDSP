@@ -6,7 +6,7 @@
 #include "math/math_util.h"
 #include "math/container.h"
 
-using namespace eDSP::Math::Frequency;
+using namespace eDSP::Frequency;
 template <typename T>
 Cepstrum<T>::Cepstrum(size_t size) :
         AlgorithmTemplate(true, Error()),
@@ -38,4 +38,4 @@ Cepstrum<T>::~Cepstrum() {
     AlgorithmTemplate::~AlgorithmTemplate();
 }
 
-EDSP_DCL_TEMPLATE(eDSP::Math::Frequency::Cepstrum, double);
+EDSP_DCL_TEMPLATE(eDSP::Frequency::Cepstrum, double);

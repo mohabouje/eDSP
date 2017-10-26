@@ -48,6 +48,8 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/frequency/autocorrelation.h
         src/frequency/cepstrum.cpp
         src/frequency/cepstrum.h
+        src/filters/biquad.h
+        src/filters/biquaddesigner.h
 )
 
 set(TEST_DIR test)
@@ -60,7 +62,7 @@ set(TEST_FILES
         ${TEST_DIR}/transforms/fft_test.cpp
         ${TEST_DIR}/test_util.h
         ${TEST_DIR}/test_config.h
-)
+        )
 
 add_executable(runtest ${SOURCE_FILES} ${TEST_FILES})
 add_library(edsp ${SOURCE_FILES} src/frequency/spectrogram.cpp src/frequency/spectrogram.h src/frequency/linearpredictivecoding.cpp src/frequency/linearpredictivecoding.h)

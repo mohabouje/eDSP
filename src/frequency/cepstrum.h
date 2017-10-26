@@ -10,20 +10,18 @@
 #include "transforms/fft.h"
 #include "transforms/ifft.h"
 EDSP_BEGING_NAMESPACE
-    namespace Math {
-        namespace Frequency {
-            template<typename T>
-            class Cepstrum : AlgorithmTemplate {
-            public:
-                explicit Cepstrum(size_t size);
-                ~Cepstrum() override;
-                const std::vector<T>& compute(const std::vector<T>&);
-            private:
-                transforms::FFT<T> fft;
-                transforms::IFFT<T> ifft;
-                std::vector<T> data;
-            };
-        }
+    namespace Frequency {
+        template<typename T>
+        class Cepstrum : AlgorithmTemplate {
+        public:
+            explicit Cepstrum(size_t size);
+            ~Cepstrum() override;
+            const std::vector<T>& compute(const std::vector<T>&);
+        private:
+            transforms::FFT<T> fft;
+            transforms::IFFT<T> ifft;
+            std::vector<T> data;
+        };
     }
 EDSP_END_NAMESPACE
 
