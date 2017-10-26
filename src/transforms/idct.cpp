@@ -12,6 +12,7 @@ using namespace eDSP::transforms;
 template<typename T>
 IDCT<T>::~IDCT() {
     fftw_destroy_plan(fftwPlan);
+    AlgorithmTemplate::~AlgorithmTemplate();
 }
 
 template <typename T>
@@ -22,7 +23,7 @@ IDCT<T>::IDCT(size_t size, DCT_Type t) : AlgorithmTemplate(true, Error()), t(t) 
 template <typename T>
 void IDCT<T>::setType(DCT_Type t) {
     IDCT::t = t;
-    fftw_r2r_kind_do_not_use_me format = [&]() {
+    const fftw_r2r_kind_do_not_use_me format = [&]() {
         switch(IDCT::t) {
             case Type_I: return FFTW_REDFT00;
             case Type_II: return FFTW_REDFT01;
@@ -32,7 +33,7 @@ void IDCT<T>::setType(DCT_Type t) {
         }
     }();
 
-    fftwPlan = fftw_plan_r2r_1d(input.size(),
+    fftwPlan = fftw_plan_r2r_1d(static_cast<int>(input.size()),
                                 &input[0],
                                 &output[0],
                                 format,

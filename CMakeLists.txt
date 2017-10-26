@@ -54,7 +54,7 @@ set(TEST_FILES
         ${TEST_DIR}/math/container_test.cpp
         ${TEST_DIR}/transforms/fft_test.cpp
         test/test_util.h
-        test/test_config.h)
+        test/test_config.h src/frequency/autocorrelation.cpp src/frequency/autocorrelation.h)
 
 add_executable(runtest ${SOURCE_FILES} ${TEST_FILES})
 add_library(edsp ${SOURCE_FILES})

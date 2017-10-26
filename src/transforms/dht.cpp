@@ -12,6 +12,7 @@ using namespace eDSP::transforms;
 template<typename T>
 DHT<T>::~DHT() {
     fftw_destroy_plan(fftwPlan);
+    AlgorithmTemplate::~AlgorithmTemplate();
 }
 
 template <typename T>

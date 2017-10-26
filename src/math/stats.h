@@ -12,7 +12,7 @@
 #include <unordered_map>
 EDSP_BEGING_NAMESPACE
 namespace Math {
-    namespace Stat {
+    namespace Stats {
 
         template<typename T>
         constexpr T mode(const std::vector<T>& container) {
