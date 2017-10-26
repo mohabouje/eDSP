@@ -43,7 +43,12 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/transforms/idct.cpp
         src/transforms/idct.h
         src/transforms/dht.cpp
-        src/transforms/dht.h )
+        src/transforms/dht.h
+        src/frequency/autocorrelation.cpp
+        src/frequency/autocorrelation.h
+        src/frequency/cepstrum.cpp
+        src/frequency/cepstrum.h
+)
 
 set(TEST_DIR test)
 set(TEST_FILES
@@ -53,8 +58,9 @@ set(TEST_FILES
         ${TEST_DIR}/math/trig_test.cpp
         ${TEST_DIR}/math/container_test.cpp
         ${TEST_DIR}/transforms/fft_test.cpp
-        test/test_util.h
-        test/test_config.h src/frequency/autocorrelation.cpp src/frequency/autocorrelation.h)
+        ${TEST_DIR}/test_util.h
+        ${TEST_DIR}/test_config.h
+)
 
 add_executable(runtest ${SOURCE_FILES} ${TEST_FILES})
 add_library(edsp ${SOURCE_FILES})
