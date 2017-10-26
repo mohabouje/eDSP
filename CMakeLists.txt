@@ -63,7 +63,7 @@ set(TEST_FILES
 )
 
 add_executable(runtest ${SOURCE_FILES} ${TEST_FILES})
-add_library(edsp ${SOURCE_FILES} src/frequency/spectrogram.cpp src/frequency/spectrogram.h)
+add_library(edsp ${SOURCE_FILES} src/frequency/spectrogram.cpp src/frequency/spectrogram.h src/frequency/linearpredictivecoding.cpp src/frequency/linearpredictivecoding.h)
 
 SET(BASEPATH "${CMAKE_SOURCE_DIR}")
 
