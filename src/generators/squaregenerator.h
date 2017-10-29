@@ -12,10 +12,10 @@ EDSP_BEGING_NAMESPACE
         template<typename T>
         class SquareGenerator : Generator<T> {
         public:
+            EDSP_DISABLE_DEFAULT(SquareGenerator)
+            EDSP_DISABLE_COPY(SquareGenerator)
             explicit SquareGenerator(size_t size, T duttycycle, T sampleRate, T frequency, T amplitude);
-            SquareGenerator() = default;
             ~SquareGenerator() override = default;
-
             const std::vector<T>& generate();
             inline T getDuttyCycle() const { return duttyCycle; }
             void setDuttyCycle(const T& dc) { SquareGenerator::duttyCycle = dc;}

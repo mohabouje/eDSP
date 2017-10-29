@@ -15,9 +15,14 @@
 
 #define EDSP_INVALID (-1)
 
+
+
 #define EDSP_DISABLE_COPY(Class) \
     Class(const Class &) = delete; \
     Class &operator=(const Class &) = delete;
+
+#define EDSP_DISABLE_DEFAULT(Class) \
+    Class() = delete;
 
 #define EDSP_DCL_TEMPLATE(X, Type) \
     template class X<Type>;
