@@ -56,6 +56,7 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/frequency/cepstrum.h
         src/filters/biquad.h
         src/filters/biquaddesigner.h
+        src/math/complex.h
 )
 
 set(TEST_DIR test)
