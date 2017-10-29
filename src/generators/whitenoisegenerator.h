@@ -12,8 +12,9 @@ EDSP_BEGING_NAMESPACE
         template <typename T>
         class WhiteNoiseGenerator : public Generator<T> {
         public:
+            EDSP_DISABLE_DEFAULT(WhiteNoiseGenerator)
+            EDSP_DISABLE_COPY(WhiteNoiseGenerator)
             explicit WhiteNoiseGenerator(size_t size);
-            WhiteNoiseGenerator() = default;
             ~WhiteNoiseGenerator() override = default;
             const std::vector<T>& generate();
         };

@@ -12,8 +12,9 @@ EDSP_BEGING_NAMESPACE
         template<typename T>
         class BrownNoiseGenerator : public Generator<T> {
         public:
+            EDSP_DISABLE_DEFAULT(BrownNoiseGenerator)
+            EDSP_DISABLE_COPY(BrownNoiseGenerator)
             explicit BrownNoiseGenerator(size_t size);
-            BrownNoiseGenerator() = default;
             virtual ~BrownNoiseGenerator() = default;
             const std::vector<T>& generate();
         private:

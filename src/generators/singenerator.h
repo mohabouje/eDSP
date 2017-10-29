@@ -12,10 +12,10 @@ EDSP_BEGING_NAMESPACE
         template<typename T>
         class SinGenerator : public Generator<T> {
         public:
+            EDSP_DISABLE_DEFAULT(SinGenerator)
+            EDSP_DISABLE_COPY(SinGenerator)
             SinGenerator(size_t size, T sampleRate, T frequency, T phase, T amplitude);
-            SinGenerator() = default;
             virtual ~SinGenerator() = default;
-
             const std::vector<T>& generate();
             inline T getPhase() const { return phase; }
             void setPhase(T phase) { SinGenerator::phase = phase; }

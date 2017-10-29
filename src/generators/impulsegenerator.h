@@ -17,8 +17,9 @@ EDSP_BEGING_NAMESPACE
         template <typename T>
         class ImpulseGenerator : Generator<T> {
         public:
+            EDSP_DISABLE_DEFAULT(ImpulseGenerator)
+            EDSP_DISABLE_COPY(ImpulseGenerator)
             explicit ImpulseGenerator(size_t size, T amplitude);
-            ImpulseGenerator() = default;
             ~ImpulseGenerator() override = default;
             const std::vector<T>& generate();
         };
