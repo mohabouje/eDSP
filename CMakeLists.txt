@@ -46,6 +46,10 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/transforms/dht.h
         src/frequency/autocorrelation.cpp
         src/frequency/autocorrelation.h
+        src/frequency/spectrogram.cpp
+        src/frequency/spectrogram.h
+        src/frequency/linearpredictivecoding.cpp
+        src/frequency/linearpredictivecoding.h
         src/frequency/cepstrum.cpp
         src/frequency/cepstrum.h
         src/filters/biquad.h
@@ -65,7 +69,7 @@ set(TEST_FILES
         )
 
 add_executable(runtest ${SOURCE_FILES} ${TEST_FILES})
-add_library(edsp ${SOURCE_FILES} src/frequency/spectrogram.cpp src/frequency/spectrogram.h src/frequency/linearpredictivecoding.cpp src/frequency/linearpredictivecoding.h)
+add_library(edsp ${SOURCE_FILES})
 
 SET(BASEPATH "${CMAKE_SOURCE_DIR}")
 
