@@ -11,8 +11,8 @@ using namespace eDSP::generators;
 template <typename T>
 const std::vector<T> &BrownNoiseGenerator<T>::generate() {
     static T ns = static_cast<T>(0);
-    for (size_t i = 0, size = Generator<T>::data.size(); i < size; ++i) {
-        Generator<T>::data[i] = [&]() {
+    for (size_t i = 0, size = this->data.size(); i < size; ++i) {
+        this->data[i] = [&]() {
             bool compute = true;
             while (compute) {
                 const T sample =  std::rand() / static_cast<T>(RAND_MAX);
@@ -25,7 +25,7 @@ const std::vector<T> &BrownNoiseGenerator<T>::generate() {
             return ns * BrownScale;
         }();
     }
-    return Generator<T>::data;
+    return this->data;
 }
 
 template <typename T>

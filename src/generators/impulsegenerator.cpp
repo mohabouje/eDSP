@@ -4,8 +4,8 @@ using namespace eDSP::generators;
 
 template<typename T>
 const std::vector<T> &ImpulseGenerator<T>::generate() {
-    Generator<T>::data[0] = Generator<T>::amplitude;
-    return Generator<T>::data;
+    this->data[0] = this->amplitude;
+    return this->data;
 }
 
 template<typename T>

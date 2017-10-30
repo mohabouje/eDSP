@@ -18,7 +18,7 @@ EDSP_BEGING_NAMESPACE
                 auto alpha = static_cast<T>(std::sin(frequency) / 2.0 * Q);
                 auto cs    = static_cast<T>(std::cos(frequency));
                 BiquadCoefficients<T> a, b;
-                b =  static_cast<T>(1.0 / (1.0 + alpha));
+                b[0] =  static_cast<T>(1.0 / (1.0 + alpha));
                 b[1] =  static_cast<T>(-2.0 * cs * b[0]);
                 b[2] =  static_cast<T>((1.0 - alpha) * b[0]);
                 a[0] =  static_cast<T>((1.0 - alpha) * b[0]);
