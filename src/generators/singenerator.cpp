@@ -9,13 +9,13 @@ using namespace eDSP::generators;
 
 template<typename T>
 const std::vector<T> &SinGenerator<T>::generate() {
-    T increment = 0.0, period = 1.0f / Generator<T>::sampleRate;
-    T normPhase = 2 * Constants<T>::pi * phase;
-    for (size_t i = 0, size = Generator<T>::data.size(); i < size; i++) {
-        Generator<T>::data[i] = Generator<T>::amplitude * std::sin(2 * Constants<T>::pi * Generator<T>::frequency * increment + normPhase);
+    T increment = 0, period = 1. / Generator<T>::sampleRate;
+    T normPhase = 2 * Constants<T>::pi * this->phase;
+    for (size_t i = 0, size = this->data.size(); i < size; i++) {
+        this->data[i] = this->amplitude * std::sin(2 * Constants<T>::pi * this->frequency * increment + normPhase);
         increment += period;
     }
-    return Generator<T>::data;
+    return this->data;
 }
 
 template<typename T>

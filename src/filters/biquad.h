@@ -56,7 +56,7 @@ EDSP_BEGING_NAMESPACE
 
                     m_state.outputs[1] = m_state.outputs[0];
                     m_state.outputs[0] = m_out[i];
-                }
+                } 
                 return m_out;
             }
 
