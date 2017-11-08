@@ -22,6 +22,8 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/generators/generator.h
         src/generators/singenerator.cpp
         src/generators/singenerator.h
+        src/generators/twosingenerator.cpp
+        src/generators/twosingenerator.h
         src/generators/brownnoisegenerator.cpp
         src/generators/brownnoisegenerator.h
         src/generators/impulsegenerator.h
