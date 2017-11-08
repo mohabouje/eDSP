@@ -37,7 +37,6 @@ const std::vector<T> &AutoCorrelation<T>::compute(const std::vector<T>& input) {
 
 template <typename T>
 AutoCorrelation<T>::~AutoCorrelation() {
-    AlgorithmTemplate::~AlgorithmTemplate();
 }
 
 EDSP_DCL_TEMPLATE(eDSP::Frequency::AutoCorrelation, double);

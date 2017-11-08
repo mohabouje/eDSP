@@ -10,7 +10,6 @@ using namespace eDSP::transforms;
 template<typename T>
 IFFT<T>::~IFFT() {
     fftw_destroy_plan(fftwPlan);
-    AlgorithmTemplate::~AlgorithmTemplate();
 }
 
 template <typename T>

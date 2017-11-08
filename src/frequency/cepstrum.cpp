@@ -35,7 +35,6 @@ const std::vector<T> &Cepstrum<T>::compute(const std::vector<T>& input) {
 
 template <typename T>
 Cepstrum<T>::~Cepstrum() {
-    AlgorithmTemplate::~AlgorithmTemplate();
 }
 
 EDSP_DCL_TEMPLATE(eDSP::Frequency::Cepstrum, double);

@@ -28,7 +28,6 @@ const std::vector<T> &Spectrogram<T>::compute(const std::vector<T>& input) {
 
 template <typename T>
 Spectrogram<T>::~Spectrogram() {
-    AlgorithmTemplate::~AlgorithmTemplate();
 }
 
 EDSP_DCL_TEMPLATE(eDSP::Frequency::Spectrogram, double);

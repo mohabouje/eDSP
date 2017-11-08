@@ -55,7 +55,6 @@ const std::vector<T> &LinearPredictiveCode<T>::compute(const std::vector<T>& inp
 
 template <typename T>
 LinearPredictiveCode<T>::~LinearPredictiveCode() {
-    AlgorithmTemplate::~AlgorithmTemplate();
 }
 
 
