@@ -15,7 +15,7 @@ class AlgorithmTemplate : public IErrorNotifier, public IInitializer {
 public:
     AlgorithmTemplate() = default;
     AlgorithmTemplate(bool state, const Error& error) : state(state), err(error) {}
-    virtual ~AlgorithmTemplate() = default;
+    virtual ~AlgorithmTemplate() { }
 
     inline bool isInitialized() const override { return state; }
     inline bool hasError() const override { return err.id() != EDSP_INVALID; }
