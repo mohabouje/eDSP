@@ -79,6 +79,18 @@ EDSP_BEGING_NAMESPACE
             }
 
             template<typename T>
+            inline std::vector<T> blackmannuttall(size_t size) {
+                std::vector<T> vec(size);
+                for (size_t i = 0; i < size; i++) {
+                    vec[i] = 0.3635819f
+                                - 0.4891775f * cos((2 * Constants<T>::pi * i) / (size - 1.0f))
+                                + 0.1365995f * cos((2 * (2 * Constants<T>::pi) *i) / (size - 1.0f))
+                                - 0.0106411f * cos((3 * (2 * Constants<T>::pi) *i) / (size - 1.0f));
+                }
+                return vec;
+            }
+
+            template<typename T>
             inline std::vector<T> parzen(size_t size) {
                 std::vector<T> vec(size);
                 for (size_t i = 0; i < size; i++) {     
