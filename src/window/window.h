@@ -107,14 +107,9 @@ EDSP_BEGING_NAMESPACE
 
             template<typename T>
             inline std::vector<T> boxcar(size_t size){
-            	std::vector<T> vec(size);
-            	for (size_t i = 0; i < size; i++) {
-            		vec[i] = 1.0f;
-            	}
+            	std::vector<T> vec(size, 1.);
             	return vec;
             }
-            }
-
 
         }
     }
