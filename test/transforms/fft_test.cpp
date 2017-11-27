@@ -5,19 +5,14 @@
 #include <catch.hpp>
 #include "transforms/fft.hpp"
 #include "transforms/ifft.hpp"
+#include "math/complex.hpp"
 #include "../test_db.h"
 #include "../test_config.h"
 
 using namespace eDSP::transforms;
 SCENARIO("Testing FFT") {
-    const std::vector<double>& original = test::db::ref_vector;
-
-    std::vector<std::complex<double>> tmp(original.size());
-    std::transform( original.begin(), original.end(), tmp.begin(),  [](const double& da) {
-        return std::complex<double>( da, 0.);
-    } );
-
-
+    auto original = test::db::ref_vector;
+    auto tmp = eDSP::math::complex::real_to_complex(original);
     FFT<std::vector<std::complex<double>>> fft(original.size());
     IFFT<std::vector<std::complex<double>>> ifft(original.size());
 
