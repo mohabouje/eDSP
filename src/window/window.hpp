@@ -10,6 +10,7 @@
 #include "base/template_util.hpp"
 #include <vector>
 #include <cmath>
+#include <math/container.hpp>
 
 EDSP_BEGING_NAMESPACE
     namespace window {
@@ -97,6 +98,14 @@ EDSP_BEGING_NAMESPACE
             for (size_t i = 0; i < size; i++) {
                 vec[i] = 1.0f - std::sqrt((2.f * i - size) / (size + 1.0f));
             }
+            return vec;
+        }
+
+        TEMPLATE_CONTAINER(Container, Container)
+        boxcar(size_t size){
+            using T = typename Container::value_type;
+            Container vec(size);
+            math::set(vec, static_cast<T>(1));
             return vec;
         }
     }
