@@ -9,8 +9,10 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/math/math_util.hpp
         src/math/container.hpp
         src/math/stats.hpp
-        src/base/constants.h
         src/math/trig.hpp
+        src/properties/properties.hpp
+        src/base/constants.h
+        src/base/template_util.hpp
         src/base/algoritmtemplate.h
         src/base/ierrornotifier.h
         src/base/iinitializer.h
@@ -28,16 +30,6 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/generators/brownnoisegenerator.h
         src/generators/impulsegenerator.h
         src/generators/impulsegenerator.cpp
-        src/properties/energy.cpp
-        src/properties/energy.h
-        src/properties/loudness.cpp
-        src/properties/loudness.h
-        src/properties/power.cpp
-        src/properties/power.h
-        src/properties/strongpeak.cpp
-        src/properties/strongpeak.h
-        src/properties/zerocrossingrate.cpp
-        src/properties/zerocrossingrate.h
         src/filters/biquad.h
         src/filters/biquaddesigner.h
         src/math/complex.hpp
