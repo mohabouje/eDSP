@@ -15,7 +15,7 @@
 EDSP_BEGING_NAMESPACE
     namespace window {
 
-        EDSP_FTEMPLATE_CONTAINER(Container, Container)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
         hamming(size_t size) {
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
@@ -25,7 +25,7 @@ EDSP_BEGING_NAMESPACE
         }
 
 
-        EDSP_FTEMPLATE_CONTAINER(Container, Container)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
         hanning(size_t size) {
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
@@ -35,7 +35,7 @@ EDSP_BEGING_NAMESPACE
         }
 
 
-        EDSP_FTEMPLATE_CONTAINER(Container, Container)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
         hammingz(size_t size) {
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
@@ -45,7 +45,7 @@ EDSP_BEGING_NAMESPACE
         }
 
 
-        EDSP_FTEMPLATE_CONTAINER(Container, Container)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
         gaussian(size_t size) {
             Container vec(size);
             typename Container::value_type a, b, c = 0.5f;
@@ -58,7 +58,7 @@ EDSP_BEGING_NAMESPACE
         }
 
 
-        EDSP_FTEMPLATE_CONTAINER(Container, Container)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
         blackman(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
@@ -68,7 +68,7 @@ EDSP_BEGING_NAMESPACE
             return vec;
         }
 
-        EDSP_FTEMPLATE_CONTAINER(Container, Container)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
         blackmanharris(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
@@ -81,7 +81,7 @@ EDSP_BEGING_NAMESPACE
             return vec;
         }
 
-        EDSP_FTEMPLATE_CONTAINER(Container, Container)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
         parzen(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
@@ -91,7 +91,7 @@ EDSP_BEGING_NAMESPACE
             return vec;
         }
 
-        EDSP_FTEMPLATE_CONTAINER(Container, Container)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
         welch(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
@@ -101,7 +101,7 @@ EDSP_BEGING_NAMESPACE
             return vec;
         }
 
-        EDSP_FTEMPLATE_CONTAINER(Container, Container)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
         boxcar(size_t size){
             using T = typename Container::value_type;
             Container vec(size);

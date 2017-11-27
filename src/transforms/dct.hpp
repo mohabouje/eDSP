@@ -15,7 +15,7 @@ EDSP_BEGING_NAMESPACE
     namespace transforms {
         enum DCT_Type { Type_I = 0, Type_II, Type_III, Type_IV};
 
-        EDSP_CTEMPLATE_CONTAINER(Container)
+        EDSP_CTEMPLATE_GENERIC_CONTAINER(Container)
         class DCT {
         public:
             EDSP_DISABLE_COPY(DCT)

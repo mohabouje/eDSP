@@ -35,12 +35,12 @@ SCENARIO("Testing math features for standard containers") {
 
             // Testing function has negative
             AND_THEN("No value should be negative") {
-                REQUIRE(!hasNegative(test));
+                REQUIRE(!has_negative(test));
             }
 
             // Testing function has zeros
             AND_THEN("No value should be zero") {
-                REQUIRE(!hasZero(test));
+                REQUIRE(!has_zero(test));
             }
         }
 
@@ -55,12 +55,12 @@ SCENARIO("Testing math features for standard containers") {
 
             // Testing function has negative
             AND_THEN("No value should be negative") {
-                REQUIRE(!hasNegative(test));
+                REQUIRE(!has_negative(test));
             }
 
             // Testing function has zeros
             AND_THEN("Should have zero values") {
-                REQUIRE(hasZero(test));
+                REQUIRE(has_zero(test));
             }
         }
 

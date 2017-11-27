@@ -10,29 +10,29 @@
 EDSP_BEGING_NAMESPACE
     namespace properties {
 
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         energy(const Container& data) {
             math::sum_squares(data);
         };
 
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         loudness(const Container& data) {
             return std::pow(math::sum_squares(data), static_cast<typename Container::value_type>(0.67)); // StevenLawLevel
         };
 
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         power(const Container& data) {
             return math::sum_squares(data) / static_cast<typename Container::value_type>(data.size());
         };
 
-        EDSP_FTEMPLATE_CONTAINER(Container, size_t)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, size_t)
         strong_peak(const Container& data) {
             auto it = std::max_element(data.begin(), data.end());
             return static_cast<size_t>(std::distance(data.begin(), it));
         };
 
 
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         zero_crossing_rate(const Container& data) {
             typename Container::value_type tmp = 0;
             for (size_t i = 0, size = data.size(); i < size; i++) {

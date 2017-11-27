@@ -17,7 +17,7 @@
 EDSP_BEGING_NAMESPACE
 namespace math {
     namespace stats {
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         mode(const Container& container) {
             typedef std::unordered_map<typename Container::value_type,unsigned int> Map;
             Map counts;
@@ -36,33 +36,33 @@ namespace math {
             return pr->first;
         }
 
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         mean(const Container& container) {
             return  sum(container) / static_cast<typename Container::value_type> (container.size());
         }
 
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         variance(const Container& container) {
             return  (sum_squares(container) - square(sum(container))) / static_cast<typename Container::value_type>(container.size());
         }
 
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         standar_desviation(const Container& container) {
             return static_cast<typename Container::value_type>(std::sqrt(variance(container)));
         }
 
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         mean_error(const Container& container) {
             return static_cast<typename Container::value_type>(std::sqrt(variance(container)
                                                                          / static_cast<typename Container::value_type>(container.size())));
         }
 
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         root_mean_square(const Container& container) {
             return static_cast<typename Container::value_type>(std::sqrt(mean(container)));
         }
 
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         median(const Container& container) {
             Container tmp(container);
             std::sort(tmp.begin(), tmp.end());
@@ -71,7 +71,7 @@ namespace math {
                                   : tmp[uint(size/2)];
         }
 
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         entropy(const Container& container) {
             static_assert(Container::hasNegative(container), "Trying to generate the entrpy of an array with negative values");
             typename Container::value_type tmp = 0;
@@ -82,7 +82,7 @@ namespace math {
             return tmp;
         }
 
-        EDSP_FTEMPLATE_CONTAINER(Container, typename Container::value_type)
+        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         geometric_mean(const Container &container) {
             assert(Container::hasNegative(container) &&
                         "Trying to generate the geometric mean of an array with "
