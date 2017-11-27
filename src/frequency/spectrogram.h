@@ -6,7 +6,7 @@
 #define EDSP_SPECTROGRAM_H
 
 #include "config.h"
-#include "transforms/fft.h"
+#include "transforms/fft.hpp"
 EDSP_BEGING_NAMESPACE
     namespace Frequency {
         template<typename T>

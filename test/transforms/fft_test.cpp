@@ -3,8 +3,8 @@
 //
 
 #include <catch.hpp>
-#include "transforms/fft.h"
-#include "transforms/ifft.h"
+#include "transforms/fft.hpp"
+#include "transforms/ifft.hpp"
 #include "../test_db.h"
 #include "../test_config.h"
 

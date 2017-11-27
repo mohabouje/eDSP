@@ -6,8 +6,8 @@
 #define EDSP_CROSSCORRELATION_H
 
 #include "config.h"
-#include "transforms/fft.h"
-#include "transforms/ifft.h"
+#include "transforms/fft.hpp"
+#include "transforms/ifft.hpp"
 EDSP_BEGING_NAMESPACE
     namespace Frequency {
         template<typename T>
@@ -17,8 +17,9 @@ EDSP_BEGING_NAMESPACE
             ~AutoCorrelation() override;
             const std::vector<T>& compute(const std::vector<T>&);
         private:
-            transforms::FFT<T> fft;
-            transforms::IFFT<T> ifft;
+            using complex_array = std::vector<std::complex<T>>;
+            transforms::FFT  fft;
+            transforms::IFFT ifft;
             std::vector<T> data;
         };
     }

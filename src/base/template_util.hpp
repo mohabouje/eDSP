@@ -20,4 +20,6 @@ EDSP_END_NAMESPACE
 #define TEMPLATE_CONTAINER(Name, Return) template <typename Name> \
     constexpr typename std::enable_if<has_const_iterator<Name>::value, Return>::type
 
+#define CLASS_TEMPLATE_CONTAINER(Name) template <typename Name, typename std::enable_if<has_const_iterator<Name>::value>::type>
+
 #endif

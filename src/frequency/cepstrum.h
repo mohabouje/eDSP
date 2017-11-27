@@ -7,8 +7,8 @@
 
 
 #include "config.h"
-#include "transforms/fft.h"
-#include "transforms/ifft.h"
+#include "transforms/fft.hpp"
+#include "transforms/ifft.hpp"
 EDSP_BEGING_NAMESPACE
     namespace Frequency {
         template<typename T>
@@ -18,8 +18,8 @@ EDSP_BEGING_NAMESPACE
             ~Cepstrum() override;
             const std::vector<T>& compute(const std::vector<T>&);
         private:
-            transforms::FFT<T> fft;
-            transforms::IFFT<T> ifft;
+            transforms::FFT fft;
+            transforms::IFFT ifft;
             std::vector<T> data;
         };
     }

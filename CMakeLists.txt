@@ -71,16 +71,11 @@ find_library(FFTW_LIB NAMES lfftw3 libfftw3 fftw3)
 IF (FFTW_LIB)
     message("FFTW_LIB library found, build ")
     set(FFTW_FILES
-            src/transforms/fft.cpp
-            src/transforms/fft.h
-            src/transforms/ifft.cpp
-            src/transforms/ifft.h
-            src/transforms/dct.cpp
-            src/transforms/dct.h
-            src/transforms/idct.cpp
-            src/transforms/idct.h
-            src/transforms/dht.cpp
-            src/transforms/dht.h
+            src/transforms/fft.hpp
+            src/transforms/ifft.hpp
+            src/transforms/dct.hpp
+            src/transforms/idct.hpp
+            src/transforms/dht.hpp
             src/frequency/autocorrelation.cpp
             src/frequency/autocorrelation.h
             src/frequency/spectrogram.cpp
