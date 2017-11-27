@@ -14,7 +14,7 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/base/algoritmtemplate.h
         src/base/ierrornotifier.h
         src/base/iinitializer.h
-        src/base/error.h src/window/window.h
+        src/base/error.h src/window/window.hpp
         src/generators/whitenoisegenerator.cpp
         src/generators/whitenoisegenerator.h
         src/generators/squaregenerator.cpp
