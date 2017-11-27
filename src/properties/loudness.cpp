@@ -9,5 +9,5 @@ using namespace eDSP::properties;
 template <typename T>
 T Loudness<T>::compute(const std::vector<T> &data) const {
     static constexpr T StevenLawLevel = static_cast<T>(0.67);
-    return std::pow(Math::Container::sum_squares(data), StevenLawLevel);
+    return std::pow(math::sum_squares(data), StevenLawLevel);
 }

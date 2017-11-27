@@ -3,7 +3,7 @@
 //
 
 #include "spectrogram.h"
-#include "math/math_util.h"
+#include "math/math_util.hpp"
 #include "math/container.hpp"
 
 using namespace eDSP::Frequency;

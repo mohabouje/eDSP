@@ -8,5 +8,5 @@ using namespace eDSP::properties;
 
 template <typename T>
 T Power<T>::compute(const std::vector<T> &data) const {
-    return Math::Container::sum_squares(data) / static_cast<T>(data.size());
+    return math::sum_squares(data) / static_cast<T>(data.size());
 }

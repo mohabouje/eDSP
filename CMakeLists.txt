@@ -6,11 +6,11 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/config.h
         src/base/types.h
         src/version.h
-        src/math/math_util.h
+        src/math/math_util.hpp
         src/math/container.hpp
-        src/math/stats.h
+        src/math/stats.hpp
         src/base/constants.h
-        src/math/trig.h
+        src/math/trig.hpp
         src/base/algoritmtemplate.h
         src/base/ierrornotifier.h
         src/base/iinitializer.h
@@ -58,7 +58,7 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/frequency/cepstrum.h
         src/filters/biquad.h
         src/filters/biquaddesigner.h
-        src/math/complex.h
+        src/math/complex.hpp
 )
 
 set(TEST_DIR test)

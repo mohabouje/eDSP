@@ -45,8 +45,8 @@ void DCT<T>::setSize(size_t size) {
     input.resize(size);
     output.resize(size);
     setType(t);
-    Math::Container::set(input, static_cast<T>(0));
-    Math::Container::set(output, static_cast<T>(0));
+    math::set(input, static_cast<T>(0));
+    math::set(output, static_cast<T>(0));
 }
 
 template<typename T>

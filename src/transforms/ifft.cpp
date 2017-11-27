@@ -27,8 +27,8 @@ void IFFT<T>::setSize(size_t size) {
                                 reinterpret_cast<fftw_complex *>(&output[0]),
                                 FFTW_BACKWARD, FFTW_ESTIMATE);
 
-    Math::Container::set(input, std::complex<T>(0,0));
-    Math::Container::set(output, std::complex<T>(0,0));
+    math::set(input, std::complex<T>(0,0));
+    math::set(output, std::complex<T>(0,0));
 }
 
 

@@ -28,8 +28,8 @@ void DHT<T>::setSize(size_t size) {
                                 &output[0],
                                 FFTW_DHT,
                                 FFTW_MEASURE);
-    Math::Container::set(input, std::complex<T>(0,0));
-    Math::Container::set(output, std::complex<T>(0,0));
+    math::set(input, std::complex<T>(0,0));
+    math::set(output, std::complex<T>(0,0));
 }
 
 template <typename T>

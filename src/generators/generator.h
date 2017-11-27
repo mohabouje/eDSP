@@ -22,7 +22,7 @@ EDSP_BEGING_NAMESPACE
                                                                              data(std::vector<T>(size)),
                                                                              AlgorithmTemplate(true, Error())
             {
-                Math::Container::set(data, static_cast<T>(0));
+                math::set(data, static_cast<T>(0));
             }
             ~Generator() override = default;
 
@@ -30,7 +30,7 @@ EDSP_BEGING_NAMESPACE
             virtual void setSize(size_t size) {
                 if (size != data.size()) {
                     data.resize(size);
-                    Math::Container::set(data, static_cast<T>(0));
+                    math::set(data, static_cast<T>(0));
                 }
             }
 

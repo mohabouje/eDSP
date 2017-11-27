@@ -8,5 +8,5 @@ using namespace eDSP::properties;
 
 template <typename T>
 T Energy<T>::compute(const std::vector<T> &data) const {
-    return Math::Container::sum_squares(data);
+    return math::sum_squares(data);
 }

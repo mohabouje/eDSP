@@ -28,15 +28,15 @@ void FFT<T>::setSize(size_t size) {
                                  reinterpret_cast<fftw_complex *>(&output[0]),
                                  FFTW_FORWARD, FFTW_ESTIMATE);
 
-    Math::Container::set(input, std::complex<T>(0,0));
-    Math::Container::set(output, std::complex<T>(0,0));
+    math::set(input, std::complex<T>(0,0));
+    math::set(output, std::complex<T>(0,0));
 }
 
 template<typename T>
 const std::vector<std::complex<T>> &FFT<T>::compute(const std::vector<T> &data) {
     assert(data.size() <= input.size());
 
-    Math::Container::set(input, std::complex<T>(0,0));
+    math::set(input, std::complex<T>(0,0));
     for (size_t i = 0, size = data.size(); i < size; i++) {
         input[i].real(data[i]);
     }
