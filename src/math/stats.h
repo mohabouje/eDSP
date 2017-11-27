@@ -7,16 +7,16 @@
 
 #include "config.h"
 #include "math_util.h"
-#include "container.h"
+#include "container.hpp"
 
 #include <unordered_map>
 EDSP_BEGING_NAMESPACE
 namespace Math {
     namespace Stats {
 
-        template<typename T>
-        constexpr T mode(const std::vector<T>& container) {
-            typedef std::unordered_map<T,unsigned int> Map;
+        template<typename Container>
+        constexpr auto mode(const Container& container) {
+            typedef std::unordered_map<Container::value_type,unsigned int> Map;
             Map counts;
             for (size_t i = 0, size = container.size(); i < size; ++i) {
                 typename Map::iterator it(counts.find(container[i]));
@@ -33,13 +33,13 @@ namespace Math {
             return pr->first;
         }
 
-        template<typename T>
-        constexpr T mean(const std::vector<T>& container) {
-            return  Container::sum(container) / static_cast<T> (container.size());
+        template<typename Container>
+        constexpr auto mean(const Container& container) {
+            return  Container::sum(container) / static_cast<Container::value_type> (container.size());
         }
 
-        template<typename T>
-        constexpr T variance(const std::vector<T>& container) {
+        template<typename Container>
+        constexpr Container::value_type variance(const Container& container) {
             return  (Container::sum_squares(container) - Util::square<T>(Container::sum(container))
                                                           / static_cast<T>(container.size()));
         }

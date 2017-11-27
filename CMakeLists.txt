@@ -7,7 +7,7 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/base/types.h
         src/version.h
         src/math/math_util.h
-        src/math/container.h
+        src/math/container.hpp
         src/math/stats.h
         src/base/constants.h
         src/math/trig.h

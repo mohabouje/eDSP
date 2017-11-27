@@ -3,7 +3,7 @@
 //
 
 #include "power.h"
-#include "math/container.h"
+#include "math/container.hpp"
 using namespace eDSP::properties;
 
 template <typename T>

@@ -3,7 +3,7 @@
 //
 
 #include "dht.h"
-#include "math/container.h"
+#include "math/container.hpp"
 #include <assert.h>
 
 using namespace eDSP::transforms;

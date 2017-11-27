@@ -74,17 +74,19 @@ EDSP_BEGING_NAMESPACE
             }
 
             template<typename T>
-            constexpr bool isPowerOfTwo(const T &x) {
+            constexpr bool is_power_two(const T &tmp) {
+                auto x = static_cast<int32_t>(tmp);
                 return x != 0 && !(x & (x - 1));
             }
 
             template<typename T>
-            constexpr T nextPowerOfTwo(T x) {
-                if (isNegative(x))
+            constexpr T next_power_two(T tmp) {
+                if (isNegative(tmp))
                     return 0;
-                if (isPowerOfTwo(x))
-                    return x;
+                if (is_power_two(tmp))
+                    return tmp;
 
+                auto x = static_cast<int32_t>(tmp);
                 --x;
                 x |= x >> 1;
                 x |= x >> 2;

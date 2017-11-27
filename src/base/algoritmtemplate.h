@@ -14,8 +14,8 @@ EDSP_BEGING_NAMESPACE
 class AlgorithmTemplate : public IErrorNotifier, public IInitializer {
 public:
     AlgorithmTemplate() = default;
+    virtual ~AlgorithmTemplate() = default;
     AlgorithmTemplate(bool state, const Error& error) : state(state), err(error) {}
-    virtual ~AlgorithmTemplate() { }
 
     inline bool isInitialized() const override { return state; }
     inline bool hasError() const override { return err.id() != EDSP_INVALID; }
