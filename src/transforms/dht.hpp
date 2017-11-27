@@ -12,7 +12,7 @@
 
 EDSP_BEGING_NAMESPACE
 namespace transforms {
-    CLASS_TEMPLATE_CONTAINER(Container)
+    EDSP_CTEMPLATE_CONTAINER(Container)
     class DHT  {
     public:
         EDSP_DISABLE_COPY(DHT)

@@ -14,7 +14,7 @@
 
 EDSP_BEGING_NAMESPACE
     namespace transforms {
-        CLASS_TEMPLATE_CONTAINER(Container)
+        EDSP_CTEMPLATE_CONTAINER(Container)
         class IDCT {
         public:
             EDSP_DISABLE_COPY(IDCT)

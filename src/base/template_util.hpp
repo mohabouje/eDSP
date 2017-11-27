@@ -16,9 +16,9 @@ public:
 
 
 
-#define TEMPLATE_CONTAINER(Name, Return) template <typename Name> \
+#define EDSP_FTEMPLATE_CONTAINER(Name, Return) template <typename Name> \
     constexpr typename std::enable_if<has_const_iterator<Name>::value, Return>::type
 
-#define CLASS_TEMPLATE_CONTAINER(Name) template <typename Name, typename = typename std::enable_if<has_const_iterator<Name>::value>::type>
+#define EDSP_CTEMPLATE_CONTAINER(Name) template <typename Name, typename = typename std::enable_if<has_const_iterator<Name>::value>::type>
 
 #endif
