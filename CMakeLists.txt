@@ -38,24 +38,6 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/properties/strongpeak.h
         src/properties/zerocrossingrate.cpp
         src/properties/zerocrossingrate.h
-        src/transforms/fft.cpp
-        src/transforms/fft.h
-        src/transforms/ifft.cpp
-        src/transforms/ifft.h
-        src/transforms/dct.cpp
-        src/transforms/dct.h
-        src/transforms/idct.cpp
-        src/transforms/idct.h
-        src/transforms/dht.cpp
-        src/transforms/dht.h
-        src/frequency/autocorrelation.cpp
-        src/frequency/autocorrelation.h
-        src/frequency/spectrogram.cpp
-        src/frequency/spectrogram.h
-        src/frequency/linearpredictivecoding.cpp
-        src/frequency/linearpredictivecoding.h
-        src/frequency/cepstrum.cpp
-        src/frequency/cepstrum.h
         src/filters/biquad.h
         src/filters/biquaddesigner.h
         src/math/complex.hpp
@@ -68,7 +50,6 @@ set(TEST_FILES
         ${TEST_DIR}/math/stats_test.cpp
         ${TEST_DIR}/math/trig_test.cpp
         ${TEST_DIR}/math/container_test.cpp
-        ${TEST_DIR}/transforms/fft_test.cpp
         ${TEST_DIR}/test_util.h
         ${TEST_DIR}/test_config.h
         )
@@ -78,16 +59,44 @@ add_library(edsp ${SOURCE_FILES})
 
 SET(BASEPATH "${CMAKE_SOURCE_DIR}")
 
-# For Home Brew correct functionality
-list(APPEND CMAKE_PREFIX_PATH /usr/local)
-include_directories(/usr/local/include)
-
 # add include dirs
 include_directories("${BASEPATH}/src/")
 include_directories("${BASEPATH}/third_party/Catch/include/")
 
-# FFTW integration
-include_directories( ${FFTW_INCLUDES} )
-target_link_libraries(edsp ${FFTW_LIBRARIES})
-target_link_libraries(runtest ${FFTW_LIBRARIES})
+# For Home Brew correct functionality
+list(APPEND CMAKE_PREFIX_PATH /usr/local)
+include_directories(/usr/local/include)
 
+find_library(FFTW_LIB NAMES lfftw3 libfftw3 fftw3)
+IF (FFTW_LIB)
+    message("FFTW_LIB library found, build ")
+    set(FFTW_FILES
+            src/transforms/fft.cpp
+            src/transforms/fft.h
+            src/transforms/ifft.cpp
+            src/transforms/ifft.h
+            src/transforms/dct.cpp
+            src/transforms/dct.h
+            src/transforms/idct.cpp
+            src/transforms/idct.h
+            src/transforms/dht.cpp
+            src/transforms/dht.h
+            src/frequency/autocorrelation.cpp
+            src/frequency/autocorrelation.h
+            src/frequency/spectrogram.cpp
+            src/frequency/spectrogram.h
+            src/frequency/linearpredictivecoding.cpp
+            src/frequency/linearpredictivecoding.h
+            src/frequency/cepstrum.cpp
+            src/frequency/cepstrum.h)
+
+    set(FFTW_TEST_FILES
+            test/transforms/fft_test.cpp)
+    target_sources(edsp PUBLIC ${FFTW_FILES})
+    target_link_libraries(edsp ${FFTW_LIB})
+
+    target_sources(runtest PUBLIC ${FFTW_FILES} ${FFTW_TEST_FILES})
+    target_link_libraries(runtest ${FFTW_LIB})
+ELSE()
+    message("FFTW_LIB library not found")
+ENDIF()
