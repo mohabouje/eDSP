@@ -26,8 +26,8 @@ namespace transforms {
                                         &output[0],
                                         FFTW_DHT,
                                         FFTW_MEASURE);
-            math::set(input, Container::value_type());
-            math::set(output, Container::value_type());
+            math::set(input, static_cast<typename Container::value_type>(0));
+            math::set(output, static_cast<typename Container::value_type>(0));
         }
 
         const Container &compute(const Container&data) {

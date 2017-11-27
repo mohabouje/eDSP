@@ -10,13 +10,20 @@
 
 using namespace eDSP::transforms;
 SCENARIO("Testing FFT") {
-    const std::vector<double> original = test::db::ref_vector;
-    FFT<double> fft(original.size());
-    IFFT<double> ifft(original.size());
+    const std::vector<double>& original = test::db::ref_vector;
+
+    std::vector<std::complex<double>> tmp(original.size());
+    std::transform( original.begin(), original.end(), tmp.begin(),  [](const double& da) {
+        return std::complex<double>( da, 0.);
+    } );
+
+
+    FFT<std::vector<std::complex<double>>> fft(original.size());
+    IFFT<std::vector<std::complex<double>>> ifft(original.size());
 
     GIVEN("A signal ") {
         WHEN("We apply the FFT") {
-            const std::vector<std::complex<double>> data = fft.compute(original);
+            const std::vector<std::complex<double>> data = fft.compute(tmp);
             THEN("It should be the same as the estimated fft") {
                 for (size_t i = 0, size = data.size(); i < size; i++) {
                     const Approx abs = Approx( std::abs(data[i])).epsilon(TEST_TOLERANCE);
@@ -26,7 +33,7 @@ SCENARIO("Testing FFT") {
         }
 
         AND_WHEN("We apply the inverse operation") {
-            const std::vector<std::complex<double>> data = fft.compute(original);
+            const std::vector<std::complex<double>> data = fft.compute(tmp);
             const std::vector<std::complex<double>> inverse = ifft.compute(data);
             THEN("We should get the same output") {
                 for (size_t i = 0, size = inverse.size(); i < size; i++) {

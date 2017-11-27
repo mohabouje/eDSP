@@ -17,6 +17,7 @@ EDSP_BEGING_NAMESPACE
 
         CLASS_TEMPLATE_CONTAINER(Container)
         class DCT {
+        public:
             EDSP_DISABLE_COPY(DCT)
             explicit DCT(size_t size, DCT_Type t = DCT_Type::Type_I) : t(t) { setSize(size); }
             virtual ~DCT() { fftw_destroy_plan(fftwPlan); }
@@ -44,8 +45,8 @@ EDSP_BEGING_NAMESPACE
                 input.resize(size);
                 output.resize(size);
                 setType(t);
-                math::set(input, Container::value_type());
-                math::set(output, Container::value_type());
+                math::set(input, static_cast<typename Container::value_type>(0));
+                math::set(output, static_cast<typename Container::value_type>(0));
             }
 
             const Container &compute(const Container &data) {

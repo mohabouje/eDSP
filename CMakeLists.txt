@@ -76,14 +76,15 @@ IF (FFTW_LIB)
             src/transforms/dct.hpp
             src/transforms/idct.hpp
             src/transforms/dht.hpp
-            src/frequency/autocorrelation.cpp
-            src/frequency/autocorrelation.h
-            src/frequency/spectrogram.cpp
-            src/frequency/spectrogram.h
-            src/frequency/linearpredictivecoding.cpp
-            src/frequency/linearpredictivecoding.h
-            src/frequency/cepstrum.cpp
-            src/frequency/cepstrum.h)
+           # src/frequency/autocorrelation.cpp
+           # src/frequency/autocorrelation.h
+           # src/frequency/spectrogram.cpp
+           # src/frequency/spectrogram.h
+           # src/frequency/linearpredictivecoding.cpp
+           # src/frequency/linearpredictivecoding.h
+           # src/frequency/cepstrum.cpp
+           # src/frequency/cepstrum.h
+            )
 
     set(FFTW_TEST_FILES
             test/transforms/fft_test.cpp)
