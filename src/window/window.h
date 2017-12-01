@@ -15,7 +15,7 @@ EDSP_BEGING_NAMESPACE
     namespace window {
 
         template <typename Container>
-        Container hamming(size_t size) {
+        EDSP_EXPORT Container hamming(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
@@ -26,7 +26,7 @@ EDSP_BEGING_NAMESPACE
 
 
         template <typename Container>
-        Container hanning(size_t size) {
+        EDSP_EXPORT Container hanning(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
@@ -37,7 +37,7 @@ EDSP_BEGING_NAMESPACE
 
 
         template <typename Container>
-        Container hammingz(size_t size) {
+        EDSP_EXPORT Container hammingz(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
@@ -48,7 +48,7 @@ EDSP_BEGING_NAMESPACE
 
 
         template <typename Container>
-        Container gaussian(size_t size) {
+        EDSP_EXPORT Container gaussian(size_t size) {
             Container vec(size);
             typename Container::value_type a, b, c = 0.5f;
             for (size_t i = 0; i < size; i++) {
@@ -61,7 +61,7 @@ EDSP_BEGING_NAMESPACE
 
 
         template <typename Container>
-        Container blackman(size_t size) {
+        EDSP_EXPORT Container blackman(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
@@ -71,7 +71,7 @@ EDSP_BEGING_NAMESPACE
         }
 
         template <typename Container>
-        Container blackmanharris(size_t size) {
+        EDSP_EXPORT Container blackmanharris(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
@@ -84,7 +84,7 @@ EDSP_BEGING_NAMESPACE
         }
 
         template <typename Container>
-        Container parzen(size_t size) {
+        EDSP_EXPORT Container parzen(size_t size) {
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
                 vec[i] = 1.0f - std::abs((2.f * i - size) / (size + 1.0f));
@@ -93,7 +93,7 @@ EDSP_BEGING_NAMESPACE
         }
 
         template <typename Container>
-        Container welch(size_t size) {
+        EDSP_EXPORT Container welch(size_t size) {
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
                 vec[i] = 1.0f - std::sqrt((2.f * i - size) / (size + 1.0f));

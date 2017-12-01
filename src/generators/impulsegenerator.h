@@ -16,7 +16,7 @@
 EDSP_BEGING_NAMESPACE
 	namespace generators {
         template <typename T, std::size_t N>
-        class ImpulseGenerator : Generator<T, N> {
+        class EDSP_EXPORT ImpulseGenerator : Generator<T, N> {
         public:
             explicit ImpulseGenerator(T amplitude) :
                     Generator<T,N>(0, 0, amplitude) {

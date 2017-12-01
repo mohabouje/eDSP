@@ -10,7 +10,7 @@
 EDSP_BEGING_NAMESPACE
    namespace generators {
         template<typename T, std::size_t N>
-        class SquareGenerator : Generator<T, N> {
+        class EDSP_EXPORT SquareGenerator : Generator<T, N> {
         public:
             explicit SquareGenerator(T duttycycle, T sampleRate, T frequency, T amplitude) :
                 duttyCycle(duttycycle), Generator<T,N>(sampleRate, frequency, amplitude) {

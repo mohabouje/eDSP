@@ -10,7 +10,7 @@ EDSP_BEGING_NAMESPACE
     namespace transforms {
 
         template<typename T, std::size_t N>
-        class IDCT {
+        class EDSP_EXPORT IDCT {
         public:
             EDSP_DISABLE_COPY(IDCT)
             explicit IDCT(DCT_Type t = DCT_Type::Type_I) : t(t) {

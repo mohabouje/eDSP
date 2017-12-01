@@ -14,7 +14,7 @@ EDSP_BEGING_NAMESPACE
     namespace frequency {
 
         template<typename T, std::size_t Order, std::size_t N = 1024>
-        class LinearPredictiveCode {
+        class EDSP_EXPORT LinearPredictiveCode {
         public:
             explicit LinearPredictiveCode() = default;
             virtual ~LinearPredictiveCode() = default;

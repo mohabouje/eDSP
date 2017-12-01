@@ -10,7 +10,7 @@
 EDSP_BEGING_NAMESPACE
     namespace generators {
         template<typename T, std::size_t N>
-        class BrownNoiseGenerator : public Generator<T, N> {
+        class EDSP_EXPORT BrownNoiseGenerator : public Generator<T, N> {
         public:
             explicit BrownNoiseGenerator() = default;
             ~BrownNoiseGenerator() override = default;

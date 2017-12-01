@@ -14,7 +14,7 @@
 EDSP_BEGING_NAMESPACE
 namespace transforms {
     template <typename T, std::size_t N>
-    class DHT  {
+    class EDSP_EXPORT  DHT  {
     public:
         EDSP_DISABLE_COPY(DHT)
         explicit DHT() {

@@ -13,7 +13,7 @@
 EDSP_BEGING_NAMESPACE
     namespace frequency {
         template<typename T, std::size_t N = 1024>
-        class Cepstrum  {
+        class EDSP_EXPORT Cepstrum  {
         public:
             explicit Cepstrum() = default;
             virtual ~Cepstrum() = default;

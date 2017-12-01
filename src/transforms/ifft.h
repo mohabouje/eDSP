@@ -15,7 +15,7 @@ EDSP_BEGING_NAMESPACE
     namespace transforms {
 
         template<typename T, std::size_t N>
-        class IFFT {
+        class EDSP_EXPORT IFFT {
         public:
             explicit IFFT() {
                 fftwPlan = fftw_plan_dft_1d(static_cast<int>(N),

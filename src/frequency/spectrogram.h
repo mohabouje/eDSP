@@ -11,7 +11,7 @@
 EDSP_BEGING_NAMESPACE
     namespace frequency {
         template<typename T, std::size_t N>
-        class Spectrogram {
+        class EDSP_EXPORT Spectrogram {
         public:
             Spectrogram() = default;
             virtual ~Spectrogram() = default;

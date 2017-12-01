@@ -11,7 +11,7 @@
 EDSP_BEGING_NAMESPACE
     namespace generators {
         template<typename T, std::size_t N>
-        class SinGenerator : public Generator<T, N> {
+        class EDSP_EXPORT SinGenerator : public Generator<T, N> {
         public:
             SinGenerator(T sr, T f, T ph, T a) : Generator<T,N>(sr, f, a), phase(ph) {}
             const std::array<T, N> &generate() {

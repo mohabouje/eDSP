@@ -14,7 +14,7 @@
 EDSP_BEGING_NAMESPACE
     namespace transforms {
         template<typename T, std::size_t N>
-        class FFT {
+        class EDSP_EXPORT FFT {
         public:
             EDSP_DISABLE_COPY(FFT)
             explicit FFT() {

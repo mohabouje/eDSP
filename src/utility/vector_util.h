@@ -14,28 +14,28 @@ EDSP_BEGING_NAMESPACE
 namespace utility {
     namespace vector {
         template <typename Container>
-        constexpr typename Container::value_type max(const Container & array) {
+        EDSP_EXPORT constexpr typename Container::value_type max(const Container & array) {
             return *std::max_element(array.begin(), array.end());
         }
 
         template <typename Container>
-        constexpr typename Container::value_type min(const Container& array) {
+        EDSP_EXPORT constexpr typename Container::value_type min(const Container& array) {
             return *std::min_element(array.begin(), array.end());
         }
 
         template <typename Container>
-        constexpr std::pair<typename Container::value_type, typename Container::value_type> minmax(const Container& array) {
+        EDSP_EXPORT constexpr std::pair<typename Container::value_type, typename Container::value_type> minmax(const Container& array) {
             return std::minmax_element(array.begin(), array.end());
         }
 
         template <typename Container>
-        constexpr std::pair<std::size_t, typename Container::value_type> strong_peak(const Container& data) {
+        EDSP_EXPORT constexpr std::pair<std::size_t, typename Container::value_type> strong_peak(const Container& data) {
             auto it = std::max_element(data.begin(), data.end());
             return std::pair<std::size_t, typename Container::value_type>(static_cast<size_t>(std::distance(data.begin(), it)), *it);
         };
 
         template <typename Container>
-        constexpr Container fract(const Container& array) {
+        EDSP_EXPORT constexpr Container fract(const Container& array) {
             Container tmp(array);
             for (size_t i = 0, size = array.size(); i < size; i++) {
                 tmp[i] -= std::floor(array[i]);
@@ -44,82 +44,82 @@ namespace utility {
         }
 
         template <typename Container>
-        constexpr bool has_negative(const Container &array) {
+        EDSP_EXPORT constexpr bool has_negative(const Container &array) {
             return std::find_if(array.begin(), array.end(), math::is_negative<typename Container::value_type>) != array.end();
         }
 
         template <typename Container>
-        constexpr bool has_zero(const Container &array) {
+        EDSP_EXPORT constexpr bool has_zero(const Container &array) {
             return std::find_if(array.begin(), array.end(), math::is_zero<typename Container::value_type>) != array.end();
         }
 
 
         template <typename Container>
-        constexpr void set(Container& array, typename Container::value_type const& value) {
+        EDSP_EXPORT constexpr void set(Container& array, typename Container::value_type const& value) {
             std::fill(array.begin(), array.end(), value);
         }
 
         template <typename Container>
-        constexpr Container zeros(const std::size_t& size) {
+        EDSP_EXPORT constexpr Container zeros(const std::size_t& size) {
             Container tmp(size);
             set(tmp, static_cast<typename Container::value_type>(0));
             return tmp;
         }
 
         template <typename Container>
-        constexpr Container ones(const std::size_t& size) {
+        EDSP_EXPORT constexpr Container ones(const std::size_t& size) {
             Container tmp(size);
             set<std::vector<double>>(tmp, static_cast<typename Container::value_type>(1));
             return tmp;
         }
 
         template <typename Container>
-        constexpr typename Container::value_type sum(const Container& array) {
+        EDSP_EXPORT constexpr typename Container::value_type sum(const Container& array) {
             return static_cast<typename Container::value_type>(std::accumulate(array.begin(), array.end(), typename Container::value_type()));
         }
 
         template <typename Container>
-        constexpr typename Container::value_type sum_squares(const Container& array) {
+        EDSP_EXPORT constexpr typename Container::value_type sum_squares(const Container& array) {
             return std::inner_product(array.begin(), array.end(), array.begin(), static_cast<typename Container::value_type>(0));
         }
 
         template <typename Container>
-        constexpr void ceil(Container& array) {
+        EDSP_EXPORT constexpr void ceil(Container& array) {
             std::for_each(array.begin(), array.end(), [](typename Container::value_type& value) {
                 value = std::ceil(value);
             });
         }
 
         template <typename Container>
-        constexpr void floor(Container& array) {
+        EDSP_EXPORT constexpr void floor(Container& array) {
             std::for_each(array.begin(), array.end(), [](typename Container::value_type& value) {
                 value = std::floor(value);
             });
         }
 
         template <typename Container>
-        constexpr void round(Container& array) {
+        EDSP_EXPORT constexpr void round(Container& array) {
             std::for_each(array.begin(), array.end(), [](typename Container::value_type& value) {
                 value = std::round(value);
             });
         }
 
         template <typename Container>
-        constexpr void ln(Container& array) {
+        EDSP_EXPORT constexpr void ln(Container& array) {
             std::for_each(array.begin(), array.end(), [](typename Container::value_type& value) {
                 value = std::log(value);
             });
         }
 
         template <typename Container>
-        constexpr void log10(Container& array) {
+        EDSP_EXPORT constexpr void log10(Container& array) {
             std::for_each(array.begin(), array.end(), [](typename Container::value_type& value) {
                 value = std::log10(value);
             });
         }
 
         template <typename Container>
-        constexpr void log2(Container& array) {
+        EDSP_EXPORT constexpr void log2(Container& array) {
             std::for_each(array.begin(), array.end(), [](typename Container::value_type& value) {
                 value = std::log2(value);
             });
@@ -127,21 +127,21 @@ namespace utility {
 
 
         template <typename Container>
-        constexpr void square(Container& array) {
+        EDSP_EXPORT constexpr void square(Container& array) {
             std::for_each(array.begin(), array.end(), [](typename Container::value_type& value) {
                 value *= value;
             });
         }
 
         template <typename Container>
-        constexpr void inv(Container& array) {
+        EDSP_EXPORT constexpr void inv(Container& array) {
             std::for_each(array.begin(), array.end(), [](typename Container::value_type& value) {
                 value = static_cast<typename Container::value_type&>(1.f / value);
             });
         }
 
         template <typename Container>
-        constexpr void normalize(Container& array) {
+        EDSP_EXPORT constexpr void normalize(Container& array) {
             typename Container::value_type x = max(array),
                     y = min(array),
                     invDiff = static_cast<typename Container::value_type>(1.f / (x - y));
@@ -153,7 +153,7 @@ namespace utility {
 
 
         template <class Container>
-        Container down_sampling(const Container& input, std::size_t OUT) {
+        EDSP_EXPORT constexpr Container down_sampling(const Container& input, std::size_t OUT) {
             Container res(OUT);
             auto IN = input.size();
             for (std::size_t i = 0; i != OUT - 1; ++i) {
@@ -166,7 +166,7 @@ namespace utility {
         }
 
         template <class Container>
-        Container linspace(typename Container::value_type const& start,
+        EDSP_EXPORT constexpr Container linspace(typename Container::value_type const& start,
                            typename Container::value_type const& end,
                            std::size_t N) {
             Container tmp (N);

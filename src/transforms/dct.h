@@ -16,7 +16,7 @@ EDSP_BEGING_NAMESPACE
         enum DCT_Type { Type_I = 0, Type_II, Type_III, Type_IV};
 
         template <typename T, std::size_t N>
-        class DCT {
+        class EDSP_EXPORT DCT {
         public:
             explicit DCT(DCT_Type t = DCT_Type::Type_I)  { setType(t); }
             virtual ~DCT() { fftw_destroy_plan(fftwPlan); }

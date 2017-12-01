@@ -12,7 +12,7 @@
 EDSP_BEGING_NAMESPACE
     namespace frequency {
         template<typename T, std::size_t N = 1024>
-        class AutoCorrelation  {
+        class EDSP_EXPORT AutoCorrelation  {
         public:
             explicit AutoCorrelation() = default;
             ~AutoCorrelation() = default;

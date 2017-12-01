@@ -14,13 +14,13 @@ EDSP_BEGING_NAMESPACE
         using BiquadCoefficients = std::array<T, 3>;
 
         template<typename T>
-        struct BiquadState {
+        struct EDSP_EXPORT BiquadState {
             std::array<T, 2> inputs{};
             std::array<T, 2> outputs{};
         };
 
         template<typename T>
-        class Biquad  {
+        class EDSP_EXPORT Biquad  {
         public:
             explicit Biquad() = default;
             explicit Biquad(const BiquadCoefficients<T>& a, const BiquadCoefficients<T>& b) :

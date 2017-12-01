@@ -10,7 +10,7 @@
 EDSP_BEGING_NAMESPACE
     namespace generators {
         template <typename T, std::size_t N>
-        class WhiteNoiseGenerator : public Generator<T, N> {
+        class EDSP_EXPORT  WhiteNoiseGenerator : public Generator<T, N> {
         public:
             explicit WhiteNoiseGenerator() = default;
             ~WhiteNoiseGenerator() override = default;

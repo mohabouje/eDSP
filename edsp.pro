@@ -1,16 +1,7 @@
 QT       -= core gui
 CONFIG += c++14
-TARGET = eDSP
+TARGET = edsp
 TEMPLATE = lib
-
-DEFINES += EDSP_LIBRARY
-
-# The following define makes your compiler emit warnings if you use
-# any feature of Qt which has been marked as deprecated (the exact warnings
-# depend on your compiler). Please consult the documentation of the
-# deprecated API in order to know how to port your code away from it.
-DEFINES += QT_DEPRECATED_WARNINGS
-
 HEADERS += \
     src/base/constants.h \
     src/filters/biquad.h \
@@ -39,12 +30,21 @@ HEADERS += \
     src/utility/template_util.h \
     src/utility/vector_util.h \
     src/window/window.h \
-    src/config.h \
-    src/version.h
+    src/version.h \
+    src/config.h
 
 INCLUDEPATH += $$PWD/src/
 DEPENDPATH += $$PWD/src/
 
-# Using FFTW library
-INCLUDEPATH += /usr/local/include/
-LIBS += -lfftw3
+unix {
+    target.path = /usr/lib
+    INSTALLS += target
+}
+
+
+macx {
+    LIBS += -L$$PWD/../../../usr/local/Cellar/fftw/3.3.6-pl2/lib/ -lfftw3.3
+    INCLUDEPATH += $$PWD/../../../usr/local/Cellar/fftw/3.3.6-pl2/include
+    DEPENDPATH += $$PWD/../../../usr/local/Cellar/fftw/3.3.6-pl2/include
+}
+

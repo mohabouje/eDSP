@@ -10,7 +10,7 @@
 EDSP_BEGING_NAMESPACE
     namespace generators {
         template<typename T, std::size_t N>
-        class Generator {
+        class EDSP_EXPORT Generator {
         public:
             explicit Generator(T sampleRate = 0, T frequency = 0, T amplitude = 1) :
                      sampleRate(sampleRate),
