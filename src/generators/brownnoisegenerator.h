@@ -9,14 +9,29 @@
 #include "generator.h"
 EDSP_BEGING_NAMESPACE
     namespace generators {
-        template<typename T>
-        class BrownNoiseGenerator : public Generator<T> {
+        template<typename T, std::size_t N>
+        class BrownNoiseGenerator : public Generator<T, N> {
         public:
-            EDSP_DISABLE_DEFAULT(BrownNoiseGenerator)
-            EDSP_DISABLE_COPY(BrownNoiseGenerator)
-            explicit BrownNoiseGenerator(size_t size);
-            virtual ~BrownNoiseGenerator() = default;
-            const std::vector<T>& generate();
+            explicit BrownNoiseGenerator() = default;
+            ~BrownNoiseGenerator() override = default;
+            const std::array<T, N> &generate() {
+                T ns = static_cast<T>(0);
+                for (size_t i = 0, size = this->data.size(); i < size; ++i) {
+                    this->data[i] = [&]() {
+                        bool compute = true;
+                        while (compute) {
+                            const T sample =  std::rand() / static_cast<T>(RAND_MAX);
+                            ns += sample;
+                            if (ns < -BrownInterval || ns > BrownInterval)
+                                ns -= sample;
+                            else
+                                compute = false;
+                        }
+                        return ns * BrownScale;
+                    }();
+                }
+                return this->data;
+            }
         private:
             static constexpr T BrownInterval{static_cast<T>(8.0)};
             static constexpr T BrownScale{static_cast<T>(0.0625)};

@@ -9,14 +9,16 @@
 
 EDSP_BEGING_NAMESPACE
     namespace generators {
-        template <typename T>
-        class WhiteNoiseGenerator : public Generator<T> {
+        template <typename T, std::size_t N>
+        class WhiteNoiseGenerator : public Generator<T, N> {
         public:
-            EDSP_DISABLE_DEFAULT(WhiteNoiseGenerator)
-            EDSP_DISABLE_COPY(WhiteNoiseGenerator)
-            explicit WhiteNoiseGenerator(size_t size);
+            explicit WhiteNoiseGenerator() = default;
             ~WhiteNoiseGenerator() override = default;
-            const std::vector<T>& generate();
+            const std::array<T, N> &generate() {
+                for (size_t i = 0, size = this->data.size(); i < size; i++) {
+                    this->data[i] = std::rand() / static_cast<T>(RAND_MAX);
+                }
+            }
         };
     }
 EDSP_END_NAMESPACE

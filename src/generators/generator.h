@@ -10,42 +10,29 @@
 
 EDSP_BEGING_NAMESPACE
     namespace generators {
-        template<typename T>
-        class Generator : public AlgorithmTemplate {
+        template<typename T, std::size_t N>
+        class Generator {
         public:
-            EDSP_DISABLE_DEFAULT(Generator)
-            EDSP_DISABLE_COPY(Generator)
-            explicit Generator(size_t size, T sampleRate = 0, T frequency = 0, T phase = 0, T amplitude = 1) :
-                                                                             sampleRate(sampleRate),
-                                                                             frequency(frequency),
-                                                                             amplitude(amplitude),
-                                                                             data(std::vector<T>(size)),
-                                                                             AlgorithmTemplate(true, Error())
+            explicit Generator(T sampleRate = 0, T frequency = 0, T amplitude = 1) :
+                     sampleRate(sampleRate),
+                     frequency(frequency),
+                     amplitude(amplitude)
             {
-                utility::vector::set(data, static_cast<T>(0));
             }
-            ~Generator() override = default;
-
-            virtual inline size_t getSize() const {  return data.size(); }
-            virtual void setSize(size_t size) {
-                if (size != data.size()) {
-                    data.resize(size);
-                    utility::vector::set(data, static_cast<T>(0));
-                }
-            }
-
-            virtual inline T getSampleRate() const { return sampleRate; }
-            virtual void setSampleRate(T sampleRate) {
+            virtual ~Generator() = default;
+            std::size_t getSize() const {  return N; }
+            T getSampleRate() const { return sampleRate; }
+            void setSampleRate(T sampleRate) {
                 Generator::sampleRate = sampleRate;
             }
 
-            virtual inline T getFrequency() const { return frequency; }
-            virtual void setFrequency(T frequency) {
+            inline T getFrequency() const { return frequency; }
+            void setFrequency(T frequency) {
                 Generator::frequency = frequency;
             }
 
-            virtual inline T getAmplitude() const {  return amplitude; }
-            virtual void setAmplitude(T amplitude) {
+            inline T getAmplitude() const {  return amplitude; }
+            void setAmplitude(T amplitude) {
                 Generator::amplitude = amplitude;
             }
 
@@ -53,7 +40,7 @@ EDSP_BEGING_NAMESPACE
             T sampleRate{0};
             T frequency{0};
             T amplitude{1};
-            std::vector<T> data;
+            std::array<T,N> data;
         };
 
 }

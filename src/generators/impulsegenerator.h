@@ -11,17 +11,21 @@
 #define EDSP_IMPULSEGENERATOR_H
 
 #include "generator.h"
+#include "base/constants.h"
 
 EDSP_BEGING_NAMESPACE
 	namespace generators {
-        template <typename T>
-        class ImpulseGenerator : Generator<T> {
+        template <typename T, std::size_t N>
+        class ImpulseGenerator : Generator<T, N> {
         public:
-            EDSP_DISABLE_DEFAULT(ImpulseGenerator)
-            EDSP_DISABLE_COPY(ImpulseGenerator)
-            explicit ImpulseGenerator(size_t size, T amplitude);
+            explicit ImpulseGenerator(T amplitude) :
+                    Generator(0, 0, amplitude) {
+            }
             ~ImpulseGenerator() override = default;
-            const std::vector<T>& generate();
+            const std::array<T, N> &generate() {
+                this->data[0] = this->amplitude;
+                return this->data;
+            }
         };
 	}
 EDSP_END_NAMESPACE
