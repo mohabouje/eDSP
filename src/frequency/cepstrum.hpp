@@ -12,7 +12,7 @@
 #include "math/complex.hpp"
 EDSP_BEGING_NAMESPACE
     namespace Frequency {
-        template<typename T, std::size_t N>
+        template<typename T, std::size_t N = 1024>
         class Cepstrum  {
         public:
             explicit Cepstrum() = default;
