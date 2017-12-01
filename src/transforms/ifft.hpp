@@ -5,10 +5,8 @@
 #ifndef EDSP_IFFT_H
 #define EDSP_IFFT_H
 
-
-
-#include "base/algoritmtemplate.h"
-#include "math/container.hpp"
+#include "base/template_util.hpp"
+#include "utility/vector_util.hpp"
 #include <fftw3.h>
 #include <assert.h>
 
@@ -28,8 +26,8 @@ EDSP_BEGING_NAMESPACE
                                             reinterpret_cast<fftw_complex *>(&output[0]),
                                             FFTW_BACKWARD, FFTW_ESTIMATE);
 
-                math::set(input, static_cast<typename Container::value_type>(0));
-                math::set(output, static_cast<typename Container::value_type>(0));
+                utility::vector::set(input, static_cast<typename Container::value_type>(0));
+                utility::vector::set(output, static_cast<typename Container::value_type>(0));
             }
 
             const Container &compute(const Container&data) {

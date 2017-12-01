@@ -3,7 +3,7 @@
 //
 
 #include "cepstrum.h"
-#include "math/math_util.hpp"
+#include "math/math.hpp"
 #include "math/container.hpp"
 
 using namespace eDSP::Frequency;

@@ -5,8 +5,8 @@
 #ifndef EDSP_GENERATOR_H
 #define EDSP_GENERATOR_H
 
-#include "math/container.hpp"
 #include "base/algoritmtemplate.h"
+#include "utility/vector_util.hpp"
 
 EDSP_BEGING_NAMESPACE
     namespace generators {
@@ -22,7 +22,7 @@ EDSP_BEGING_NAMESPACE
                                                                              data(std::vector<T>(size)),
                                                                              AlgorithmTemplate(true, Error())
             {
-                math::set(data, static_cast<T>(0));
+                utility::vector::set(data, static_cast<T>(0));
             }
             ~Generator() override = default;
 
@@ -30,7 +30,7 @@ EDSP_BEGING_NAMESPACE
             virtual void setSize(size_t size) {
                 if (size != data.size()) {
                     data.resize(size);
-                    math::set(data, static_cast<T>(0));
+                    utility::vector::set(data, static_cast<T>(0));
                 }
             }
 

@@ -12,22 +12,6 @@
 
 EDSP_BEGING_NAMESPACE
     namespace math {
-        template<typename T>
-        constexpr int compare(const T &x, const T &y) {
-            return (x > y) - (x < y);
-        }
-
-        template<typename T>
-        inline void swap(T &x, T &y) {
-            const T tmp = x;
-            x = y;
-            y = tmp;
-        }
-
-        template<typename T>
-        constexpr bool isNaN(const T &x) {
-            return (x) != (x);
-        }
 
         template<typename T>
         constexpr int sign(const T &x) {
@@ -35,13 +19,13 @@ EDSP_BEGING_NAMESPACE
         }
 
         template<typename T>
-        constexpr bool isOdd(const T &x) {
+        constexpr bool is_odd(const T &x) {
             return (x % 2) == 0;
         }
 
         template<typename T>
-        constexpr bool isEven(const T &x) {
-            return !isOdd(x);
+        constexpr bool is_even(const T &x) {
+            return !is_odd(x);
         }
 
 
@@ -62,12 +46,12 @@ EDSP_BEGING_NAMESPACE
 
 
         template<typename T>
-        constexpr bool isNegative(const T &x) {
+        constexpr bool is_negative(const T &x) {
             return x < 0;
         }
 
         template<typename T>
-        constexpr bool isZero(const T &x) {
+        constexpr bool is_zero(const T &x) {
             return x == 0;
         }
 
@@ -79,7 +63,7 @@ EDSP_BEGING_NAMESPACE
 
         template<typename T>
         constexpr T next_power_two(T tmp) {
-            if (isNegative(tmp)) return 0;
+            if (is_negative(tmp)) return 0;
             else if (is_power_two(tmp)) return tmp;
             else {
                 auto x = static_cast<int32_t>(tmp);
@@ -89,7 +73,7 @@ EDSP_BEGING_NAMESPACE
                 x |= x >> 4;
                 x |= x >> 8;
                 x |= x >> 16;
-                return x + 1;
+                return static_cast<T>(x + 1);
             }
 
         }

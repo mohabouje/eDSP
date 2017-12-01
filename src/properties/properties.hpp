@@ -3,7 +3,7 @@
 
 
 
-#include "math/container.hpp"
+#include "utility/vector_util.hpp"
 #include "base/template_util.hpp"
 #include <utility>
 
@@ -12,17 +12,17 @@ EDSP_BEGING_NAMESPACE
 
         EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         energy(const Container& data) {
-            math::sum_squares(data);
+            utility::vector::sum_squares(data);
         };
 
         EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         loudness(const Container& data) {
-            return std::pow(math::sum_squares(data), static_cast<typename Container::value_type>(0.67)); // StevenLawLevel
+            return std::pow(utility::vector::sum_squares(data), static_cast<typename Container::value_type>(0.67)); // StevenLawLevel
         };
 
         EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         power(const Container& data) {
-            return math::sum_squares(data) / static_cast<typename Container::value_type>(data.size());
+            return utility::vector::sum_squares(data) / static_cast<typename Container::value_type>(data.size());
         };
 
         EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, size_t)

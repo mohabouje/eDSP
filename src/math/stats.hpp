@@ -6,8 +6,8 @@
 #define EDSP_STATS_H
 
 #include "config.h"
-#include "math_util.hpp"
-#include "container.hpp"
+#include "math.hpp"
+#include "utility/vector_util.hpp"
 #include "base/template_util.hpp"
 
 
@@ -38,12 +38,12 @@ namespace math {
 
         EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         mean(const Container& container) {
-            return  sum(container) / static_cast<typename Container::value_type> (container.size());
+            return utility::vector::sum(container) / static_cast<typename Container::value_type> (container.size());
         }
 
         EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
         variance(const Container& container) {
-            return  (sum_squares(container) - square(sum(container))) / static_cast<typename Container::value_type>(container.size());
+            return  (utility::vector::sum_squares(container) - square(utility::vector::sum(container))) / static_cast<typename Container::value_type>(container.size());
         }
 
         EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, typename Container::value_type)
@@ -67,7 +67,7 @@ namespace math {
             Container tmp(container);
             std::sort(tmp.begin(), tmp.end());
             const size_t size = tmp.size();
-            return (isOdd(size))  ? (tmp[uint(size/2 - 1)] + tmp[uint(size/2)]) / 2
+            return (is_odd(size))  ? (tmp[uint(size/2 - 1)] + tmp[uint(size/2)]) / 2
                                   : tmp[uint(size/2)];
         }
 

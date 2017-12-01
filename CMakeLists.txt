@@ -6,8 +6,7 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/config.h
         src/base/types.h
         src/version.h
-        src/math/math_util.hpp
-        src/math/container.hpp
+        src/math/math.hpp
         src/math/stats.hpp
         src/math/trig.hpp
         src/properties/properties.hpp
@@ -47,7 +46,7 @@ set(TEST_FILES
         )
 
 add_executable(runtest ${SOURCE_FILES} ${TEST_FILES})
-add_library(edsp ${SOURCE_FILES})
+add_library(edsp ${SOURCE_FILES} src/utility/map_util.hpp src/utility/vector_util.hpp)
 
 SET(BASEPATH "${CMAKE_SOURCE_DIR}")
 

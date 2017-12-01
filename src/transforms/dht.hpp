@@ -5,8 +5,8 @@
 #ifndef EDSP_DHT_H
 #define EDSP_DHT_H
 
-#include "base/algoritmtemplate.h"
-#include "math/container.hpp"
+#include "base/template_util.hpp"
+#include "utility/vector_util.hpp"
 #include <fftw3.h>
 #include <assert.h>
 
@@ -26,8 +26,8 @@ namespace transforms {
                                         &output[0],
                                         FFTW_DHT,
                                         FFTW_MEASURE);
-            math::set(input, static_cast<typename Container::value_type>(0));
-            math::set(output, static_cast<typename Container::value_type>(0));
+            utility::vector::set(input, static_cast<typename Container::value_type>(0));
+            utility::vector::set(output, static_cast<typename Container::value_type>(0));
         }
 
         const Container &compute(const Container&data) {

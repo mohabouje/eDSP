@@ -1,5 +1,4 @@
 #include "impulsegenerator.h"
-#include "math/container.hpp"
 using namespace eDSP::generators;
 
 template<typename T>

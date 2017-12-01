@@ -6,8 +6,8 @@
 #define EDSP_IDCT_H
 
 
-#include "base/algoritmtemplate.h"
-#include "math/container.hpp"
+#include "base/template_util.hpp"
+#include "utility/vector_util.hpp"
 #include "dct.hpp"
 #include <fftw3.h>
 #include <assert.h>
@@ -48,8 +48,8 @@ EDSP_BEGING_NAMESPACE
                                             FFTW_DHT,
                                             FFTW_MEASURE);
                 setType(t);
-                math::set(input, static_cast<typename Container::value_type>(0));
-                math::set(output, static_cast<typename Container::value_type>(0));
+                utility::vector::set(input, static_cast<typename Container::value_type>(0));
+                utility::vector::set(output, static_cast<typename Container::value_type>(0));
             }
 
             const Container &compute(const Container&data) {
