@@ -4,7 +4,7 @@
 
 
 #include "utility/vector_util.hpp"
-#include "base/template_util.hpp"
+#include "utility/template_util.hpp"
 #include <utility>
 
 EDSP_BEGING_NAMESPACE

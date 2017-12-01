@@ -7,7 +7,7 @@
 
 #include "config.h"
 #include "base/constants.h"
-#include "base/template_util.hpp"
+#include "utility/template_util.hpp"
 
 #include <algorithm>
 #include <numeric>
@@ -32,9 +32,10 @@ EDSP_BEGING_NAMESPACE
                 return std::complex<T>(complex.real(),  (std::abs(complex.imag()) > limit) ? complex.imag() : static_cast<T>(0));
             }
 
-            EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, std::vector<std::complex<typename Container::value_type>>)
-            real_to_complex(const Container& data) {
-                std::vector<std::complex<typename Container::value_type>> tmp(data.size());
+
+            template <typename T, template<typename, typename ...> class Container>
+            Container<std::complex<T>> real_to_complex(const Container<T>& data) {
+                Container<std::complex<T>> tmp(data.size());
                 std::transform(data.begin(), data.end(), tmp.begin(),  [](const double& da) {
                     return std::complex<double>( da, 0.);
                 } );

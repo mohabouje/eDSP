@@ -11,7 +11,7 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/math/trig.hpp
         src/properties/properties.hpp
         src/base/constants.h
-        src/base/template_util.hpp
+        src/utility/template_util.hpp
         src/base/algoritmtemplate.h
         src/base/ierrornotifier.h
         src/base/iinitializer.h
@@ -43,7 +43,7 @@ set(TEST_FILES
         ${TEST_DIR}/math/container_test.cpp
         ${TEST_DIR}/test_util.h
         ${TEST_DIR}/test_config.h
-        )
+        src/transforms/transform_utility.h)
 
 add_executable(runtest ${SOURCE_FILES} ${TEST_FILES})
 add_library(edsp ${SOURCE_FILES} src/utility/map_util.hpp src/utility/vector_util.hpp)
@@ -67,14 +67,14 @@ IF (FFTW_LIB)
             src/transforms/dct.hpp
             src/transforms/idct.hpp
             src/transforms/dht.hpp
-           # src/frequency/autocorrelation.cpp
-           # src/frequency/autocorrelation.h
-           # src/frequency/spectrogram.cpp
-           # src/frequency/spectrogram.h
-           # src/frequency/linearpredictivecoding.cpp
-           # src/frequency/linearpredictivecoding.h
-           # src/frequency/cepstrum.cpp
-           # src/frequency/cepstrum.h
+            src/frequency/autocorrelation.cpp
+            src/frequency/autocorrelation.h
+            src/frequency/spectrogram.cpp
+            src/frequency/spectrogram.h
+            src/frequency/linearpredictivecoding.cpp
+            src/frequency/linearpredictivecoding.h
+            src/frequency/cepstrum.cpp
+            src/frequency/cepstrum.h
             )
 
     set(FFTW_TEST_FILES

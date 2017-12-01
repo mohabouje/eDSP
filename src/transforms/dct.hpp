@@ -5,8 +5,9 @@
 #ifndef EDSP_DCT_H
 #define EDSP_DCT_H
 
-#include "base/template_util.hpp"
+#include "utility/template_util.hpp"
 #include "utility/vector_util.hpp"
+#include "transform_utility.h"
 
 #include <fftw3.h>
 #include <assert.h>
@@ -15,14 +16,13 @@ EDSP_BEGING_NAMESPACE
     namespace transforms {
         enum DCT_Type { Type_I = 0, Type_II, Type_III, Type_IV};
 
-        EDSP_CTEMPLATE_GENERIC_CONTAINER(Container)
+        template <typename T, std::size_t N>
         class DCT {
         public:
             EDSP_DISABLE_COPY(DCT)
-            explicit DCT(size_t size, DCT_Type t = DCT_Type::Type_I) : t(t) { setSize(size); }
+            explicit DCT(DCT_Type t = DCT_Type::Type_I)  { setType(t); }
             virtual ~DCT() { fftw_destroy_plan(fftwPlan); }
             DCT_Type type() const { return t; }
-            size_t size() const { return input.size(); }
             void setType(DCT_Type t) {
                 DCT::t = t;
                 const fftw_r2r_kind_do_not_use_me format = [&]() {
@@ -41,26 +41,21 @@ EDSP_BEGING_NAMESPACE
                                             format,
                                             FFTW_MEASURE);
             }
-            void setSize(size_t size) {
-                input.resize(size);
-                output.resize(size);
-                setType(t);
-                utility::vector::set(input, static_cast<typename Container::value_type>(0));
-                utility::vector::set(output, static_cast<typename Container::value_type>(0));
-            }
-
-            const Container &compute(const Container &data) {
+            template<typename Container>
+            typename std::enable_if<std::is_same<typename Container::value_type,
+                    std::complex<T>>::value, const std::array<std::complex<double>, N>&>::type
+            compute(const Container& data) {
                 assert(data.size() <= input.size());
-                std::copy(data.begin(), data.end(), input.begin());
+                std::transform(data.begin(), data.end(), input.begin(), [](std::complex<T> tmp) {
+                    return std::complex<double>(tmp.real(), tmp.imag());
+                });
                 fftw_execute(fftwPlan);
                 return output;
             }
-
         private:
             DCT_Type t{DCT_Type::Type_I};
-            fftw_plan fftwPlan{nullptr};
-            Container input;
-            Container output;
+            std::array<std::complex<double>, N>  input{};
+            std::array<std::complex<double>, N>  output{};
         };
     }
 EDSP_END_NAMESPACE

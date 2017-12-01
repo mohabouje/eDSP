@@ -8,7 +8,7 @@
 #include "config.h"
 #include "math.hpp"
 #include "utility/vector_util.hpp"
-#include "base/template_util.hpp"
+#include "utility/template_util.hpp"
 
 
 #include <unordered_map>

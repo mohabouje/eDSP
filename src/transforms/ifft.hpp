@@ -5,41 +5,39 @@
 #ifndef EDSP_IFFT_H
 #define EDSP_IFFT_H
 
-#include "base/template_util.hpp"
 #include "utility/vector_util.hpp"
 #include <fftw3.h>
 #include <assert.h>
 
 EDSP_BEGING_NAMESPACE
     namespace transforms {
-        EDSP_CTEMPLATE_GENERIC_CONTAINER(Container)
+
+        template<typename T, std::size_t N>
         class IFFT {
         public:
-            EDSP_DISABLE_COPY(IFFT)
-            explicit IFFT(size_t size) { setSize(size); }
-            virtual ~IFFT() { fftw_destroy_plan(fftwPlan); }
-            void setSize(size_t size) {
-                input.resize(size);
-                output.resize(size);
-                fftwPlan = fftw_plan_dft_1d(static_cast<int>(size),
+            explicit IFFT() {
+                fftwPlan = fftw_plan_dft_1d(static_cast<int>(N),
                                             reinterpret_cast<fftw_complex *>(&input[0]),
                                             reinterpret_cast<fftw_complex *>(&output[0]),
                                             FFTW_BACKWARD, FFTW_ESTIMATE);
-
-                utility::vector::set(input, static_cast<typename Container::value_type>(0));
-                utility::vector::set(output, static_cast<typename Container::value_type>(0));
             }
+            virtual ~IFFT() { fftw_destroy_plan(fftwPlan); }
 
-            const Container &compute(const Container&data) {
+            template<typename Container>
+            typename std::enable_if<std::is_same<typename Container::value_type,
+                    std::complex<T>>::value, const std::array<std::complex<double>, N>&>::type
+            compute(const Container& data) {
                 assert(data.size() <= input.size());
-                std::copy(data.begin(), data.end(), input.begin());
+                std::transform(data.begin(), data.end(), input.begin(), [](std::complex<T> tmp) {
+                    return std::complex<double>(tmp.real(), tmp.imag());
+                });
                 fftw_execute(fftwPlan);
                 return output;
             }
         private:
             fftw_plan fftwPlan{nullptr};
-            Container  input;
-            Container  output;
+            std::array<std::complex<double>, N>  input{};
+            std::array<std::complex<double>, N>  output{};
         };
     }
 EDSP_END_NAMESPACE

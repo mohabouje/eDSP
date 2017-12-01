@@ -7,7 +7,7 @@
 
 #include "config.h"
 #include "base/constants.h"
-#include "base/template_util.hpp"
+#include "utility/template_util.hpp"
 #include <vector>
 #include <cmath>
 #include <math/container.hpp>

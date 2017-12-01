@@ -5,41 +5,39 @@
 #ifndef EDSP_DHT_H
 #define EDSP_DHT_H
 
-#include "base/template_util.hpp"
 #include "utility/vector_util.hpp"
 #include <fftw3.h>
 #include <assert.h>
 
 EDSP_BEGING_NAMESPACE
 namespace transforms {
-    EDSP_CTEMPLATE_GENERIC_CONTAINER(Container)
+    template <typename T,  template<typename, typename ...> class Container>
     class DHT  {
     public:
         EDSP_DISABLE_COPY(DHT)
-        explicit DHT(size_t size) { setSize(size); }
-        virtual ~DHT() { fftw_destroy_plan(fftwPlan); }
-        void setSize(size_t size) {
-            input.resize(size);
-            output.resize(size);
-            fftwPlan = fftw_plan_r2r_1d(static_cast<int>(size),
+        explicit DHT() {
+            fftwPlan = fftw_plan_r2r_1d(static_cast<int>(N),
                                         &input[0],
                                         &output[0],
                                         FFTW_DHT,
                                         FFTW_MEASURE);
-            utility::vector::set(input, static_cast<typename Container::value_type>(0));
-            utility::vector::set(output, static_cast<typename Container::value_type>(0));
         }
-
-        const Container &compute(const Container&data) {
+        virtual ~DHT() { fftw_destroy_plan(fftwPlan); }
+        template<typename Container>
+        typename std::enable_if<std::is_same<typename Container::value_type,
+                std::complex<T>>::value, const std::array<std::complex<double>, N>&>::type
+        compute(const Container& data) {
             assert(data.size() <= input.size());
-            std::copy(data.begin(), data.end(), input.begin());
+            std::transform(data.begin(), data.end(), input.begin(), [](std::complex<T> tmp) {
+                return std::complex<double>(tmp.real(), tmp.imag());
+            });
             fftw_execute(fftwPlan);
             return output;
         }
     private:
         fftw_plan fftwPlan{nullptr};
-        Container  input;
-        Container  output;
+        std::array<std::complex<double>, N>  input{};
+        std::array<std::complex<double>, N>  output{};
     };
 }
 EDSP_END_NAMESPACE
