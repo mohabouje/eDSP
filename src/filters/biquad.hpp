@@ -9,7 +9,7 @@
 #include "base/algoritmtemplate.h"
 #include <algorithm>
 EDSP_BEGING_NAMESPACE
-    namespace Filters {
+    namespace filters {
         template <typename T>
         using BiquadCoefficients = std::array<T, 3>;
 
@@ -41,10 +41,15 @@ EDSP_BEGING_NAMESPACE
             {
             }
             ~Biquad() override = default;
-            const std::vector<T>& compute(const std::vector<T>&input) {
-                m_out.resize(input.size());
+
+
+            template<typename Container>
+            typename std::enable_if<std::is_same<typename Container::value_type,
+                    T>::value, Container>::type
+            compute(const Container& input) {
+                Container out(input.size());
                 for (size_t i = 0, size = input.size(); i < size; i++) {
-                    m_out[i] = (m_b[0] * input[i]
+                    out[i] = (m_b[0] * input[i]
                              + m_b[1] * m_state.inputs[0]
                              + m_b[2] * m_state.inputs[1]
                              - m_a[1] * m_state.outputs[0]
@@ -55,9 +60,9 @@ EDSP_BEGING_NAMESPACE
                     m_state.inputs[0] = input[i];
 
                     m_state.outputs[1] = m_state.outputs[0];
-                    m_state.outputs[0] = m_out[i];
+                    m_state.outputs[0] = out[i];
                 }
-                return m_out;
+                return out;
             }
 
             inline const BiquadState& state() const { return m_state; }
@@ -86,7 +91,6 @@ EDSP_BEGING_NAMESPACE
             BiquadCoefficients m_a{};
             BiquadCoefficients m_b{};
             BiquadState        m_state{};
-            std::vector<T>     m_out{};
         };
 
     }

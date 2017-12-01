@@ -5,7 +5,7 @@
 #ifndef EDSP_SQUAREGENERATOR_H
 #define EDSP_SQUAREGENERATOR_H
 
-#include "generator.h"
+#include "generator.hpp"
 
 EDSP_BEGING_NAMESPACE
    namespace generators {

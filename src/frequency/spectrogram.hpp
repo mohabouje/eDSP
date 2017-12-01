@@ -9,7 +9,7 @@
 #include "transforms/fft.hpp"
 #include "math/complex.hpp"
 EDSP_BEGING_NAMESPACE
-    namespace Frequency {
+    namespace frequency {
         template<typename T, std::size_t N>
         class Spectrogram {
         public:

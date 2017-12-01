@@ -16,14 +16,14 @@ set(SOURCE_FILES ${FFTW_INCLUDES}
         src/base/ierrornotifier.h
         src/base/iinitializer.h
         src/base/error.h src/window/window.hpp
-        src/generators/whitenoisegenerator.h
-        src/generators/squaregenerator.h
-        src/generators/generator.h
-        src/generators/singenerator.h
-        src/generators/brownnoisegenerator.h
-        src/generators/impulsegenerator.h
-        src/filters/biquad.h
-        src/filters/biquaddesigner.h
+        src/generators/whitenoisegenerator.hpp
+        src/generators/squaregenerator.hpp
+        src/generators/generator.hpp
+        src/generators/singenerator.hpp
+        src/generators/brownnoisegenerator.hpp
+        src/generators/impulsegenerator.hpp
+        src/filters/biquad.hpp
+        src/filters/biquaddesigner.hpp
         src/math/complex.hpp
 )
 

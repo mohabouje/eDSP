@@ -8,11 +8,11 @@
 #include <tclDecls.h>
 #include "base/algoritmtemplate.h"
 #include "base/constants.h"
-#include "biquad.h"
+#include "biquad.hpp"
 
 EDSP_BEGING_NAMESPACE
-    namespace Filters {
-        namespace BiquadDesigner {
+    namespace filters {
+        namespace designer {
             template <typename T >
             Biquad<T> allpass(T frequency, T Q) {
                 auto alpha = static_cast<T>(std::sin(frequency) / 2.0 * Q);

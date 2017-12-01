@@ -11,7 +11,7 @@
 #include "autocorrelation.hpp"
 
 EDSP_BEGING_NAMESPACE
-    namespace Frequency {
+    namespace frequency {
 
         template<typename T, std::size_t Order, std::size_t N = 1024>
         class LinearPredictiveCode {
