@@ -25,9 +25,9 @@ namespace properties {
     };
 
     template <typename Container>
-    typename Container::value_type strong_peak(const Container& data) {
+    std::pair<std::size_t, typename Container::value_type> strong_peak(const Container& data) {
         auto it = std::max_element(data.begin(), data.end());
-        return static_cast<size_t>(std::distance(data.begin(), it));
+        return std::pair<std::size_t, typename Container::value_type>(static_cast<size_t>(std::distance(data.begin(), it)), *it);
     };
 
 
