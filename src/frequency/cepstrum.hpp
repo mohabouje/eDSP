@@ -21,18 +21,16 @@ EDSP_BEGING_NAMESPACE
             typename std::enable_if<std::is_same<typename Container::value_type,
                     T>::value, Container>::type
             compute(const Container& input) {
-                Container data(N);
-                auto fft_data = fft.compute(math::complex::real_to_complex(input));
+                const auto& fft_data = fft.compute(math::complex::real_to_complex(input));
                 std::transform(fft_data.begin(), fft_data.end(), fft_data.begin(), [](std::complex<T>& value) {
                     return std::complex<T>( 2 * std::log(std::abs(value)), 0);
                 });
 
-                fft_data = ifft.compute(fft_data);
-
-                std::transform(fft_data.begin(), fft_data.end(), data.begin(), [](const std::complex<T>& value) {
+                const auto& out = ifft.compute(fft_data);
+                Container data(N);
+                std::transform(out.begin(), out.end(), data.begin(), [](const std::complex<T>& value) {
                     return value.real();
                 });
-
                 return data;
             }
         private:
