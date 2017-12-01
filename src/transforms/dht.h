@@ -13,7 +13,7 @@
 
 EDSP_BEGING_NAMESPACE
 namespace transforms {
-    template <typename T,  template<typename, typename ...> class Container>
+    template <typename T, std::size_t N>
     class DHT  {
     public:
         EDSP_DISABLE_COPY(DHT)
@@ -25,6 +25,7 @@ namespace transforms {
                                         FFTW_MEASURE);
         }
         virtual ~DHT() { fftw_destroy_plan(fftwPlan); }
+
         template<typename Container>
         typename std::enable_if<std::is_same<typename Container::value_type,
                 std::complex<T>>::value, const std::array<std::complex<double>, N>&>::type

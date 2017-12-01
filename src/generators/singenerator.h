@@ -13,7 +13,7 @@ EDSP_BEGING_NAMESPACE
         template<typename T, std::size_t N>
         class SinGenerator : public Generator<T, N> {
         public:
-            SinGenerator(T sr, T f, T ph, T a) : Generator(sr, f, a), phase(ph) {}
+            SinGenerator(T sr, T f, T ph, T a) : Generator<T,N>(sr, f, a), phase(ph) {}
             const std::array<T, N> &generate() {
                 T increment = 0, period = 1. / this->sampleRate;
                 T normPhase = 2 * Constants<T>::pi * this->phase;

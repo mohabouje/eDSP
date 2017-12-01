@@ -19,7 +19,7 @@ EDSP_BEGING_NAMESPACE
             explicit LinearPredictiveCode() = default;
             virtual ~LinearPredictiveCode() = default;
             const std::array<T, Order + 1>& reflection() { return m_reflection; }
-            int16 order() const { return m_order; }
+            int16_t order() const { return m_order; }
             T lpc_error() const { return m_error; }
 
             template<typename Container>
@@ -62,7 +62,7 @@ EDSP_BEGING_NAMESPACE
             AutoCorrelation<T, N>       m_xcorr{};
             std::array<T, Order + 1>    m_lpc{};
             std::array<T, Order + 1>    m_reflection{};
-            int16                       m_order{0};
+            int16_t                       m_order{0};
             T                           m_error{0};
         };
     }

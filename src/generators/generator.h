@@ -5,7 +5,6 @@
 #ifndef EDSP_GENERATOR_H
 #define EDSP_GENERATOR_H
 
-#include "base/algoritmtemplate.h"
 #include "utility/vector_util.h"
 
 EDSP_BEGING_NAMESPACE

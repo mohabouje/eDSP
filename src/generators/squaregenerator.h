@@ -13,7 +13,7 @@ EDSP_BEGING_NAMESPACE
         class SquareGenerator : Generator<T, N> {
         public:
             explicit SquareGenerator(T duttycycle, T sampleRate, T frequency, T amplitude) :
-                duttyCycle(duttycycle), Generator(sampleRate, frequency, amplitude) {
+                duttyCycle(duttycycle), Generator<T,N>(sampleRate, frequency, amplitude) {
 
             }
             ~SquareGenerator() override = default;

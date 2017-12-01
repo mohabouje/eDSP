@@ -27,8 +27,7 @@ EDSP_BEGING_NAMESPACE
                     return  (tmp * tmp);
                 });
                 return data;
-            };
-
+            }
 
             template<typename Container>
             typename std::enable_if<std::is_same<typename Container::value_type,
@@ -41,7 +40,7 @@ EDSP_BEGING_NAMESPACE
                     return 20 * log10(tmp);
                 });
                 return data;
-            };
+            }
 
         private:
             transforms::FFT<T, N> fft{};

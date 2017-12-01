@@ -7,7 +7,7 @@
 
 #include "config.h"
 
-#include <type_traits>
+#include <numeric>
 
 EDSP_BEGING_NAMESPACE
     namespace math {

@@ -33,7 +33,7 @@ EDSP_BEGING_NAMESPACE
                     return value.real();
                 });
                 return data;
-            };
+            }
         private:
             using complex_array = std::vector<std::complex<T>>;
             transforms::FFT<T, N>  fft;

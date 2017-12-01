@@ -16,6 +16,7 @@ EDSP_BEGING_NAMESPACE
 
         template <typename Container>
         Container hamming(size_t size) {
+            using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
                 vec[i] = 0.53836f - 0.46164f * cos(2 * Constants<T>::pi * i / (size - 1.0f));
@@ -26,6 +27,7 @@ EDSP_BEGING_NAMESPACE
 
         template <typename Container>
         Container hanning(size_t size) {
+            using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
                 vec[i] = 0.5f - 0.5f * std::cos(2 * Constants<T>::pi * i / (size - 1.0f));
@@ -36,6 +38,7 @@ EDSP_BEGING_NAMESPACE
 
         template <typename Container>
         Container hammingz(size_t size) {
+            using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
                 vec[i] = 0.5f - 0.5f * std::cos(2 * Constants<T>::pi * i / (size - 1.0f));
@@ -82,7 +85,6 @@ EDSP_BEGING_NAMESPACE
 
         template <typename Container>
         Container parzen(size_t size) {
-            using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
                 vec[i] = 1.0f - std::abs((2.f * i - size) / (size + 1.0f));
@@ -92,7 +94,6 @@ EDSP_BEGING_NAMESPACE
 
         template <typename Container>
         Container welch(size_t size) {
-            using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
                 vec[i] = 1.0f - std::sqrt((2.f * i - size) / (size + 1.0f));

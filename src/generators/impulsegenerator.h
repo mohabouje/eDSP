@@ -19,7 +19,7 @@ EDSP_BEGING_NAMESPACE
         class ImpulseGenerator : Generator<T, N> {
         public:
             explicit ImpulseGenerator(T amplitude) :
-                    Generator(0, 0, amplitude) {
+                    Generator<T,N>(0, 0, amplitude) {
             }
             ~ImpulseGenerator() override = default;
             const std::array<T, N> &generate() {

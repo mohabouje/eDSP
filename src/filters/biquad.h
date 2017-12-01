@@ -14,32 +14,21 @@ EDSP_BEGING_NAMESPACE
         using BiquadCoefficients = std::array<T, 3>;
 
         template<typename T>
-        class BiquadState {
-        public:
-            BiquadState() {
-                std::fill(inputs.begin(), inputs.end(), static_cast<T>(0));
-                std::fill(outputs.begin(), outputs.end(), static_cast<T>(0));
-            }
-
-            inline const std::array<T, 2>& last_inputs() const { return  inputs; };
-            inline const std::array<T, 2>& last_outputs() const { return  outputs; };
-        private:
-            friend class Biquad;
+        struct BiquadState {
             std::array<T, 2> inputs{};
             std::array<T, 2> outputs{};
-
         };
 
         template<typename T>
         class Biquad  {
         public:
             explicit Biquad() = default;
-            explicit Biquad(const BiquadCoefficients& a, const BiquadCoefficients& b) :
+            explicit Biquad(const BiquadCoefficients<T>& a, const BiquadCoefficients<T>& b) :
                     m_a(a),
                     m_b(b)
             {
             }
-            ~Biquad() override = default;
+            virtual ~Biquad() = default;
 
 
             template<typename Container>
@@ -64,9 +53,9 @@ EDSP_BEGING_NAMESPACE
                 return out;
             }
 
-            inline const BiquadState& state() const { return m_state; }
-            inline const BiquadCoefficients& a() const { return m_a; }
-            inline const BiquadCoefficients& b() const { return m_b; }
+            inline const BiquadState<T>& state() const { return m_state; }
+            inline const BiquadCoefficients<T>& a() const { return m_a; }
+            inline const BiquadCoefficients<T>& b() const { return m_b; }
             inline T a0() const { return m_a[0]; }
             inline T a1() const { return m_a[1]; }
             inline T a2() const { return m_a[2]; }
@@ -75,8 +64,8 @@ EDSP_BEGING_NAMESPACE
             inline T b1() const { return m_b[1]; }
             inline T b2() const { return m_b[2]; }
 
-            void set_a(const BiquadCoefficients& tmp) { std::copy(tmp.begin(), tmp.end(), m_a.begin()); }
-            void set_b(const BiquadCoefficients& tmp) { std::copy(tmp.begin(), tmp.end(), m_b.begin()); }
+            void set_a(const BiquadCoefficients<T>& tmp) { std::copy(tmp.begin(), tmp.end(), m_a.begin()); }
+            void set_b(const BiquadCoefficients<T>& tmp) { std::copy(tmp.begin(), tmp.end(), m_b.begin()); }
 
             void set_a0(T value) { m_a[0] = value; }
             void set_a1(T value) { m_a[1] = value; }
@@ -87,9 +76,9 @@ EDSP_BEGING_NAMESPACE
             void set_b2(T value) { m_b[2] = value; }
 
         private:
-            BiquadCoefficients m_a{};
-            BiquadCoefficients m_b{};
-            BiquadState        m_state{};
+            BiquadCoefficients<T> m_a{};
+            BiquadCoefficients<T> m_b{};
+            BiquadState<T>        m_state{};
         };
 
     }
