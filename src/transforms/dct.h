@@ -5,10 +5,9 @@
 #ifndef EDSP_DCT_H
 #define EDSP_DCT_H
 
-#include "utility/template_util.hpp"
-#include "utility/vector_util.hpp"
-#include "transform_utility.h"
-
+#include "config.h"
+#include <complex>
+#include <array>
 #include <fftw3.h>
 #include <assert.h>
 
@@ -19,7 +18,6 @@ EDSP_BEGING_NAMESPACE
         template <typename T, std::size_t N>
         class DCT {
         public:
-            EDSP_DISABLE_COPY(DCT)
             explicit DCT(DCT_Type t = DCT_Type::Type_I)  { setType(t); }
             virtual ~DCT() { fftw_destroy_plan(fftwPlan); }
             DCT_Type type() const { return t; }
@@ -54,6 +52,7 @@ EDSP_BEGING_NAMESPACE
             }
         private:
             DCT_Type t{DCT_Type::Type_I};
+            fftw_plan fftwPlan{nullptr};
             std::array<std::complex<double>, N>  input{};
             std::array<std::complex<double>, N>  output{};
         };

@@ -7,8 +7,8 @@
 
 
 #include "config.h"
-#include "transforms/fft.hpp"
-#include "autocorrelation.hpp"
+#include "transforms/fft.h"
+#include "autocorrelation.h"
 
 EDSP_BEGING_NAMESPACE
     namespace frequency {

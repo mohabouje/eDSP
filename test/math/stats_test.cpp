@@ -4,7 +4,7 @@
 
 #include "../test_db.h"
 #include "../test_util.h"
-#include "math/stats.hpp"
+#include "math/stats.h"
 #include <catch.hpp>
 
 using namespace eDSP::math;

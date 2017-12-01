@@ -5,11 +5,9 @@
 #ifndef EDSP_BIQUADDESIGNER_H
 #define EDSP_BIQUADDESIGNER_H
 
-#include <tclDecls.h>
-#include "base/algoritmtemplate.h"
 #include "base/constants.h"
-#include "biquad.hpp"
-
+#include "biquad.h"
+#include <cmath>
 EDSP_BEGING_NAMESPACE
     namespace filters {
         namespace designer {

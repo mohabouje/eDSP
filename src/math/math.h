@@ -6,7 +6,6 @@
 #define EDSP_UTIL_H
 
 #include "config.h"
-#include "base/types.h"
 
 #include <type_traits>
 

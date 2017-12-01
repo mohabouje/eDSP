@@ -7,9 +7,9 @@
 
 
 #include "config.h"
-#include "transforms/fft.hpp"
-#include "transforms/ifft.hpp"
-#include "math/complex.hpp"
+#include "transforms/fft.h"
+#include "transforms/ifft.h"
+#include "math/complex.h"
 EDSP_BEGING_NAMESPACE
     namespace frequency {
         template<typename T, std::size_t N = 1024>

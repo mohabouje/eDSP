@@ -5,8 +5,9 @@
 #ifndef EDSP_REALFFT_H
 #define EDSP_REALFFT_H
 
-#include "utility/template_util.hpp"
-#include "utility/vector_util.hpp"
+#include "config.h"
+#include <complex>
+#include <array>
 #include <fftw3.h>
 #include <assert.h>
 

@@ -6,9 +6,9 @@
 #define EDSP_CROSSCORRELATION_H
 
 #include "config.h"
-#include "math/complex.hpp"
-#include "transforms/fft.hpp"
-#include "transforms/ifft.hpp"
+#include "math/complex.h"
+#include "transforms/fft.h"
+#include "transforms/ifft.h"
 EDSP_BEGING_NAMESPACE
     namespace frequency {
         template<typename T, std::size_t N = 1024>

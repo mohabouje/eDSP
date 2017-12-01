@@ -6,7 +6,7 @@
 #define EDSP_BIQUAD_H
 
 #include "config.h"
-#include "base/algoritmtemplate.h"
+#include <array>
 #include <algorithm>
 EDSP_BEGING_NAMESPACE
     namespace filters {
@@ -31,11 +31,10 @@ EDSP_BEGING_NAMESPACE
         };
 
         template<typename T>
-        class Biquad : AlgorithmTemplate {
+        class Biquad  {
         public:
-            explicit Biquad() : AlgorithmTemplate(true, Error()) {}
+            explicit Biquad() = default;
             explicit Biquad(const BiquadCoefficients& a, const BiquadCoefficients& b) :
-                    AlgorithmTemplate(true, Error()),
                     m_a(a),
                     m_b(b)
             {

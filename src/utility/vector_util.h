@@ -9,7 +9,7 @@
 #include <numeric>
 #include <cmath>
 #include "config.h"
-#include "math/math.hpp"
+#include "math/math.h"
 EDSP_BEGING_NAMESPACE
 namespace utility {
     namespace vector {

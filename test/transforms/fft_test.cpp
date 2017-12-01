@@ -3,9 +3,9 @@
 //
 
 #include <catch.hpp>
-#include "transforms/fft.hpp"
-#include "transforms/ifft.hpp"
-#include "math/complex.hpp"
+#include "transforms/fft.h"
+#include "transforms/ifft.h"
+#include "math/complex.h"
 #include "../test_db.h"
 #include "../test_config.h"
 

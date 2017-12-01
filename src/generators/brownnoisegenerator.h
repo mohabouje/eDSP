@@ -6,7 +6,7 @@
 #define EDSP_BROWNNOISEGENERATOR_H
 
 
-#include "generator.hpp"
+#include "generator.h"
 EDSP_BEGING_NAMESPACE
     namespace generators {
         template<typename T, std::size_t N>

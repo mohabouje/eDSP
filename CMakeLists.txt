@@ -2,43 +2,40 @@ cmake_minimum_required(VERSION 3.8)
 project(eDSP)
 
 set(CMAKE_CXX_STANDARD 14)
-set(SOURCE_FILES ${FFTW_INCLUDES}
+set(SRC_FILES
         src/config.h
-        src/base/types.h
         src/version.h
-        src/math/math.hpp
-        src/math/stats.hpp
-        src/math/trig.hpp
-        src/properties/properties.hpp
         src/base/constants.h
-        src/utility/template_util.hpp
-        src/base/algoritmtemplate.h
-        src/base/ierrornotifier.h
-        src/base/iinitializer.h
-        src/base/error.h src/window/window.hpp
-        src/generators/whitenoisegenerator.hpp
-        src/generators/squaregenerator.hpp
-        src/generators/generator.hpp
-        src/generators/singenerator.hpp
-        src/generators/brownnoisegenerator.hpp
-        src/generators/impulsegenerator.hpp
-        src/filters/biquad.hpp
-        src/filters/biquaddesigner.hpp
-        src/math/complex.hpp
+        src/math/math.h
+        src/math/stats.h
+        src/math/trig.h
+        src/math/complex.h
+        src/properties/properties.h
+        src/window/window.h
+        src/generators/whitenoisegenerator.h
+        src/generators/squaregenerator.h
+        src/generators/generator.h
+        src/generators/singenerator.h
+        src/generators/brownnoisegenerator.h
+        src/generators/impulsegenerator.h
+        src/filters/biquad.h
+        src/filters/biquaddesigner.h
+        src/utility/template_util.h
+        src/utility/map_util.h
+        src/utility/vector_util.h
 )
 
-set(TEST_DIR test)
 set(TEST_FILES
-        ${TEST_DIR}/main.cpp
-        ${TEST_DIR}/test_db.h
-        ${TEST_DIR}/math/stats_test.cpp
-        ${TEST_DIR}/math/trig_test.cpp
-        ${TEST_DIR}/math/container_test.cpp
-        ${TEST_DIR}/test_util.h
-        ${TEST_DIR}/test_config.h)
+        test/test_util.h
+        test/test_config.h
+        test/test_db.h
+        test/main.cpp
+        test/math/stats_test.cpp
+        test/utilitity/vectorutil_test.cpp
+)
 
-add_executable(runtest ${SOURCE_FILES} ${TEST_FILES})
-add_library(edsp ${SOURCE_FILES} src/utility/map_util.hpp src/utility/vector_util.hpp)
+add_library(edsp ${SRC_FILES})
+add_executable(runtest ${SRC_FILES} ${TEST_FILES})
 
 SET(BASEPATH "${CMAKE_SOURCE_DIR}")
 
@@ -52,23 +49,22 @@ include_directories(/usr/local/include)
 
 find_library(FFTW_LIB NAMES lfftw3 libfftw3 fftw3)
 IF (FFTW_LIB)
-    message("FFTW_LIB library found, build ")
+    message("FFTW_LIB library found, build with fft support")
     set(FFTW_FILES
-            src/transforms/fft.hpp
-            src/transforms/ifft.hpp
-            src/transforms/dct.hpp
-            src/transforms/idct.hpp
-            src/transforms/dht.hpp
-            src/frequency/autocorrelation.hpp
-            src/frequency/spectrogram.hpp
-            src/frequency/linearpredictivecoding.hpp
-            src/frequency/cepstrum.hpp
+            src/transforms/fft.h
+            src/transforms/ifft.h
+            src/transforms/dct.h
+            src/transforms/idct.h
+            src/transforms/dht.h
+            src/frequency/autocorrelation.h
+            src/frequency/spectrogram.h
+            src/frequency/linearpredictivecoding.h
+            src/frequency/cepstrum.h
             )
 
-    set(FFTW_TEST_FILES
-            test/transforms/fft_test.cpp)
+    set(FFTW_TEST_FILES  test/transforms/fft_test.cpp)
     target_sources(edsp PUBLIC ${FFTW_FILES})
-    target_link_libraries(edsp ${FFTW_LIB})
+    target_link_libraries(edsp  ${FFTW_LIB})
 
     target_sources(runtest PUBLIC ${FFTW_FILES} ${FFTW_TEST_FILES})
     target_link_libraries(runtest ${FFTW_LIB})

@@ -5,7 +5,9 @@
 #ifndef EDSP_DHT_H
 #define EDSP_DHT_H
 
-#include "utility/vector_util.hpp"
+#include "config.h"
+#include <complex>
+#include <array>
 #include <fftw3.h>
 #include <assert.h>
 

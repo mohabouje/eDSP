@@ -6,7 +6,7 @@
 #define EDSP_GENERATOR_H
 
 #include "base/algoritmtemplate.h"
-#include "utility/vector_util.hpp"
+#include "utility/vector_util.h"
 
 EDSP_BEGING_NAMESPACE
     namespace generators {

@@ -6,9 +6,9 @@
 #define EDSP_STATS_H
 
 #include "config.h"
-#include "math.hpp"
-#include "utility/vector_util.hpp"
-#include "utility/template_util.hpp"
+#include "math.h"
+#include "utility/vector_util.h"
+#include "utility/template_util.h"
 
 
 #include <unordered_map>
@@ -18,7 +18,7 @@ EDSP_BEGING_NAMESPACE
 namespace math {
     namespace stats {
         template <typename Container>
-        typename Container::value_type mode(const Container& container) {
+        constexpr typename Container::value_type mode(const Container& container) {
             typedef std::unordered_map<typename Container::value_type,unsigned int> Map;
             Map counts;
             for (size_t i = 0, size = container.size(); i < size; ++i) {
@@ -37,33 +37,33 @@ namespace math {
         }
 
         template <typename Container>
-        typename Container::value_type mean(const Container& container) {
+        constexpr typename Container::value_type mean(const Container& container) {
             return utility::vector::sum(container) / static_cast<typename Container::value_type> (container.size());
         }
 
         template <typename Container>
-        typename Container::value_type variance(const Container& container) {
+        constexpr typename Container::value_type variance(const Container& container) {
             return  (utility::vector::sum_squares(container) - square(utility::vector::sum(container))) / static_cast<typename Container::value_type>(container.size());
         }
 
         template <typename Container>
-        typename Container::value_type standar_desviation(const Container& container) {
+        constexpr typename Container::value_type standar_desviation(const Container& container) {
             return static_cast<typename Container::value_type>(std::sqrt(variance(container)));
         }
 
         template <typename Container>
-        typename Container::value_type mean_error(const Container& container) {
+        constexpr typename Container::value_type mean_error(const Container& container) {
             return static_cast<typename Container::value_type>(std::sqrt(variance(container)
                                                                          / static_cast<typename Container::value_type>(container.size())));
         }
 
         template <typename Container>
-        typename Container::value_type root_mean_square(const Container& container) {
+        constexpr typename Container::value_type root_mean_square(const Container& container) {
             return static_cast<typename Container::value_type>(std::sqrt(mean(container)));
         }
 
         template <typename Container>
-        typename Container::value_type median(const Container& container) {
+        constexpr typename Container::value_type median(const Container& container) {
             Container tmp(container);
             std::sort(tmp.begin(), tmp.end());
             auto size = tmp.size();
@@ -72,8 +72,8 @@ namespace math {
         }
 
         template <typename Container>
-        typename Container::value_type entropy(const Container& container) {
-            assert(Container::hasNegative(container) &&
+        constexpr typename Container::value_type entropy(const Container& container) {
+            static_assert(Container::hasNegative(container),
                            "Trying to generate the entrpy of an array with negative values");
             return std::accumulate(container.begin(), container.end(),
                                    static_cast<typename Container::value_type>(0),
@@ -84,8 +84,8 @@ namespace math {
         }
 
         template <typename Container>
-        typename Container::value_type geometric_mean(const Container &container) {
-            assert(Container::hasNegative(container) &&
+        constexpr typename Container::value_type geometric_mean(const Container &container) {
+            static_assert(Container::hasNegative(container),
                         "Trying to generate the geometric mean of an array with "
                         "negative values");
             return Container::hasZero(container)

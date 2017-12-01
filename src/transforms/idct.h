@@ -5,13 +5,7 @@
 #ifndef EDSP_IDCT_H
 #define EDSP_IDCT_H
 
-
-#include "utility/template_util.hpp"
-#include "utility/vector_util.hpp"
-#include "dct.hpp"
-#include <fftw3.h>
-#include <assert.h>
-
+#include "dct.h"
 EDSP_BEGING_NAMESPACE
     namespace transforms {
 
@@ -55,6 +49,7 @@ EDSP_BEGING_NAMESPACE
             }
         private:
             DCT_Type t{DCT_Type::Type_I};
+            fftw_plan fftwPlan{nullptr};
             std::array<std::complex<double>, N>  input{};
             std::array<std::complex<double>, N>  output{};
         };

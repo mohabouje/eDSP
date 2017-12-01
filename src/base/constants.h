@@ -11,8 +11,6 @@
 EDSP_BEGING_NAMESPACE
     template <typename T>
     struct Constants {
-
-
         constexpr static T pi           = static_cast<T>(3.141592653589793);
         constexpr static T e            = static_cast<T>(2.718281828459045);
 
@@ -29,9 +27,8 @@ EDSP_BEGING_NAMESPACE
 
         constexpr static T epsilon     = std::numeric_limits<T>::epsilon();
         constexpr static T infinity    = std::numeric_limits<T>::infinity();
-        constexpr static T neginfinity = -std::numeric_limits<T>::infinity();
+        constexpr static T neg_infinity = -std::numeric_limits<T>::infinity();
         constexpr static T qnan        = std::numeric_limits<T>::quiet_NaN();
-
     };
 
 EDSP_END_NAMESPACE

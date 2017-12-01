@@ -10,7 +10,7 @@
 #ifndef EDSP_IMPULSEGENERATOR_H
 #define EDSP_IMPULSEGENERATOR_H
 
-#include "generator.hpp"
+#include "generator.h"
 #include "base/constants.h"
 
 EDSP_BEGING_NAMESPACE
