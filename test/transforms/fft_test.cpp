@@ -13,8 +13,8 @@ using namespace eDSP::transforms;
 SCENARIO("Testing FFT") {
     auto original = test::db::ref_vector;
     auto tmp = eDSP::math::complex::real_to_complex(original);
-    FFT<double, 1024> fft{};
-    IFFT<double, 1024> ifft{};
+    FFT<double, 30> fft{};
+    IFFT<double, 30> ifft{};
 
     GIVEN("A signal ") {
         WHEN("We apply the FFT") {

@@ -10,13 +10,12 @@
 #include "utility/template_util.hpp"
 #include <vector>
 #include <cmath>
-#include <math/container.hpp>
 
 EDSP_BEGING_NAMESPACE
     namespace window {
 
-        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
-        hamming(size_t size) {
+        template <typename Container>
+        Container hamming(size_t size) {
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
                 vec[i] = 0.53836f - 0.46164f * cos(2 * Constants<T>::pi * i / (size - 1.0f));
@@ -25,8 +24,8 @@ EDSP_BEGING_NAMESPACE
         }
 
 
-        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
-        hanning(size_t size) {
+        template <typename Container>
+        Container hanning(size_t size) {
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
                 vec[i] = 0.5f - 0.5f * std::cos(2 * Constants<T>::pi * i / (size - 1.0f));
@@ -35,8 +34,8 @@ EDSP_BEGING_NAMESPACE
         }
 
 
-        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
-        hammingz(size_t size) {
+        template <typename Container>
+        Container hammingz(size_t size) {
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
                 vec[i] = 0.5f - 0.5f * std::cos(2 * Constants<T>::pi * i / (size - 1.0f));
@@ -45,8 +44,8 @@ EDSP_BEGING_NAMESPACE
         }
 
 
-        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
-        gaussian(size_t size) {
+        template <typename Container>
+        Container gaussian(size_t size) {
             Container vec(size);
             typename Container::value_type a, b, c = 0.5f;
             for (size_t i = 0; i < size; i++) {
@@ -58,8 +57,8 @@ EDSP_BEGING_NAMESPACE
         }
 
 
-        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
-        blackman(size_t size) {
+        template <typename Container>
+        Container blackman(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
@@ -68,8 +67,8 @@ EDSP_BEGING_NAMESPACE
             return vec;
         }
 
-        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
-        blackmanharris(size_t size) {
+        template <typename Container>
+        Container blackmanharris(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
@@ -81,8 +80,8 @@ EDSP_BEGING_NAMESPACE
             return vec;
         }
 
-        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
-        parzen(size_t size) {
+        template <typename Container>
+        Container parzen(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
@@ -91,8 +90,8 @@ EDSP_BEGING_NAMESPACE
             return vec;
         }
 
-        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
-        welch(size_t size) {
+        template <typename Container>
+        Container welch(size_t size) {
             using T = typename Container::value_type;
             Container vec(size);
             for (size_t i = 0; i < size; i++) {
@@ -101,13 +100,6 @@ EDSP_BEGING_NAMESPACE
             return vec;
         }
 
-        EDSP_FTEMPLATE_ARITHMETIC_CONTAINER(Container, Container)
-        boxcar(size_t size){
-            using T = typename Container::value_type;
-            Container vec(size);
-            math::set(vec, static_cast<T>(1));
-            return vec;
-        }
     }
 
 EDSP_END_NAMESPACE
