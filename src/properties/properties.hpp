@@ -25,13 +25,6 @@ namespace properties {
     };
 
     template <typename Container>
-    std::pair<std::size_t, typename Container::value_type> strong_peak(const Container& data) {
-        auto it = std::max_element(data.begin(), data.end());
-        return std::pair<std::size_t, typename Container::value_type>(static_cast<size_t>(std::distance(data.begin(), it)), *it);
-    };
-
-
-    template <typename Container>
     typename Container::value_type zero_crossing_rate(const Container& data) {
         typename Container::value_type tmp = 0;
         for (size_t i = 0, size = data.size(); i < size; i++) {

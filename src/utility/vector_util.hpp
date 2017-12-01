@@ -24,6 +24,17 @@ namespace utility {
         }
 
         template <typename Container>
+        constexpr std::pair<typename Container::value_type, typename Container::value_type> minmax(const Container& array) {
+            return std::minmax_element(array.begin(), array.end());
+        }
+
+        template <typename Container>
+        constexpr std::pair<std::size_t, typename Container::value_type> strong_peak(const Container& data) {
+            auto it = std::max_element(data.begin(), data.end());
+            return std::pair<std::size_t, typename Container::value_type>(static_cast<size_t>(std::distance(data.begin(), it)), *it);
+        };
+
+        template <typename Container>
         constexpr Container fract(const Container& array) {
             Container tmp(array);
             for (size_t i = 0, size = array.size(); i < size; i++) {
