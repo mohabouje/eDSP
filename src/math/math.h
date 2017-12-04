@@ -11,6 +11,7 @@
 
 EDSP_BEGING_NAMESPACE
     namespace math {
+
         template<typename T>
         EDSP_EXPORT constexpr int sign(const T &x) {
             return x > 0 ? 1 : 0;

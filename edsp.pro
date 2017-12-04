@@ -1,6 +1,5 @@
 QT       -= core gui
 CONFIG += c++14
-TARGET = edsp
 TEMPLATE = lib
 HEADERS += \
     src/base/constants.h \
@@ -10,7 +9,6 @@ HEADERS += \
     src/frequency/cepstrum.h \
     src/frequency/linearpredictivecoding.h \
     src/frequency/spectrogram.h \
-    src/generators/brownnoisegenerator.h \
     src/generators/generator.h \
     src/generators/impulsegenerator.h \
     src/generators/singenerator.h \
@@ -31,7 +29,8 @@ HEADERS += \
     src/utility/vector_util.h \
     src/window/window.h \
     src/version.h \
-    src/config.h
+    src/config.h \
+    src/generators/brownnoisegenerator.hpp
 
 INCLUDEPATH += $$PWD/src/
 DEPENDPATH += $$PWD/src/
@@ -47,4 +46,7 @@ macx {
     INCLUDEPATH += $$PWD/../../../usr/local/Cellar/fftw/3.3.6-pl2/include
     DEPENDPATH += $$PWD/../../../usr/local/Cellar/fftw/3.3.6-pl2/include
 }
+
+SOURCES += \
+    src/test.cpp
 

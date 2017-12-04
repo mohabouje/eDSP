@@ -34,4 +34,6 @@
 # Clion IDE files.
 .idea/
 cmake-build-debug/
+CMakeFiles/
+*.pro.user
 
