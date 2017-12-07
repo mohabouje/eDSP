@@ -36,4 +36,7 @@
 cmake-build-debug/
 CMakeFiles/
 *.pro.user
-
+*.cmake
+*.cbp
+Makefile
+CMakeCache.txt

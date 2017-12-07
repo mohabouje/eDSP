@@ -41,6 +41,7 @@ SCENARIO("Testing math features for standard containers") {
             // Testing function has zeros
             AND_THEN("No value should be zero") {
                 REQUIRE(!vector::has_zero(test));
+                REQUIRE(false);
             }
         }
 
