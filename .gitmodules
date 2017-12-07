@@ -1,3 +1,6 @@
 [submodule "third_party/Catch"]
 	path = third_party/Catch
 	url = https://github.com/philsquared/Catch.git
+[submodule "third_party/benchmark"]
+	path = third_party/benchmark
+	url = https://github.com/google/benchmark.git
