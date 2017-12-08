@@ -13,13 +13,17 @@ using namespace eDSP::frequency;
 SCENARIO("Testing FFT") {
     auto original = test::db::ref_vector;
     auto inverse = original;
-    std::vector<std::complex<double>> buffer(std::size(original));
+    std::vector<std::complex<double>> buffer(original.size());
     FFT fft{};
     IFFT ifft{};
 
+    std::transform(std::begin(original), std::end(original), std::begin(buffer), [](const auto& val) {
+       return std::complex<double>(val, 0);
+    });
+
     GIVEN("A signal ") {
         WHEN("We apply the FFT") {
-            fft.compute_r2c(std::begin(original), std::end(original), std::begin(buffer));
+            fft.compute_c2c(std::begin(buffer), std::end(buffer), std::begin(buffer));
             THEN("It should be the same as the estimated fft") {
                 for (size_t i = 0, size = buffer.size(); i < size; i++) {
                     const Approx abs = Approx(std::abs(buffer[i])).epsilon(TEST_TOLERANCE);

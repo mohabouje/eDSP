@@ -17,6 +17,10 @@ EDSP_BEGING_NAMESPACE
         virtual ~BaseTransform() {
             if (plan != nullptr) fftw_destroy_plan(plan);
         }
+        virtual void reset() {
+            if (plan != nullptr) fftw_destroy_plan(plan);
+            size = 0;
+        }
     protected:
         fftw_plan plan{nullptr};
         long size{0};
