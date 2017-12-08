@@ -12,7 +12,7 @@ EDSP_BEGING_NAMESPACE
     namespace filters {
         namespace designer {
             template <typename T >
-            EDSP_EXPORT Biquad<T> allpass(T frequency, T Q) {
+            Biquad<T> allpass(T frequency, T Q) {
                 auto alpha = static_cast<T>(std::sin(frequency) / 2.0 * Q);
                 auto cs    = static_cast<T>(std::cos(frequency));
                 BiquadCoefficients<T> a, b;
@@ -26,7 +26,7 @@ EDSP_BEGING_NAMESPACE
             }
 
             template <typename T>
-            EDSP_EXPORT Biquad<T> lowpass(T frequency, T Q)  {
+            Biquad<T> lowpass(T frequency, T Q)  {
                 auto K    = static_cast<T>(std::tan(Constants<T>::pi  * frequency));
                 auto K2   = static_cast<T>(K * K);
                 auto norm = static_cast<T>(1 / (1 + K / Q + K2));
@@ -41,7 +41,7 @@ EDSP_BEGING_NAMESPACE
             }
 
             template <typename T >
-            EDSP_EXPORT Biquad<T> highpass(T frequency, T Q) {
+            Biquad<T> highpass(T frequency, T Q) {
                 auto K    = static_cast<T>(std::tan(Constants<T>::pi  * frequency));
                 auto K2   = static_cast<T>(K * K);
                 auto norm = static_cast<T>(1 / (1 + K / Q + K2));
@@ -57,7 +57,7 @@ EDSP_BEGING_NAMESPACE
 
 
             template <typename T>
-            EDSP_EXPORT Biquad<T> bandpass(T frequency, T Q) {
+            Biquad<T> bandpass(T frequency, T Q) {
                 auto K    = static_cast<T>(std::tan(2 * Constants<T>::pi * frequency));
                 auto K2   = static_cast<T>(K * K);
                 auto  norm = static_cast<T>(1 / (1 + K / Q + K2));
@@ -72,7 +72,7 @@ EDSP_BEGING_NAMESPACE
             }
 
             template <typename T>
-            EDSP_EXPORT Biquad<T> notch(T frequency, T Q) {
+            Biquad<T> notch(T frequency, T Q) {
                 auto K    = static_cast<T>(std::tan(Constants<T>::pi * frequency));
                 auto K2   = static_cast<T>(K * K);
                 auto norm = static_cast<T>(1 / (1 + K / Q + K2));
@@ -88,7 +88,7 @@ EDSP_BEGING_NAMESPACE
 
 
             template <typename T>
-            EDSP_EXPORT Biquad<T> peak(T frequency, T Q, T gain) {
+            Biquad<T> peak(T frequency, T Q, T gain) {
                 auto K = static_cast<T>(std::tan(Constants<T>::pi * frequency));
                 auto K2 = static_cast<T>(K * K);
                 auto V = static_cast<T>(std::exp(std::abs(gain) * static_cast<T>(0.05f) * std::log10(200)));
@@ -116,7 +116,7 @@ EDSP_BEGING_NAMESPACE
             }
 
             template <typename T>
-            EDSP_EXPORT Biquad<T> lowshelf(T frequency, T gain) {
+            Biquad<T> lowshelf(T frequency, T gain) {
                 auto K = static_cast<T>(std::tan(Constants<T>::pi * frequency));
                 auto K2 = static_cast<T>(K * K);
                 auto V  = static_cast<T>(std::exp(std::fabs(gain) * static_cast<T>(0.05f) * std::log10(200)));
@@ -143,7 +143,7 @@ EDSP_BEGING_NAMESPACE
             }
 
             template<typename T>
-            EDSP_EXPORT Biquad<T> highshelf(T frequency, T gain) {
+            Biquad<T> highshelf(T frequency, T gain) {
                 auto K = static_cast<T>(std::tan(Constants<T>::pi * frequency));
                 auto K2 = static_cast<T>(K * K);
                 auto V  = static_cast<T>(std::exp(std::fabs(gain) * static_cast<T>(0.05f) * std::log10(200)));
