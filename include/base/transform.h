@@ -21,6 +21,7 @@ EDSP_BEGING_NAMESPACE
         fftw_plan plan{nullptr};
         long size{0};
     };
+#define PTR(X) &(*X)
 
 #define ITER_SAME(X, Y) std::is_same<typename std::iterator_traits<X>::value_type, Y>::value
 #define ITER_COMPLEX(X) is_complex<typename std::iterator_traits<X>::value_type>::value

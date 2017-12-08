@@ -15,17 +15,17 @@ EDSP_BEGING_NAMESPACE
             template <class InputIterator, class OutputIterator>
             void compute_c2c(InputIterator __first, InputIterator __last, OutputIterator __out) {
                 const auto m_size = std::distance(__first, __last);
-                if (size != m_size && plan != nullptr) {
+                if (size != m_size || plan == nullptr) {
                     fftw_destroy_plan(plan);
                     size = m_size;
                     plan = fftw_plan_dft_1d(static_cast<int>(size),
-                                            reinterpret_cast<fftw_complex *>(__first),
-                                            reinterpret_cast<fftw_complex *>(__out),
+                                            reinterpret_cast<fftw_complex *>(PTR(__first)),
+                                            reinterpret_cast<fftw_complex *>(PTR(__out)),
                                             FFTW_BACKWARD, FFTW_ESTIMATE);
                 }
                 fftw_execute_dft(plan,
-                                 reinterpret_cast<fftw_complex *>(__first),
-                                 reinterpret_cast<fftw_complex *>(__out));
+                                 reinterpret_cast<fftw_complex *>(PTR(__first)),
+                                 reinterpret_cast<fftw_complex *>(PTR(__out)));
                 scale_output(__out);
 
             }
@@ -33,15 +33,15 @@ EDSP_BEGING_NAMESPACE
             template <class InputIterator, class OutputIterator>
             void compute_c2r(InputIterator __first, InputIterator __last, OutputIterator __out) {
                 const auto m_size = std::distance(__first, __last);
-                if (size != m_size && plan != nullptr) {
+                if (size != m_size || plan == nullptr) {
                     fftw_destroy_plan(plan);
                     size = m_size;
                     plan = fftw_plan_dft_c2r_1d(static_cast<int>(size),
-                                                reinterpret_cast<fftw_complex *>(__first),
-                                                __out,
+                                                reinterpret_cast<fftw_complex *>(PTR(__first)),
+                                                PTR(__out),
                                                 FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
                 }
-                fftw_execute_dft_c2r(plan, reinterpret_cast<fftw_complex *>(__first), __out);
+                fftw_execute_dft_c2r(plan, reinterpret_cast<fftw_complex *>(PTR(__first)), PTR(__out));
                 scale_output(__out);
             }
 

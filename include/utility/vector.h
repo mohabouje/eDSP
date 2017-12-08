@@ -165,12 +165,12 @@ namespace utility {
 
     template <class Container, typename = std::enable_if<std::is_arithmetic<typename Container::value_type>::value>>
     constexpr bool has_negative(const Container &array) {
-        return std::any_of(array.begin(), array.end(), math::is_negative<typename Container::value_type>) != array.end();
+        return std::any_of(array.begin(), array.end(), math::is_negative<typename Container::value_type>);
     }
 
     template <class Container, typename = std::enable_if<std::is_arithmetic<typename Container::value_type>::value>>
     constexpr bool has_zero(const Container &array) {
-        return std::any_of(array.begin(), array.end(), math::is_zero<typename Container::value_type>) != array.end();
+        return std::any_of(array.begin(), array.end(), math::is_zero<typename Container::value_type>);
     }
 
     template <typename Container>

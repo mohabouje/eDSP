@@ -20,12 +20,12 @@ namespace frequency {
                 fftw_destroy_plan(plan);
                 size = m_size;
                 plan = fftw_plan_r2r_1d(static_cast<int>(size),
-                                        __first,
-                                        __out,
+                                        PTR(__first),
+                                        PTR(__out),
                                         FFTW_DHT,
                                         FFTW_MEASURE);
             }
-            fftw_execute_r2r(plan, __first, __out);
+            fftw_execute_r2r(plan, PTR(__first), PTR(__out));
         }
     };
 }

@@ -25,12 +25,12 @@ EDSP_BEGING_NAMESPACE
                     fftw_destroy_plan(plan);
                     size = m_size;
                     plan = fftw_plan_r2r_1d(static_cast<int>(size),
-                                                __first,
-                                                __out,
-                                                format(),
-                                                FFTW_ESTIMATE);
+                                            PTR(__first),
+                                            PTR(__out),
+                                            format(),
+                                            FFTW_ESTIMATE);
                 }
-                fftw_execute_r2r(plan, __first, __out);
+                fftw_execute_r2r(plan, PTR(__first), PTR(__out));
             }
 
         private:

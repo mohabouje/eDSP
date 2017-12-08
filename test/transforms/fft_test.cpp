@@ -12,27 +12,28 @@
 using namespace eDSP::frequency;
 SCENARIO("Testing FFT") {
     auto original = test::db::ref_vector;
-    auto tmp = eDSP::math::complex::real_to_complex(original);
-    FFT<double, 30> fft{};
-    IFFT<double, 30> ifft{};
+    auto inverse = original;
+    std::vector<std::complex<double>> buffer(std::size(original));
+    FFT fft{};
+    IFFT ifft{};
 
     GIVEN("A signal ") {
         WHEN("We apply the FFT") {
-            auto data = fft.compute(tmp);
+            fft.compute_r2c(std::begin(original), std::end(original), std::begin(buffer));
             THEN("It should be the same as the estimated fft") {
-                for (size_t i = 0, size = data.size(); i < size; i++) {
-                    const Approx abs = Approx(std::abs(data[i])).epsilon(TEST_TOLERANCE);
+                for (size_t i = 0, size = buffer.size(); i < size; i++) {
+                    const Approx abs = Approx(std::abs(buffer[i])).epsilon(TEST_TOLERANCE);
                     REQUIRE(abs == std::abs(test::db::fft_ref_vector[i]));
                 }
             }
         }
 
         AND_WHEN("We apply the inverse operation") {
-            auto data = fft.compute(tmp);
-            auto inverse = ifft.compute(data);
+            fft.compute_r2c(std::begin(original), std::end(original), std::begin(buffer));
+            ifft.compute_c2r(std::begin(buffer), std::end(buffer), std::begin(inverse));
             THEN("We should get the same output") {
                 for (size_t i = 0, size = inverse.size(); i < size; i++) {
-                    const Approx target = Approx(inverse[i].real() / static_cast<double>(size)).epsilon(TEST_TOLERANCE);
+                    const Approx target = Approx(inverse[i]).epsilon(TEST_TOLERANCE);
                     REQUIRE(target == original[i]);
                 }
             }
