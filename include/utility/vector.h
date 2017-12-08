@@ -107,7 +107,7 @@ namespace utility {
                             typename std::iterator_traits<InputIterator>::value_type const& end
                             ) {
         const auto size = std::distance(__first, __last);
-        typename std::iterator_traits<InputIterator>::value_type increment = (end - start) /
+        typename std::iterator_traits<InputIterator>::value_type const increment = (end - start) /
                 static_cast<typename std::iterator_traits<InputIterator>::value_type>(size);
         std::iota(__first, __last, increment);
     }
@@ -115,7 +115,7 @@ namespace utility {
     template <class InputIterator>
     constexpr void normalize(InputIterator __first, InputIterator __last) {
         const auto pair = std::minmax_element(__first, __last);
-        const typename std::iterator_traits<InputIterator>::value_type inverse = 1.f / (pair.first - pair.second);
+        typename std::iterator_traits<InputIterator>::value_type const inverse = 1.f / (pair.first - pair.second);
         std::for_each(__first, __last, [&](auto& value) {
             value = (value - pair.first) * inverse;
         });

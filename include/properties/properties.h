@@ -4,33 +4,36 @@
 
 #include "config.h"
 #include "utility/vector.h"
-#include "utility/template_util.h"
 #include <utility>
+#include <valarray>
 
 EDSP_BEGING_NAMESPACE
 namespace properties {
-    template <typename Container>
-    EDSP_EXPORT constexpr typename Container::value_type energy(const Container& data) {
-        utility::vector::sum_squares(data);
+
+    template <class InputIterator>
+    constexpr auto energy(InputIterator __first, InputIterator __last) {
+        return utility::sum_squares(__first, __last);
     };
 
-    template <typename Container>
-    EDSP_EXPORT constexpr typename Container::value_type loudness(const Container& data) {
-        return std::pow(utility::vector::sum_squares(data), static_cast<typename Container::value_type>(0.67)); // StevenLawLevel
+    template <class InputIterator>
+    constexpr auto loudness(InputIterator __first, InputIterator __last) {
+        return std::pow(utility::sum_squares(__first, __last), 0.67f); // StevenLawLevel
     };
 
-    template <typename Container>
-    EDSP_EXPORT constexpr typename Container::value_type power(const Container& data) {
-        return utility::vector::sum_squares(data) / static_cast<typename Container::value_type>(data.size());
+    template <class InputIterator>
+    constexpr auto power(InputIterator __first, InputIterator __last) {
+        return utility::sum_squares(__first, __last)
+               / static_cast<typename std::iterator_traits<InputIterator>::value_type>(std::distance(__first, __last));
     };
 
-    template <typename Container>
-    EDSP_EXPORT constexpr typename Container::value_type zero_crossing_rate(const Container& data) {
-        typename Container::value_type tmp = 0;
-        for (size_t i = 1, size = data.size(); i < size; i++) {
-            tmp += (math::sign(data[i]) != math::sign(data[i - 1])) ? 1 : 0;
+    template <class InputIterator>
+    constexpr auto zero_crossing_rate(InputIterator __first, InputIterator __last) {
+        typename std::iterator_traits<InputIterator>::value_type tmp = 0;
+        for (auto before = __first, after = ++__first, ; after != __last; ++before, ++after) {
+            tmp += (math::sign(after) != math::sign(before)) ? 1 : 0;
         }
-        return tmp / static_cast<typename Container::value_type>(data.size()) ;
+        return tmp
+               / static_cast<typename std::iterator_traits<InputIterator>::value_type>(std::distance(__first, __last));
     };
 }
 EDSP_END_NAMESPACE
