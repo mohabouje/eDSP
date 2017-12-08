@@ -11,33 +11,28 @@
 #include "ifft.h"
 EDSP_BEGING_NAMESPACE
     namespace frequency {
-        template<typename T, std::size_t N = 1024>
-        class EDSP_EXPORT AutoCorrelation  {
+        class AutoCorrelation  {
         public:
-            explicit AutoCorrelation() = default;
-            ~AutoCorrelation() = default;
-
-            template<typename Container>
-            typename std::enable_if<std::is_same<typename Container::value_type,
-                    T>::value, Container>::type
-            compute(const Container& input) {
-                const auto& fft_data = fft.compute(math::complex::real_to_complex(input));
-                std::transform(fft_data.begin(), fft_data.end(), fft_data.begin(), [](std::complex<T>& value) {
-                    auto tmp = static_cast<T>(std::abs(value));
-                    return std::complex<T>(tmp * tmp, 0);
+            template<class InputIterator, class OutputIterator>
+            void compute(InputIterator __first, InputIterator __last, OutputIterator __out) {
+                const auto size = std::distance(__first, __last);
+                if (buffer.size() != size) { buffer.resize(size); }
+                std::transform(__first, __last, std::begin(buffer), [](const auto& val) {
+                    return std::complex<double>(val, 0);
                 });
 
-                const auto& out = ifft.compute(fft_data);
-                Container data(input.size());
-                std::transform(out.begin(), out.end(), data.begin(), [](const std::complex<T>& value) {
-                    return value.real();
+                fft.compute_c2c(std::begin(buffer), std::end(buffer), std::begin(buffer));
+                std::transform(std::begin(buffer), std::end(buffer), std::begin(buffer), [](std::complex<double>& value) {
+                    const auto tmp = std::abs(value);
+                    return std::complex<double>(tmp * tmp, 0);
                 });
-                return data;
+
+                ifft.compute_c2r(std::begin(buffer), std::end(buffer), __out);
             }
         private:
-            using complex_array = std::vector<std::complex<T>>;
-            frequency::FFT<T, N>  fft;
-            frequency::IFFT<T, N> ifft;
+            std::vector<std::complex<double>> buffer;
+            FFT  fft;
+            IFFT ifft;
         };
     }
 EDSP_END_NAMESPACE

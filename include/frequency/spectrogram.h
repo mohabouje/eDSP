@@ -10,40 +10,21 @@
 #include "math/complex.h"
 EDSP_BEGING_NAMESPACE
     namespace frequency {
-        template<typename T, std::size_t N>
-        class EDSP_EXPORT Spectrogram {
+        class  Spectrogram {
         public:
-            Spectrogram() = default;
-            virtual ~Spectrogram() = default;
-
-            template<typename Container>
-            typename std::enable_if<std::is_same<typename Container::value_type,
-                    T>::value, Container>::type
-            compute(const Container& input) {
-                Container data(N);
-                const auto& fft_data = fft.compute(math::complex::real_to_complex(input));
-                std::transform(fft_data.begin(), fft_data.end(), data.begin(), [](const std::complex<T>& value) {
-                    auto tmp = static_cast<T>(std::abs(value));
+            typename <class InputIterator, class OutputIterator>
+            void compute(InputIterator __first, InputIterator __last, OutputIterator __out) {
+                const auto size = std::distance(__first, __last);
+                if (buffer.size() != size) { buffer.resize(size); }
+                fft.compute_r2c(__first, __last, std::begin(buffer));
+                std::transform(std::begin(buffer), std::end(buffer), __out, [](const auto& value) {
+                    const auto tmp = std::abs(value);
                     return  (tmp * tmp);
                 });
-                return data;
             }
-
-            template<typename Container>
-            typename std::enable_if<std::is_same<typename Container::value_type,
-                    T>::value, Container>::type
-            compute_db(const Container& input) {
-                Container data(N);
-                const auto& fft_data = fft.compute(math::complex::real_to_complex(input));
-                std::transform(fft_data.begin(), fft_data.end(), data.begin(), [](const std::complex<T>& value) {
-                    auto tmp = static_cast<T>(std::abs(value));
-                    return 20 * log10(tmp);
-                });
-                return data;
-            }
-
         private:
-            frequency::FFT<T, N> fft{};
+            FFT fft{};
+            std::vector<std::complex<double>> buffer;
         };
     }
 EDSP_END_NAMESPACE

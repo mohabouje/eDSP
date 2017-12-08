@@ -9,12 +9,13 @@
 #include "config.h"
 #include "fft.h"
 #include "autocorrelation.h"
+#include <array>
 
 EDSP_BEGING_NAMESPACE
     namespace frequency {
 
-        template<typename T, std::size_t Order, std::size_t N = 1024>
-        class EDSP_EXPORT LinearPredictiveCode {
+        template<typename T, std::size_t Order>
+        class LinearPredictiveCode {
         public:
             explicit LinearPredictiveCode() = default;
             virtual ~LinearPredictiveCode() = default;
@@ -22,22 +23,23 @@ EDSP_BEGING_NAMESPACE
             int16_t order() const { return m_order; }
             T lpc_error() const { return m_error; }
 
-            template<typename Container>
-            typename std::enable_if<std::is_same<typename Container::value_type,
-                    T>::value,const std::array<T, Order + 1>&>::type
-            compute(const Container& input) {
+            template<class InputIterator>
+            const std::array<T, Order + 1>& compute(InputIterator __first, InputIterator __last) {
+                const auto size = std::distance(__first, __last);
+                if (buffer.size() != size) { buffer.resize(size); }
+
                 std::array<T, Order> temp;
-                auto correlation = m_xcorr.compute(input);
+                m_xcorr.compute(__first, __last, std::begin(buffer));
 
                 T k;
-                m_error = correlation[0];
+                m_error = buffer[0];
                 m_lpc[0] = 1;
 
-                for (size_t i = 1, size = m_lpc.size(); i < size; i++) {
-                    k = correlation[i];
+                for (auto i = 1, _size = m_lpc.size(); i < _size; ++i) {
+                    k = buffer[i];
 
-                    for (size_t j = 1; j < i; j++) {
-                        k += correlation[i - j] *  m_lpc[j];
+                    for (auto j = 1; j < i; ++j) {
+                        k += buffer[i - j] *  m_lpc[j];
                     }
 
                     k /= m_error;
@@ -45,11 +47,11 @@ EDSP_BEGING_NAMESPACE
                     m_reflection[i-1] = k;
                     m_lpc[i] = -k;
 
-                    for (size_t j = 1; j < i; j++) {
+                    for (auto j = 1; j < i; ++j) {
                         temp[j] = m_lpc[j] - k * m_lpc[i - j];
                     }
 
-                    for (size_t j = 1; j < i; j++) {
+                    for (auto j = 1; j < i; ++j) {
                         m_lpc[j] = temp[j];
                     }
 
@@ -59,10 +61,11 @@ EDSP_BEGING_NAMESPACE
             }
 
         private:
-            AutoCorrelation<T, N>       m_xcorr{};
+            std::vector<std::complex<T>> buffer;
+            AutoCorrelation             m_xcorr{};
             std::array<T, Order + 1>    m_lpc{};
             std::array<T, Order + 1>    m_reflection{};
-            int16_t                       m_order{0};
+            int16_t                     m_order{0};
             T                           m_error{0};
         };
     }

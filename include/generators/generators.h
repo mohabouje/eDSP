@@ -50,8 +50,8 @@ EDSP_BEGING_NAMESPACE
             static constexpr T BrownScale{static_cast<T>(0.0625)};
             std::array<T, N> data;
             T ns = static_cast<T>(0);
-            for (size_t i = 0; i < N; ++i) {
-                data[i] = [&]() {
+            std::for_each(std::begin(data), std::end(data), [&](auto& val) {
+                val = [&]() {
                     bool compute = true;
                     while (compute) {
                         const T sample =  std::rand() / static_cast<T>(RAND_MAX);
@@ -63,7 +63,7 @@ EDSP_BEGING_NAMESPACE
                     }
                     return ns * BrownScale;
                 }();
-            }
+            });
             return data;
         };
 
