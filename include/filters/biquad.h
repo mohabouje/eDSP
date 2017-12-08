@@ -34,8 +34,8 @@ EDSP_BEGING_NAMESPACE
             void compute(ForwardIterator __first, ForwardIterator __last, OutputIterator __out) {
                 const auto size = std::distance(__first, __last);
                 const auto input(__first, __last);
-                for (size_t i = 0; i < size; ++i, ++__out) {
-                    *__out = (m_b[0] * input[i]
+                for (; __first != __last, ++__last, ++__out) {
+                    *__out = (m_b[0] * *__first
                              + m_b[1] * m_state.inputs[0]
                              + m_b[2] * m_state.inputs[1]
                              - m_a[1] * m_state.outputs[0]
@@ -43,7 +43,7 @@ EDSP_BEGING_NAMESPACE
 
                     // Circular buffer;
                     m_state.inputs[1] = m_state.inputs[0];
-                    m_state.inputs[0] = input[i];
+                    m_state.inputs[0] = *__last;
 
                     m_state.outputs[1] = m_state.outputs[0];
                     m_state.outputs[0] = *__out;
