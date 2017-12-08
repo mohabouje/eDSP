@@ -5,41 +5,53 @@
 #ifndef EDSP_IFFT_H
 #define EDSP_IFFT_H
 
-#include "config.h"
-#include <complex>
-#include <array>
-#include <fftw3.h>
-#include <assert.h>
+#include "fft.h"
+
 
 EDSP_BEGING_NAMESPACE
     namespace frequency {
-
-        template<typename T, std::size_t N>
-        class EDSP_EXPORT IFFT {
+        class IFFT : public BaseTransform {
         public:
-            explicit IFFT() {
-                fftwPlan = fftw_plan_dft_1d(static_cast<int>(N),
-                                            reinterpret_cast<fftw_complex *>(&input[0]),
-                                            reinterpret_cast<fftw_complex *>(&output[0]),
+            template <class InputIterator, class OutputIterator>
+            void compute_c2c(InputIterator __first, InputIterator __last, OutputIterator __out) {
+                const auto m_size = std::distance(__first, __last);
+                if (size != m_size && plan != nullptr) {
+                    fftw_destroy_plan(plan);
+                    size = m_size;
+                    plan = fftw_plan_dft_1d(static_cast<int>(size),
+                                            reinterpret_cast<fftw_complex *>(__first),
+                                            reinterpret_cast<fftw_complex *>(__out),
                                             FFTW_BACKWARD, FFTW_ESTIMATE);
-            }
-            virtual ~IFFT() { fftw_destroy_plan(fftwPlan); }
+                }
+                fftw_execute_dft(plan,
+                                 reinterpret_cast<fftw_complex *>(__first),
+                                 reinterpret_cast<fftw_complex *>(__out));
+                scale_output(__out);
 
-            template<typename Container>
-            typename std::enable_if<std::is_same<typename Container::value_type,
-                    std::complex<T>>::value, const std::array<std::complex<double>, N>&>::type
-            compute(const Container& data) {
-                assert(data.size() <= input.size());
-                std::transform(data.begin(), data.end(), input.begin(), [](std::complex<T> tmp) {
-                    return std::complex<double>(tmp.real(), tmp.imag());
-                });
-                fftw_execute(fftwPlan);
-                return output;
             }
+
+            template <class InputIterator, class OutputIterator>
+            void compute_c2r(InputIterator __first, InputIterator __last, OutputIterator __out) {
+                const auto m_size = std::distance(__first, __last);
+                if (size != m_size && plan != nullptr) {
+                    fftw_destroy_plan(plan);
+                    size = m_size;
+                    plan = fftw_plan_dft_c2r_1d(static_cast<int>(size),
+                                                reinterpret_cast<fftw_complex *>(__first),
+                                                __out,
+                                                FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                }
+                fftw_execute_dft_c2r(plan, reinterpret_cast<fftw_complex *>(__first), __out);
+                scale_output(__out);
+            }
+
         private:
-            fftw_plan fftwPlan{nullptr};
-            std::array<std::complex<double>, N>  input{};
-            std::array<std::complex<double>, N>  output{};
+            template <class OutputIterator>
+            void scale_output(OutputIterator __out) const {
+                for (auto i = 0; i < size; ++i, ++__out) {
+                    *__out /= static_cast<typename std::iterator_traits<OutputIterator>::value_type>(size);
+                }
+            }
         };
     }
 EDSP_END_NAMESPACE
