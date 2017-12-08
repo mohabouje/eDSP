@@ -7,8 +7,8 @@
 
 #include "config.h"
 #include "math/complex.h"
-#include "transforms/fft.h"
-#include "transforms/ifft.h"
+#include "fft.h"
+#include "ifft.h"
 EDSP_BEGING_NAMESPACE
     namespace frequency {
         template<typename T, std::size_t N = 1024>
@@ -36,8 +36,8 @@ EDSP_BEGING_NAMESPACE
             }
         private:
             using complex_array = std::vector<std::complex<T>>;
-            transforms::FFT<T, N>  fft;
-            transforms::IFFT<T, N> ifft;
+            frequency::FFT<T, N>  fft;
+            frequency::IFFT<T, N> ifft;
         };
     }
 EDSP_END_NAMESPACE

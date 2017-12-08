@@ -1,9 +1,9 @@
 //
-// Created by Mohammed Boujemaoui on 13/10/2017.
+// Created by Mohammed Boujemaoui on 16/10/2017.
 //
 
-#ifndef EDSP_REALFFT_H
-#define EDSP_REALFFT_H
+#ifndef EDSP_IFFT_H
+#define EDSP_IFFT_H
 
 #include "config.h"
 #include <complex>
@@ -12,19 +12,18 @@
 #include <assert.h>
 
 EDSP_BEGING_NAMESPACE
-    namespace transforms {
+    namespace frequency {
+
         template<typename T, std::size_t N>
-        class EDSP_EXPORT FFT {
+        class EDSP_EXPORT IFFT {
         public:
-            EDSP_DISABLE_COPY(FFT)
-            explicit FFT() {
+            explicit IFFT() {
                 fftwPlan = fftw_plan_dft_1d(static_cast<int>(N),
                                             reinterpret_cast<fftw_complex *>(&input[0]),
                                             reinterpret_cast<fftw_complex *>(&output[0]),
-                                            FFTW_FORWARD, FFTW_ESTIMATE);
+                                            FFTW_BACKWARD, FFTW_ESTIMATE);
             }
-            virtual ~FFT() { fftw_destroy_plan(fftwPlan); }
-
+            virtual ~IFFT() { fftw_destroy_plan(fftwPlan); }
 
             template<typename Container>
             typename std::enable_if<std::is_same<typename Container::value_type,
@@ -45,6 +44,4 @@ EDSP_BEGING_NAMESPACE
     }
 EDSP_END_NAMESPACE
 
-
-
-#endif //EDSP_REALFFT_H
+#endif //EDSP_IFFT_H

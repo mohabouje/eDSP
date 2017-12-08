@@ -7,8 +7,8 @@
 
 
 #include "config.h"
-#include "transforms/fft.h"
-#include "transforms/ifft.h"
+#include "fft.h"
+#include "ifft.h"
 #include "math/complex.h"
 EDSP_BEGING_NAMESPACE
     namespace frequency {
@@ -34,8 +34,8 @@ EDSP_BEGING_NAMESPACE
                 return data;
             }
         private:
-            transforms::FFT<T,N> fft;
-            transforms::IFFT<T,N> ifft;
+            frequency::FFT<T,N> fft;
+            frequency::IFFT<T,N> ifft;
         };
     }
 EDSP_END_NAMESPACE

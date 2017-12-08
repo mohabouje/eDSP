@@ -19,11 +19,11 @@ HEADERS += \
     src/math/stats.h \
     src/math/trig.h \
     src/properties/properties.h \
-    src/transforms/dct.h \
-    src/transforms/dht.h \
-    src/transforms/fft.h \
-    src/transforms/idct.h \
-    src/transforms/ifft.h \
+    src/frequency/dct.h \
+    src/frequency/dht.h \
+    src/frequency/fft.h \
+    src/frequency/idct.h \
+    src/frequency/ifft.h \
     src/utility/map_util.h \
     src/utility/template_util.h \
     src/utility/vector_util.h \

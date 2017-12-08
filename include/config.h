@@ -13,6 +13,24 @@
 #define EDSP_BEGING_NAMESPACE  namespace eDSP {
 #define EDSP_END_NAMESPACE      }
 
+// Check windows
+#if _WIN32 || _WIN64
+#if _WIN64
+#define EDSP_X64
+#else
+#define EDSP_X32
+#endif
+#endif
+
+// Check GCC
+#if __GNUC__
+#if __x86_64__ || __ppc64__
+#define EDSP_X64
+#else
+#define EDSP_X32
+#endif
+#endif
+
 #if defined(_MSC_VER)
     #define EXPORT __declspec(dllexport)
 #elif defined(__GNUC__)

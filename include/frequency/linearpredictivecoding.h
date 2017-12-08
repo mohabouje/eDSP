@@ -7,7 +7,7 @@
 
 
 #include "config.h"
-#include "transforms/fft.h"
+#include "fft.h"
 #include "autocorrelation.h"
 
 EDSP_BEGING_NAMESPACE

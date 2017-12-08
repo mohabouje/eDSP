@@ -3,13 +3,13 @@
 //
 
 #include <catch.hpp>
-#include "transforms/fft.h"
-#include "transforms/ifft.h"
+#include "frequency/fft.h"
+#include "frequency/ifft.h"
 #include "math/complex.h"
 #include "../test_db.h"
 #include "../test_config.h"
 
-using namespace eDSP::transforms;
+using namespace eDSP::frequency;
 SCENARIO("Testing FFT") {
     auto original = test::db::ref_vector;
     auto tmp = eDSP::math::complex::real_to_complex(original);

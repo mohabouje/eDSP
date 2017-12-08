@@ -6,7 +6,7 @@
 #define EDSP_SPECTROGRAM_H
 
 #include "config.h"
-#include "transforms/fft.h"
+#include "fft.h"
 #include "math/complex.h"
 EDSP_BEGING_NAMESPACE
     namespace frequency {
@@ -43,7 +43,7 @@ EDSP_BEGING_NAMESPACE
             }
 
         private:
-            transforms::FFT<T, N> fft{};
+            frequency::FFT<T, N> fft{};
         };
     }
 EDSP_END_NAMESPACE

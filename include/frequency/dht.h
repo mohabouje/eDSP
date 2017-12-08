@@ -12,7 +12,7 @@
 #include <assert.h>
 
 EDSP_BEGING_NAMESPACE
-namespace transforms {
+namespace frequency {
     template <typename T, std::size_t N>
     class EDSP_EXPORT  DHT  {
     public:

@@ -1,9 +1,9 @@
 //
-// Created by Mohammed Boujemaoui on 16/10/2017.
+// Created by Mohammed Boujemaoui on 13/10/2017.
 //
 
-#ifndef EDSP_IFFT_H
-#define EDSP_IFFT_H
+#ifndef EDSP_REALFFT_H
+#define EDSP_REALFFT_H
 
 #include "config.h"
 #include <complex>
@@ -12,18 +12,19 @@
 #include <assert.h>
 
 EDSP_BEGING_NAMESPACE
-    namespace transforms {
-
+    namespace frequency {
         template<typename T, std::size_t N>
-        class EDSP_EXPORT IFFT {
+        class EDSP_EXPORT FFT {
         public:
-            explicit IFFT() {
+            EDSP_DISABLE_COPY(FFT)
+            explicit FFT() {
                 fftwPlan = fftw_plan_dft_1d(static_cast<int>(N),
                                             reinterpret_cast<fftw_complex *>(&input[0]),
                                             reinterpret_cast<fftw_complex *>(&output[0]),
-                                            FFTW_BACKWARD, FFTW_ESTIMATE);
+                                            FFTW_FORWARD, FFTW_ESTIMATE);
             }
-            virtual ~IFFT() { fftw_destroy_plan(fftwPlan); }
+            virtual ~FFT() { fftw_destroy_plan(fftwPlan); }
+
 
             template<typename Container>
             typename std::enable_if<std::is_same<typename Container::value_type,
@@ -31,11 +32,14 @@ EDSP_BEGING_NAMESPACE
             compute(const Container& data) {
                 assert(data.size() <= input.size());
                 std::transform(data.begin(), data.end(), input.begin(), [](std::complex<T> tmp) {
-                    return std::complex<double>(tmp.real(), tmp.imag());
+                    return std::complex<double>(static_cast<double>(tmp.real()),
+                                                static_cast<double>(tmp.imag())
+                    );
                 });
                 fftw_execute(fftwPlan);
                 return output;
             }
+
         private:
             fftw_plan fftwPlan{nullptr};
             std::array<std::complex<double>, N>  input{};
@@ -44,4 +48,6 @@ EDSP_BEGING_NAMESPACE
     }
 EDSP_END_NAMESPACE
 
-#endif //EDSP_IFFT_H
+
+
+#endif //EDSP_REALFFT_H

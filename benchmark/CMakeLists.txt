@@ -1,6 +1,6 @@
 set(BENCHMARK_FILES
         main.cpp
-        benchmark_transforms.cpp)
+        benchmark_transforms.cpp benchmark_window.cpp)
 add_executable(runbenchmark  ${BENCHMARK_FILES})
 include_directories("${CMAKE_SOURCE_DIR}/third_party/benchmark/include/")
 target_link_libraries(runbenchmark ${FFTW_LIB})
