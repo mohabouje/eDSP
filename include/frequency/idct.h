@@ -33,7 +33,7 @@ EDSP_BEGING_NAMESPACE
 
         private:
             DCT_Type t{DCT_Type::Type_I};
-            int format() const {
+            fftw_r2r_kind format() const {
                 switch(IDCT::t) {
                     case Type_I: return FFTW_REDFT00;
                     case Type_II: return FFTW_REDFT10;
