@@ -5,7 +5,7 @@
 #ifndef EDSP_GENERATOR_H
 #define EDSP_GENERATOR_H
 
-#include "utility/vector_util.h"
+#include "utility/vector.h"
 
 EDSP_BEGING_NAMESPACE
     namespace generators {

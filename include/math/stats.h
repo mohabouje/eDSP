@@ -7,7 +7,7 @@
 
 #include "config.h"
 #include "math.h"
-#include "utility/vector_util.h"
+#include "utility/vector.h"
 #include "utility/template_util.h"
 
 

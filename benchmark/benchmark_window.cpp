@@ -3,7 +3,6 @@
 //
 
 #include <benchmark/benchmark.h>
-
 #include <window/window.h>
 
 using namespace eDSP;

@@ -2,7 +2,7 @@
 // Created by Mohammed Boujemaoui on 10/10/2017.
 //
 
-#include "utility/vector_util.h"
+#include "utility/vector.h"
 #include "../test_db.h"
 #include <catch.hpp>
 

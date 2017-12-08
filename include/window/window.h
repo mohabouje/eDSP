@@ -7,7 +7,6 @@
 
 #include "config.h"
 #include "base/constants.h"
-#include "utility/template_util.h"
 #include <vector>
 #include <cmath>
 #include <iterator>
