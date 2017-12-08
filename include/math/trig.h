@@ -14,29 +14,26 @@
 
 EDSP_BEGING_NAMESPACE
     namespace math {
-        namespace trigonometry {
+        template<typename T>
+        constexpr T asinh(const T &x) {
+            return static_cast<T>(
+                    std::log(x + std::sqrt(x * x + 1)));
+        }
 
-            template<typename T>
-            EDSP_EXPORT constexpr T asinh(const T &x) {
-                return static_cast<T>(
-                        std::log(x + std::sqrt(x * x + 1)));
-            }
+        template<typename T>
+        constexpr T acosh(const T &x) {
+            return static_cast<T>(
+                    std::log(x + std::sqrt(x * x - 1)));
+        }
 
-            template<typename T>
-            EDSP_EXPORT constexpr T acosh(const T &x) {
-                return static_cast<T>(
-                        std::log(x + std::sqrt(x * x - 1)));
-            }
+        template<typename T>
+        constexpr T deg_to_rad(const T &x) {
+            return static_cast<T>( x * Constants<T>::pi / 180 );
+        }
 
-            template<typename T>
-            EDSP_EXPORT constexpr T deg_to_rad(const T &x) {
-                return static_cast<T>( x * Constants<T>::pi / 180 );
-            }
-
-            template<typename T>
-            EDSP_EXPORT constexpr T rad_to_deg(const T &x) {
-                return static_cast<T>( x * Constants<T>::pi * 180 );
-            }
+        template<typename T>
+        constexpr T rad_to_deg(const T &x) {
+            return static_cast<T>( x * Constants<T>::pi * 180 );
         }
     }
 

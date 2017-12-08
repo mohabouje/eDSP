@@ -8,7 +8,6 @@
 #include "config.h"
 #include "math.h"
 #include "utility/vector.h"
-#include "utility/template_util.h"
 
 
 #include <unordered_map>
@@ -17,6 +16,7 @@
 EDSP_BEGING_NAMESPACE
 namespace math {
     namespace stats {
+
         template <typename Container>
         EDSP_EXPORT constexpr typename Container::value_type mode(const Container& container) {
             typedef std::unordered_map<typename Container::value_type,unsigned int> Map;
@@ -36,66 +36,64 @@ namespace math {
             return pr->first;
         }
 
-        template <typename Container>
-        EDSP_EXPORT constexpr typename Container::value_type mean(const Container& container) {
-            return utility::vector::sum(container) / static_cast<typename Container::value_type> (container.size());
+        template <class ForwardIterator>
+        constexpr auto mean(ForwardIterator __first, ForwardIterator __last) {
+            return utility::sum(__first, __last)
+                   / static_cast< typename std::iterator_traits<ForwardIterator>::value_type> (std::distance(__first, __last));
         }
 
-        template <typename Container>
-        EDSP_EXPORT constexpr typename Container::value_type variance(const Container& container) {
-            return  (utility::vector::sum_squares(container) - square(utility::vector::sum(container))) / static_cast<typename Container::value_type>(container.size());
+        template <class ForwardIterator>
+        constexpr auto variance(ForwardIterator __first, ForwardIterator __last) {
+            return  (utility::sum_squares(__first, __last) - square(utility::sum(__first, __last)))
+                    / static_cast< typename std::iterator_traits<ForwardIterator>::value_type> (std::distance(__first, __last));
         }
 
-        template <typename Container>
-        EDSP_EXPORT constexpr typename Container::value_type standar_desviation(const Container& container) {
-            return static_cast<typename Container::value_type>(std::sqrt(variance(container)));
+        template <class ForwardIterator>
+        constexpr auto standar_desviation(ForwardIterator __first, ForwardIterator __last) {
+            return std::sqrt(variance(__first, __last));
         }
 
-        template <typename Container>
-        EDSP_EXPORT constexpr typename Container::value_type mean_error(const Container& container) {
-            return static_cast<typename Container::value_type>(std::sqrt(variance(container)
-                                                                         / static_cast<typename Container::value_type>(container.size())));
+        template <class ForwardIterator>
+        constexpr auto mean_error(ForwardIterator __first, ForwardIterator __last) {
+            return std::sqrt(variance(__first, __last)) /
+                    static_cast<typename std::iterator_traits<ForwardIterator>::value_type> (std::distance(__first, __last));
         }
 
-        template <typename Container>
-        EDSP_EXPORT constexpr typename Container::value_type root_mean_square(const Container& container) {
-            return static_cast<typename Container::value_type>(std::sqrt(mean(container)));
+        template <class ForwardIterator>
+        constexpr auto root_mean_square(ForwardIterator __first, ForwardIterator __last) {
+            return std::sqrt(mean(__first, __last));
         }
 
-        template <typename Container>
-        EDSP_EXPORT constexpr typename Container::value_type median(const Container& container) {
-            Container tmp(container);
-            std::sort(tmp.begin(), tmp.end());
-            auto size = tmp.size();
-            return (is_odd(size))  ? (tmp[uint(size/2 - 1)] + tmp[uint(size/2)]) / 2
-                                  : tmp[uint(size/2)];
+        template <class ForwardIterator>
+        constexpr auto median(ForwardIterator __first, ForwardIterator __last) {
+            const auto size = std::distance(__first, __last);
+            const auto middle = is_odd(size) ? (size/2 - 1) : size/2;
+            std::nth_element(__first, __first + middle, __last);
+            return *__first + middle;
         }
 
-        template <typename Container>
-        EDSP_EXPORT constexpr typename Container::value_type entropy(const Container& container) {
-            static_assert(Container::hasNegative(container),
-                           "Trying to generate the entrpy of an array with negative values");
-            return std::accumulate(container.begin(), container.end(),
-                                   static_cast<typename Container::value_type>(0),
-                                   [](typename Container::value_type last, typename Container::value_type next) {
+        template <class ForwardIterator>
+        constexpr auto entropy(ForwardIterator __first, ForwardIterator __last) {
+            return std::accumulate(__first, __last,
+                                   typename std::iterator_traits<ForwardIterator>::value_type(),
+                                   [](auto& last, auto& next) {
                                        auto sample = !next ? 1 : next;
-                                       return last -= std::log2(sample) * sample;
+                                       last -= std::log2(sample) * sample;
+                                       return last;
                                    });
         }
 
-        template <typename Container>
-        EDSP_EXPORT constexpr typename Container::value_type geometric_mean(const Container &container) {
-            static_assert(Container::hasNegative(container),
-                        "Trying to generate the geometric mean of an array with "
-                        "negative values");
-            return Container::hasZero(container)
-                     ? static_cast<typename Container::value_type>(0)
-                     : std::accumulate(container.begin(), container.end(),
-                                       static_cast<typename Container::value_type>(0),
-                                       [](typename Container::value_type last, typename Container::value_type next) {
-                                         return last += std::log(next);
-                                       }) / static_cast<typename Container::value_type>(container.size());
-
+        template <class ForwardIterator>
+        constexpr auto geometric_mean(ForwardIterator __first, ForwardIterator __last) {
+            return std::any_of(__first, __last, 0)
+                     ? typename std::iterator_traits<ForwardIterator>::value_type()
+                     : std::accumulate(__first, __last,
+                                       typename std::iterator_traits<ForwardIterator>::value_type(),
+                                       [](auto& last, auto& next) {
+                                            last += std::log(next);
+                                            return last;
+                                       })
+                       / static_cast< typename std::iterator_traits<ForwardIterator>::value_type> (std::distance(__first, __last));
         }
 
     }
