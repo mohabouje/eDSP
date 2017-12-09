@@ -107,9 +107,10 @@ namespace utility {
                             typename std::iterator_traits<InputIterator>::value_type const& end
                             ) {
         const auto size = std::distance(__first, __last);
-        typename std::iterator_traits<InputIterator>::value_type const increment = (end - start) /
+        typename std::iterator_traits<InputIterator>::value_type __value = (end - start) /
                 static_cast<typename std::iterator_traits<InputIterator>::value_type>(size);
-        std::iota(__first, __last, increment);
+        for (auto tmp = __value; __first != __last; ++__first, tmp += __value)
+            *__first = tmp;
     }
 
     template <class InputIterator>
@@ -119,6 +120,34 @@ namespace utility {
         std::for_each(__first, __last, [&](auto& value) {
             value = (value - pair.first) * inverse;
         });
+    }
+
+    template <class InputIterator, class OutputIterator>
+    constexpr void element_wise_multiplication(InputIterator __first, InputIterator __last,
+                                                 InputIterator __first2, OutputIterator __out) {
+        std::transform(__first, __last, __first2, __out,
+                       std::multiplies<typename std::iterator_traits<InputIterator>::value_type>());
+    }
+
+    template <class InputIterator, class OutputIterator>
+    constexpr void element_wise_plus(InputIterator __first, InputIterator __last,
+                                                 InputIterator __first2, OutputIterator __out) {
+        std::transform(__first, __last, __first2, __out,
+                       std::plus<typename std::iterator_traits<InputIterator>::value_type>());
+    }
+
+    template <class InputIterator, class OutputIterator>
+    constexpr void element_wise_divides(InputIterator __first, InputIterator __last,
+                                                 InputIterator __first2, OutputIterator __out) {
+        std::transform(__first, __last, __first2, __out,
+                       std::divides<typename std::iterator_traits<InputIterator>::value_type>());
+    }
+
+    template <class InputIterator, class OutputIterator>
+    constexpr void element_wise_minus(InputIterator __first, InputIterator __last,
+                                                 InputIterator __first2, OutputIterator __out) {
+        std::transform(__first, __last, __first2, __out,
+                       std::minus<typename std::iterator_traits<InputIterator>::value_type>());
     }
 
     template <class Container>

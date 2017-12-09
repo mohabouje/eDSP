@@ -30,7 +30,7 @@ namespace properties {
     constexpr auto zero_crossing_rate(InputIterator __first, InputIterator __last) {
         typename std::iterator_traits<InputIterator>::value_type tmp = 0;
         for (auto before = __first, after = ++__first; after != __last; ++before, ++after) {
-            tmp += (math::sign(after) != math::sign(before)) ? 1 : 0;
+            tmp += (math::sign(*after) != math::sign(*before)) ? 1 : 0;
         }
         return tmp
                / static_cast<typename std::iterator_traits<InputIterator>::value_type>(std::distance(__first, __last));

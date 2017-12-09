@@ -12,7 +12,7 @@ EDSP_BEGIN_NAMESPACE
     namespace frequency {
         class  Spectrogram {
         public:
-            typename <class InputIterator, class OutputIterator>
+            template <class InputIterator, class OutputIterator>
             void compute(InputIterator __first, InputIterator __last, OutputIterator __out) {
                 const auto size = std::distance(__first, __last);
                 if (buffer.size() != size) { buffer.resize(size); }
