@@ -7,7 +7,7 @@
 #include <utility>
 #include <valarray>
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
 namespace properties {
 
     template <class InputIterator>

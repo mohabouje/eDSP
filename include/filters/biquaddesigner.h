@@ -8,7 +8,7 @@
 #include "base/constants.h"
 #include "biquad.h"
 #include <cmath>
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace filters {
         namespace designer {
             template <typename T >

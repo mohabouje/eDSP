@@ -12,7 +12,7 @@
 #include "config.h"
 #include "math/math.h"
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
 namespace utility {
     template <class InputIterator>
     constexpr std::pair<std::size_t, typename std::iterator_traits<InputIterator>::value_type>

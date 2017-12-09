@@ -10,7 +10,7 @@
 #define EDSP_VERSION_BUILD     0
 #define EDSP_VERSION_LABEL     ""
 
-#define EDSP_BEGING_NAMESPACE  namespace eDSP {
+#define EDSP_BEGIN_NAMESPACE  namespace eDSP {
 #define EDSP_END_NAMESPACE      }
 
 // Check windows

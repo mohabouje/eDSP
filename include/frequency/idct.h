@@ -6,7 +6,7 @@
 #define EDSP_IDCT_H
 
 #include "frequency/dct.h"
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace frequency {
         class IDCT : BaseTransform {
         public:

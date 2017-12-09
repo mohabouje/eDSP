@@ -8,7 +8,7 @@
 #include "config.h"
 #include <array>
 #include <algorithm>
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace filters {
         template <typename T>
         using BiquadCoefficients = std::array<T, 3>;
@@ -34,7 +34,7 @@ EDSP_BEGING_NAMESPACE
             void compute(ForwardIterator __first, ForwardIterator __last, OutputIterator __out) {
                 const auto size = std::distance(__first, __last);
                 const auto input(__first, __last);
-                for (; __first != __last, ++__last, ++__out) {
+                for (; __first != __last; ++__last, ++__out) {
                     *__out = (m_b[0] * *__first
                              + m_b[1] * m_state.inputs[0]
                              + m_b[2] * m_state.inputs[1]

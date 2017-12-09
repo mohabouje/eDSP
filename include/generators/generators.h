@@ -9,7 +9,7 @@
 #include <array>
 #include <cmath>
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace generators {
 
         template <typename T, std::size_t N, typename R>

@@ -7,7 +7,7 @@
 
 #include "config.h"
 #include <string>
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     constexpr int VersionMajor           = EDSP_VERSION_MAJOR;
     constexpr int VersionMinor           = EDSP_VERSION_MINOR;
     constexpr int VersionBuild           = EDSP_VERSION_BUILD;

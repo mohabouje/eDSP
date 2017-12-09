@@ -12,7 +12,7 @@
 #include <functional>
 #include <array>
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
 namespace utility {
     namespace map {
         namespace intern {

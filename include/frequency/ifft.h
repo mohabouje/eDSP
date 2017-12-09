@@ -8,7 +8,7 @@
 #include "fft.h"
 
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace frequency {
         class IFFT : public BaseTransform {
         public:

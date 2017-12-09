@@ -8,7 +8,7 @@
 #include "config.h"
 #include <limits>
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     template <typename T>
     struct Constants {
         constexpr static T pi           = static_cast<T>(3.141592653589793);

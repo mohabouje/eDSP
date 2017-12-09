@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <assert.h>
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
 namespace math {
     namespace stats {
 

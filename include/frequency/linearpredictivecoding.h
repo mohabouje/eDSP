@@ -11,7 +11,7 @@
 #include "autocorrelation.h"
 #include <array>
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace frequency {
 
         template<typename T, std::size_t Order>

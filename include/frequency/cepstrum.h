@@ -10,7 +10,7 @@
 #include "fft.h"
 #include "ifft.h"
 #include "math/complex.h"
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace frequency {
         class Cepstrum  {
         public:

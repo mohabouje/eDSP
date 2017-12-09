@@ -12,7 +12,7 @@
 #include <numeric>
 #include <cmath>
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace math {
         template<typename T>
         constexpr T asinh(const T &x) {

@@ -19,7 +19,7 @@
 #endif
 
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace window {
         template <class ForwardIterator>
         constexpr void hamming(ForwardIterator __first, ForwardIterator __last) {

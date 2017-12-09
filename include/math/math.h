@@ -9,7 +9,7 @@
 
 #include <numeric>
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace math {
 
         template<typename T>

@@ -8,7 +8,7 @@
 #include "config.h"
 #include "fft.h"
 #include "math/complex.h"
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace frequency {
         class  Spectrogram {
         public:

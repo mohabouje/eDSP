@@ -14,7 +14,7 @@
 #include <complex>
 #include <vector>
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace math {
         namespace complex {
             template<typename T, typename = std::enable_if<std::is_arithmetic<T>::value>>

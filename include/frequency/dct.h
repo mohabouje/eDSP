@@ -7,7 +7,7 @@
 
 #include "fft.h"
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace frequency {
         enum DCT_Type { Type_I = 0, Type_II, Type_III, Type_IV};
         class DCT : BaseTransform {

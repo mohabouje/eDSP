@@ -9,7 +9,7 @@
 #include "math/complex.h"
 #include "fft.h"
 #include "ifft.h"
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     namespace frequency {
         class AutoCorrelation  {
         public:

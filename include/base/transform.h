@@ -8,7 +8,7 @@
 #include "config.h"
 #include <fftw3.h>
 
-EDSP_BEGING_NAMESPACE
+EDSP_BEGIN_NAMESPACE
     class BaseTransform {
     public:
         BaseTransform() = default;
