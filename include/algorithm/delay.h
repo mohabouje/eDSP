@@ -16,10 +16,10 @@ EDSP_BEGIN_NAMESPACE
         template <typename T>
         class Delay {
         public:
-            Delay(size_t delay, size_t max_delay) :
+            Delay(std::size_t delay, std::size_t maximum_delay) :
                     m_delay(delay),
-                    m_max_delay(max_delay),
-                    m_buffer{max_delay, 0}
+                    m_max_delay(maximum_delay),
+                    m_buffer{maximum_delay, 0}
             {
             }
             virtual ~Delay() = default;
@@ -43,7 +43,7 @@ EDSP_BEGIN_NAMESPACE
             }
 
             std::size_t delay() const { return m_delay; }
-            std::size_t max_delay() const { return m_max_delay; }
+            std::size_t maximum_delay() const { return m_max_delay; }
             T gain() const { return m_gain; }
 
             void set_gain(const T value) { m_gain = value; }
@@ -51,7 +51,7 @@ EDSP_BEGIN_NAMESPACE
                 assert(value <= m_max_delay && "Greater than the maximum");
                 m_delay = value;
             }
-            void set_max_delay(const std::size_t value) {
+            void set_maximum_delay(const std::size_t value) {
                 if (m_max_delay != value) {
                     m_max_delay = value;
                     m_buffer.resize(value);
