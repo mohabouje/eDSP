@@ -13,7 +13,7 @@
 #include <frequency/idct.h>
 #include <frequency/dht.h>
 
-using namespace eDSP;
+using namespace edsp;
 static void do_fft(benchmark::State &state) {
     const std::size_t N = 1024;
     std::array<double, N> tmp{};

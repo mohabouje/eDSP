@@ -3,7 +3,7 @@ set(BENCHMARK_FILES
         benchmark_transforms.cpp
         benchmark_window.cpp
         benchmark_vectorutil.cpp
-        ../include/base/analog_filter.h ../include/base/types.h)
+        ../include/base/analog_filter.h ../include/base/types.h ../include/filters/fir.h ../include/algorithm/delay.h)
 add_executable(runbenchmark  ${BENCHMARK_FILES})
 include_directories("${CMAKE_SOURCE_DIR}/third_party/benchmark/include/")
 target_link_libraries(runbenchmark ${FFTW_LIB})

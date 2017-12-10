@@ -6,7 +6,7 @@
 #include <utility/vector.h>
 #include <array>
 
-using namespace eDSP;
+using namespace edsp;
 static void do_floor(benchmark::State &state) {
     const std::size_t N = 1024;
     std::array<double, N> tmp{};

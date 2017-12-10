@@ -5,7 +5,7 @@
 #include <benchmark/benchmark.h>
 #include <window/window.h>
 
-using namespace eDSP;
+using namespace edsp;
 
 static void do_hamming(benchmark::State &state) {
     const std::size_t N = 1024;
