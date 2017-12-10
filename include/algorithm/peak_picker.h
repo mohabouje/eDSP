@@ -33,7 +33,6 @@ EDSP_BEGIN_NAMESPACE
                 // filter onset_proc
                 m_biquad.compute(std::begin(onset_proc), std::end(onset_proc), std::begin(onset_proc));
 
-
                 // calculate mean and median for onset_proc
                 const auto mean = math::stats::mean(std::begin(onset_proc), std::end(onset_proc));
                 const auto median = math::stats::median(std::begin(onset_proc), std::end(onset_proc));

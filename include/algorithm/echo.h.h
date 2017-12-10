@@ -18,8 +18,7 @@ EDSP_BEGIN_NAMESPACE
             template <class InputIterator, class OutputIterator>
             void compute(const InputIterator first, const InputIterator last, OutputIterator out) {
                 for (; first != last; ++first, ++out) {
-                    m_delay.compute(*first, *out);
-                    *out = m_gain * (*out - *first) + *first;
+                    compute(*first, *out);
                 };
             }
 

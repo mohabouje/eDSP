@@ -27,15 +27,7 @@ EDSP_BEGIN_NAMESPACE
             template <class InputIterator, class OutputIterator>
             void compute(const InputIterator first, const InputIterator last, OutputIterator out) {
                 for (; first != last; ++first, ++out) {
-                    const auto actual = std::abs(*first);
-                    if (m_envelope > actual) {
-                        m_envelope *= m_gain_attack;
-                        m_envelope += (1 - m_gain_attack) * actual;
-                    } else {
-                        m_envelope *= m_gain_release;
-                        m_envelope += (1 - m_gain_release) * actual;
-                    }
-                    *out = m_envelope;
+                    compute(*first, *out);
                 }
             };
 

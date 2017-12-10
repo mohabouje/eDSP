@@ -28,10 +28,7 @@ EDSP_BEGIN_NAMESPACE
             template <class InputIterator, class OutputIterator>
             void compute(InputIterator first, InputIterator last, OutputIterator out) {
                 for (; first != last; ++first, ++out) {
-                    m_buffer[input_point++] = *first * m_gain;
-                    *out = m_buffer[output_point++];
-                    if (input_point == m_max_delay) input_point = 0;
-                    if (output_point == m_max_delay) output_point = 0;
+                    compute(*first, *out);
                 };
             }
 
