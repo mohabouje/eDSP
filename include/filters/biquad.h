@@ -8,6 +8,8 @@
 #include "config.h"
 #include <array>
 #include <algorithm>
+#include <utility/vector.h>
+
 EDSP_BEGIN_NAMESPACE
     namespace filters {
         template <typename T>
@@ -15,6 +17,11 @@ EDSP_BEGIN_NAMESPACE
 
         template<typename T>
         struct BiquadState {
+
+            void reset() {
+                utility::set(std::begin(inputs), std::end(inputs), T());
+                utility::set(std::begin(outputs), std::end(outputs), T());
+            }
             std::array<T, 2> inputs{};
             std::array<T, 2> outputs{};
         };
@@ -74,6 +81,10 @@ EDSP_BEGIN_NAMESPACE
             void set_b2(const T value) { m_b[2] = value; }
 
             void set_gain(const T value) { m_gain = value; }
+
+            void reset() {
+                m_state.reset();
+            }
 
         private:
             BiquadCoefficients<T> m_a{};
