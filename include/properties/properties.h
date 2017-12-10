@@ -47,6 +47,12 @@ namespace properties {
         return tmp
                / static_cast<typename std::iterator_traits<InputIterator>::value_type>(std::distance(__first, __last));
     };
+
+
+    template <class InputIterator, typename SampleRate>
+    constexpr float buffer_duration_secs(const InputIterator __first, const InputIterator __last, const SampleRate sr) {
+        return static_cast<float>(std::distance(__first, __last)) / static_cast<float>(sr);
+    };
 }
 EDSP_END_NAMESPACE
 #endif
