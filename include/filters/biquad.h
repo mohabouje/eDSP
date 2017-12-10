@@ -34,6 +34,7 @@ EDSP_BEGIN_NAMESPACE
             void compute(ForwardIterator __first, ForwardIterator __last, OutputIterator __out) {
                 const auto size = std::distance(__first, __last);
                 for (; __first != __last; ++__first, ++__out) {
+                    *__first *= m_gain;
                     *__out = (m_b[0] * (*__first)
                              + m_b[1] * m_state.inputs[0]
                              + m_b[2] * m_state.inputs[1]
@@ -60,6 +61,8 @@ EDSP_BEGIN_NAMESPACE
             T b1() const { return m_b[1]; }
             T b2() const { return m_b[2]; }
 
+            T gain() const { return m_gain; }
+
             void set_a(const BiquadCoefficients<T>& tmp) { std::copy(tmp.begin(), tmp.end(), m_a.begin()); }
             void set_b(const BiquadCoefficients<T>& tmp) { std::copy(tmp.begin(), tmp.end(), m_b.begin()); }
 
@@ -71,10 +74,13 @@ EDSP_BEGIN_NAMESPACE
             void set_b1(const T value) { m_b[1] = value; }
             void set_b2(const T value) { m_b[2] = value; }
 
+            void set_gain(const T value) { m_gain = value; }
+
         private:
             BiquadCoefficients<T> m_a{};
             BiquadCoefficients<T> m_b{};
             BiquadState<T>        m_state{};
+            T                     m_gain{1};
         };
 
     }
