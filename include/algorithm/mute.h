@@ -6,7 +6,6 @@
 #define EDSP_MUTE_H
 
 #include "config.h"
-
 EDSP_BEGIN_NAMESPACE
     namespace algorithm {
         class Mute {
@@ -14,7 +13,7 @@ EDSP_BEGIN_NAMESPACE
             Mute() = default;
 
             template <class InputIterator, class OutputIterator>
-            void compute(const InputIterator first, const InputIterator last, OutputIterator out) {
+            void compute(InputIterator first, InputIterator last, OutputIterator out) {
                 for (; first != last; ++first, ++out) {
                     compute(*first, *out);
                 };
@@ -22,6 +21,7 @@ EDSP_BEGIN_NAMESPACE
 
             template <typename T>
             void compute(const T in, T& out) {
+                EDSP_UNUSED(in);
                 out = static_cast<T>(0);
             }
         };

@@ -38,7 +38,7 @@ EDSP_BEGIN_NAMESPACE
                 const auto median = math::stats::median(std::begin(onset_proc), std::end(onset_proc));
 
                 // shift peek array
-                for (int j = 0 ; j < 3 - 1; ++j) {
+                for (std::size_t j = 0 ; j < 3 - 1; ++j) {
                     onset_peek[j] = onset_peek[j + 1];
                 }
 
@@ -69,8 +69,7 @@ EDSP_BEGIN_NAMESPACE
             std::array<double, length>  onset_keep{};
             std::array<double, length>  onset_proc{};
             std::array<double, 3>       onset_peek{};
-            filters::Biquad<double> m_biquad{{1, -0.5949,0.2348},
-                                             {0.1600,0.3200,0.1600}};
+            filters::Biquad<double> m_biquad{{{1, -0.5949,0.2348}}, {{0.1600,0.3200,0.1600}}};
             double m_threshold{0.01};
             double m_last_peak{0.};
 
