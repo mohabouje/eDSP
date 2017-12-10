@@ -20,7 +20,7 @@ EDSP_BEGIN_NAMESPACE
                     : m_threshold(threshold) {
 
             }
-            
+
             template <typename T>
             bool compute(const T input) {
                 // store onset in onset_keep
