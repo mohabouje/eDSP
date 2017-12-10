@@ -26,6 +26,18 @@ namespace properties {
                / static_cast<typename std::iterator_traits<InputIterator>::value_type>(std::distance(__first, __last));
     };
 
+    template <class InputIterator, typename  Threshold_dB>
+    constexpr bool is_silence_db(InputIterator __first, InputIterator __last, Threshold_dB limit) {
+        auto tmp  = energy(__first, __last);
+        return 20 * std::log10(tmp) <= limit;
+    };
+
+    template <class InputIterator, typename Threshold>
+    constexpr bool is_silence(InputIterator __first, InputIterator __last, Threshold limit) {
+        auto tmp  = energy(__first, __last);
+        return tmp <= limit;
+    };
+
     template <class InputIterator>
     constexpr auto zero_crossing_rate(InputIterator __first, InputIterator __last) {
         typename std::iterator_traits<InputIterator>::value_type tmp = 0;
