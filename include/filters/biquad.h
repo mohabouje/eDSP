@@ -33,9 +33,8 @@ EDSP_BEGIN_NAMESPACE
             template<class ForwardIterator, class OutputIterator>
             void compute(ForwardIterator __first, ForwardIterator __last, OutputIterator __out) {
                 const auto size = std::distance(__first, __last);
-                const auto input(__first, __last);
-                for (; __first != __last; ++__last, ++__out) {
-                    *__out = (m_b[0] * *__first
+                for (; __first != __last; ++__first, ++__out) {
+                    *__out = (m_b[0] * (*__first)
                              + m_b[1] * m_state.inputs[0]
                              + m_b[2] * m_state.inputs[1]
                              - m_a[1] * m_state.outputs[0]
@@ -43,7 +42,7 @@ EDSP_BEGIN_NAMESPACE
 
                     // Circular buffer;
                     m_state.inputs[1] = m_state.inputs[0];
-                    m_state.inputs[0] = *__last;
+                    m_state.inputs[0] = *__first;
 
                     m_state.outputs[1] = m_state.outputs[0];
                     m_state.outputs[0] = *__out;
