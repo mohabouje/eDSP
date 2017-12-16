@@ -20,7 +20,7 @@ EDSP_BEGIN_NAMESPACE
                 for (; first != last; first += num_channels, ++out) {
                     *out = utility::sum(first, first + num_channels) / num_channels;
                 }
-            };
+            }
 
         private:
             double num_channels;

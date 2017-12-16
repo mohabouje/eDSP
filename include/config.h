@@ -41,6 +41,8 @@
 
 
 #define EDSP_EXPORT EXPORT
+#define EDSP_UNUSED(x) (void)x;
+
 
 #define EDSP_DISABLE_COPY(Class) \
     Class(const Class &) = delete; \

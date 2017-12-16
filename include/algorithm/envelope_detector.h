@@ -11,15 +11,14 @@
 EDSP_BEGIN_NAMESPACE
     namespace algorithm {
 
-        template <typename T>
         class EnvelopeDetector {
         public:
-            EnvelopeDetector(const T attack, const T release, const T sample_rate) :
+            EnvelopeDetector(const double attack, const double release, const double sample_rate) :
+                    m_samplerate(sample_rate),
                     m_attack(attack),
                     m_release(release),
-                    m_samplerate(sample_rate),
-                    m_gain_attack(std::exp(-1.f / (sample_rate * attack))),
-                    m_gain_release(std::exp(-1.f / (sample_rate * release)))
+                    m_gain_attack(std::exp(-1.0 / (sample_rate * attack))),
+                    m_gain_release(std::exp(-1.0 / (sample_rate * release)))
             {
 
             }
@@ -29,9 +28,9 @@ EDSP_BEGIN_NAMESPACE
                 for (; first != last; ++first, ++out) {
                     compute(*first, *out);
                 }
-            };
+            }
 
-
+            template <typename T>
             void compute(const T input, T& out) {
                 const auto actual = std::abs(input);
                 if (m_envelope > actual) {
@@ -44,19 +43,21 @@ EDSP_BEGIN_NAMESPACE
                 out = m_envelope;
             }
 
-            T samplerate() const { return m_samplerate; }
-            T attack_time() const { return m_attack; }
-            T release_time() const { return m_release; }
+            double samplerate() const { return m_samplerate; }
+            double attack_time() const { return m_attack; }
+            double release_time() const { return m_release; }
 
-            void set_attack_time(const T value) {
+            void set_attack_time(const double value) {
                 m_attack = value;
-                m_gain_attack = std::exp(-1.f / (m_samplerate * m_attack));
+                m_gain_attack = std::exp(-1. / (m_samplerate * m_attack));
             }
-            void set_release_time(const T value) {
+
+            void set_release_time(const double value) {
                 m_release = value;
-                m_gain_release = std::exp(-1.f / (m_samplerate * m_release));
+                m_gain_release = std::exp(-1. / (m_samplerate * m_release));
             }
-            void set_samplerate(const T value) {
+
+            void set_samplerate(const double value) {
                 m_samplerate = value;
                 set_attack_time(m_attack);
                 set_release_time(m_release);
@@ -66,12 +67,12 @@ EDSP_BEGIN_NAMESPACE
                 m_envelope = 0;
             }
         private:
-            T m_samplerate{0};
-            T m_attack{0};
-            T m_release{0};
-            T m_gain_attack{0};
-            T m_gain_release{0};
-            T m_envelope{0};
+            double m_samplerate{0};
+            double m_attack{0};
+            double m_release{0};
+            double m_gain_attack{0};
+            double m_gain_release{0};
+            double m_envelope{0};
         };
     }
 EDSP_END_NAMESPACE

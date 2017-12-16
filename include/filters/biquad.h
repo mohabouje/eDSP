@@ -38,22 +38,27 @@ EDSP_BEGIN_NAMESPACE
             virtual ~Biquad() = default;
 
             template<class InputIterator, class OutputIterator>
-            void compute(const InputIterator __first, const InputIterator __last, OutputIterator __out) {
-                for (; __first != __last; ++__first, ++__out) {
-                    const auto input = *__first *  m_gain;
-                    *__out = (m_b[0] * input
-                             + m_b[1] * m_state.inputs[0]
-                             + m_b[2] * m_state.inputs[1]
-                             - m_a[1] * m_state.outputs[0]
-                             - m_a[2] * m_state.outputs[1]) / m_a[0];
-
-                    // Circular buffer;
-                    m_state.inputs[1] = m_state.inputs[0];
-                    m_state.inputs[0] = input;
-
-                    m_state.outputs[1] = m_state.outputs[0];
-                    m_state.outputs[0] = *__out;
+            void compute(InputIterator first, InputIterator last, OutputIterator out) {
+                for (; first != last; ++first, ++out) {
+                    compute(*first, *out);
                 }
+            }
+
+            template<typename C>
+            void compute(const C in, C& out) {
+                const auto input = in *  m_gain;
+                out = (m_b[0] * input
+                         + m_b[1] * m_state.inputs[0]
+                         + m_b[2] * m_state.inputs[1]
+                         - m_a[1] * m_state.outputs[0]
+                         - m_a[2] * m_state.outputs[1]) / m_a[0];
+
+                // Circular buffer;
+                m_state.inputs[1] = m_state.inputs[0];
+                m_state.inputs[0] = input;
+
+                m_state.outputs[1] = m_state.outputs[0];
+                m_state.outputs[0] = out;
             }
 
             const BiquadState<T>& state() const { return m_state; }

@@ -12,18 +12,14 @@
 
 EDSP_BEGIN_NAMESPACE
     namespace algorithm {
-
-        template <typename T>
         class Delay {
         public:
             Delay(std::size_t delay, std::size_t maximum_delay) :
                     m_delay(delay),
                     m_max_delay(maximum_delay),
-                    m_buffer{maximum_delay, 0}
+                    m_buffer{std::vector<double>(maximum_delay, 0.)}
             {
             }
-            virtual ~Delay() = default;
-
 
             template <class InputIterator, class OutputIterator>
             void compute(InputIterator first, InputIterator last, OutputIterator out) {
@@ -32,6 +28,7 @@ EDSP_BEGIN_NAMESPACE
                 };
             }
 
+            template <typename T>
             void compute(const T in, T& out) {
                 m_buffer[input_point++] = in * m_gain;
                 out = m_buffer[output_point++];
@@ -41,9 +38,9 @@ EDSP_BEGIN_NAMESPACE
 
             std::size_t delay() const { return m_delay; }
             std::size_t maximum_delay() const { return m_max_delay; }
-            T gain() const { return m_gain; }
+            double gain() const { return m_gain; }
 
-            void set_gain(const T value) { m_gain = value; }
+            void set_gain(const double value) { m_gain = value; }
             void set_delay(const std::size_t value) {
                 assert(value <= m_max_delay && "Greater than the maximum");
                 m_delay = value;
@@ -64,12 +61,12 @@ EDSP_BEGIN_NAMESPACE
             }
 
         private:
-            T           m_gain;
+            double      m_gain;
             std::size_t m_delay{0};
             std::size_t m_max_delay{1};
-            std::vector<T> m_buffer;
             std::size_t input_point{0};
             std::size_t output_point{0};
+            std::vector<double> m_buffer;
         };
     }
 EDSP_END_NAMESPACE
