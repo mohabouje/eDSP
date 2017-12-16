@@ -6,7 +6,7 @@
 #include "../test_db.h"
 #include <catch.hpp>
 
-using namespace eDSP::utility;
+using namespace edsp::utility;
 SCENARIO("Testing math features for standard containers") {
 
     GIVEN("A std::vector with a given size") {

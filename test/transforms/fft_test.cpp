@@ -9,7 +9,7 @@
 #include "../test_db.h"
 #include "../test_config.h"
 
-using namespace eDSP::frequency;
+using namespace edsp::frequency;
 SCENARIO("Testing FFT") {
     auto original = test::db::ref_vector;
     auto inverse = original;

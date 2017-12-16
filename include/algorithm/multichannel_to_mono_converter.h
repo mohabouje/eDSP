@@ -16,7 +16,7 @@ EDSP_BEGIN_NAMESPACE
             explicit MultiChannelToMonoConverter(size_t num_channels) : num_channels(num_channels) {}
 
             template <class InputIterator, class Outputiterator>
-            void compute(const InputIterator first, const InputIterator last, Outputiterator out) {
+            void compute(InputIterator first, InputIterator last, Outputiterator out) {
                 for (; first != last; first += num_channels, ++out) {
                     *out = utility::sum(first, first + num_channels) / num_channels;
                 }

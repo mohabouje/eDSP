@@ -7,7 +7,7 @@
 #include "math/stats.h"
 #include <catch.hpp>
 
-using namespace eDSP::math;
+using namespace edsp::math;
 SCENARIO("Testing the basic usage of the statistic functions") {
 
     GIVEN("A hamming window with a given size") {
@@ -19,6 +19,8 @@ SCENARIO("Testing the basic usage of the statistic functions") {
             const Approx target = Approx(mean).epsilon(TEST_TOLERANCE);
             REQUIRE(target == test::db::mean_ref_vector);
         }
+
+        std::find()
 
         // Testing mode function
         WHEN("We want to estimate the mode of the signal") {

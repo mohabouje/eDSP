@@ -19,7 +19,7 @@ EDSP_BEGIN_NAMESPACE
             }
 
             template <class InputIterator, class OutputIterator>
-            void compute(const InputIterator first, const InputIterator last, OutputIterator out) {
+            void compute(InputIterator first, InputIterator last, OutputIterator out) {
                 for (; first != last; ++first, ++out) {
                     compute(*first, *out);
                 };
