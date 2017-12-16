@@ -26,7 +26,7 @@ EDSP_BEGIN_NAMESPACE
             std::array<T, 2> outputs{};
         };
 
-        template<typename T>
+        template<typename T = double>
         class Biquad  {
         public:
             explicit Biquad() = default;

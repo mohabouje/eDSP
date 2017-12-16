@@ -6,7 +6,7 @@
 EDSP_BEGIN_NAMESPACE
     namespace filters {
 
-        template <typename T>
+        template <typename T = double>
         class DCRemoval : private Biquad<T> {
         public:
             explicit DCRemoval(T alpha = 0.995) :

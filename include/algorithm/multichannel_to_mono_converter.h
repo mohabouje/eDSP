@@ -23,7 +23,7 @@ EDSP_BEGIN_NAMESPACE
             };
 
         private:
-            std::size_t num_channels;
+            double num_channels;
         };
 
 

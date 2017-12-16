@@ -8,21 +8,11 @@
 
 using namespace edsp;
 
-template <class InputIterator>
-constexpr bool find(InputIterator __first, InputIterator __last, typename std::iterator_traits<InputIterator>::value_type const& __Tp) {
-    std::find(__first, __last, __Tp);
-    for (; __first != __last; ++__first) {
-        if (*__first == __Tp) return true;
-    }
-    return false;
-}
-
 
 static void do_hamming(benchmark::State &state) {
     constexpr std::size_t N = 1024;
-    constexpr std::array<double, N> tmp{};
-    find(std::begin(tmp), std::end(tmp), 8);
-    std::accumulate()
+    std::array<double, N> tmp{};
+    window::hamming(std::begin(tmp), std::end(tmp));
 }
 
 static void do_hanning(benchmark::State &state) {

@@ -150,6 +150,18 @@ namespace utility {
                        std::minus<typename std::iterator_traits<InputIterator>::value_type>());
     }
 
+    template <class InputIterator>
+    std::enable_if<std::is_arithmetic<typename std::iterator_traits<InputIterator>::value_type>::value, bool>::type
+    constexpr bool has_negative(InputIterator __first, InputIterator __last) {
+        return std::any_of(__first, __first, math::is_negative<typename std::iterator_traits<InputIterator>::value_type>);
+    }
+
+    template <class InputIterator>
+    std::enable_if<std::is_arithmetic<typename std::iterator_traits<InputIterator>::value_type>::value, bool>::type
+    constexpr bool has_zero(InputIterator __first, InputIterator __last) {
+        return std::any_of(__first, __first, math::is_zero<typename std::iterator_traits<InputIterator>::value_type>);
+    }
+
     template <class Container>
     constexpr Container linspace(typename Container::value_type const& start,
                                  typename Container::value_type const& end,
