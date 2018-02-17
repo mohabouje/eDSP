@@ -10,7 +10,7 @@
 #include "math/stats.h"
 
 EDSP_BEGIN_NAMESPACE
-    namespace algorith {
+    namespace blocks {
 
 
         class PeakPicker {

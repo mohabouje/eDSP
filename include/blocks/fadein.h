@@ -9,7 +9,7 @@
 #include <iterator>
 
 EDSP_BEGIN_NAMESPACE
-    namespace algorithm {
+    namespace blocks {
         class FadeIn {
         public:
             FadeIn(double samplerate, double duration) :

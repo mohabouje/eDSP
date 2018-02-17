@@ -8,7 +8,7 @@
 #include "config.h"
 
 EDSP_BEGIN_NAMESPACE
-    namespace algorithn {
+    namespace blocks {
         class Gain {
         public:
             explicit Gain(double gain) : m_gain(gain) {}

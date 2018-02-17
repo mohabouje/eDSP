@@ -9,7 +9,7 @@
 #include "config.h"
 
 EDSP_BEGIN_NAMESPACE
-    namespace algorithm {
+    namespace blocks {
 
         class EnvelopeDetector {
         public:

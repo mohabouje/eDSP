@@ -10,7 +10,7 @@
 #include <iterator>
 
 EDSP_BEGIN_NAMESPACE
-    namespace algorithm {
+    namespace blocks {
         class MultiChannelToMonoConverter {
         public:
             explicit MultiChannelToMonoConverter(size_t num_channels) : num_channels(num_channels) {}

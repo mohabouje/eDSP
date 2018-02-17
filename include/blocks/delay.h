@@ -11,7 +11,7 @@
 #include <assert.h>
 
 EDSP_BEGIN_NAMESPACE
-    namespace algorithm {
+    namespace blocks {
         class Delay {
         public:
             Delay() = default;

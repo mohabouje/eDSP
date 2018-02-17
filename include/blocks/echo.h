@@ -7,7 +7,7 @@
 
 #include "delay.h"
 EDSP_BEGIN_NAMESPACE
-    namespace algorithm {
+    namespace blocks {
         class Echo {
             explicit Echo(std::size_t maximum_delay) : m_delay(maximum_delay/3, maximum_delay) {
                 set_maximum_delay(maximum_delay);

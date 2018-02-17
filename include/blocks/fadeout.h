@@ -11,7 +11,7 @@
 #include <iterator>
 
 EDSP_BEGIN_NAMESPACE
-    namespace algorithm {
+    namespace blocks {
         class FadeOut {
         public:
             FadeOut(double samplerate, double duration) :
