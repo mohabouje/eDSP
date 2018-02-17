@@ -13,45 +13,41 @@
 
 EDSP_BEGIN_NAMESPACE
 
-    template <typename T>
     class AnalogFilterBase {
     public:
         AnalogFilterBase() = default;
-        AnalogFilterBase(AnalogFilterBase &&) noexcept = default;
-        AnalogFilterBase(const AnalogFilterBase&) = default;
-        AnalogFilterBase& operator=(AnalogFilterBase&& other)  = default;
         virtual ~AnalogFilterBase() = default;
-        explicit AnalogFilterBase(const std::vector<PoleZeroPair<T>> &m_pairs) : m_pairs(m_pairs) {}
+        explicit AnalogFilterBase(const std::vector<PoleZeroPair> &pairs) : pairs_(pairs) {}
 
+        std::size_t size() const noexcept { return pairs_.size(); }
         const PoleZeroPair& pair_at(std::size_t index) const {
-            assert(m_pairs.size() > index);
-            return m_pairs[index];
+            if (pairs_.size() > index) {
+                throw std::runtime_error("Index out of bounds");
+            }
+            return pairs_[index];
         }
-
-        const PoleZeroPair& operator[] (std::size_t index) const {
-            return pair_at(index);
-        }
-
+        
+        const PoleZeroPair& operator[] (std::size_t index) const noexcept { return pairs_[index]; }
+        PoleZeroPair& operator[](std::size_t index) noexcept {  return pairs_[index]; }
 
         void insert(const std::complex<T>& pole, const std::complex<T>& zero) {
-            m_pairs.emplace_back(pole, std::complex<T>(), zero, std::complex<T>());
+            pairs_.emplace_back(pole, std::complex<T>(), zero, std::complex<T>());
         }
 
         void insert(const Pole& pole, const Zero& zero) {
-            m_pairs.emplace_back(pole, zero);
+            pairs_.emplace_back(pole, zero);
         }
 
         void insert(const PoleZeroPair& pair) {
-            m_pairs.emplace_back(std::move(pair));
+            pairs_.emplace_back(std::move(pair));
         }
 
         void reset() {
-            m_pairs.clear();
+            pairs_.clear();
         }
 
     protected:
-        std::vector<PoleZeroPair<T>> m_pairs{};
-
+        std::vector<PoleZeroPair<T>> pairs_{};
     };
 
 
