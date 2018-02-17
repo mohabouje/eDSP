@@ -14,10 +14,11 @@ EDSP_BEGIN_NAMESPACE
     namespace algorithm {
         class Delay {
         public:
+            Delay() = default;
             Delay(std::size_t delay, std::size_t maximum_delay) :
-                    m_delay(delay),
-                    m_max_delay(maximum_delay),
-                    m_buffer{std::vector<double>(maximum_delay, 0.)}
+                    delay_(delay),
+                    max_delay_(maximum_delay_),
+                    buffer_{std::vector<double>(maximudelay_, 0.)}
             {
             }
 
@@ -30,43 +31,39 @@ EDSP_BEGIN_NAMESPACE
 
             template <typename T>
             void compute(const T in, T& out) {
-                m_buffer[input_point++] = in * m_gain;
-                out = m_buffer[output_point++];
-                if (input_point == m_max_delay) input_point = 0;
-                if (output_point == m_max_delay) output_point = 0;
+                buffer_[input_point_++] = in * gain_;
+                out = buffer_[output_point_++];
+                if (input_point_ == max_delay_) input_point_ = 0;
+                if (output_point_ == max_delay_) output_point_ = 0;
             }
 
-            std::size_t delay() const { return m_delay; }
-            std::size_t maximum_delay() const { return m_max_delay; }
-            double gain() const { return m_gain; }
+            std::size_t delay() const noexcept { return delay_; }
+            std::size_t maximum_delay() const noexcept { return max_delay_; }
+            double gain() const noexcept { return gain_; }
 
-            void set_gain(const double value) { m_gain = value; }
-            void set_delay(const std::size_t value) {
-                assert(value <= m_max_delay && "Greater than the maximum");
-                m_delay = value;
-            }
-            void set_maximum_delay(const std::size_t value) {
-                if (m_max_delay != value) {
-                    m_max_delay = value;
-                    m_buffer.resize(value);
+            void set_gain(const double value) noexcept { gain_ = value; }
+            void set_delay(const std::size_t value) noexcept {  delay_ = value; }
+            void set_maximum_delay_(const std::size_t value) {
+                if (max_delay_ != value) {
+                    max_delay_ = value;
+                    buffer_.resize(value);
                     reset();
                 }
             }
 
-
             void reset() {
-                utility::set(std::begin(m_buffer), std::end(m_buffer), 0);
-                input_point = 0;
-                output_point = 0;
+                utility::set(std::begin(buffer_), std::end(buffer_), 0);
+                input_point_ = 0;
+                output_point_ = 0;
             }
 
         private:
-            double      m_gain;
-            std::size_t m_delay{0};
-            std::size_t m_max_delay{1};
-            std::size_t input_point{0};
-            std::size_t output_point{0};
-            std::vector<double> m_buffer;
+            double      gain_{1.};
+            std::size_t delay_{0};
+            std::size_t max_delay_{1};
+            std::size_t input_point_{0};
+            std::size_t output_point_{0};
+            std::vector<double> buffer_;
         };
     }
 EDSP_END_NAMESPACE

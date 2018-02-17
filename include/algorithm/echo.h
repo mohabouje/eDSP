@@ -10,8 +10,8 @@ EDSP_BEGIN_NAMESPACE
     namespace algorithm {
         class Echo {
             explicit Echo(std::size_t maximum_delay) : m_delay(maximum_delay/3, maximum_delay) {
-                this->set_maximum_delay(maximum_delay);
-                this->reset();
+                set_maximum_delay(maximum_delay);
+                reset();
             }
 
             template <class InputIterator, class OutputIterator>
@@ -23,33 +23,22 @@ EDSP_BEGIN_NAMESPACE
 
             template <typename T>
             void compute(const T input, T& out) {
-                m_delay.compute(input, out);
-                out = m_gain * (out - input) + input;
+                delay_.compute(input, out);
+                out = gain_ * (out - input) + input;
             }
 
-            void reset() {
-                m_delay.reset();
-            }
+            void reset() { delay_.reset(); }
+            double delay() const noexcept { return delay_.delay(); }
+            double maximum_delay() const noexcept { return delay_.maximum_delay(); }
+            double gain() const noexcept { return gain_; }
 
-            double delay() const { return m_delay.delay(); }
-            double maximum_delay() const { return m_delay.maximum_delay(); }
-            double gain() const { return m_gain; }
-
-            void set_delay(const std::size_t value) {
-                m_delay.set_delay(value);
-            }
-
-            void set_maximum_delay(const std::size_t value) {
-                m_delay.set_maximum_delay(value);
-            }
-
-            void set_gain(const double value) {
-                m_gain = value;
-            }
+            void set_delay(const std::size_t value) noexcept { delay_.set_delay(value); }
+            void set_maximum_delay(const std::size_t value) noexcept { delay_.set_maximum_delay(value); }
+            void set_gain(const double value) noexcept { gain_ = value; }
 
         private:
-            Delay       m_delay;
-            double      m_gain;
+            Delay       delay_;
+            double      gain;
         };
     }
 
