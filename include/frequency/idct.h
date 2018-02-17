@@ -17,18 +17,18 @@ EDSP_BEGIN_NAMESPACE
             }
 
             template <class InputIterator, class OutputIterator>
-            void compute_r2r(InputIterator __first, InputIterator __last, OutputIterator __out) {
-                const auto m_size = std::distance(__first, __last);
+            void compute_r2r(InputIterator first, InputIterator last, OutputIterator out) {
+                const auto m_size = std::distance(first, last);
                 if (size != m_size || plan == nullptr) {
                     fftw_destroy_plan(plan);
                     size = m_size;
                     plan = fftw_plan_r2r_1d(static_cast<int>(size),
-                                            PTR(__first),
-                                            PTR(__out),
+                                            PTR(first),
+                                            PTR(out),
                                             format(),
                                             FFTW_ESTIMATE);
                 }
-                fftw_execute_r2r(plan, PTR(__first), PTR(__out));
+                fftw_execute_r2r(plan, PTR(first), PTR(out));
             }
 
         private:

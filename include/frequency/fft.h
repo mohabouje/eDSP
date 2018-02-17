@@ -15,31 +15,31 @@ EDSP_BEGIN_NAMESPACE
         class FFT : public BaseTransform {
         public:
             template <class InputIterator, class OutputIterator>
-            void compute_c2c(InputIterator __first, InputIterator __last, OutputIterator __out) {
-                const auto m_size = std::distance(__first, __last);
+            void compute_c2c(InputIterator first, InputIterator last, OutputIterator out) {
+                const auto m_size = std::distance(first, last);
                 if (size != m_size || plan == nullptr) {
                     fftw_destroy_plan(plan);
                     size = m_size;
                     plan = fftw_plan_dft_1d(static_cast<int>(size),
-                                                reinterpret_cast<fftw_complex *>(PTR(__first)),
-                                                reinterpret_cast<fftw_complex *>(PTR(__out)),
+                                                reinterpret_cast<fftw_complex *>(PTR(first)),
+                                                reinterpret_cast<fftw_complex *>(PTR(out)),
                                                 FFTW_FORWARD, FFTW_ESTIMATE);
                 }
                 fftw_execute_dft(plan,
-                                 reinterpret_cast<fftw_complex *>(PTR(__first)),
-                                 reinterpret_cast<fftw_complex *>(PTR(__out)));
+                                 reinterpret_cast<fftw_complex *>(PTR(first)),
+                                 reinterpret_cast<fftw_complex *>(PTR(out)));
 
             }
 
             template <class InputIterator, class OutputIterator>
-            void compute_r2c(InputIterator __first, InputIterator __last, OutputIterator __out) {
-                const auto m_size = std::distance(__first, __last);
+            void compute_r2c(InputIterator first, InputIterator last, OutputIterator out) {
+                const auto m_size = std::distance(first, last);
                 if (size != m_size || plan == nullptr) {
                     fftw_destroy_plan(plan);
                     size = m_size;
-                    plan = fftw_plan_dft_r2c_1d(static_cast<int>(size), PTR(__first), reinterpret_cast<fftw_complex *>(PTR(__out)), FFTW_ESTIMATE);
+                    plan = fftw_plan_dft_r2c_1d(static_cast<int>(size), PTR(first), reinterpret_cast<fftw_complex *>(PTR(out)), FFTW_ESTIMATE);
                 }
-                fftw_execute_dft_r2c(plan, PTR(__first), reinterpret_cast<fftw_complex *>(PTR(__out)));
+                fftw_execute_dft_r2c(plan, PTR(first), reinterpret_cast<fftw_complex *>(PTR(out)));
             }
         };
     }

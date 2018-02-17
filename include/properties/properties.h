@@ -11,47 +11,45 @@ EDSP_BEGIN_NAMESPACE
 namespace properties {
 
     template <class InputIterator>
-    constexpr auto energy(InputIterator __first, InputIterator __last) {
-        return utility::sum_squares(__first, __last);
+    constexpr auto energy(InputIterator first, InputIterator last) {
+        return utility::sum_squares(first, last);
+    };
+
+    template <class InputIterator, typename StevenLowLevel>
+    constexpr auto loudness(InputIterator first, InputIterator last, StevenLowLevel factor = 0.67f) {
+        return std::pow(utility::sum_squares(first, last), factor);
     };
 
     template <class InputIterator>
-    constexpr auto loudness(InputIterator __first, InputIterator __last) {
-        return std::pow(utility::sum_squares(__first, __last), 0.67f); // StevenLawLevel
-    };
-
-    template <class InputIterator>
-    constexpr auto power(InputIterator __first, InputIterator __last) {
-        return utility::sum_squares(__first, __last)
-               / static_cast<typename std::iterator_traits<InputIterator>::value_type>(std::distance(__first, __last));
+    constexpr auto power(InputIterator first, InputIterator last) {
+        using value_type = typename std::iterator_traits<InputIterator>::value_type;
+        return utility::sum_squares(first, last) / static_cast<value_type >(std::distance(first, last));
     };
 
     template <class InputIterator, typename  Threshold_dB>
-    constexpr bool is_silence_db(InputIterator __first, InputIterator __last, Threshold_dB limit) {
-        auto tmp  = energy(__first, __last);
-        return 20 * std::log10(tmp) <= limit;
+    constexpr bool is_silence_db(InputIterator first, InputIterator last, Threshold_dB limit) {
+        return 20 * std::log10(energy(first, last)) <= limit;
     };
 
     template <class InputIterator, typename Threshold>
-    constexpr bool is_silence(InputIterator __first, InputIterator __last, Threshold limit) {
-        auto tmp  = energy(__first, __last);
-        return tmp <= limit;
+    constexpr bool is_silence(InputIterator first, InputIterator last, Threshold limit) {
+        return energy(first, last) <= limit;
     };
 
     template <class InputIterator>
-    constexpr auto zero_crossing_rate(InputIterator __first, InputIterator __last) {
-        typename std::iterator_traits<InputIterator>::value_type tmp = 0;
-        for (auto before = __first, after = ++__first; after != __last; ++before, ++after) {
+    constexpr auto zero_crossing_rate(InputIterator first, InputIterator last) {
+        using value_type = typename std::iterator_traits<InputIterator>::value_type;
+        value_type tmp = 0;
+        for (auto before = first, after = ++first; after != last; ++before, ++after) {
             tmp += (math::sign(*after) != math::sign(*before)) ? 1 : 0;
         }
-        return tmp
-               / static_cast<typename std::iterator_traits<InputIterator>::value_type>(std::distance(__first, __last));
+        return tmp / static_cast<value_type >(std::distance(first, last));
     };
 
 
     template <class InputIterator, typename SampleRate>
-    constexpr float buffer_duration_secs(const InputIterator __first, const InputIterator __last, const SampleRate sr) {
-        return static_cast<float>(std::distance(__first, __last)) / static_cast<float>(sr);
+    constexpr float buffer_duration_secs(const InputIterator first, const InputIterator last, const SampleRate sr) {
+        return static_cast<float>(std::distance(first, last)) / static_cast<float>(sr);
     };
 }
 EDSP_END_NAMESPACE

@@ -11,7 +11,7 @@
 
 
 EDSP_BEGIN_NAMESPACE
-    using ecomplex = std::complex<ereal>;
+    using ecomplex = std::complex<double>;
     struct ComplexPair : public std::pair<ecomplex, ecomplex> {
 
         bool is_conjugate() const {

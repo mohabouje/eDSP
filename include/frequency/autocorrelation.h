@@ -14,10 +14,10 @@ EDSP_BEGIN_NAMESPACE
         class AutoCorrelation  {
         public:
             template<class InputIterator, class OutputIterator>
-            void compute(InputIterator __first, InputIterator __last, OutputIterator __out) {
-                const auto size = std::distance(__first, __last);
+            void compute(InputIterator first, InputIterator last, OutputIterator out) {
+                const auto size = std::distance(first, last);
                 if (buffer.size() != size) { buffer.resize(size); }
-                std::transform(__first, __last, std::begin(buffer), [](const auto& val) {
+                std::transform(first, last, std::begin(buffer), [](const auto& val) {
                     return std::complex<double>(val, 0);
                 });
 
@@ -27,7 +27,7 @@ EDSP_BEGIN_NAMESPACE
                     return std::complex<double>(tmp * tmp, 0);
                 });
 
-                ifft.compute_c2r(std::begin(buffer), std::end(buffer), __out);
+                ifft.compute_c2r(std::begin(buffer), std::end(buffer), out);
             }
         private:
             std::vector<std::complex<double>> buffer;

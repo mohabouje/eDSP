@@ -13,11 +13,11 @@ EDSP_BEGIN_NAMESPACE
         class  Spectrogram {
         public:
             template <class InputIterator, class OutputIterator>
-            void compute(InputIterator __first, InputIterator __last, OutputIterator __out) {
-                const auto size = std::distance(__first, __last);
+            void compute(InputIterator first, InputIterator last, OutputIterator out) {
+                const auto size = std::distance(first, last);
                 if (buffer.size() != size) { buffer.resize(size); }
-                fft.compute_r2c(__first, __last, std::begin(buffer));
-                std::transform(std::begin(buffer), std::end(buffer), __out, [](const auto& value) {
+                fft.compute_r2c(first, last, std::begin(buffer));
+                std::transform(std::begin(buffer), std::end(buffer), out, [](const auto& value) {
                     const auto tmp = std::abs(value);
                     return  (tmp * tmp);
                 });

@@ -6,26 +6,25 @@
 EDSP_BEGIN_NAMESPACE
     namespace filters {
 
-        template <typename T = double>
-        class DCRemoval : private Biquad<T> {
+        class DCRemoval {
         public:
-            explicit DCRemoval(T alpha = 0.995) :
-                alpha(alpha),
-                Biquad<T>({1, -alpha, 0}, {1, -1, 0}) {
+            constexpr DCRemoval() = default;
+            constexpr explicit DCRemoval(double alpha = 0.995) :
+                biquad_(Biquad({1, -alpha, 0}, {1, -1, 0})) {
 
             }
-
             template<class InputIterator, class OutputIterator>
-            void apply(InputIterator first, InputIterator last, OutputIterator out) {
-                Biquad<T>::compute(first, last, out);
+            void compute(InputIterator first, InputIterator last, OutputIterator out) {
+                Biquad::compute(first, last, out);
             }
 
-            void set_alpha(const T _alpha) {
-                alpha = _alpha;
-                Biquad<T>::set_a1(alpha);
+            constexpr double alpha() const noexcept{ return biquad_.a1(); }
+            constexpr void set_alpha(const double alpha) noexcept {
+                biquad_.set_a1(alpha);
             }
         private:
-            T alpha{0.995};
+            T alpha_{0.995};
+            Biquad biquad_;
         };
     }
 EDSP_END_NAMESPACE

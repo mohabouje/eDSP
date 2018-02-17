@@ -17,10 +17,10 @@ EDSP_BEGIN_NAMESPACE
             explicit Cepstrum() = default;
 
             template<class InputIterator, class OutputIterator>
-            void compute(InputIterator __first, InputIterator __last, OutputIterator __out) {
-                const auto size = std::distance(__first, __last);
+            void compute(InputIterator first, InputIterator last, OutputIterator out) {
+                const auto size = std::distance(first, last);
                 if (buffer.size() != size) { buffer.resize(size); }
-                std::transform(__first, __last, std::begin(buffer), [](const auto& val) {
+                std::transform(first, last, std::begin(buffer), [](const auto& val) {
                     return std::complex<double>(val, 0);
                 });
 
@@ -28,7 +28,7 @@ EDSP_BEGIN_NAMESPACE
                 std::transform(std::begin(buffer), std::end(buffer), std::begin(buffer), [](std::complex<double>& value) {
                     return std::complex<double>( 2 * std::log(std::abs(value)), 0);
                 });
-                ifft.compute_c2r(std::begin(buffer), std::end(buffer), __out);
+                ifft.compute_c2r(std::begin(buffer), std::end(buffer), out);
             }
 
         private:

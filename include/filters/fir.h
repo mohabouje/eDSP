@@ -12,10 +12,10 @@
 EDSP_BEGIN_NAMESPACE
     namespace filters {
 
-        template <typename T>
         class FIR  {
         public:
-            explicit FIR(const std::vector<T> &m_b) :
+            FIR() = default;
+            explicit FIR(const std::vector<double> &m_b) :
                     m_b(m_b),
                     m_inputs{m_b.size(), 0} {
 
@@ -34,21 +34,15 @@ EDSP_BEGIN_NAMESPACE
                 }
             };
 
-            void set_gain(const T value) {
-                m_gain = value;
-            }
-
-            T gain() const {
-                return m_gain;
-            }
-
-            void reset() {
+            void set_gain(const T value) { m_gain = value; }
+            double gain() const noexcept { return m_gain; }
+            void reset() noexcept {
                 utility::set(std::begin(m_inputs), std::end(m_inputs), 0);
             }
         private:
-            T               m_gain{};
-            std::vector<T>  m_b{};
-            std::vector<T>  m_inputs{};
+            double               m_gain{1};
+            std::vector<double>  m_b{};
+            std::vector<double>  m_inputs{};
         };
     }
 EDSP_END_NAMESPACE

@@ -45,12 +45,4 @@
 #define EDSP_DCL_TEMPLATE(X, Type) \
     template class X<Type>;
 
-
-#ifdef EDSP_X64
-    using ereal = float;
-#else
-    using ereal = double;
-#endif
-
-
 #endif //EDSP_EDSP_H

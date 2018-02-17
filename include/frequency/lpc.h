@@ -32,11 +32,11 @@ EDSP_BEGIN_NAMESPACE
             }
 
             template<class InputIterator>
-            std::tuple<T, std::vector<T>, std::vector<T>> compute(InputIterator __first, InputIterator __last) {
-                const auto size = std::distance(__first, __last);
+            std::tuple<T, std::vector<T>, std::vector<T>> compute(InputIterator first, InputIterator last) {
+                const auto size = std::distance(first, last);
                 if (buffer.size() != size) { buffer.resize(size); }
 
-                m_xcorr.compute(__first, __last, std::begin(buffer));
+                m_xcorr.compute(first, last, std::begin(buffer));
                 m_error = buffer[0];
                 m_lpc[0] = 1;
                 for (int i = 1, _size = m_lpc.size(); i < _size; ++i) {

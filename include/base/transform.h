@@ -27,9 +27,6 @@ EDSP_BEGIN_NAMESPACE
     };
 #define PTR(X) &(*X)
 
-#define ITER_SAME(X, Y) std::is_same<typename std::iterator_traits<X>::value_type, Y>::value
-#define ITER_COMPLEX(X) is_complex<typename std::iterator_traits<X>::value_type>::value
-#define ITER_COMPLEX_TYPE(X, Y)  std::is_same<typename (typename std::iterator_traits<X>::value_type)::value_type, Y>::value
 
 
 EDSP_END_NAMESPACE

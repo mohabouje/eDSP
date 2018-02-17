@@ -18,7 +18,7 @@ namespace math {
     namespace stats {
 
         template <typename Container>
-        EDSP_EXPORT constexpr typename Container::value_type mode(const Container& container) {
+        constexpr typename Container::value_type mode(const Container& container) {
             typedef std::unordered_map<typename Container::value_type,unsigned int> Map;
             Map counts;
             for (size_t i = 0, size = container.size(); i < size; ++i) {
@@ -37,44 +37,44 @@ namespace math {
         }
 
         template <class ForwardIterator>
-        constexpr auto mean(ForwardIterator __first, ForwardIterator __last) {
-            return utility::sum(__first, __last)
-                   / static_cast< typename std::iterator_traits<ForwardIterator>::value_type> (std::distance(__first, __last));
+        constexpr auto mean(ForwardIterator first, ForwardIterator last) {
+            return utility::sum(first, last)
+                   / static_cast< typename std::iterator_traits<ForwardIterator>::value_type> (std::distance(first, last));
         }
 
         template <class ForwardIterator>
-        constexpr auto variance(ForwardIterator __first, ForwardIterator __last) {
-            return  (utility::sum_squares(__first, __last) - square(utility::sum(__first, __last)))
-                    / static_cast< typename std::iterator_traits<ForwardIterator>::value_type> (std::distance(__first, __last));
+        constexpr auto variance(ForwardIterator first, ForwardIterator last) {
+            return  (utility::sum_squares(first, last) - square(utility::sum(first, last)))
+                    / static_cast< typename std::iterator_traits<ForwardIterator>::value_type> (std::distance(first, last));
         }
 
         template <class ForwardIterator>
-        constexpr auto standar_desviation(ForwardIterator __first, ForwardIterator __last) {
-            return std::sqrt(variance(__first, __last));
+        constexpr auto standar_desviation(ForwardIterator first, ForwardIterator last) {
+            return std::sqrt(variance(first, last));
         }
 
         template <class ForwardIterator>
-        constexpr auto mean_error(ForwardIterator __first, ForwardIterator __last) {
-            return std::sqrt(variance(__first, __last)) /
-                    static_cast<typename std::iterator_traits<ForwardIterator>::value_type> (std::distance(__first, __last));
+        constexpr auto mean_error(ForwardIterator first, ForwardIterator last) {
+            return std::sqrt(variance(first, last)) /
+                    static_cast<typename std::iterator_traits<ForwardIterator>::value_type> (std::distance(first, last));
         }
 
         template <class ForwardIterator>
-        constexpr auto root_mean_square(ForwardIterator __first, ForwardIterator __last) {
-            return std::sqrt(mean(__first, __last));
+        constexpr auto root_mean_square(ForwardIterator first, ForwardIterator last) {
+            return std::sqrt(mean(first, last));
         }
 
         template <class ForwardIterator>
-        constexpr auto median(ForwardIterator __first, ForwardIterator __last) {
-            const auto size = std::distance(__first, __last);
+        constexpr auto median(ForwardIterator first, ForwardIterator last) {
+            const auto size = std::distance(first, last);
             const auto middle = is_odd(size) ? (size/2 - 1) : size/2;
-            std::nth_element(__first, __first + middle, __last);
-            return *__first + middle;
+            std::nth_element(first, first + middle, last);
+            return *first + middle;
         }
 
         template <class ForwardIterator>
-        constexpr auto entropy(ForwardIterator __first, ForwardIterator __last) {
-            return std::accumulate(__first, __last,
+        constexpr auto entropy(ForwardIterator first, ForwardIterator last) {
+            return std::accumulate(first, last,
                                    typename std::iterator_traits<ForwardIterator>::value_type(),
                                    [](auto& last, auto& next) {
                                        auto sample = !next ? 1 : next;
@@ -84,16 +84,16 @@ namespace math {
         }
 
         template <class ForwardIterator>
-        constexpr auto geometric_mean(ForwardIterator __first, ForwardIterator __last) {
-            return std::any_of(__first, __last, 0)
+        constexpr auto geometric_mean(ForwardIterator first, ForwardIterator last) {
+            return std::any_of(first, last, 0)
                      ? typename std::iterator_traits<ForwardIterator>::value_type()
-                     : std::accumulate(__first, __last,
+                     : std::accumulate(first, last,
                                        typename std::iterator_traits<ForwardIterator>::value_type(),
                                        [](auto& last, auto& next) {
                                             last += std::log(next);
                                             return last;
                                        })
-                       / static_cast< typename std::iterator_traits<ForwardIterator>::value_type> (std::distance(__first, __last));
+                       / static_cast< typename std::iterator_traits<ForwardIterator>::value_type> (std::distance(first, last));
         }
 
     }
