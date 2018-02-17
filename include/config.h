@@ -15,28 +15,19 @@
 
 // Check windows
 #if _WIN32 || _WIN64
-#if _WIN64
-#define EDSP_X64
-#else
-#define EDSP_X32
-#endif
+    #if _WIN64
+        #define EDSP_X64
+    #else
+        #define EDSP_X32
+    #endif
 #endif
 
-// Check GCC
 #if __GNUC__
-#if __x86_64__ || __ppc64__
-#define EDSP_X64
-#else
-#define EDSP_X32
-#endif
-#endif
-
-#if defined(_MSC_VER)
-    #define EXPORT __declspec(dllexport)
-#elif defined(__GNUC__)
-    #define EXPORT __attribute__((visibility("default")))
-#else
-    #define EXPORT
+    #if __x86_64__ || __ppc64__
+        #define EDSP_X64
+    #else
+        #define EDSP_X32
+    #endif
 #endif
 
 
@@ -55,8 +46,11 @@
     template class X<Type>;
 
 
-
-#define USE_FFTWD 1
+#ifdef EDSP_X64
+    using ereal = float;
+#else
+    using ereal = double;
+#endif
 
 
 #endif //EDSP_EDSP_H
