@@ -20,5 +20,49 @@ It aims to provide efficient and streamlined base calculations, while at the sam
 > - Implementation of different signal generators: white noise, pink noise, sin, square....
 > - Implementation of the Basic statistic functions.
 > - Developing the frequency analysis module: FFT, DCT, DHT....
-> - Developing the Signal properties analysis: energy, power, zero crossing rate ....
+> - Developing the signal properties analysis: energy, power, zero crossing rate ....
 > - Windowing
+> - Basic digital filter implementation using Biquad - WIP
+> - Analog filter implementation - WIP
+
+## Example: Extract signal properties
+Given an input signal, eDSP allow the extraction of some of the basic properties of audio signals:
+
+ - Energy
+ - Power
+ - Loudness using the Steven Low Level
+ - Zero Crossing Rate
+ - et...
+Example of usage:
+
+```c++
+constexpr std::size_t size = 1024;
+// Generate a buffer of a sin function
+const auto real_data = generators::sin<double, size>(1000, 0, 2);
+
+const auto energy = properties::energy(std::cbegin(input), std::cend(input));
+const auto power = properties::power(std::cbegin(input), std::cend(input));
+```
+
+## Example: Frequency domain computation
+This library uses the available implementation of the FFT in the [FFTW](http://www.fftw.org/) library.  It allows the computation of the generic frequency transforms:
+
+ - (FFT) Fast Fourier Transform
+ - (IFFT) Inverse Fast Fourier Transform
+ - (DCT) Direct Cosine Transform (Type I, II, III & IV)
+ - (IDCT) Inverse Direct Cosine Transform (Type I, II, III & IV)
+ - (DHT) Discrete Hartley Transform
+
+Example of usage:
+
+```c++
+constexpr std::size_t size = 1024;
+// Generate a buffer of a sin function
+const auto real_data = generators::sin<double, size>(1000, 0, 2);
+
+// Create an array of complex data to store the fft output
+std::array<std::complex<double>, size> fft_data;
+
+// Create an fft object with the expected output size as parameter
+FFT fft(size);
+fft.compute(std::cbegin(real_data), std::cend(real_data), std::begin(fft_data));
