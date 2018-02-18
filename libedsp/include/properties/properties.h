@@ -17,7 +17,7 @@ namespace properties {
 
     template <class InputIterator, typename StevenLowLevel>
     constexpr auto loudness(InputIterator first, InputIterator last, StevenLowLevel factor = 0.67f) {
-        return std::pow(utility::sum_squares(first, last), factor);
+        return std::pow(utility::sum_squares(first, last), factor);    
     };
 
     template <class InputIterator>

@@ -11,7 +11,8 @@ EDSP_BEGIN_NAMESPACE
     namespace blocks {
         class Gain {
         public:
-            explicit Gain(double gain) : m_gain(gain) {}
+            explicit Gain(double gain);
+            ~Gain() = default;
 
             template <class InputIterator, class OutputIterator>
             void compute(InputIterator first, InputIterator last, OutputIterator out) {

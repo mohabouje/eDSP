@@ -14,10 +14,20 @@ EDSP_BEGIN_NAMESPACE
     namespace filters {
         using BiquadCoefficients = std::array<double, 3>;
 
+        struct BiquadState {
+            constexpr void reset() {
+                utility::set(std::begin(inputs), std::end(inputs), 0.);
+                utility::set(std::begin(outputs), std::end(outputs), 0.);
+            }
+            std::array<double, 2> inputs{};
+            std::array<double, 2> outputs{};
+        };
+
+
         class Biquad  {
         public:
             constexpr explicit Biquad() = default;
-            constexpr explicit Biquad(const BiquadCoefficients<T>& a, const BiquadCoefficients<T>& b) :
+            constexpr explicit Biquad(const BiquadCoefficients& a, const BiquadCoefficients& b) :
                     m_a(a),
                     m_b(b)
             {
@@ -59,8 +69,8 @@ EDSP_BEGIN_NAMESPACE
             constexpr double b2() const noexcept { return m_b[2]; }
             constexpr double gain() const noexcept { return m_gain; }
 
-            constexpr void set_a(const BiquadCoefficients& tmp) noexcept { std::copy(tmp.begin(), tmp.end(), m_a.begin()); }
-            constexpr void set_b(const BiquadCoefficients& tmp) noexcept { std::copy(tmp.begin(), tmp.end(), m_b.begin()); }
+            constexpr void set_a(const BiquadCoefficients& tmp) noexcept { m_a = tmp; }
+            constexpr void set_b(const BiquadCoefficients& tmp) noexcept { m_b = tmp; }
 
             constexpr void set_a0(const double value) noexcept { m_a[0] = value; }
             constexpr void set_a1(const double value) noexcept { m_a[1] = value; }
@@ -75,19 +85,9 @@ EDSP_BEGIN_NAMESPACE
             }
 
         private:
-            struct BiquadState {
-                void reset() {
-                    utility::set(std::begin(inputs), std::end(inputs), T());
-                    utility::set(std::begin(outputs), std::end(outputs), T());
-                }
-                std::array<double, 2> inputs{};
-                std::array<double, 2> outputs{};
-            };
-
-
             BiquadCoefficients m_a{};
             BiquadCoefficients m_b{};
-            BiquadState<       m_state{};
+            BiquadState        m_state{};
             double             m_gain{1};
         };
 

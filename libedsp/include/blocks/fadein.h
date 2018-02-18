@@ -12,11 +12,8 @@ EDSP_BEGIN_NAMESPACE
     namespace blocks {
         class FadeIn {
         public:
-            FadeIn(double samplerate, double duration) :
-                    m_samplerate(samplerate),
-                    m_duration(duration) {
-
-            }
+            FadeIn(double samplerate, double duration);
+            ~FadeIn() = default;
 
             template <class InputIterator, class OutputIterator>
             void compute(InputIterator first, InputIterator last, OutputIterator out) {
@@ -35,19 +32,9 @@ EDSP_BEGIN_NAMESPACE
                 }
             }
 
-            void set_duration(double duration) {
-                m_duration = duration;
-            }
-
-            void set_samplerate(double samplerate) {
-                m_samplerate = samplerate;
-                m_increment = 1.0 / samplerate;
-            }
-
-            void reset() {
-                m_timestamp = 0.;
-            }
-
+            void set_duration(double duration) { m_duration = duration; }
+            void set_samplerate(double samplerate);
+            void reset() { m_timestamp = 0.; }
         private:
             double m_samplerate{0.};
             double m_duration{0.};

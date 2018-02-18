@@ -15,12 +15,7 @@ EDSP_BEGIN_NAMESPACE
         class Delay {
         public:
             Delay() = default;
-            Delay(std::size_t delay, std::size_t maximum_delay) :
-                    delay_(delay),
-                    max_delay_(maximum_delay_),
-                    buffer_{std::vector<double>(maximudelay_, 0.)}
-            {
-            }
+            Delay(std::size_t delay, std::size_t maximum_delay);
 
             template <class InputIterator, class OutputIterator>
             void compute(InputIterator first, InputIterator last, OutputIterator out) {
@@ -40,23 +35,10 @@ EDSP_BEGIN_NAMESPACE
             std::size_t delay() const noexcept { return delay_; }
             std::size_t maximum_delay() const noexcept { return max_delay_; }
             double gain() const noexcept { return gain_; }
-
             void set_gain(const double value) noexcept { gain_ = value; }
             void set_delay(const std::size_t value) noexcept {  delay_ = value; }
-            void set_maximum_delay_(const std::size_t value) {
-                if (max_delay_ != value) {
-                    max_delay_ = value;
-                    buffer_.resize(value);
-                    reset();
-                }
-            }
-
-            void reset() {
-                utility::set(std::begin(buffer_), std::end(buffer_), 0);
-                input_point_ = 0;
-                output_point_ = 0;
-            }
-
+            void set_maximum_delay(const std::size_t value);
+            void reset();
         private:
             double      gain_{1.};
             std::size_t delay_{0};

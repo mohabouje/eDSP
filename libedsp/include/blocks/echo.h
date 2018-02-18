@@ -9,10 +9,7 @@
 EDSP_BEGIN_NAMESPACE
     namespace blocks {
         class Echo {
-            explicit Echo(std::size_t maximum_delay) : m_delay(maximum_delay/3, maximum_delay) {
-                set_maximum_delay(maximum_delay);
-                reset();
-            }
+            explicit Echo(std::size_t maximum_delay);
 
             template <class InputIterator, class OutputIterator>
             void compute(InputIterator first, InputIterator last, OutputIterator out) {
@@ -38,7 +35,7 @@ EDSP_BEGIN_NAMESPACE
 
         private:
             Delay       delay_;
-            double      gain;
+            double      gain_;
         };
     }
 

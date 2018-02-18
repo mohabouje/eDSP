@@ -5,10 +5,13 @@ set(BENCHMARK_FILES
         benchmark_vectorutil.cpp
         )
 
-add_executable(runbenchmark  ${BENCHMARK_FILES})
 include_directories("${CMAKE_SOURCE_DIR}/third_party/benchmark/include/")
-target_link_libraries(runbenchmark ${FFTW_LIB})
-target_link_libraries(runbenchmark ${BENCHMARK_LIB})
+include_directories("${CMAKE_SOURCE_DIR}/libesdp/include/")
+
+
+add_executable(runbenchmark  ${BENCHMARK_FILES})
+target_link_libraries(runbenchmark ${FFTW_LIB} ${BENCHMARK_LIB} libedsp)
+target_link_libraries(runbenchmark )
 
 if (UNIX)
     target_link_libraries(runbenchmark -lpthread)

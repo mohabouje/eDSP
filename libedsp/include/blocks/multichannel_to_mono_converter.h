@@ -13,7 +13,8 @@ EDSP_BEGIN_NAMESPACE
     namespace blocks {
         class MultiChannelToMonoConverter {
         public:
-            explicit MultiChannelToMonoConverter(size_t num_channels) : num_channels(num_channels) {}
+            explicit MultiChannelToMonoConverter(size_t num_channels);
+            ~MultiChannelToMonoConverter() = default;
 
             template <class InputIterator, class Outputiterator>
             void compute(InputIterator first, InputIterator last, Outputiterator out) {
@@ -23,7 +24,7 @@ EDSP_BEGIN_NAMESPACE
             }
 
         private:
-            double num_channels;
+            double num_channels{2};
         };
 
 

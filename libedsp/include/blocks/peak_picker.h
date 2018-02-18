@@ -16,10 +16,7 @@ EDSP_BEGIN_NAMESPACE
         class PeakPicker {
 
         public:
-            explicit PeakPicker(double threshold)
-                    : m_threshold(threshold) {
-
-            }
+            explicit PeakPicker(double threshold);
 
             template <typename T>
             bool compute(const T input) {
@@ -51,15 +48,12 @@ EDSP_BEGIN_NAMESPACE
 
             double threshold() const { return m_threshold; }
             double last_peak() const { return m_last_peak; }
+            void set_threshold(double threshold) { m_threshold = threshold; }
+            void reset();
 
-            void set_threshold(double threshold) {
-                m_threshold = threshold;
-            }
+        protected:
+            bool is_peak(const std::size_t index) const;
 
-            void reset() {
-                m_biquad.reset();
-                m_last_peak = 0;
-            }
 
         private:
             static constexpr std::size_t win_post{5};
@@ -69,15 +63,10 @@ EDSP_BEGIN_NAMESPACE
             std::array<double, length>  onset_keep{};
             std::array<double, length>  onset_proc{};
             std::array<double, 3>       onset_peek{};
-            filters::Biquad<double> m_biquad{{{1, -0.5949,0.2348}}, {{0.1600,0.3200,0.1600}}};
+            filters::Biquad m_biquad{{1, -0.5949,0.2348}, {0.1600,0.3200,0.1600}};
             double m_threshold{0.01};
             double m_last_peak{0.};
 
-            bool is_peak(const std::size_t index) const {
-                return (onset_peek[index] > onset_peek[index - 1] &&
-                        onset_peek[index] > onset_peek[index + 1] &&
-                        onset_peek[index] > 0.);
-            }
 
 
         };

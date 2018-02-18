@@ -11,6 +11,7 @@ EDSP_BEGIN_NAMESPACE
         class Mute {
         public:
             Mute() = default;
+            ~Mute() = default;
 
             template <class InputIterator, class OutputIterator>
             void compute(InputIterator first, InputIterator last, OutputIterator out) {

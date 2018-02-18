@@ -7,8 +7,10 @@ set(TEST_FILES
         utilitity/vectorutil_test.cpp
         transforms/fft_test.cpp
 )
-add_executable(runtest ${TEST_FILES})
-include_directories("${CMAKE_SOURCE_DIR}/third_party/Catch/include/")
-target_link_libraries(runtest ${FFTW_LIB})
 
+include_directories("${CMAKE_SOURCE_DIR}/third_party/Catch/include/")
+include_directories("${CMAKE_SOURCE_DIR}/libesdp/include/")
+
+add_executable(runtest ${TEST_FILES})
+target_link_libraries(runtest  libedsp)
 add_test (NAME UnitTest COMMAND runtest)
