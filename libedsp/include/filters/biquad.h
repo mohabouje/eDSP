@@ -6,16 +6,16 @@
 #define EDSP_BIQUAD_H
 
 #include "config.h"
+#include "utility/vector.h"
 #include <array>
 #include <algorithm>
-#include <utility/vector.h>
 
 EDSP_BEGIN_NAMESPACE
     namespace filters {
         using BiquadCoefficients = std::array<double, 3>;
 
         struct BiquadState {
-            constexpr void reset() {
+            constexpr void reset() noexcept {
                 utility::set(std::begin(inputs), std::end(inputs), 0.);
                 utility::set(std::begin(outputs), std::end(outputs), 0.);
             }
@@ -27,7 +27,7 @@ EDSP_BEGIN_NAMESPACE
         class Biquad  {
         public:
             constexpr explicit Biquad() = default;
-            constexpr explicit Biquad(const BiquadCoefficients& a, const BiquadCoefficients& b) :
+            constexpr explicit Biquad(const BiquadCoefficients &a, const BiquadCoefficients &b) :
                     m_a(a),
                     m_b(b)
             {
@@ -80,9 +80,7 @@ EDSP_BEGIN_NAMESPACE
             constexpr void set_b2(const double value) noexcept { m_b[2] = value; }
             constexpr void set_gain(const double value) noexcept { m_gain = value; }
 
-            constexpr void reset() {
-                m_state.reset();
-            }
+            constexpr void reset() { m_state.reset(); }
 
         private:
             BiquadCoefficients m_a{};

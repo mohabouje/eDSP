@@ -46,7 +46,10 @@ set(SOURCE_FILES
         src/blocks/fadein.cpp
         src/blocks/gain.cpp
         src/blocks/multichannel_to_mono_converter.cpp
-        src/blocks/peak_picker.cpp)
+        src/blocks/peak_picker.cpp
+
+        src/filters/biquaddesigner.cpp
+        src/filters/fir.cpp)
 
 
 include_directories(./include)

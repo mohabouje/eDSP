@@ -6,7 +6,6 @@
 #define EDSP_FIR_H
 
 #include "config.h"
-#include "utility/vector.h"
 #include <vector>
 
 EDSP_BEGIN_NAMESPACE
@@ -15,11 +14,8 @@ EDSP_BEGIN_NAMESPACE
         class FIR  {
         public:
             FIR() = default;
-            explicit FIR(const std::vector<double> &m_b) :
-                    m_b(m_b),
-                    m_inputs{m_b.size(), 0} {
-
-            }
+            explicit FIR(const std::vector<double> &m_b);
+            ~FIR() = default;
 
             template <class InputIterator, class OutputIterator>
             void compute(const InputIterator first, const InputIterator last, OutputIterator out) {
@@ -34,11 +30,9 @@ EDSP_BEGIN_NAMESPACE
                 }
             };
 
-            void set_gain(const T value) { m_gain = value; }
+            void set_gain(const double value) noexcept { m_gain = value; }
             double gain() const noexcept { return m_gain; }
-            void reset() noexcept {
-                utility::set(std::begin(m_inputs), std::end(m_inputs), 0);
-            }
+            void reset() noexcept;
         private:
             double               m_gain{1};
             std::vector<double>  m_b{};

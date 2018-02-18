@@ -13,17 +13,17 @@ EDSP_BEGIN_NAMESPACE
                 biquad_(Biquad({1, -alpha, 0}, {1, -1, 0})) {
 
             }
+            ~DCRemoval() = default;
+
             template<class InputIterator, class OutputIterator>
-            void compute(InputIterator first, InputIterator last, OutputIterator out) {
-                Biquad::compute(first, last, out);
+            constexpr void compute(InputIterator first, InputIterator last, OutputIterator out) {
+                biquad_.compute(first, last, out);
             }
 
-            constexpr double alpha() const noexcept{ return biquad_.a1(); }
-            constexpr void set_alpha(const double alpha) noexcept {
-                biquad_.set_a1(alpha);
-            }
+            constexpr double alpha() const noexcept { return biquad_.a1(); }
+            constexpr void set_alpha(const double alpha) noexcept { biquad_.set_a1(alpha); }
         private:
-            T alpha_{0.995};
+            double alpha_{0.995};
             Biquad biquad_;
         };
     }
