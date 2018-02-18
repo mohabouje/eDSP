@@ -24,45 +24,6 @@ SCENARIO("Testing math features for standard containers") {
             }
         }
 
-        // Testing one function
-        WHEN("We set up the vector like a one array") {
-            test = ones<std::vector<double>>(size);
-            THEN("Every single value should be the same inside the array") {
-                for (double i : test) {
-                    REQUIRE(i == static_cast<double>(1));
-                }
-            }
-
-            // Testing function has negative
-            AND_THEN("No value should be negative") {
-                REQUIRE(!has_negative(test));
-            }
-
-            // Testing function has zeros
-            AND_THEN("No value should be zero") {
-                REQUIRE(!has_zero(test));
-            }
-        }
-
-        // Testing zero function
-        WHEN("We set up the vector like a zero array") {
-            test = zeros<std::vector<double>>(size);
-            THEN("Every single value should be the same inside the array") {
-                for (double i : test) {
-                    REQUIRE(i == static_cast<double>(0));
-                }
-            }
-
-            // Testing function has negative
-            AND_THEN("No value should be negative") {
-                REQUIRE(!has_negative(test));
-            }
-
-            // Testing function has zeros
-            AND_THEN("Should have zero values") {
-                REQUIRE(has_zero(test));
-            }
-        }
 
     }
 
@@ -84,22 +45,7 @@ SCENARIO("Testing math features for standard containers") {
                 //REQUIRE( test::util::isEqual(total), test::db::sum_square_ref_vector);
             }
         }
-
-        // Testing max function
-        WHEN("We want to calculate the max") {
-            const double m_max = max(test);
-            THEN("The sum should be the correct one") {
-                REQUIRE(m_max == test::db::max_ref_vector);
-            }
-        }
-
-        // Testing min function
-        WHEN("We want to calculate the min") {
-            const double m_min = min(test);
-            THEN("The sum should be the correct one") {
-                REQUIRE(m_min == test::db::min_ref_vector);
-            }
-        }
+        
     }
 
     GIVEN("A std::vector with fractional values") {

@@ -8,9 +8,9 @@ set(TEST_FILES
         transforms/fft_test.cpp
 )
 
+
 include_directories("${CMAKE_SOURCE_DIR}/third_party/Catch/include/")
-include_directories("${CMAKE_SOURCE_DIR}/libesdp/include/")
 
 add_executable(runtest ${TEST_FILES})
-target_link_libraries(runtest  libedsp)
+target_link_libraries(runtest libedsp)
 add_test (NAME UnitTest COMMAND runtest)

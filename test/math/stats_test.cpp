@@ -20,8 +20,6 @@ SCENARIO("Testing the basic usage of the statistic functions") {
             REQUIRE(target == test::db::mean_ref_vector);
         }
 
-        std::find()
-
         // Testing mode function
         WHEN("We want to estimate the mode of the signal") {
             const double mode = stats::mode(test);

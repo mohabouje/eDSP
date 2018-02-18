@@ -55,6 +55,9 @@ set(SOURCE_FILES
         src/frequency/lpc.cpp)
 
 
-include_directories(./include)
 add_library(libedsp ${HEADER_FILES} ${SOURCE_FILES})
+include_directories(./include/)
+
+find_library(FFTW_LIB NAMES lfftw3 libfftw3 fftw3 REQUIRED)
 target_link_libraries(libedsp ${FFTW_LIB})
+target_include_directories(libedsp PUBLIC ./include/)

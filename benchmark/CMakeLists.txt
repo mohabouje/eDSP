@@ -6,11 +6,10 @@ set(BENCHMARK_FILES
         )
 
 include_directories("${CMAKE_SOURCE_DIR}/third_party/benchmark/include/")
-include_directories("${CMAKE_SOURCE_DIR}/libesdp/include/")
-
+find_library(BENCHMARK_LIB NAMES lbenchmark libbenchmark benchmark REQUIRED)
 
 add_executable(runbenchmark  ${BENCHMARK_FILES})
-target_link_libraries(runbenchmark ${FFTW_LIB} ${BENCHMARK_LIB} libedsp)
+target_link_libraries(runbenchmark ${BENCHMARK_LIB} libedsp)
 target_link_libraries(runbenchmark )
 
 if (UNIX)

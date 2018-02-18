@@ -36,7 +36,7 @@ static void do_dct(benchmark::State &state) {
     const std::size_t N = 1024;
     std::array<double, N> tmp{}, out{};
     utility::linspace(std::begin(tmp), std::end(tmp), 0, 100);
-    frequency::DCT dct;
+    frequency::DCT dct{};
     dct.compute_r2r(std::begin(tmp), std::end(tmp), std::begin(out));
 }
 

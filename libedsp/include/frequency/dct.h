@@ -15,7 +15,6 @@ EDSP_BEGIN_NAMESPACE
         class DCT : public BaseTransform {
         public:
             explicit DCT(DCT_Type t = DCT_Type::Type_I);
-            DCT() = default;
             ~DCT() override = default;
 
             DCT_Type type() const noexcept { return t; }
