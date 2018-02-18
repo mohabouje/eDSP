@@ -9,9 +9,10 @@
 
 EDSP_BEGIN_NAMESPACE
 namespace frequency {
-    class DHT : BaseTransform {
+    class DHT : public BaseTransform {
     public:
-        DHT() : BaseTransform() {}
+        DHT() = default;
+        ~DHT() override = default;
 
         template<class InputIterator, class OutputIterator>
         void compute_r2r(InputIterator first, InputIterator last, OutputIterator out) {

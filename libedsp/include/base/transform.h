@@ -12,14 +12,8 @@ EDSP_BEGIN_NAMESPACE
     class BaseTransform {
     public:
         BaseTransform() = default;
-        BaseTransform(const BaseTransform&) = default;
-        BaseTransform& operator=(const BaseTransform&) = default;
         virtual ~BaseTransform() {
             if (plan != nullptr) fftw_destroy_plan(plan);
-        }
-        virtual void reset() {
-            if (plan != nullptr) fftw_destroy_plan(plan);
-            size = 0;
         }
     protected:
         fftw_plan plan{nullptr};

@@ -8,13 +8,12 @@
 #include "frequency/dct.h"
 EDSP_BEGIN_NAMESPACE
     namespace frequency {
-        class IDCT : BaseTransform {
+        class IDCT : public BaseTransform {
         public:
-            explicit IDCT(DCT_Type t = DCT_Type::Type_I) : BaseTransform(), t(t) { setType(t); }
-            DCT_Type type() const { return t; }
-            void setType(DCT_Type t) {
-                IDCT::t = t;
-            }
+            explicit IDCT(DCT_Type t = DCT_Type::Type_I);
+
+            DCT_Type type() const noexcept { return t; }
+            void setType(DCT_Type t) noexcept { IDCT::t = t; }
 
             template <class InputIterator, class OutputIterator>
             void compute_r2r(InputIterator first, InputIterator last, OutputIterator out) {
@@ -33,15 +32,7 @@ EDSP_BEGIN_NAMESPACE
 
         private:
             DCT_Type t{DCT_Type::Type_I};
-            fftw_r2r_kind format() const {
-                switch(IDCT::t) {
-                    case Type_I: return FFTW_REDFT00;
-                    case Type_II: return FFTW_REDFT10;
-                    case Type_III: return FFTW_REDFT01;
-                    case Type_IV: return FFTW_REDFT11;
-                    default: return FFTW_REDFT00;
-                }
-            }
+            fftw_r2r_kind format() const noexcept ;
         };
     }
 EDSP_END_NAMESPACE

@@ -49,7 +49,10 @@ set(SOURCE_FILES
         src/blocks/peak_picker.cpp
 
         src/filters/biquaddesigner.cpp
-        src/filters/fir.cpp)
+        src/filters/fir.cpp
+        src/frequency/dct.cpp
+        src/frequency/idct.cpp
+        src/frequency/lpc.cpp)
 
 
 include_directories(./include)

@@ -12,6 +12,9 @@ EDSP_BEGIN_NAMESPACE
     namespace frequency {
         class  Spectrogram {
         public:
+            Spectrogram() = default;
+            ~Spectrogram() = default;
+
             template <class InputIterator, class OutputIterator>
             void compute(InputIterator first, InputIterator last, OutputIterator out) {
                 const auto size = std::distance(first, last);
@@ -22,9 +25,10 @@ EDSP_BEGIN_NAMESPACE
                     return  (tmp * tmp);
                 });
             }
+
         private:
             FFT fft{};
-            std::vector<std::complex<double>> buffer;
+            std::vector<std::complex<double>> buffer{};
         };
     }
 EDSP_END_NAMESPACE

@@ -12,6 +12,9 @@ EDSP_BEGIN_NAMESPACE
     namespace frequency {
         class IFFT : public BaseTransform {
         public:
+            IFFT() = default;
+            ~IFFT() = default;
+
             template <class InputIterator, class OutputIterator>
             void compute_c2c(InputIterator first, InputIterator last, OutputIterator out) {
                 const auto m_size = std::distance(first, last);

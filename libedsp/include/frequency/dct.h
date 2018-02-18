@@ -9,15 +9,17 @@
 
 EDSP_BEGIN_NAMESPACE
     namespace frequency {
+
         enum DCT_Type { Type_I = 0, Type_II, Type_III, Type_IV};
 
-        class DCT : BaseTransform {
+        class DCT : public BaseTransform {
         public:
-            explicit DCT(DCT_Type t = DCT_Type::Type_I) : BaseTransform(), t(t) { setType(t); }
-            DCT_Type type() const { return t; }
-            void setType(DCT_Type t) {
-                DCT::t = t;
-            }
+            explicit DCT(DCT_Type t = DCT_Type::Type_I);
+            DCT() = default;
+            ~DCT() override = default;
+
+            DCT_Type type() const noexcept { return t; }
+            void setType(DCT_Type t) noexcept { DCT::t = t; }
 
             template <class InputIterator, class OutputIterator>
             void compute_r2r(InputIterator first, InputIterator last, OutputIterator out) {
@@ -36,15 +38,7 @@ EDSP_BEGIN_NAMESPACE
 
         private:
             DCT_Type t{DCT_Type::Type_I};
-            fftw_r2r_kind format() const {
-                switch(DCT::t) {
-                    case Type_I: return FFTW_REDFT00;
-                    case Type_II: return FFTW_REDFT10;
-                    case Type_III: return FFTW_REDFT01;
-                    case Type_IV: return FFTW_REDFT11;
-                    default: return FFTW_REDFT00;
-                }
-            }
+            fftw_r2r_kind format() const noexcept ;
         };
     }
 EDSP_END_NAMESPACE
