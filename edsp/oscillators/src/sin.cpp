@@ -33,7 +33,7 @@ SinOscillator::SinOscillator(Oscillator::value_type amplitude, Oscillator::value
 }
 
 Oscillator::value_type SinOscillator::operator()() EDSP_NOEXCEPT {
-    const value_type result = std::sin(2 * Constants<value_type>::pi  * (frequency() * timestamp() + phase()));
+    const value_type result = std::sin(2 * constants<value_type>::pi  * (frequency() * timestamp() + phase()));
     set_timestamp(timestamp() + sampling_period());
     return result;}
 

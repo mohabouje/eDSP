@@ -15,30 +15,26 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "windowing/blackman_harris.h"
+
+#include "windowing/hamming.h"
 #include "base/constants.h"
 #include <cmath>
 using namespace edsp;
-
-BlackmanHarris::BlackmanHarris(Window::size_type size) : Window(size) {
-
-}
-
-BlackmanHarris::BlackmanHarris(Window::size_type size, Window::WindowType type) : Window(size, type) {
+Hamming::Hamming(edsp::Window::size_type size) : Window(size) {
 
 }
 
-BlackmanHarris::~BlackmanHarris() = default;
+Hamming::Hamming(Window::size_type size, Window::WindowType type) : Window(size, type) {
 
-void BlackmanHarris::initialize() {
+}
+
+Hamming::~Hamming() = default;
+
+void Hamming::initialize() {
     if (!empty()) {
         const value_type N = (type_ == WindowType::Symmetric) ? size() - 1 : size();
         for (size_type i = 0, sz = size(); i < sz; ++i) {
-            value_type tmp = Constants<value_type>::pi * i / N;
-            data_[i] = 0.35875
-                        - 0.48829 * std::cos(2. * tmp)
-                        + 0.14128 * std::cos(4. * tmp)
-                        + 0.01168 * std::cos(6. * tmp);
+            data_[i] = 0.54 - 0.46 * std::cos(2 * constants<value_type >::pi * i / N);
         }
     }
 }

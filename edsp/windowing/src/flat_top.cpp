@@ -15,29 +15,32 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#include "windowing/bohman.h"
+#include "windowing/flat_top.h"
 #include "base/constants.h"
 #include <cmath>
 using namespace edsp;
 
-Bohman::Bohman(Window::size_type size) : Window(size) {
+FlatTop::FlatTop(Window::size_type size) : Window(size) {
 
 }
 
-Bohman::~Bohman() = default;
+FlatTop::FlatTop(Window::size_type size, Window::WindowType type) : Window(size, type) {
 
-void Bohman::initialize() {
+}
+
+FlatTop::~FlatTop() = default;
+
+void FlatTop::initialize() {
     if (!empty()) {
-        const value_type N = size() - 1;
-        value_type initial = -N / 2.0;
+        const value_type N = (type_ == WindowType::Symmetric) ? size() - 1 : size();
         for (size_type i = 0, sz = size(); i < sz; ++i) {
-            data_[i] = (1 - 2. * std::abs(initial) / N) * std::cos(2. * Constants<value_type>::pi * std::abs(initial) / N)
-                       + ( 1. / Constants<value_type>::pi) * std::sin(2. * Constants<value_type>::pi * std::abs(initial) / N);
-            ++initial;
-        }
+            value_type tmp = constants<value_type>::pi * i / N;
+            data_[i] = 1
+                       - 1.9300 * std::cos(2. * tmp)
+                       + 1.2900 * std::cos(4. * tmp)
+                       - 0.3880 * std::cos(6. * tmp)
+                       + 0.0322 * std::cos(8. * tmp);
 
-        data_[0] = 0.;
-        data_[N] = 0.;
+        }
     }
 }

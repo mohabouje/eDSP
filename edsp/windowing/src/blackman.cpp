@@ -16,25 +16,30 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "windowing/hanning.h"
+#include "windowing/blackman.h"
 #include "base/constants.h"
 #include <cmath>
 using namespace edsp;
-Hanning::Hanning(edsp::Window::size_type size) : Window(size) {
+Blackman::Blackman(edsp::Window::size_type size) : Window(size) {
 
 }
 
-Hanning::Hanning(Window::size_type size, Window::WindowType type) : Window(size, type) {
+Blackman::Blackman(Window::size_type size, Window::WindowType type) : Window(size, type) {
 
 }
 
-Hanning::~Hanning() = default;
+Blackman::~Blackman() = default;
 
-void Hanning::initialize() {
+void Blackman::initialize() {
     if (!empty()) {
         const value_type N = (type_ == WindowType::Symmetric) ? size() - 1 : size();
         for (size_type i = 0, sz = size(); i < sz; ++i) {
-            data_[i] = 0.5 * (1 - std::cos(2 * Constants<value_type>::pi * i / (N)));
+            value_type tmp = constants<value_type>::pi * i / N;
+            data_[i] = 0.42
+                        - 0.50 * std::cos(2. * tmp)
+                        + 0.08 * std::cos(4. * tmp);
         }
     }
 }
+
+

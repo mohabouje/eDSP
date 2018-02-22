@@ -5,7 +5,7 @@
 #ifndef EDSP_TRANSFORM_H
 #define EDSP_TRANSFORM_H
 
-#include "../config.h"
+#include "config.h"
 #include <fftw3.h>
 
 EDSP_BEGIN_NAMESPACE

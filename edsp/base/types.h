@@ -6,9 +6,8 @@
 #ifndef EDSP_TYPES_H
 #define EDSP_TYPES_H
 
-#include "../config.h"
+#include "config.h"
 #include <complex>
-
 
 EDSP_BEGIN_NAMESPACE
     using ecomplex = std::complex<double>;

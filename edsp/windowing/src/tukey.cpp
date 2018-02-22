@@ -50,7 +50,7 @@ void Tukey::initialize() {
 
         value_type increment = 1. / static_cast<value_type>(sz);
         for (size_type i = 0; i < half; ++i) {
-            data_[i] = (1. + std::cos(Constants<value_type>::pi * (2. * increment / ratio_ - 1))) / 2.;
+            data_[i] = (1. + std::cos(constants<value_type>::pi * (2. * increment / ratio_ - 1))) / 2.;
             ++increment;
         }
 

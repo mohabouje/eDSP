@@ -28,12 +28,12 @@ EDSP_BEGIN_NAMESPACE
 
         template<typename T>
         constexpr T deg_to_rad(const T &x) {
-            return static_cast<T>( x * Constants<T>::pi / 180 );
+            return static_cast<T>( x * constants<T>::pi / 180 );
         }
 
         template<typename T>
         constexpr T rad_to_deg(const T &x) {
-            return static_cast<T>( x * Constants<T>::pi * 180 );
+            return static_cast<T>( x * constants<T>::pi * 180 );
         }
     }
 

@@ -22,7 +22,7 @@ Biquad designer::allpass(double frequency, double Q) {
 }
 
 Biquad designer::lowpass(double frequency, double Q) {
-    const auto K    = std::tan(Constants<double>::pi  * frequency);
+    const auto K    = std::tan(constants<double>::pi  * frequency);
     const auto K2   = K * K;
     const auto norm = 1. / (1. + K / Q + K2);
     BiquadCoefficients a{}, b{};
@@ -36,7 +36,7 @@ Biquad designer::lowpass(double frequency, double Q) {
 }
 
 Biquad designer::highpass(double frequency, double Q) {
-    const auto K    = std::tan(Constants<double>::pi  * frequency);
+    const auto K    = std::tan(constants<double>::pi  * frequency);
     const auto K2   = K * K;
     const auto norm = 1. / (1. + K / Q + K2);
     BiquadCoefficients a{}, b{};
@@ -50,7 +50,7 @@ Biquad designer::highpass(double frequency, double Q) {
 }
 
 Biquad designer::bandpass(double frequency, double Q) {
-    const auto K    = std::tan(2. * Constants<double >::pi * frequency);
+    const auto K    = std::tan(2. * constants<double >::pi * frequency);
     const auto K2   = K * K;
     const auto  norm = 1. / (1. + K / Q + K2);
     BiquadCoefficients a{}, b{};
@@ -64,7 +64,7 @@ Biquad designer::bandpass(double frequency, double Q) {
 }
 
 Biquad designer::notch(double frequency, double Q) {
-    const auto K    = std::tan(Constants<double>::pi * frequency);
+    const auto K    = std::tan(constants<double>::pi * frequency);
     const auto K2   = K * K;
     const auto norm = 1. / (1. + K / Q + K2);
     BiquadCoefficients a{}, b{};
@@ -78,7 +78,7 @@ Biquad designer::notch(double frequency, double Q) {
 }
 
 Biquad designer::peak(double frequency, double Q, double gain) {
-    const auto K = std::tan(Constants<double>::pi * frequency);
+    const auto K = std::tan(constants<double>::pi * frequency);
     const auto K2 = K * K;
     const auto V = std::exp(std::abs(gain) * (0.05) * std::log10(200));
 
@@ -104,7 +104,7 @@ Biquad designer::peak(double frequency, double Q, double gain) {
 }
 
 Biquad designer::lowshelf(double frequency, double gain) {
-    const auto K = std::tan(Constants<double>::pi * frequency);
+    const auto K = std::tan(constants<double>::pi * frequency);
     const auto K2 = K * K;
     const auto V  = std::exp(std::fabs(gain) * (0.05f) * std::log10(200));
 
@@ -130,7 +130,7 @@ Biquad designer::lowshelf(double frequency, double gain) {
 }
 
 Biquad designer::highshelf(double frequency, double gain) {
-    const auto K = std::tan(Constants<double>::pi * frequency);
+    const auto K = std::tan(constants<double>::pi * frequency);
     const auto K2 = K * K;
     const auto V  = std::exp(std::fabs(gain) * (0.05f) * std::log10(200));
 

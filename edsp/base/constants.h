@@ -5,12 +5,12 @@
 #ifndef EDSP_CONSTANTS_H
 #define EDSP_CONSTANTS_H
 
-#include "../config.h"
+#include "config.h"
 #include <limits>
 
 EDSP_BEGIN_NAMESPACE
     template <typename T>
-    struct Constants {
+    struct constants {
         constexpr static T pi           = static_cast<T>(3.141592653589793);
         constexpr static T e            = static_cast<T>(2.718281828459045);
 

@@ -15,30 +15,29 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "windowing/blackman_nuttall.h"
+
+#include "windowing/bohman.h"
 #include "base/constants.h"
 #include <cmath>
 using namespace edsp;
 
-BlackmanNuttall::BlackmanNuttall(Window::size_type size) : Window(size) {
+Bohman::Bohman(Window::size_type size) : Window(size) {
 
 }
 
-BlackmanNuttall::BlackmanNuttall(Window::size_type size, Window::WindowType type) : Window(size, type) {
+Bohman::~Bohman() = default;
 
-}
-
-BlackmanNuttall::~BlackmanNuttall() = default;
-
-void BlackmanNuttall::initialize() {
+void Bohman::initialize() {
     if (!empty()) {
-        const value_type N = (type_ == WindowType::Symmetric) ? size() - 1 : size();
+        const value_type N = size() - 1;
+        value_type initial = -N / 2.0;
         for (size_type i = 0, sz = size(); i < sz; ++i) {
-            value_type tmp = Constants<value_type>::pi * i / N;
-            data_[i] = 0.3635879
-                       - 0.4891775 * std::cos(2. * tmp)
-                       + 0.1365995 * std::cos(4. * tmp)
-                       + 0.0106411 * std::cos(6. * tmp);
+            data_[i] = (1 - 2. * std::abs(initial) / N) * std::cos(2. * constants<value_type>::pi * std::abs(initial) / N)
+                       + ( 1. / constants<value_type>::pi) * std::sin(2. * constants<value_type>::pi * std::abs(initial) / N);
+            ++initial;
         }
+
+        data_[0] = 0.;
+        data_[N] = 0.;
     }
 }

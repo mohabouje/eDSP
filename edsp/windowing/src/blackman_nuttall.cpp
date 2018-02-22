@@ -15,26 +15,30 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#include "windowing/hamming.h"
+#include "windowing/blackman_nuttall.h"
 #include "base/constants.h"
 #include <cmath>
 using namespace edsp;
-Hamming::Hamming(edsp::Window::size_type size) : Window(size) {
+
+BlackmanNuttall::BlackmanNuttall(Window::size_type size) : Window(size) {
 
 }
 
-Hamming::Hamming(Window::size_type size, Window::WindowType type) : Window(size, type) {
+BlackmanNuttall::BlackmanNuttall(Window::size_type size, Window::WindowType type) : Window(size, type) {
 
 }
 
-Hamming::~Hamming() = default;
+BlackmanNuttall::~BlackmanNuttall() = default;
 
-void Hamming::initialize() {
+void BlackmanNuttall::initialize() {
     if (!empty()) {
         const value_type N = (type_ == WindowType::Symmetric) ? size() - 1 : size();
         for (size_type i = 0, sz = size(); i < sz; ++i) {
-            data_[i] = 0.54 - 0.46 * std::cos(2 * Constants<value_type >::pi * i / N);
+            value_type tmp = constants<value_type>::pi * i / N;
+            data_[i] = 0.3635879
+                       - 0.4891775 * std::cos(2. * tmp)
+                       + 0.1365995 * std::cos(4. * tmp)
+                       + 0.0106411 * std::cos(6. * tmp);
         }
     }
 }

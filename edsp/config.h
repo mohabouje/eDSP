@@ -35,4 +35,9 @@
 #define EDSP_END_NAMESPACE      }
 
 
+
+#define _In_
+#define _Out_
+
+
 #endif //EDSP_CONFIG_EDSP_H

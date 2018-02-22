@@ -15,32 +15,30 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "windowing/flat_top.h"
+#include "windowing/blackman_harris.h"
 #include "base/constants.h"
 #include <cmath>
 using namespace edsp;
 
-FlatTop::FlatTop(Window::size_type size) : Window(size) {
+BlackmanHarris::BlackmanHarris(Window::size_type size) : Window(size) {
 
 }
 
-FlatTop::FlatTop(Window::size_type size, Window::WindowType type) : Window(size, type) {
+BlackmanHarris::BlackmanHarris(Window::size_type size, Window::WindowType type) : Window(size, type) {
 
 }
 
-FlatTop::~FlatTop() = default;
+BlackmanHarris::~BlackmanHarris() = default;
 
-void FlatTop::initialize() {
+void BlackmanHarris::initialize() {
     if (!empty()) {
         const value_type N = (type_ == WindowType::Symmetric) ? size() - 1 : size();
         for (size_type i = 0, sz = size(); i < sz; ++i) {
-            value_type tmp = Constants<value_type>::pi * i / N;
-            data_[i] = 1
-                       - 1.9300 * std::cos(2. * tmp)
-                       + 1.2900 * std::cos(4. * tmp)
-                       - 0.3880 * std::cos(6. * tmp)
-                       + 0.0322 * std::cos(8. * tmp);
-
+            value_type tmp = constants<value_type>::pi * i / N;
+            data_[i] = 0.35875
+                        - 0.48829 * std::cos(2. * tmp)
+                        + 0.14128 * std::cos(4. * tmp)
+                        + 0.01168 * std::cos(6. * tmp);
         }
     }
 }
