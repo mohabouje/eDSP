@@ -34,9 +34,30 @@ EDSP_BEGIN_NAMESPACE
          * @param size The number of elements to initially create.
          */
         explicit Kaiser(size_type size);
+
+        /**
+         * @brief Creates and compute a Kaiser %window with the given size and the spectral sidelobe attenuation factor.
+         * @param size The number of elements to initially create.
+         * @param beta Spectral slidelobe attenuation factor.
+         */
+        Kaiser(size_type size, value_type beta);
         ~Kaiser() override;
 
         void compute() override;
+
+        /**
+         * @brief Set the spectral sidelobe attenuation factor.
+         * @param beta sidelobe attenuation factor.
+         */
+        void set_beta(value_type beta) EDSP_NOEXCEPT;
+
+        /**
+         * @bried Returns the Kaiser %window parameter that modify the sidelobe attenuation of the FFT.
+         * @return The spectral sidelobe attenuation factor
+         */
+        value_type beta() const EDSP_NOEXCEPT;
+    private:
+        value_type beta_;
     };
 EDSP_END_NAMESPACE
 

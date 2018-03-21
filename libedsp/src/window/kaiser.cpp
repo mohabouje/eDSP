@@ -15,3 +15,15 @@ void Kaiser::compute() {
 Kaiser::~Kaiser() {
 
 }
+
+void Kaiser::set_beta(Window::value_type beta) EDSP_NOEXCEPT {
+    beta_ = beta;
+}
+
+Window::value_type Kaiser::beta() const EDSP_NOEXCEPT {
+    return beta_;
+}
+
+Kaiser::Kaiser(Window::size_type size, Window::value_type beta) : Window(size), beta_(beta) {
+
+}
