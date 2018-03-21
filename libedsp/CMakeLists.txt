@@ -1,4 +1,6 @@
 set(HEADER_FILES
+        include/config.h
+        include/version.h
         include/base/analog_filter.h
         include/base/constants.h
         include/base/sfinae.h

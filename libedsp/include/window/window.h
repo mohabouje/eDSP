@@ -2,88 +2,203 @@
 // Created by Mohammed Boujemaoui on 11/10/2017.
 //
 
-#ifndef EDSP_WINDOW_H
-#define EDSP_WINDOW_H
+#ifndef EDSP_WINDOW_BASE_H
+#define EDSP_WINDOW_BASE_H
 
 #include "config.h"
-#include "base/constants.h"
 #include <vector>
-#include <cmath>
-#include <iterator>
-#include <array>
-
-#ifdef EDSP_X64
-    using real = double;
-#else
-    using real = float;
-#endif
-
+#include <bits/valarray_after.h>
 
 EDSP_BEGIN_NAMESPACE
-    namespace window {
-        template <class ForwardIterator>
-        constexpr void hamming(ForwardIterator first, ForwardIterator last) {
-            for (auto i = 0l, size = std::distance(first, last)   ; first != last; ++i, ++first) {
-                *first = 0.53836f - 0.46164f * cos(2 * Constants<float>::pi * i / (size - 1.0f));
-            }
-        }
+    class Window {
+        using value_type = double;
+        using pointer = value_type *;
+        using const_pointer = const value_type *;
+        using reference = value_type&:
+        using const_reference = const value_type&;
 
-        template <class ForwardIterator>
-        constexpr void hanning(ForwardIterator first, ForwardIterator last) {
-            for (auto i = 0l, size = std::distance(first, last); first != last; ++i, ++first) {
-                *first = 0.5f - 0.5f * std::cos(2 * Constants<float>::pi * i / (size - 1.0f));
-            }
-        }
+        using iterator = value_type*;
+        using const_iterator = value_type*;
+        using reverse_iterator = std::reverse_iterator<iterator>;
+        using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
+        using size_type = std::vector::size_type;
+        using difference_type = std::ptrdiff_t;
 
-        template <class ForwardIterator>
-        constexpr void hanningz(ForwardIterator first, ForwardIterator last) {
-            for (auto i = 0l, size = std::distance(first, last); first != last; ++i, ++first) {
-                *first = 0.5f - 0.5f * std::cos(2 * Constants<float>::pi * i / (size - 1.0f));
-            }
-        }
+        /**
+         * @brief Creates a %window with no elements.
+         */
+        Window();
 
-        template <class ForwardIterator>
-        constexpr void gaussian(ForwardIterator first, ForwardIterator last) {
-            for (auto i = 0l, size = std::distance(first, last); first != last; ++i, ++first) {
-                const auto a = (i -  0.5f * (size-1.0f)) / (sqrt(0.5f) * (size - 1.0f));
-                *first = exp(-0.5f * sqrt(a));
-            }
-        }
+        /* @brief Creates and computes a %window with the default constructed elements.
+         * @param size The number of elements to initially create.
+         */
+        explicit Window(size_type size);
 
-        template <class ForwardIterator>
-        constexpr void blackman(ForwardIterator first, ForwardIterator last) {
-            for (auto i = 0l, size = std::distance(first, last); first != last; ++i, ++first) {
-                *first = 0.42f - 0.5f * std::cos(2 * Constants<float>::pi * i / (size - 1.0f))
-                           + 0.8f * std::cos((2 * Constants<float>::pi * i) / (size - 1.0f));
-            }
-        }
+        /**
+         * @brief Default destructor that erase the different elements in the %window.
+         */
+        virtual ~Window()
 
-        template <class ForwardIterator>
-        constexpr void blackmanharris(ForwardIterator first, ForwardIterator last) {
-            for (auto i = 0l, size = std::distance(first, last); first != last; ++i, ++first) {
-                *first = 0.35875f
-                        - 0.48829f * cos((2 * Constants<float>::pi * i) / (size - 1.0f))
-                        + 0.14128f * cos((2 * (2 * Constants<float>::pi) *i) / (size - 1.0f))
-                        - 0.01168f * cos((3 * (2 * Constants<float>::pi) *i) / (size - 1.0f));
-            }
-        }
+        /**
+         * @brief Computes the %window and stores the computed values in the local data.
+         *
+         * This function computes the data of the %window. It can be called when the size of the window has been changed
+         * or when the local data has been modified and should be restored.
+         */
+        virtual void compute() EDSP_NOEXCEPT = 0;
 
-        template <class ForwardIterator>
-        constexpr void parzen(ForwardIterator first, ForwardIterator last) {
-            for (auto i = 0l, size = std::distance(first, last); first != last; ++i, ++first) {
-                *first = 1.0f - std::abs((2.f * i - size) / (size + 1.0f));
-            }
-        }
+        /**
+         * @brief Returns the number of elements in the %window
+         * @return Number of elements in the %window
+         */
+        EDSP_INLINE size_type size() const EDSP_NOEXCEPT;
 
-        template <class ForwardIterator>
-        constexpr void welch(ForwardIterator first, ForwardIterator last) {
-            for (auto i = 0l, size = std::distance(first, last)   ; first != last; ++i, ++first) {
-                *first = 1.0f - std::sqrt((2.f * i - size) / (size + 1.0f));
-            }
-        }
+        /**
+         * @brief Returns true if the %window is empty.
+         * @return True/False if the %window is empty.
+         */
+        EDSP_INLINE bool empty() const EDSP_NOEXCEPT;
+
+        /**
+         * @brief Attempt to preallocate enough memory for specified number of elements
+         * @param size Number of elements required.
+         *
+         * This function atempts to reserve enough memory for the %window. It allows the reservation
+         * of memory in %advance to prevent a possible reallocation of memory.
+         *
+         * Note: This function does not compute the %window, so %compute should be called after.
+         */
+        EDSP_INLINE void reserve(size_type size);
+
+        /**
+         * @brief Resizes the %window to the specified number of elements.
+         * @param size Number of elements the %window should contain.
+         *
+         * This function will resize & compute the window to the specified number of elements.
+         */
+        EDSP_INLINE void resize(size_type size);
+
+        /**
+         * @brief Returns a constant pointer such that [data(), data() + size()) is a valid range.
+         * @return Constant pointer to the data of the window.
+         */
+        EDSP_INLINE const_pointer data() const EDSP_NOEXCEPT;
+
+        /**
+         * @brief Returns a const pointer such that [data(), data() + size()) is a valid range.
+         * @return Pointer to the data of the window.
+         */
+        EDSP_INLINE pointer data() EDSP_NOEXCEPT;
+
+        /**
+         *  @brief Returns a Read-Only iterator that points to the first
+         *  element in the %window.
+         *  @return Constant iterator of the first element.
+         */
+        EDSP_INLINE const_iterator cbegin() const EDSP_NOEXCEPT;
+
+        /**
+         *  @brief Returns a Read-Only iterator that points to the last element in the %window (cbegin() + size()).
+         *  @return Contant iterator of the last element.
+         */
+        EDSP_INLINE const_iterator cend() const EDSP_NOEXCEPT;
+
+        /**
+         *  @brief Returns a Read/Write iterator that points to the first element in the %window.
+         *  @return Iterator of the first element.
+         */
+        EDSP_INLINE iterator begin() const EDSP_NOEXCEPT;
+
+        /**
+         *  @brief Returns a Read/Write iterator that points to the last
+         *  element in the %window (begin() + size()).
+         *  @return Iterator of the last element.
+         */
+        EDSP_INLINE iterator end() const EDSP_NOEXCEPT;
+
+        /**
+         *  @brief Subscript access to the data contained in the %window.
+         *  @param pos The index of the element for which the data should be accessed.
+         *  @return Read/Write reference to data.
+         *
+         *  Note that data access with this operator is unchecked.
+         */
+        EDSP_INLINE reference operator[](size_type pos) EDSP_NOEXCEPT;
+
+        /**
+         *  @brief Subscript access to the data contained in the %window.
+         *  @param pos The index of the element for which the data should be accessed.
+         *  @return Read-only reference to data.
+         *
+         *  Note that data access with this operator is unchecked.
+         */
+        EDSP_INLINE const_reference operator[](size_type pos) EDSP_NOEXCEPT;
+
+    protected:
+        std::vector<double> data_;
+    };
+
+    Window::Window() {
+
     }
 
+    Window::~Window() {
+
+    }
+
+    Window::Window(Window::size_type sz) : data_(std::vector<double>(sz)) {
+        compute();
+    }
+
+    Window::size_type Window::size() const EDSP_NOEXCEPT {
+        return data_.size();
+    }
+
+    void Window::reserve(Window::size_type size) {
+        data_.reserve(size);
+    }
+
+    void Window::resize(Window::size_type size) {
+        data_.resize(size);
+        compute();
+    }
+
+    Window::const_pointer Window::data() const EDSP_NOEXCEPT {
+        return data_.data();
+    }
+
+    Window::pointer Window::data() EDSP_NOEXCEPT {
+        return data_.data();
+    }
+
+    Window::const_iterator Window::cbegin() const EDSP_NOEXCEPT {
+        return &data_[0];
+    }
+
+    Window::const_iterator Window::cend() const EDSP_NOEXCEPT {
+        return cbegin() + size();
+    }
+
+    Window::iterator Window::begin() const EDSP_NOEXCEPT {
+        return &data_[0];
+    }
+
+    Window::iterator Window::end() const EDSP_NOEXCEPT {
+        return begin() + size();
+    }
+
+    const Window::value_type &Window::operator[](Window::size_type pos) EDSP_NOEXCEPT {
+        return data_[pos];
+    }
+
+    bool Window::empty() const EDSP_NOEXCEPT {
+        return data_.empty();
+    }
+
+    Window::value_type &Window::operator[](Window::size_type pos) EDSP_NOEXCEPT {
+        return data_[pos];
+    }
 EDSP_END_NAMESPACE
 
-#endif //EDSP_WINDOW_H
+#endif //EDSP_WINDOW_BASE_H
