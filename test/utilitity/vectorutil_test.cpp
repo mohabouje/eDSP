@@ -45,7 +45,7 @@ SCENARIO("Testing math features for standard containers") {
                 //REQUIRE( test::util::isEqual(total), test::db::sum_square_ref_vector);
             }
         }
-        
+
     }
 
     GIVEN("A std::vector with fractional values") {
