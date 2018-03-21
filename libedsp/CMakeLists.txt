@@ -41,7 +41,8 @@ set(HEADER_FILES
         include/window/hamming.h
         include/window/hanning.h
         include/window/blackman.h
-        include/window/kaiser.h)
+        include/window/kaiser.h
+        include/window/parzen.h)
 
 set(SOURCE_FILES
         src/blocks/delay.cpp
@@ -61,7 +62,9 @@ set(SOURCE_FILES
         src/window/hamming.cpp
         src/window/hanning.cpp
         src/window/blackman.cpp
-        src/window/kaiser.cpp)
+        src/window/kaiser.cpp
+        src/window/parzen.cpp
+        src/window/rectangular.cpp include/window/rectangular.h src/window/gaussian.cpp include/window/gaussian.h)
 
 
 add_library(libedsp ${HEADER_FILES} ${SOURCE_FILES})
