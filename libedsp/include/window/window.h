@@ -24,7 +24,7 @@ EDSP_BEGIN_NAMESPACE
         using value_type = double;
         using pointer = value_type *;
         using const_pointer = const value_type *;
-        using reference = value_type&:
+        using reference = value_type&;
         using const_reference = const value_type&;
 
         using iterator = value_type*;
@@ -32,7 +32,7 @@ EDSP_BEGIN_NAMESPACE
         using reverse_iterator = std::reverse_iterator<iterator>;
         using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
-        using size_type = std::vector::size_type;
+        using size_type = std::vector<double>::size_type;
         using difference_type = std::ptrdiff_t;
 
         /**
@@ -57,7 +57,7 @@ EDSP_BEGIN_NAMESPACE
          * This function computes the data of the %window. It can be called when the size of the window has been changed
          * or when the local data has been modified and should be restored.
          */
-        virtual void compute() EDSP_NOEXCEPT = 0;
+        virtual void compute() = 0;
 
         /**
          * @brief Returns the number of elements in the %window
@@ -144,7 +144,7 @@ EDSP_BEGIN_NAMESPACE
          *
          *  Note that data access with this operator is unchecked.
          */
-        EDSP_INLINE const_reference operator[](size_type pos) EDSP_NOEXCEPT;
+        EDSP_INLINE const_reference operator[](size_type pos) const EDSP_NOEXCEPT;
 
     protected:
         std::vector<double> data_;
@@ -159,7 +159,6 @@ EDSP_BEGIN_NAMESPACE
     }
 
     Window::Window(Window::size_type sz) : data_(std::vector<double>(sz)) {
-        compute();
     }
 
     Window::size_type Window::size() const EDSP_NOEXCEPT {
@@ -184,7 +183,7 @@ EDSP_BEGIN_NAMESPACE
     }
 
     Window::const_iterator Window::cbegin() const EDSP_NOEXCEPT {
-        return &data_[0];
+        return const_iterator(&data_[0]);
     }
 
     Window::const_iterator Window::cend() const EDSP_NOEXCEPT {
@@ -192,14 +191,14 @@ EDSP_BEGIN_NAMESPACE
     }
 
     Window::iterator Window::begin() const EDSP_NOEXCEPT {
-        return &data_[0];
+        return iterator(&data_[0]);
     }
 
     Window::iterator Window::end() const EDSP_NOEXCEPT {
         return begin() + size();
     }
 
-    const Window::value_type &Window::operator[](Window::size_type pos) EDSP_NOEXCEPT {
+    const Window::value_type &Window::operator[](Window::size_type pos) const EDSP_NOEXCEPT {
         return data_[pos];
     }
 

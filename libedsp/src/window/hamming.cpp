@@ -11,7 +11,7 @@ Hamming::Hamming(edsp::Window::size_type size) : Window(size) {
 }
 
 void Hamming::compute() {
-    for (auto  sz = size(), i = 0; i < sz; ++i) {
+    for (size_type sz = size(), i = 0; i < sz; ++i) {
         data_[i] = 0.53836 - 0.46164 * std::cos(2 * Constants<double>::pi * i / (sz - 1.0));
     }
 }

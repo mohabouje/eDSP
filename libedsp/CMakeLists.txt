@@ -40,6 +40,7 @@ set(HEADER_FILES
         include/window/window.h
         include/window/hamming.h
         include/window/hanning.h
+        include/window/blackman.h
         )
 
 set(SOURCE_FILES
@@ -59,7 +60,7 @@ set(SOURCE_FILES
         src/frequency/lpc.cpp
         src/window/hamming.cpp
         src/window/hanning.cpp
-        )
+        src/window/blackman.cpp)
 
 
 add_library(libedsp ${HEADER_FILES} ${SOURCE_FILES})
