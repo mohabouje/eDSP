@@ -38,6 +38,7 @@ set(HEADER_FILES
         include/utility/map.h
         include/utility/vector.h
         include/window/window.h
+        include/window/hamming.h
         )
 
 set(SOURCE_FILES
@@ -54,8 +55,22 @@ set(SOURCE_FILES
         src/filters/fir.cpp
         src/frequency/dct.cpp
         src/frequency/idct.cpp
-        src/frequency/lpc.cpp)
+        src/frequency/lpc.cpp
+        src/window/hamming.cpp
+        )
 
+find_package(Doxygen)
+if(NOT DOXYGEN_FOUND)
+    message(WARNING "Doxygen not found, unable to generate documentation")
+else()
+    set(DOXY_DOC_DEST_DIR ${CMAKE_BINARY_DIR} CACHE PATH "${CMAKE_BINARY_DIR}/doxyfile")
+    set(DOXY_DOC_INPUT_ROOT_DIRS ${CMAKE_HOME_DIRECTORY} CACHE PATH ${CMAKE_HOME_DIRECTORY})
+    configure_file(doxyfile.in ${CMAKE_BINARY_DIR}/doxyfile @ONLY)
+    add_custom_target(doxyDoc COMMAND ${DOXYGEN_EXECUTABLE} "${CMAKE_BINARY_DIR}/doxyfile"
+            WORKING_DIRECTORY ${CMAKE_HOME_DIRECTORY}
+            COMMENT "Building user's documentation into doxyDoc build dir..."
+            )
+endif()
 
 add_library(libedsp ${HEADER_FILES} ${SOURCE_FILES})
 include_directories(./include/)

@@ -7,10 +7,20 @@
 
 #include "config.h"
 #include <vector>
-#include <bits/valarray_after.h>
 
 EDSP_BEGIN_NAMESPACE
+
+    /**
+     * @brief An abstract container class that stores the computation of a generic %window function.
+     *
+     * In DSP, a %window function is a mathematical function that is zero-valued outside of some chosen interval. A %window
+     * function is generally used for taking a small subset of a larger dataset, for processing and analysis.
+     *
+     * The reason there are so many types is that each one generates a slightly different frequency response and time domain
+     * response.
+     */
     class Window {
+    public:
         using value_type = double;
         using pointer = value_type *;
         using const_pointer = const value_type *;
@@ -30,7 +40,8 @@ EDSP_BEGIN_NAMESPACE
          */
         Window();
 
-        /* @brief Creates and computes a %window with the default constructed elements.
+        /**
+         * @brief Creates and computes a %window with the default constructed elements.
          * @param size The number of elements to initially create.
          */
         explicit Window(size_type size);
@@ -38,7 +49,7 @@ EDSP_BEGIN_NAMESPACE
         /**
          * @brief Default destructor that erase the different elements in the %window.
          */
-        virtual ~Window()
+        virtual ~Window();
 
         /**
          * @brief Computes the %window and stores the computed values in the local data.
