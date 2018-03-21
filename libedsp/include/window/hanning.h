@@ -19,7 +19,7 @@ EDSP_BEGIN_NAMESPACE
  * \f[
  *    w(n)=\alpha -\beta \;\cos \left({\frac {2\pi n}{N-1}}\right),
  * \f]
- * with \f[ {\displaystyle \alpha =0.5,\;\beta =1-\alpha =0.5} \f]
+ * with \f$ {\displaystyle \alpha =0.5,\;\beta =1-\alpha =0.5} \f$
  *
  */
 class Hanning : Window {

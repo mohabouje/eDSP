@@ -18,7 +18,7 @@ EDSP_BEGIN_NAMESPACE
      * \f[
      *    w(n)=\alpha -\beta \;\cos \left({\frac {2\pi n}{N-1}}\right),
      * \f]
-     * with \f[ {\displaystyle \alpha =0.54,\;\beta =1-\alpha =0.46,} \f]
+     * with \f$ {\displaystyle \alpha =0.54,\;\beta =1-\alpha =0.46,} \f$
      *
      */
     class Hamming : Window {

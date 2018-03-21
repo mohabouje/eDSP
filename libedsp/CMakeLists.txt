@@ -41,7 +41,7 @@ set(HEADER_FILES
         include/window/hamming.h
         include/window/hanning.h
         include/window/blackman.h
-        )
+        include/window/kaiser.h)
 
 set(SOURCE_FILES
         src/blocks/delay.cpp
@@ -60,7 +60,8 @@ set(SOURCE_FILES
         src/frequency/lpc.cpp
         src/window/hamming.cpp
         src/window/hanning.cpp
-        src/window/blackman.cpp)
+        src/window/blackman.cpp
+        src/window/kaiser.cpp)
 
 
 add_library(libedsp ${HEADER_FILES} ${SOURCE_FILES})
