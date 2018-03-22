@@ -292,7 +292,7 @@ EDSP_BEGIN_NAMESPACE
     const Window::value_type &Window::operator[](Window::size_type pos) const EDSP_NOEXCEPT {
         return data_[pos];
     }
-    
+
     Window::value_type &Window::operator[](Window::size_type pos) EDSP_NOEXCEPT {
         return data_[pos];
     }
