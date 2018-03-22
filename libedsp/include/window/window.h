@@ -35,6 +35,12 @@ EDSP_BEGIN_NAMESPACE
         using size_type = std::vector<double>::size_type;
         using difference_type = std::ptrdiff_t;
 
+        enum class WindowType {
+            Symmetric,
+            Periodic
+        };
+
+
         /**
          * @brief Creates a %window with no elements.
          */
@@ -45,6 +51,14 @@ EDSP_BEGIN_NAMESPACE
          * @param size The number of elements to initially create.
          */
         explicit Window(size_type size);
+
+        /**
+         * @brief Creates and computes a %window with the default constructed elements and the given type
+         * @param size The number of elements to initially create.
+         * @param type Type of the window: Symmetric or Periodic
+         */
+        Window(size_type size, WindowType type);
+
 
         /**
          * @brief Default destructor that erase the different elements in the %window.
@@ -146,8 +160,23 @@ EDSP_BEGIN_NAMESPACE
          */
         EDSP_INLINE const_reference operator[](size_type pos) const EDSP_NOEXCEPT;
 
+        /**
+         *  @brief Returns the type of the window
+         *  @return
+         */
+        EDSP_INLINE WindowType type() const EDSP_NOEXCEPT;
+
+        /**
+         * @brief Set the type of the window,
+         *
+         * Note: In some windows updating this parameter has no effect,
+         * @param type Type of the window: Symmetric or Periodic
+         * @return
+         */
+        EDSP_INLINE WindowType set_type(WindowType type) EDSP_NOEXCEPT;
     protected:
-        std::vector<double> data_;
+        std::vector<value_type> data_;
+        WindowType type_ = WindowType::Symmetric;
     };
 
     Window::Window() {
@@ -159,6 +188,11 @@ EDSP_BEGIN_NAMESPACE
     }
 
     Window::Window(Window::size_type sz) : data_(std::vector<double>(sz)) {
+
+    }
+
+    Window::Window(size_type size, Window::WindowType type_) : data_(std::vector<double>(size)), type_(type_) {
+
     }
 
     Window::size_type Window::size() const EDSP_NOEXCEPT {
@@ -209,6 +243,15 @@ EDSP_BEGIN_NAMESPACE
     Window::value_type &Window::operator[](Window::size_type pos) EDSP_NOEXCEPT {
         return data_[pos];
     }
+
+    Window::WindowType Window::type() const EDSP_NOEXCEPT {
+        return type_;
+    }
+
+    Window::WindowType Window::set_type(Window::WindowType type) EDSP_NOEXCEPT {
+        return type_ = type;
+    }
+
 EDSP_END_NAMESPACE
 
 #endif //EDSP_WINDOW_BASE_H

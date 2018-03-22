@@ -15,19 +15,19 @@
 
 // Check windows
 #if _WIN32 || _WIN64
-    #if _WIN64
-        #define EDSP_X64
-    #else
-        #define EDSP_X32
-    #endif
+#if _WIN64
+#define EDSP_X64
+#else
+#define EDSP_X86
+#endif
 #endif
 
 #if __GNUC__
-    #if __x86_64__ || __ppc64__
-        #define EDSP_X64
-    #else
-        #define EDSP_X32
-    #endif
+#if __x86_64__ || __ppc64__
+#define EDSP_X64
+#else
+#define EDSP_X86
+#endif
 #endif
 
 #define EDSP_NOEXCEPT noexcept

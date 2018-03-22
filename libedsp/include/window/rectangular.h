@@ -10,11 +10,6 @@
 EDSP_BEGIN_NAMESPACE
     /**
      * @brief Rectangular %window implementation.
-     *     *
-     * \f[
-            {\displaystyle w(n)=1}
-     * \f]
-     *
      */
     class Rectangular : Window {
     public:

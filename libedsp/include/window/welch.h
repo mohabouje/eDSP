@@ -23,42 +23,26 @@ EDSP_BEGIN_NAMESPACE
      */
     class Welch : Window {
     public:
-        enum class WelchType {
-            Symmetric,
-            Periodic
-        };
+
 
         /**
          * @brief Creates and computes a Welch %window with the given size.
          * @param size The number of elements to initially create.
          */
-        Welch(size_type size);
+        explicit Welch(size_type size);
 
         /**
          * @brief Creates and computes a Welch %window with the given size and type.
          * @param size The number of elements to initially create.
          * @param type Window type.
          */
-        Welch(size_type size, WelchType type_);
+        Welch(size_type size, WindowType type_);
 
         ~Welch() override;
-        
+
 
         void compute() override;
 
-        /**
-         * @brief Returns the type of the %window
-         * @return Welch window type: Symmetric or Periodic
-         */
-        WelchType type() const EDSP_NOEXCEPT;
-
-        /**
-         * @brief Set the type of the %window
-         * @param type Symmetric or Periodic
-         */
-        void set_type(const WelchType type) EDSP_NOEXCEPT;
-    private:
-        WelchType type_;
     };
 EDSP_END_NAMESPACE
 
