@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "generators/singenerator.h"
+#include "generators/sin_generator.h"
 #include "base/constants.h"
 #include <cmath>
 using namespace edsp;
@@ -24,8 +24,17 @@ SinGenerator::SinGenerator() = default;
 
 SinGenerator::~SinGenerator() = default;
 
-Generator::value_type SinGenerator::generate() EDSP_NOEXCEPT {
+SinGenerator::SinGenerator(Generator::value_type amplitude, Generator::value_type samplerate,
+                           Generator::value_type frequency, Generator::value_type phase) : PeriodicGenerator(amplitude,
+                                                                                                             samplerate,
+                                                                                                             frequency,
+                                                                                                             phase) {
+
+}
+
+Generator::value_type SinGenerator::operator()() EDSP_NOEXCEPT {
     const value_type result = std::sin(2 * Constants<value_type>::pi  * (frequency() * timestamp() + phase()));
     set_timestamp(timestamp() + 1. / samplerate());
-    return result;
-}
+    return result;}
+
+

@@ -13,24 +13,24 @@ EDSP_BEGIN_NAMESPACE
     namespace generators {
 
         template <typename T, std::size_t N, typename R>
-        constexpr auto sin(R frequency, R phase, R samplerate, R amplitude) {
+        constexpr auto sin(R frequency, R phase, R samplerate, R amplitudee) {
             std::array<T, N> data;
             R increment = 0, period = 1. / samplerate;
             R norm_phase = 2 * Constants<T>::pi * phase;
             for (auto i = 0; i < N; i++) {
-                data[i] = amplitude * std::sin(2 * Constants<T>::pi * frequency * increment + norm_phase);
+                data[i] = amplitudee * std::sin(2 * Constants<T>::pi * frequency * increment + norm_phase);
                 increment += period;
             }
             return data;
         }
 
         template <typename T, std::size_t N, typename R>
-        constexpr auto square(R frequency, R dutty_cycle, R samplerate, R amplitude) {
+        constexpr auto square(R frequency, R dutty_cycle, R samplerate, R amplitudee) {
             std::array<T, N> data;
             auto samplesPerPeriod = static_cast<size_t>(samplerate / frequency);
             auto samplesPerDuttyCycle = static_cast<size_t> (dutty_cycle * samplesPerPeriod);
             for (auto i = 0; i < N; i++) {
-                data[i] =  amplitude * ((i % samplesPerPeriod) < samplesPerDuttyCycle ? 1 : -1);
+                data[i] =  amplitudee * ((i % samplesPerPeriod) < samplesPerDuttyCycle ? 1 : -1);
             }
             return data;
         };
@@ -68,7 +68,7 @@ EDSP_BEGIN_NAMESPACE
         };
 
         template <typename T, std::size_t N, typename R>
-        constexpr auto inpulse_generator(R amplitude) {
+        constexpr auto inpulse_generator(R amplitudee) {
             std::array<T, N> data;
             std::fill(std::begin(data), std::end(data), 0);
             data[0] = 1;

@@ -21,12 +21,33 @@
 #include "periodic_generator.h
 
 EDSP_BEGIN_NAMESPACE
+
+/**
+ * @brief Generate a periodic sinusoidal signal with the given %frecuency sampled at %samplerate.
+ */
 class SinGenerator : public PeriodicGenerator {
 public:
+    /**
+     * @brief Created a SinGenerator with the defualt configuration
+     */
     SinGenerator();
+
+    /**
+     * @brief Created a TriangularPulseGenerator with the given configuration
+     * @param amplitude
+     * @param samplerate
+     * @param frequency
+     * @param phase
+     */
+    SinGenerator(value_type amplitude, value_type samplerate, value_type frequency, value_type phase);
     ~SinGenerator() override;
 
-    value_type generate() EDSP_NOEXCEPT override ;
+    /**
+     * \brief Computes the output of the generator in the given timestamp
+     *
+     * @return Output of the generator
+     */
+    value_type operator()() EDSP_NOEXCEPT;
 };
 
 EDSP_END_NAMESPACE

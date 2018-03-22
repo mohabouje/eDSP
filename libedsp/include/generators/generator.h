@@ -25,36 +25,28 @@ EDSP_BEGIN_NAMESPACE
     public:
         using value_type = double;
         Generator();
-        explicit Generator(value_type amplitud);
+        explicit Generator(value_type amplitude);
         virtual ~Generator();
 
-        EDSP_INLINE value_type operator()() EDSP_NOEXCEPT;
-        virtual value_type generate() EDSP_NOEXCEPT = 0;
-        virtual void reset() EDSP_NOEXCEPT = 0;
-
         EDSP_INLINE value_type amplitude() const EDSP_NOEXCEPT;
-        void set_amplitud(value_type amplitud) EDSP_NOEXCEPT;
+        void set_amplitude(value_type amplitude) EDSP_NOEXCEPT;
 
     private:
-        value_type amplitud_{1};
+        value_type amplitude_{1};
     };
 
     Generator::Generator() = default;
     Generator::~Generator() = default;
-    Generator::Generator(Generator::value_type amplitud) : amplitud_(amplitud) {
+    Generator::Generator(Generator::value_type amplitude) : amplitude_(amplitude) {
 
-    }
-
-    Generator::value_type Generator::operator()() EDSP_NOEXCEPT {
-        return generate();
     }
 
     Generator::value_type Generator::amplitude() const EDSP_NOEXCEPT {
-        return amplitud_;
+        return amplitude_;
     }
 
-    void Generator::set_amplitud(Generator::value_type amplitud) EDSP_NOEXCEPT {
-        amplitud_ = amplitud;
+    void Generator::set_amplitude(Generator::value_type amplitude) EDSP_NOEXCEPT {
+        amplitude_ = amplitude;
     }
 
 EDSP_END_NAMESPACE

@@ -6,6 +6,8 @@ if (COMPILE_GENERATORS)
             include/generators/singenerator.h
             include/generators/time_series_generator.h
             include/generators/periodic_generator.h
+            include/generators/triangular_pulse_generator.cpp
+            include/generators/triangular_pulse_generator.h
             PARENT_SCOPE)
 
 
