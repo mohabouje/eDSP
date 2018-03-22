@@ -1,9 +1,3 @@
-option(COMPILE_FILTERS "Compiles the Filters module" ON)
-option(COMPILE_GENERATORS "Compiles the Generators module" ON)
-option(COMPILE_FREQUENCY "Compiles the Frequency module" ON)
-option(COMPILE_AUDIO_BLOCKS "Compiles the Audio Blocks module" ON)
-
-
 
 set(HEADER_FILES
         include/config.h
@@ -13,7 +7,6 @@ set(HEADER_FILES
         include/base/sfinae.h
         include/base/transform.h
         include/base/types.h
-        include/generators/generators.h
         include/math/complex.h
         include/math/math.h
         include/math/stats.h
@@ -24,16 +17,13 @@ set(HEADER_FILES
         include/utility/vector.h
 )
 
-set(SOURCE_FILES
-
-
-
-)
+set(SOURCE_FILES )
 
 
 add_subdirectory(include/window)
 add_subdirectory(include/frequency)
 add_subdirectory(include/filters)
+add_subdirectory(include/generators)
 add_subdirectory(include/blocks)
 add_library(libedsp ${HEADER_FILES} ${SOURCE_FILES})
 
