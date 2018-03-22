@@ -8,6 +8,7 @@ if (COMPILE_GENERATORS)
             include/generators/periodic_generator.h
             include/generators/triangular_pulse_generator.h
             include/generators/square_pulse_generator.h
+            include/generators/sawtooth_generator.h
             PARENT_SCOPE)
 
 
@@ -15,5 +16,6 @@ if (COMPILE_GENERATORS)
             src/generators/sin_generator.cpp
             src/generators/square_pulse_generator.cpp
             src/generators/triangular_pulse_generator.cpp
+            src/generators/sawtooth_generator.cpp
             PARENT_SCOPE)
 endif(COMPILE_GENERATORS)

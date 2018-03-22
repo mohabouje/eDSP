@@ -15,34 +15,32 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "generators/square_pulse_generator.h"
+#include "generators/sawtooth_generator.h"
 using namespace edsp;
 
-
-void SquarePulseGenerator::set_duty_cycle(Generator::value_type dutty) EDSP_NOEXCEPT {
-    duty_ = dutty;
-    duty_t_ = dutty / frequency();
+Generator::value_type SawtoothGenerator::width() const EDSP_NOEXCEPT {
+    return width_;
 }
 
-Generator::value_type SquarePulseGenerator::duty_cycle() const EDSP_NOEXCEPT {
-    return duty_;
+void SawtoothGenerator::set_width(Generator::value_type width) EDSP_NOEXCEPT {
+    width_ = width;
 }
 
-Generator::value_type SquarePulseGenerator::operator()() EDSP_NOEXCEPT {
+Generator::value_type SawtoothGenerator::operator()() EDSP_NOEXCEPT {
     const auto t = timestamp();
-    const value_type result = (t >= duty_) ? -1 : 1;
+    const value_type result = (t >= width_) ? -2 * t / (1 - width_) + 1
+                                            : 2 * t / width_ - 1;
     const value_type increased = t + 1. / samplerate();
     set_timestamp((increased > 1. / frequency()) ? 0 : increased);
     return result * amplitude();
 }
 
-SquarePulseGenerator::SquarePulseGenerator(Generator::value_type amplitude,
-                                           Generator::value_type samplerate,
-                                           Generator::value_type frequency,
-                                           Generator::value_type duty_)
-    : PeriodicGenerator(amplitude, samplerate, frequency, 0.), duty_(duty_) {
-}
+SawtoothGenerator::SawtoothGenerator() = default;
 
-SquarePulseGenerator::~SquarePulseGenerator() = default;
+SawtoothGenerator::~SawtoothGenerator() = default;
 
-SquarePulseGenerator::SquarePulseGenerator() = default;
+SawtoothGenerator::SawtoothGenerator(Generator::value_type amplitude,
+                                     Generator::value_type samplerate,
+                                     Generator::value_type frequency,
+                                     Generator::value_type width)
+    : PeriodicGenerator(amplitude, samplerate, frequency, 0.), width_(width) {}
