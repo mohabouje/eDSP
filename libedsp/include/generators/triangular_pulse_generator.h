@@ -18,7 +18,7 @@
 #ifndef EDSP_GENERATORS_TRIANGULAR_PULSE_GENERATOR_H
 #define EDSP_GENERATORS_TRIANGULAR_PULSE_GENERATOR_H
 
-#include "periodic_generator.h
+#include "periodic_generator.h"
 
 EDSP_BEGIN_NAMESPACE
 

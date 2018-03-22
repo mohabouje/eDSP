@@ -18,7 +18,7 @@
 #ifndef EDSP_GENERATORS_SINGENERATOR_H
 #define EDSP_GENERATORS_SINGENERATOR_H
 
-#include "periodic_generator.h
+#include "periodic_generator.h"
 
 EDSP_BEGIN_NAMESPACE
 

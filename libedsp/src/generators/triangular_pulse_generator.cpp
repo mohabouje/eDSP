@@ -40,9 +40,8 @@ Generator::value_type TriangularPulseGenerator::operator()() EDSP_NOEXCEPT {
     else if (t > peak_ && t < half_w)
         result = (t - half_w) / (peak_ - half_w);
 
-    const value_type period = 1. / frequency();
     const value_type increased = t + 1. / samplerate();
-    set_timestamp((increased > period) ? 0 : increased);
+    set_timestamp((increased >  1. / frequency()) ? 0 : increased);
     return result * amplitude();
 }
 

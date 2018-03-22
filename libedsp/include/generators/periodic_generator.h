@@ -18,7 +18,7 @@
 #ifndef EDSP_GENERATORS_PERIODIC_GENERATOR_H
 #define EDSP_GENERATORS_PERIODIC_GENERATOR_H
 
-#include "time_series_generator.h
+#include "time_series_generator.h"
 
 EDSP_BEGIN_NAMESPACE
 
