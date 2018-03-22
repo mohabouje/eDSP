@@ -2,13 +2,12 @@
 // Created by mohabouje on 21/03/18.
 //
 
-#ifndef EDSP_WINDOW_BlackmanZ_H
-#define EDSP_WINDOW_BlackmanZ_H
+#ifndef EDSP_WINDOW_BLACKMAN_H
+#define EDSP_WINDOW_BLACKMAN_H
 
 #include "window.h"
 
 EDSP_BEGIN_NAMESPACE
-    
     /**
      * @brief Blackman %window implementation.
      *
@@ -38,4 +37,4 @@ EDSP_BEGIN_NAMESPACE
     };
 EDSP_END_NAMESPACE
 
-#endif //EDSP_WINDOW_BlackmanZ_H
+#endif //EDSP_WINDOW_BLACKMAN_H

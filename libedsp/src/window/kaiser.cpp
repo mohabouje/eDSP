@@ -8,6 +8,10 @@ Kaiser::Kaiser(edsp::Window::size_type size) : Window(size) {
 
 }
 
+Kaiser::Kaiser(Window::size_type size, Window::value_type beta) : Window(size), beta_(beta) {
+
+}
+
 void Kaiser::compute() {
     // TODO: implement
 }
@@ -24,6 +28,3 @@ Window::value_type Kaiser::beta() const EDSP_NOEXCEPT {
     return beta_;
 }
 
-Kaiser::Kaiser(Window::size_type size, Window::value_type beta) : Window(size), beta_(beta) {
-
-}

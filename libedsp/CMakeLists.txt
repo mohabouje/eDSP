@@ -64,7 +64,7 @@ set(SOURCE_FILES
         src/window/blackman.cpp
         src/window/kaiser.cpp
         src/window/parzen.cpp
-        src/window/rectangular.cpp include/window/rectangular.h src/window/gaussian.cpp include/window/gaussian.h)
+        src/window/rectangular.cpp include/window/rectangular.h src/window/gaussian.cpp include/window/gaussian.h src/window/bathann.cpp include/window/bathann.h src/window/bohman.cpp include/window/bohman.h src/window/triangular.cpp include/window/triangular.h src/window/tukey.cpp include/window/tukey.h src/window/welch.cpp include/window/welch.h)
 
 
 add_library(libedsp ${HEADER_FILES} ${SOURCE_FILES})

@@ -8,7 +8,6 @@
 #include "window.h"
 
 EDSP_BEGIN_NAMESPACE
-
     /**
      * @brief Gaussian %window implementation.
      *

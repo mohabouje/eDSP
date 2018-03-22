@@ -12,7 +12,7 @@ EDSP_BEGIN_NAMESPACE
     /**
      * @brief Parzen %window implementation.
      *
-     * Parzen windows a piecewise-cubic approximation of Gaussian windows. It is all known as de la Vallée Poussin window.
+     * Parzen windows a piecewise-cubic approximation of Gaussian windows. It is also known as de la Vallée Poussin window.
      * The following equation defines the N–point Parzen window over the interval \f$ -\frac{N-1}{2} \leqslant  n \leqslant  \frac{N-1}{2}  \f$:
      *
      * \f[
