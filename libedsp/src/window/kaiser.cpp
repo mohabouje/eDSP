@@ -23,13 +23,13 @@ Kaiser::Kaiser(Window::size_type size) : Window(size) {
 
 }
 
-Kaiser::Kaiser(Window::size_type size, Window::value_type beta) {
+Kaiser::Kaiser(Window::size_type size, Window::value_type beta) : Window(size), beta_(beta) {
 
 }
 
 Kaiser::~Kaiser() = default;
 
-void Kaiser::compute() {
+void Kaiser::initialize() {
 
 }
 

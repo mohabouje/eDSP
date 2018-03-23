@@ -26,7 +26,7 @@ BartHann::BartHann(Window::size_type size) : Window(size) {
 
 BartHann::~BartHann() = default;
 
-void BartHann::compute() {
+void BartHann::initialize() {
     for (size_type i = 0, sz = size(); i < sz; ++i) {
         data_[i] = 0.62 -0.48 * std::abs(i / (sz - 1) - 0.5) +
                 0.38 * std::cos(2 * Constants<value_type>::pi * (i / (sz - 1) - 0.5));

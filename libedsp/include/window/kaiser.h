@@ -49,7 +49,7 @@ EDSP_BEGIN_NAMESPACE
         Kaiser(size_type size, value_type beta);
         ~Kaiser() override;
 
-        void compute() override;
+        void initialize() override;
 
         /**
          * @brief Set the spectral sidelobe attenuation factor.

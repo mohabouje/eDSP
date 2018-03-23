@@ -24,7 +24,7 @@ Rectangular::Rectangular(edsp::Window::size_type size) : Window(size) {
 
 Rectangular::~Rectangular() = default;
 
-void Rectangular::compute() {
+void Rectangular::initialize() {
     std::fill(begin(), end(), 1.);
 }
 

@@ -25,7 +25,7 @@ Parzen::Parzen(edsp::Window::size_type size) : Window(size) {
 
 Parzen::~Parzen() = default;
 
-void Parzen::compute() {
+void Parzen::initialize() {
     if (!empty()) {
         const value_type half = (size() - 1) / 2.;
         const value_type quarter = half / 2.;

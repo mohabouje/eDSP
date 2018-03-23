@@ -30,7 +30,7 @@ Gaussian::Gaussian(Window::size_type size, Window::value_type alpha) : Window(si
 
 Gaussian::~Gaussian() = default;
 
-void Gaussian::compute() {
+void Gaussian::initialize() {
     if (!empty()) {
         value_type initial = -(size() - 1);
         for (size_type i = 0, sz = size(); i < sz; ++i) {

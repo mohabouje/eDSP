@@ -56,7 +56,7 @@ EDSP_BEGIN_NAMESPACE
 
         ~Gaussian() override;
 
-        void compute() override;
+        void initialize() override;
 
         /**
          * @brief Set the proportional factor to the standard deviation

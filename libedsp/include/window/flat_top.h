@@ -51,7 +51,7 @@ EDSP_BEGIN_NAMESPACE
         explicit FlatTop(size_type size);
         ~FlatTop() override;
 
-        void compute() override;
+        void initialize() override;
     };
 EDSP_END_NAMESPACE
 

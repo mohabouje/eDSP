@@ -71,7 +71,7 @@ EDSP_BEGIN_NAMESPACE
          * This function computes the data of the %window. It can be called when the size of the window has been changed
          * or when the local data has been modified and should be restored.
          */
-        virtual void compute() = 0;
+        virtual void initialize() = 0;
 
         /**
          * @brief Returns the number of elements in the %window
@@ -205,7 +205,7 @@ EDSP_BEGIN_NAMESPACE
 
     void Window::resize(Window::size_type size) {
         data_.resize(size);
-        compute();
+        initialize();
     }
 
     Window::const_pointer Window::data() const EDSP_NOEXCEPT {

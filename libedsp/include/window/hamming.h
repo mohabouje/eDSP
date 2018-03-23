@@ -52,7 +52,7 @@ EDSP_BEGIN_NAMESPACE
 
         ~Hamming() override;
 
-        void compute() override;
+        void initialize() override;
     };
 EDSP_END_NAMESPACE
 

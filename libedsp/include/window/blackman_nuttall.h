@@ -44,7 +44,7 @@ EDSP_BEGIN_NAMESPACE
         explicit BlackmanNuttall(size_type size);
         ~BlackmanNuttall() override;
 
-        void compute() override;
+        void initialize() override;
     };
 
 EDSP_END_NAMESPACE

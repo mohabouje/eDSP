@@ -30,7 +30,7 @@ Welch::Welch(Window::size_type size, WindowType type) : Window(size, type) {
 
 Welch::~Welch() = default;
 
-void Welch::compute() {
+void Welch::initialize() {
     if (!empty()) {
         const size_type minimum_size = (type_ == WindowType::Symmetric) ? 3 : 2;
         if (size() < minimum_size)

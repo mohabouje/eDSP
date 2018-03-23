@@ -27,7 +27,7 @@ Bohman::Bohman(Window::size_type size) : Window(size) {
 
 Bohman::~Bohman() = default;
 
-void Bohman::compute() {
+void Bohman::initialize() {
     if (!empty()) {
         const value_type N = size() - 1;
         value_type initial = -N / 2.0;

@@ -38,7 +38,7 @@ EDSP_BEGIN_NAMESPACE
         explicit BartHann(size_type size);
         ~BartHann() override;
 
-        void compute() override;
+        void initialize() override;
     };
 EDSP_END_NAMESPACE
 

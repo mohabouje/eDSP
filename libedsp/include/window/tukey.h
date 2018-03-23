@@ -48,7 +48,7 @@ EDSP_BEGIN_NAMESPACE
         ~Tukey() override;
 
 
-        void compute() override;
+        void initialize() override;
 
         /**
          * @brief Set the ratio between the constant section and the cosine section.

@@ -30,7 +30,7 @@ BlackmanHarris::BlackmanHarris(Window::size_type size, Window::WindowType type) 
 
 BlackmanHarris::~BlackmanHarris() = default;
 
-void BlackmanHarris::compute() {
+void BlackmanHarris::initialize() {
     if (!empty()) {
         const value_type N = (type_ == WindowType::Symmetric) ? size() - 1 : size();
         for (size_type i = 0, sz = size(); i < sz; ++i) {

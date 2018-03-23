@@ -30,7 +30,7 @@ Hamming::Hamming(Window::size_type size, Window::WindowType type) : Window(size,
 
 Hamming::~Hamming() = default;
 
-void Hamming::compute() {
+void Hamming::initialize() {
     if (!empty()) {
         const value_type N = (type_ == WindowType::Symmetric) ? size() - 1 : size();
         for (size_type i = 0, sz = size(); i < sz; ++i) {

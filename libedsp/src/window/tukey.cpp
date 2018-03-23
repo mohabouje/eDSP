@@ -45,7 +45,7 @@ Window::value_type Tukey::ratio() const EDSP_NOEXCEPT {
 }
 
 
-void Tukey::compute() {
+void Tukey::initialize() {
     if (!empty()) {
         const size_type sz = size();
         const size_type N = sz - 1;

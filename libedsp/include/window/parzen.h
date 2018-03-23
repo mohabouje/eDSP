@@ -31,7 +31,7 @@ EDSP_BEGIN_NAMESPACE
         explicit Parzen(size_type size);
         ~Parzen() override;
 
-        void compute() override;
+        void initialize() override;
     };
 EDSP_END_NAMESPACE
 

@@ -35,7 +35,7 @@ EDSP_BEGIN_NAMESPACE
         explicit Rectangular(size_type size);
         ~Rectangular() override;
 
-        void compute() override;
+        void initialize() override;
     };
 
     using Boxcar = Rectangular;

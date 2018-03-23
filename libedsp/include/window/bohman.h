@@ -37,7 +37,7 @@ EDSP_BEGIN_NAMESPACE
         explicit Bohman(size_type size);
         ~Bohman() override;
 
-        void compute() override;
+        void initialize() override;
     };
 EDSP_END_NAMESPACE
 

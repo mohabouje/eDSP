@@ -25,7 +25,7 @@ Triangular::Triangular(Window::size_type size) : Window(size) {
 
 Triangular::~Triangular() = default;
 
-void Triangular::compute() {
+void Triangular::initialize() {
     if (!empty()) {
         const size_type sz = size();
         const value_type rem = sz + std::remainder(sz, 2);

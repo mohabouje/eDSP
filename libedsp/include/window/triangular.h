@@ -41,7 +41,7 @@ public:
     explicit Triangular(size_type size);
     ~Triangular() override;
 
-    void compute() override;
+    void initialize() override;
 };
 EDSP_END_NAMESPACE
 
