@@ -28,18 +28,18 @@ Blackman::Blackman(Window::size_type size, Window::WindowType type) : Window(siz
 
 }
 
+Blackman::~Blackman() = default;
 
 void Blackman::compute() {
     if (!empty()) {
         const value_type N = (type_ == WindowType::Symmetric) ? size() - 1 : size();
         for (size_type i = 0, sz = size(); i < sz; ++i) {
-            data_[i] = 0.42 - 0.5 * std::cos(2. * Constants<value_type>::pi * i / N)
-                       + 0.08 * std::cos (4 * Constants<value_type>::pi * i / N);
+            value_type tmp = Constants<value_type>::pi * i / N;
+            data_[i] = 0.42
+                        - 0.50 * std::cos(2. * tmp)
+                        + 0.08 * std::cos(4. * tmp);
         }
     }
 }
 
-Blackman::~Blackman() {
-
-}
 

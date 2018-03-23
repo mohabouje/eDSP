@@ -15,30 +15,40 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+#ifndef EDSP_WINDOW_BLACKMAN_HARRIS_H
+#define EDSP_WINDOW_BLACKMAN_HARRIS_H
 
-#ifndef EDSP_WINDOW_RECTANGULAR_H
-#define EDSP_WINDOW_RECTANGULAR_H
 
 #include "window.h"
 
 EDSP_BEGIN_NAMESPACE
     /**
-     * @brief Rectangular %window implementation.
+     * @brief Blackman-Harris %window implementation.
+     *
+     * See also: Blackman, BlackmanNuttall
+     *
      */
-    class Rectangular : Window {
+    class BlackmanHarris : Window {
     public:
 
         /**
-         * @brief Creates and computes a Rectangular %window with the given size.
+         * @brief Creates and computes a Blackman-Harris %window with the given size & type
+         * @param size The number of elements to initially create.
+         * @param type Window type.
+         */
+        BlackmanHarris(size_type size, WindowType type);
+
+        /**
+         * @brief Creates and computes a Blackman-Harris %window with the given size.
          * @param size The number of elements to initially create.
          */
-        explicit Rectangular(size_type size);
-        ~Rectangular() override;
+        explicit BlackmanHarris(size_type size);
+        ~BlackmanHarris() override;
 
         void compute() override;
     };
 
-    using Boxcar = Rectangular;
 EDSP_END_NAMESPACE
 
-#endif //EDSP_WINDOW_RECTANGULAR_H
+
+#endif //EDSP_WINDOW_BLACKMAN_HARRIS_H

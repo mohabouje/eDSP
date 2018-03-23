@@ -15,37 +15,30 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-#include "window/gaussian.h"
+#include "window/blackman_nuttall.h"
 #include "base/constants.h"
 #include <cmath>
 using namespace edsp;
-Gaussian::Gaussian(edsp::Window::size_type size) : Window(size) {
+
+BlackmanNuttall::BlackmanNuttall(Window::size_type size) : Window(size) {
 
 }
 
-Gaussian::Gaussian(Window::size_type size, Window::value_type alpha) : Window(size), alpha_(alpha) {
+BlackmanNuttall::BlackmanNuttall(Window::size_type size, Window::WindowType type) : Window(size, type) {
 
 }
 
-Gaussian::~Gaussian() = default;
+BlackmanNuttall::~BlackmanNuttall() = default;
 
-void Gaussian::compute() {
+void BlackmanNuttall::compute() {
     if (!empty()) {
-        value_type initial = -(size() - 1);
+        const value_type N = (type_ == WindowType::Symmetric) ? size() - 1 : size();
         for (size_type i = 0, sz = size(); i < sz; ++i) {
-            auto tmp = alpha_ / static_cast<value_type >(sz) * initial;
-            data_[i] = std::exp(-0.5 * tmp * tmp);
-            initial += 2;
+            value_type tmp = Constants<value_type>::pi * i / N;
+            data_[i] = 0.3635879
+                       - 0.4891775 * std::cos(2. * tmp)
+                       + 0.1365995 * std::cos(4. * tmp)
+                       + 0.0106411 * std::cos(6. * tmp);
         }
     }
 }
-
-void Gaussian::set_alpha(double alpha) EDSP_NOEXCEPT {
-    alpha_ = alpha;
-}
-
-double Gaussian::alpha() const EDSP_NOEXCEPT {
-    return alpha_;
-}
-

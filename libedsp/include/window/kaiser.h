@@ -1,6 +1,20 @@
-//
-// Created by mohabouje on 21/03/18.
-//
+/*
+ * eDSP, A cross-platform DSP framework written in C++.
+ * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 
 #ifndef EDSP_WINDOW_KAISER_H
 #define EDSP_WINDOW_KAISER_H
@@ -13,18 +27,10 @@ EDSP_BEGIN_NAMESPACE
      * @brief Kaiser %window implementation.
      *
      * This %window is also called Kaiser-Bessel window was developed by James Kaiser.
-     * This function approximates the  DPSS (Discrete Prolate Spheroidal Sequence) window which
-     * maximizes the energy concentration in the main lobe  but which is difficult to compute
-     * \f[
-     * {\displaystyle w[n]={\begin{cases}{\frac {I_{0}\left[\alpha {\sqrt {1-\left({\frac {2n}{N-1}}-1\right)^{2}}}\right]}{I_{0}[\alpha ]}},&0\leq n\leq N-1,\\0,&{\mbox{otherwise}},\\\end{cases}}}
-     * \f]
-     *   where:
-
-            - \f$ I_0 \f$ is the zeroth-order modified Bessel function of the first kind,
-            - \f$ \tau \f$ is the window duration, and
-            - \f$ \alpha \f$ is a non-negative real number that determines the shape of the window.
-            In the frequency domain, it determines the trade-off between main-lobe width and side lobe level, which is a central decision in window design.
+     * The Fourier transform of the window has a stop-band attenuation that is derived
+     * from the parameter %beta.
      *
+     * By default: %beta = 0.5
      */
     class Kaiser : Window {
     public:
@@ -57,7 +63,7 @@ EDSP_BEGIN_NAMESPACE
          */
         value_type beta() const EDSP_NOEXCEPT;
     private:
-        value_type beta_;
+        value_type beta_{0.5};
     };
 EDSP_END_NAMESPACE
 

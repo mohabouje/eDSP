@@ -16,36 +16,27 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "window/gaussian.h"
-#include "base/constants.h"
-#include <cmath>
+#include "window/kaiser.h"
 using namespace edsp;
-Gaussian::Gaussian(edsp::Window::size_type size) : Window(size) {
+
+Kaiser::Kaiser(Window::size_type size) : Window(size) {
 
 }
 
-Gaussian::Gaussian(Window::size_type size, Window::value_type alpha) : Window(size), alpha_(alpha) {
+Kaiser::Kaiser(Window::size_type size, Window::value_type beta) {
 
 }
 
-Gaussian::~Gaussian() = default;
+Kaiser::~Kaiser() = default;
 
-void Gaussian::compute() {
-    if (!empty()) {
-        value_type initial = -(size() - 1);
-        for (size_type i = 0, sz = size(); i < sz; ++i) {
-            auto tmp = alpha_ / static_cast<value_type >(sz) * initial;
-            data_[i] = std::exp(-0.5 * tmp * tmp);
-            initial += 2;
-        }
-    }
+void Kaiser::compute() {
+
 }
 
-void Gaussian::set_alpha(double alpha) EDSP_NOEXCEPT {
-    alpha_ = alpha;
+void Kaiser::set_beta(Window::value_type beta) EDSP_NOEXCEPT {
+    beta_ = beta;
 }
 
-double Gaussian::alpha() const EDSP_NOEXCEPT {
-    return alpha_;
+Window::value_type Kaiser::beta() const EDSP_NOEXCEPT {
+    return beta_;
 }
-
