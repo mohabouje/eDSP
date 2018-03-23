@@ -7,6 +7,8 @@
 
 #include "config.h"
 #include <vector>
+#include <iterator>
+#include <type_traits>
 
 EDSP_BEGIN_NAMESPACE
 
@@ -66,7 +68,62 @@ EDSP_BEGIN_NAMESPACE
         virtual ~Window();
 
         /**
-         * @brief Computes the %window and stores the computed values in the local data.
+         * @brief Applies the window to a buffer defined by both iterators and stores the result in the output buffer.
+         *
+         * Both buffer should be of the same size.
+         *
+         * @tparam InputIterator Read-Only arithmetic iterator
+         * @tparam OutputIterator Read/Write arithmetic iterator
+         * @param first First element of the input buffer
+         * @param last Last element of the input buffer
+         */
+        template <class InputIterator, class OutputIterator,
+                typename = typename std::enable_if<std::is_arithmetic<typename std::iterator_traits<InputIterator>::value_type >::value ||
+                                          std::is_arithmetic<typename std::iterator_traits<OutputIterator>::value_type >::value>::type>
+        void compute(InputIterator first, InputIterator last, OutputIterator);
+
+
+        /**
+         * @brief Applies the window to a buffer defined by both iterators.
+         * @throw Throw a runtime error if the size of the input array is less than the window one.
+         * @tparam OutputIterator Read/Write arithmetic iterator
+         * @param first First element of the input buffer
+         * @param last Last element of the input buffer
+         */
+        template <class OutputIterator,
+                typename = typename std::enable_if<std::is_arithmetic<typename std::iterator_traits<OutputIterator>::value_type >::value>::type>
+        void compute(OutputIterator first, OutputIterator last);
+
+
+        /**
+         * @brief Applies the window in the %input buffer.
+         *
+         * @throw Throw a runtime error if the size of the input array is less than the window one.
+         * @tparam T An arithmetic type
+         * @param input Input buffer
+         * @param sz Size of the buffers
+         */
+        template <class T,
+                typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+        void compute(T* input, size_type sz);
+
+        /**
+         * @brief Applies the window to an %input buffer and stores the result in the %output buffer.
+         *
+         * Both buffer should be of the same size.
+         *
+         * @throw Throw a runtime error if the size of the input array is less than the window one.
+         * @tparam T An arithmetic type
+         * @param input Input buffer
+         * @param output Output buffer
+         * @param sz Size of the buffers
+         */
+        template <class T,
+                typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
+        void compute(T* input, T* output, size_type sz);
+
+        /**
+         * @brief Initialize the %window and stores the computed values in the local data.
          *
          * This function computes the data of the %window. It can be called when the size of the window has been changed
          * or when the local data has been modified and should be restored.
@@ -235,13 +292,13 @@ EDSP_BEGIN_NAMESPACE
     const Window::value_type &Window::operator[](Window::size_type pos) const EDSP_NOEXCEPT {
         return data_[pos];
     }
+    
+    Window::value_type &Window::operator[](Window::size_type pos) EDSP_NOEXCEPT {
+        return data_[pos];
+    }
 
     bool Window::empty() const EDSP_NOEXCEPT {
         return data_.empty();
-    }
-
-    Window::value_type &Window::operator[](Window::size_type pos) EDSP_NOEXCEPT {
-        return data_[pos];
     }
 
     Window::WindowType Window::type() const EDSP_NOEXCEPT {
@@ -250,6 +307,40 @@ EDSP_BEGIN_NAMESPACE
 
     Window::WindowType Window::set_type(Window::WindowType type) EDSP_NOEXCEPT {
         return type_ = type;
+    }
+
+    template<class InputIterator, class OutputIterator, typename>
+    void Window::compute(InputIterator first, InputIterator last, OutputIterator out) {
+        const auto input_size = std::distance(first, last);
+        compute(first, out, input_size);
+    }
+
+    template<class OutputIterator, typename>
+    void Window::compute(OutputIterator first, OutputIterator last) {
+        const auto input_size = std::distance(first, last);
+        compute(first, input_size);
+    }
+
+    template<class T, typename>
+    void Window::compute(T *input, Window::size_type input_size) {
+        if (input_size < size()) {
+            throw std::runtime_error("Expected input size bigger than " + std::to_string(size()));
+        }
+
+        for (size_type i = 0, sz = size(); i < sz; ++i, ++input) {
+            (*input) = (*input) * data_[i];
+        }
+    }
+
+    template<class T, typename>
+    void Window::compute(T *input, T *out, Window::size_type input_size) {
+        if (input_size < size()) {
+            throw std::runtime_error("Expected input size bigger than " + std::to_string(size()));
+        }
+
+        for (size_type i = 0, sz = size(); i < sz; ++i, ++input, ++out) {
+            (*out) = (*input) * data_[i];
+        }
     }
 
 EDSP_END_NAMESPACE
