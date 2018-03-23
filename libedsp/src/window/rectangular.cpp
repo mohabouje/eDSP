@@ -22,10 +22,10 @@ Rectangular::Rectangular(edsp::Window::size_type size) : Window(size) {
 
 }
 
+Rectangular::~Rectangular() = default;
+
 void Rectangular::compute() {
     std::fill(begin(), end(), 1.);
 }
 
-Rectangular::~Rectangular() {
 
-}
