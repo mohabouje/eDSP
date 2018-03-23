@@ -19,6 +19,8 @@
 #include "window/tukey.h"
 #include "base/constants.h"
 #include <cmath>
+#include <stdexcept>
+
 using namespace edsp;
 
 Tukey::Tukey(Window::size_type size) : Window(size) {
@@ -32,12 +34,10 @@ Tukey::Tukey(Window::size_type size, Window::value_type ratio_) : Window(size), 
 Tukey::~Tukey() = default;
 
 void Tukey::set_ratio(const edsp::Window::value_type ratio) EDSP_NOEXCEPT {
-    if (ratio > 1)
-        ratio_ = 1.;
-    else if (ratio < 0)
-        ratio_ = 0.;
-    else
-        ratio_ = ratio;
+    if (ratio < 0 || ratio > 1)
+        throw std::runtime_error("ratio should be in the interval [0, 1]");
+
+    ratio_ = ratio;
 }
 
 Window::value_type Tukey::ratio() const EDSP_NOEXCEPT {
