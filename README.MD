@@ -22,13 +22,16 @@ It aims to provide efficient and streamlined base calculations, while at the sam
 ***The library is under construction.***
 
 ><i class="icon-file"></i> **Actual State**
-> - Implementation of different signal generators: white noise, pink noise, sin, square.... [NOT]
-> - Developing the frequency analysis module: FFT, DCT, DHT.... [NOT DOCUMENTED]
-> - Developing the signal properties analysis: energy, power, zero crossing rate .... [REFACTORING]
-> - Windowing [DONE]
-> - Oscillators [DONE]
-> - Basic digital filter implementation using Biquad - [NOT DOCUMENTED][NOT OPTIMIZED]
-> - Analog filter implementation [NOT]
+
+|Feature|State|
+|--|--|
+|Random Generators| Not Implemented Yet|
+|[Discrete Frequency Transform](https://github.com/mohabouje/eDSP/wiki/Discrete-Frequency-Transform)| Not Documented Yet|
+|Feature Extraction | Work In Progress|
+|[Windowing](https://github.com/mohabouje/eDSP/wiki/Windowing)| Done|
+|[Oscillators](https://github.com/mohabouje/eDSP/wiki/Oscillators)| Done|
+|IIR Filters| Not Documented Yet|
+|FIR Filters| Not Implemented Yet|
 
 ## Example: Windowing an imput signal
 This example show how to apply a Hamming window to an input signal $x(n)$ and store the output in a signal $y(n)$:
