@@ -21,21 +21,31 @@ It aims to provide efficient and streamlined base calculations, while at the sam
 
 ***The library is under construction.***
 
-><i class="icon-file"></i> **Actual State**
-
 |Feature|State|Compilation Flag |
 |--|--|--|
-|Random Generators| Not Implemented Yet| COMPILE_RANDOM_MODULE |
-|[Discrete Frequency Transform](https://github.com/mohabouje/eDSP/wiki/Discrete-Frequency-Transform)| Not Documented Yet| COMPILE_FREQUENCY_MODULE |
-|Feature Extraction | Work In Progress| COMPILE_FEATURES_EXTRACTION_MODULE |
-|[Windowing](https://github.com/mohabouje/eDSP/wiki/Windowing)| Done| COMPILE_WINDOWING_MODULE |
-|[Oscillators](https://github.com/mohabouje/eDSP/wiki/Oscillators)| Done| COMPILE_OSCILLATORS_MODULE |
-|IIR Filters| Not Documented Yet| COMPILE_IIR_MODULE |
-|FIR Filters| Not Implemented Yet| COMPILE_FIR_MODULE |
-|Modulation| Not Implemented Yet| COMPILE_MODULATION_MODULE |
-|Statistics|Not Implement Yet| COMPILE_STATISTICS_MODULE |
+|Random Generators| Not Implemented Yet| `COMPILE_RANDOM_MODULE` |
+|[Discrete Frequency Transform](https://github.com/mohabouje/eDSP/wiki/Discrete-Frequency-Transform)| Not Documented Yet| `COMPILE_FREQUENCY_MODULE` |
+|Feature Extraction | Work In Progress| `COMPILE_FEATURES_EXTRACTION_MODULE` |
+|[Windowing](https://github.com/mohabouje/eDSP/wiki/Windowing)| Done| `COMPILE_WINDOWING_MODULE` |
+|[Oscillators](https://github.com/mohabouje/eDSP/wiki/Oscillators)| Done| `COMPILE_OSCILLATORS_MODULE` |
+|IIR Filters| Not Documented Yet| `COMPILE_IIR_MODULE` |
+|FIR Filters| Not Implemented Yet| `COMPILE_FIR_MODULE` |
+|Modulation| Not Implemented Yet| `COMPILE_MODULATION_MODULE` |
+|Statistics|Not Implement Yet| `COMPILE_STATISTICS_MODULE` |
 
-## Example: Windowing an imput signal
+## Compilation
+
+The source code has been tested in Ubuntu 16.04 and MacOS 10.13 (High Sierra).
+
+    mkdir build
+    cd build
+    cmake ..
+    make -j4
+
+The easy way to enable/disable the different modules of the framework is by using the [ccmake](https://cmake.org/cmake/help/v3.0/manual/ccmake.1.html).
+
+
+### Example: Windowing an imput signal
 This example show how to apply a Hamming window to an input signal $x(n)$ and store the output in a signal $y(n)$:
 ```c++
 constexpr std::size_t size = 1024;
@@ -48,7 +58,7 @@ auto window = Hamming(size);
 // Apply the window to the signal X and store it in Y
 window.compute(std::cbegin(x), std::cend(x), std::begin(y));
 ```
-## Example: Generate an square signal
+### Example: Generate an square signal
 This example show how to generate a square wave with a duration of 10 seconds, frequency of 500Hz and sampled at 8000Hz.
 ```c++
 const std::size_t size = 80000;
@@ -63,7 +73,7 @@ square_oscillator.set_frequency(500);
 // Generate the samples and store them
 std::generate_n(std::begin(square), size,square_oscillator); 
 ```
-## Example: Extract signal features
+### Example: Extract signal features
 This example show how to extract some features like the energy and power of an input signal. 
 
 ```c++
@@ -76,7 +86,7 @@ const auto energy = properties::energy(std::cbegin(input), std::cend(input));
 const auto power = properties::power(std::cbegin(input), std::cend(input));
 ```
 
-## Example: Computing the DFT
+### Example: Computing the DFT
 This example show how to compute the DFT of an input signal.
 ```c++
 constexpr std::size_t size = 1024;
