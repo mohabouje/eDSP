@@ -18,19 +18,19 @@
 #ifndef EDSP_GENERATORS_SINGENERATOR_H
 #define EDSP_GENERATORS_SINGENERATOR_H
 
-#include "periodic_generator.h"
+#include "oscillator.h"
 
 EDSP_BEGIN_NAMESPACE
 
 /**
  * @brief Generate a periodic sinusoidal signal with the given %frecuency sampled at %samplerate.
  */
-class SinGenerator : public PeriodicGenerator {
+class SinOscillator : public Oscillator {
 public:
     /**
      * @brief Created a SinGenerator with the defualt configuration
      */
-    SinGenerator();
+    SinOscillator();
 
     /**
      * @brief Created a TriangularPulseGenerator with the given configuration
@@ -39,8 +39,8 @@ public:
      * @param frequency
      * @param phase
      */
-    SinGenerator(value_type amplitude, value_type samplerate, value_type frequency, value_type phase);
-    ~SinGenerator() override;
+    SinOscillator(value_type amplitude, value_type samplerate, value_type frequency, value_type phase);
+    ~SinOscillator() override;
 
     /**
      * \brief Computes the output of the generator in the given timestamp

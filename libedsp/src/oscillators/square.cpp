@@ -15,34 +15,34 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "generators/square_pulse_generator.h"
+#include "oscillators/square.h"
 using namespace edsp;
 
 
-void SquarePulseGenerator::set_duty_cycle(Generator::value_type dutty) EDSP_NOEXCEPT {
+void SquareOscillator::set_duty_cycle(Oscillator::value_type dutty) EDSP_NOEXCEPT {
     duty_ = dutty;
     duty_t_ = dutty / frequency();
 }
 
-Generator::value_type SquarePulseGenerator::duty_cycle() const EDSP_NOEXCEPT {
+Oscillator::value_type SquareOscillator::duty_cycle() const EDSP_NOEXCEPT {
     return duty_;
 }
 
-Generator::value_type SquarePulseGenerator::operator()() EDSP_NOEXCEPT {
+Oscillator::value_type SquareOscillator::operator()() EDSP_NOEXCEPT {
     const auto t = timestamp();
     const value_type result = (t >= duty_t_) ? -1 : 1;
-    const value_type increased = t + 1. / samplerate();
+    const value_type increased = t + sampling_period();
     set_timestamp((increased > 1. / frequency()) ? 0 : increased);
     return result * amplitude();
 }
 
-SquarePulseGenerator::SquarePulseGenerator(Generator::value_type amplitude,
-                                           Generator::value_type samplerate,
-                                           Generator::value_type frequency,
-                                           Generator::value_type duty_)
-    : PeriodicGenerator(amplitude, samplerate, frequency, 0.), duty_(duty_) {
+SquareOscillator::SquareOscillator(Oscillator::value_type amplitude,
+                                           Oscillator::value_type samplerate,
+                                           Oscillator::value_type frequency,
+                                           Oscillator::value_type duty_)
+    : Oscillator(amplitude, samplerate, frequency, 0.), duty_(duty_) {
 }
 
-SquarePulseGenerator::~SquarePulseGenerator() = default;
+SquareOscillator::~SquareOscillator() = default;
 
-SquarePulseGenerator::SquarePulseGenerator() = default;
+SquareOscillator::SquareOscillator() = default;

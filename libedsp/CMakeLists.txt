@@ -23,7 +23,7 @@ set(SOURCE_FILES )
 add_subdirectory(include/window)
 add_subdirectory(include/frequency)
 add_subdirectory(include/filters)
-add_subdirectory(include/generators)
+add_subdirectory(include/oscillators)
 add_subdirectory(include/blocks)
 add_library(libedsp ${HEADER_FILES} ${SOURCE_FILES})
 

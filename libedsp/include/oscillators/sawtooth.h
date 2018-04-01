@@ -18,19 +18,19 @@
 #ifndef EDSP_GENERATORS_SAWTOOTH_GENERATOR_H
 #define EDSP_GENERATORS_SAWTOOTH_GENERATOR_H
 
-#include "periodic_generator.h"
+#include "oscillator.h"
 
 EDSP_BEGIN_NAMESPACE
 
 /**
  * @brief Generate a sawtooth wave of a given %frequency sampled with %samplerate
  */
-class SawtoothGenerator : public PeriodicGenerator {
+class SawtoothOscillator : public Oscillator {
 public:
 
-    SawtoothGenerator();
-    SawtoothGenerator(value_type amplitude, value_type samplerate, value_type frequency, value_type width_);
-    ~SawtoothGenerator() override;
+    SawtoothOscillator();
+    SawtoothOscillator(value_type amplitude, value_type samplerate, value_type frequency, value_type width_);
+    ~SawtoothOscillator() override;
 
     /**
      * @brief Set the width of the pulse over the interval \f$ \frac{1}{F} \f$

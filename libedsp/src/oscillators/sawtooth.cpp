@@ -15,32 +15,32 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "generators/sawtooth_generator.h"
+#include "oscillators/sawtooth.h"
 using namespace edsp;
 
-Generator::value_type SawtoothGenerator::width() const EDSP_NOEXCEPT {
+Oscillator::value_type SawtoothOscillator::width() const EDSP_NOEXCEPT {
     return width_;
 }
 
-void SawtoothGenerator::set_width(Generator::value_type width) EDSP_NOEXCEPT {
+void SawtoothOscillator::set_width(Oscillator::value_type width) EDSP_NOEXCEPT {
     width_ = width;
 }
 
-Generator::value_type SawtoothGenerator::operator()() EDSP_NOEXCEPT {
+Oscillator::value_type SawtoothOscillator::operator()() EDSP_NOEXCEPT {
     const auto t = timestamp();
     const value_type result = (t >= width_) ? -2 * t / (1 - width_) + 1
                                             : 2 * t / width_ - 1;
-    const value_type increased = t + 1. / samplerate();
+    const value_type increased = t + sampling_period();
     set_timestamp((increased > 1. / frequency()) ? 0 : increased);
     return result * amplitude();
 }
 
-SawtoothGenerator::SawtoothGenerator() = default;
+SawtoothOscillator::SawtoothOscillator() = default;
 
-SawtoothGenerator::~SawtoothGenerator() = default;
+SawtoothOscillator::~SawtoothOscillator() = default;
 
-SawtoothGenerator::SawtoothGenerator(Generator::value_type amplitude,
-                                     Generator::value_type samplerate,
-                                     Generator::value_type frequency,
-                                     Generator::value_type width)
-    : PeriodicGenerator(amplitude, samplerate, frequency, 0.), width_(width) {}
+SawtoothOscillator::SawtoothOscillator(Oscillator::value_type amplitude,
+                                     Oscillator::value_type samplerate,
+                                     Oscillator::value_type frequency,
+                                     Oscillator::value_type width)
+    : Oscillator(amplitude, samplerate, frequency, 0.), width_(width) {}

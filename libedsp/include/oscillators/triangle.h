@@ -18,7 +18,7 @@
 #ifndef EDSP_GENERATORS_TRIANGULAR_PULSE_GENERATOR_H
 #define EDSP_GENERATORS_TRIANGULAR_PULSE_GENERATOR_H
 
-#include "periodic_generator.h"
+#include "oscillator.h"
 
 EDSP_BEGIN_NAMESPACE
 
@@ -30,12 +30,12 @@ EDSP_BEGIN_NAMESPACE
  *
  * See also: set_width, set_skew
  **/
-class TriangularPulseGenerator : public PeriodicGenerator {
+class TriangleOscillator : public Oscillator {
 public:
     /**
      * @brief Default constrcutor
      */
-    TriangularPulseGenerator();
+    TriangleOscillator();
 
     /**
      * @brief Created a TriangularPulseGenerator with the given configuration
@@ -43,7 +43,7 @@ public:
      * @param samplerate
      * @param frequency
      */
-    TriangularPulseGenerator(value_type amplitude, value_type samplerate, value_type frequency);
+    TriangleOscillator(value_type amplitude, value_type samplerate, value_type frequency);
 
     /**
      * @brief Created a TriangularPulseGenerator with the given configuration
@@ -53,11 +53,11 @@ public:
      * @param width_
      * @param skew_
      */
-    TriangularPulseGenerator(value_type amplitude, value_type samplerate, value_type frequency,
+    TriangleOscillator(value_type amplitude, value_type samplerate, value_type frequency,
                              value_type width_, value_type skew_);
 
 
-    ~TriangularPulseGenerator();
+    ~TriangleOscillator();
 
     /**
      * @brief Set the width of the pulse over the interval \f$ \frac{1}{F} \f$

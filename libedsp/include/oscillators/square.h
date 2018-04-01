@@ -18,7 +18,7 @@
 #ifndef EDSP_GENERATORS_SQUARE_PULSE_GENERATOR_H
 #define EDSP_GENERATORS_SQUARE_PULSE_GENERATOR_H
 
-#include "periodic_generator.h"
+#include "oscillator.h"
 EDSP_BEGIN_NAMESPACE
 
 /**
@@ -27,13 +27,13 @@ EDSP_BEGIN_NAMESPACE
  * The parameter %duty defines the relative placement of the transition between the positive period and the
  * negative one
  */
-class SquarePulseGenerator : public PeriodicGenerator {
+class SquareOscillator : public Oscillator {
 public:
 
     /**
      * @brief Default constructor
      */
-    SquarePulseGenerator();
+    SquareOscillator();
 
     /**
      * @brief Creates an SquarePulseGenerator with the given configuration
@@ -42,9 +42,9 @@ public:
      * @param frequency
      * @param duty
      */
-    SquarePulseGenerator(value_type amplitude, value_type samplerate, value_type frequency, value_type duty);
+    SquareOscillator(value_type amplitude, value_type samplerate, value_type frequency, value_type duty);
 
-    ~SquarePulseGenerator() override;
+    ~SquareOscillator() override;
 
     /**
      * @brief Set the duty cycle.
