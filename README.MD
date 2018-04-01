@@ -32,6 +32,8 @@ It aims to provide efficient and streamlined base calculations, while at the sam
 |[Oscillators](https://github.com/mohabouje/eDSP/wiki/Oscillators)| Done|
 |IIR Filters| Not Documented Yet|
 |FIR Filters| Not Implemented Yet|
+|Modulation| Not Implemented Yet|
+|Statistics|Not Implement Yet|
 
 ## Example: Windowing an imput signal
 This example show how to apply a Hamming window to an input signal $x(n)$ and store the output in a signal $y(n)$:
