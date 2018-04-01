@@ -30,7 +30,7 @@ Generator::value_type SquarePulseGenerator::duty_cycle() const EDSP_NOEXCEPT {
 
 Generator::value_type SquarePulseGenerator::operator()() EDSP_NOEXCEPT {
     const auto t = timestamp();
-    const value_type result = (t >= duty_) ? -1 : 1;
+    const value_type result = (t >= duty_t_) ? -1 : 1;
     const value_type increased = t + 1. / samplerate();
     set_timestamp((increased > 1. / frequency()) ? 0 : increased);
     return result * amplitude();

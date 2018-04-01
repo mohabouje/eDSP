@@ -69,6 +69,7 @@ public:
      * @return Output of the generator
      */
     value_type operator()() EDSP_NOEXCEPT;
+
 private:
     value_type duty_;
     value_type duty_t_;
