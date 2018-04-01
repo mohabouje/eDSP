@@ -23,17 +23,17 @@ It aims to provide efficient and streamlined base calculations, while at the sam
 
 ><i class="icon-file"></i> **Actual State**
 
-|Feature|State|
-|--|--|
-|Random Generators| Not Implemented Yet|
-|[Discrete Frequency Transform](https://github.com/mohabouje/eDSP/wiki/Discrete-Frequency-Transform)| Not Documented Yet|
-|Feature Extraction | Work In Progress|
-|[Windowing](https://github.com/mohabouje/eDSP/wiki/Windowing)| Done|
-|[Oscillators](https://github.com/mohabouje/eDSP/wiki/Oscillators)| Done|
-|IIR Filters| Not Documented Yet|
-|FIR Filters| Not Implemented Yet|
-|Modulation| Not Implemented Yet|
-|Statistics|Not Implement Yet|
+|Feature|State|Compilation Flag |
+|--|--|--|
+|Random Generators| Not Implemented Yet| COMPILE_RANDOM_MODULE |
+|[Discrete Frequency Transform](https://github.com/mohabouje/eDSP/wiki/Discrete-Frequency-Transform)| Not Documented Yet| COMPILE_FREQUENCY_MODULE |
+|Feature Extraction | Work In Progress| COMPILE_FEATURES_EXTRACTION_MODULE |
+|[Windowing](https://github.com/mohabouje/eDSP/wiki/Windowing)| Done| COMPILE_WINDOWING_MODULE |
+|[Oscillators](https://github.com/mohabouje/eDSP/wiki/Oscillators)| Done| COMPILE_OSCILLATORS_MODULE |
+|IIR Filters| Not Documented Yet| COMPILE_IIR_MODULE |
+|FIR Filters| Not Implemented Yet| COMPILE_FIR_MODULE |
+|Modulation| Not Implemented Yet| COMPILE_MODULATION_MODULE |
+|Statistics|Not Implement Yet| COMPILE_STATISTICS_MODULE |
 
 ## Example: Windowing an imput signal
 This example show how to apply a Hamming window to an input signal $x(n)$ and store the output in a signal $y(n)$:
