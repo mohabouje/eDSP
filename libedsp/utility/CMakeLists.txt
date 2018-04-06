@@ -1,0 +1,5 @@
+set(HEADER_FILES  ${HEADER_FILES}
+        ${CMAKE_CURRENT_SOURCE_DIR}/converter.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/map.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/vector.h
+        PARENT_SCOPE)

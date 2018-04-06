@@ -1,35 +1,24 @@
 
-set(HEADER_FILES
-        include/config.h
-        include/version.h
-        include/base/analog_filter.h
-        include/base/constants.h
-        include/base/sfinae.h
-        include/base/transform.h
-        include/base/types.h
-        include/math/complex.h
-        include/math/math.h
-        include/math/stats.h
-        include/math/trig.h
-        include/properties/properties.h
-        include/utility/converter.h
-        include/utility/map.h
-        include/utility/vector.h
-)
-
+set(HEADER_FILES config.h version.h)
 set(SOURCE_FILES )
 
 
-add_subdirectory(include/window)
-add_subdirectory(include/frequency)
-add_subdirectory(include/filters)
-add_subdirectory(include/oscillators)
-add_subdirectory(include/blocks)
+add_subdirectory(windowing)
+add_subdirectory(oscillators)
+add_subdirectory(blocks)
+add_subdirectory(filters)
+add_subdirectory(utility)
+add_subdirectory(properties)
+add_subdirectory(base)
+add_subdirectory(frequency)
+add_subdirectory(math)
+
+
 add_library(libedsp ${HEADER_FILES} ${SOURCE_FILES})
 
 
+include_directories(.)
 
-include_directories(./include/)
 
 find_library(FFTW_LIB NAMES lfftw3 libfftw3 fftw3 REQUIRED)
 target_link_libraries(libedsp ${FFTW_LIB})

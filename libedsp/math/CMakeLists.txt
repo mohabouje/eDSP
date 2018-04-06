@@ -1,0 +1,6 @@
+set(HEADER_FILES  ${HEADER_FILES}
+        ${CMAKE_CURRENT_SOURCE_DIR}/complex.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/math.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/stats.h
+        ${CMAKE_CURRENT_SOURCE_DIR}/trig.h
+        PARENT_SCOPE)
