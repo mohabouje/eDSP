@@ -70,21 +70,20 @@ protected:
     virtual void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_  value_type *output) = 0;
 };
 
-    template<class InputIterator, class OutputIterator, typename>
-    void Feature::extract(_In_ InputIterator first, _In_ InputIterator last, _Out_ OutputIterator out) {
-        const auto size = static_cast<size_type>(std::distance(first, last));
-        extract_implementation(first, size, out);
-    }
+template<class InputIterator, class OutputIterator, typename>
+void Feature::extract(_In_ InputIterator first, _In_ InputIterator last, _Out_ OutputIterator out) {
+    const auto size = static_cast<size_type>(std::distance(first, last));
+    extract_implementation(first, size, out);
+}
 
-    template<class T, typename>
-    void Feature::extract(_In_ T *input, _In_ Feature::size_type sz, _Out_ T *output) {
-        extract_implementation(input, sz, output);
-    }
+template<class T, typename>
+void Feature::extract(_In_ T *input, _In_ Feature::size_type sz, _Out_ T *output) {
+    extract_implementation(input, sz, output);
+}
 
-    Feature::Feature() = default;
+Feature::Feature() = default;
 
-    Feature::~Feature() = default;
-
+Feature::~Feature() = default;
 
 EDSP_END_NAMESPACE
 

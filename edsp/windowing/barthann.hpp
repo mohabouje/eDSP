@@ -19,29 +19,43 @@
 #ifndef EDSP_WINDOW_BATHANNWIN_H
 #define EDSP_WINDOW_BATHANNWIN_H
 
-#include "window.h"
+#include "base/constants.h"
+#include "window.hpp"
+#include <cmath>
 
 EDSP_BEGIN_NAMESPACE
-    /**
-     * @brief Bartlett-Hann %window implementation.
-     *
-     * See also: Bartlett and Hann.
-     *
-     */
-    class BartHann : Window {
-    public:
+/**
+ * @brief Bartlett-Hann %window implementation.
+ *
+ * See also: Bartlett and Hann.
+ *
+ */
+class BartHann : Window {
+public:
+  /**
+   * @brief Creates and computes a Blackman %window with the given size.
+   * @param size The number of elements to initially create.
+   */
+  explicit BartHann(_In_ size_type size);
+  ~BartHann() EDSP_OVERRIDE;
 
-        /**
-         * @brief Creates and computes a Blackman %window with the given size.
-         * @param size The number of elements to initially create.
-         */
-        explicit BartHann(size_type size);
-        ~BartHann() override;
+  EDSP_INLINE void initialize() EDSP_OVERRIDE;
+};
 
-        void initialize() override;
-    };
+BartHann::BartHann(_In_ Window::size_type size) : Window(size) {}
+
+BartHann::~BartHann() {
+
+}
+
+void BartHann::initialize() {
+  for (size_type i = 0, sz = size(); i < sz; ++i) {
+    data_[i] =
+        0.62 - 0.48 * std::abs(i / (sz - 1) - 0.5) +
+        0.38 * std::cos(2 * constants<value_type>::pi * (i / (sz - 1) - 0.5));
+  }
+}
+
+
 EDSP_END_NAMESPACE
-
-
-
-#endif //EDSP_WINDOW_BATHANNWIN_H
+#endif // EDSP_WINDOW_BATHANNWIN_H

@@ -15,23 +15,38 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "windowing/bartlett.h"
-#include <cmath>
 
-using namespace edsp;
-Bartlett::Bartlett(edsp::Window::size_type size) : Window(size) {
+#ifndef EDSP_WINDOW_RECTANGULAR_H
+#define EDSP_WINDOW_RECTANGULAR_H
+
+#include "window.hpp"
+
+EDSP_BEGIN_NAMESPACE
+/**
+ * @brief Rectangular %window implementation.
+ */
+class Rectangular : Window {
+public:
+
+    /**
+     * @brief Creates and computes a Rectangular %window with the given size.
+     * @param size The number of elements to initially create.
+     */
+    explicit Rectangular(_In_ size_type size);
+    ~Rectangular() EDSP_OVERRIDE;
+
+    EDSP_INLINE void initialize() EDSP_OVERRIDE;
+};
+
+Rectangular::Rectangular(edsp::Window::size_type size) : Window(size) {
 
 }
 
-Bartlett::~Bartlett() = default;
+Rectangular::~Rectangular() = default;
 
-void Bartlett::initialize() {
-    if (!empty()) {
-        const value_type N = size() - 1;
-        value_type half = 0;
-        std::modf(N / 2., &half);
-        for (size_type i = 0, sz = size(); i < sz; ++i) {
-            data_[i] = ((i <= half) ? 2 * i : (2 - 2 * i)) / N;
-        }
-    }
+void Rectangular::initialize() {
+    std::fill(begin(), end(), 1.);
 }
+EDSP_END_NAMESPACE
+
+#endif //EDSP_WINDOW_RECTANGULAR_H

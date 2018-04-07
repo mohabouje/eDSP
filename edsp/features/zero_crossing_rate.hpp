@@ -25,35 +25,39 @@
 #include <cmath>
 
 EDSP_BEGIN_NAMESPACE
+/**
+ * @brief Extract the zero crossing rate of a signal
+ *
+ * The ZCR is the rate of sign-changes along a signal. This feature is heavily used in both speech
+ * recognition and music information retrieval.
+ *
+ * ZCR is defined formally as:
+ * \f[
+ *      {\displaystyle zcr={\frac {1}{T-1}}\sum _{t=1}^{T-1}\mathbb {1} _{\mathbb {R} _{<0}}(s_{t}s_{t-1})}
+ * \f]
+ */
+class ZeroCrossingRate : public Feature {
+public:
+    ZeroCrossingRate();
+    ~ZeroCrossingRate() EDSP_OVERRIDE;
+protected:
+    EDSP_INLINE void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_
+                                            value_type *output) EDSP_OVERRIDE;
+};
 
-    /**
-     * @brief Extract the zero crossing rate of a signal
-     *
-     * The ZCR is the rate of sign-changes along a signal. This feature is heavily used in both speech
-     * recognition and music information retrieval.
-     *
-     * ZCR is defined formally as:
-     * \f[
-     *      {\displaystyle zcr={\frac {1}{T-1}}\sum _{t=1}^{T-1}\mathbb {1} _{\mathbb {R} _{<0}}(s_{t}s_{t-1})}
-     * \f]
-     */
-    class ZeroCrossingRate : public Feature {
-    public:
-        ZeroCrossingRate();
-    protected:
-        EDSP_INLINE void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_
-                                                value_type *output) EDSP_OVERRIDE;
-    };
+ZeroCrossingRate::~ZeroCrossingRate() {
 
-    void ZeroCrossingRate::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_
-                                        Feature::value_type *output) {
-        *output = 0;
-        for (auto iter = input, last = input + size - 1; iter != last; ++iter) {
-            *output += (math::sign(*(iter + 1)) != math::sign(*iter)) ? 1 : 0;
-        }
-        *output /= static_cast<value_type>(size);
+}
+
+void ZeroCrossingRate::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_
+                                    Feature::value_type *output) {
+    *output = 0;
+    for (auto iter = input, last = input + size - 1; iter != last; ++iter) {
+        *output += (math::sign(*(iter + 1)) != math::sign(*iter)) ? 1 : 0;
     }
+    *output /= static_cast<value_type>(size);
+}
 
-    ZeroCrossingRate::ZeroCrossingRate() = default;
+ZeroCrossingRate::ZeroCrossingRate() = default;
 EDSP_END_NAMESPACE
 #endif //EDSP_ZERO_CROSSING_RATE_H

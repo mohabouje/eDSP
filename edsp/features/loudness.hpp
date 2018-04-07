@@ -44,7 +44,9 @@ public:
      * @param alpha Exponential factor
      */
     explicit Loudness(_In_ value_type alpha);
+
     Loudness();
+
     ~Loudness() EDSP_OVERRIDE;
 
     /**
@@ -70,9 +72,11 @@ void Loudness::extract_implementation(_In_ const Feature::value_type *input, _In
 
 Loudness::Loudness() = default;
 
-Loudness::~Loudness() = default;
-
 Loudness::Loudness(_In_ Feature::value_type _alpha) : _alpha(_alpha) {}
+
+Loudness::~Loudness() {
+
+}
 
 void Loudness::set_alpha(_In_ Feature::value_type alpha) EDSP_NOEXCEPT {
     _alpha = alpha;

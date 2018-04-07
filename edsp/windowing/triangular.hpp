@@ -19,7 +19,8 @@
 #ifndef EDSP_WINDOW_TRIANGULAR_H
 #define EDSP_WINDOW_TRIANGULAR_H
 
-#include "windowing/window.h"
+#include "window.hpp"
+#include <cmath>
 
 EDSP_BEGIN_NAMESPACE
 
@@ -38,12 +39,29 @@ public:
      * @brief Creates and computes a Triangular %window with the given size.
      * @param size The number of elements to initially create.
      */
-    explicit Triangular(size_type size);
-    ~Triangular() override;
+    explicit Triangular(_In_ size_type size);
+    ~Triangular() EDSP_OVERRIDE;
 
-    void initialize() override;
+    EDSP_INLINE void initialize() EDSP_OVERRIDE;
 };
+
+Triangular::Triangular(_In_ Window::size_type size) : Window(size) {
+
+}
+
+Triangular::~Triangular() = default;
+
+void Triangular::initialize() {
+    if (!empty()) {
+        const size_type sz = size();
+        const value_type rem = sz + std::remainder(sz, 2);
+        value_type initial = -(sz - 1);
+        for (size_type i = 0; i < sz; ++i) {
+            data_[i] = 1 - std::abs(initial / rem);
+            initial += 2;
+        }
+    }
+}
+
 EDSP_END_NAMESPACE
-
-
 #endif //EDSP_TRIANGULAR_H

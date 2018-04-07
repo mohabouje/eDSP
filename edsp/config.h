@@ -40,6 +40,7 @@
 
 #define _In_
 #define _Out_
+#define _InOut_
 
 
 #endif //EDSP_CONFIG_EDSP_H

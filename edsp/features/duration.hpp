@@ -41,6 +41,8 @@ public:
      */
     EDSP_INLINE void set_sample_rate(_In_ value_type sample_rate) EDSP_NOEXCEPT;
 
+    ~Duration() EDSP_OVERRIDE;
+
     /**
      * @brief Returns the sample rate
      * @return Sample rate in Hz
@@ -61,6 +63,10 @@ Duration::Duration(_In_ Feature::value_type sample_rate) : _sample_rate(sample_r
 
 void Duration::set_sample_rate(_In_ Feature::value_type sample_rate) EDSP_NOEXCEPT {
     _sample_rate = sample_rate;
+}
+
+Duration::~Duration() {
+
 }
 
 Feature::value_type Duration::sample_rate() EDSP_NOEXCEPT {

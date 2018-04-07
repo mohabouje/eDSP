@@ -35,9 +35,14 @@ EDSP_BEGIN_NAMESPACE
 class Energy : public Feature {
 public:
     Energy();
+    ~Energy() EDSP_OVERRIDE;
 protected:
     EDSP_INLINE void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
 };
+
+Energy::~Energy() {
+
+}
 
 void Energy::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_ Feature::value_type *output) {
     *output = std::inner_product(input, input + size, input, static_cast<value_type >(0));

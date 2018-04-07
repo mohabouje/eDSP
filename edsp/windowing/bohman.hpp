@@ -16,16 +16,36 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "windowing/bohman.h"
+#ifndef EDSP_WINDOW_BOHMAN_H
+#define EDSP_WINDOW_BOHMAN_H
+
+#include "window.hpp"
 #include "base/constants.h"
 #include <cmath>
-using namespace edsp;
+
+EDSP_BEGIN_NAMESPACE
+/**
+ * @brief Bohman %window implementation.
+ *
+ * See also: Rectangular and Bartlett
+ */
+class Bohman : Window {
+public:
+
+    /**
+     * @brief Creates and computes a Bohman %window with the given size.
+     * @param size The number of elements to initially create.
+     */
+    explicit Bohman(_In_ size_type size);
+
+    ~Bohman() EDSP_OVERRIDE;
+
+    EDSP_INLINE void initialize() EDSP_OVERRIDE;
+};
 
 Bohman::Bohman(Window::size_type size) : Window(size) {
 
 }
-
-Bohman::~Bohman() = default;
 
 void Bohman::initialize() {
     if (!empty()) {
@@ -38,6 +58,13 @@ void Bohman::initialize() {
         }
 
         data_[0] = 0.;
-        data_[N] = 0.;
+        data_[size() - 1] = 0.;
     }
 }
+
+Bohman::~Bohman() {
+
+}
+EDSP_END_NAMESPACE
+
+#endif //EDSP_WINDOW_BOHMAN_H

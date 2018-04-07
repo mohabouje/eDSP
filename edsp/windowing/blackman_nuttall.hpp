@@ -15,20 +15,48 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "windowing/blackman_nuttall.h"
+#ifndef EDSP_BLACKMAN_NUTTALL_H
+#define EDSP_BLACKMAN_NUTTALL_H
+
+#include "window.hpp"
 #include "base/constants.h"
 #include <cmath>
-using namespace edsp;
 
-BlackmanNuttall::BlackmanNuttall(Window::size_type size) : Window(size) {
+EDSP_BEGIN_NAMESPACE
+/**
+ * @brief Blackman-Nuttal %window implementation.
+ *
+ * See also: Blackman, BlackmanNuttall
+ *
+ */
+class BlackmanNuttall : Window {
+public:
+
+    /**
+     * @brief Creates and computes a Blackman-Nuttall %window with the given size & type
+     * @param size The number of elements to initially create.
+     * @param type Window type.
+     */
+    BlackmanNuttall(_In_ size_type size, _In_ WindowType type);
+
+    /**
+     * @brief Creates and computes a Blackman-Nuttal %window with the given size.
+     * @param size The number of elements to initially create.
+     */
+    explicit BlackmanNuttall(_In_ size_type size);
+
+    ~BlackmanNuttall() EDSP_OVERRIDE;
+
+    EDSP_INLINE void initialize() EDSP_OVERRIDE;
+};
+
+BlackmanNuttall::BlackmanNuttall(_In_ Window::size_type size) : Window(size) {
 
 }
 
-BlackmanNuttall::BlackmanNuttall(Window::size_type size, Window::WindowType type) : Window(size, type) {
+BlackmanNuttall::BlackmanNuttall(_In_ Window::size_type size, _In_ Window::WindowType type) : Window(size, type) {
 
 }
-
-BlackmanNuttall::~BlackmanNuttall() = default;
 
 void BlackmanNuttall::initialize() {
     if (!empty()) {
@@ -42,3 +70,12 @@ void BlackmanNuttall::initialize() {
         }
     }
 }
+
+BlackmanNuttall::~BlackmanNuttall() {
+
+}
+
+EDSP_END_NAMESPACE
+
+
+#endif //EDSP_BLACKMAN_NUTTALL_H

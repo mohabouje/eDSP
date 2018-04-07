@@ -34,9 +34,14 @@ EDSP_BEGIN_NAMESPACE
 class Power : public Feature {
 public:
     Power();
+    ~Power() EDSP_OVERRIDE;
 protected:
     EDSP_INLINE void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
 };
+
+Power::~Power() {
+
+}
 
 void Power::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_
                                     Feature::value_type *output) {

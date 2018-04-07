@@ -15,20 +15,50 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "windowing/blackman_harris.h"
+#ifndef EDSP_WINDOW_BLACKMAN_HARRIS_H
+#define EDSP_WINDOW_BLACKMAN_HARRIS_H
+
+
+#include "window.hpp"
 #include "base/constants.h"
 #include <cmath>
-using namespace edsp;
 
-BlackmanHarris::BlackmanHarris(Window::size_type size) : Window(size) {
+EDSP_BEGIN_NAMESPACE
+/**
+ * @brief Blackman-Harris %window implementation.
+ *
+ * See also: Blackman, BlackmanNuttall
+ *
+ */
+class BlackmanHarris : Window {
+public:
+
+    /**
+     * @brief Creates and computes a Blackman-Harris %window with the given size & type
+     * @param size The number of elements to initially create.
+     * @param type Window type.
+     */
+    BlackmanHarris(_In_ size_type size, _In_ WindowType type);
+
+    /**
+     * @brief Creates and computes a Blackman-Harris %window with the given size.
+     * @param size The number of elements to initially create.
+     */
+    explicit BlackmanHarris(_In_ size_type size);
+
+    ~BlackmanHarris() EDSP_OVERRIDE;
+
+    EDSP_INLINE void initialize() EDSP_OVERRIDE;
+};
+
+
+BlackmanHarris::BlackmanHarris(_In_ Window::size_type size) : Window(size) {
 
 }
 
-BlackmanHarris::BlackmanHarris(Window::size_type size, Window::WindowType type) : Window(size, type) {
+BlackmanHarris::BlackmanHarris(_In_ Window::size_type size, _In_ Window::WindowType type) : Window(size, type) {
 
 }
-
-BlackmanHarris::~BlackmanHarris() = default;
 
 void BlackmanHarris::initialize() {
     if (!empty()) {
@@ -42,3 +72,12 @@ void BlackmanHarris::initialize() {
         }
     }
 }
+
+BlackmanHarris::~BlackmanHarris() {
+
+}
+
+EDSP_END_NAMESPACE
+
+
+#endif //EDSP_WINDOW_BLACKMAN_HARRIS_H

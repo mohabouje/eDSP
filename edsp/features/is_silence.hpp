@@ -36,6 +36,8 @@ public:
      */
     explicit IsSilence(value_type threshold_dB);
 
+    ~IsSilence() EDSP_OVERRIDE;
+
     /**
      * @brief Set the threshold
      * @param threshold_linear Threshold in dB
@@ -67,6 +69,10 @@ Feature::value_type IsSilence::threshold() EDSP_NOEXCEPT {
 }
 
 IsSilence::IsSilence(Feature::value_type threshold_dB) : _threshold_dB(threshold_dB) {
+
+}
+
+IsSilence::~IsSilence() {
 
 }
 

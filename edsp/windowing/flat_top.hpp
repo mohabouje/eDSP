@@ -15,10 +15,47 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "windowing/flat_top.h"
+#ifndef EDSP_FLAT_TOP_H
+#define EDSP_FLAT_TOP_H
+
+#include "window.hpp"
 #include "base/constants.h"
 #include <cmath>
-using namespace edsp;
+
+EDSP_BEGIN_NAMESPACE
+/**
+ * @brief Flat Top %window implementation.
+ *
+ * The Flat Function has a low pass-band ripple, but high bandwidth. It cans be defined by:
+ *
+ * \f[
+ *  w(n) = 1 - - 1.93 \cos(2 \pi \frac{n}{N-1})
+ *  + 1.29 \cos(4 \pi \frac{n}{N-1})
+ *  - 0.388 \cos(6 \pi \frac{n}{N-1})
+ *  + 0.0322 \cos(8 \pi \frac{n}{N-1})
+ * \f]
+ *
+ **/
+class FlatTop : Window {
+public:
+
+    /**
+     * @brief Creates and computes a FlatTop %window with the given size & type
+     * @param size The number of elements to initially create.
+     * @param type Window type.
+     */
+    FlatTop(_In_ size_type size, _In_ WindowType type);
+
+    /**
+     * @brief Creates and computes a FlatTop %window with the given size.
+     * @param size The number of elements to initially create.
+     */
+    explicit FlatTop(_In_ size_type size);
+
+    ~FlatTop() EDSP_OVERRIDE;
+
+    EDSP_INLINE void initialize() EDSP_OVERRIDE;
+};
 
 FlatTop::FlatTop(Window::size_type size) : Window(size) {
 
@@ -27,8 +64,6 @@ FlatTop::FlatTop(Window::size_type size) : Window(size) {
 FlatTop::FlatTop(Window::size_type size, Window::WindowType type) : Window(size, type) {
 
 }
-
-FlatTop::~FlatTop() = default;
 
 void FlatTop::initialize() {
     if (!empty()) {
@@ -44,3 +79,11 @@ void FlatTop::initialize() {
         }
     }
 }
+
+FlatTop::~FlatTop() {
+
+}
+EDSP_END_NAMESPACE
+
+
+#endif //EDSP_FLAT_TOP_H
