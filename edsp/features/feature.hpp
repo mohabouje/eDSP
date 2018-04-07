@@ -1,7 +1,20 @@
-//
-// Created by mboujemaoui on 22/02/18.
-//
-
+/*
+ * eDSP, A cross-platform DSP framework written in C++.
+ * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 #ifndef EDSP_FEATURE_H
 #define EDSP_FEATURE_H
 
@@ -12,6 +25,7 @@
 EDSP_BEGIN_NAMESPACE
 
 class Feature {
+public:
     using value_type = double;
     using size_type = std::size_t;
 
@@ -23,7 +37,7 @@ class Feature {
     /**
      * @brief Default destructor
      */
-    ~Feature();
+    virtual ~Feature();
 
     /**
      * @brief Extracts the feature and stores it in an output buffer
@@ -37,18 +51,6 @@ class Feature {
             typename = typename std::enable_if<std::is_arithmetic<typename std::iterator_traits<InputIterator>::value_type >::value ||
                                                std::is_arithmetic<typename std::iterator_traits<OutputIterator>::value_type >::value>::type>
     EDSP_INLINE void compute(_In_ InputIterator first, _In_ InputIterator last, _Out_ OutputIterator);
-
-    /**
-     * @brief Extracts the feature and stores it in an output buffer
-     *
-     * @throw Throw a runtime error if the size of the input array is less than the window one.
-     * @tparam T An arithmetic type
-     * @param input Input buffer
-     * @param sz Size of the buffers
-     */
-    template <class T,
-            typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-    EDSP_INLINE value_type compute(_In_ T* input, _In_ size_type sz);
 
     /**
      * @brief Extracts the feature and stores it in an output buffer
@@ -69,13 +71,6 @@ protected:
     void Feature::compute(_In_ InputIterator first, _In_ InputIterator last, _Out_ OutputIterator out) {
         const auto size = static_cast<size_type>(std::distance(first, last));
         extract(first, size, out);
-    }
-
-    template<class T, typename>
-    Feature::value_type Feature::compute(_In_ T *input, _In_ Feature::size_type sz) {
-        value_type tmp;
-        extract(input, sz, &tmp);
-        return tmp;
     }
 
     template<class T, typename>

@@ -24,6 +24,7 @@
 
 #define EDSP_NOEXCEPT noexcept
 #define EDSP_INLINE   inline
+#define EDSP_OVERRIDE override
 #define EDSP_UNUSED(x) (void)x;
 
 #define EDSP_VERSION_MAJOR     0
@@ -33,6 +34,7 @@
 
 #define EDSP_BEGIN_NAMESPACE  namespace edsp {
 #define EDSP_END_NAMESPACE      }
+
 
 
 
