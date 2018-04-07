@@ -74,7 +74,7 @@ square_oscillator.set_frequency(500);
 std::generate_n(std::begin(square), size,square_oscillator); 
 ```
 ### Example: Extract signal features
-This example show how to extract some features like the energy and power of an input signal. 
+This example show how to extract_implementation some features like the energy and power of an input signal.
 
 ```c++
 constexpr std::size_t size = 1024;

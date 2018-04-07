@@ -23,14 +23,23 @@
 #include "feature.hpp"
 EDSP_BEGIN_NAMESPACE
 
+/**
+ * @brief Extracts the energy of a signal
+ *
+ * The energy of a discrete-time signal is defined as:
+ *
+ *  \f[
+ *     e = \sum_{n = 0}^{N-1} \left| x(n) \right| ^ 2
+ *  \f]
+ */
 class Energy : public Feature {
 public:
     Energy();
 protected:
-    EDSP_INLINE void extract(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
+    EDSP_INLINE void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
 };
 
-void Energy::extract(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_ Feature::value_type *output) {
+void Energy::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_ Feature::value_type *output) {
     *output = std::inner_product(input, input + size, input, static_cast<value_type >(0));
 }
 

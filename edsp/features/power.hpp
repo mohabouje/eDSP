@@ -22,20 +22,29 @@
 #include <numeric>
 #include "feature.hpp"
 EDSP_BEGIN_NAMESPACE
-
-class Energy : public Feature {
+/**
+ *  @brief Extracts the power of a signal
+ *
+ * The power of a discrete-time signal is defined as:
+ *
+ *  \f[
+ *     e = \frac{1}{N} \sum_{n = 0}^{N-1} \left| x(n) \right| ^ 2
+ *  \f]
+ */
+class Power : public Feature {
 public:
-    Energy();
+    Power();
 protected:
-    EDSP_INLINE void extract(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
+    EDSP_INLINE void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
 };
 
-void Energy::extract(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_ Feature::value_type *output) {
+void Power::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_
+                                    Feature::value_type *output) {
     *output = std::inner_product(input, input + size, input, static_cast<value_type>(0));
     *output /= static_cast<value_type>(size);
 }
 
-Energy::Energy() = default;
+Power::Power() = default;
 
 EDSP_END_NAMESPACE
 #endif //EDSP_POWER_H

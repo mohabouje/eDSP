@@ -24,37 +24,62 @@
 #include "feature.hpp"
 EDSP_BEGIN_NAMESPACE
 
+/**
+ *  @brief Extracts the loudness of an audio signal
+ *
+ *  In acoustics, loudness is the subjective perception of sound pressure. The loudness orders the sound on
+ *  a scale extending from quiet to loud. It's usually specified in dB.
+ *
+ *  \f[
+ *     l = \left( \sum_{n = 0}^{N-1} x(n) ^ 2 \right)^{\alpha}
+ *
+ *  \f]
+ *
+ *  This class uses the Steven's  power law factor ( \$[ \alpha = 0.67 \$])  by default.
+ */
 class Loudness : public Feature {
 public:
-    explicit Loudness(_In_ value_type factor);
+    /**
+     * \brief Creates a loudness feature extractor object with the given \$[ \alpha \$]
+     * @param alpha Exponential factor
+     */
+    explicit Loudness(_In_ value_type alpha);
     Loudness();
     ~Loudness() EDSP_OVERRIDE;
 
-    EDSP_INLINE void set_factor(_In_ value_type factor) EDSP_NOEXCEPT;
+    /**
+     * \brief Set the exponential factor \$[ \alpha \$]
+     * @param factor Exponential factor \$[ \alpha \$]
+     */
+    EDSP_INLINE void set_alpha(_In_ value_type factor) EDSP_NOEXCEPT;
 
-    EDSP_INLINE value_type factor() EDSP_NOEXCEPT;
+    /**
+     * \brief Returns the exponential factor \$[ \alpha \$]
+     * @return Exponential factor \$[ \alpha \$]
+     */
+    EDSP_INLINE value_type alpha() EDSP_NOEXCEPT;
 private:
-    EDSP_INLINE void extract(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
-    value_type _factor = 0.67;
+    EDSP_INLINE void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
+    value_type _alpha = 0.67;
 };
 
-void Loudness::extract(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_ Feature::value_type *output) {
+void Loudness::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_ Feature::value_type *output) {
     *output = std::inner_product(input, input + size, input, static_cast<value_type>(0));
-    std::pow(*output, _factor);
+    std::pow(*output, _alpha);
 }
 
 Loudness::Loudness() = default;
 
 Loudness::~Loudness() = default;
 
-Loudness::Loudness(_In_ Feature::value_type _factor) : _factor(_factor) {}
+Loudness::Loudness(_In_ Feature::value_type _alpha) : _alpha(_alpha) {}
 
-void Loudness::set_factor(_In_ Feature::value_type factor) EDSP_NOEXCEPT {
-    _factor = factor;
+void Loudness::set_alpha(_In_ Feature::value_type alpha) EDSP_NOEXCEPT {
+    _alpha = alpha;
 }
 
-Feature::value_type Loudness::factor() EDSP_NOEXCEPT {
-    return _factor;
+Feature::value_type Loudness::alpha() EDSP_NOEXCEPT {
+    return _alpha;
 }
 
 EDSP_END_NAMESPACE

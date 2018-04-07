@@ -22,28 +22,40 @@
 
 EDSP_BEGIN_NAMESPACE
 
+/**
+ * @brief Extract the duration of an audio signal in secs
+ *
+ * The sample rate of the original signal is needed for the computation.
+ */
 class Duration : public Feature {
 public:
+    /**
+     * @brief Creates a duration extractor with the given sample rate
+     * @param sample_rate Sample rate in Hz
+     */
     explicit Duration(_In_ value_type sample_rate);
-    Duration();
-    ~Duration() EDSP_OVERRIDE;
 
+    /**
+     * @brief Set the sample rate
+     * @param sample_rate Sample rate in Hz
+     */
     EDSP_INLINE void set_sample_rate(_In_ value_type sample_rate) EDSP_NOEXCEPT;
 
+    /**
+     * @brief Returns the sample rate
+     * @return Sample rate in Hz
+     */
     EDSP_INLINE value_type sample_rate() EDSP_NOEXCEPT;
 private:
-    EDSP_INLINE void extract(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
-    value_type _sample_rate = 8000;
+    EDSP_INLINE void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
+    value_type _sample_rate;
 };
 
-void Duration::extract(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_ Feature::value_type *output) {
+void Duration::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_
+                                      Feature::value_type *output) {
     EDSP_UNUSED(input);
     *output = static_cast<value_type>(size) / _sample_rate;
 }
-
-Duration::Duration() = default;
-
-Duration::~Duration() = default;
 
 Duration::Duration(_In_ Feature::value_type sample_rate) : _sample_rate(sample_rate) {}
 

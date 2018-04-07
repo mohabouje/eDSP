@@ -25,19 +25,35 @@
 
 EDSP_BEGIN_NAMESPACE
 
+/**
+ * @brief Checks if a signal is silence given a pre defined threshold in dB.
+ */
 class IsSilence : public Feature {
 public:
-    IsSilence();
-    IsSilence(value_type threshold_dB);
+    /**
+     * @brief Create a silence checker with the given threshold
+     * @param threshold_dB Threshold in dB.
+     */
+    explicit IsSilence(value_type threshold_dB);
 
+    /**
+     * @brief Set the threshold
+     * @param threshold_linear Threshold in dB
+     */
     EDSP_INLINE void set_threshold(_In_ value_type threshold_linear) EDSP_NOEXCEPT;
+
+    /**
+     * @brief Returns the threshold
+     * @return Threshold in dB
+     */
     EDSP_INLINE value_type threshold() EDSP_NOEXCEPT;
 protected:
-    EDSP_INLINE void extract(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
+    EDSP_INLINE void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
     value_type _threshold_dB = -20;
 };
 
-void IsSilence::extract(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_ Feature::value_type *output) {
+void IsSilence::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_
+                                       Feature::value_type *output) {
     const value_type energy = std::inner_product(input, input + size, input, static_cast<value_type >(0));
     *output = (20 * std::log10(energy) <= _threshold_dB);
 };
@@ -53,8 +69,6 @@ Feature::value_type IsSilence::threshold() EDSP_NOEXCEPT {
 IsSilence::IsSilence(Feature::value_type threshold_dB) : _threshold_dB(threshold_dB) {
 
 }
-
-IsSilence::IsSilence() = default;
 
 EDSP_END_NAMESPACE
 #endif //EDSP_IS_SILENCE_H

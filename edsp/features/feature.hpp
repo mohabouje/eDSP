@@ -24,6 +24,9 @@
 
 EDSP_BEGIN_NAMESPACE
 
+/**
+ *  @brief Abstract class to implement different feature extraction.
+ */
 class Feature {
 public:
     using value_type = double;
@@ -50,7 +53,7 @@ public:
     template <class InputIterator, class OutputIterator,
             typename = typename std::enable_if<std::is_arithmetic<typename std::iterator_traits<InputIterator>::value_type >::value ||
                                                std::is_arithmetic<typename std::iterator_traits<OutputIterator>::value_type >::value>::type>
-    EDSP_INLINE void compute(_In_ InputIterator first, _In_ InputIterator last, _Out_ OutputIterator);
+    EDSP_INLINE void extract(_In_ InputIterator first, _In_ InputIterator last, _Out_ OutputIterator);
 
     /**
      * @brief Extracts the feature and stores it in an output buffer
@@ -61,21 +64,21 @@ public:
      */
     template <class T,
             typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-    EDSP_INLINE void compute(_In_ T* input, _In_ size_type sz, _Out_ T* output);
+    EDSP_INLINE void extract(_In_ T* input, _In_ size_type sz, _Out_ T* output);
 
 protected:
-    virtual void extract(_In_ const value_type* input, _In_ size_type size, _Out_  value_type* output) = 0;
+    virtual void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_  value_type *output) = 0;
 };
 
     template<class InputIterator, class OutputIterator, typename>
-    void Feature::compute(_In_ InputIterator first, _In_ InputIterator last, _Out_ OutputIterator out) {
+    void Feature::extract(_In_ InputIterator first, _In_ InputIterator last, _Out_ OutputIterator out) {
         const auto size = static_cast<size_type>(std::distance(first, last));
-        extract(first, size, out);
+        extract_implementation(first, size, out);
     }
 
     template<class T, typename>
-    void Feature::compute(_In_ T *input, _In_ Feature::size_type sz, _Out_ T *output) {
-        extract(input, sz, output);
+    void Feature::extract(_In_ T *input, _In_ Feature::size_type sz, _Out_ T *output) {
+        extract_implementation(input, sz, output);
     }
 
     Feature::Feature() = default;

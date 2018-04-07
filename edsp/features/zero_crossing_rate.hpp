@@ -15,47 +15,45 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef EDSP_ENERGY_H
-#define EDSP_ENERGY_H
+#ifndef EDSP_ZERO_CROSSING_RATE_H
+#define EDSP_ZERO_CROSSING_RATE_H
 
+#include "feature.hpp"
+#include "math/math.h"
 
 #include <numeric>
 #include <cmath>
-#include "feature.hpp"
+
 EDSP_BEGIN_NAMESPACE
 
-    class Energy : public Feature {
+    /**
+     * @brief Extract the zero crossing rate of a signal
+     *
+     * The ZCR is the rate of sign-changes along a signal. This feature is heavily used in both speech
+     * recognition and music information retrieval.
+     *
+     * ZCR is defined formally as:
+     * \f[
+     *      {\displaystyle zcr={\frac {1}{T-1}}\sum _{t=1}^{T-1}\mathbb {1} _{\mathbb {R} _{<0}}(s_{t}s_{t-1})}
+     * \f]
+     */
+    class ZeroCrossingRate : public Feature {
     public:
-        explicit Energy(_In_ value_type factor);
-        Energy();
-        ~Energy() EDSP_OVERRIDE;
-
-        EDSP_INLINE void set_factor(_In_ value_type factor) EDSP_NOEXCEPT;
-
-        EDSP_INLINE value_type factor() EDSP_NOEXCEPT;
-    private:
-        EDSP_INLINE void extract(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
-        value_type _factor = 0.67;
+        ZeroCrossingRate();
+    protected:
+        EDSP_INLINE void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_
+                                                value_type *output) EDSP_OVERRIDE;
     };
 
-    void Energy::extract(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_ Feature::value_type *output) {
-        *output = std::inner_product(input, input + size, input, static_cast<value_type>(0));
-        std::pow(*output, _factor);
+    void ZeroCrossingRate::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_
+                                        Feature::value_type *output) {
+        *output = 0;
+        for (auto iter = input, last = input + size - 1; iter != last; ++iter) {
+            *output += (math::sign(*(iter + 1)) != math::sign(*iter)) ? 1 : 0;
+        }
+        *output /= static_cast<value_type>(size);
     }
 
-    Energy::Energy() = default;
-
-    Energy::~Energy()  = default;
-
-    Energy::Energy(_In_ Feature::value_type _factor) : _factor(_factor) {}
-
-    void Energy::set_factor(_In_ Feature::value_type factor) EDSP_NOEXCEPT {
-        _factor = factor;
-    }
-
-    Feature::value_type Energy::factor() EDSP_NOEXCEPT {
-        return _factor;
-    }
-
+    ZeroCrossingRate::ZeroCrossingRate() = default;
 EDSP_END_NAMESPACE
 #endif //EDSP_ZERO_CROSSING_RATE_H
