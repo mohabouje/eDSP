@@ -32,6 +32,7 @@ EDSP_BEGIN_NAMESPACE
  * \f]
  */
 class Bartlett : Window {
+    EDSP_DEFINE_IMPLICITS(Bartlett)
 public:
 
     /**
@@ -48,9 +49,7 @@ Bartlett::Bartlett(Window::size_type size) : Window(size) {
 
 }
 
-Bartlett::~Bartlett() {
-
-}
+Bartlett::~Bartlett() = default;
 
 void Bartlett::initialize() {
     if (!empty()) {

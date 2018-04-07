@@ -31,6 +31,7 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class BartHann : Window {
+    EDSP_DEFINE_IMPLICITS(BartHann)
 public:
   /**
    * @brief Creates and computes a Blackman %window with the given size.
@@ -44,9 +45,7 @@ public:
 
 BartHann::BartHann(_In_ Window::size_type size) : Window(size) {}
 
-BartHann::~BartHann() {
-
-}
+BartHann::~BartHann() = default;
 
 void BartHann::initialize() {
   for (size_type i = 0, sz = size(); i < sz; ++i) {

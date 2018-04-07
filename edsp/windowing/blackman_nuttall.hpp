@@ -30,6 +30,7 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class BlackmanNuttall : Window {
+    EDSP_DEFINE_IMPLICITS(BlackmanNuttall)
 public:
 
     /**
@@ -71,9 +72,7 @@ void BlackmanNuttall::initialize() {
     }
 }
 
-BlackmanNuttall::~BlackmanNuttall() {
-
-}
+BlackmanNuttall::~BlackmanNuttall() = default;
 
 EDSP_END_NAMESPACE
 

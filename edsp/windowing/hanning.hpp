@@ -38,6 +38,7 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class Hanning : Window {
+    EDSP_DEFINE_IMPLICITS(Hanning)
 public:
 
     /**

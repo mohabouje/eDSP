@@ -31,6 +31,7 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class BlackmanHarris : Window {
+    EDSP_DEFINE_IMPLICITS(BlackmanHarris)
 public:
 
     /**
@@ -51,6 +52,7 @@ public:
     EDSP_INLINE void initialize() EDSP_OVERRIDE;
 };
 
+BlackmanHarris::~BlackmanHarris() = default;
 
 BlackmanHarris::BlackmanHarris(_In_ Window::size_type size) : Window(size) {
 
@@ -71,10 +73,6 @@ void BlackmanHarris::initialize() {
                         + 0.01168 * std::cos(6. * tmp);
         }
     }
-}
-
-BlackmanHarris::~BlackmanHarris() {
-
 }
 
 EDSP_END_NAMESPACE

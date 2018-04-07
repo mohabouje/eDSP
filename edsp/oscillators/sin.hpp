@@ -15,17 +15,51 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "oscillators/sin.h"
+#ifndef EDSP_GENERATORS_SINGENERATOR_H
+#define EDSP_GENERATORS_SINGENERATOR_H
+
+#include "oscillator.h"
 #include "base/constants.h"
 #include <cmath>
-using namespace edsp;
+
+EDSP_BEGIN_NAMESPACE
+
+/**
+ * @brief Generate a periodic sinusoidal signal with the given %frecuency sampled at %samplerate.
+ */
+class SinOscillator : public Oscillator {
+    EDSP_DEFINE_IMPLICITS(SinOscillator)
+public:
+    /**
+     * @brief Created a SinGenerator with the defualt configuration
+     */
+    SinOscillator();
+
+    /**
+     * @brief Created a TriangularPulseGenerator with the given configuration
+     * @param amplitude
+     * @param samplerate
+     * @param frequency
+     * @param phase
+     */
+    SinOscillator(_In_ value_type amplitude, _In_ value_type samplerate, _In_ value_type frequency, _In_ value_type phase);
+
+    ~SinOscillator() EDSP_OVERRIDE;
+
+    /**
+     * \brief Computes the output of the generator in the given timestamp
+     *
+     * @return Output of the generator
+     */
+    EDSP_INLINE value_type operator()() EDSP_NOEXCEPT;
+};
 
 SinOscillator::SinOscillator() = default;
 
 SinOscillator::~SinOscillator() = default;
 
-SinOscillator::SinOscillator(Oscillator::value_type amplitude, Oscillator::value_type samplerate,
-                           Oscillator::value_type frequency, Oscillator::value_type phase) : Oscillator(amplitude,
+SinOscillator::SinOscillator(_In_ Oscillator::value_type amplitude, _In_ Oscillator::value_type samplerate,
+                           _In_ Oscillator::value_type frequency, _In_ Oscillator::value_type phase) : Oscillator(amplitude,
                                                                                                              samplerate,
                                                                                                              frequency,
                                                                                                              phase) {
@@ -35,6 +69,10 @@ SinOscillator::SinOscillator(Oscillator::value_type amplitude, Oscillator::value
 Oscillator::value_type SinOscillator::operator()() EDSP_NOEXCEPT {
     const value_type result = std::sin(2 * constants<value_type>::pi  * (frequency() * timestamp() + phase()));
     set_timestamp(timestamp() + sampling_period());
-    return result;}
+    return result;
+}
 
 
+EDSP_END_NAMESPACE
+
+#endif //EDSP_SINGENERATOR_H

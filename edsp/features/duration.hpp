@@ -28,6 +28,7 @@ EDSP_BEGIN_NAMESPACE
  * The sample rate of the original signal is needed for the computation.
  */
 class Duration : public Feature {
+    EDSP_DEFINE_IMPLICITS(Duration)
 public:
     /**
      * @brief Creates a duration extractor with the given sample rate
@@ -65,9 +66,7 @@ void Duration::set_sample_rate(_In_ Feature::value_type sample_rate) EDSP_NOEXCE
     _sample_rate = sample_rate;
 }
 
-Duration::~Duration() {
-
-}
+Duration::~Duration() = default;
 
 Feature::value_type Duration::sample_rate() EDSP_NOEXCEPT {
     return _sample_rate;

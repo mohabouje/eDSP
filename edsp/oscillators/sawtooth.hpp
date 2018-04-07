@@ -26,11 +26,11 @@ EDSP_BEGIN_NAMESPACE
  * @brief Generate a sawtooth wave of a given %frequency sampled with %samplerate
  */
 class SawtoothOscillator : public Oscillator {
+    EDSP_DEFINE_IMPLICITS(SawtoothOscillator)
 public:
-
     SawtoothOscillator();
-    SawtoothOscillator(value_type amplitude, value_type samplerate, value_type frequency, value_type width_);
-    ~SawtoothOscillator() override;
+    SawtoothOscillator(_In_ value_type amplitude, _In_ value_type samplerate, _In_ value_type frequency, _In_ value_type width);
+    ~SawtoothOscillator() EDSP_OVERRIDE;
 
     /**
      * @brief Set the width of the pulse over the interval \f$ \frac{1}{F} \f$
@@ -42,18 +42,46 @@ public:
      *
      * @param width Value between 0 and 1
      */
-    void set_width(value_type width) EDSP_NOEXCEPT;
+    EDSP_INLINE void set_width(_In_ value_type width) EDSP_NOEXCEPT;
 
     /**
      * \brief Return the width of the pulse over the interval \f$ \frac{1}{F} \f$
      * @return Value between 0 and 1
      */
-    value_type width() const EDSP_NOEXCEPT;
+    EDSP_INLINE value_type width() const EDSP_NOEXCEPT;
 
-    value_type operator()() EDSP_NOEXCEPT;
+    EDSP_INLINE value_type operator()() EDSP_NOEXCEPT;
 private:
     value_type width_{1};
 };
+
+Oscillator::value_type SawtoothOscillator::width() const EDSP_NOEXCEPT {
+    return width_;
+}
+
+void SawtoothOscillator::set_width(_In_ Oscillator::value_type width) EDSP_NOEXCEPT {
+    width_ = width;
+}
+
+Oscillator::value_type SawtoothOscillator::operator()() EDSP_NOEXCEPT {
+    const auto t = timestamp();
+    const value_type result = (t >= width_) ? -2 * t / (1 - width_) + 1
+                                            : 2 * t / width_ - 1;
+    const value_type increased = t + sampling_period();
+    set_timestamp((increased > 1. / frequency()) ? 0 : increased);
+    return result * amplitude();
+}
+
+SawtoothOscillator::SawtoothOscillator() = default;
+
+SawtoothOscillator::~SawtoothOscillator() = default;
+
+SawtoothOscillator::SawtoothOscillator(_In_ Oscillator::value_type amplitude,
+                                     _In_ Oscillator::value_type samplerate,
+                                     _In_ Oscillator::value_type frequency,
+                                     _In_ Oscillator::value_type width)
+    : Oscillator(amplitude, samplerate, frequency, 0.), width_(width) {}
+
 
 EDSP_END_NAMESPACE
 #endif //EDSP_GENERATORS_SAWTOOTH_GENERATOR_H

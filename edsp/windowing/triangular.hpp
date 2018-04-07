@@ -33,8 +33,8 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class Triangular : Window {
+    EDSP_DEFINE_IMPLICITS(Triangular)
 public:
-
     /**
      * @brief Creates and computes a Triangular %window with the given size.
      * @param size The number of elements to initially create.

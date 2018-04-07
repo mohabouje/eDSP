@@ -37,6 +37,7 @@ EDSP_BEGIN_NAMESPACE
  *
  **/
 class FlatTop : Window {
+    EDSP_DEFINE_IMPLICITS(FlatTop)
 public:
 
     /**
@@ -80,9 +81,7 @@ void FlatTop::initialize() {
     }
 }
 
-FlatTop::~FlatTop() {
-
-}
+FlatTop::~FlatTop() = default;
 EDSP_END_NAMESPACE
 
 

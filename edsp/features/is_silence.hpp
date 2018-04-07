@@ -29,6 +29,7 @@ EDSP_BEGIN_NAMESPACE
  * @brief Checks if a signal is silence given a pre defined threshold in dB.
  */
 class IsSilence : public Feature {
+    EDSP_DEFINE_IMPLICITS(IsSilence)
 public:
     /**
      * @brief Create a silence checker with the given threshold
@@ -72,9 +73,7 @@ IsSilence::IsSilence(Feature::value_type threshold_dB) : _threshold_dB(threshold
 
 }
 
-IsSilence::~IsSilence() {
-
-}
+IsSilence::~IsSilence() = default;
 
 EDSP_END_NAMESPACE
 #endif //EDSP_IS_SILENCE_H

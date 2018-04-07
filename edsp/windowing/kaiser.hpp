@@ -33,8 +33,8 @@ EDSP_BEGIN_NAMESPACE
  * By default: %beta = 0.5
  */
 class Kaiser : Window {
+    EDSP_DEFINE_IMPLICITS(Kaiser)
 public:
-
     /**
      * @brief Creates and computes a Kaiser %window with the given size.
      * @param size The number of elements to initially create.
@@ -76,9 +76,7 @@ Kaiser::Kaiser(_In_ Window::size_type size, _In_ Window::value_type beta) : Wind
 
 Kaiser::~Kaiser() = default;
 
-void Kaiser::initialize() {
-
-}
+void Kaiser::initialize() = default;
 
 void Kaiser::set_beta(_In_ Window::value_type beta) EDSP_NOEXCEPT {
     _beta = beta;

@@ -37,6 +37,7 @@ EDSP_BEGIN_NAMESPACE
  * \f]
  */
 class ZeroCrossingRate : public Feature {
+    EDSP_DEFINE_IMPLICITS(ZeroCrossingRate)
 public:
     ZeroCrossingRate();
     ~ZeroCrossingRate() EDSP_OVERRIDE;
@@ -45,9 +46,9 @@ protected:
                                             value_type *output) EDSP_OVERRIDE;
 };
 
-ZeroCrossingRate::~ZeroCrossingRate() {
+ZeroCrossingRate::ZeroCrossingRate() = default;
 
-}
+ZeroCrossingRate::~ZeroCrossingRate() = default;
 
 void ZeroCrossingRate::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_
                                     Feature::value_type *output) {
@@ -58,6 +59,5 @@ void ZeroCrossingRate::extract_implementation(_In_ const Feature::value_type *in
     *output /= static_cast<value_type>(size);
 }
 
-ZeroCrossingRate::ZeroCrossingRate() = default;
 EDSP_END_NAMESPACE
 #endif //EDSP_ZERO_CROSSING_RATE_H

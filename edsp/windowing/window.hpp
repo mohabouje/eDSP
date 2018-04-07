@@ -23,7 +23,8 @@ EDSP_BEGIN_NAMESPACE
  */
 
 class Window {
-public:
+    EDSP_DEFINE_IMPLICITS(Window)
+public:    
     using value_type = double;
     using pointer = value_type *;
     using const_pointer = const value_type *;
@@ -237,13 +238,9 @@ protected:
     WindowType type_ = WindowType::Symmetric;
 };
 
-Window::Window() {
+Window::Window() = default;
 
-}
-
-Window::~Window() {
-
-}
+Window::~Window() = default;
 
 Window::Window(_In_ Window::size_type sz) : data_(std::vector<double>(sz)) {
 

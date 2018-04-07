@@ -28,6 +28,7 @@ EDSP_BEGIN_NAMESPACE
  * negative one
  */
 class SquareOscillator : public Oscillator {
+    EDSP_DEFINE_IMPLICITS(SquareOscillator)
 public:
 
     /**
@@ -42,9 +43,9 @@ public:
      * @param frequency
      * @param duty
      */
-    SquareOscillator(value_type amplitude, value_type samplerate, value_type frequency, value_type duty);
+    SquareOscillator(_In_ value_type amplitude, _In_ value_type samplerate, _In_ value_type frequency, _In_ value_type duty);
 
-    ~SquareOscillator() override;
+    ~SquareOscillator() EDSP_OVERRIDE;
 
     /**
      * @brief Set the duty cycle.
@@ -53,7 +54,7 @@ public:
      * the positives values and negative ones of the cycle.
      * @param dutty Value between 0 and 1
      */
-    void set_duty_cycle(value_type dutty) EDSP_NOEXCEPT;
+    EDSP_INLINE void set_duty_cycle(_In_ value_type dutty) EDSP_NOEXCEPT;
 
     /**
      * Return the duty cycle
@@ -61,19 +62,47 @@ public:
      * See also: set_duty_cycle
      * @return Value between 0 and 1
      */
-    value_type duty_cycle() const EDSP_NOEXCEPT;
+    EDSP_INLINE value_type duty_cycle() const EDSP_NOEXCEPT;
 
     /**
      * \brief Computes the output of the generator in the given timestamp
      *
      * @return Output of the generator
      */
-    value_type operator()() EDSP_NOEXCEPT;
+    EDSP_INLINE value_type operator()() EDSP_NOEXCEPT;
 
 private:
-    value_type duty_;
-    value_type duty_t_;
+    value_type duty_ = 0;
+    value_type duty_t_ = 0;
 };
+
+void SquareOscillator::set_duty_cycle(_In_ Oscillator::value_type dutty) EDSP_NOEXCEPT {
+    duty_ = dutty;
+    duty_t_ = dutty / frequency();
+}
+
+Oscillator::value_type SquareOscillator::duty_cycle() const EDSP_NOEXCEPT {
+    return duty_;
+}
+
+Oscillator::value_type SquareOscillator::operator()() EDSP_NOEXCEPT {
+    const auto t = timestamp();
+    const value_type result = (t >= duty_t_) ? -1 : 1;
+    const value_type increased = t + sampling_period();
+    set_timestamp((increased > 1. / frequency()) ? 0 : increased);
+    return result * amplitude();
+}
+
+SquareOscillator::SquareOscillator(_In_ Oscillator::value_type amplitude,
+                                           _In_ Oscillator::value_type samplerate,
+                                           _In_ Oscillator::value_type frequency,
+                                           _In_ Oscillator::value_type duty)
+    : Oscillator(amplitude, samplerate, frequency, 0.), duty_(duty), duty_t_(duty / frequency) {
+}
+
+SquareOscillator::~SquareOscillator() = default;
+
+SquareOscillator::SquareOscillator() = default;
 
 EDSP_END_NAMESPACE
 #endif //EDSP_GENERATORS_SQUARE_PULSE_GENERATOR_H

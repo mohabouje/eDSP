@@ -38,6 +38,7 @@ EDSP_BEGIN_NAMESPACE
  *  This class uses the Steven's  power law factor ( \$[ \alpha = 0.67 \$])  by default.
  */
 class Loudness : public Feature {
+    EDSP_DEFINE_IMPLICITS(Loudness)
 public:
     /**
      * \brief Creates a loudness feature extractor object with the given \$[ \alpha \$]
@@ -72,11 +73,9 @@ void Loudness::extract_implementation(_In_ const Feature::value_type *input, _In
 
 Loudness::Loudness() = default;
 
+Loudness::~Loudness() = default;
+
 Loudness::Loudness(_In_ Feature::value_type _alpha) : _alpha(_alpha) {}
-
-Loudness::~Loudness() {
-
-}
 
 void Loudness::set_alpha(_In_ Feature::value_type alpha) EDSP_NOEXCEPT {
     _alpha = alpha;

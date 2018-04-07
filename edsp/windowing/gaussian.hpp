@@ -39,8 +39,8 @@ EDSP_BEGIN_NAMESPACE
  * By default: \f$ \alpha = 2.5 \f$
  */
 class Gaussian : Window {
+    EDSP_DEFINE_IMPLICITS(Gaussian)
 public:
-
     /**
      * @brief Creates a Gaussian %window with the given size and a factor alpha
      * @param size The number of elements to initially create
@@ -102,9 +102,7 @@ double Gaussian::alpha() const EDSP_NOEXCEPT {
     return alpha_;
 }
 
-Gaussian::~Gaussian() {
-
-}
+Gaussian::~Gaussian() = default;
 
 EDSP_END_NAMESPACE
 #endif //EDSP_WINDOW_GAUSSIAN_H

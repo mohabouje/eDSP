@@ -35,7 +35,12 @@
 #define EDSP_BEGIN_NAMESPACE  namespace edsp {
 #define EDSP_END_NAMESPACE      }
 
-
+#define EDSP_DEFINE_IMPLICITS(Class)            \
+public:                                         \
+    Class(const Class&) = default;              \
+    Class(Class && ) = default;                 \
+    Class& operator=(const Class&) = default;   \
+    Class& operator=(Class&&) = default;
 
 
 #define _In_

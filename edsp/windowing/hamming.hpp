@@ -37,6 +37,7 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class Hamming : Window {
+    EDSP_DEFINE_IMPLICITS(Hamming)
 public:
 
     /**
@@ -74,9 +75,7 @@ void Hamming::initialize() {
     }
 }
 
-Hamming::~Hamming() {
-
-}
+Hamming::~Hamming() = default;
 
 EDSP_END_NAMESPACE
 

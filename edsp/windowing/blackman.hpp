@@ -40,6 +40,7 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class Blackman : Window {
+    EDSP_DEFINE_IMPLICITS(Blackman)
 public:
 
     /**
@@ -69,9 +70,7 @@ Blackman::Blackman(_In_ Window::size_type size, _In_ Window::WindowType type) : 
 
 }
 
-Blackman::~Blackman() {
-
-}
+Blackman::~Blackman() = default;
 
 void Blackman::initialize() {
     if (!empty()) {

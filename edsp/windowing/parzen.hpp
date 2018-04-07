@@ -22,8 +22,8 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class Parzen : Window {
+    EDSP_DEFINE_IMPLICITS(Parzen)
 public:
-
     /**
      * @brief Creates and computes a Parzen %window with the given size.
      * @param size The number of elements to initially create.

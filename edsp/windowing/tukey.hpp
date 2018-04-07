@@ -31,8 +31,8 @@ EDSP_BEGIN_NAMESPACE
  * the ratio between the constant section and the cosine section. The default value of r = 1/2
  */
 class Tukey : Window {
+    EDSP_DEFINE_IMPLICITS(Tukey)
 public:
-
     /**
      * @brief Creates and computes a Tukey %window with the given size.
      * @param size The number of elements to initially create.
@@ -69,7 +69,7 @@ Tukey::Tukey(_In_ Window::size_type size) : Window(size) {
 
 }
 
-Tukey::Tukey(_In_ Window::size_type size, _In_ Window::value_type ratio_) : Window(size), _ratio(ratio_) {
+Tukey::Tukey(_In_ Window::size_type size, _In_ Window::value_type ratio) : Window(size), _ratio(ratio) {
 
 }
 

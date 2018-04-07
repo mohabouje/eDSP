@@ -33,6 +33,7 @@ EDSP_BEGIN_NAMESPACE
  *  \f]
  */
 class Energy : public Feature {
+    EDSP_DEFINE_IMPLICITS(Energy)
 public:
     Energy();
     ~Energy() EDSP_OVERRIDE;
@@ -40,15 +41,13 @@ protected:
     EDSP_INLINE void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
 };
 
-Energy::~Energy() {
+Energy::Energy() = default;
 
-}
+Energy::~Energy() = default;
 
 void Energy::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_ Feature::value_type *output) {
     *output = std::inner_product(input, input + size, input, static_cast<value_type >(0));
 }
-
-Energy::Energy() = default;
 
 EDSP_END_NAMESPACE
 #endif //EDSP_ENERGY_H

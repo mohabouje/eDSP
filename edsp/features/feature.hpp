@@ -28,6 +28,7 @@ EDSP_BEGIN_NAMESPACE
  *  @brief Abstract class to implement different feature extraction.
  */
 class Feature {
+    EDSP_DEFINE_IMPLICITS(Feature)
 public:
     using value_type = double;
     using size_type = std::size_t;

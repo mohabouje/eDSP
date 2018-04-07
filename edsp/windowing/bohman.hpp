@@ -30,8 +30,8 @@ EDSP_BEGIN_NAMESPACE
  * See also: Rectangular and Bartlett
  */
 class Bohman : Window {
+    EDSP_DEFINE_IMPLICITS(Bohman)
 public:
-
     /**
      * @brief Creates and computes a Bohman %window with the given size.
      * @param size The number of elements to initially create.
@@ -62,9 +62,7 @@ void Bohman::initialize() {
     }
 }
 
-Bohman::~Bohman() {
-
-}
+Bohman::~Bohman() = default;
 EDSP_END_NAMESPACE
 
 #endif //EDSP_WINDOW_BOHMAN_H

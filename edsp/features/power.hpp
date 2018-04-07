@@ -32,6 +32,7 @@ EDSP_BEGIN_NAMESPACE
  *  \f]
  */
 class Power : public Feature {
+    EDSP_DEFINE_IMPLICITS(Power)
 public:
     Power();
     ~Power() EDSP_OVERRIDE;
@@ -39,9 +40,9 @@ protected:
     EDSP_INLINE void extract_implementation(_In_ const value_type *input, _In_ size_type size, _Out_ value_type *output) EDSP_OVERRIDE;
 };
 
-Power::~Power() {
+Power::Power() = default;
 
-}
+Power::~Power() = default;
 
 void Power::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_
                                     Feature::value_type *output) {
@@ -49,7 +50,6 @@ void Power::extract_implementation(_In_ const Feature::value_type *input, _In_ F
     *output /= static_cast<value_type>(size);
 }
 
-Power::Power() = default;
 
 EDSP_END_NAMESPACE
 #endif //EDSP_POWER_H

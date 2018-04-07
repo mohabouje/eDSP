@@ -36,8 +36,8 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class Welch : Window {
+    EDSP_DEFINE_IMPLICITS(Welch)
 public:
-
     /**
      * @brief Creates and computes a Welch %window with the given size.
      * @param size The number of elements to initially create.
