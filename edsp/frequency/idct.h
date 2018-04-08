@@ -1,39 +1,57 @@
-//
-// Created by Mohammed Boujemaoui on 16/10/2017.
-//
-
-#ifndef EDSP_IDCT_H
-#define EDSP_IDCT_H
+/*
+ * eDSP, A cross-platform DSP framework written in C++.
+ * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+#ifndef EDSP_FREQUENCY_IDCT_H
+#define EDSP_FREQUENCY_IDCT_H
 
 #include "dct.h"
 EDSP_BEGIN_NAMESPACE
-    namespace frequency {
-        class IDCT : public BaseTransform {
-        public:
-            explicit IDCT(DCT_Type t = DCT_Type::Type_I);
 
-            DCT_Type type() const noexcept { return t; }
-            void setType(DCT_Type t) noexcept { IDCT::t = t; }
+/**
+ * @brief The IDCT class implemented the Inverse DCT
+ *
+ * See @DCT for more details.
+ */
+class IDCT : public DCT {
+    EDSP_DECLARE_MOVE_IMPLICITS(IDCT)
+public:
+    /**
+     * @brief IDCT Creates a IDCT object with the given size and implementation
+     * @param size Number of samples to be used in the computation
+     * @param type Type of implementation: DCT-I, DCT-II, DCT-III or DCT-IV
+     */
+    explicit IDCT(std::size_t size, DCT_Type type = DCT_Type::Type_I);
+    ~IDCT() EDSP_OVERRIDE;
+private:
+    EDSP_INLINE fftw_r2r_kind format() const EDSP_NOEXCEPT EDSP_OVERRIDE;
+};
 
-            template <class InputIterator, class OutputIterator>
-            void compute_r2r(InputIterator first, InputIterator last, OutputIterator out) {
-                const auto m_size = std::distance(first, last);
-                if (size != m_size || plan == nullptr) {
-                    fftw_destroy_plan(plan);
-                    size = m_size;
-                    plan = fftw_plan_r2r_1d(static_cast<int>(size),
-                                            PTR(first),
-                                            PTR(out),
-                                            format(),
-                                            FFTW_ESTIMATE);
-                }
-                fftw_execute_r2r(plan, PTR(first), PTR(out));
-            }
+IDCT::IDCT(std::size_t size, DCT_Type type) : DCT(size, type) {
+    build_plan();
+}
 
-        private:
-            DCT_Type t{DCT_Type::Type_I};
-            fftw_r2r_kind format() const noexcept ;
-        };
+fftw_r2r_kind IDCT::format() const EDSP_NOEXCEPT {
+    switch(type()) {
+        case DCT_Type::Type_I: return FFTW_REDFT00;
+        case DCT_Type::Type_II: return FFTW_REDFT10;
+        case DCT_Type::Type_III: return FFTW_REDFT01;
+        case DCT_Type::Type_IV: return FFTW_REDFT11;
     }
+}
+
 EDSP_END_NAMESPACE
-#endif //EDSP_IDCT_H
+#endif //EDSP_FREQUENCY_IDCT_H

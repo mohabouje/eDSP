@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef EDSP_ENERGY_H
-#define EDSP_ENERGY_H
+#ifndef EDSP_FEATURES_ENERGY_H
+#define EDSP_FEATURES_ENERGY_H
 
 
 #include <numeric>
@@ -33,7 +33,7 @@ EDSP_BEGIN_NAMESPACE
  *  \f]
  */
 class Energy : public Feature {
-    EDSP_DEFINE_IMPLICITS(Energy)
+    EDSP_DECLARE_ALL_IMPLICITS(Energy)
 public:
     Energy();
     ~Energy() EDSP_OVERRIDE;
@@ -50,4 +50,4 @@ void Energy::extract_implementation(_In_ const Feature::value_type *input, _In_ 
 }
 
 EDSP_END_NAMESPACE
-#endif //EDSP_ENERGY_H
+#endif //EDSP_FEATURES_ENERGY_H

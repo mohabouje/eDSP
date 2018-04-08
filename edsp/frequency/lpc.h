@@ -15,13 +15,24 @@ EDSP_BEGIN_NAMESPACE
 
         class LinearPredictiveCode {
         public:
-            explicit LinearPredictiveCode(std::size_t order);;
+            explicit LinearPredictiveCode(std::size_t order) :
+                m_order(order),
+                m_reflection(order + 1),
+                m_lpc(order + 1)
+            {
+            };
             ~LinearPredictiveCode() = default;
 
             const auto& reflection() noexcept { return m_reflection; }
             std::size_t order() const noexcept { return m_order; }
             double lpc_error() const noexcept { return m_error; }
-            void set_order(const std::size_t order) noexcept ;
+            void set_order(const std::size_t order) noexcept  {
+                if (order != m_order) {
+                    m_lpc.resize(m_order + 1);
+                    m_reflection.resize(m_order + 1);
+                    m_tmp.resize(m_order + 1);
+                }
+            }
 
             template<class InputIterator>
             std::tuple<double, std::vector<double>, std::vector<double>> compute(InputIterator first, InputIterator last) {

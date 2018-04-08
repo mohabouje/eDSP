@@ -37,7 +37,7 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class Hamming : Window {
-    EDSP_DEFINE_IMPLICITS(Hamming)
+    EDSP_DECLARE_ALL_IMPLICITS(Hamming)
 public:
 
     /**

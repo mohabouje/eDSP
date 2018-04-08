@@ -28,7 +28,7 @@ EDSP_BEGIN_NAMESPACE
  * @brief Generate a periodic sinusoidal signal with the given %frecuency sampled at %samplerate.
  */
 class SinOscillator : public Oscillator {
-    EDSP_DEFINE_IMPLICITS(SinOscillator)
+    EDSP_DECLARE_ALL_IMPLICITS(SinOscillator)
 public:
     /**
      * @brief Created a SinGenerator with the defualt configuration

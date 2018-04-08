@@ -31,7 +31,7 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class BlackmanHarris : Window {
-    EDSP_DEFINE_IMPLICITS(BlackmanHarris)
+    EDSP_DECLARE_ALL_IMPLICITS(BlackmanHarris)
 public:
 
     /**

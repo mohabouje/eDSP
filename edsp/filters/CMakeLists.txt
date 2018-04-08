@@ -1,5 +1,4 @@
-option(COMPILE_FREQUENCY "Compiles the Frequency module" ON)
-if (COMPILE_FREQUENCY)
+if (COMPILE_FILTERS_MODULE)
     set(HEADER_FILES  ${HEADER_FILES}
             ${CMAKE_CURRENT_SOURCE_DIR}/biquad.h
             ${CMAKE_CURRENT_SOURCE_DIR}/biquaddesigner.h
@@ -11,6 +10,4 @@ if (COMPILE_FREQUENCY)
             ${CMAKE_CURRENT_SOURCE_DIR}/src/biquaddesigner.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/src/fir.cpp
             PARENT_SCOPE)
-
-    include_directories(include)
-endif(COMPILE_FREQUENCY)
+endif(COMPILE_FILTERS_MODULE)

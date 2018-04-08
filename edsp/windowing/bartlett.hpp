@@ -32,7 +32,7 @@ EDSP_BEGIN_NAMESPACE
  * \f]
  */
 class Bartlett : Window {
-    EDSP_DEFINE_IMPLICITS(Bartlett)
+    EDSP_DECLARE_ALL_IMPLICITS(Bartlett)
 public:
 
     /**

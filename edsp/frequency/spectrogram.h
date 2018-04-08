@@ -27,7 +27,7 @@ EDSP_BEGIN_NAMESPACE
             }
 
         private:
-            FFT fft{};
+            DFT fft{};
             std::vector<std::complex<double>> buffer{};
         };
     }

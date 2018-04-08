@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef EDSP_FEATURE_H
-#define EDSP_FEATURE_H
+#ifndef EDSP_FEATURES_FEATURE_H
+#define EDSP_FEATURES_FEATURE_H
 
 #include "config.h"
 #include <type_traits>
@@ -28,9 +28,9 @@ EDSP_BEGIN_NAMESPACE
  *  @brief Abstract class to implement different feature extraction.
  */
 class Feature {
-    EDSP_DEFINE_IMPLICITS(Feature)
+    EDSP_DECLARE_ALL_IMPLICITS(Feature)
 public:
-    using value_type = double;
+    using value_type = edsp::real_t;
     using size_type = std::size_t;
 
     /**
@@ -54,7 +54,7 @@ public:
     template <class InputIterator, class OutputIterator,
             typename = typename std::enable_if<std::is_arithmetic<typename std::iterator_traits<InputIterator>::value_type >::value ||
                                                std::is_arithmetic<typename std::iterator_traits<OutputIterator>::value_type >::value>::type>
-    EDSP_INLINE void extract(_In_ InputIterator first, _In_ InputIterator last, _Out_ OutputIterator);
+    EDSP_INLINE void extract(_In_ InputIterator first, _In_ InputIterator last, _Out_ OutputIterator out);
 
     /**
      * @brief Extracts the feature and stores it in an output buffer
@@ -90,4 +90,4 @@ EDSP_END_NAMESPACE
 
 
 
-#endif //EDSP_FEATURE_H
+#endif //EDSP_FEATURES_FEATURE_H

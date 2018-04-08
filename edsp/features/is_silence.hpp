@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef EDSP_IS_SILENCE_H
-#define EDSP_IS_SILENCE_H
+#ifndef EDSP_FEATURES_IS_SILENCE_H
+#define EDSP_FEATURES_IS_SILENCE_H
 
 #include "feature.hpp"
 
@@ -29,7 +29,7 @@ EDSP_BEGIN_NAMESPACE
  * @brief Checks if a signal is silence given a pre defined threshold in dB.
  */
 class IsSilence : public Feature {
-    EDSP_DEFINE_IMPLICITS(IsSilence)
+    EDSP_DECLARE_ALL_IMPLICITS(IsSilence)
 public:
     /**
      * @brief Create a silence checker with the given threshold
@@ -43,7 +43,7 @@ public:
      * @brief Set the threshold
      * @param threshold_linear Threshold in dB
      */
-    EDSP_INLINE void set_threshold(_In_ value_type threshold_linear) EDSP_NOEXCEPT;
+    EDSP_INLINE void set_threshold(_In_ value_type threshold_dB) EDSP_NOEXCEPT;
 
     /**
      * @brief Returns the threshold
@@ -58,7 +58,7 @@ protected:
 void IsSilence::extract_implementation(_In_ const Feature::value_type *input, _In_ Feature::size_type size, _Out_
                                        Feature::value_type *output) {
     const value_type energy = std::inner_product(input, input + size, input, static_cast<value_type >(0));
-    *output = (20 * std::log10(energy) <= _threshold_dB);
+    *output = static_cast<Feature::value_type>(20 * std::log10(energy) <= _threshold_dB);
 };
 
 void IsSilence::set_threshold(_In_ Feature::value_type threshold_dB) EDSP_NOEXCEPT {
@@ -76,4 +76,4 @@ IsSilence::IsSilence(Feature::value_type threshold_dB) : _threshold_dB(threshold
 IsSilence::~IsSilence() = default;
 
 EDSP_END_NAMESPACE
-#endif //EDSP_IS_SILENCE_H
+#endif //EDSP_FEATURES_IS_SILENCE_H

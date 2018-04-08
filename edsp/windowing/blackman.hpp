@@ -40,7 +40,7 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class Blackman : Window {
-    EDSP_DEFINE_IMPLICITS(Blackman)
+    EDSP_DECLARE_ALL_IMPLICITS(Blackman)
 public:
 
     /**

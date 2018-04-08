@@ -31,7 +31,7 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class BartHann : Window {
-    EDSP_DEFINE_IMPLICITS(BartHann)
+    EDSP_DECLARE_ALL_IMPLICITS(BartHann)
 public:
   /**
    * @brief Creates and computes a Blackman %window with the given size.

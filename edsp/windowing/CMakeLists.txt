@@ -1,4 +1,3 @@
-option(COMPILE_WINDOWING_MODULE "Compiles the WINDOWING module" ON)
 if (COMPILE_WINDOWING_MODULE)
     set(HEADER_FILES  ${HEADER_FILES}
             ${CMAKE_CURRENT_SOURCE_DIR}/window.hpp

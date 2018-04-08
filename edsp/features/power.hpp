@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef EDSP_POWER_H
-#define EDSP_POWER_H
+#ifndef EDSP_FEATURES_POWER_H
+#define EDSP_FEATURES_POWER_H
 
 
 #include <numeric>
@@ -32,7 +32,7 @@ EDSP_BEGIN_NAMESPACE
  *  \f]
  */
 class Power : public Feature {
-    EDSP_DEFINE_IMPLICITS(Power)
+    EDSP_DECLARE_ALL_IMPLICITS(Power)
 public:
     Power();
     ~Power() EDSP_OVERRIDE;
@@ -52,4 +52,4 @@ void Power::extract_implementation(_In_ const Feature::value_type *input, _In_ F
 
 
 EDSP_END_NAMESPACE
-#endif //EDSP_POWER_H
+#endif //EDSP_FEATURES_POWER_H

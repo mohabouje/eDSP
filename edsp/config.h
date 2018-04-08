@@ -25,7 +25,9 @@
 #define EDSP_NOEXCEPT noexcept
 #define EDSP_INLINE   inline
 #define EDSP_OVERRIDE override
-#define EDSP_UNUSED(x) (void)x;
+#define EDSP_UNUSED(X) (void)X;
+#define EDSP_PTR_ITERATOR(X) &(*X)
+
 
 #define EDSP_VERSION_MAJOR     0
 #define EDSP_VERSION_MINOR     0
@@ -35,17 +37,38 @@
 #define EDSP_BEGIN_NAMESPACE  namespace edsp {
 #define EDSP_END_NAMESPACE      }
 
-#define EDSP_DEFINE_IMPLICITS(Class)            \
+#define EDSP_DECLARE_ALL_IMPLICITS(Class)       \
 public:                                         \
     Class(const Class&) = default;              \
     Class(Class && ) = default;                 \
     Class& operator=(const Class&) = default;   \
     Class& operator=(Class&&) = default;
 
+#define EDSP_DECLARE_COPY_IMPLICITS(Class)      \
+public:                                         \
+    Class(const Class&) = default;              \
+    Class& operator=(const Class&) = default;   \
+
+#define EDSP_DECLARE_MOVE_IMPLICITS(Class)      \
+public:                                         \
+    Class(Class && ) = default;                 \
+    Class& operator=(Class&&) = default;
 
 #define _In_
 #define _Out_
 #define _InOut_
+
+namespace edsp {
+
+#ifdef EDSP_FLOAT32
+using float_t = float;
+#else
+using real_t = double;
+#endif
+}
+
+
+
 
 
 #endif //EDSP_CONFIG_EDSP_H

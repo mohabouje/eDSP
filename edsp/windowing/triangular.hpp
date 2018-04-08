@@ -33,7 +33,7 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class Triangular : Window {
-    EDSP_DEFINE_IMPLICITS(Triangular)
+    EDSP_DECLARE_ALL_IMPLICITS(Triangular)
 public:
     /**
      * @brief Creates and computes a Triangular %window with the given size.

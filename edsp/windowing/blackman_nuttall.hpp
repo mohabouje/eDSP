@@ -30,7 +30,7 @@ EDSP_BEGIN_NAMESPACE
  *
  */
 class BlackmanNuttall : Window {
-    EDSP_DEFINE_IMPLICITS(BlackmanNuttall)
+    EDSP_DECLARE_ALL_IMPLICITS(BlackmanNuttall)
 public:
 
     /**

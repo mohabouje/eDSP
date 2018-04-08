@@ -37,7 +37,7 @@ EDSP_BEGIN_NAMESPACE
  *
  **/
 class FlatTop : Window {
-    EDSP_DEFINE_IMPLICITS(FlatTop)
+    EDSP_DECLARE_ALL_IMPLICITS(FlatTop)
 public:
 
     /**

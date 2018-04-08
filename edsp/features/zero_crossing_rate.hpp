@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef EDSP_ZERO_CROSSING_RATE_H
-#define EDSP_ZERO_CROSSING_RATE_H
+#ifndef EDSP_FEATURES_ZERO_CROSSING_RATE_H
+#define EDSP_FEATURES_ZERO_CROSSING_RATE_H
 
 #include "feature.hpp"
 #include "math/math.h"
@@ -37,7 +37,7 @@ EDSP_BEGIN_NAMESPACE
  * \f]
  */
 class ZeroCrossingRate : public Feature {
-    EDSP_DEFINE_IMPLICITS(ZeroCrossingRate)
+    EDSP_DECLARE_ALL_IMPLICITS(ZeroCrossingRate)
 public:
     ZeroCrossingRate();
     ~ZeroCrossingRate() EDSP_OVERRIDE;
@@ -60,4 +60,4 @@ void ZeroCrossingRate::extract_implementation(_In_ const Feature::value_type *in
 }
 
 EDSP_END_NAMESPACE
-#endif //EDSP_ZERO_CROSSING_RATE_H
+#endif //EDSP_FEATURES_ZERO_CROSSING_RATE_H

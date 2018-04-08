@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef EDSP_LOUDNESS_H
-#define EDSP_LOUDNESS_H
+#ifndef EDSP_FEATURES_LOUDNESS_H
+#define EDSP_FEATURES_LOUDNESS_H
 
 
 #include <numeric>
@@ -38,7 +38,7 @@ EDSP_BEGIN_NAMESPACE
  *  This class uses the Steven's  power law factor ( \$[ \alpha = 0.67 \$])  by default.
  */
 class Loudness : public Feature {
-    EDSP_DEFINE_IMPLICITS(Loudness)
+    EDSP_DECLARE_ALL_IMPLICITS(Loudness)
 public:
     /**
      * \brief Creates a loudness feature extractor object with the given \$[ \alpha \$]
@@ -54,7 +54,7 @@ public:
      * \brief Set the exponential factor \$[ \alpha \$]
      * @param factor Exponential factor \$[ \alpha \$]
      */
-    EDSP_INLINE void set_alpha(_In_ value_type factor) EDSP_NOEXCEPT;
+    EDSP_INLINE void set_alpha(_In_ value_type alpha) EDSP_NOEXCEPT;
 
     /**
      * \brief Returns the exponential factor \$[ \alpha \$]
@@ -75,7 +75,7 @@ Loudness::Loudness() = default;
 
 Loudness::~Loudness() = default;
 
-Loudness::Loudness(_In_ Feature::value_type _alpha) : _alpha(_alpha) {}
+Loudness::Loudness(_In_ Feature::value_type alpha) : _alpha(alpha) {}
 
 void Loudness::set_alpha(_In_ Feature::value_type alpha) EDSP_NOEXCEPT {
     _alpha = alpha;
@@ -86,4 +86,4 @@ Feature::value_type Loudness::alpha() EDSP_NOEXCEPT {
 }
 
 EDSP_END_NAMESPACE
-#endif //EDSP_LOUDNESS_H
+#endif //EDSP_FEATURES_LOUDNESS_H

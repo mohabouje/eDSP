@@ -30,7 +30,7 @@ EDSP_BEGIN_NAMESPACE
  * See also: Rectangular and Bartlett
  */
 class Bohman : Window {
-    EDSP_DEFINE_IMPLICITS(Bohman)
+    EDSP_DECLARE_ALL_IMPLICITS(Bohman)
 public:
     /**
      * @brief Creates and computes a Bohman %window with the given size.

@@ -47,7 +47,7 @@ EDSP_BEGIN_NAMESPACE
         }
 
     protected:
-        std::vector<PoleZeroPair<T>> pairs_{};
+        std::vector<PoleZeroPair<double>> pairs_{};
     };
 
 

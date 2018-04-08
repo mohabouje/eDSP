@@ -1,4 +1,3 @@
-option(COMPILE_AUDIO_BLOCKS_MODULE "Compiles the AUDIO BLOCKS module" ON)
 if (COMPILE_AUDIO_BLOCKS_MODULE)
     set(HEADER_FILES  ${HEADER_FILES}
             ${CMAKE_CURRENT_SOURCE_DIR}/delay.h
@@ -22,6 +21,4 @@ if (COMPILE_AUDIO_BLOCKS_MODULE)
             ${CMAKE_CURRENT_SOURCE_DIR}/src/multichannel_to_mono_converter.cpp
             ${CMAKE_CURRENT_SOURCE_DIR}/src/peak_picker.cpp
             PARENT_SCOPE)
-
-    include_directories(include)
 endif(COMPILE_AUDIO_BLOCKS_MODULE)

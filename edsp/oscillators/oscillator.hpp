@@ -25,9 +25,9 @@ EDSP_BEGIN_NAMESPACE
  * @brief Base class that implements the interface to generate periodic signals.
  */
 class Oscillator  {
-    EDSP_DEFINE_IMPLICITS(Oscillator)
+    EDSP_DECLARE_ALL_IMPLICITS(Oscillator)
 public:
-    using value_type = double;
+    using value_type = edsp::real_t;
     Oscillator();
     virtual ~Oscillator();
 
@@ -120,7 +120,6 @@ Oscillator::Oscillator(_In_ Oscillator::value_type amplitude_, _In_ Oscillator::
                                                                                            samplerate_(samplerate_),
                                                                                            frequency_(frequency_),
                                                                                            phase_(phase_) {}
-
 
 Oscillator::~Oscillator() = default;
 

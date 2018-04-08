@@ -33,7 +33,7 @@ EDSP_BEGIN_NAMESPACE
  * By default: %beta = 0.5
  */
 class Kaiser : Window {
-    EDSP_DEFINE_IMPLICITS(Kaiser)
+    EDSP_DECLARE_ALL_IMPLICITS(Kaiser)
 public:
     /**
      * @brief Creates and computes a Kaiser %window with the given size.

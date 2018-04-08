@@ -2,7 +2,20 @@ cmake_minimum_required(VERSION 3.8)
 project(eDSP)
 set(CMAKE_CXX_STANDARD 17)
 
+option(COMPILE_USING_FLOAT32 "Enable the usage of 32bits floating point precision" OFF)
+option(COMPILE_WINDOWING_MODULE "Compiles the WINDOWING module" ON)
+option(COMPILE_OSCILLATORS_MODULE "Compiles the OSCILLATORS module" ON)
+option(COMPILE_FREQUENCY_MODULE "Compiles the FREQUENCY module" ON)
+option(COMPILE_FILTERS_MODULE "Compiles the FILTERS module" ON)
+option(COMPILE_FEATURES_MODULE "Compiles the FEATURES module" ON)
+option(COMPILE_AUDIO_BLOCKS_MODULE "Compiles the AUDIO BLOCKS module" ON)
+
+if (COMPILE_USING_FLOAT32)
+    message("Compiling using float 32 bits precision")
+    add_definitions(EDSP_FLOAT32)
+else()
+    message("Compiling using float 64 bits precision")
+endif(COMPILE_USING_FLOAT32)
 
 add_subdirectory (edsp)
-
 enable_testing ()

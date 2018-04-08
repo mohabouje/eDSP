@@ -23,9 +23,9 @@ EDSP_BEGIN_NAMESPACE
  */
 
 class Window {
-    EDSP_DEFINE_IMPLICITS(Window)
+    EDSP_DECLARE_ALL_IMPLICITS(Window)
 public:    
-    using value_type = double;
+    using value_type = edsp::real_t;
     using pointer = value_type *;
     using const_pointer = const value_type *;
     using reference = value_type&;
@@ -43,7 +43,6 @@ public:
         Symmetric,
         Periodic
     };
-
 
     /**
      * @brief Creates a %window with no elements.
@@ -82,8 +81,7 @@ public:
     template <class InputIterator, class OutputIterator,
             typename = typename std::enable_if<std::is_arithmetic<typename std::iterator_traits<InputIterator>::value_type >::value ||
                                       std::is_arithmetic<typename std::iterator_traits<OutputIterator>::value_type >::value>::type>
-    void compute(_In_ InputIterator first, _In_ InputIterator last, _Out_ OutputIterator);
-
+    void compute(_In_ InputIterator first, _In_ InputIterator last, _Out_ OutputIterator out);
 
     /**
      * @brief Applies the window to a buffer defined by both iterators.
@@ -96,7 +94,6 @@ public:
             typename = typename std::enable_if<std::is_arithmetic<typename std::iterator_traits<OutputIterator>::value_type >::value>::type>
     void compute(_InOut_ OutputIterator first, _InOut_ OutputIterator last);
 
-
     /**
      * @brief Applies the window in the %input buffer.
      *
@@ -107,7 +104,7 @@ public:
      */
     template <class T,
             typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-    void compute(_InOut_ T* input, _In_ size_type sz);
+    void compute(_InOut_ T* input, _In_ size_type size);
 
     /**
      * @brief Applies the window to an %input buffer and stores the result in the %output buffer.
@@ -122,7 +119,7 @@ public:
      */
     template <class T,
             typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-    void compute(_In_ const T* input, _Out_ T* output, _In_ size_type sz);
+    void apply(_In_ const T* input, _Out_ T* output, _In_ size_type size);
 
     /**
      * @brief Initialize the %window and stores the computed values in the local data.
@@ -242,11 +239,11 @@ Window::Window() = default;
 
 Window::~Window() = default;
 
-Window::Window(_In_ Window::size_type sz) : data_(std::vector<double>(sz)) {
+Window::Window(_In_ Window::size_type size) : data_(std::vector<double>(size)) {
 
 }
 
-Window::Window(_In_ size_type size, _In_ Window::WindowType type_) : data_(std::vector<double>(size)), type_(type_) {
+Window::Window(_In_ size_type size, _In_ Window::WindowType type) : data_(std::vector<double>(size)), type_(type) {
 
 }
 
@@ -320,24 +317,24 @@ void Window::compute(_InOut_ OutputIterator first, _InOut_ OutputIterator last) 
 }
 
 template<class T, typename>
-void Window::compute(_InOut_ T *input, _In_ Window::size_type input_size) {
-    if (input_size < size()) {
-        throw std::runtime_error("Expected input size bigger than " + std::to_string(size()));
+void Window::compute(_InOut_ T *input, _In_ Window::size_type size) {
+    if (size != Window::size()) {
+        throw std::runtime_error("Expected input size " + std::to_string(Window::size()));
     }
 
-    for (size_type i = 0, sz = size(); i < sz; ++i, ++input) {
+    for (size_type i = 0; i < size; ++i, ++input) {
         (*input) = (*input) * data_[i];
     }
 }
 
 template<class T, typename>
-void Window::compute(_In_ const T *input, _Out_ T *out, _In_ Window::size_type input_size) {
-    if (input_size < size()) {
-        throw std::runtime_error("Expected input size bigger than " + std::to_string(size()));
+void Window::compute(_In_ const T *input, _Out_ T *output, _In_ Window::size_type size) {
+    if (size != Window::size()) {
+        throw std::runtime_error("Expected input size " + std::to_string(Window::size()));
     }
 
-    for (size_type i = 0, sz = size(); i < sz; ++i, ++input, ++out) {
-        (*out) = (*input) * data_[i];
+    for (size_type i = 0; i < size; ++i, ++input, ++output) {
+        (*output) = (*input) * data_[i];
     }
 }
 

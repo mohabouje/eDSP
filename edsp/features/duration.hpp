@@ -15,8 +15,8 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#ifndef EDSP_DURATION_H
-#define EDSP_DURATION_H
+#ifndef EDSP_FEATURES_DURATION_H
+#define EDSP_FEATURES_DURATION_H
 
 #include "feature.hpp"
 
@@ -28,7 +28,7 @@ EDSP_BEGIN_NAMESPACE
  * The sample rate of the original signal is needed for the computation.
  */
 class Duration : public Feature {
-    EDSP_DEFINE_IMPLICITS(Duration)
+    EDSP_DECLARE_ALL_IMPLICITS(Duration)
 public:
     /**
      * @brief Creates a duration extractor with the given sample rate
@@ -73,4 +73,4 @@ Feature::value_type Duration::sample_rate() EDSP_NOEXCEPT {
 }
 
 EDSP_END_NAMESPACE
-#endif //EDSP_DURATION_H
+#endif //EDSP_FEATURES_DURATION_H

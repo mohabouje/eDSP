@@ -26,7 +26,7 @@ EDSP_BEGIN_NAMESPACE
  * @brief Rectangular %window implementation.
  */
 class Rectangular : Window {
-    EDSP_DEFINE_IMPLICITS(Rectangular)
+    EDSP_DECLARE_ALL_IMPLICITS(Rectangular)
 public:
     /**
      * @brief Creates and computes a Rectangular %window with the given size.
