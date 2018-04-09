@@ -21,6 +21,10 @@ It aims to provide efficient and streamlined base calculations, while at the sam
 
 ***The library is under construction.***
 
+<img src="https://openclipart.org/image/2400px/svg_to_png/293844/under-construction_geek_man_01.png" width="250">
+
+## Compilation Flags
+
 |Feature|State|Compilation Flag |
 |--|--|--|
 |Random Generators| Not Implemented Yet| `COMPILE_RANDOM_MODULE` |
