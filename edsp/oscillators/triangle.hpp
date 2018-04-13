@@ -18,7 +18,7 @@
 #ifndef EDSP_GENERATORS_TRIANGULAR_PULSE_GENERATOR_H
 #define EDSP_GENERATORS_TRIANGULAR_PULSE_GENERATOR_H
 
-#include "oscillator.h"
+#include "oscillator.hpp"
 
 EDSP_BEGIN_NAMESPACE
 
@@ -31,7 +31,7 @@ EDSP_BEGIN_NAMESPACE
  * See also: set_width, set_skew
  **/
 class TriangleOscillator : public Oscillator {
-    EDSP_DEFINE_IMPLICITS(TriangleOscillator)
+    EDSP_DECLARE_ALL_IMPLICITS(TriangleOscillator)
 public:
     /**
      * @brief Default constrcutor

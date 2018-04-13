@@ -70,7 +70,7 @@ void Hamming::initialize() {
     if (!empty()) {
         const value_type N = (type_ == WindowType::Symmetric) ? size() - 1 : size();
         for (size_type i = 0, sz = size(); i < sz; ++i) {
-            data_[i] = 0.54 - 0.46 * std::cos(2 * constants<value_type >::pi * i / N);
+            data_[i] = 0.54 - 0.46 * std::cos(constants<value_type>::two_pi * i / N);
         }
     }
 }

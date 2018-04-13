@@ -18,7 +18,7 @@
 #ifndef EDSP_GENERATORS_SAWTOOTH_GENERATOR_H
 #define EDSP_GENERATORS_SAWTOOTH_GENERATOR_H
 
-#include "oscillator.h"
+#include "oscillator.hpp"
 
 EDSP_BEGIN_NAMESPACE
 
@@ -26,7 +26,7 @@ EDSP_BEGIN_NAMESPACE
  * @brief Generate a sawtooth wave of a given %frequency sampled with %samplerate
  */
 class SawtoothOscillator : public Oscillator {
-    EDSP_DEFINE_IMPLICITS(SawtoothOscillator)
+    EDSP_DECLARE_ALL_IMPLICITS(SawtoothOscillator)
 public:
     SawtoothOscillator();
     SawtoothOscillator(_In_ value_type amplitude, _In_ value_type samplerate, _In_ value_type frequency, _In_ value_type width);

@@ -18,7 +18,7 @@
 #ifndef EDSP_GENERATORS_SQUARE_PULSE_GENERATOR_H
 #define EDSP_GENERATORS_SQUARE_PULSE_GENERATOR_H
 
-#include "oscillator.h"
+#include "oscillator.hpp"
 EDSP_BEGIN_NAMESPACE
 
 /**
@@ -28,7 +28,7 @@ EDSP_BEGIN_NAMESPACE
  * negative one
  */
 class SquareOscillator : public Oscillator {
-    EDSP_DEFINE_IMPLICITS(SquareOscillator)
+    EDSP_DECLARE_ALL_IMPLICITS(SquareOscillator)
 public:
 
     /**

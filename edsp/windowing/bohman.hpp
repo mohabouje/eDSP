@@ -52,8 +52,8 @@ void Bohman::initialize() {
         const value_type N = size() - 1;
         value_type initial = -N / 2.0;
         for (size_type i = 0, sz = size(); i < sz; ++i) {
-            data_[i] = (1 - 2. * std::abs(initial) / N) * std::cos(2. * constants<value_type>::pi * std::abs(initial) / N)
-                       + ( 1. / constants<value_type>::pi) * std::sin(2. * constants<value_type>::pi * std::abs(initial) / N);
+            data_[i] = (1 - 2. * std::abs(initial) / N) * std::cos(constants<value_type>::two_pi * std::abs(initial) / N)
+                       + constants<value_type>::one_div_pi * std::sin(constants<value_type>::two_pi * std::abs(initial) / N);
             ++initial;
         }
 

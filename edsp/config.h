@@ -54,6 +54,9 @@ public:                                         \
     Class(Class && ) = default;                 \
     Class& operator=(Class&&) = default;
 
+#define EDSP_DEFAULT_CONSTRUCTOR(Class)  Class() = default;
+#define EDSP_DEFAULT_DESTRUCTOR(Class)   ~Class() = default;
+
 #define _In_
 #define _Out_
 #define _InOut_

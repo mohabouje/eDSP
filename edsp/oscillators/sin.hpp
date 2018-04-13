@@ -18,7 +18,7 @@
 #ifndef EDSP_GENERATORS_SINGENERATOR_H
 #define EDSP_GENERATORS_SINGENERATOR_H
 
-#include "oscillator.h"
+#include "oscillator.hpp"
 #include "base/constants.h"
 #include <cmath>
 
@@ -67,7 +67,7 @@ SinOscillator::SinOscillator(_In_ Oscillator::value_type amplitude, _In_ Oscilla
 }
 
 Oscillator::value_type SinOscillator::operator()() EDSP_NOEXCEPT {
-    const value_type result = std::sin(2 * constants<value_type>::pi  * (frequency() * timestamp() + phase()));
+    const value_type result = std::sin(constants<value_type>::two_pi  * (frequency() * timestamp() + phase()));
     set_timestamp(timestamp() + sampling_period());
     return result;
 }
