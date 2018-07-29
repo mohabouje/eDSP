@@ -29,8 +29,8 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator = std::allocator<T>>
     class Hanning : public Window<Hanning<T, Allocator>, T, Allocator> {
+        friend class Window<Hanning<T, Allocator>, T, Allocator>;
         using parent = Window<Hanning<T, Allocator>, T, Allocator>;
-
     public:
         using value_type = typename parent::value_type;
         using size_type  = typename parent::size_type;

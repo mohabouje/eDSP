@@ -29,4 +29,4 @@ target_link_libraries(${PROJECT_NAME} INTERFACE ${EASYDSP_DEPENDENCIES})
 
 enable_testing()
 add_subdirectory(test)
-#add_subdirectory(python)
+add_subdirectory(python)

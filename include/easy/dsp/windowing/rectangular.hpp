@@ -23,14 +23,12 @@
 #define EASYDSP_RECTANGULAR_HPP
 
 #include "window.hpp"
-#include <cmath>
-
 namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator = std::allocator<T>>
     class Rectangular : public Window<Rectangular<T, Allocator>, T, Allocator> {
+        friend class Window<Rectangular<T, Allocator>, T, Allocator>;
         using parent = Window<Rectangular<T, Allocator>, T, Allocator>;
-
     public:
         using value_type = typename parent::value_type;
         using size_type  = typename parent::size_type;

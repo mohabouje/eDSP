@@ -36,9 +36,25 @@ namespace easy { namespace dsp { namespace windowing {
     struct Window {
         using value_type = T;
         using size_type  = std::size_t;
+        using reference = value_type&;
+        using const_reference = const value_type&;
+        using iterator = typename std::vector<value_type, Allocator>::iterator;
+        using const_iterator = typename std::vector<value_type, Allocator>::const_iterator;
+
         inline explicit Window(size_type size);
         inline void set_size(size_type size);
         inline size_type size() const noexcept;
+        inline value_type at(size_type index) const;
+
+        inline reference operator[](size_type index) noexcept;
+        inline const_reference operator[](size_type index) const noexcept;
+        inline iterator begin() noexcept;
+        inline const_iterator begin() const noexcept;
+        inline const_iterator cbegin() const noexcept;
+        inline iterator end() noexcept;
+        inline const_iterator end() const noexcept;
+        inline const_iterator cend() const noexcept;
+
 
         template <typename InputIterator, typename OutputIterator>
         inline void compute(InputIterator first, InputIterator last, OutputIterator out);
@@ -54,7 +70,9 @@ namespace easy { namespace dsp { namespace windowing {
     };
 
     template <typename Implementation, typename T, typename Allocator>
-    inline Window<Implementation, T, Allocator>::Window(Window::size_type size) : data_(size) {
+    inline Window<Implementation, T, Allocator>::Window(Window::size_type size) :
+        data_(size)
+    {
         initialize();
     }
 
@@ -68,6 +86,58 @@ namespace easy { namespace dsp { namespace windowing {
     inline typename Window<Implementation, T, Allocator>::size_type
         Window<Implementation, T, Allocator>::size() const noexcept {
         return data_.size();
+    }
+
+    template<typename Implementation, typename T, typename Allocator>
+    inline typename Window<Implementation, T, Allocator>::value_type
+    Window<Implementation, T, Allocator>::at(Window::size_type index) const
+    {
+        if (index >= size()) {
+            throw std::runtime_error("Index out of bounds");
+        }
+        return data_[index];
+    }
+
+    template<typename Implementation, typename T, typename Allocator>
+    typename Window<Implementation, T, Allocator>::reference
+    Window<Implementation, T, Allocator>::operator[](Window::size_type index) noexcept {
+        return data_[index];
+    }
+
+    template<typename Implementation, typename T, typename Allocator>
+    typename Window<Implementation, T, Allocator>::const_reference
+    Window<Implementation, T, Allocator>::operator[](Window::size_type index) const noexcept {
+        return data_[index];
+    }
+
+    template<typename Implementation, typename T, typename Allocator>
+    typename Window<Implementation, T, Allocator>::iterator  Window<Implementation, T, Allocator>::begin() noexcept {
+        return data_.begin();
+    }
+
+    template<typename Implementation, typename T, typename Allocator>
+    typename Window<Implementation, T, Allocator>::const_iterator  Window<Implementation, T, Allocator>::begin() const noexcept {
+        return data_.begin();
+    }
+
+    template<typename Implementation, typename T, typename Allocator>
+    typename Window<Implementation, T, Allocator>::const_iterator  Window<Implementation, T, Allocator>::cbegin() const noexcept {
+        return data_.cbegin();
+    }
+
+    template<typename Implementation, typename T, typename Allocator>
+    typename Window<Implementation, T, Allocator>::iterator  Window<Implementation, T, Allocator>::end() noexcept {
+        return data_.end();
+    }
+
+    template<typename Implementation, typename T, typename Allocator>
+    typename Window<Implementation, T, Allocator>::const_iterator  Window<Implementation, T, Allocator>::end() const noexcept {
+        return data_.end();
+    }
+
+    template<typename Implementation, typename T, typename Allocator>
+    typename Window<Implementation, T, Allocator>::const_iterator  Window<Implementation, T, Allocator>::cend() const noexcept {
+        return data_.cend();
     }
 
     template <typename Implementation, typename T, typename Allocator>

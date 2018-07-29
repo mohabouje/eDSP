@@ -27,24 +27,24 @@
 namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator = std::allocator<T>>
-    class Rectangular : public Window<Rectangular<T, Allocator>, T, Allocator> {
-        using parent = Window<Rectangular<T, Allocator>, T, Allocator>;
-
+    class FlatTop : public Window<FlatTop<T, Allocator>, T, Allocator> {
+        friend class Window<FlatTop<T, Allocator>, T, Allocator>;
+        using parent = Window<FlatTop<T, Allocator>, T, Allocator>;
     public:
         using value_type = typename parent::value_type;
         using size_type  = typename parent::size_type;
-        inline explicit Rectangular(size_type size);
+        inline explicit FlatTop(size_type size);
 
     private:
         inline void initialize();
     };
 
     template <typename T, typename Allocator>
-    inline Rectangular<T, Allocator>::Rectangular(Rectangular::size_type size) : parent(size) {}
+    FlatTop<T, Allocator>::FlatTop(FlatTop::size_type size) : parent(size) {}
 
     template <typename T, typename Allocator>
-    inline void Rectangular<T, Allocator>::initialize() {
-        for (size_type i = 0, sz = parent::ize(); i < sz; ++i) {
+    void FlatTop<T, Allocator>::initialize() {
+        for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
             const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
             parent::data_[i] = 1 - 1.9300 * std::cos(tmp) + 1.2900 * std::cos(2 * tmp) - 0.3880 * std::cos(3 * tmp) +
                                0.0322 * std::cos(4 * tmp);
