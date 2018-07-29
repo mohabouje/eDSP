@@ -22,20 +22,21 @@
 
 #include <easy/dsp/standard/autocorrelation.hpp>
 #include <easy/dsp/standard/crosscorrelation.hpp>
+#include <easy/meta/size.hpp>
 #include <catch/catch.hpp>
 
 using namespace easy;
 using namespace easy::dsp;
 
-static constexpr std::array<float, 24> hamming = {{0.080000, 0.097058, 0.146967, 0.226026, 0.328370, 0.446410,
-                                                   0.571392, 0.694045, 0.805273, 0.896827, 0.961917, 0.995716,
-                                                   0.995716, 0.961917, 0.896827, 0.805273, 0.694045, 0.571392,
-                                                   0.446410, 0.328370, 0.226026, 0.146967, 0.097058, 0.080000}};
+static constexpr std::array<float, 24> hamming = {{0.080000f, 0.097058f, 0.146967f, 0.226026f, 0.328370f, 0.446410f,
+                                                   0.571392f, 0.694045f, 0.805273f, 0.896827f, 0.961917f, 0.995716f,
+                                                   0.995716f, 0.961917f, 0.896827f, 0.805273f, 0.694045f, 0.571392f,
+                                                   0.446410f, 0.328370f, 0.226026f, 0.146967f, 0.097058f, 0.080000f}};
 
 SCENARIO("Testing CrossCorrelation", "[CrossCorrelation]") {
     GIVEN("An input buffer") {
         WHEN("We want to apply the CrossCorrelation with the same signal") {
-            constexpr auto sz = std::size(hamming);
+            constexpr auto sz = meta::size(hamming);
             std::vector<float> output_cross(sz), output_auto(sz);
 
             CrossCorrelation<float> cross_correlation(sz, CrossCorrelation<float>::ScaleOpt::None);

@@ -23,7 +23,6 @@
 #ifndef EASYDSP_NORMALIZER_HPP
 #define EASYDSP_NORMALIZER_HPP
 
-
 #include <algorithm>
 #include <iterator>
 

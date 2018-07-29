@@ -22,8 +22,6 @@
 #ifndef EASYDSP_FEATURE_TEMPORAL_ENVELOPE_HPP
 #define EASYDSP_FEATURE_TEMPORAL_ENVELOPE_HPP
 
-
-#include <easy/meta/meta.hpp>
 #include <numeric>
 #include <cmath>
 

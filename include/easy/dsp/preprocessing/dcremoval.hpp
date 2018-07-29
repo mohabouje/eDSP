@@ -33,13 +33,13 @@ namespace easy { namespace dsp {
         using size_type  = std::size_t;
         using value_type = T;
 
-        constexpr explicit DCRemoval(float alpha);
+        constexpr explicit DCRemoval(value_type alpha);
         constexpr value_type alpha() const noexcept;
         constexpr void set_alpha(value_type alpha) noexcept;
     };
 
     template <typename T>
-    constexpr DCRemoval<T>::DCRemoval(float alpha) : filter::Biquad<T>(1, -alpha, 0, 1 - alpha, alpha - 1, 0) {}
+    constexpr DCRemoval<T>::DCRemoval(value_type alpha) : filter::Biquad<T>(1, -alpha, 0, 1 - alpha, alpha - 1, 0) {}
 
     template <typename T>
     constexpr void DCRemoval<T>::set_alpha(value_type alpha) noexcept {

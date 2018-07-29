@@ -23,7 +23,6 @@
 #ifndef EASYDSP_amplifier_HPP
 #define EASYDSP_amplifier_HPP
 
-
 #include <algorithm>
 
 namespace easy { namespace dsp {

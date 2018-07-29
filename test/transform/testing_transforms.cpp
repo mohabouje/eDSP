@@ -23,6 +23,7 @@
 #include <easy/dsp/transform/dct.hpp>
 #include <easy/dsp/transform/dft.hpp>
 #include <easy/meta/empty.hpp>
+#include <easy/meta/size.hpp>
 #include <catch/catch.hpp>
 
 using namespace easy;
@@ -31,8 +32,8 @@ static constexpr std::array<float, 64> hamming = {{
     0.0800, 0.0823, 0.0891, 0.1004, 0.1161, 0.1360, 0.1599, 0.1876, 0.2188, 0.2532, 0.2904, 0.3301, 0.3719,
     0.4154, 0.4601, 0.5056, 0.5515, 0.5972, 0.6424, 0.6865, 0.7292, 0.7700, 0.8085, 0.8444, 0.8772, 0.9067,
     0.9325, 0.9544, 0.9723, 0.9858, 0.9949, 0.9994, 0.9994, 0.9949, 0.9858, 0.9723, 0.9544, 0.9325, 0.9067,
-    0.8772, 0.8444, 0.8085, 0.7700, 0.7292, 0.6865, 0.6424, 0.5972, 0.5515, 0.5056, 0.4601, 0.4154, 0.3719,
-    0.3301, 0.2904, 0.2532, 0.2188, 0.1876, 0.1599, 0.1360, 0.1161, 0.1004, 0.0891, 0.0823, 0.0800,
+    0.8772, 0.8444, 0.8085f, 0.7700, 0.7292, 0.6865, 0.6424, 0.5972, 0.5515, 0.5056, 0.4601, 0.4154, 0.3719,
+    0.3301, 0.2904, 0.2532f, 0.2188, 0.1876, 0.1599, 0.1360, 0.1161, 0.1004, 0.0891, 0.0823, 0.0800,
 }};
 
 static constexpr std::array<std::complex<float>, 64> hamming_fft = {
@@ -58,8 +59,8 @@ SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
         }
 
         REQUIRE(!meta::empty(input));
-        REQUIRE(std::size(input) == std::size(data_fft));
-        REQUIRE(std::size(input) == std::size(data_ifft));
+        REQUIRE(meta::size(input) == meta::size(data_fft));
+        REQUIRE(meta::size(input) == meta::size(data_ifft));
 
         WHEN("We want to compute the fft and ifft to restore the original signal") {
             dsp::complex_dft<float>(input, data_fft);
@@ -75,7 +76,7 @@ SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
     }
 
     GIVEN("An input buffer storing a Hamming Window") {
-        constexpr auto sz = std::size(hamming);
+        constexpr auto sz = meta::size(hamming);
         std::vector<std::complex<float>> input(sz), data_fft(sz), data_ifft(sz);
 
         for (std::size_t i = 0; i < sz; ++i) {
@@ -83,8 +84,8 @@ SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
         }
 
         REQUIRE(!meta::empty(input));
-        REQUIRE(std::size(input) == std::size(data_fft));
-        REQUIRE(std::size(input) == std::size(data_ifft));
+        REQUIRE(meta::size(input) == meta::size(data_fft));
+        REQUIRE(meta::size(input) == meta::size(data_ifft));
 
         WHEN("We want to compute the fft and ifft to restore the original signal") {
             dsp::complex_dft<float>(input, data_fft);
@@ -117,8 +118,8 @@ SCENARIO("Testing the DCT implementation", "[DCT]") {
         std::copy(std::begin(hamming), std::end(hamming), std::begin(input));
 
         REQUIRE(!meta::empty(input));
-        REQUIRE(std::size(input) == std::size(data_dct));
-        REQUIRE(std::size(input) == std::size(data_idct));
+        REQUIRE(meta::size(input) == meta::size(data_dct));
+        REQUIRE(meta::size(input) == meta::size(data_idct));
 
         WHEN("We want to compute the DCT-Type I") {
             dsp::dct(input, data_dct, dsp::DCT_Type::Type_I);

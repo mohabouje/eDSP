@@ -23,7 +23,6 @@
 #ifndef EASYDSP_MIXER_HPP
 #define EASYDSP_MIXER_HPP
 
-
 #include <numeric>
 
 namespace easy { namespace dsp {

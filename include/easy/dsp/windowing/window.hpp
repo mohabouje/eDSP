@@ -25,6 +25,9 @@
 
 #include "easy/dsp/math/constant.hpp"
 #include <algorithm>
+#include <numeric>
+#include <iterator>
+#include <vector>
 
 namespace easy { namespace dsp { namespace windowing {
 

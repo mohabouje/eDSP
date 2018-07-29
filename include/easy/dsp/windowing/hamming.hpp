@@ -23,6 +23,7 @@
 #define EASYDSP_HAMMING_HPP
 
 #include "window.hpp"
+#include <cmath>
 
 namespace easy { namespace dsp { namespace windowing {
 

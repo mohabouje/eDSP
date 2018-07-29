@@ -37,9 +37,6 @@ namespace easy { namespace dsp { namespace windowing {
         return Window(std::forward(arg...));
     }
 
-
-
-
 }}}
 
 #endif // EASYDSP_WINDOWING_HPP

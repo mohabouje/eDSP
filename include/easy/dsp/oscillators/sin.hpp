@@ -24,6 +24,7 @@
 
 #include "easy/dsp/oscillators/oscillator_impl.hpp"
 #include "easy/dsp/math/constant.hpp"
+#include <cmath>
 
 namespace easy { namespace dsp { namespace oscillator {
 

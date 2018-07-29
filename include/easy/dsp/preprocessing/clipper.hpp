@@ -23,7 +23,6 @@
 #ifndef EASYDSP_CLIPPER_HPP
 #define EASYDSP_CLIPPER_HPP
 
-
 #include <algorithm>
 #include <iterator>
 
