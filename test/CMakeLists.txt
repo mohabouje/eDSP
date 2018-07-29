@@ -9,8 +9,11 @@ set(SOURCE_FILES
         transform/testing_transforms.cpp
         filter/testing_biquad.cpp
         standard/testing_autocorrelation.cpp
-        standard/testing_crosscorrelation.cpp
-        )
+        standard/testing_crosscorrelation.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME} ${GTEST_LIBRARIES} pthread EasyDSP EasyMeta fftw3f)
+target_link_libraries(${PROJECT_NAME} ${GTEST_LIBRARIES}
+    pthread
+    EasyDSP
+    EasyMeta
+    fftw3f)

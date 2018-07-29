@@ -22,12 +22,12 @@
 
 #include <easy/dsp/transform/dct.hpp>
 #include <easy/dsp/transform/dft.hpp>
-#include <easy/meta/meta.hpp>
+#include <easy/meta/empty.hpp>
 #include <catch/catch.hpp>
 
 using namespace easy;
 
-static constexpr std::array<ereal, 64> hamming = {{
+static constexpr std::array<float, 64> hamming = {{
     0.0800, 0.0823, 0.0891, 0.1004, 0.1161, 0.1360, 0.1599, 0.1876, 0.2188, 0.2532, 0.2904, 0.3301, 0.3719,
     0.4154, 0.4601, 0.5056, 0.5515, 0.5972, 0.6424, 0.6865, 0.7292, 0.7700, 0.8085, 0.8444, 0.8772, 0.9067,
     0.9325, 0.9544, 0.9723, 0.9858, 0.9949, 0.9994, 0.9994, 0.9949, 0.9858, 0.9723, 0.9544, 0.9325, 0.9067,
@@ -35,7 +35,7 @@ static constexpr std::array<ereal, 64> hamming = {{
     0.3301, 0.2904, 0.2532, 0.2188, 0.1876, 0.1599, 0.1360, 0.1161, 0.1004, 0.0891, 0.0823, 0.0800,
 }};
 
-static constexpr std::array<std::complex<ereal>, 64> hamming_fft = {
+static constexpr std::array<std::complex<float>, 64> hamming_fft = {
     {{34.1000, 0.0000}, {-14.8121, -0.7277}, {0.1589, 0.0157},  {0.0587, 0.0087},  {0.0309, 0.0061},  {0.0190, 0.0048},
      {0.0128, 0.0039},  {0.0091, 0.0033},    {0.0068, 0.0028},  {0.0052, 0.0024},  {0.0040, 0.0022},  {0.0032, 0.0019},
      {0.0026, 0.0017},  {0.0021, 0.0016},    {0.0017, 0.0014},  {0.0014, 0.0013},  {0.0011, 0.0011},  {0.0009, 0.0010},
@@ -51,13 +51,13 @@ static constexpr std::array<std::complex<ereal>, 64> hamming_fft = {
 SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
     GIVEN("A random input data") {
         constexpr auto sz = 1024;
-        std::vector<std::complex<ereal>> input(sz), data_fft(sz), data_ifft(sz);
+        std::vector<std::complex<float>> input(sz), data_fft(sz), data_ifft(sz);
 
         for (std::size_t i = 0; i < sz; ++i) {
-            input[i] = std::complex<ereal>(i, i);
+            input[i] = std::complex<float>(i, i);
         }
 
-        REQUIRE(meta::notempty(input));
+        REQUIRE(!meta::empty(input));
         REQUIRE(std::size(input) == std::size(data_fft));
         REQUIRE(std::size(input) == std::size(data_ifft));
 
@@ -76,13 +76,13 @@ SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
 
     GIVEN("An input buffer storing a Hamming Window") {
         constexpr auto sz = std::size(hamming);
-        std::vector<std::complex<ereal>> input(sz), data_fft(sz), data_ifft(sz);
+        std::vector<std::complex<float>> input(sz), data_fft(sz), data_ifft(sz);
 
         for (std::size_t i = 0; i < sz; ++i) {
-            input[i] = std::complex<ereal>(hamming[i], 0);
+            input[i] = std::complex<float>(hamming[i], 0);
         }
 
-        REQUIRE(meta::notempty(input));
+        REQUIRE(!meta::empty(input));
         REQUIRE(std::size(input) == std::size(data_fft));
         REQUIRE(std::size(input) == std::size(data_ifft));
 
@@ -113,10 +113,10 @@ SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
 SCENARIO("Testing the DCT implementation", "[DCT]") {
     GIVEN("A random input data") {
         constexpr auto sz = 1024;
-        std::vector<ereal> input(sz), data_dct(sz), data_idct(sz);
+        std::vector<float> input(sz), data_dct(sz), data_idct(sz);
         std::copy(std::begin(hamming), std::end(hamming), std::begin(input));
 
-        REQUIRE(meta::notempty(input));
+        REQUIRE(!meta::empty(input));
         REQUIRE(std::size(input) == std::size(data_dct));
         REQUIRE(std::size(input) == std::size(data_idct));
 

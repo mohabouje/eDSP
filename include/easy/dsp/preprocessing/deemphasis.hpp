@@ -33,13 +33,13 @@ namespace easy { namespace dsp {
         using size_type  = std::size_t;
         using value_type = T;
 
-        constexpr explicit DeEmphasis(ereal alpha);
+        constexpr explicit DeEmphasis(float alpha);
         constexpr value_type alpha() const noexcept;
         constexpr void set_alpha(value_type alpha) noexcept;
     };
 
     template <typename T>
-    constexpr DeEmphasis<T>::DeEmphasis(ereal alpha) : filter::Biquad<T>(1, 0, 0, 1, alpha, 0) {}
+    constexpr DeEmphasis<T>::DeEmphasis(float alpha) : filter::Biquad<T>(1, 0, 0, 1, alpha, 0) {}
 
     template <typename T>
     constexpr void DeEmphasis<T>::set_alpha(value_type alpha) noexcept {

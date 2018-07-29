@@ -37,5 +37,7 @@
 .vscode/
 
 # Exclude build folder
+.output/
 ./build
+build/
 cmake-build*/

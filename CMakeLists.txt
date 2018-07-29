@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(EasyDSP VERSION 0.0.0 LANGUAGES CXX)
 
-
+add_subdirectory(eMeta)
 set(EASYDSP_DEPENDENCIES  EasyMeta)
 find_library(FFTW_LIB NAMES lfftw3f libfftw3f fftw3f)
 if (FFTW_LIB)
@@ -19,6 +19,7 @@ if (SAMPLERATE_LIB)
 else()
     message(FATAL_ERROR "Library LibSampleRate not found")
 endif(SAMPLERATE_LIB)
+
 
 
 add_library(${PROJECT_NAME} INTERFACE)

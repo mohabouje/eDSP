@@ -24,6 +24,7 @@
 #define EASYDSP_CONVOLUTION_HPP
 
 #include "easy/dsp/transform/fftw_impl.hpp"
+#include <algorithm>
 #include <vector>
 
 namespace easy { namespace dsp {

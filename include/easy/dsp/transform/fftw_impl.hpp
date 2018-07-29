@@ -24,7 +24,7 @@
 #define EASYDSP_FFTW_IMPL_HPP
 
 
-#include <easy/meta/meta.hpp>
+#include <easy/meta/is_null.hpp>
 #include <complex>
 #include <fftw3.h>
 
@@ -57,44 +57,44 @@ namespace easy { namespace dsp {
         ::fftwf_plan plan_{nullptr};
         fftw_plan() = default;
         ~fftw_plan() {
-            if (meta::notnull(plan_)) {
+            if (!meta::is_null(plan_)) {
                 fftwf_destroy_plan(plan_);
             }
         }
 
         inline void dft(complex_type* src, complex_type* dst, size_type nfft) {
-            if (meta::isnull(plan_))
+            if (meta::is_null(plan_))
                 plan_ = fftwf_plan_dft_1d(nfft, src, dst, FFTW_FORWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             fftwf_execute_dft(plan_, src, dst);
         }
 
         inline void idft(complex_type* src, complex_type* dst, size_type nfft) {
-            if (meta::isnull(plan_))
+            if (meta::is_null(plan_))
                 plan_ = fftwf_plan_dft_1d(nfft, src, dst, FFTW_BACKWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             fftwf_execute_dft(plan_, src, dst);
         }
 
         inline void dft(value_type* src, complex_type* dst, size_type nfft) {
-            if (meta::isnull(plan_))
+            if (meta::is_null(plan_))
                 plan_ = fftwf_plan_dft_r2c_1d(nfft, src, dst, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             fftwf_execute_dft_r2c(plan_, src, dst);
         }
 
         inline void idft(complex_type* src, value_type* dst, size_type nfft) {
-            if (meta::isnull(plan_))
+            if (meta::is_null(plan_))
                 plan_ = fftwf_plan_dft_c2r_1d(nfft, src, dst, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             fftwf_execute_dft_c2r(plan_, src, dst);
         }
 
         inline void dht(value_type* src, value_type* dst, size_type nfft) {
-            if (meta::isnull(plan_)) {
+            if (meta::is_null(plan_)) {
                 plan_ = fftwf_plan_r2r_1d(nfft, src, dst, FFTW_DHT, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
             fftwf_execute_r2r(plan_, src, dst);
         }
 
         inline void dct(value_type* src, value_type* dst, size_type nfft, DCT_Type type) {
-            if (meta::isnull(plan_)) {
+            if (meta::is_null(plan_)) {
                 const auto plan_type = [type]() {
                     switch (type) {
                         case DCT_Type::Type_I:
@@ -113,7 +113,7 @@ namespace easy { namespace dsp {
         }
 
         inline void idct(value_type* src, value_type* dst, size_type nfft, DCT_Type type) {
-            if (meta::isnull(plan_)) {
+            if (meta::is_null(plan_)) {
                 const auto plan_type = [type]() {
                     switch (type) {
                         case DCT_Type::Type_I:
@@ -141,44 +141,44 @@ namespace easy { namespace dsp {
         ::fftw_plan plan_{nullptr};
         fftw_plan() = default;
         ~fftw_plan() {
-            if (meta::notnull(plan_)) {
+            if (!meta::is_null(plan_)) {
                 fftw_destroy_plan(plan_);
             }
         }
 
         inline void dft(complex_type* src, complex_type* dst, size_type nfft) {
-            if (meta::isnull(plan_))
+            if (meta::is_null(plan_))
                 plan_ = fftw_plan_dft_1d(nfft, src, dst, FFTW_FORWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             fftw_execute_dft(plan_, src, dst);
         }
 
         inline void idft(complex_type* src, complex_type* dst, size_type nfft) {
-            if (meta::isnull(plan_))
+            if (meta::is_null(plan_))
                 plan_ = fftw_plan_dft_1d(nfft, src, dst, FFTW_BACKWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             fftw_execute_dft(plan_, src, dst);
         }
 
         inline void dft(value_type* src, complex_type* dst, size_type nfft) {
-            if (meta::isnull(plan_))
+            if (meta::is_null(plan_))
                 plan_ = fftw_plan_dft_r2c_1d(nfft, src, dst, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             fftw_execute_dft_r2c(plan_, src, dst);
         }
 
         inline void idft(complex_type* src, value_type* dst, size_type nfft) {
-            if (meta::isnull(plan_))
+            if (meta::is_null(plan_))
                 plan_ = fftw_plan_dft_c2r_1d(nfft, src, dst, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             fftw_execute_dft_c2r(plan_, src, dst);
         }
 
         inline void dht(value_type* src, value_type* dst, size_type nfft) {
-            if (meta::isnull(plan_)) {
+            if (meta::is_null(plan_)) {
                 plan_ = fftw_plan_r2r_1d(nfft, src, dst, FFTW_DHT, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
             fftw_execute_r2r(plan_, src, dst);
         }
 
         inline void dct(value_type* src, value_type* dst, size_type nfft, DCT_Type type) {
-            if (meta::isnull(plan_)) {
+            if (meta::is_null(plan_)) {
                 const auto plan_type = [type]() {
                     switch (type) {
                         case DCT_Type::Type_I:
@@ -197,7 +197,7 @@ namespace easy { namespace dsp {
         }
 
         inline void idct(value_type* src, value_type* dst, size_type nfft, DCT_Type type) {
-            if (meta::isnull(plan_)) {
+            if (meta::is_null(plan_)) {
                 const auto plan_type = [type]() {
                     switch (type) {
                         case DCT_Type::Type_I:

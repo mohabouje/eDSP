@@ -32,7 +32,7 @@ namespace easy { namespace dsp {
     class E_EXPORT ReSampler {
     public:
         enum class ConverterType { BestQuality = 0, MediumQuality, Fastest, ZeroOrderHold, Linear };
-        E_EXPORT ReSampler(ereal input_sr, ereal output_sr, euint8 channels,
+        E_EXPORT ReSampler(float input_sr, float output_sr, euint8 channels,
                            ConverterType type = ConverterType::BestQuality);
         E_EXPORT ~ReSampler();
 
@@ -49,22 +49,22 @@ namespace easy { namespace dsp {
         E_EXPORT ConverterType type() const noexcept;
         E_EXPORT void set_type(ConverterType type) noexcept;
 
-        E_EXPORT ereal input_samplerate() const noexcept;
-        E_EXPORT void set_input_samplerate(ereal input_samplerate) noexcept;
+        E_EXPORT float input_samplerate() const noexcept;
+        E_EXPORT void set_input_samplerate(float input_samplerate) noexcept;
 
-        E_EXPORT ereal output_samplerate() const noexcept;
-        E_EXPORT void set_output_samplerate(ereal output_samplerate) noexcept;
+        E_EXPORT float output_samplerate() const noexcept;
+        E_EXPORT void set_output_samplerate(float output_samplerate) noexcept;
 
     private:
-        ereal input_samplerate_{8000};
-        ereal output_samplerate_{8000};
+        float input_samplerate_{8000};
+        float output_samplerate_{8000};
         euint8 channels_{1};
         ConverterType type_{ConverterType::BestQuality};
         SRC_STATE* state_ = nullptr;
         SRC_DATA data_;
 
         void initialize();
-        void configure(const ereal* input, esize input_sz, ereal* output, esize output_sz);
+        void configure(const float* input, std::size_tinput_sz, float* output, std::size_toutput_sz);
         void process();
     };
 
@@ -85,7 +85,7 @@ namespace easy { namespace dsp {
         process();
     }
 
-    ReSampler::ReSampler(ereal input_sr, ereal output_sr, euint8 channels, ReSampler::ConverterType type) :
+    ReSampler::ReSampler(float input_sr, float output_sr, euint8 channels, ReSampler::ConverterType type) :
         input_samplerate_(input_sr),
         output_samplerate_(output_sr),
         channels_(channels),
@@ -117,19 +117,19 @@ namespace easy { namespace dsp {
         initialize();
     }
 
-    ereal ReSampler::input_samplerate() const noexcept {
+    float ReSampler::input_samplerate() const noexcept {
         return input_samplerate_;
     }
 
-    void ReSampler::set_input_samplerate(ereal input_samplerate) noexcept {
+    void ReSampler::set_input_samplerate(float input_samplerate) noexcept {
         input_samplerate_ = input_samplerate;
     }
 
-    ereal ReSampler::output_samplerate() const noexcept {
+    float ReSampler::output_samplerate() const noexcept {
         return output_samplerate_;
     }
 
-    void ReSampler::set_output_samplerate(ereal output_samplerate) noexcept {
+    void ReSampler::set_output_samplerate(float output_samplerate) noexcept {
         output_samplerate_ = output_samplerate;
     }
 
@@ -145,7 +145,7 @@ namespace easy { namespace dsp {
         }
     }
 
-    void ReSampler::configure(const ereal* input, esize input_sz, ereal* output, esize output_sz) {
+    void ReSampler::configure(const float* input, std::size_tinput_sz, float* output, std::size_toutput_sz) {
         E_EXPECTS(meta::notnull(input) && meta::notnull(output));
         const auto ratio       = output_samplerate_ / input_samplerate_;
         const auto expected_sz = static_cast<std::size_t>(ratio * input_sz + 0.5);
@@ -153,7 +153,7 @@ namespace easy { namespace dsp {
             eError() << "Error: output size does not match. Expected: " << output_sz;
         }
 
-        data_.data_in       = const_cast<ereal*>(input);
+        data_.data_in       = const_cast<float*>(input);
         data_.input_frames  = input_sz / channels_;
         data_.data_out      = output;
         data_.output_frames = output_sz / channels_;

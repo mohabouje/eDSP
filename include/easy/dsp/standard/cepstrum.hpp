@@ -23,8 +23,8 @@
 #define EASYDSP_CEPSTRUM_HPP
 
 #include "easy/dsp/transform/fftw_impl.hpp"
+#include <algorithm>
 #include <vector>
-
 namespace easy { namespace dsp {
 
     template <typename T, typename Allocator = std::allocator<std::complex<T>>>

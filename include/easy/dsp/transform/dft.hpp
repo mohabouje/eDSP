@@ -23,6 +23,7 @@
 #ifndef EASYDSP_DFT_HPP
 #define EASYDSP_DFT_HPP
 
+#include <algorithm>
 #include "fftw_impl.hpp"
 
 namespace easy { namespace dsp {
@@ -72,9 +73,8 @@ namespace easy { namespace dsp {
     template <typename InputIterator, typename OutputIterator>
     void idft(InputIterator first, InputIterator last, OutputIterator out) {
         using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-
-        const auto nfft = static_cast<esize>(std::distance(first, last));
         fftw_plan<value_type> plan;
+        const auto nfft = static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last));
         plan.idft(fftw_cast(&(*out)), fftw_cast(&(*first)), nfft);
         std::transform(out, out + nfft, out, [nfft](value_type value) { return value / nfft; });
     };

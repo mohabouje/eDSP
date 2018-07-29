@@ -24,7 +24,6 @@
 #define EASYDSP_DHT_HPP
 
 #include "fftw_impl.hpp"
-#include <easy/meta/meta.hpp>
 
 namespace easy { namespace dsp {
 
@@ -32,7 +31,8 @@ namespace easy { namespace dsp {
     inline void dht(InputIterator first, InputIterator last, OutputIterator out) {
         using value_type = typename std::iterator_traits<InputIterator>::value_type;
         fftw_plan<value_type> plan;
-        plan.dht(fftw_cast(&(*first)), fftw_cast(&(*out)), static_cast<esize>(std::distance(first, last)));
+        plan.dht(fftw_cast(&(*first)), fftw_cast(&(*out)),
+                 static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last)));
     };
 
     template <typename Container>

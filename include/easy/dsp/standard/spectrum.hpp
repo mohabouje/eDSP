@@ -23,6 +23,7 @@
 #define EASYDSP_SPECTROGRAM_HPP
 
 #include "easy/dsp/transform/fftw_impl.hpp"
+#include <algorithm>
 #include <vector>
 
 namespace easy { namespace dsp {

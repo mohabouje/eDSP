@@ -27,7 +27,7 @@
 using namespace easy;
 using namespace easy::dsp;
 
-static constexpr std::array<ereal, 24> hamming = {{0.080000, 0.097058, 0.146967, 0.226026, 0.328370, 0.446410,
+static constexpr std::array<float, 24> hamming = {{0.080000, 0.097058, 0.146967, 0.226026, 0.328370, 0.446410,
                                                    0.571392, 0.694045, 0.805273, 0.896827, 0.961917, 0.995716,
                                                    0.995716, 0.961917, 0.896827, 0.805273, 0.694045, 0.571392,
                                                    0.446410, 0.328370, 0.226026, 0.146967, 0.097058, 0.080000}};
@@ -36,7 +36,7 @@ SCENARIO("Testing CrossCorrelation", "[CrossCorrelation]") {
     GIVEN("An input buffer") {
         WHEN("We want to apply the CrossCorrelation with the same signal") {
             constexpr auto sz = std::size(hamming);
-            std::vector<ereal> output_cross(sz), output_auto(sz);
+            std::vector<float> output_cross(sz), output_auto(sz);
 
             CrossCorrelation<float> cross_correlation(sz, CrossCorrelation<float>::ScaleOpt::None);
             cross_correlation.compute(std::cbegin(hamming), std::cend(hamming), std::cbegin(hamming),
@@ -45,7 +45,7 @@ SCENARIO("Testing CrossCorrelation", "[CrossCorrelation]") {
             THEN("We should get the same output as with the AutoCorrelation class") {
                 AutoCorrelation<float> auto_correlation(sz, AutoCorrelation<float>::ScaleOpt::None);
                 auto_correlation.compute(std::cbegin(hamming), std::cend(hamming), std::begin(output_auto));
-                for (esize i = 0; i < sz; ++i) {
+                for (std::size_t i = 0; i < sz; ++i) {
                     REQUIRE(Approx(output_cross[i]) == output_auto[i]);
                 }
             }

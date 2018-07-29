@@ -21,26 +21,27 @@
  */
 
 #include <easy/dsp/filter/biquad.hpp>
-#include <easy/meta/meta.hpp>
+#include <array>
+#include <easy/meta/empty.hpp>
 #include <catch/catch.hpp>
 
 using namespace easy;
 using namespace easy::dsp;
 
-constexpr std::array<ereal, 14> hamming = {
+constexpr std::array<float, 14> hamming = {
     {0.0800000000000000, 0.1326902281995235, 0.2786902165036683, 0.4845531270825514, 0.7031182480395664,
      0.8843149441587066, 0.9866332360159840, 0.9866332360159840, 0.8843149441587066, 0.7031182480395666,
      0.4845531270825514, 0.2786902165036688, 0.1326902281995234, 0.0800000000000000}};
 
-constexpr std::array<ereal, 14> filtered_hamming = {
+constexpr std::array<float, 14> filtered_hamming = {
     {0.0600000000000000, 0.1225176711496426, 0.2243161029851142, 0.4080561361272294, 0.6038674248104523,
      0.7454970053272414, 0.8343232053689902, 0.8383218172944669, 0.7436858710921658, 0.5892356489435457,
      0.4057487890439693, 0.2277438949872962, 0.1045839910529946, 0.0628555966544836}};
 
 SCENARIO("Testing the Biquad filter class", "[Biquad]") {
     GIVEN("An input data that we want to filter") {
-        std::vector<ereal> input;
-        std::vector<ereal> output;
+        std::vector<float> input;
+        std::vector<float> output;
         filter::Biquad<float> biquad;
 
         WHEN("The input buffer is empty") {
@@ -55,7 +56,7 @@ SCENARIO("Testing the Biquad filter class", "[Biquad]") {
             output.resize(sz);
 
             std::copy(std::begin(hamming), std::end(hamming), std::begin(input));
-            REQUIRE(meta::notempty(input));
+            REQUIRE(!meta::empty(input));
             REQUIRE(std::size(input) == std::size(output));
 
             THEN("The biquad filter should not modify any imput") {
@@ -102,7 +103,7 @@ SCENARIO("Testing the Biquad filter class", "[Biquad]") {
                 output.resize(sz);
 
                 std::copy(std::begin(hamming), std::end(hamming), std::begin(input));
-                REQUIRE(meta::notempty(input));
+                REQUIRE(!meta::empty(input));
                 REQUIRE(std::size(input) == std::size(output));
 
                 THEN("The data should be filtered with no problem") {
