@@ -14,55 +14,95 @@ easy DSP
 
 It aims to provide efficient and streamlined base calculations, while at the same time having a straightforward and easy-to-use interface similar to another numeric language like [MATLAB](https://www.mathworks.com/products/matlab.html). 
 
-<i class="icon-hdd"></I> **The library is under constructions.**
 
-><i class="icon-file"></i> **Actual State**
-> - Implementation of different signal generators: white noise, pink noise, sin, square....
-> - Implementation of the Basic statistic functions.
-> - Developing the frequency analysis module: FFT, DCT, DHT....
-> - Developing the signal properties analysis: energy, power, zero crossing rate ....
-> - Windowing
-> - Basic digital filter implementation using Biquad - WIP
-> - Analog filter implementation - WIP
+1. [Windowing](https://github.com/mohabouje/eDSP/wiki/Windowing)
+2. [Oscillators](https://github.com/mohabouje/eDSP/wiki/Oscillators)
+3. [Discrete Frequency Transform](https://github.com/mohabouje/eDSP/wiki/Discrete-Frequency-Transform)
 
-## Example: Extract signal properties
-Given an input signal, eDSP allow the extraction of some of the basic properties of audio signals:
+***The library is under construction.***
 
- - Energy
- - Power
- - Loudness using the Steven Low Level
- - Zero Crossing Rate
- - et...
-Example of usage:
+<img src="https://openclipart.org/image/2400px/svg_to_png/293844/under-construction_geek_man_01.png" width="250">
+
+## Compilation Flags
+
+|Feature|State|Compilation Flag |
+|--|--|--|
+|Random Generators| Not Implemented Yet| `COMPILE_RANDOM_MODULE` |
+|[Discrete Frequency Transform](https://github.com/mohabouje/eDSP/wiki/Discrete-Frequency-Transform)| Not Documented Yet| `COMPILE_FREQUENCY_MODULE` |
+|Feature Extraction | Work In Progress| `COMPILE_FEATURES_EXTRACTION_MODULE` |
+|[Windowing](https://github.com/mohabouje/eDSP/wiki/Windowing)| Done| `COMPILE_WINDOWING_MODULE` |
+|[Oscillators](https://github.com/mohabouje/eDSP/wiki/Oscillators)| Done| `COMPILE_OSCILLATORS_MODULE` |
+|IIR Filters| Not Documented Yet| `COMPILE_IIR_MODULE` |
+|FIR Filters| Not Implemented Yet| `COMPILE_FIR_MODULE` |
+|Modulation| Not Implemented Yet| `COMPILE_MODULATION_MODULE` |
+|Statistics|Not Implement Yet| `COMPILE_STATISTICS_MODULE` |
+
+## Compilation
+
+The source code has been tested in Ubuntu 16.04 and MacOS 10.13 (High Sierra).
+
+    mkdir build
+    cd build
+    cmake ..
+    make -j4
+
+The easy way to enable/disable the different modules of the framework is by using the [ccmake](https://cmake.org/cmake/help/v3.0/manual/ccmake.1.html).
+
+
+### Example: Windowing an imput signal
+This example show how to apply a Hamming window to an input signal $x(n)$ and store the output in a signal $y(n)$:
+```c++
+constexpr std::size_t size = 1024;
+auto x = std::vector<double>(size);
+auto y = std::vector<double>(size);
+
+// Create a Hamming Window of 1024 samples
+auto window = Hamming(size);
+
+// Apply the window to the signal X and store it in Y
+window.compute(std::cbegin(x), std::cend(x), std::begin(y));
+```
+### Example: Generate an square signal
+This example show how to generate a square wave with a duration of 10 seconds, frequency of 500Hz and sampled at 8000Hz.
+```c++
+const std::size_t size = 80000;
+std::vector<double> square(size);
+
+// Configure the oscillator
+auto square_oscillator = SquareOscillator();
+square_oscillator.set_samplerate(8000);
+square_oscillator.set_amplitude(2);
+square_oscillator.set_frequency(500);
+
+// Generate the samples and store them
+std::generate_n(std::begin(square), size,square_oscillator); 
+```
+### Example: Extract signal features
+This example show how to extract_implementation some features like the energy and power of an input signal.
 
 ```c++
 constexpr std::size_t size = 1024;
 // Generate a buffer of a sin function
-const auto real_data = generators::sin<double, size>(1000, 0, 2);
-
+const auto real_data = std::vector<doubl>(size);
+... 
+// Extract the features from the input signal
 const auto energy = properties::energy(std::cbegin(input), std::cend(input));
 const auto power = properties::power(std::cbegin(input), std::cend(input));
 ```
 
-## Example: Frequency domain computation
-This library uses the available implementation of the FFT in the [FFTW](http://www.fftw.org/) library.  It allows the computation of the generic frequency transforms:
-
- - (FFT) Fast Fourier Transform
- - (IFFT) Inverse Fast Fourier Transform
- - (DCT) Direct Cosine Transform (Type I, II, III & IV)
- - (IDCT) Inverse Direct Cosine Transform (Type I, II, III & IV)
- - (DHT) Discrete Hartley Transform
-
-Example of usage:
-
+### Example: Computing the DFT
+This example show how to compute the DFT of an input signal.
 ```c++
 constexpr std::size_t size = 1024;
 // Generate a buffer of a sin function
-const auto real_data = generators::sin<double, size>(1000, 0, 2);
+auto real_data = std::vector<double>(size);
+
+...
 
 // Create an array of complex data to store the fft output
-std::array<std::complex<double>, size> fft_data;
+auto fft_data = std::vector<std::complex<double>>(size) fft_data;
 
 // Create an fft object with the expected output size as parameter
 FFT fft(size);
 fft.compute(std::cbegin(real_data), std::cend(real_data), std::begin(fft_data));
+```
