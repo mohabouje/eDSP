@@ -23,9 +23,8 @@
 #ifndef EASYDSP_RESAMPLER_HPP
 #define EASYDSP_RESAMPLER_HPP
 
-#include <easymeet/base/base.hpp>
 
-#include <easymeet/meta/meta.hpp>
+#include <easy/meta/meta.hpp>
 #include <samplerate.h>
 
 namespace easy { namespace dsp {

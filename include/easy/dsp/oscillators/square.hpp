@@ -22,8 +22,8 @@
 #ifndef EASYDSP_OSCILLATOR_SQUARE_HPP
 #define EASYDSP_OSCILLATOR_SQUARE_HPP
 
-#include "easymeet/dsp/oscillators/oscillator_impl.hpp"
-#include "easymeet/dsp/math/constant.hpp"
+#include "easy/dsp/oscillators/oscillator_impl.hpp"
+#include "easy/dsp/math/constant.hpp"
 
 namespace easy { namespace dsp { namespace oscillator {
 

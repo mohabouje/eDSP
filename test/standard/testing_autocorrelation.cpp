@@ -15,31 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: dht.hpp
- * Created at: 09/06/18
+ * Filename: testing_autocorrelation.cpp
+ * Created at: 10/06/18
  * Created by: Mohammed Boujemaoui
  */
 
-#ifndef EASYDSP_DHT_HPP
-#define EASYDSP_DHT_HPP
+#include <easy/dsp/standard/autocorrelation.hpp>
 
-#include "fftw_impl.hpp"
-#include <easy/meta/meta.hpp>
-
-namespace easy { namespace dsp {
-
-    template <typename InputIterator, typename OutputIterator>
-    inline void dht(InputIterator first, InputIterator last, OutputIterator out) {
-        using value_type = typename std::iterator_traits<InputIterator>::value_type;
-        fftw_plan<value_type> plan;
-        plan.dht(fftw_cast(&(*first)), fftw_cast(&(*out)), static_cast<esize>(std::distance(first, last)));
-    };
-
-    template <typename Container>
-    inline void dht(const Container& input, Container& output) {
-        dht(std::cbegin(input), std::cend(input), std::begin(output));
-    };
-
-}} // namespace easy::dsp
-
-#endif // EASYDSP_DHT_HPP
+using namespace easy;
+using namespace easy::dsp;

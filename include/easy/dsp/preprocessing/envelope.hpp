@@ -23,7 +23,7 @@
 #define EASYDSP_FEATURE_TEMPORAL_ENVELOPE_HPP
 
 
-#include <easymeet/meta/meta.hpp>
+#include <easy/meta/meta.hpp>
 #include <numeric>
 #include <cmath>
 

@@ -20,7 +20,7 @@
 *.mod
 *.smod
 
-# Compiled Static libraries∫
+# Compiled Static libraries
 *.lai
 *.la
 *.a
@@ -31,12 +31,11 @@
 *.out
 *.app
 
-# Clion IDE files.
+# Exclude editor files
+*.user
 .idea/
-cmake-build-debug/
-CMakeFiles/
-*.pro.user
-*.cmake
-*.cbp
-Makefile
-CMakeCache.txt
+.vscode/
+
+# Exclude build folder
+./build
+cmake-build*/

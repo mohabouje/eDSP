@@ -23,8 +23,7 @@
 #ifndef EASYDSP_AUTOCORRELATION_HPP
 #define EASYDSP_AUTOCORRELATION_HPP
 
-#include "easymeet/dsp/transform/fftw_impl.hpp"
-#include <easymeet/base/base.hpp>
+#include "easy/dsp/transform/fftw_impl.hpp"
 #include <vector>
 
 namespace easy { namespace dsp {

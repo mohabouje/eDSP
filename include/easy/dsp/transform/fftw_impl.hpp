@@ -24,7 +24,7 @@
 #define EASYDSP_FFTW_IMPL_HPP
 
 
-#include <easymeet/meta/meta.hpp>
+#include <easy/meta/meta.hpp>
 #include <complex>
 #include <fftw3.h>
 

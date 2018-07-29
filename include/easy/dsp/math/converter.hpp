@@ -25,7 +25,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <numeric>
-#include "easymeet/dsp/math/constant.hpp"
+#include "easy/dsp/math/constant.hpp"
 
 namespace easy { namespace dsp { namespace math {
 

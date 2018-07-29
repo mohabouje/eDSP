@@ -23,7 +23,7 @@
 #define EASYDSP_FILTER_MOVING_MEDIAN_FILTER_H
 
 
-#include <easymeet/meta/meta.hpp>
+#include <easy/meta/meta.hpp>
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
 #include <boost/circular_buffer.hpp>

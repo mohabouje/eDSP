@@ -23,8 +23,8 @@
 #ifndef EASYDSP_FILTER_BIQUAD_DESIGNER_HPP
 #define EASYDSP_FILTER_BIQUAD_DESIGNER_HPP
 
-#include "easymeet/dsp/filter/biquad.hpp"
-#include "easymeet/dsp/math/constant.hpp"
+#include "easy/dsp/filter/biquad.hpp"
+#include "easy/dsp/math/constant.hpp"
 #include <cmath>
 
 namespace easy { namespace dsp { namespace filter {

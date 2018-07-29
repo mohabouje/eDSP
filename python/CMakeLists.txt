@@ -1,0 +1,18 @@
+cmake_minimum_required(VERSION 3.5)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+project(EasyDSPPython VERSION 0.0.0 LANGUAGES CXX)
+
+find_package(Boost COMPONENTS python)
+find_package(PythonInterp)
+find_package(PythonLibs)
+if (${PYTHON_VERSION_MAJOR} EQUAL 3)
+    find_package(Boost COMPONENTS python3)
+else()
+    find_package(Boost COMPONENTS python)
+endif()
+
+set(PYTHON_BINDINGS )
+add_library(${PROJECT_NAME} ${PYTHON_BINDINGS})
+target_include_directories(${PROJECT_NAME} PRIVATE ${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} EasyCore ${Boost_LIBRARIES}  ${PYTHON_LIBRARIES})

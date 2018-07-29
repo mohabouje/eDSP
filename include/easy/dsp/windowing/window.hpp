@@ -23,7 +23,7 @@
 #define EASYDSP_WINDOW_HPP
 
 
-#include "easymeet/dsp/math/constant.hpp"
+#include "easy/dsp/math/constant.hpp"
 #include <algorithm>
 
 namespace easy { namespace dsp { namespace windowing {

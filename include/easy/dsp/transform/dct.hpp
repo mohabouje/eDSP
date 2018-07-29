@@ -23,7 +23,7 @@
 #ifndef EASYDSP_DCT_HPP
 #define EASYDSP_DCT_HPP
 
-#include <easymeet/meta/meta.hpp>
+#include <easy/meta/meta.hpp>
 #include "fftw_impl.hpp"
 namespace easy { namespace dsp {
     template <typename InputIterator, typename OutputIterator>

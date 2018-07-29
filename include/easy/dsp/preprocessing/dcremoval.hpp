@@ -23,7 +23,7 @@
 #ifndef EASYDSP_DCREMOVAL_HPP
 #define EASYDSP_DCREMOVAL_HPP
 
-#include "easymeet/dsp/filter/biquad.hpp"
+#include "easy/dsp/filter/biquad.hpp"
 
 namespace easy { namespace dsp {
 
