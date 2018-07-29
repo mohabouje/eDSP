@@ -24,6 +24,7 @@
 
 
 #include "easy/dsp/math/constant.hpp"
+#include <easy/meta/expects.hpp>
 #include <algorithm>
 #include <numeric>
 #include <iterator>
@@ -78,7 +79,7 @@ namespace easy { namespace dsp { namespace windowing {
     template <typename InputIterator, typename OutputIterator>
     inline void Window<Implementation, T, Allocator>::compute(InputIterator first, InputIterator last,
                                                                 OutputIterator out) {
-        E_ENSURES_MSG(std::distance(first, last) == size(), "Expecting a buffer with the same size");
+        meta::expects(std::distance(first, last) == size(), "Expecting a buffer with the same size");
         std::transform(first, last, std::begin(data_), out, std::multiplies<T>());
     }
 
