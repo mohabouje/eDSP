@@ -75,7 +75,7 @@ namespace easy { namespace dsp {
         using value_type = typename std::iterator_traits<OutputIterator>::value_type;
         fftw_plan<value_type> plan;
         const auto nfft = static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last));
-        plan.idft(fftw_cast(&(*out)), fftw_cast(&(*first)), nfft);
+        plan.idft(fftw_cast(&(*first)), fftw_cast(&(*out)), nfft);
         std::transform(out, out + nfft, out, [nfft](value_type value) { return value / nfft; });
     };
 
