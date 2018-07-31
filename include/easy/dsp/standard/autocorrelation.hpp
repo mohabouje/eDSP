@@ -92,5 +92,17 @@ namespace easy { namespace dsp {
         const auto factor = size_ * (scale_ == ScaleOpt::Biased ? size_ : 1);
         std::transform(out, meta::advance(out, size_), out, [factor](value_type val) { return val / factor; });
     }
+
+
+    template <typename InputIterator,
+              typename OutputIterator,
+              typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    inline void xcorr(InputIterator first, InputIterator last, OutputIterator out,
+                      typename AutoCorrelation<value_type>::ScaleOpt scale_opt = AutoCorrelation<value_type>::ScaleOpt::None) {
+        meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
+        AutoCorrelation<value_type> correlator(std::distance(first, last), scale_opt);
+        correlator.compute(first, last, out);
+    }
+
 }}     // namespace easy::dsp
 #endif // EASYDSP_AUTOCORRELATION_HPP

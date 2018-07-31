@@ -86,6 +86,16 @@ namespace easy { namespace dsp {
         ifft_.idft(fftw_cast(fft_data_.data()), fftw_cast(&(*out)), size_);
         std::transform(out, meta::advance(out, size_), out, [factor = size_](value_type val) { return val / factor; });
     }
+
+    template <typename InputIterator,
+              typename OutputIterator,
+              typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    inline void cepstrum(InputIterator first, InputIterator last, OutputIterator out) {
+        meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
+        Cepstrum<value_type> cepstrum(std::distance(first, last));
+        cepstrum.compute(first, last, out);
+    }
+
 }}     // namespace easy::dsp
 
 #endif // EASYDSP_CEPSTRUM_HPP

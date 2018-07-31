@@ -81,6 +81,16 @@ namespace easy { namespace dsp {
             return  (tmp * tmp);
         });
     }
+
+    template <typename InputIterator,
+              typename OutputIterator,
+              typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    inline void spectrum(InputIterator first, InputIterator last, OutputIterator out) {
+        meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
+        Spectrum<value_type> spectrum(std::distance(first, last));
+        spectrum.compute(first, last, out);
+    }
+
 }}     // namespace easy::dsp
 
 

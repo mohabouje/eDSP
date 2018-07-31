@@ -100,6 +100,17 @@ namespace easy { namespace dsp {
         std::transform(out, meta::advance(out, size_), out, [factor](value_type val) { return val / factor; });
     }
 
+
+    template <typename InputIterator,
+              typename OutputIterator,
+              typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    inline void xcorr(InputIterator first_x, InputIterator last_x, InputIterator first_y, OutputIterator out,
+                      typename CrossCorrelation<value_type>::ScaleOpt scale_opt = CrossCorrelation<value_type>::ScaleOpt::None) {
+        meta::expects(std::distance(first_x, last_x) > 0, "Not expecting empty input");
+        CrossCorrelation<value_type> correlator(std::distance(first_x, last_x), scale_opt);
+        correlator.compute(first_x, last_x, first_y, out);
+    }
+
 }} // namespace easy::dsp
 
 #endif // EASYDSP_CROSSCORRELATION_HPP
