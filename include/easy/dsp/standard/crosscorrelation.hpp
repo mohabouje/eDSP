@@ -25,6 +25,7 @@
 
 #include "easy/dsp/transform/fftw_impl.hpp"
 #include <easy/meta/expects.hpp>
+#include <easy/meta/advance.hpp>
 #include <algorithm>
 #include <vector>
 
@@ -73,7 +74,7 @@ namespace easy { namespace dsp {
     inline void CrossCorrelation<T, Allocator>::compute(const Container& left, const Container& right,
                                                           Container& output) {
         meta::expects(left.size() == size_ && right.size() == size_ && output.size() == size_, "Buffer size mismatch");
-        compute(std::cbegin(left), std::cend(left), std::cbegin(right), std::cbegin(output));
+        compute(std::cbegin(left), std::cend(left), std::cbegin(right), std::begin(output));
     }
 
     template <typename T, typename Allocator>
@@ -96,9 +97,7 @@ namespace easy { namespace dsp {
 
         // Scale the ifft & cross correlation scale option (Biased, Unbiased or None)
         const auto factor = static_cast<value_type>(size_ * (scale_ == ScaleOpt::Biased ? size_ : 1));
-        auto last_out     = out;
-        std::advance(last_out, size_);
-        std::transform(out, last_out, out, [factor](value_type val) { return val / factor; });
+        std::transform(out, meta::advance(out, size_), out, [factor](value_type val) { return val / factor; });
     }
 
 }} // namespace easy::dsp

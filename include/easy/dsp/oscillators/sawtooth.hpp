@@ -34,7 +34,7 @@ namespace easy { namespace dsp { namespace oscillator {
         constexpr SawtoothOscillator(value_type amplitude, value_type samplerate, value_type frequency,
                                        value_type width) noexcept;
 
-        constexpr value_type operator()() noexcept;
+        constexpr value_type operator()();
         constexpr void set_width(value_type dutty) noexcept;
         constexpr value_type width() const noexcept;
 

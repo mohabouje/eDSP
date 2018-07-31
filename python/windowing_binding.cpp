@@ -25,7 +25,6 @@
 #include <boost/python/class.hpp>
 #include <boost/python/scope.hpp>
 #include <boost/python/iterator.hpp>
-#include <boost/python/numpy.hpp>
 
 #include <easy/dsp/windowing/flat_top.hpp>
 #include <easy/dsp/windowing/blackman.hpp>
@@ -35,12 +34,11 @@
 #include <easy/dsp/windowing/bartlett.hpp>
 #include <easy/dsp/windowing/triangular.hpp>
 #include <easy/dsp/windowing/windowing.hpp>
-#include <easy/dsp/windowing/window.hpp>
+#include <easy/dsp/windowing/window_impl.hpp>
 #include <cstdint>
 #include <vector>
 
 using namespace boost::python;
-using namespace boost::python::numpy;
 using namespace easy::dsp::windowing;
 
 template <class Window>
@@ -74,7 +72,7 @@ boost::python::list window_apply(Window& w, boost::python::list data) {
     using value_type = typename Window::value_type;
     using size_type = typename Window::size_type;
     const size_type size = static_cast<size_type>(boost::python::len(data));
-    std::vector<value_type> converted{}, windowed;
+    std::vector<value_type> converted, windowed;
     converted.reserve(size), windowed.reserve(size);
     for (size_type i = 0; i < size; ++i) {
         converted.push_back(boost::python::extract<value_type>(data[i]));

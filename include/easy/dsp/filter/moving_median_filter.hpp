@@ -22,8 +22,6 @@
 #ifndef EASYDSP_FILTER_MOVING_MEDIAN_FILTER_H
 #define EASYDSP_FILTER_MOVING_MEDIAN_FILTER_H
 
-
-#include <easy/meta/meta.hpp>
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
 #include <boost/circular_buffer.hpp>

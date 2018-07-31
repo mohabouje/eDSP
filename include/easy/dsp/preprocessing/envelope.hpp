@@ -22,6 +22,7 @@
 #ifndef EASYDSP_FEATURE_TEMPORAL_ENVELOPE_HPP
 #define EASYDSP_FEATURE_TEMPORAL_ENVELOPE_HPP
 
+#include <easy/meta/math.hpp>
 #include <numeric>
 #include <cmath>
 
@@ -133,7 +134,7 @@ namespace easy { namespace dsp {
             const auto rectified = rectification_ ? std::abs(*first) : *first;
             const auto current   = (last_ < rectified) ? (1 - attack_gain_) * rectified + attack_gain_ * last_
                                                      : (1 - release_gain_) * rectified + release_gain_ * last_;
-            last_ = meta::isdenormal(current) ? 0 : current;
+            last_ = meta::is_denormal(current) ? 0 : current;
             *out  = last_;
         }
     }

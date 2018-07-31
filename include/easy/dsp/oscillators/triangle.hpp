@@ -33,7 +33,7 @@ namespace easy { namespace dsp { namespace oscillator {
         using value_type = typename Oscillator<T>::value_type;
         constexpr TriangleOscillator(value_type amplitude, value_type samplerate, value_type frequency,
                                        value_type width, value_type skew) noexcept;
-        constexpr value_type operator()() noexcept;
+        constexpr value_type operator()();
         constexpr void set_width(value_type width) noexcept;
         constexpr value_type width() const noexcept;
         constexpr void set_skew(value_type skew) noexcept;

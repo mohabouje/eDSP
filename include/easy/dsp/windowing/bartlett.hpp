@@ -22,7 +22,7 @@
 #ifndef EASYDSP_BARTLETT_HPP
 #define EASYDSP_BARTLETT_HPP
 
-#include "window.hpp"
+#include "window_impl.hpp"
 #include <cmath>
 
 namespace easy { namespace dsp { namespace windowing {

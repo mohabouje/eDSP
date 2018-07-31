@@ -65,7 +65,7 @@ namespace easy { namespace dsp {
     template <typename Container>
     inline void Spectrum<T, Allocator>::compute(const Container& input, Container& output) {
         meta::expects(input.size() == size_ && output.size() == size_, "Buffer size mismatch");
-        compute(std::cbegin(input), std::cend(input), std::cbegin(output));
+        compute(std::cbegin(input), std::cend(input), std::begin(output));
     }
 
     template <typename T, typename Allocator>

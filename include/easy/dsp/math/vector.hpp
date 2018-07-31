@@ -22,11 +22,11 @@
 #ifndef EASYDSP_VECTOR_HPP
 #define EASYDSP_VECTOR_HPP
 
+#include <easy/meta/math.hpp>
 #include <algorithm>
 #include <numeric>
 #include <cmath>
 #include <functional>
-#include "easy/dsp/math/math.hpp"
 
 namespace easy { namespace dsp { namespace math {
 
@@ -145,14 +145,14 @@ namespace easy { namespace dsp { namespace math {
     constexpr typename std::enable_if<std::is_arithmetic<typename std::iterator_traits<BiIterator>::value_type>::value,
                                       bool>::type
         has_negative(BiIterator first, BiIterator last) {
-        return std::any_of(first, last, math::is_negative<typename std::iterator_traits<BiIterator>::value_type>);
+        return std::any_of(first, last, meta::is_negative<typename std::iterator_traits<BiIterator>::value_type>);
     }
 
     template <class BiIterator>
     constexpr typename std::enable_if<std::is_arithmetic<typename std::iterator_traits<BiIterator>::value_type>::value,
                                       bool>::type
         has_zero(BiIterator first, BiIterator last) {
-        return std::any_of(first, last, math::is_zero<typename std::iterator_traits<BiIterator>::value_type>);
+        return std::any_of(first, last, meta::is_zero<typename std::iterator_traits<BiIterator>::value_type>);
     }
 
 }}} // namespace easy::dsp::math

@@ -22,7 +22,7 @@
 #ifndef EASYDSP_BLACKMAN_HPP
 #define EASYDSP_BLACKMAN_HPP
 
-#include "window.hpp"
+#include "window_impl.hpp"
 
 namespace easy { namespace dsp { namespace windowing {
 

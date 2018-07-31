@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: window.hpp
+ * Filename: window_impl.hpp
  * Author: Mohammed Boujemaoui
  * Date: 27/7/2018
  */
@@ -99,44 +99,44 @@ namespace easy { namespace dsp { namespace windowing {
     }
 
     template<typename Implementation, typename T, typename Allocator>
-    typename Window<Implementation, T, Allocator>::reference
+    inline typename Window<Implementation, T, Allocator>::reference
     Window<Implementation, T, Allocator>::operator[](Window::size_type index) noexcept {
         return data_[index];
     }
 
     template<typename Implementation, typename T, typename Allocator>
-    typename Window<Implementation, T, Allocator>::const_reference
+    inline typename Window<Implementation, T, Allocator>::const_reference
     Window<Implementation, T, Allocator>::operator[](Window::size_type index) const noexcept {
         return data_[index];
     }
 
     template<typename Implementation, typename T, typename Allocator>
-    typename Window<Implementation, T, Allocator>::iterator  Window<Implementation, T, Allocator>::begin() noexcept {
+    inline typename Window<Implementation, T, Allocator>::iterator  Window<Implementation, T, Allocator>::begin() noexcept {
         return data_.begin();
     }
 
     template<typename Implementation, typename T, typename Allocator>
-    typename Window<Implementation, T, Allocator>::const_iterator  Window<Implementation, T, Allocator>::begin() const noexcept {
+    inline typename Window<Implementation, T, Allocator>::const_iterator  Window<Implementation, T, Allocator>::begin() const noexcept {
         return data_.begin();
     }
 
     template<typename Implementation, typename T, typename Allocator>
-    typename Window<Implementation, T, Allocator>::const_iterator  Window<Implementation, T, Allocator>::cbegin() const noexcept {
+    inline typename Window<Implementation, T, Allocator>::const_iterator  Window<Implementation, T, Allocator>::cbegin() const noexcept {
         return data_.cbegin();
     }
 
     template<typename Implementation, typename T, typename Allocator>
-    typename Window<Implementation, T, Allocator>::iterator  Window<Implementation, T, Allocator>::end() noexcept {
+    inline typename Window<Implementation, T, Allocator>::iterator  Window<Implementation, T, Allocator>::end() noexcept {
         return data_.end();
     }
 
     template<typename Implementation, typename T, typename Allocator>
-    typename Window<Implementation, T, Allocator>::const_iterator  Window<Implementation, T, Allocator>::end() const noexcept {
+    inline typename Window<Implementation, T, Allocator>::const_iterator  Window<Implementation, T, Allocator>::end() const noexcept {
         return data_.end();
     }
 
     template<typename Implementation, typename T, typename Allocator>
-    typename Window<Implementation, T, Allocator>::const_iterator  Window<Implementation, T, Allocator>::cend() const noexcept {
+    inline typename Window<Implementation, T, Allocator>::const_iterator  Window<Implementation, T, Allocator>::cend() const noexcept {
         return data_.cend();
     }
 

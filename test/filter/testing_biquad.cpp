@@ -87,7 +87,7 @@ SCENARIO("Testing the Biquad filter class", "[Biquad]") {
             constexpr auto b1 = 0.85f;
             constexpr auto b2 = 0.41f;
 
-            biquad = filter::Biquad(a0, a1, a2, b0, b1, b2);
+            biquad = filter::Biquad<float>(a0, a1, a2, b0, b1, b2);
 
             THEN("The biquad is initialized correctly") {
                 REQUIRE(Approx(biquad.a0()).margin(0.001f) == a0);

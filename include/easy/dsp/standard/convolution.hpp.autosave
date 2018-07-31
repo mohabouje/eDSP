@@ -81,7 +81,7 @@ namespace easy { namespace dsp {
                       "Iterator does not math the value type. No implicit conversion is allowed");
         meta::expects(std::distance(first_x, last_x) == size_, "Buffer size mismatch");
         fft_.dft(fftw_cast(&(*first_x)), fftw_cast(fft_data_left_.data()), size_);
-        fft_.dft(fftw_cast(&(*first_y)), fftw_cast(fft_data_left_.data()), size_);
+        fft_.dft(fftw_cast(&(*first_y)), fftw_cast(fft_data_right_.data()), size_);
 
         std::transform(std::cbegin(fft_data_left_), std::cend(fft_data_left_), std::cbegin(fft_data_right_),
                        std::begin(fft_data_right_), std::multiplies<>());

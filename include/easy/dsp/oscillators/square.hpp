@@ -33,7 +33,7 @@ namespace easy { namespace dsp { namespace oscillator {
         using value_type = typename Oscillator<T>::value_type;
         constexpr SquareOscillator(value_type amplitude, value_type samplerate, value_type frequency,
                                      value_type duty) noexcept;
-        constexpr value_type operator()() noexcept;
+        constexpr value_type operator()();
         constexpr void set_duty_cycle(value_type dutty) noexcept;
         constexpr value_type duty_cycle() const noexcept;
 

@@ -24,6 +24,7 @@
 #define EASYDSP_MIXER_HPP
 
 #include <numeric>
+#include <iterator>
 
 namespace easy { namespace dsp {
 

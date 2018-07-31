@@ -22,7 +22,7 @@
 #ifndef EASYDSP_RECTANGULAR_HPP
 #define EASYDSP_RECTANGULAR_HPP
 
-#include "window.hpp"
+#include "window_impl.hpp"
 namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator = std::allocator<T>>
