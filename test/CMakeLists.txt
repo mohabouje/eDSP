@@ -8,6 +8,7 @@ set(SOURCE_FILES
         testing_dsp.cpp
         transform/testing_transforms.cpp
         filter/testing_biquad.cpp
+        filter/testing_biquad_designer.cpp
         standard/testing_autocorrelation.cpp
         standard/testing_crosscorrelation.cpp)
 
