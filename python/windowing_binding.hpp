@@ -37,7 +37,7 @@
 #include <easy/dsp/windowing/bartlett.hpp>
 #include <easy/dsp/windowing/triangular.hpp>
 #include <easy/dsp/windowing/windowing.hpp>
-#include <easy/dsp/windowing/window.hpp>
+#include <easy/dsp/windowing/window_impl.hpp>
 #include <cstdint>
 #include <vector>
 
