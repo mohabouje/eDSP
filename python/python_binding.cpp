@@ -22,6 +22,7 @@
 
 #include "transform_binding.hpp"
 #include "windowing_binding.hpp"
+#include "standard_binding.hpp"
 
 BOOST_PYTHON_MODULE(PYTHON_MODULE_NAME) {
     scope windowing = class_<Windowing>("Windowing")
@@ -47,6 +48,9 @@ BOOST_PYTHON_MODULE(PYTHON_MODULE_NAME) {
             .staticmethod("dct")
             .staticmethod("idct")
             .staticmethod("dht");
+
+    scope standard = class_<Standard>("Standard");
+    declare_standard();
 }
 
 
