@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(EasyDSP-Test VERSION 0.0.0 LANGUAGES CXX)
 enable_testing()
@@ -8,6 +8,7 @@ set(SOURCE_FILES
         testing_dsp.cpp
         transform/testing_transforms.cpp
         filter/testing_biquad.cpp
+        filter/testing_biquad_designer.cpp
         standard/testing_autocorrelation.cpp
         standard/testing_crosscorrelation.cpp)
 

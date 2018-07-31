@@ -22,7 +22,6 @@
 #ifndef EASYDSP_FILTER_MOVING_AVERAGE_FILTER_H
 #define EASYDSP_FILTER_MOVING_AVERAGE_FILTER_H
 
-
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
 #include <boost/accumulators/statistics/rolling_mean.hpp>

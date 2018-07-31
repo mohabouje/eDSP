@@ -22,7 +22,7 @@
 #ifndef EASYDSP_HAMMING_HPP
 #define EASYDSP_HAMMING_HPP
 
-#include "window.hpp"
+#include "window_impl.hpp"
 #include <cmath>
 
 namespace easy { namespace dsp { namespace windowing {
@@ -31,6 +31,7 @@ namespace easy { namespace dsp { namespace windowing {
     class Hamming : public Window<Hamming<T, Allocator>, T, Allocator> {
         friend class Window<Hamming<T, Allocator>, T, Allocator>;
         using parent = Window<Hamming<T, Allocator>, T, Allocator>;
+
     public:
         using value_type = typename parent::value_type;
         using size_type  = typename parent::size_type;
@@ -45,9 +46,20 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator>
     inline void Hamming<T, Allocator>::initialize() {
+        constexpr auto a0 = static_cast<value_type>(0.54);
+        constexpr auto a1 = static_cast<value_type>(0.46);
         for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            parent::data_[i] = static_cast<value_type>(0.54 - 0.46 * std::cos(constants<value_type>::two_pi * i / sz));
+            const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
+            parent::data_[i]     = a0 - a1 * std::cos(tmp);
         }
+    }
+
+    template <typename OutputIterator, typename Integer>
+    inline void hamming(Integer size, OutputIterator out) {
+        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
+        using size_type  = typename Hamming<value_type>::size_type;
+        Hamming<value_type> window(static_cast<size_type>(size));
+        std::copy(std::cbegin(window), std::cend(window), out);
     }
 
 }}}    // namespace easy::dsp::windowing

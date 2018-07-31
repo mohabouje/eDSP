@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: sin.hpp
+ * Filename: sine.hpp
  * Author: Mohammed Boujemaoui
  * Date: 27/7/2018
  */
@@ -26,24 +26,24 @@
 #include "easy/dsp/math/constant.hpp"
 #include <cmath>
 
-namespace easy { namespace dsp { namespace oscillator {
+namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
     class SinOscillator : public Oscillator<T> {
     public:
         using value_type = typename Oscillator<T>::value_type;
         constexpr SinOscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                  value_type phase) noexcept;
-        constexpr value_type operator()() noexcept;
+                                value_type phase) noexcept;
+        constexpr value_type operator()();
     };
 
     template <typename T>
     constexpr SinOscillator<T>::SinOscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                                value_type phase) noexcept
-        : Oscillator<T>(amplitude, samplerate, frequency, phase) {}
+                                              value_type phase) noexcept :
+        Oscillator<T>(amplitude, samplerate, frequency, phase) {}
 
     template <typename T>
-    constexpr typename SinOscillator<T>::value_type SinOscillator<T>::operator()() noexcept {
+    constexpr typename SinOscillator<T>::value_type SinOscillator<T>::operator()() {
         const value_type result =
             std::sin(constants<value_type>::two_pi *
                      (Oscillator<T>::frequency() * Oscillator<T>::timestamp() + Oscillator<T>::phase()));
@@ -51,6 +51,6 @@ namespace easy { namespace dsp { namespace oscillator {
         return result * Oscillator<T>::amplitude();
     }
 
-}}} // namespace easy::dsp::oscillator
+}}} // namespace easy::dsp::oscillators
 
 #endif // EASYDSP_OSCILLATOR_SIN_HPP

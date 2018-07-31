@@ -24,6 +24,7 @@
 #define EASYDSP_MIXER_HPP
 
 #include <numeric>
+#include <iterator>
 
 namespace easy { namespace dsp {
 
@@ -40,7 +41,7 @@ namespace easy { namespace dsp {
 
     template <typename InputIterator, typename OutputIterator, typename Integer>
     constexpr void mixer(InputIterator first, InputIterator last, OutputIterator out, Integer channels,
-                           Integer desired_channel) {
+                         Integer desired_channel) {
         static_assert(std::is_integral<Integer>::value, "Expecting an integer type");
         for (; first < last; first += channels, out++) {
             *out = *(first + desired_channel);

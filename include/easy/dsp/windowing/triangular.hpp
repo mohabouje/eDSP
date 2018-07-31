@@ -22,7 +22,7 @@
 #ifndef EASYDSP_TRIANGULAR_HPP
 #define EASYDSP_TRIANGULAR_HPP
 
-#include "window.hpp"
+#include "window_impl.hpp"
 #include <cmath>
 
 namespace easy { namespace dsp { namespace windowing {
@@ -31,6 +31,7 @@ namespace easy { namespace dsp { namespace windowing {
     class Triangular : public Window<Triangular<T, Allocator>, T, Allocator> {
         friend class Window<Triangular<T, Allocator>, T, Allocator>;
         using parent = Window<Triangular<T, Allocator>, T, Allocator>;
+
     public:
         using value_type = typename parent::value_type;
         using size_type  = typename parent::size_type;
@@ -52,6 +53,14 @@ namespace easy { namespace dsp { namespace windowing {
             parent::data_[i] = 1 - std::abs(initial / rem);
             initial += 2;
         }
+    }
+
+    template <typename OutputIterator, typename Integer>
+    inline void triang(Integer size, OutputIterator out) {
+        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
+        using size_type  = typename Triangular<value_type>::size_type;
+        Triangular<value_type> window(static_cast<size_type>(size));
+        std::copy(std::cbegin(window), std::cend(window), out);
     }
 
 }}} // namespace easy::dsp::windowing

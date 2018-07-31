@@ -25,16 +25,16 @@
 #include "easy/dsp/oscillators/oscillator_impl.hpp"
 #include "easy/dsp/math/constant.hpp"
 
-namespace easy { namespace dsp { namespace oscillator {
+namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
     class SawtoothOscillator : public Oscillator<T> {
     public:
         using value_type = typename Oscillator<T>::value_type;
         constexpr SawtoothOscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                       value_type width) noexcept;
+                                     value_type width) noexcept;
 
-        constexpr value_type operator()() noexcept;
+        constexpr value_type operator()();
         constexpr void set_width(value_type dutty) noexcept;
         constexpr value_type width() const noexcept;
 
@@ -44,9 +44,9 @@ namespace easy { namespace dsp { namespace oscillator {
 
     template <typename T>
     constexpr SawtoothOscillator<T>::SawtoothOscillator(value_type amplitude, value_type samplerate,
-                                                          value_type frequency, value_type width) noexcept
-        : Oscillator<T>(amplitude, samplerate, frequency, 0),
-          width_(width) {}
+                                                        value_type frequency, value_type width) noexcept :
+        Oscillator<T>(amplitude, samplerate, frequency, 0),
+        width_(width) {}
 
     template <typename T>
     constexpr void SawtoothOscillator<T>::set_width(value_type dutty) noexcept {
@@ -59,7 +59,7 @@ namespace easy { namespace dsp { namespace oscillator {
     }
 
     template <typename T>
-    constexpr typename Oscillator<T>::value_type SawtoothOscillator<T>::operator()() noexcept {
+    constexpr typename Oscillator<T>::value_type SawtoothOscillator<T>::operator()() {
         const auto t               = Oscillator<T>::timestamp();
         const value_type result    = (t >= width_) ? -2 * t / (1 - width_) + 1 : 2 * t / width_ - 1;
         const value_type increased = t + Oscillator<T>::sampling_period();
@@ -67,6 +67,6 @@ namespace easy { namespace dsp { namespace oscillator {
         return result * Oscillator<T>::amplitude();
     }
 
-}}} // namespace easy::dsp::oscillator
+}}} // namespace easy::dsp::oscillators
 
 #endif // EASYDSP_OSCILLATOR_SAWTOOTH_HPP

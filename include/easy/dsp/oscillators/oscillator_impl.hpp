@@ -22,16 +22,14 @@
 #ifndef EASYDSP_OSCILLATOR_IMPL_HPP
 #define EASYDSP_OSCILLATOR_IMPL_HPP
 
-
-
-namespace easy { namespace dsp { namespace oscillator {
+namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
     class Oscillator {
     public:
         using value_type = T;
         constexpr Oscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                               value_type phase) noexcept;
+                             value_type phase) noexcept;
         constexpr value_type frequency() const noexcept;
         constexpr value_type phase() const noexcept;
         constexpr void set_frequency(value_type frequency) noexcept;
@@ -55,13 +53,12 @@ namespace easy { namespace dsp { namespace oscillator {
     };
 
     template <typename T>
-    constexpr Oscillator<T>::Oscillator(value_type amplitude,
-                                          value_type samplerate,
-                                          value_type frequency,
-                                          value_type phase) noexcept : amplitude_(amplitude),
-                                                                         samplerate_(samplerate),
-                                                                         frequency_(frequency),
-                                                                         phase_(phase) {}
+    constexpr Oscillator<T>::Oscillator(value_type amplitude, value_type samplerate, value_type frequency,
+                                        value_type phase) noexcept :
+        amplitude_(amplitude),
+        samplerate_(samplerate),
+        frequency_(frequency),
+        phase_(phase) {}
 
     template <typename T>
     constexpr typename Oscillator<T>::value_type Oscillator<T>::timestamp() const noexcept {
@@ -126,6 +123,6 @@ namespace easy { namespace dsp { namespace oscillator {
         return sampling_period_;
     }
 
-}}} // namespace easy::dsp::oscillator
+}}} // namespace easy::dsp::oscillators
 
 #endif // EASYDSP_OSCILLATOR_IMPL_HPP

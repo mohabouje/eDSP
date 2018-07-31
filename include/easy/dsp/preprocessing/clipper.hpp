@@ -31,7 +31,7 @@ namespace easy { namespace dsp {
     template <typename InputIterator, typename OutputIterator,
               typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     constexpr void clipper(InputIterator first, InputIterator last, OutputIterator out, value_type min,
-                             value_type max) {
+                           value_type max) {
         std::transform(first, last, out,
                        [min, max](const double val) { return (val < min) ? min : (val > max) ? max : val; });
     };

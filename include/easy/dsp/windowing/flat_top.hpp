@@ -22,7 +22,7 @@
 #ifndef EASYDSP_FLAT_TOP_HPP
 #define EASYDSP_FLAT_TOP_HPP
 
-#include "window.hpp"
+#include "window_impl.hpp"
 #include <cmath>
 namespace easy { namespace dsp { namespace windowing {
 
@@ -30,6 +30,7 @@ namespace easy { namespace dsp { namespace windowing {
     class FlatTop : public Window<FlatTop<T, Allocator>, T, Allocator> {
         friend class Window<FlatTop<T, Allocator>, T, Allocator>;
         using parent = Window<FlatTop<T, Allocator>, T, Allocator>;
+
     public:
         using value_type = typename parent::value_type;
         using size_type  = typename parent::size_type;
@@ -44,11 +45,23 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator>
     void FlatTop<T, Allocator>::initialize() {
+        constexpr auto a0 = static_cast<value_type>(1);
+        constexpr auto a1 = static_cast<value_type>(1.9300);
+        constexpr auto a2 = static_cast<value_type>(1.2900);
+        constexpr auto a3 = static_cast<value_type>(0.3880);
+        constexpr auto a4 = static_cast<value_type>(0.0322);
         for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
             const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
-            parent::data_[i] = 1 - 1.9300 * std::cos(tmp) + 1.2900 * std::cos(2 * tmp) - 0.3880 * std::cos(3 * tmp) +
-                               0.0322 * std::cos(4 * tmp);
+            parent::data_[i]     = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp) + a4 * std::cos(4 * tmp);
         }
+    }
+
+    template <typename OutputIterator, typename Integer>
+    inline void flattopwin(Integer size, OutputIterator out) {
+        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
+        using size_type  = typename FlatTop<value_type>::size_type;
+        FlatTop<value_type> window(static_cast<size_type>(size));
+        std::copy(std::cbegin(window), std::cend(window), out);
     }
 
 }}} // namespace easy::dsp::windowing

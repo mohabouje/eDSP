@@ -22,7 +22,7 @@
 #ifndef EASYDSP_BLACKMAN_HPP
 #define EASYDSP_BLACKMAN_HPP
 
-#include "window.hpp"
+#include "window_impl.hpp"
 
 namespace easy { namespace dsp { namespace windowing {
 
@@ -30,6 +30,7 @@ namespace easy { namespace dsp { namespace windowing {
     class Blackman : public Window<Blackman<T, Allocator>, T, Allocator> {
         friend class Window<Blackman<T, Allocator>, T, Allocator>;
         using parent = Window<Blackman<T, Allocator>, T, Allocator>;
+
     public:
         using value_type = typename parent::value_type;
         using size_type  = typename parent::size_type;
@@ -44,10 +45,21 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator>
     inline void Blackman<T, Allocator>::initialize() {
+        constexpr auto a0 = static_cast<value_type>(0.42);
+        constexpr auto a1 = static_cast<value_type>(0.50);
+        constexpr auto a2 = static_cast<value_type>(0.08);
         for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
             const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
-            parent::data_[i]     = 0.42 - 0.50 * std::cos(tmp) + 0.08 * std::cos(2 * tmp);
+            parent::data_[i]     = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp);
         }
+    }
+
+    template <typename OutputIterator, typename Integer>
+    inline void blackman(Integer size, OutputIterator out) {
+        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
+        using size_type  = typename Blackman<value_type>::size_type;
+        Blackman<value_type> window(static_cast<size_type>(size));
+        std::copy(std::cbegin(window), std::cend(window), out);
     }
 
 }}} // namespace easy::dsp::windowing

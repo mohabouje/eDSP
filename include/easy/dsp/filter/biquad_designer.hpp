@@ -23,6 +23,7 @@
 #ifndef EASYDSP_FILTER_BIQUAD_DESIGNER_HPP
 #define EASYDSP_FILTER_BIQUAD_DESIGNER_HPP
 
+#include <easy/meta/unused.hpp>
 #include "easy/dsp/filter/biquad.hpp"
 #include "easy/dsp/math/constant.hpp"
 #include <cmath>
@@ -40,14 +41,13 @@ namespace easy { namespace dsp { namespace filter {
         HighShelf
     };
 
-    template <BiquadType Type>
+    template <typename T, BiquadType Type>
     struct BiquadDesigner {};
 
-    template <>
-    struct BiquadDesigner<BiquadType::LowPass> {
-        template <typename T>
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) {
-            E_UNUSED(gain_db);
+    template <typename T>
+    struct BiquadDesigner<T, BiquadType::LowPass> {
+        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+            meta::unused(gain_db);
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
             const auto omega_c = std::cos(omega);
@@ -64,11 +64,10 @@ namespace easy { namespace dsp { namespace filter {
         }
     };
 
-    template <>
-    struct BiquadDesigner<BiquadType::HighPass> {
-        template <typename T>
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) {
-            E_UNUSED(gain_db);
+    template <typename T>
+    struct BiquadDesigner<T, BiquadType::HighPass> {
+        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+            meta::unused(gain_db);
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
             const auto omega_c = std::cos(omega);
@@ -85,11 +84,10 @@ namespace easy { namespace dsp { namespace filter {
         }
     };
 
-    template <>
-    struct BiquadDesigner<BiquadType::BandPassSkirtGain> {
-        template <typename T>
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) {
-            E_UNUSED(gain_db);
+    template <typename T>
+    struct BiquadDesigner<T, BiquadType::BandPassSkirtGain> {
+        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+            meta::unused(gain_db);
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
             const auto omega_c = std::cos(omega);
@@ -106,11 +104,10 @@ namespace easy { namespace dsp { namespace filter {
         }
     };
 
-    template <>
-    struct BiquadDesigner<BiquadType::BandPassPeakGain> {
-        template <typename T>
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) {
-            E_UNUSED(gain_db);
+    template <typename T>
+    struct BiquadDesigner<T, BiquadType::BandPassPeakGain> {
+        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+            meta::unused(gain_db);
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
             const auto omega_c = std::cos(omega);
@@ -127,11 +124,10 @@ namespace easy { namespace dsp { namespace filter {
         }
     };
 
-    template <>
-    struct BiquadDesigner<BiquadType::Notch> {
-        template <typename T>
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) {
-            E_UNUSED(gain_db);
+    template <typename T>
+    struct BiquadDesigner<T, BiquadType::Notch> {
+        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+            meta::unused(gain_db);
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
             const auto omega_c = std::cos(omega);
@@ -148,11 +144,10 @@ namespace easy { namespace dsp { namespace filter {
         }
     };
 
-    template <>
-    struct BiquadDesigner<BiquadType::AllPass> {
-        template <typename T>
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) {
-            E_UNUSED(gain_db);
+    template <typename T>
+    struct BiquadDesigner<T, BiquadType::AllPass> {
+        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+            meta::unused(gain_db);
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
             const auto omega_c = std::cos(omega);
@@ -169,10 +164,9 @@ namespace easy { namespace dsp { namespace filter {
         }
     };
 
-    template <>
-    struct BiquadDesigner<BiquadType::PeakingEQ> {
-        template <typename T>
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) {
+    template <typename T>
+    struct BiquadDesigner<T, BiquadType::PeakingEQ> {
+        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             const T A          = std::sqrt(std::pow(10, gain_db / 20));
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
@@ -190,10 +184,9 @@ namespace easy { namespace dsp { namespace filter {
         }
     };
 
-    template <>
-    struct BiquadDesigner<BiquadType::LowShelf> {
-        template <typename T>
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) {
+    template <typename T>
+    struct BiquadDesigner<T, BiquadType::LowShelf> {
+        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             const T A          = std::sqrt(std::pow(10., gain_db / 20));
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
@@ -211,10 +204,9 @@ namespace easy { namespace dsp { namespace filter {
         }
     };
 
-    template <>
-    struct BiquadDesigner<BiquadType::HighShelf> {
-        template <typename T>
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) {
+    template <typename T>
+    struct BiquadDesigner<T, BiquadType::HighShelf> {
+        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             const T A          = std::sqrt(std::pow(10, gain_db / 20));
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);

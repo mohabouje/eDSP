@@ -25,6 +25,7 @@
 
 #include "easy/dsp/transform/fftw_impl.hpp"
 #include <easy/meta/expects.hpp>
+#include <easy/meta/advance.hpp>
 #include <vector>
 #include <algorithm>
 
@@ -69,7 +70,7 @@ namespace easy { namespace dsp {
     template <typename Container>
     inline void AutoCorrelation<T, Allocator>::compute(const Container& input, Container& output) {
         meta::expects(input.size() == size_ && output.size() == size_, "Buffer size mismatch");
-        compute(std::cbegin(input), std::cend(input), std::cbegin(output));
+        compute(std::cbegin(input), std::cend(input), std::begin(output));
     }
 
     template <typename T, typename Allocator>
@@ -88,11 +89,19 @@ namespace easy { namespace dsp {
                        });
 
         ifft_.idft(fftw_cast(fft_data_.data()), fftw_cast(&(*out)), size_);
-
         const auto factor = size_ * (scale_ == ScaleOpt::Biased ? size_ : 1);
-        auto last_out     = out;
-        std::advance(last_out, size_);
-        std::transform(out, last_out, out, [factor](value_type val) { return val / factor; });
+        std::transform(out, meta::advance(out, size_), out, [factor](value_type val) { return val / factor; });
     }
+
+    template <typename InputIterator, typename OutputIterator,
+              typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    inline void
+        xcorr(InputIterator first, InputIterator last, OutputIterator out,
+              typename AutoCorrelation<value_type>::ScaleOpt scale_opt = AutoCorrelation<value_type>::ScaleOpt::None) {
+        meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
+        AutoCorrelation<value_type> correlator(std::distance(first, last), scale_opt);
+        correlator.compute(first, last, out);
+    }
+
 }}     // namespace easy::dsp
 #endif // EASYDSP_AUTOCORRELATION_HPP

@@ -15,14 +15,19 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: dsp_testing.cpp
- * Created at: 10/06/18
- * Created by: Mohammed Boujemaoui
+ * Filename: histogram.hpp
+ * Author: Mohammed Boujemaoui
+ * Date: 31/7/2018
  */
+#ifndef EASYDSP_FISHER_HISTOGRAM_HPP
+#define EASYDSP_FISHER_HISTOGRAM_HPP
 
-#define CATCH_CONFIG_RUNNER
-#include <catch/catch.hpp>
+#include <boost/histogram.hpp>
 
-int main(int argc, char* argv[]) {
-    return Catch::Session().run(argc, argv);
-}
+namespace easy { namespace dsp { namespace statistics {
+
+
+
+}}}
+
+#endif // EASYDSP_FISHER_HISTOGRAM_HPP

@@ -1,6 +1,19 @@
 /*
- * This file is part of the Easy Meeting project.
- * Copyright (Ⓒ) 2018. All rights reserved
+ * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along withº
+ * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * Filename: biquad.hpp
  * Created at: 09/06/18
@@ -9,7 +22,6 @@
 
 #ifndef EASYDSP_FILTER_BIQUAD_HPP
 #define EASYDSP_FILTER_BIQUAD_HPP
-
 
 #include <algorithm>
 #include <cmath>
@@ -21,8 +33,8 @@ namespace easy { namespace dsp { namespace filter {
     class Biquad {
     public:
         using value_type = T;
-        constexpr Biquad(value_type a0, value_type a1, value_type a2,
-                           value_type b0, value_type b1, value_type b2) noexcept;
+        constexpr Biquad(value_type a0, value_type a1, value_type a2, value_type b0, value_type b1,
+                         value_type b2) noexcept;
         constexpr Biquad() noexcept              = default;
         constexpr Biquad(const Biquad&) noexcept = default;
         constexpr Biquad(Biquad&&) noexcept      = default;
@@ -67,14 +79,14 @@ namespace easy { namespace dsp { namespace filter {
     };
 
     template <typename T>
-    constexpr Biquad<T>::Biquad(value_type a0, value_type a1, value_type a2,
-                                  value_type b0, value_type b1, value_type b2) noexcept :
-                                b2_(b2 / a0),
-                                b1_(b1 / a0),
-                                b0_(b0 / a0),
-                                a2_(a2 / a0),
-                                a1_(a1 / a0),
-                                a0_(1) {}
+    constexpr Biquad<T>::Biquad(value_type a0, value_type a1, value_type a2, value_type b0, value_type b1,
+                                value_type b2) noexcept :
+        b2_(b2 / a0),
+        b1_(b1 / a0),
+        b0_(b0 / a0),
+        a2_(a2 / a0),
+        a1_(a1 / a0),
+        a0_(1) {}
 
     template <typename T>
     constexpr void Biquad<T>::reset() noexcept {

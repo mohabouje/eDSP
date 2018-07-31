@@ -36,7 +36,7 @@ namespace easy { namespace dsp {
     template <typename InputIterator, typename OutputIterator,
               typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     constexpr void amplifier(InputIterator first, InputIterator last, OutputIterator out, value_type factor,
-                               value_type min, value_type max) {
+                             value_type min, value_type max) {
         std::transform(first, last, out, [factor, min, max](const double val) {
             const auto scaled = factor * val;
             return (scaled < min) ? min : (scaled > max) ? max : scaled;

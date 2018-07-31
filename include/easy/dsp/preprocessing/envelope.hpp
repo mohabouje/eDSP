@@ -22,6 +22,7 @@
 #ifndef EASYDSP_FEATURE_TEMPORAL_ENVELOPE_HPP
 #define EASYDSP_FEATURE_TEMPORAL_ENVELOPE_HPP
 
+#include <easy/meta/math.hpp>
 #include <numeric>
 #include <cmath>
 
@@ -34,7 +35,7 @@ namespace easy { namespace dsp {
         using size_type  = std::size_t;
 
         constexpr Envelope(value_type samplerate, value_type attack_time, value_type release_time,
-                             bool rectify = false) noexcept;
+                           bool rectify = false) noexcept;
         constexpr value_type samplerate() const noexcept;
         constexpr void set_samplerate(value_type samplerate) noexcept;
         constexpr value_type attack_time() const noexcept;
@@ -63,10 +64,11 @@ namespace easy { namespace dsp {
 
     template <typename T>
     constexpr Envelope<T>::Envelope(value_type samplerate, value_type attack_time, value_type release_time,
-                                      bool rectify) noexcept : samplerate_(samplerate),
-                                                                 attack_time_(attack_time),
-                                                                 release_time_(release_time),
-                                                                 rectification_(rectify) {
+                                    bool rectify) noexcept :
+        samplerate_(samplerate),
+        attack_time_(attack_time),
+        release_time_(release_time),
+        rectification_(rectify) {
         reset();
     }
 
@@ -133,7 +135,7 @@ namespace easy { namespace dsp {
             const auto rectified = rectification_ ? std::abs(*first) : *first;
             const auto current   = (last_ < rectified) ? (1 - attack_gain_) * rectified + attack_gain_ * last_
                                                      : (1 - release_gain_) * rectified + release_gain_ * last_;
-            last_ = meta::isdenormal(current) ? 0 : current;
+            last_ = meta::is_denormal(current) ? 0 : current;
             *out  = last_;
         }
     }

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: triangle.hpp
+ * Filename: triangular.hpp
  * Author: Mohammed Boujemaoui
  * Date: 27/7/2018
  */
@@ -25,15 +25,15 @@
 #include "easy/dsp/oscillators/oscillator_impl.hpp"
 #include "easy/dsp/math/constant.hpp"
 
-namespace easy { namespace dsp { namespace oscillator {
+namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
-    class TriangleOscillator : public Oscillator<T> {
+    class TriangularOscillator : public Oscillator<T> {
     public:
         using value_type = typename Oscillator<T>::value_type;
-        constexpr TriangleOscillator(value_type amplitude, value_type samplerate, value_type frequency,
+        constexpr TriangularOscillator(value_type amplitude, value_type samplerate, value_type frequency,
                                        value_type width, value_type skew) noexcept;
-        constexpr value_type operator()() noexcept;
+        constexpr value_type operator()();
         constexpr void set_width(value_type width) noexcept;
         constexpr value_type width() const noexcept;
         constexpr void set_skew(value_type skew) noexcept;
@@ -47,15 +47,15 @@ namespace easy { namespace dsp { namespace oscillator {
     };
 
     template <typename T>
-    constexpr TriangleOscillator<T>::TriangleOscillator(value_type amplitude, value_type samplerate,
-                                                          value_type frequency, value_type width,
-                                                          value_type skew) noexcept
-        : Oscillator<T>(amplitude, samplerate, frequency, 0),
-          width_(width),
-          skew_(skew) {}
+    constexpr TriangularOscillator<T>::TriangularOscillator(value_type amplitude, value_type samplerate,
+                                                            value_type frequency, value_type width,
+                                                            value_type skew) noexcept :
+        Oscillator<T>(amplitude, samplerate, frequency, 0),
+        width_(width),
+        skew_(skew) {}
 
     template <typename T>
-    constexpr typename Oscillator<T>::value_type TriangleOscillator<T>::operator()() noexcept {
+    constexpr typename Oscillator<T>::value_type TriangularOscillator<T>::operator()() {
         const auto half_w = width_ / 2;
         const auto t      = Oscillator<T>::timestamp();
         value_type result = 0;
@@ -71,32 +71,32 @@ namespace easy { namespace dsp { namespace oscillator {
     }
 
     template <typename T>
-    constexpr typename Oscillator<T>::value_type TriangleOscillator<T>::skew() const noexcept {
+    constexpr typename Oscillator<T>::value_type TriangularOscillator<T>::skew() const noexcept {
         return skew_;
     }
 
     template <typename T>
-    constexpr void TriangleOscillator<T>::set_skew(value_type skew) noexcept {
+    constexpr void TriangularOscillator<T>::set_skew(value_type skew) noexcept {
         skew_ = skew;
         compute_peak_position();
     }
 
     template <typename T>
-    constexpr typename Oscillator<T>::value_type TriangleOscillator<T>::width() const noexcept {
+    constexpr typename Oscillator<T>::value_type TriangularOscillator<T>::width() const noexcept {
         return width_;
     }
 
     template <typename T>
-    constexpr void TriangleOscillator<T>::set_width(value_type width) noexcept {
+    constexpr void TriangularOscillator<T>::set_width(value_type width) noexcept {
         width_ = width;
         compute_peak_position();
     }
 
     template <typename T>
-    constexpr void TriangleOscillator<T>::compute_peak_position() {
+    constexpr void TriangularOscillator<T>::compute_peak_position() {
         peak_ = skew_ * width_ / static_cast<T>(2);
     }
 
-}}} // namespace easy::dsp::oscillator
+}}} // namespace easy::dsp::oscillators
 
 #endif // EASYDSP_OSCILLATOR_TRIANGLE_HPP

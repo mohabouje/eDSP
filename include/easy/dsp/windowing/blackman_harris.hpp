@@ -15,53 +15,54 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: bartlett.hpp
+ * Filename: BlackmanHarris_harris.hpp
  * Author: Mohammed Boujemaoui
- * Date: 27/7/2018
+ * Date: 31/7/2018
  */
-#ifndef EASYDSP_BARTLETT_HPP
-#define EASYDSP_BARTLETT_HPP
+#ifndef EASYDSP_BlackmanHarris_HARRIS_HPP
+#define EASYDSP_BlackmanHarris_HARRIS_HPP
 
 #include "window_impl.hpp"
-#include <cmath>
 
 namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator = std::allocator<T>>
-    class Bartlett : public Window<Bartlett<T, Allocator>, T, Allocator> {
-        friend class Window<Bartlett<T, Allocator>, T, Allocator>;
-        using parent = Window<Bartlett<T, Allocator>, T, Allocator>;
+    class BlackmanHarris : public Window<BlackmanHarris<T, Allocator>, T, Allocator> {
+        friend class Window<BlackmanHarris<T, Allocator>, T, Allocator>;
+        using parent = Window<BlackmanHarris<T, Allocator>, T, Allocator>;
 
     public:
         using value_type = typename parent::value_type;
         using size_type  = typename parent::size_type;
-        inline explicit Bartlett(size_type size);
+        inline explicit BlackmanHarris(size_type size);
 
     private:
         inline void initialize();
     };
 
     template <typename T, typename Allocator>
-    inline Bartlett<T, Allocator>::Bartlett(Bartlett::size_type size) : parent(size) {}
+    inline BlackmanHarris<T, Allocator>::BlackmanHarris(BlackmanHarris::size_type size) : parent(size) {}
 
     template <typename T, typename Allocator>
-    inline void Bartlett<T, Allocator>::initialize() {
-        const value_type N = parent::size() - 1;
-        value_type half    = 0;
-        std::modf(N / static_cast<value_type>(2), &half);
+    inline void BlackmanHarris<T, Allocator>::initialize() {
+        constexpr auto a0 = static_cast<value_type>(0.35875);
+        constexpr auto a1 = static_cast<value_type>(0.48829);
+        constexpr auto a2 = static_cast<value_type>(0.14128);
+        constexpr auto a3 = static_cast<value_type>(0.01168);
         for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            parent::data_[i] = ((i <= half) ? 2 * i : (2 - 2 * i)) / N;
+            const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
+            parent::data_[i]     = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp);
         }
     }
 
     template <typename OutputIterator, typename Integer>
-    inline void bartlett(Integer size, OutputIterator out) {
+    inline void blackman_harris(Integer size, OutputIterator out) {
         using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        using size_type  = typename Bartlett<value_type>::size_type;
-        Bartlett<value_type> window(static_cast<size_type>(size));
+        using size_type  = typename BlackmanHarris<value_type>::size_type;
+        BlackmanHarris<value_type> window(static_cast<size_type>(size));
         std::copy(std::cbegin(window), std::cend(window), out);
     }
 
 }}} // namespace easy::dsp::windowing
 
-#endif // EASYDSP_BARTLETT_HPP
+#endif // EASYDSP_BlackmanHarris_HARRIS_HPP

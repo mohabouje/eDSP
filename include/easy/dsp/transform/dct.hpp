@@ -42,14 +42,13 @@ namespace easy { namespace dsp {
 
     template <typename InputIterator, typename OutputIterator>
     inline void idct(InputIterator first, InputIterator last, OutputIterator out, DCT_Type type = DCT_Type::Type_II) {
-        using value_type   = typename std::iterator_traits<InputIterator>::value_type;
+        using value_type        = typename std::iterator_traits<InputIterator>::value_type;
         using output_value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        const auto nfft    = static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last));
-        const auto scaling = (type == DCT_Type::Type_I) ? 2 * (nfft - 1) : 2 * nfft;
+        const auto nfft         = static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last));
+        const auto scaling      = (type == DCT_Type::Type_I) ? 2 * (nfft - 1) : 2 * nfft;
         fftw_plan<value_type> plan;
         plan.idct(fftw_cast(&(*first)), fftw_cast(&(*out)), nfft, type);
-        std::transform(out, out + nfft, out,
-                       [scaling](output_value_type value) { return value / scaling; });
+        std::transform(out, out + nfft, out, [scaling](output_value_type value) { return value / scaling; });
     };
 
     template <typename Container>
