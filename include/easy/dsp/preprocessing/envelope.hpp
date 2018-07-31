@@ -35,7 +35,7 @@ namespace easy { namespace dsp {
         using size_type  = std::size_t;
 
         constexpr Envelope(value_type samplerate, value_type attack_time, value_type release_time,
-                             bool rectify = false) noexcept;
+                           bool rectify = false) noexcept;
         constexpr value_type samplerate() const noexcept;
         constexpr void set_samplerate(value_type samplerate) noexcept;
         constexpr value_type attack_time() const noexcept;
@@ -64,10 +64,11 @@ namespace easy { namespace dsp {
 
     template <typename T>
     constexpr Envelope<T>::Envelope(value_type samplerate, value_type attack_time, value_type release_time,
-                                      bool rectify) noexcept : samplerate_(samplerate),
-                                                                 attack_time_(attack_time),
-                                                                 release_time_(release_time),
-                                                                 rectification_(rectify) {
+                                    bool rectify) noexcept :
+        samplerate_(samplerate),
+        attack_time_(attack_time),
+        release_time_(release_time),
+        rectification_(rectify) {
         reset();
     }
 

@@ -29,6 +29,7 @@ namespace easy { namespace dsp { namespace windowing {
     class Rectangular : public Window<Rectangular<T, Allocator>, T, Allocator> {
         friend class Window<Rectangular<T, Allocator>, T, Allocator>;
         using parent = Window<Rectangular<T, Allocator>, T, Allocator>;
+
     public:
         using value_type = typename parent::value_type;
         using size_type  = typename parent::size_type;
@@ -49,7 +50,7 @@ namespace easy { namespace dsp { namespace windowing {
     template <typename OutputIterator, typename Integer>
     inline void rectwin(Integer size, OutputIterator out) {
         using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        using size_type = typename Rectangular<value_type>::size_type;
+        using size_type  = typename Rectangular<value_type>::size_type;
         Rectangular<value_type> window(static_cast<size_type>(size));
         std::copy(std::cbegin(window), std::cend(window), out);
     }

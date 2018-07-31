@@ -30,6 +30,7 @@ namespace easy { namespace dsp { namespace windowing {
     class Blackman : public Window<Blackman<T, Allocator>, T, Allocator> {
         friend class Window<Blackman<T, Allocator>, T, Allocator>;
         using parent = Window<Blackman<T, Allocator>, T, Allocator>;
+
     public:
         using value_type = typename parent::value_type;
         using size_type  = typename parent::size_type;
@@ -53,7 +54,7 @@ namespace easy { namespace dsp { namespace windowing {
     template <typename OutputIterator, typename Integer>
     inline void blackman(Integer size, OutputIterator out) {
         using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        using size_type = typename Blackman<value_type>::size_type;
+        using size_type  = typename Blackman<value_type>::size_type;
         Blackman<value_type> window(static_cast<size_type>(size));
         std::copy(std::cbegin(window), std::cend(window), out);
     }

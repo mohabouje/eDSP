@@ -23,7 +23,6 @@
 #ifndef EASYDSP_FILTER_BIQUAD_HPP
 #define EASYDSP_FILTER_BIQUAD_HPP
 
-
 #include <algorithm>
 #include <cmath>
 #include <functional>
@@ -34,8 +33,8 @@ namespace easy { namespace dsp { namespace filter {
     class Biquad {
     public:
         using value_type = T;
-        constexpr Biquad(value_type a0, value_type a1, value_type a2,
-                           value_type b0, value_type b1, value_type b2) noexcept;
+        constexpr Biquad(value_type a0, value_type a1, value_type a2, value_type b0, value_type b1,
+                         value_type b2) noexcept;
         constexpr Biquad() noexcept              = default;
         constexpr Biquad(const Biquad&) noexcept = default;
         constexpr Biquad(Biquad&&) noexcept      = default;
@@ -80,14 +79,14 @@ namespace easy { namespace dsp { namespace filter {
     };
 
     template <typename T>
-    constexpr Biquad<T>::Biquad(value_type a0, value_type a1, value_type a2,
-                                  value_type b0, value_type b1, value_type b2) noexcept :
-                                b2_(b2 / a0),
-                                b1_(b1 / a0),
-                                b0_(b0 / a0),
-                                a2_(a2 / a0),
-                                a1_(a1 / a0),
-                                a0_(1) {}
+    constexpr Biquad<T>::Biquad(value_type a0, value_type a1, value_type a2, value_type b0, value_type b1,
+                                value_type b2) noexcept :
+        b2_(b2 / a0),
+        b1_(b1 / a0),
+        b0_(b0 / a0),
+        a2_(a2 / a0),
+        a1_(a1 / a0),
+        a0_(1) {}
 
     template <typename T>
     constexpr void Biquad<T>::reset() noexcept {

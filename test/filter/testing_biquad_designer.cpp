@@ -27,14 +27,14 @@ using namespace easy;
 using namespace easy::dsp::filter;
 
 SCENARIO("Testing Biquad Designer", "[BiquadDesigner]") {
-    WHEN ("Creating a High Pass filter") {
-        constexpr float fs                             = 24000;
-        constexpr float fc                             = 100;
-        constexpr float Q                              = 0.7f;
-        constexpr float G                              = 0;
+    WHEN("Creating a High Pass filter") {
+        constexpr float fs               = 24000;
+        constexpr float fc               = 100;
+        constexpr float Q                = 0.7f;
+        constexpr float G                = 0;
         constexpr std::array<float, 3> a = {{1, -1.96297974726857f, 0.963652641985662f}};
         constexpr std::array<float, 3> b = {{0.981658097313558f, -1.96331619462712f, 0.981658097313558f}};
-        const auto biquad = BiquadDesigner<float, BiquadType::HighPass>{}(fc, fs, Q, G);
+        const auto biquad                = BiquadDesigner<float, BiquadType::HighPass>{}(fc, fs, Q, G);
         THEN("The coefficient should be the same") {
             REQUIRE(biquad.a0() == Approx(a[0]).margin(0.05));
             REQUIRE(biquad.a1() == Approx(a[1]).margin(0.05));
@@ -45,7 +45,7 @@ SCENARIO("Testing Biquad Designer", "[BiquadDesigner]") {
         }
     }
 
-    WHEN ("Creating a Band Pass with Skirt Gain") {
+    WHEN("Creating a Band Pass with Skirt Gain") {
         constexpr float fs = 24000;
         constexpr float fc = 100;
         constexpr float Q  = 0.7f;
@@ -71,8 +71,7 @@ SCENARIO("Testing Biquad Designer", "[BiquadDesigner]") {
         }
     }
 
-
-    WHEN ("Creating a Band Pass with Peak Gain") {
+    WHEN("Creating a Band Pass with Peak Gain") {
         constexpr float fs = 24000;
         constexpr float fc = 100;
         constexpr float Q  = 0.7f;
@@ -99,7 +98,7 @@ SCENARIO("Testing Biquad Designer", "[BiquadDesigner]") {
         }
     }
 
-    WHEN ("Creating a Notch filter") {
+    WHEN("Creating a Notch filter") {
         constexpr float fs = 24000;
         constexpr float fc = 100;
         constexpr float Q  = 0.7f;
@@ -126,7 +125,7 @@ SCENARIO("Testing Biquad Designer", "[BiquadDesigner]") {
         }
     }
 
-    WHEN ("Creating a All Pass filter") {
+    WHEN("Creating a All Pass filter") {
         constexpr float fs = 24000;
         constexpr float fc = 100;
         constexpr float Q  = 0.7f;
@@ -153,7 +152,7 @@ SCENARIO("Testing Biquad Designer", "[BiquadDesigner]") {
         }
     }
 
-    WHEN ("Creating a Peaking EQ filter") {
+    WHEN("Creating a Peaking EQ filter") {
         constexpr float fs = 24000;
         constexpr float fc = 100;
         constexpr float Q  = 0.7f;
@@ -180,7 +179,7 @@ SCENARIO("Testing Biquad Designer", "[BiquadDesigner]") {
         }
     }
 
-    WHEN ("Creating a Low Shelf filter") {
+    WHEN("Creating a Low Shelf filter") {
         constexpr float fs = 24000;
         constexpr float fc = 100;
         constexpr float Q  = 0.7f;
@@ -207,7 +206,7 @@ SCENARIO("Testing Biquad Designer", "[BiquadDesigner]") {
         }
     }
 
-    WHEN ("Creating a High Shelf filter") {
+    WHEN("Creating a High Shelf filter") {
         constexpr float fs = 24000;
         constexpr float fc = 100;
         constexpr float Q  = 0.7f;
@@ -223,7 +222,6 @@ SCENARIO("Testing Biquad Designer", "[BiquadDesigner]") {
         a[1] = static_cast<float>(-1.94408905223652);
         a[2] = static_cast<float>(0.945581295648469);
 
-
         const auto biquad = BiquadDesigner<float, BiquadType::BandPassSkirtGain>{}(fc, fs, Q, G);
         THEN("The coefficient should be the same") {
             REQUIRE(biquad.a0() == Approx(a[0]).margin(0.05));
@@ -235,5 +233,3 @@ SCENARIO("Testing Biquad Designer", "[BiquadDesigner]") {
         }
     }
 }
-
-

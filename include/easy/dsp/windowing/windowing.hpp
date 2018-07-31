@@ -32,11 +32,21 @@
 
 namespace easy { namespace dsp { namespace windowing {
 
-    template <typename Window, typename... Args>
-    Window make_window(Args... arg) {
-        return Window(std::forward(arg...));
+    template <typename Window, typename BiIterator, typename... Arg>
+    inline void generate_window(BiIterator first, BiIterator last, Arg... arg) {
+        using size_type   = typename Window::size_type;
+        const auto size   = static_cast<size_type>(std::distance(first, last));
+        const auto window = Window(size, std::forward(arg...));
+        std::copy(std::cbegin(window), std::cend(window), first);
     }
 
-}}}
+    template <typename Window, typename OutputIterator, typename Size, typename... Arg>
+    inline void generate_window(Size size, OutputIterator out, Arg... arg) {
+        using size_type   = typename Window::size_type;
+        const auto window = Window(static_cast<size_type>(size), std::forward(arg...));
+        std::copy(std::cbegin(window), std::cend(window), out);
+    }
+
+}}} // namespace easy::dsp::windowing
 
 #endif // EASYDSP_WINDOWING_HPP

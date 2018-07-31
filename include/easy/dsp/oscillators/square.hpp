@@ -32,7 +32,7 @@ namespace easy { namespace dsp { namespace oscillators {
     public:
         using value_type = typename Oscillator<T>::value_type;
         constexpr SquareOscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                     value_type duty) noexcept;
+                                   value_type duty) noexcept;
         constexpr value_type operator()();
         constexpr void set_duty_cycle(value_type dutty) noexcept;
         constexpr value_type duty_cycle() const noexcept;
@@ -43,9 +43,9 @@ namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
     constexpr SquareOscillator<T>::SquareOscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                                      value_type duty) noexcept
-        : Oscillator<T>(amplitude, samplerate, frequency, 0),
-          duty_(duty) {}
+                                                    value_type duty) noexcept :
+        Oscillator<T>(amplitude, samplerate, frequency, 0),
+        duty_(duty) {}
 
     template <typename T>
     constexpr void SquareOscillator<T>::set_duty_cycle(value_type dutty) noexcept {
@@ -66,6 +66,6 @@ namespace easy { namespace dsp { namespace oscillators {
         return result * Oscillator<T>::amplitude();
     }
 
-}}} // namespace easy::dsp::oscillator
+}}} // namespace easy::dsp::oscillators
 
 #endif // EASYDSP_OSCILLATOR_SQUARE_HPP

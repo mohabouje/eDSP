@@ -32,12 +32,7 @@
 #include <algorithm>
 
 namespace easy { namespace dsp {
-    enum class SignalType {
-        Sine,
-        Square,
-        Sawtooth,
-        Triangular
-    };
+    enum class SignalType { Sine, Square, Sawtooth, Triangular };
 
     namespace {
 
@@ -46,7 +41,7 @@ namespace easy { namespace dsp {
 
         template <>
         struct Generator<SignalType::Sine> {
-            template <typename OutputIterator, typename ...Args>
+            template <typename OutputIterator, typename... Args>
             constexpr void operator()(OutputIterator first, OutputIterator last, Args... arg) {
                 using value_type = typename std::iterator_traits<OutputIterator>::value_type;
                 std::generate(first, last, oscillators::SinOscillator<value_type>(std::forward(arg...)));
@@ -55,7 +50,7 @@ namespace easy { namespace dsp {
 
         template <>
         struct Generator<SignalType::Square> {
-            template <typename OutputIterator, typename ...Args>
+            template <typename OutputIterator, typename... Args>
             constexpr void operator()(OutputIterator first, OutputIterator last, Args... arg) {
                 using value_type = typename std::iterator_traits<OutputIterator>::value_type;
                 std::generate(first, last, oscillators::SquareOscillator<value_type>(std::forward(arg...)));
@@ -64,7 +59,7 @@ namespace easy { namespace dsp {
 
         template <>
         struct Generator<SignalType::Sawtooth> {
-            template <typename OutputIterator, typename ...Args>
+            template <typename OutputIterator, typename... Args>
             constexpr void operator()(OutputIterator first, OutputIterator last, Args... arg) {
                 using value_type = typename std::iterator_traits<OutputIterator>::value_type;
                 std::generate(first, last, oscillators::SawtoothOscillator<value_type>(std::forward(arg...)));
@@ -73,21 +68,20 @@ namespace easy { namespace dsp {
 
         template <>
         struct Generator<SignalType::Triangular> {
-            template <typename OutputIterator, typename ...Args>
+            template <typename OutputIterator, typename... Args>
             constexpr void operator()(OutputIterator first, OutputIterator last, Args... arg) {
                 using value_type = typename std::iterator_traits<OutputIterator>::value_type;
                 std::generate(first, last, oscillators::TriangularOscillator<value_type>(std::forward(arg...)));
             }
         };
 
-    }
+    } // namespace
 
-    template <SignalType type, typename OutputIterator, typename ...Args>
+    template <SignalType type, typename OutputIterator, typename... Args>
     void oscillator(OutputIterator first, OutputIterator last, Args... arg) {
         Generator<type>{}(first, last, std::forward(arg...));
     }
 
-}}
-
+}} // namespace easy::dsp
 
 #endif // EASYDSP_OSCILLATOR_HPP

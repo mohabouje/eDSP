@@ -75,7 +75,7 @@ namespace easy { namespace dsp {
     template <typename T, typename Allocator>
     template <typename InputIterator, typename OutputIterator>
     inline void Convolution<T, Allocator>::compute(InputIterator first_x, InputIterator last_x, InputIterator first_y,
-                                                     OutputIterator out) {
+                                                   OutputIterator out) {
         static_assert(std::is_same<typename std::iterator_traits<InputIterator>::value_type, T>::value &&
                           std::is_same<typename std::iterator_traits<OutputIterator>::value_type, T>::value,
                       "Iterator does not math the value type. No implicit conversion is allowed");
@@ -90,8 +90,7 @@ namespace easy { namespace dsp {
         std::transform(out, meta::advance(out, size_), out, [factor = size_](value_type val) { return val / factor; });
     }
 
-    template <typename InputIterator,
-              typename OutputIterator>
+    template <typename InputIterator, typename OutputIterator>
     inline void conv(InputIterator first_x, InputIterator last_x, InputIterator first_y, OutputIterator out) {
         using value_type = typename std::iterator_traits<InputIterator>::value_type;
         meta::expects(std::distance(first_x, last_x) > 0, "Not expecting empty input");

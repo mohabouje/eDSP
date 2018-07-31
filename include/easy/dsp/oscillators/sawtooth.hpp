@@ -32,7 +32,7 @@ namespace easy { namespace dsp { namespace oscillators {
     public:
         using value_type = typename Oscillator<T>::value_type;
         constexpr SawtoothOscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                       value_type width) noexcept;
+                                     value_type width) noexcept;
 
         constexpr value_type operator()();
         constexpr void set_width(value_type dutty) noexcept;
@@ -44,9 +44,9 @@ namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
     constexpr SawtoothOscillator<T>::SawtoothOscillator(value_type amplitude, value_type samplerate,
-                                                          value_type frequency, value_type width) noexcept
-        : Oscillator<T>(amplitude, samplerate, frequency, 0),
-          width_(width) {}
+                                                        value_type frequency, value_type width) noexcept :
+        Oscillator<T>(amplitude, samplerate, frequency, 0),
+        width_(width) {}
 
     template <typename T>
     constexpr void SawtoothOscillator<T>::set_width(value_type dutty) noexcept {
@@ -67,6 +67,6 @@ namespace easy { namespace dsp { namespace oscillators {
         return result * Oscillator<T>::amplitude();
     }
 
-}}} // namespace easy::dsp::oscillator
+}}} // namespace easy::dsp::oscillators
 
 #endif // EASYDSP_OSCILLATOR_SAWTOOTH_HPP

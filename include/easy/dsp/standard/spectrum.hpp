@@ -72,18 +72,17 @@ namespace easy { namespace dsp {
     template <typename InputIterator, typename OutputIterator>
     inline void Spectrum<T, Allocator>::compute(InputIterator first, InputIterator last, OutputIterator out) {
         static_assert(std::is_same<typename std::iterator_traits<InputIterator>::value_type, T>::value &&
-                      std::is_same<typename std::iterator_traits<OutputIterator>::value_type, T>::value,
+                          std::is_same<typename std::iterator_traits<OutputIterator>::value_type, T>::value,
                       "Iterator does not math the value type. No implicit conversion is allowed");
         meta::expects(std::distance(first, last) == size_, "Buffer size mismatch");
         fft_.dft(fftw_cast(&(*first)), fftw_cast(fft_data_.data()), size_);
         std::transform(std::begin(fft_data_), std::end(fft_data_), out, [](const std::complex<value_type>& value) {
             const auto tmp = std::abs(value);
-            return  (tmp * tmp);
+            return (tmp * tmp);
         });
     }
 
-    template <typename InputIterator,
-              typename OutputIterator,
+    template <typename InputIterator, typename OutputIterator,
               typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     inline void spectrum(InputIterator first, InputIterator last, OutputIterator out) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
@@ -91,7 +90,6 @@ namespace easy { namespace dsp {
         spectrum.compute(first, last, out);
     }
 
-}}     // namespace easy::dsp
-
+}} // namespace easy::dsp
 
 #endif // EASYDSP_SPECTROGRAM_HPP

@@ -33,14 +33,14 @@ namespace easy { namespace dsp { namespace oscillators {
     public:
         using value_type = typename Oscillator<T>::value_type;
         constexpr SinOscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                  value_type phase) noexcept;
+                                value_type phase) noexcept;
         constexpr value_type operator()();
     };
 
     template <typename T>
     constexpr SinOscillator<T>::SinOscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                                value_type phase) noexcept
-        : Oscillator<T>(amplitude, samplerate, frequency, phase) {}
+                                              value_type phase) noexcept :
+        Oscillator<T>(amplitude, samplerate, frequency, phase) {}
 
     template <typename T>
     constexpr typename SinOscillator<T>::value_type SinOscillator<T>::operator()() {
@@ -51,6 +51,6 @@ namespace easy { namespace dsp { namespace oscillators {
         return result * Oscillator<T>::amplitude();
     }
 
-}}} // namespace easy::dsp::oscillator
+}}} // namespace easy::dsp::oscillators
 
 #endif // EASYDSP_OSCILLATOR_SIN_HPP

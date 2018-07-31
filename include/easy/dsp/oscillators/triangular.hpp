@@ -48,11 +48,11 @@ namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
     constexpr TriangularOscillator<T>::TriangularOscillator(value_type amplitude, value_type samplerate,
-                                                          value_type frequency, value_type width,
-                                                          value_type skew) noexcept
-        : Oscillator<T>(amplitude, samplerate, frequency, 0),
-          width_(width),
-          skew_(skew) {}
+                                                            value_type frequency, value_type width,
+                                                            value_type skew) noexcept :
+        Oscillator<T>(amplitude, samplerate, frequency, 0),
+        width_(width),
+        skew_(skew) {}
 
     template <typename T>
     constexpr typename Oscillator<T>::value_type TriangularOscillator<T>::operator()() {
@@ -97,6 +97,6 @@ namespace easy { namespace dsp { namespace oscillators {
         peak_ = skew_ * width_ / static_cast<T>(2);
     }
 
-}}} // namespace easy::dsp::oscillator
+}}} // namespace easy::dsp::oscillators
 
 #endif // EASYDSP_OSCILLATOR_TRIANGLE_HPP

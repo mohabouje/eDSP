@@ -23,7 +23,6 @@
 #ifndef EASYDSP_FFTW_IMPL_HPP
 #define EASYDSP_FFTW_IMPL_HPP
 
-
 #include <easy/meta/is_null.hpp>
 #include <complex>
 #include <fftw3.h>
