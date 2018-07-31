@@ -46,6 +46,14 @@ namespace easy { namespace dsp { namespace windowing {
         std::fill(std::begin(parent::data_), std::end(parent::data_), 1);
     }
 
+    template <typename OutputIterator, typename Integer>
+    inline void rectwin(Integer size, OutputIterator out) {
+        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
+        using size_type = typename Rectangular<value_type>::size_type;
+        Rectangular<value_type> window(static_cast<size_type>(size));
+        std::copy(std::cbegin(window), std::cend(window), out);
+    }
+
 }}} // namespace easy::dsp::windowing
 
 #endif // EASYDSP_RECTANGULAR_HPP

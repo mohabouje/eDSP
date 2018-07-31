@@ -23,7 +23,7 @@
 #define EASYDSP_OSCILLATOR_IMPL_HPP
 
 
-namespace easy { namespace dsp { namespace oscillator {
+namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
     class Oscillator {

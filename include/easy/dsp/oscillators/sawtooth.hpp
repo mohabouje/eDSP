@@ -25,7 +25,7 @@
 #include "easy/dsp/oscillators/oscillator_impl.hpp"
 #include "easy/dsp/math/constant.hpp"
 
-namespace easy { namespace dsp { namespace oscillator {
+namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
     class SawtoothOscillator : public Oscillator<T> {
@@ -59,7 +59,7 @@ namespace easy { namespace dsp { namespace oscillator {
     }
 
     template <typename T>
-    constexpr typename Oscillator<T>::value_type SawtoothOscillator<T>::operator()() noexcept {
+    constexpr typename Oscillator<T>::value_type SawtoothOscillator<T>::operator()() {
         const auto t               = Oscillator<T>::timestamp();
         const value_type result    = (t >= width_) ? -2 * t / (1 - width_) + 1 : 2 * t / width_ - 1;
         const value_type increased = t + Oscillator<T>::sampling_period();

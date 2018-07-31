@@ -25,7 +25,7 @@
 #include "easy/dsp/oscillators/oscillator_impl.hpp"
 #include "easy/dsp/math/constant.hpp"
 
-namespace easy { namespace dsp { namespace oscillator {
+namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
     class SquareOscillator : public Oscillator<T> {
@@ -58,7 +58,7 @@ namespace easy { namespace dsp { namespace oscillator {
     }
 
     template <typename T>
-    constexpr typename Oscillator<T>::value_type SquareOscillator<T>::operator()() noexcept {
+    constexpr typename Oscillator<T>::value_type SquareOscillator<T>::operator()() {
         const auto t               = Oscillator<T>::timestamp();
         const value_type result    = (t >= duty_) ? -1 : 1;
         const value_type increased = t + Oscillator<T>::sampling_period();

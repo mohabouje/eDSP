@@ -54,6 +54,14 @@ namespace easy { namespace dsp { namespace windowing {
         }
     }
 
+    template <typename OutputIterator, typename Integer>
+    inline void triang(Integer size, OutputIterator out) {
+        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
+        using size_type = typename Triangular<value_type>::size_type;
+        Triangular<value_type> window(static_cast<size_type>(size));
+        std::copy(std::cbegin(window), std::cend(window), out);
+    }
+
 }}} // namespace easy::dsp::windowing
 
 #endif // EASYDSP_TRIANGULAR_HPP
