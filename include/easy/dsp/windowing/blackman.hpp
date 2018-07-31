@@ -45,9 +45,12 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator>
     inline void Blackman<T, Allocator>::initialize() {
+        constexpr auto a0 = static_cast<value_type>(0.42);
+        constexpr auto a1 = static_cast<value_type>(0.50);
+        constexpr auto a2 = static_cast<value_type>(0.08);
         for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
             const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
-            parent::data_[i]     = 0.42 - 0.50 * std::cos(tmp) + 0.08 * std::cos(2 * tmp);
+            parent::data_[i]     = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp);
         }
     }
 

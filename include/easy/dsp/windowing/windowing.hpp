@@ -29,6 +29,7 @@
 #include "hanning.hpp"
 #include "rectangular.hpp"
 #include "triangular.hpp"
+#include "kaiser.hpp"
 
 namespace easy { namespace dsp { namespace windowing {
 
