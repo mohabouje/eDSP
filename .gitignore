@@ -41,3 +41,6 @@
 ./build
 build/
 cmake-build*/
+
+# Exclude generate docs
+site/

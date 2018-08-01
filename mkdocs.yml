@@ -1,0 +1,32 @@
+site_name: easyDSP
+site_author: Mohammed Boujemaoui Boulaghmoudi
+site_description: A cross-platform DSP library written in C++. This library harnesses the power of C++ templates to implement a complete set of DSP algorithms.
+
+repo_url: https://github.com/mohabouje/eDSP
+edit_uri: ""
+
+
+nav:
+    - Home: index.md
+    - Features:
+        - List: features/list.md
+    - About:
+        - License: about/license.md
+        - Release Notes: about/release-notes.md
+
+markdown_extensions:
+    - toc:
+        permalink: true
+    - admonition
+    - def_list
+    - smarty
+    - sane_lists
+
+copyright: Copyright &copy; 2018 <a href="https://github.com/mohabouje">Mohammed Boujemaoui Boulaghmoudi</a>.
+
+
+plugins:
+     - search
+
+
+
