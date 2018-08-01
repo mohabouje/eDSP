@@ -29,8 +29,8 @@ namespace easy { namespace dsp { namespace random {
     template <typename T, typename Engine = std::mt19937>
     struct BrownNoiseGenerator {
         using result_type = T;
-        inline BrownNoiseGenerator(result_type mean, result_type std_dev) :
-            generator_(WhiteNoiseGenerator<result_type>(mean, std_dev)) {
+        inline BrownNoiseGenerator(result_type min, result_type max) :
+            generator_(WhiteNoiseGenerator<result_type>(min, max)) {
 
         }
 
