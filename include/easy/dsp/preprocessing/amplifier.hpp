@@ -20,8 +20,8 @@
  * Created by: Mohammed Boujemaoui
  */
 
-#ifndef EASYDSP_amplifier_HPP
-#define EASYDSP_amplifier_HPP
+#ifndef EASYDSP_AMPLIFIER_HPP
+#define EASYDSP_AMPLIFIER_HPP
 
 #include <algorithm>
 
@@ -64,4 +64,4 @@ namespace easy { namespace dsp {
     };
 }} // namespace easy::dsp
 
-#endif // EASYDSP_amplifier_HPP
+#endif // EASYDSP_AMPLIFIER_HPP
