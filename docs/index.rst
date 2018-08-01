@@ -164,3 +164,4 @@ auto fft_data = std::vector<std::complex<double>>(size );
 // Create an fft object with the expected output size as parameter
 easy::dsp::complex_dft(std::cbegin(real_data), std::cend(real_data), std::begin(fft_data));
 ```
+
