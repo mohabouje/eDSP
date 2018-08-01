@@ -1,0 +1,5 @@
+site_name: EasyDSP 
+pages:
+- Introduction: introduction.md
+- List of Features: features.md
+theme: readthedocs

@@ -1,0 +1,194 @@
+## Features
+
+Those are the list of different features that may be implemented. The list is ordered in different categories that share some common properties.
+
+- [ ] Buffer
+  - [ ] Circular Buffer
+  - [ ] Ring Buffer
+- [ ] Statistics
+  - [ ] Histogram
+  - [ ] Mean
+  - [ ] Moment
+- [ ] Interpolate Block
+- [ ] Interleaver
+- [ ] Peak Detector
+- [ ] Resample
+  - [ ] Irrational Resampling 
+- [ ] Granulator
+- [ ] RMS Estimator
+- [ ] Phase Vocoder
+- [ ] Denormal Cancelling
+- [ ] Automatic Gain Control (AGC)
+- [ ] Modulation
+  - [ ] Analog AM Modulator
+  - [ ] Analog FM Modulator
+  - [ ] Analog PSK Modulator
+  - [ ] CPFSK Modulator
+  - [ ] GMSK Modulator
+- [ ] Equalizers
+  - [ ] FIR Adaptive Filters
+    - [ ] FIR Only
+    - [ ] FIR with Decision Feedback Estimator
+  - [ ] Recursive Least Squares Estimator
+  - [ ] Maximum Likelihood Sequence Estimator
+    - [ ] MLSD
+    - [ ] DDFSE
+    - [ ] RSDFSE
+  - [ ] LMS Equalization
+  - [ ] RLS Equalization
+- [ ] Periodogram
+  - [ ] ASCII Spectral Periodogram
+  - [ ] Spectral Periodogram
+- [ ] Generator
+  - [ ] Binary Sequence Generator
+  - [ ] Random
+    - [ ] Uniform Distribution
+    - [ ] Bernoulli Distribution
+    - [ ] Binomial Distribution
+    - [ ] Geometric Distribution
+    - [ ] Poisson Distribution
+    - [ ] Exponential Distribution
+    - [ ] Gamma Distribution
+    - [ ] Weibull Distribution
+    - [ ] Extreme Value Distribution
+    - [ ] Normal Distribution
+    - [ ] Log Normal Distribution
+    - [ ] Chi Squared Distribution
+    - [ ] Cauchy Distribution
+    - [ ] Fisher Distribution
+    - [ ] Discrete Distribution
+    - [ ] Piecewise Constant Distribution
+    - [ ] Piecewise Linear Distribution
+    - [ ] Student Distribution
+- [ ] Transform
+  - [ ] DFT
+  - [ ] DCT
+  - [ ] DHT
+  - [ ] Q-Transform
+- [ ] Wavelet
+- [ ] Standard
+  - [ ] Convolution
+  - [ ] Correlator
+  - [ ] Cepstrum
+- [ ] Coefficients
+  - [ ] CLPC
+  - [ ] LPC
+  - [ ] MFCC
+  - [ ] LSF
+- [ ] Onset Detection
+- [ ] Tracking
+  - [ ] Beat
+  - [ ] Pitch
+  - [ ] Tempo
+- [ ] Encoder/Decoder
+  - [ ] Convolutional Encoder
+  - [ ] Viterbi Decoder
+  - [ ] Cordic Processor
+  - [ ] Fading Channel
+- [ ] Filters
+  - [ ] FIR Filter
+    - [ ] Sinc FIR
+    - [ ] Remez Filter: Linear-Phase 
+    - [ ] Maximally Flat FIR
+    - [ ] Raised Cosine FIR
+    - [ ] Gaussian FIR
+  - [ ] Cascaded Integrate Comb Filters (CIC)
+  - [ ] Cut/Boost Filter
+  - [ ] Halfband/Subband IIR Filters
+  - [ ] RBJ Filter
+  - [ ] Butterworth
+  - [ ] Chebyshev
+  - [ ] Elliptic
+  - [ ] Legendre
+  - [ ] One Pole Filter
+  - [ ] Ladder: MOOG Ladder filter
+  - [ ] Running Average Filter
+  - [ ] Running Median Filter
+  - [ ] Zero Delay Feedback
+  - [ ] Comb Filters
+  - [ ] Farrow & Lagrange Based Filters
+- [ ] Effects
+  - [ ] Compressor
+    - [ ] Hard-Knee
+    - [ ] Soft-Knee
+  - [ ] Digital Delay
+    - [ ] Feed-Back Delay
+    - [ ] Interpolated
+    - [ ] Non-Interpolated
+  - [ ] Modulated Delay
+  - [ ] Flager
+  - [ ] Chorus
+  - [ ] Vibrato
+  - [ ] Phaser
+  - [ ] Stereo Panner
+  - [ ] Ring Modulator
+  - [ ] Bit Crusher
+  - [ ] Driver / Saturator
+  - [ ] Jitter
+- [ ] Envelope
+  - [ ] ADSR Envelope
+  - [ ] ASR Envelope
+  - [ ] Percussive Envelope
+  - [ ] Multistage Envelope 
+  - [ ] Classic Dual Stage (AD)
+  - [ ] Ducking Curve 
+- [ ] Generators
+  - [ ] Noise
+    - [ ] White Noise
+    - [ ] Pink Noise
+    - [ ] Brown Noise
+    - [ ] Perlin Noise
+  - [ ] Oscillators
+    - [ ] Pulse
+    - [ ] SawTooth
+    - [ ] Silence
+    - [ ] Sine
+    - [ ] Triangular
+    - [ ] Square
+    - [ ] LFO
+      - [ ] Sine
+      - [ ] Parabolic
+      - [ ] Triangle
+      - [ ] Sawtooth
+      - [ ] Square
+      - [ ] Random
+      - [ ] Perlin
+    - [ ] Anti Aliased
+      - [ ] Pulse
+      - [ ] Sawtooth
+      - [ ] Triangular
+    - [ ] Numerical Controller Oscillator (NCO)
+    - [ ] Lorenz chaotic Oscillator
+- [ ] Multi-Channel
+  - [ ] Down Mix
+  - [ ] Up Mix
+  - [ ] Fan
+  - [ ] Selector
+  - [ ] Split
+- [ ] Filter Banks
+  - [ ] ERB Filter Bank
+  - [ ] Mel Filter Bank
+  - [ ] Bark Filter Bank
+- [ ] Windowing
+- [ ] Utilities
+  - [ ] Frame Cutter (Segmentator)
+  - [ ] Frame Tokenizer
+  - [ ] Converter
+    - [ ] Pith (MIDI) to Frequency
+    - [ ] Linear to dB
+    - [ ] Linear to Exponential
+    - [ ] Linear to Logarithmic
+- [ ] Pre-Processing
+  - [ ] Padder
+    - [ ] Constant
+    - [ ] Random
+    - [ ] What ever you want!
+  - [ ] Amplifier
+  - [ ] Clipper
+  - [ ] DC Removal
+  - [ ] De-Emphasis
+  - [ ] Pre-Emphasis
+  - [ ] Mixer - Move to a multichannel section
+  - [ ] Normalizer
+  - [ ] Envelope - Move to a dedicated section to envelope followers
+
