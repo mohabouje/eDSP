@@ -15,56 +15,46 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: flat_top.hpp
+ * Filename: boxcar.hpp
  * Author: Mohammed Boujemaoui
- * Date: 27/7/2018
+ * Date: 1/8/2018
  */
-#ifndef EASYDSP_FLAT_TOP_HPP
-#define EASYDSP_FLAT_TOP_HPP
+#ifndef EASYDSP_BOXCAR_HPP
+#define EASYDSP_BOXCAR_HPP
 
 #include "window_impl.hpp"
-#include <cmath>
-
 namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator = std::allocator<T>>
-    class FlatTop : public Window<FlatTop<T, Allocator>, T, Allocator> {
-        friend class Window<FlatTop<T, Allocator>, T, Allocator>;
-        using parent = Window<FlatTop<T, Allocator>, T, Allocator>;
+    class Boxcar : public Window<Boxcar<T, Allocator>, T, Allocator> {
+        friend class Window<Boxcar<T, Allocator>, T, Allocator>;
+        using parent = Window<Boxcar<T, Allocator>, T, Allocator>;
 
     public:
         using value_type = typename parent::value_type;
         using size_type  = typename parent::size_type;
-        inline explicit FlatTop(size_type size);
+        inline explicit Boxcar(size_type size);
 
     private:
         inline void initialize();
     };
 
     template <typename T, typename Allocator>
-    FlatTop<T, Allocator>::FlatTop(FlatTop::size_type size) : parent(size) {}
+    inline Boxcar<T, Allocator>::Boxcar(Boxcar::size_type size) : parent(size) {}
 
     template <typename T, typename Allocator>
-    void FlatTop<T, Allocator>::initialize() {
-        constexpr auto a0 = static_cast<value_type>(1);
-        constexpr auto a1 = static_cast<value_type>(1.9300);
-        constexpr auto a2 = static_cast<value_type>(1.2900);
-        constexpr auto a3 = static_cast<value_type>(0.3880);
-        constexpr auto a4 = static_cast<value_type>(0.0322);
-        for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
-            parent::data_[i]     = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp) + a4 * std::cos(4 * tmp);
-        }
+    inline void Boxcar<T, Allocator>::initialize() {
+        std::fill(std::begin(parent::data_), std::end(parent::data_), 1);
     }
 
     template <typename OutputIterator, typename Integer>
-    inline void flattopwin(Integer size, OutputIterator out) {
+    inline void boxcar(Integer size, OutputIterator out) {
         using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        using size_type  = typename FlatTop<value_type>::size_type;
-        FlatTop<value_type> window(static_cast<size_type>(size));
+        using size_type  = typename Boxcar<value_type>::size_type;
+        Boxcar<value_type> window(static_cast<size_type>(size));
         std::copy(std::cbegin(window), std::cend(window), out);
     }
 
 }}} // namespace easy::dsp::windowing
 
-#endif // EASYDSP_FLAT_TOP_HPP
+#endif // EASYDSP_BOXCAR_HPP

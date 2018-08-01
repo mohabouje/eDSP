@@ -16,5 +16,4 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} ${GTEST_LIBRARIES}
     pthread
     EasyDSP
-    EasyMeta
     fftw3f)

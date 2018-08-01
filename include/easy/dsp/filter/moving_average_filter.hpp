@@ -34,16 +34,16 @@ namespace easy { namespace dsp { namespace filter {
         using size_type  = std::size_t;
         using value_type = T;
 
-        explicit MovingAverageFilter(size_type window_size);
-        inline size_type window_size() const;
-        inline void set_window_size(size_type window_size);
+        explicit MovingAverageFilter(size_type windowSize);
+        inline size_type windowSize() const;
+        inline void setWindowSize(size_type windowSize);
         inline void reset();
 
         template <typename BiIterator>
-        inline void filter(BiIterator first, BiIterator last);
+        inline void apply(BiIterator first, BiIterator last);
 
         template <typename InputIterator, typename OutputIterator>
-        inline void filter(InputIterator first, InputIterator last, OutputIterator out);
+        inline void apply(InputIterator first, InputIterator last, OutputIterator out);
 
         inline value_type operator()(value_type tick);
 
@@ -58,22 +58,22 @@ namespace easy { namespace dsp { namespace filter {
     template <typename T>
     inline MovingAverageFilter<T>::MovingAverageFilter(size_type window_size) :
         window_size_(window_size),
-        acc_(boost::accumulators::tag::rolling_window::window_size = 3) {}
+        acc_(boost::accumulators::tag::rolling_window::window_size = window_size) {}
 
     template <typename T>
-    inline typename MovingAverageFilter<T>::size_type MovingAverageFilter<T>::window_size() const {
+    inline typename MovingAverageFilter<T>::size_type MovingAverageFilter<T>::windowSize() const {
         return window_size_;
     }
 
     template <typename T>
-    inline void MovingAverageFilter<T>::set_window_size(size_type window_size) {
+    inline void MovingAverageFilter<T>::setWindowSize(size_type window_size) {
         window_size_ = window_size;
         reset();
     }
 
     template <typename T>
     inline void MovingAverageFilter<T>::reset() {
-        acc_ = maf(boost::accumulators::tag::rolling_window::window_size = 3);
+        acc_ = maf(boost::accumulators::tag::rolling_window::window_size = window_size_);
     }
 
     template <typename T>
@@ -84,13 +84,13 @@ namespace easy { namespace dsp { namespace filter {
 
     template <typename T>
     template <typename BiIterator>
-    inline void MovingAverageFilter<T>::filter(BiIterator first, BiIterator last) {
-        filter(first, last, first);
+    inline void MovingAverageFilter<T>::apply(BiIterator first, BiIterator last) {
+        apply(first, last, first);
     }
 
     template <typename T>
     template <typename InputIterator, typename OutputIterator>
-    inline void MovingAverageFilter<T>::filter(InputIterator first, InputIterator last, OutputIterator out) {
+    inline void MovingAverageFilter<T>::apply(InputIterator first, InputIterator last, OutputIterator out) {
         static_assert(std::is_same<typename std::iterator_traits<InputIterator>::value_type, value_type>::value &&
                           std::is_same<typename std::iterator_traits<OutputIterator>::value_type, value_type>::value,
                       "Iterator does not math the value type. No implicit conversion is allowed");

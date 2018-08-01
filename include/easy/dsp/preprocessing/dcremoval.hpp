@@ -35,17 +35,17 @@ namespace easy { namespace dsp {
 
         constexpr explicit DCRemoval(value_type alpha);
         constexpr value_type alpha() const noexcept;
-        constexpr void set_alpha(value_type alpha) noexcept;
+        constexpr void setAlpha(value_type alpha) noexcept;
     };
 
     template <typename T>
     constexpr DCRemoval<T>::DCRemoval(value_type alpha) : filter::Biquad<T>(1, -alpha, 0, 1 - alpha, alpha - 1, 0) {}
 
     template <typename T>
-    constexpr void DCRemoval<T>::set_alpha(value_type alpha) noexcept {
-        filter::Biquad<T>::set_a1(-alpha);
-        filter::Biquad<T>::set_b0(1 - alpha);
-        filter::Biquad<T>::set_b1(alpha - 1);
+    constexpr void DCRemoval<T>::setAlpha(value_type alpha) noexcept {
+        filter::Biquad<T>::setA1(-alpha);
+        filter::Biquad<T>::setB0(1 - alpha);
+        filter::Biquad<T>::setB1(alpha - 1);
         filter::Biquad<T>::reset();
     }
 

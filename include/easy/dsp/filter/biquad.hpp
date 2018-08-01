@@ -48,12 +48,12 @@ namespace easy { namespace dsp { namespace filter {
         constexpr value_type b1() const noexcept;
         constexpr value_type b2() const noexcept;
 
-        constexpr void set_a0(T value) noexcept;
-        constexpr void set_a1(T value) noexcept;
-        constexpr void set_a2(T value) noexcept;
-        constexpr void set_b0(T value) noexcept;
-        constexpr void set_b1(T value) noexcept;
-        constexpr void set_b2(T value) noexcept;
+        constexpr void setA0(T value) noexcept;
+        constexpr void setA1(T value) noexcept;
+        constexpr void setA2(T value) noexcept;
+        constexpr void setB0(T value) noexcept;
+        constexpr void setB1(T value) noexcept;
+        constexpr void setB2(T value) noexcept;
 
         template <typename BiIterator>
         constexpr void apply(BiIterator first, BiIterator last);
@@ -62,7 +62,7 @@ namespace easy { namespace dsp { namespace filter {
         constexpr void apply(InputIterator first, InputIterator last, OutputIterator out);
 
         constexpr void reset() noexcept;
-        constexpr bool is_stable() const noexcept;
+        constexpr bool isStable() const noexcept;
 
         constexpr value_type operator()(T tick) noexcept;
         constexpr operator bool() const noexcept;
@@ -95,42 +95,42 @@ namespace easy { namespace dsp { namespace filter {
     }
 
     template <typename T>
-    constexpr bool Biquad<T>::is_stable() const noexcept {
+    constexpr bool Biquad<T>::isStable() const noexcept {
         return std::abs(a2_) < 1 && (std::abs(a1_) < (1 + a2_));
     }
 
     template <typename T>
-    constexpr void Biquad<T>::set_a0(const value_type value) noexcept {
+    constexpr void Biquad<T>::setA0(const value_type value) noexcept {
         a0_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void Biquad<T>::set_a1(const value_type value) noexcept {
+    constexpr void Biquad<T>::setA1(const value_type value) noexcept {
         a1_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void Biquad<T>::set_a2(const value_type value) noexcept {
+    constexpr void Biquad<T>::setA2(const value_type value) noexcept {
         a2_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void Biquad<T>::set_b0(const value_type value) noexcept {
+    constexpr void Biquad<T>::setB0(const value_type value) noexcept {
         b0_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void Biquad<T>::set_b1(const value_type value) noexcept {
+    constexpr void Biquad<T>::setB1(const value_type value) noexcept {
         b1_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void Biquad<T>::set_b2(const value_type value) noexcept {
+    constexpr void Biquad<T>::setB2(const value_type value) noexcept {
         b2_ = value;
         reset();
     }
@@ -160,7 +160,7 @@ namespace easy { namespace dsp { namespace filter {
 
     template <typename T>
     constexpr Biquad<T>::operator bool() const noexcept {
-        return is_stable();
+        return isStable();
     }
 
     template <typename T>

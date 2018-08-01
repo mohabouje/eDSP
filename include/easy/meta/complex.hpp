@@ -23,6 +23,7 @@
 #ifndef EASYMETA_COMPLEX_H
 #define EASYMETA_COMPLEX_H
 
+#include "unused.hpp"
 #include <complex>
 #include <cmath>
 
@@ -46,6 +47,27 @@ namespace easy { namespace meta { inline namespace math {
     template <typename T>
     constexpr T imag(const std::complex<T>& value) {
         return std::imag(value);
+    }
+
+    template <typename T>
+    constexpr T conj(const std::complex<T>& value) {
+        return std::conj(value);
+    }
+
+    template <typename T>
+    constexpr T real(T value) {
+        return value;
+    }
+
+    template <typename T>
+    constexpr T imag(T value) {
+        meta::unused(value);
+        return 0;
+    }
+
+    template <typename T>
+    constexpr T conj(T value) {
+        return value;
     }
 
 }}} // namespace easy::meta::math

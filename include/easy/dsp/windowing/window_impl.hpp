@@ -41,7 +41,7 @@ namespace easy { namespace dsp { namespace windowing {
         using const_iterator  = typename std::vector<value_type, Allocator>::const_iterator;
 
         inline explicit Window(size_type size);
-        inline void set_size(size_type size);
+        inline void setSize(size_type size);
         inline size_type size() const noexcept;
         inline value_type at(size_type index) const;
 
@@ -69,11 +69,12 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename Implementation, typename T, typename Allocator>
     inline Window<Implementation, T, Allocator>::Window(Window::size_type size) : data_(size) {
+        meta::expects(size > 0, "Window size must be a positive integer");
         initialize();
     }
 
     template <typename Implementation, typename T, typename Allocator>
-    inline void Window<Implementation, T, Allocator>::set_size(Window::size_type size) {
+    inline void Window<Implementation, T, Allocator>::setSize(Window::size_type size) {
         data_.resize(size);
         initialize();
     }

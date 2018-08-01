@@ -15,26 +15,27 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: moving_median_filter.hpp
+ * Filename: moving_rms_filter.hpp
  * Author: Mohammed Boujemaoui
- * Date: 14/6/2018
+ * Date: 2/8/2018
  */
-#ifndef EASYDSP_FILTER_MOVING_MEDIAN_FILTER_H
-#define EASYDSP_FILTER_MOVING_MEDIAN_FILTER_H
+#ifndef EASYDSP_MOVING_RMS_FILTER_HPP
+#define EASYDSP_MOVING_RMS_FILTER_HPP
 
+#include <easy/meta/math.hpp>
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
-#include <boost/circular_buffer.hpp>
+#include <boost/accumulators/statistics/rolling_mean.hpp>
 
 namespace easy { namespace dsp { namespace filter {
 
     template <typename T>
-    class MovingMedianFilter {
+    class MovingRMSFilter {
     public:
         using size_type  = std::size_t;
         using value_type = T;
 
-        inline explicit MovingMedianFilter(size_type windowSize);
+        explicit MovingRMSFilter(size_type windowSize);
         inline size_type windowSize() const;
         inline void setWindowSize(size_type windowSize);
         inline void reset();
@@ -48,49 +49,49 @@ namespace easy { namespace dsp { namespace filter {
         inline value_type operator()(value_type tick);
 
     private:
-        using mmf =
+        using maf =
             boost::accumulators::accumulator_set<value_type,
-                                                 boost::accumulators::features<boost::accumulators::tag::median>>;
-        using buf = boost::circular_buffer<value_type>;
-        buf buffer_{};
-        mmf acc_{};
+                                                 boost::accumulators::features<boost::accumulators::tag::rolling_mean>>;
+        size_type window_size_{3};
+        maf acc_{boost::accumulators::tag::rolling_window::window_size = window_size_};
     };
 
     template <typename T>
-    inline MovingMedianFilter<T>::MovingMedianFilter(size_type window_size) : buffer_(window_size),
-        acc_() {}
+    inline MovingRMSFilter<T>::MovingRMSFilter(size_type window_size) :
+        window_size_(window_size),
+        acc_(boost::accumulators::tag::rolling_window::window_size = window_size) {}
 
     template <typename T>
-    inline typename MovingMedianFilter<T>::size_type MovingMedianFilter<T>::windowSize() const {
-        return buffer_.capacity();
+    inline typename MovingRMSFilter<T>::size_type MovingRMSFilter<T>::windowSize() const {
+        return window_size_;
     }
 
     template <typename T>
-    inline void MovingMedianFilter<T>::setWindowSize(size_type window_size) {
-        buffer_ = buf(window_size);
+    inline void MovingRMSFilter<T>::setWindowSize(size_type window_size) {
+        window_size_ = window_size;
+        reset();
     }
 
     template <typename T>
-    inline void MovingMedianFilter<T>::reset() {
-        buffer_.clear();
+    inline void MovingRMSFilter<T>::reset() {
+        acc_ = maf(boost::accumulators::tag::rolling_window::window_size = window_size_);
     }
 
     template <typename T>
-    inline typename MovingMedianFilter<T>::value_type MovingMedianFilter<T>::operator()(value_type tick) {
-        buffer_.push_back(tick);
-        acc_ = std::for_each(std::cbegin(buffer_), std::cend(buffer_), acc_);
-        return boost::accumulators::median(acc_);
+    inline typename MovingRMSFilter<T>::value_type MovingRMSFilter<T>::operator()(value_type tick) {
+        acc_(meta::square(tick));
+        return std::sqrt(boost::accumulators::rolling_mean(acc_));
     }
 
     template <typename T>
     template <typename BiIterator>
-    inline void MovingMedianFilter<T>::apply(BiIterator first, BiIterator last) {
+    inline void MovingRMSFilter<T>::apply(BiIterator first, BiIterator last) {
         apply(first, last, first);
     }
 
     template <typename T>
     template <typename InputIterator, typename OutputIterator>
-    inline void MovingMedianFilter<T>::apply(InputIterator first, InputIterator last, OutputIterator out) {
+    inline void MovingRMSFilter<T>::apply(InputIterator first, InputIterator last, OutputIterator out) {
         static_assert(std::is_same<typename std::iterator_traits<InputIterator>::value_type, value_type>::value &&
                           std::is_same<typename std::iterator_traits<OutputIterator>::value_type, value_type>::value,
                       "Iterator does not math the value type. No implicit conversion is allowed");
@@ -99,4 +100,5 @@ namespace easy { namespace dsp { namespace filter {
 
 }}} // namespace easy::dsp::filter
 
-#endif // EASYDSP_FILTER_MOVING_MEDIAN_FILTER_H
+
+#endif // EASYDSP_MOVING_RMS_FILTER_HPP

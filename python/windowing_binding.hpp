@@ -102,7 +102,7 @@ void declare_window(const char* name) {
             .def("__getitem__", &window_getitem<W>)
             .def("__setitem__", &window_setitem<W>)
             .def("__delitem__", &window_delitem<W>)
-            .def("set_size", &W::set_size)
+            .def("set_size", &W::setSize)
             .def("get_size", &W::size)
             .def("apply", &window_apply<W>);
 }

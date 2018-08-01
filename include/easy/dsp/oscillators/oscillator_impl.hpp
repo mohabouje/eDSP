@@ -22,6 +22,8 @@
 #ifndef EASYDSP_OSCILLATOR_IMPL_HPP
 #define EASYDSP_OSCILLATOR_IMPL_HPP
 
+#include <easy/meta/math.hpp>
+
 namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
@@ -31,17 +33,17 @@ namespace easy { namespace dsp { namespace oscillators {
         constexpr Oscillator(value_type amplitude, value_type samplerate, value_type frequency,
                              value_type phase) noexcept;
         constexpr value_type frequency() const noexcept;
+        constexpr void setFrequency(value_type frequency) noexcept;
         constexpr value_type phase() const noexcept;
-        constexpr void set_frequency(value_type frequency) noexcept;
-        constexpr void set_phase(value_type phase) noexcept;
-        constexpr void reset() noexcept;
+        constexpr void setPhase(value_type phase) noexcept;
         constexpr value_type timestamp() const noexcept;
-        constexpr void set_timestamp(value_type timestamp) noexcept;
+        constexpr void setTimestamp(value_type timestamp) noexcept;
         constexpr value_type samplerate() const noexcept;
-        constexpr value_type sampling_period() const noexcept;
-        constexpr void set_samplerate(value_type samplerate) noexcept;
+        constexpr void setSamplerate(value_type samplerate) noexcept;
+        constexpr value_type samplingPeriod() const noexcept;
         constexpr value_type amplitude() const noexcept;
-        constexpr void set_amplitude(value_type amplitude) noexcept;
+        constexpr void setAmplitude(value_type amplitude) noexcept;
+        constexpr void reset() noexcept;
 
     private:
         value_type amplitude_{0.};
@@ -57,6 +59,7 @@ namespace easy { namespace dsp { namespace oscillators {
                                         value_type phase) noexcept :
         amplitude_(amplitude),
         samplerate_(samplerate),
+        sampling_period_(meta::inv(samplerate)),
         frequency_(frequency),
         phase_(phase) {}
 
@@ -66,7 +69,7 @@ namespace easy { namespace dsp { namespace oscillators {
     }
 
     template <typename T>
-    constexpr void Oscillator<T>::set_timestamp(value_type timestamp) noexcept {
+    constexpr void Oscillator<T>::setTimestamp(value_type timestamp) noexcept {
         timestamp_ = timestamp;
     }
 
@@ -81,7 +84,7 @@ namespace easy { namespace dsp { namespace oscillators {
     }
 
     template <typename T>
-    constexpr void Oscillator<T>::set_samplerate(value_type samplerate) noexcept {
+    constexpr void Oscillator<T>::setSamplerate(value_type samplerate) noexcept {
         samplerate_ = samplerate;
         if (samplerate_ > 0) {
             sampling_period_ = 1. / samplerate_;
@@ -94,7 +97,7 @@ namespace easy { namespace dsp { namespace oscillators {
     }
 
     template <typename T>
-    constexpr void Oscillator<T>::set_frequency(value_type frequency) noexcept {
+    constexpr void Oscillator<T>::setFrequency(value_type frequency) noexcept {
         frequency_ = frequency;
     }
 
@@ -104,7 +107,7 @@ namespace easy { namespace dsp { namespace oscillators {
     }
 
     template <typename T>
-    constexpr void Oscillator<T>::set_phase(value_type phase) noexcept {
+    constexpr void Oscillator<T>::setPhase(value_type phase) noexcept {
         phase_ = phase;
     }
 
@@ -114,12 +117,12 @@ namespace easy { namespace dsp { namespace oscillators {
     }
 
     template <typename T>
-    constexpr void Oscillator<T>::set_amplitude(value_type amplitude) noexcept {
+    constexpr void Oscillator<T>::setAmplitude(value_type amplitude) noexcept {
         amplitude_ = amplitude;
     }
 
     template <typename T>
-    constexpr typename Oscillator<T>::value_type Oscillator<T>::sampling_period() const noexcept {
+    constexpr typename Oscillator<T>::value_type Oscillator<T>::samplingPeriod() const noexcept {
         return sampling_period_;
     }
 

@@ -65,8 +65,8 @@ namespace easy { namespace dsp { namespace oscillators {
             result = (t - half_w) / (peak_ - half_w);
         }
 
-        const value_type increased = t + Oscillator<T>::sampling_period();
-        set_timestamp((increased > 1. / Oscillator<T>::frequency()) ? 0 : increased);
+        const value_type increased = t + Oscillator<T>::samplingPeriod();
+        setTimestamp((increased > 1. / Oscillator<T>::frequency()) ? 0 : increased);
         return result * Oscillator<T>::amplitude();
     }
 

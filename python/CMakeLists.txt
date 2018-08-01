@@ -18,7 +18,7 @@ set(PYTHON_BINDINGS
     python_binding.cpp)
 add_library(${PROJECT_NAME} SHARED ${PYTHON_BINDINGS})
 target_include_directories(${PROJECT_NAME} PRIVATE ${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
-target_link_libraries(${PROJECT_NAME} EasyDSP EasyMeta ${Boost_LIBRARIES}  ${PYTHON_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} EasyDSP ${Boost_LIBRARIES}  ${PYTHON_LIBRARIES})
 target_compile_definitions(${PROJECT_NAME} PRIVATE PYTHON_MODULE_NAME=easyDSP)
 set_target_properties(${PROJECT_NAME} PROPERTIES PREFIX "")
 set_target_properties(${PROJECT_NAME} PROPERTIES SUFFIX ".so")

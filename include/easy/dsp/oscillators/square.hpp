@@ -61,8 +61,8 @@ namespace easy { namespace dsp { namespace oscillators {
     constexpr typename Oscillator<T>::value_type SquareOscillator<T>::operator()() {
         const auto t               = Oscillator<T>::timestamp();
         const value_type result    = (t >= duty_) ? -1 : 1;
-        const value_type increased = t + Oscillator<T>::sampling_period();
-        set_timestamp((increased > 1. / Oscillator<T>::frequency()) ? 0 : increased);
+        const value_type increased = t + Oscillator<T>::samplingPeriod();
+        setTimestamp((increased > 1. / Oscillator<T>::frequency()) ? 0 : increased);
         return result * Oscillator<T>::amplitude();
     }
 

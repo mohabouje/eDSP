@@ -35,15 +35,15 @@ namespace easy { namespace dsp {
 
         constexpr explicit DeEmphasis(value_type alpha);
         constexpr value_type alpha() const noexcept;
-        constexpr void set_alpha(value_type alpha) noexcept;
+        constexpr void setAlpha(value_type alpha) noexcept;
     };
 
     template <typename T>
     constexpr DeEmphasis<T>::DeEmphasis(value_type alpha) : filter::Biquad<T>(1, 0, 0, 1, alpha, 0) {}
 
     template <typename T>
-    constexpr void DeEmphasis<T>::set_alpha(value_type alpha) noexcept {
-        filter::Biquad<T>::set_b1(alpha);
+    constexpr void DeEmphasis<T>::setAlpha(value_type alpha) noexcept {
+        filter::Biquad<T>::setB1(alpha);
         filter::Biquad<T>::reset();
     }
 

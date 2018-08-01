@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: flat_top.hpp
+ * Filename: bohman.hpp
  * Author: Mohammed Boujemaoui
- * Date: 27/7/2018
+ * Date: 1/8/2018
  */
-#ifndef EASYDSP_FLAT_TOP_HPP
-#define EASYDSP_FLAT_TOP_HPP
+#ifndef EASYDSP_BOHMAN_HPP
+#define EASYDSP_BOHMAN_HPP
 
 #include "window_impl.hpp"
 #include <cmath>
@@ -28,43 +28,44 @@
 namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator = std::allocator<T>>
-    class FlatTop : public Window<FlatTop<T, Allocator>, T, Allocator> {
-        friend class Window<FlatTop<T, Allocator>, T, Allocator>;
-        using parent = Window<FlatTop<T, Allocator>, T, Allocator>;
+    class Bohman : public Window<Bohman<T, Allocator>, T, Allocator> {
+        friend class Window<Bohman<T, Allocator>, T, Allocator>;
+        using parent = Window<Bohman<T, Allocator>, T, Allocator>;
 
     public:
         using value_type = typename parent::value_type;
         using size_type  = typename parent::size_type;
-        inline explicit FlatTop(size_type size);
+        inline explicit Bohman(size_type size);
 
     private:
         inline void initialize();
     };
 
     template <typename T, typename Allocator>
-    FlatTop<T, Allocator>::FlatTop(FlatTop::size_type size) : parent(size) {}
+    inline Bohman<T, Allocator>::Bohman(Bohman::size_type size) : parent(size) {}
 
     template <typename T, typename Allocator>
-    void FlatTop<T, Allocator>::initialize() {
-        constexpr auto a0 = static_cast<value_type>(1);
-        constexpr auto a1 = static_cast<value_type>(1.9300);
-        constexpr auto a2 = static_cast<value_type>(1.2900);
-        constexpr auto a3 = static_cast<value_type>(0.3880);
-        constexpr auto a4 = static_cast<value_type>(0.0322);
-        for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
-            parent::data_[i]     = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp) + a4 * std::cos(4 * tmp);
+    inline void Bohman<T, Allocator>::initialize() {
+        const auto sz = parent::size();
+        const auto N = static_cast<value_type>(sz) - 1;
+        value_type initial = -N / 2;
+        for (size_type i = 0; i < sz; ++i, ++initial) {
+            const auto tmp = std::abs(initial) / N;
+            const auto phase = constants<value_type>::two_pi * tmp;
+            parent::data_[i] = (1 - 2 * tmp) * std::cos(phase) + constants<value_type>::inv_pi * std::sin(phase);
         }
+        parent::data_[0] = 0;
+        parent::data_[N] = 0;
     }
 
     template <typename OutputIterator, typename Integer>
-    inline void flattopwin(Integer size, OutputIterator out) {
+    inline void bohman(Integer size, OutputIterator out) {
         using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        using size_type  = typename FlatTop<value_type>::size_type;
-        FlatTop<value_type> window(static_cast<size_type>(size));
+        using size_type  = typename Bohman<value_type>::size_type;
+        Bohman<value_type> window(static_cast<size_type>(size));
         std::copy(std::cbegin(window), std::cend(window), out);
     }
 
 }}} // namespace easy::dsp::windowing
 
-#endif // EASYDSP_FLAT_TOP_HPP
+#endif // EASYDSP_BOHMAN_HPP

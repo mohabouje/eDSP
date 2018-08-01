@@ -15,14 +15,15 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: BlackmanHarris_harris.hpp
+ * Filename: blackman_harris.hpp
  * Author: Mohammed Boujemaoui
  * Date: 31/7/2018
  */
-#ifndef EASYDSP_BlackmanHarris_HARRIS_HPP
-#define EASYDSP_BlackmanHarris_HARRIS_HPP
+#ifndef EASYDSP_BLACKMANHARRIS_HARRIS_HPP
+#define EASYDSP_BLACKMANHARRIS_HARRIS_HPP
 
 #include "window_impl.hpp"
+#include <cmath>
 
 namespace easy { namespace dsp { namespace windowing {
 
@@ -56,7 +57,7 @@ namespace easy { namespace dsp { namespace windowing {
     }
 
     template <typename OutputIterator, typename Integer>
-    inline void blackman_harris(Integer size, OutputIterator out) {
+    inline void blackmanharris(Integer size, OutputIterator out) {
         using value_type = typename std::iterator_traits<OutputIterator>::value_type;
         using size_type  = typename BlackmanHarris<value_type>::size_type;
         BlackmanHarris<value_type> window(static_cast<size_type>(size));
@@ -65,4 +66,4 @@ namespace easy { namespace dsp { namespace windowing {
 
 }}} // namespace easy::dsp::windowing
 
-#endif // EASYDSP_BlackmanHarris_HARRIS_HPP
+#endif // EASYDSP_BLACKMANHARRIS_HARRIS_HPP

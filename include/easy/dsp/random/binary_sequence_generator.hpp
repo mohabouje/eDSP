@@ -44,7 +44,7 @@ namespace easy { namespace dsp { namespace random {
         }
     private:
         Engine generator_;
-        std::uniform_int_distribution<T> distribution_;
+        std::bernoulli_distribution distribution_;
     };
 
 }}}
