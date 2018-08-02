@@ -15,23 +15,27 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: pow2db.hpp
+ * Filename: centroid.hpp
  * Author: Mohammed Boujemaoui
- * Date: 2/8/2018
+ * Date: 17/6/2018
  */
-#ifndef EASYDSP_POW2DB_HPP
-#define EASYDSP_POW2DB_HPP
+#ifndef EASYDSP_STATISTICAL_CENTROID_HPP
+#define EASYDSP_STATISTICAL_CENTROID_HPP
 
-#include <easy/meta/expects.hpp>
-#include <cmath>
+#include <iterator>
 
-namespace easy { namespace dsp {
-
-    template <typename T>
-    constexpr T pow2db(T value) noexcept {
-        meta::expects(value >= 0, "Expected non negative value");
-        return 10 * std::log10(value);
+namespace easy { namespace dsp { namespace statistics {
+    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    inline value_type centroid(InputIterator first, InputIterator last) {
+        value_type weighted_sum   = static_cast<value_type>(0);
+        value_type unweighted_sum = static_cast<value_type>(0);
+        for (value_type i = 0; first != last; ++first, ++i) {
+            weighted_sum += i * (*first);
+            unweighted_sum += *first;
+        }
+        return weighted_sum / unweighted_sum;
     }
-}}
 
-#endif // EASYDSP_POW2DB_HPP
+}}} // namespace easy::feature::statistical
+
+#endif // EASYDSP_STATISTICAL_CENTROID_HPP

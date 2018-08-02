@@ -15,23 +15,23 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: pow2db.hpp
+ * Filename: mag2db.hpp
  * Author: Mohammed Boujemaoui
  * Date: 2/8/2018
  */
-#ifndef EASYDSP_POW2DB_HPP
-#define EASYDSP_POW2DB_HPP
+#ifndef EASYDSP_MAG2DB_HPP
+#define EASYDSP_MAG2DB_HPP
 
 #include <easy/meta/expects.hpp>
 #include <cmath>
 
 namespace easy { namespace dsp {
 
-    template <typename T>
-    constexpr T pow2db(T value) noexcept {
-        meta::expects(value >= 0, "Expected non negative value");
-        return 10 * std::log10(value);
-    }
-}}
+        template <typename T>
+        constexpr T mag2db(T value) noexcept {
+            meta::expects(value >= 0, "Expected non negative value");
+            return 20 * std::log10(value);
+        }
+    }}
 
-#endif // EASYDSP_POW2DB_HPP
+#endif // EASYDSP_MAG2DB_HPP

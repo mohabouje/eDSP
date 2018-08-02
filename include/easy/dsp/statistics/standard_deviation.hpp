@@ -15,24 +15,26 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: db2pow.hpp
+ * Filename: standard_deviation.hpp
  * Author: Mohammed Boujemaoui
- * Date: 2/8/2018
+ * Date: 2018-06-13
  */
-#ifndef EASYDSP_DB2POW_HPP
-#define EASYDSP_DB2POW_HPP
+#ifndef EASYDSP_STATISTICAL_STANDARD_DEVIATION_H
+#define EASYDSP_STATISTICAL_STANDARD_DEVIATION_H
 
-#include <easy/meta/expects.hpp>
-#include <cmath>
+#include <boost/accumulators/accumulators.hpp>
+#include <boost/accumulators/statistics.hpp>
+#include <numeric>
 
-namespace easy { namespace dsp {
-
-    template <typename T>
-    constexpr T db2pow(T value) noexcept {
-        return std::pow(10, value / static_cast<T>(10));
+namespace easy { namespace dsp { namespace statistics {
+    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    inline value_type standard_deviation(InputIterator first, InputIterator last) {
+        using namespace boost::accumulators;
+        accumulator_set<value_type, features<tag::variance>> acc;
+        acc = std::for_each(first, last, acc);
+        return std::sqrt(boost::accumulators::variance(acc));
     }
 
-}}
+}}} // namespace easy::feature::statistical
 
-
-#endif // EASYDSP_DB2POW_HPP
+#endif // EASYDSP_STATISTICAL_STANDARD_DEVIATION_H

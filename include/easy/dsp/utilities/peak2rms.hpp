@@ -22,7 +22,7 @@
 #ifndef EASYDSP_PEAK2RMS_HPP
 #define EASYDSP_PEAK2RMS_HPP
 
-#include "easy/dsp/math/rms.hpp"
+#include "easy/dsp/statistics/rms.hpp"
 #include <easy/meta/expects.hpp>
 #include <cmath>
 #include <algorithm>
@@ -34,7 +34,7 @@ namespace easy { namespace dsp {
     constexpr value_type peak2rms(InputIterator first, InputIterator last) noexcept {
         const auto pair = std::minmax_element(first, last);
         const auto max_abs = std::max(std::abs(pair.first), std::abs(pair.second));
-        return max_abs / dsp::rms(first, last);
+        return max_abs / statistics::rms(first, last);
     }
 }}
 

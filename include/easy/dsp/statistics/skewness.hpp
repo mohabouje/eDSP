@@ -15,23 +15,25 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: pow2db.hpp
+ * Filename: skewness.hpp
  * Author: Mohammed Boujemaoui
- * Date: 2/8/2018
+ * Date: 2018-06-13
  */
-#ifndef EASYDSP_POW2DB_HPP
-#define EASYDSP_POW2DB_HPP
+#ifndef EASYDSP_STATISTICAL_SKEWNESS_H
+#define EASYDSP_STATISTICAL_SKEWNESS_H
 
-#include <easy/meta/expects.hpp>
-#include <cmath>
+#include <boost/accumulators/accumulators.hpp>
+#include <boost/accumulators/statistics.hpp>
+#include <numeric>
 
-namespace easy { namespace dsp {
-
-    template <typename T>
-    constexpr T pow2db(T value) noexcept {
-        meta::expects(value >= 0, "Expected non negative value");
-        return 10 * std::log10(value);
+namespace easy { namespace dsp { namespace statistics {
+    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    inline value_type skewness(InputIterator first, InputIterator last) {
+        using namespace boost::accumulators;
+        accumulator_set<value_type, features<tag::skewness>> acc;
+        acc = std::for_each(first, last, acc);
+        return boost::accumulators::skewness(acc);
     }
-}}
+}}} // namespace easy::feature::statistical
 
-#endif // EASYDSP_POW2DB_HPP
+#endif // EASYDSP_STATISTICAL_SKEWNESS_H

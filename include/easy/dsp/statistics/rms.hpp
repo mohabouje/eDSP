@@ -15,23 +15,24 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: pow2db.hpp
+ * Filename: rms.hpp
  * Author: Mohammed Boujemaoui
- * Date: 2/8/2018
+ * Date: 14/6/2018
  */
-#ifndef EASYDSP_POW2DB_HPP
-#define EASYDSP_POW2DB_HPP
+#ifndef EASYDSP_STATISTICAL_RMS_H
+#define EASYDSP_STATISTICAL_RMS_H
 
-#include <easy/meta/expects.hpp>
+#include <numeric>
 #include <cmath>
+#include <iterator>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { namespace statistics {
 
-    template <typename T>
-    constexpr T pow2db(T value) noexcept {
-        meta::expects(value >= 0, "Expected non negative value");
-        return 10 * std::log10(value);
+    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    inline value_type rms(InputIterator first, InputIterator last) {
+        const value_type accumulated = std::inner_product(first, last, static_cast<value_type>(0));
+        return std::sqrt(accumulated / static_cast<value_type>(std::distance(first, last)));
     }
-}}
+}}} // namespace easy::feature::statistical
 
-#endif // EASYDSP_POW2DB_HPP
+#endif // EASYDSP_STATISTICAL_RMS_H

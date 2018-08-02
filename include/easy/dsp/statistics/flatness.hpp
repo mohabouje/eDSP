@@ -15,23 +15,25 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: pow2db.hpp
+ * Filename: flatness.hpp
  * Author: Mohammed Boujemaoui
- * Date: 2/8/2018
+ * Date: 14/6/2018
  */
-#ifndef EASYDSP_POW2DB_HPP
-#define EASYDSP_POW2DB_HPP
+#ifndef EASYDSP_STATISTICAL_FLATNESS_H
+#define EASYDSP_STATISTICAL_FLATNESS_H
 
-#include <easy/meta/expects.hpp>
-#include <cmath>
+#include "arithmetic_mean.hpp"
+#include "geometric_mean.hpp"
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { namespace statistics {
 
-    template <typename T>
-    constexpr T pow2db(T value) noexcept {
-        meta::expects(value >= 0, "Expected non negative value");
-        return 10 * std::log10(value);
+    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    inline value_type flatness(InputIterator first, InputIterator last) {
+        const value_type computed_gmean = geometric_mean(first, last);
+        const value_type computed_mean  = mean(first, last);
+        return geometric_mean / computed_mean;
     }
-}}
 
-#endif // EASYDSP_POW2DB_HPP
+}}} // namespace easy::feature::statistical
+
+#endif // EASYDSP_STATISTICAL_FLATNESS_H

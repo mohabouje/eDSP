@@ -15,23 +15,25 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: pow2db.hpp
+ * Filename: geometric_mean.hpp
  * Author: Mohammed Boujemaoui
- * Date: 2/8/2018
+ * Date: 2018-06-13
  */
-#ifndef EASYDSP_POW2DB_HPP
-#define EASYDSP_POW2DB_HPP
+#ifndef EASYDSP_STATISTICAL_GEOMETRIC_MEAN_H
+#define EASYDSP_STATISTICAL_GEOMETRIC_MEAN_H
 
-#include <easy/meta/expects.hpp>
+#include <numeric>
 #include <cmath>
+#include <iterator>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { namespace statistics {
 
-    template <typename T>
-    constexpr T pow2db(T value) noexcept {
-        meta::expects(value >= 0, "Expected non negative value");
-        return 10 * std::log10(value);
+    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    inline value_type geometric_mean(InputIterator first, InputIterator last) {
+        const value_type accumulated = std::accumulate(first, last, value_type(), std::multiplies<value_type>());
+        return static_cast<value_type>(std::pow(accumulated, 1 / static_cast<value_type>(std::distance(first, last))));
     }
-}}
 
-#endif // EASYDSP_POW2DB_HPP
+}}} // namespace easy::feature::statistical
+
+#endif // EASYDSP_STATISTICAL_GEOMETRIC_MEAN_H
