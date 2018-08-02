@@ -33,6 +33,6 @@ namespace easy { namespace dsp {
         std::fill(first, last, static_cast<typename std::iterator_traits<InputIterator>::value_type>(1));
     }
 
-}} // namespace easy::feature::statistical
+}} // namespace easy::dsp
 
 #endif // EASYDSP_UTILITIES_ONES_H

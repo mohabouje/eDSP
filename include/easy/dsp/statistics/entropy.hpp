@@ -36,6 +36,6 @@ namespace easy { namespace dsp { namespace statistics {
         return std::accumulate(first, last, static_cast<value_type>(0), predicate);
     }
 
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_ENTROPY_HPP

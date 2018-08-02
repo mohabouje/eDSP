@@ -55,9 +55,8 @@ boost::python::list compute_simple(Standard& component, const boost::python::lis
 }
 
 template <class Standard>
-boost::python::list compute_double(Standard& component,
-                            const boost::python::list& data_X,
-                            const boost::python::list& data_Y) {
+boost::python::list compute_double(Standard& component, const boost::python::list& data_X,
+                                   const boost::python::list& data_Y) {
     const auto size = static_cast<std::size_t>(boost::python::len(data_X));
     std::vector<double> stored_X, stored_Y, computed;
     stored_X.reserve(size);
@@ -66,10 +65,8 @@ boost::python::list compute_double(Standard& component,
     for (std::size_t i = 0; i < size; ++i) {
         stored_X.push_back(boost::python::extract<double>(data_X[i]));
         stored_Y.push_back(boost::python::extract<double>(data_Y[i]));
-
     }
-    component.compute(std::cbegin(stored_X), std::cend(stored_X),
-                      std::cbegin(stored_Y), std::begin(computed));
+    component.compute(std::cbegin(stored_X), std::cend(stored_X), std::cbegin(stored_Y), std::begin(computed));
     boost::python::list output;
     for (const auto element : computed) {
         output.append(element);
@@ -77,27 +74,23 @@ boost::python::list compute_double(Standard& component,
     return output;
 }
 
-
 void declare_standard() {
-
     enum_<::AutoCorrelation<double>::ScaleOpt>("AutoCorrelationScale")
-            .value("Biased", ::AutoCorrelation<double>::ScaleOpt::Biased)
-            .value("None", ::AutoCorrelation<double>::ScaleOpt::None);
+        .value("Biased", ::AutoCorrelation<double>::ScaleOpt::Biased)
+        .value("None", ::AutoCorrelation<double>::ScaleOpt::None);
 
     enum_<::CrossCorrelation<double>::ScaleOpt>("CrossCorrelationScale")
-            .value("Biased", ::CrossCorrelation<double>::ScaleOpt::Biased)
-            .value("None", ::CrossCorrelation<double>::ScaleOpt::None);
+        .value("Biased", ::CrossCorrelation<double>::ScaleOpt::Biased)
+        .value("None", ::CrossCorrelation<double>::ScaleOpt::None);
 
     class_<::AutoCorrelation<double>>("AutoCorrelation", init<std::size_t, ::AutoCorrelation<double>::ScaleOpt>())
-            .def("compute", &compute_simple<::AutoCorrelation<double>>);
-    class_<::Spectrum<double>>("Spectrum", init<std::size_t>())
-            .def("compute", &compute_simple<::Spectrum<double>>);
-    class_<::Cepstrum<double>>("Cepstrum", init<std::size_t>())
-            .def("compute", &compute_simple<::Cepstrum<double>>);
+        .def("compute", &compute_simple<::AutoCorrelation<double>>);
+    class_<::Spectrum<double>>("Spectrum", init<std::size_t>()).def("compute", &compute_simple<::Spectrum<double>>);
+    class_<::Cepstrum<double>>("Cepstrum", init<std::size_t>()).def("compute", &compute_simple<::Cepstrum<double>>);
     class_<::CrossCorrelation<double>>("CrossCorrelation", init<std::size_t, ::CrossCorrelation<double>::ScaleOpt>())
-            .def("compute", &compute_double<::CrossCorrelation<double>>);
+        .def("compute", &compute_double<::CrossCorrelation<double>>);
     class_<::Convolution<double>>("Convolution", init<std::size_t>())
-            .def("compute", &compute_double<::Convolution<double>>);
+        .def("compute", &compute_double<::Convolution<double>>);
 }
 
 class Standard {};

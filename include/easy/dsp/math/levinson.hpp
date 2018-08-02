@@ -35,9 +35,7 @@
 
 namespace easy { namespace dsp { namespace math {
 
-    template <typename InputIterator,
-              typename Integer,
-              typename OutputIterator,
+    template <typename InputIterator, typename Integer, typename OutputIterator,
               typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     constexpr value_type levinson(InputIterator first, InputIterator last, Integer order, OutputIterator out) {
         const auto size = std::distance(first, last);
@@ -46,12 +44,11 @@ namespace easy { namespace dsp { namespace math {
         std::fill(out, out + (order + 1), static_cast<value_type>(0));
         std::vector<value_type> temp_buffer(order + 1, 0);
 
-
         value_type* temp = meta::data(temp_buffer);
-        value_type* r = &(*first);
-        value_type* lpc = &(*out);
-        value_type E = r[0];
-        lpc[0] = 1;
+        value_type* r    = &(*first);
+        value_type* lpc  = &(*out);
+        value_type E     = r[0];
+        lpc[0]           = 1;
 
         for (std::size_t i = 1, until = (order + 1); i < until; ++i) {
             auto k = r[i];
@@ -71,11 +68,8 @@ namespace easy { namespace dsp { namespace math {
         }
 
         return E;
-
     }
 
-
-
-}}}
+}}} // namespace easy::dsp::math
 
 #endif // EASYDSP_LEVINSON_HPP

@@ -31,31 +31,22 @@
 
 namespace easy { namespace dsp {
 
-
-    template <typename InputIterator,
-              typename OutputIterator,
-              typename Generator>
-    constexpr void padder(InputIterator first, InputIterator last,
-                          OutputIterator first_out, OutputIterator last_out,
+    template <typename InputIterator, typename OutputIterator, typename Generator>
+    constexpr void padder(InputIterator first, InputIterator last, OutputIterator first_out, OutputIterator last_out,
                           Generator generator) {
-        const auto input_size = std::distance(first, last);
+        const auto input_size  = std::distance(first, last);
         const auto output_size = std::distance(first_out, last_out);
         meta::expects(output_size >= input_size, "Output size should be greather or equal than the input size");
         std::copy(first, last, first_out);
         std::generate(meta::advance(first_out, input_size), last, generator);
     };
 
-
-    template <typename InputIterator,
-              typename OutputIterator>
-    constexpr void padder(InputIterator first, InputIterator last,
-                          OutputIterator first_out, OutputIterator last_out,
+    template <typename InputIterator, typename OutputIterator>
+    constexpr void padder(InputIterator first, InputIterator last, OutputIterator first_out, OutputIterator last_out,
                           typename std::iterator_traits<InputIterator>::value_type value) {
         padder(first, last, first_out, last_out,
-                      random::ConstantGenerator<typename std::iterator_traits<InputIterator>::value_type>(value));
+               random::ConstantGenerator<typename std::iterator_traits<InputIterator>::value_type>(value));
     };
-
-
 
     template <typename Container>
     constexpr void padder(const Container& input, Container& output, typename Container::value_type value) {

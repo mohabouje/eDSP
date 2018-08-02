@@ -51,7 +51,7 @@ namespace easy { namespace dsp { namespace statistics {
                     accumulated += meta::euclidean_distance(*first, *first_other);
                 }
                 return accumulated / static_cast<value_type>(size);
-            } else if constexpr (Type ==  FluxType::Logarithmic) {
+            } else if constexpr (Type == FluxType::Logarithmic) {
                 value_type accumulated = static_cast<value_type>(0);
                 for (; first != last; ++first, ++first_other) {
                     accumulated += std::log(std::abs(*first) / std::abs(*first_other));
@@ -60,6 +60,6 @@ namespace easy { namespace dsp { namespace statistics {
             }
         }
     };
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_FLUX_HPP

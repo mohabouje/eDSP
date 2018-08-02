@@ -36,6 +36,6 @@ namespace easy { namespace dsp { namespace statistics {
         const value_type accumulated = std::accumulate(first, last, static_cast<value_type>(0), predicate);
         return static_cast<value_type>(std::distance(first, last) / accumulated);
     }
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_HARMONIC_MEAN_H

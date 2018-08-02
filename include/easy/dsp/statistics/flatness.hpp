@@ -34,6 +34,6 @@ namespace easy { namespace dsp { namespace statistics {
         return geometric_mean / computed_mean;
     }
 
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_FLATNESS_H

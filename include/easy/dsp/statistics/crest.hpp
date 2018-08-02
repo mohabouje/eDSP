@@ -33,6 +33,6 @@ namespace easy { namespace dsp { namespace statistics {
         return computed_max / computed_mean;
     }
 
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_CREST_HPP

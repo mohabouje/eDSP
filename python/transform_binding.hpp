@@ -106,7 +106,6 @@ public:
         }
         return output;
     }
-
 };
 
 #endif

@@ -35,6 +35,6 @@ namespace easy { namespace dsp { namespace statistics {
         return boost::accumulators::median(acc);
     }
 
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif //EASYDSP_STATISTICAL_MEDIANT_HPP

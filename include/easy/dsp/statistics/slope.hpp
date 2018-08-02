@@ -41,6 +41,6 @@ namespace easy { namespace dsp { namespace statistics {
         const auto size = std::distance(first, last);
         return (size * weighted_sum - index_sum * unweighted_sum) / (size * square_index_sum - meta::square(index_sum));
     }
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_SLOPE_HPP

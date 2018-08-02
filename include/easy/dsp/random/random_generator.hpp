@@ -49,17 +49,14 @@ namespace easy { namespace dsp { namespace random {
     };
 
     namespace {
-        template <typename Distribution,
-                  typename Engine = std::mt19937,
+        template <typename Distribution, typename Engine = std::mt19937,
                   typename result_type = typename Distribution::result_type>
         struct RandomGeneratorImpl {
             template <typename... Args>
             RandomGeneratorImpl(Args... arg) :
-                generator_(Engine(static_cast<std::size_t>(std::chrono::system_clock::now()
-                                                           .time_since_epoch()
-                                                           .count()))),
-                distribution_(Distribution(std::forward(arg...)))
-            {}
+                generator_(
+                    Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
+                distribution_(Distribution(std::forward(arg...))) {}
 
             inline result_type operator()() {
                 return static_cast<result_type>(distribution_(generator_));
@@ -75,77 +72,72 @@ namespace easy { namespace dsp { namespace random {
 
         template <typename T>
         struct _RandomGenerator<Distribution::Uniform, T>
-                : public RandomGeneratorImpl<std::uniform_real_distribution<T>> {};
+            : public RandomGeneratorImpl<std::uniform_real_distribution<T>> {};
 
         template <typename T>
         struct _RandomGenerator<Distribution::Bernoulli, T>
-                : public RandomGeneratorImpl<std::bernoulli_distribution, T> {};
+            : public RandomGeneratorImpl<std::bernoulli_distribution, T> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Binomial, T>
-                : public RandomGeneratorImpl<std::binomial_distribution<T>> {};
+        struct _RandomGenerator<Distribution::Binomial, T> : public RandomGeneratorImpl<std::binomial_distribution<T>> {
+        };
 
         template <typename T>
         struct _RandomGenerator<Distribution::Geometric, T>
-                : public RandomGeneratorImpl<std::geometric_distribution<T>> {};
+            : public RandomGeneratorImpl<std::geometric_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Poisson, T>
-                : public RandomGeneratorImpl<std::poisson_distribution<T>> {};
+        struct _RandomGenerator<Distribution::Poisson, T> : public RandomGeneratorImpl<std::poisson_distribution<T>> {};
 
         template <typename T>
         struct _RandomGenerator<Distribution::Exponential, T>
-                : public RandomGeneratorImpl<std::exponential_distribution<T>> {};
+            : public RandomGeneratorImpl<std::exponential_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Gamma, T>
-                : public RandomGeneratorImpl<std::gamma_distribution<T>> {};
+        struct _RandomGenerator<Distribution::Gamma, T> : public RandomGeneratorImpl<std::gamma_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Weibull, T>
-                : public RandomGeneratorImpl<std::weibull_distribution<T>> {};
+        struct _RandomGenerator<Distribution::Weibull, T> : public RandomGeneratorImpl<std::weibull_distribution<T>> {};
 
         template <typename T>
         struct _RandomGenerator<Distribution::ExtremeValue, T>
-                : public RandomGeneratorImpl<std::extreme_value_distribution<T>> {};
+            : public RandomGeneratorImpl<std::extreme_value_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Normal, T>
-                : public RandomGeneratorImpl<std::normal_distribution<T>> {};
+        struct _RandomGenerator<Distribution::Normal, T> : public RandomGeneratorImpl<std::normal_distribution<T>> {};
 
         template <typename T>
         struct _RandomGenerator<Distribution::LogNormal, T>
-                : public RandomGeneratorImpl<std::lognormal_distribution<T>> {};
+            : public RandomGeneratorImpl<std::lognormal_distribution<T>> {};
 
         template <typename T>
         struct _RandomGenerator<Distribution::ChiSquared, T>
-                : public RandomGeneratorImpl<std::chi_squared_distribution<T>> {};
+            : public RandomGeneratorImpl<std::chi_squared_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Fisher, T>
-                : public RandomGeneratorImpl<std::fisher_f_distribution<T>> {};
+        struct _RandomGenerator<Distribution::Fisher, T> : public RandomGeneratorImpl<std::fisher_f_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Student, T>
-                : public RandomGeneratorImpl<std::student_t_distribution<T>> {};
+        struct _RandomGenerator<Distribution::Student, T> : public RandomGeneratorImpl<std::student_t_distribution<T>> {
+        };
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Discrete, T>
-                : public RandomGeneratorImpl<std::discrete_distribution<T>> {};
+        struct _RandomGenerator<Distribution::Discrete, T> : public RandomGeneratorImpl<std::discrete_distribution<T>> {
+        };
 
         template <typename T>
         struct _RandomGenerator<Distribution::PieceWiseConstant, T>
-                : public RandomGeneratorImpl<std::piecewise_constant_distribution<T>> {};
+            : public RandomGeneratorImpl<std::piecewise_constant_distribution<T>> {};
 
         template <typename T>
         struct _RandomGenerator<Distribution::PieceWiseLinear, T>
-                : public RandomGeneratorImpl<std::piecewise_linear_distribution<T>> {};
+            : public RandomGeneratorImpl<std::piecewise_linear_distribution<T>> {};
 
-    }
+    } // namespace
 
     template <Distribution dist, typename T>
     struct RandomGenerator : public _RandomGenerator<dist, T> {};
 
-}}}
+}}} // namespace easy::dsp::random
 
 #endif // EASYDSP_FISHER_DISTRIBUTION_HPP

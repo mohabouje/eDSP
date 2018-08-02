@@ -14,36 +14,36 @@
  *
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
-
  *
- * Filename: binary_sequence_generator.hpp
+ * Filename: brown_noise.hpp
  * Author: Mohammed Boujemaoui
  * Date: 31/7/2018
  */
-#ifndef EASYDSP_BINARY_SEQUENCE_GENERATOR_HPP
-#define EASYDSP_BINARY_SEQUENCE_GENERATOR_HPP
+#ifndef EASYDSP_BROWN_NOISE_HPP
+#define EASYDSP_BROWN_NOISE_HPP
 
-#include <random>
-#include <chrono>
+#include "white_noise_generator.hpp"
 
 namespace easy { namespace dsp { namespace random {
 
     template <typename T, typename Engine = std::mt19937>
-    struct BinarySequenceGenerator {
+    struct BrownNoiseGenerator {
         using result_type = T;
-        inline BinarySequenceGenerator(result_type probability) :
-            generator_(Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
-            distribution_(std::bernoulli_distribution(probability)) {}
+        inline BrownNoiseGenerator(result_type min, result_type max) :
+            generator_(WhiteNoiseGenerator<result_type>(min, max)) {}
 
         inline result_type operator()() {
-            return static_cast<result_type>(distribution_(generator_));
+            result_type white = generator_();
+            last_output_ += (0.02 * white);
+            last_output_ /= 1.02;
+            return 3.5 * last_output_;
         }
 
     private:
-        Engine generator_;
-        std::bernoulli_distribution distribution_;
+        result_type last_output_{0};
+        WhiteNoiseGenerator<T, Engine> generator_;
     };
 
 }}} // namespace easy::dsp::random
 
-#endif // EASYDSP_BINARY_SEQUENCE_GENERATOR_HPP
+#endif // EASYDSP_BROWN_NOISE_HPP

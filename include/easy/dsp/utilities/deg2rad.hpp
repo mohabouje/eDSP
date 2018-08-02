@@ -15,23 +15,23 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: mag2db.hpp
+ * Filename: deg2rad.hpp
  * Author: Mohammed Boujemaoui
  * Date: 2/8/2018
  */
-#ifndef EASYDSP_MAG2DB_HPP
-#define EASYDSP_MAG2DB_HPP
+#ifndef EASYDSP_DEGB2RAD_HPP
+#    define EASYDSP_DEGMARAD_HPP
 
-#include <easy/meta/expects.hpp>
-#include <cmath>
+#    include "easy/dsp/math/constant.hpp"
+#    include <cmath>
 
 namespace easy { namespace dsp {
 
     template <typename T>
-    constexpr T mag2db(T value) noexcept {
-        meta::expects(value >= 0, "Expected non negative value");
-        return 20 * std::log10(value);
+    constexpr T deg2rad(T value) noexcept {
+        return value * constants<T>::pi / static_cast<T>(180);
     }
+
 }} // namespace easy::dsp
 
-#endif // EASYDSP_MAG2DB_HPP
+#endif // EASYDSP_DEG2RAD_HPP

@@ -75,13 +75,17 @@ namespace easy { namespace meta { inline namespace math {
     template <typename T>
     constexpr bool is_prime(T value) {
         auto n = static_cast<std::uint64_t>(value);
-        if      (n <= 1)  return 0;
-        else if (n <= 3)  return 1;
-        else if (!(n & 1)) return 0;
-        else if (!(n % 3)) return 0;
+        if (n <= 1)
+            return 0;
+        else if (n <= 3)
+            return 1;
+        else if (!(n & 1))
+            return 0;
+        else if (!(n % 3))
+            return 0;
         std::uint64_t r = 5;
-        while ( r*r <= n ) {
-            if ((n % r) == 0 || (n % (r+2)) == 0)
+        while (r * r <= n) {
+            if ((n % r) == 0 || (n % (r + 2)) == 0)
                 return 0;
             r += 6;
         }

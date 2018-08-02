@@ -32,6 +32,6 @@ namespace easy { namespace dsp {
         meta::expects(value >= 0, "Expected non negative value");
         return 10 * std::log10(value);
     }
-}}
+}} // namespace easy::dsp
 
 #endif // EASYDSP_POW2DB_HPP

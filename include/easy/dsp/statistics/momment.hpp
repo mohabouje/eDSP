@@ -37,6 +37,6 @@ namespace easy { namespace dsp { namespace statistics {
         return boost::accumulators::kurtosis(acc);
     }
 
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_MOMMENT_H

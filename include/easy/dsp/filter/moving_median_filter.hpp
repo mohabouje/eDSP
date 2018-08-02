@@ -57,8 +57,7 @@ namespace easy { namespace dsp { namespace filter {
     };
 
     template <typename T>
-    inline MovingMedianFilter<T>::MovingMedianFilter(size_type window_size) : buffer_(window_size),
-        acc_() {}
+    inline MovingMedianFilter<T>::MovingMedianFilter(size_type window_size) : buffer_(window_size), acc_() {}
 
     template <typename T>
     inline typename MovingMedianFilter<T>::size_type MovingMedianFilter<T>::windowSize() const {

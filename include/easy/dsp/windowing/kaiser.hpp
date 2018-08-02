@@ -48,8 +48,7 @@ namespace easy { namespace dsp { namespace windowing {
     inline Kaiser<T, Allocator>::Kaiser(size_type size, value_type window_taper, value_type fractional_sample_offset) :
         parent(size),
         beta_(window_taper),
-        mu_(fractional_sample_offset)
-    {}
+        mu_(fractional_sample_offset) {}
 
     template <typename T, typename Allocator>
     inline void Kaiser<T, Allocator>::initialize() {
@@ -57,12 +56,12 @@ namespace easy { namespace dsp { namespace windowing {
         constexpr auto a1 = static_cast<value_type>(0.48829);
         constexpr auto a2 = static_cast<value_type>(0.14128);
         constexpr auto a3 = static_cast<value_type>(0.01168);
-        const auto r = meta::square(2 * beta_ / static_cast<value_type>(parent::size()));
+        const auto r      = meta::square(2 * beta_ / static_cast<value_type>(parent::size()));
         for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            const auto t = i - static_cast<value_type>(sz - 1) / 2 + mu_;
+            const auto t         = i - static_cast<value_type>(sz - 1) / 2 + mu_;
             const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
-            parent::data_[i]     = boost::math::cyl_bessel_j_zero(0, beta_ * std::sqrt(1 - r))
-                    /  boost::math::cyl_bessel_j_zero(0, beta_);
+            parent::data_[i] =
+                boost::math::cyl_bessel_j_zero(0, beta_ * std::sqrt(1 - r)) / boost::math::cyl_bessel_j_zero(0, beta_);
         }
     }
 
@@ -74,5 +73,5 @@ namespace easy { namespace dsp { namespace windowing {
         std::copy(std::cbegin(window), std::cend(window), out);
     }
 
-}}} // namespace easy::dsp::windowing
+}}}    // namespace easy::dsp::windowing
 #endif // EASYDSP_RCOSTAPER_HPP

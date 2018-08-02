@@ -46,11 +46,11 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator>
     inline void Bohman<T, Allocator>::initialize() {
-        const auto sz = parent::size();
-        const auto N = static_cast<value_type>(sz) - 1;
+        const auto sz      = parent::size();
+        const auto N       = static_cast<value_type>(sz) - 1;
         value_type initial = -N / 2;
         for (size_type i = 0; i < sz; ++i, ++initial) {
-            const auto tmp = std::abs(initial) / N;
+            const auto tmp   = std::abs(initial) / N;
             const auto phase = constants<value_type>::two_pi * tmp;
             parent::data_[i] = (1 - 2 * tmp) * std::cos(phase) + constants<value_type>::inv_pi * std::sin(phase);
         }

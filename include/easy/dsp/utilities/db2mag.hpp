@@ -27,12 +27,11 @@
 
 namespace easy { namespace dsp {
 
-        template <typename T>
-        constexpr T db2mag(T value) noexcept {
-            return std::pow(10, value / static_cast<T>(20));
-        }
+    template <typename T>
+    constexpr T db2mag(T value) noexcept {
+        return std::pow(10, value / static_cast<T>(20));
+    }
 
-    }}
-
+}} // namespace easy::dsp
 
 #endif // EASYDSP_DB2POW_HPP

@@ -34,6 +34,6 @@ namespace easy { namespace dsp { namespace statistics {
         acc = std::for_each(first, last, acc);
         return boost::accumulators::skewness(acc);
     }
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_SKEWNESS_H

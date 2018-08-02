@@ -29,13 +29,12 @@
 
 namespace easy { namespace dsp {
 
-    template <typename InputIterator,
-              typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     constexpr value_type peak2rms(InputIterator first, InputIterator last) noexcept {
-        const auto pair = std::minmax_element(first, last);
+        const auto pair    = std::minmax_element(first, last);
         const auto max_abs = std::max(std::abs(pair.first), std::abs(pair.second));
         return max_abs / statistics::rms(first, last);
     }
-}}
+}} // namespace easy::dsp
 
 #endif // EASYDSP_PEAK2RMS_HPP

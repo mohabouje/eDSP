@@ -40,6 +40,6 @@ namespace easy { namespace dsp { namespace statistics {
         return static_cast<value_type>(std::pow(temp, 1 / static_cast<value_type>(beta)));
     }
 
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_GENERALIZED_MEAN_H

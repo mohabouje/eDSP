@@ -36,6 +36,6 @@ namespace easy { namespace dsp { namespace statistics {
         return weighted_sum / unweighted_sum;
     }
 
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_CENTROID_HPP

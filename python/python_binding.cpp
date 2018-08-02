@@ -25,9 +25,7 @@
 #include "standard_binding.hpp"
 
 BOOST_PYTHON_MODULE(PYTHON_MODULE_NAME) {
-    scope windowing = class_<Windowing>("Windowing")
-            .def("apply", &Windowing::apply)
-            .staticmethod("apply");
+    scope windowing = class_<Windowing>("Windowing").def("apply", &Windowing::apply).staticmethod("apply");
 
     declare_window<Bartlett<double>>("Bartlett");
     declare_window<Blackman<double>>("Blackman");
@@ -38,19 +36,17 @@ BOOST_PYTHON_MODULE(PYTHON_MODULE_NAME) {
     declare_window<Triangular<double>>("Triangular");
 
     scope transform = class_<Transform>("Transform")
-            .def("dft", &Transform::dft)
-            .def("idft", &Transform::idft)
-            .def("dct", &Transform::dct)
-            .def("idct", &Transform::idct)
-            .def("dht", &Transform::dht)
-            .staticmethod("dft")
-            .staticmethod("idft")
-            .staticmethod("dct")
-            .staticmethod("idct")
-            .staticmethod("dht");
+                          .def("dft", &Transform::dft)
+                          .def("idft", &Transform::idft)
+                          .def("dct", &Transform::dct)
+                          .def("idct", &Transform::idct)
+                          .def("dht", &Transform::dht)
+                          .staticmethod("dft")
+                          .staticmethod("idft")
+                          .staticmethod("dct")
+                          .staticmethod("idct")
+                          .staticmethod("dht");
 
     scope standard = class_<Standard>("Standard");
     declare_standard();
 }
-
-

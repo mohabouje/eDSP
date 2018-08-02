@@ -32,7 +32,6 @@ namespace easy { namespace dsp {
         return std::pow(10, value / static_cast<T>(10));
     }
 
-}}
-
+}} // namespace easy::dsp
 
 #endif // EASYDSP_DB2POW_HPP

@@ -44,19 +44,17 @@
 
 namespace easy { namespace dsp {
 
-    template <typename BiIterator,
-              typename Integer,
+    template <typename BiIterator, typename Integer,
               typename value_type = typename std::iterator_traits<BiIterator>::value_type>
     constexpr void logspace(BiIterator first, Integer N, value_type starting, value_type ending) {
-        using diff_type = typename std::iterator_traits<BiIterator>::difference_type;
-        const auto sz = static_cast<diff_type>(N);
+        using diff_type      = typename std::iterator_traits<BiIterator>::difference_type;
+        const auto sz        = static_cast<diff_type>(N);
         const auto increment = (ending - starting) / 2;
         for (diff_type i = 0; i < N; ++N, starting += increment, ++first) {
             *first = std::pow(10, starting);
         }
     }
 
-}} // namespace easy::feature::statistical
+}} // namespace easy::dsp
 
 #endif // EASYDSP_UTILITIES_LOGSPACE_H
-

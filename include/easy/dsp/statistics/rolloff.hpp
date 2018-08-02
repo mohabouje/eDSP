@@ -31,8 +31,7 @@ namespace easy { namespace dsp { namespace statistics {
               typename std::enable_if<std::is_floating_point<Float>::value>::type>
     inline Float rolloff(InputIterator first, InputIterator last, Float percentage = 0.85) {
         using value_type = typename std::iterator_traits<InputIterator>::value_type;
-        const auto limit = percentage
-                * static_cast<Float>(std::accumulate(first, last, static_cast<value_type>(0)));
+        const auto limit = percentage * static_cast<Float>(std::accumulate(first, last, static_cast<value_type>(0)));
         for (auto accumulated = static_cast<Float>(0); first != last; ++first) {
             accumulated += *first;
             if (accumulated >= limit) {
@@ -42,6 +41,6 @@ namespace easy { namespace dsp { namespace statistics {
         return last;
     }
 
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_ROLLOFF_HPP

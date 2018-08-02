@@ -22,24 +22,21 @@
 #ifndef EASYDSP_CONSTANT_GENERATOR_HPP
 #define EASYDSP_CONSTANT_GENERATOR_HPP
 
-
 namespace easy { namespace dsp { namespace random {
 
     template <typename T>
     struct ConstantGenerator {
         using result_type = T;
-        inline ConstantGenerator(result_type constant) :
-            constant_(constant) {
-
-        }
+        inline ConstantGenerator(result_type constant) : constant_(constant) {}
 
         inline result_type operator()() {
             return constant_;
         }
+
     private:
         result_type constant_;
     };
 
-}}}
+}}} // namespace easy::dsp::random
 
 #endif // EASYDSP_CONSTANT_GENERATOR_HPP

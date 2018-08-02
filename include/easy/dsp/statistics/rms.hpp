@@ -33,6 +33,6 @@ namespace easy { namespace dsp { namespace statistics {
         const value_type accumulated = std::inner_product(first, last, static_cast<value_type>(0));
         return std::sqrt(accumulated / static_cast<value_type>(std::distance(first, last)));
     }
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_RMS_H

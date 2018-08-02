@@ -35,6 +35,6 @@ namespace easy { namespace dsp { namespace statistics {
         return boost::accumulators::variance(acc);
     }
 
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_VARIANCE_H

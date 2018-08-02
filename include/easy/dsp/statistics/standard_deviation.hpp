@@ -35,6 +35,6 @@ namespace easy { namespace dsp { namespace statistics {
         return std::sqrt(boost::accumulators::variance(acc));
     }
 
-}}} // namespace easy::feature::statistical
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_STANDARD_DEVIATION_H

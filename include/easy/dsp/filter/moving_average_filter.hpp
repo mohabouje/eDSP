@@ -50,7 +50,7 @@ namespace easy { namespace dsp { namespace filter {
     private:
         using maf =
             boost::accumulators::accumulator_set<value_type,
-                                                 boost::accumulators::features<boost::accumulators::tag::rolling_mean>>;
+                                                 boost::accumulators::stats<boost::accumulators::tag::rolling_mean>>;
         size_type window_size_{3};
         maf acc_{boost::accumulators::tag::rolling_window::window_size = window_size_};
     };

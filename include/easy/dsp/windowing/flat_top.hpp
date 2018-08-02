@@ -53,7 +53,8 @@ namespace easy { namespace dsp { namespace windowing {
         constexpr auto a4 = static_cast<value_type>(0.0322);
         for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
             const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
-            parent::data_[i]     = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp) + a4 * std::cos(4 * tmp);
+            parent::data_[i] =
+                a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp) + a4 * std::cos(4 * tmp);
         }
     }
 
