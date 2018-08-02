@@ -15,36 +15,27 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: brown_noise.hpp
+ * Filename: cat.hpp
  * Author: Mohammed Boujemaoui
- * Date: 31/7/2018
+ * Date: 02/08/2018
  */
-#ifndef EASYDSP_BROWN_NOISE_HPP
-#define EASYDSP_BROWN_NOISE_HPP
+#ifndef EASYDSP_UTILITIES_CAT_H
+#define EASYDSP_UTILITIES_CAT_H
 
-#include "white_noise_generator.hpp"
+#include <easy/meta/advance.hpp>
+#include <numeric>
+#include <cmath>
+#include <iterator>
 
-namespace easy { namespace dsp { namespace random {
+namespace easy { namespace dsp {
 
-    template <typename T, typename Engine = std::mt19937>
-    struct BrownNoiseGenerator {
-        using result_type = T;
-        inline BrownNoiseGenerator(result_type min, result_type max) :
-            generator_(WhiteNoiseGenerator<result_type>(min, max)) {
+    template <typename InputIterator, typename OutputIterator>
+    constexpr void cat(InputIterator first, InputIterator last,
+                       InputIterator first2, InputIterator last2, OutputIterator out) {
+        std::copy(first, last, out);
+        std::copy(first2, last2, meta::advance(out, std::distance(first, last)));
+    }
 
-        }
+}} // namespace easy::feature::statistical
 
-        inline result_type operator()() {
-            result_type white = generator_();
-            last_output_ += (0.02 *  white);
-            last_output_ /= 1.02;
-            return 3.5 * last_output_;
-        }
-    private:
-        result_type last_output_{0};
-        WhiteNoiseGenerator<T, Engine> generator_;
-    };
-
-}}}
-
-#endif // EASYDSP_BROWN_NOISE_HPP
+#endif // EASYDSP_UTILITIES_CAT_H

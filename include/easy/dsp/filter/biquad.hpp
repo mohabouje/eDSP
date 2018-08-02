@@ -40,6 +40,7 @@ namespace easy { namespace dsp { namespace filter {
         constexpr Biquad(Biquad&&) noexcept      = default;
         constexpr Biquad& operator=(const Biquad&) noexcept = default;
         constexpr Biquad& operator=(Biquad&&) noexcept = default;
+        ~Biquad() = default;
 
         constexpr value_type a0() const noexcept;
         constexpr value_type a1() const noexcept;

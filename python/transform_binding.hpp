@@ -32,6 +32,7 @@
 #include <easy/dsp/transform/dct.hpp>
 #include <easy/dsp/transform/dht.hpp>
 #include <easy/dsp/transform/dft.hpp>
+#include <vector>
 
 using namespace boost::python;
 using namespace easy::dsp;
