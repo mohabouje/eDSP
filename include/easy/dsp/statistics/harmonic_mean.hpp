@@ -33,7 +33,7 @@ namespace easy { namespace dsp { namespace statistics {
         const auto predicate = [](const value_type prev, const value_type current) {
             return static_cast<value_type>(prev + (1 / current));
         };
-        const value_type accumulated = std::accumulate(first, last, value_type(), predicate);
+        const value_type accumulated = std::accumulate(first, last, static_cast<value_type>(0), predicate);
         return static_cast<value_type>(std::distance(first, last) / accumulated);
     }
 }}} // namespace easy::feature::statistical

@@ -28,7 +28,7 @@ namespace easy { namespace dsp { namespace statistics {
 
     template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     inline value_type crest(InputIterator first, InputIterator last) {
-        const value_type computed_mean = mean(first, last);
+        const value_type computed_mean = statistics::mean(first, last);
         const value_type computed_max  = *std::max_element(first, last);
         return computed_max / computed_mean;
     }

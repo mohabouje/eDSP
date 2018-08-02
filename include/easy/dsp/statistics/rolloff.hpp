@@ -27,14 +27,13 @@
 
 namespace easy { namespace dsp { namespace statistics {
 
-    template <typename InputIterator, typename PercentageType,
-              typename std::enable_if<std::is_floating_point<PercentageType>::value>::type>
-    inline InputIterator rolloff(InputIterator first, InputIterator last, PercentageType percentage = 0.85) {
+    template <typename InputIterator, typename Float,
+              typename std::enable_if<std::is_floating_point<Float>::value>::type>
+    inline Float rolloff(InputIterator first, InputIterator last, Float percentage = 0.85) {
         using value_type = typename std::iterator_traits<InputIterator>::value_type;
-        const PercentageType limit =
-            percentage * static_cast<PercentageType>(std::accumulate(first, last, static_cast<value_type>(0)));
-        auto accumulated = static_cast<PercentageType>(0);
-        for (; first != last; ++first) {
+        const auto limit = percentage
+                * static_cast<Float>(std::accumulate(first, last, static_cast<value_type>(0)));
+        for (auto accumulated = static_cast<Float>(0); first != last; ++first) {
             accumulated += *first;
             if (accumulated >= limit) {
                 return first;

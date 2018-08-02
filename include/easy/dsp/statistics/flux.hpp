@@ -22,33 +22,36 @@
 #ifndef EASYDSP_STATISTICAL_FLUX_HPP
 #define EASYDSP_STATISTICAL_FLUX_HPP
 
+#include <easy/meta/math.hpp>
 #include <type_traits>
 #include <iterator>
+#include <cmath>
 
 namespace easy { namespace dsp { namespace statistics {
 
     enum FluxType { ManhattanDistance, EuclideanDistance, Logarithmic };
 
+    // TODO: implement it in a template metaprogramming way, avoid if statements
     template <FluxType Type>
     struct Flux {
         template <typename InputIterator,
                   typename value_type = typename std::iterator_traits<InputIterator>::value_type>
         inline value_type operator()(InputIterator first, InputIterator last, InputIterator first_other) const {
             const auto size = std::distance(first, last);
-            if constexpr (std::is_same_v<Type, FluxType::ManhattanDistance>) {
+            if (Type == FluxType::ManhattanDistance) {
                 value_type accumulated = static_cast<value_type>(0);
                 for (; first != last; ++first, ++first_other) {
                     accumulated += meta::manhattan_distance(*first, *first_other);
                 }
                 return std::sqrt(accumulated) / static_cast<value_type>(size);
 
-            } else if constexpr (std::is_same_v<Type, FluxType::EuclideanDistance>) {
+            } else if (Type == FluxType::EuclideanDistance) {
                 value_type accumulated = static_cast<value_type>(0);
                 for (; first != last; ++first, ++first_other) {
                     accumulated += meta::euclidean_distance(*first, *first_other);
                 }
                 return accumulated / static_cast<value_type>(size);
-            } else if constexpr (std::is_same_v<Type, FluxType::Logarithmic>) {
+            } else if constexpr (Type ==  FluxType::Logarithmic) {
                 value_type accumulated = static_cast<value_type>(0);
                 for (; first != last; ++first, ++first_other) {
                     accumulated += std::log(std::abs(*first) / std::abs(*first_other));

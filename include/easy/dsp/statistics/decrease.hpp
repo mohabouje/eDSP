@@ -26,7 +26,7 @@
 
 namespace easy { namespace dsp { namespace statistics {
     template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type decrease(InputIterator first, InputIterator last) {
+    constexpr value_type decrease(InputIterator first, InputIterator last) {
         const auto size           = std::distance(first, last);
         value_type weighted_sum   = static_cast<value_type>(0);
         value_type unweighted_sum = static_cast<value_type>(0);

@@ -22,6 +22,7 @@
 #ifndef EASYDSP_STATISTICAL_GEOMETRIC_MEAN_H
 #define EASYDSP_STATISTICAL_GEOMETRIC_MEAN_H
 
+#include <easy/meta/math.hpp>
 #include <numeric>
 #include <cmath>
 #include <iterator>
@@ -30,8 +31,8 @@ namespace easy { namespace dsp { namespace statistics {
 
     template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     inline value_type geometric_mean(InputIterator first, InputIterator last) {
-        const value_type accumulated = std::accumulate(first, last, value_type(), std::multiplies<value_type>());
-        return static_cast<value_type>(std::pow(accumulated, 1 / static_cast<value_type>(std::distance(first, last))));
+        const value_type accumulated = std::accumulate(first, last, static_cast<value_type>(0), std::multiplies<value_type>());
+        return std::pow(accumulated, meta::inv(std::distance(first, last)));
     }
 
 }}} // namespace easy::feature::statistical

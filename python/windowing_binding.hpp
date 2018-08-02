@@ -27,7 +27,6 @@
 #include <boost/python/class.hpp>
 #include <boost/python/scope.hpp>
 #include <boost/python/iterator.hpp>
-#include <boost/python/numpy.hpp>
 
 #include <easy/dsp/windowing/flat_top.hpp>
 #include <easy/dsp/windowing/blackman.hpp>
@@ -42,7 +41,6 @@
 #include <vector>
 
 using namespace boost::python;
-using namespace boost::python::numpy;
 using namespace easy::dsp::windowing;
 
 template <class Window>

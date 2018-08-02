@@ -29,8 +29,8 @@ namespace easy { namespace dsp { namespace statistics {
 
     template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     inline value_type flatness(InputIterator first, InputIterator last) {
-        const value_type computed_gmean = geometric_mean(first, last);
-        const value_type computed_mean  = mean(first, last);
+        const auto computed_gmean = statistics::geometric_mean(first, last);
+        const auto computed_mean  = statistics::mean(first, last);
         return geometric_mean / computed_mean;
     }
 

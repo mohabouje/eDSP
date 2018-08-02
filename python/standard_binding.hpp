@@ -27,7 +27,6 @@
 #include <boost/python/class.hpp>
 #include <boost/python/scope.hpp>
 #include <boost/python/iterator.hpp>
-#include <boost/python/numpy.hpp>
 
 #include <easy/dsp/standard/crosscorrelation.hpp>
 #include <easy/dsp/standard/convolution.hpp>
@@ -36,7 +35,6 @@
 #include <easy/dsp/standard/cepstrum.hpp>
 
 using namespace boost::python;
-using namespace boost::python::numpy;
 using namespace easy::dsp;
 
 template <class Standard>
