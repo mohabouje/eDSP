@@ -1,6 +1,6 @@
 /*
- * Easy Meet, Yet another header-only library for C++ meta-programming.
- * Copyright (C) 2018 Mohammed Boujemaoui
+ * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -12,7 +12,7 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along with
+ * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * Filename: size
@@ -23,6 +23,7 @@
 #ifndef EASYMETA_SIZE_H
 #define EASYMETA_SIZE_H
 
+#include "unused.hpp"
 #include <cstdint>
 #include <array>
 
@@ -34,6 +35,7 @@ namespace easy { namespace meta {
 
     template <class T, std::size_t N>
     constexpr std::size_t size(const T (&array)[N]) noexcept {
+        meta::unused(array);
         return N;
     }
 

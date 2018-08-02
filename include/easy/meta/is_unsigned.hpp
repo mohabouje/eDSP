@@ -1,5 +1,5 @@
 /*
- * EasyMeta, Yet another header-only library for C++ meta-programming.
+ * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -30,7 +30,7 @@ namespace easy { namespace meta {
 
     namespace {
         template <typename T, bool = std::is_arithmetic<T>::value>
-            struct _is_unsigned : std::integral_constant<bool, T(-1)> T(0) > {};
+            struct _is_unsigned : std::integral_constant<bool, (T(-1) > T(0))> {};
 
         template <typename T>
         struct _is_unsigned<T, false> : std::false_type {};
