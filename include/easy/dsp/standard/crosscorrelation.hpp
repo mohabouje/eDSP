@@ -23,7 +23,7 @@
 #ifndef EASYDSP_CROSSCORRELATION_HPP
 #define EASYDSP_CROSSCORRELATION_HPP
 
-#include "easy/dsp/transform/fftw_impl.hpp"
+#include "easy/dsp/transform/fft_impl.hpp"
 #include <easy/meta/expects.hpp>
 #include <easy/meta/advance.hpp>
 #include <algorithm>

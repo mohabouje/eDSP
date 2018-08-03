@@ -24,7 +24,7 @@
 #define EASYDSP_DFT_HPP
 
 #include <algorithm>
-#include "fftw_impl.hpp"
+#include "fft_impl.hpp"
 
 namespace easy { namespace dsp {
 
@@ -33,12 +33,12 @@ namespace easy { namespace dsp {
         fftw_plan<T> plan;
         plan.dft(fftw_cast(&(*first)), fftw_cast(&(*out)),
                  static_cast<typename fftw_plan<T>::size_type>(std::distance(first, last)));
-    };
+    }
 
     template <typename T, typename Container>
     inline void complex_dft(const Container& input, Container& output) {
         complex_dft<T>(std::cbegin(input), std::cend(input), std::begin(output));
-    };
+    }
 
     template <typename T, typename InputIterator, typename OutputIterator>
     inline void complex_idft(InputIterator first, InputIterator last, OutputIterator out) {
@@ -50,12 +50,12 @@ namespace easy { namespace dsp {
             return value / static_cast<value_type>(nfft);
             ;
         });
-    };
+    }
 
     template <typename T, typename Container>
     inline void complex_idft(const Container& input, Container& output) {
         complex_idft<T>(std::cbegin(input), std::cend(input), std::begin(output));
-    };
+    }
 
     template <typename InputIterator, typename OutputIterator>
     void dft(InputIterator first, InputIterator last, OutputIterator out) {
@@ -63,12 +63,12 @@ namespace easy { namespace dsp {
         fftw_plan<value_type> plan;
         plan.dft(fftw_cast(&(*first)), fftw_cast(&(*out)),
                  static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last)));
-    };
+    }
 
     template <typename RealContainer, typename ComplexContainer>
     void dft(const RealContainer& input, ComplexContainer& output) {
         dft(std::cbegin(input), std::cend(input), std::begin(output));
-    };
+    }
 
     template <typename InputIterator, typename OutputIterator>
     void idft(InputIterator first, InputIterator last, OutputIterator out) {
@@ -77,12 +77,12 @@ namespace easy { namespace dsp {
         const auto nfft = static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last));
         plan.idft(fftw_cast(&(*first)), fftw_cast(&(*out)), nfft);
         std::transform(out, out + nfft, out, [nfft](value_type value) { return value / nfft; });
-    };
+    }
 
     template <typename RealContainer, typename ComplexContainer>
     void idft(const ComplexContainer& input, RealContainer& output) {
         idft(std::cbegin(input), std::cend(input), std::begin(output));
-    };
+    }
 
 }} // namespace easy::dsp
 

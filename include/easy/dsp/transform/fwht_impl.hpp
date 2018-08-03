@@ -15,31 +15,29 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: logspace.hpp
+ * Filename: fwht_impl.hpp
  * Author: Mohammed Boujemaoui
- * Date: 02/08/2018
+ * Date: 3/8/2018
  */
-#ifndef EASYDSP_UTILITIES_LOGSPACE_H
-#define EASYDSP_UTILITIES_LOGSPACE_H
+#ifndef EASYDSP_FWHT_IMPL_HPP
+#define EASYDSP_FWHT_IMPL_HPP
 
-#include <easy/meta/advance.hpp>
-#include <numeric>
+#include <algorithm>
 #include <cmath>
-#include <iterator>
 
 namespace easy { namespace dsp {
-
-    template <typename BiIterator, typename Integer,
-              typename value_type = typename std::iterator_traits<BiIterator>::value_type>
-    constexpr void logspace(BiIterator first, Integer N, value_type starting, value_type ending) {
-        using diff_type      = typename std::iterator_traits<BiIterator>::difference_type;
-        const auto sz        = static_cast<diff_type>(N);
-        const auto increment = (ending - starting) / 2;
-        for (diff_type i = 0; i < N; ++N, starting += increment, ++first) {
-            *first = std::pow(10, starting);
+    template <typename Integer,
+              typename Type>
+    void fwht_plan(Type data, Integer N) {
+      const  auto log2 = std::log2(N) - 1;
+      for (Integer i = 0; i < log2; ++i) {
+        for (Integer j = 0; j < (1 << log2); j += 1 << (i+1)) {
+           for (Integer k = 0; k < (1<<i); ++k) {
+               std::swap(data [j + k], data [j + k + (1<<i)]);
+           }
         }
+      }
     }
+}}
 
-}} // namespace easy::dsp
-
-#endif // EASYDSP_UTILITIES_LOGSPACE_H
+#endif // EASYDSP_FWHT_IMPL_HPP

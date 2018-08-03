@@ -23,7 +23,7 @@
 #ifndef EASYDSP_DCT_HPP
 #define EASYDSP_DCT_HPP
 
-#include "fftw_impl.hpp"
+#include "fft_impl.hpp"
 #include <algorithm>
 
 namespace easy { namespace dsp {

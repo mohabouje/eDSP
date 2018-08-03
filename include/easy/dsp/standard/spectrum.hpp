@@ -22,7 +22,7 @@
 #ifndef EASYDSP_SPECTROGRAM_HPP
 #define EASYDSP_SPECTROGRAM_HPP
 
-#include "easy/dsp/transform/fftw_impl.hpp"
+#include "easy/dsp/transform/fft_impl.hpp"
 #include <easy/meta/expects.hpp>
 #include <algorithm>
 #include <vector>

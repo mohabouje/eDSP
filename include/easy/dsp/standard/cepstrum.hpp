@@ -22,7 +22,7 @@
 #ifndef EASYDSP_CEPSTRUM_HPP
 #define EASYDSP_CEPSTRUM_HPP
 
-#include "easy/dsp/transform/fftw_impl.hpp"
+#include "easy/dsp/transform/fft_impl.hpp"
 #include <easy/meta/expects.hpp>
 #include <easy/meta/advance.hpp>
 #include <algorithm>

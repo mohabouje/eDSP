@@ -15,31 +15,24 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: dht.hpp
- * Created at: 09/06/18
- * Created by: Mohammed Boujemaoui
+ * Filename: round.hpp
+ * Author: Mohammed Boujemaoui
+ * Date: 3/8/2018
  */
+#ifndef EASYDSP_UTILITIES_ROUND_HPP
+#define EASYDSP_UTILITIES_ROUND_HPP
 
-#ifndef EASYDSP_DHT_HPP
-#define EASYDSP_DHT_HPP
-
-#include "fftw_impl.hpp"
+#include <algorithm>
+#include <cmath>
+#include <iterator>
 
 namespace easy { namespace dsp {
 
-    template <typename InputIterator, typename OutputIterator>
-    inline void dht(InputIterator first, InputIterator last, OutputIterator out) {
-        using value_type = typename std::iterator_traits<InputIterator>::value_type;
-        fftw_plan<value_type> plan;
-        plan.dht(fftw_cast(&(*first)), fftw_cast(&(*out)),
-                 static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last)));
-    };
-
-    template <typename Container>
-    inline void dht(const Container& input, Container& output) {
-        dht(std::cbegin(input), std::cend(input), std::begin(output));
-    };
+    template <typename InputIterator>
+    constexpr void round(InputIterator first, InputIterator last) {
+        std::for_each(first, last, std::round);
+    }
 
 }} // namespace easy::dsp
 
-#endif // EASYDSP_DHT_HPP
+#endif // EASYDSP_UTILITIES_ROUND_HPP
