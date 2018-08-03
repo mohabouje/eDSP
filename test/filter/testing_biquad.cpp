@@ -20,7 +20,7 @@
  * Created by: Mohammed Boujemaoui
  */
 
-#include <easy/dsp/filter/biquad.hpp>
+#include <easy/dsp/filter/biquad/biquad.hpp>
 #include <array>
 #include <easy/meta/empty.hpp>
 #include <easy/meta/size.hpp>
@@ -47,7 +47,7 @@ SCENARIO("Testing the Biquad filter class", "[Biquad]") {
 
         WHEN("The input buffer is empty") {
             THEN("The biquad should run with no problem") {
-                REQUIRE_NOTHROW(biquad.apply(std::cbegin(input), std::cend(input), std::begin(output)));
+                REQUIRE_NOTHROW(biquad.filter(std::cbegin(input), std::cend(input), std::begin(output)));
             }
         }
 
@@ -70,7 +70,7 @@ SCENARIO("Testing the Biquad filter class", "[Biquad]") {
             }
 
             AND_WHEN("The data should be filtered with no problem") {
-                REQUIRE_NOTHROW(biquad.apply(std::cbegin(input), std::cend(input), std::begin(output)));
+                REQUIRE_NOTHROW(biquad.filter(std::cbegin(input), std::cend(input), std::begin(output)));
                 THEN("The filtered output should store the same data") {
                     for (std::size_t i = 0; i < meta::size(output); ++i) {
                         REQUIRE(hamming[i] == Approx(output[i]).epsilon(0.00001));
@@ -108,7 +108,7 @@ SCENARIO("Testing the Biquad filter class", "[Biquad]") {
                 REQUIRE(meta::size(input) == meta::size(output));
 
                 THEN("The data should be filtered with no problem") {
-                    REQUIRE_NOTHROW(biquad.apply(std::cbegin(input), std::cend(input), std::begin(output)));
+                    REQUIRE_NOTHROW(biquad.filter(std::cbegin(input), std::cend(input), std::begin(output)));
                     AND_THEN("The filtered output should store the same data") {
                         for (std::size_t i = 0; i < meta::size(output); ++i) {
                             REQUIRE(filtered_hamming[i] == Approx(output[i]).margin(0.00001));

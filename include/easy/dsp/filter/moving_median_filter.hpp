@@ -25,10 +25,12 @@
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
 #include <boost/circular_buffer.hpp>
+#include <vector>
 
 namespace easy { namespace dsp { namespace filter {
 
-    template <typename T>
+    template <typename T,
+              typename Allocator = std::allocator<T>>
     class MovingMedianFilter {
     public:
         using size_type  = std::size_t;
@@ -51,7 +53,7 @@ namespace easy { namespace dsp { namespace filter {
         using mmf =
             boost::accumulators::accumulator_set<value_type,
                                                  boost::accumulators::features<boost::accumulators::tag::median>>;
-        using buf = boost::circular_buffer<value_type>;
+        using buf = boost::circular_buffer<value_type, Allocator>;
         buf buffer_{};
         mmf acc_{};
     };

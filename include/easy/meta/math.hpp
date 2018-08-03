@@ -40,7 +40,7 @@ namespace easy { namespace meta { inline namespace math {
 
     template <typename T>
     constexpr bool is_odd(const T& x) {
-        return (x % 2) == 0;
+        return (x % 2) == 1;
     }
 
     template <typename T>

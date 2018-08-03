@@ -27,25 +27,24 @@
 
 namespace easy { namespace dsp {
 
-    template <typename Integer,
-              typename Type,
-              typename Allocator = std::allocator<Type>>
-    void fwht_plan(Integer n, const Type *src, Type *dst) {
+    template <typename Integer, typename Type, typename Allocator = std::allocator<Type>>
+    void fwht_plan(Integer n, const Type* src, Type* dst) {
         std::vector<Type> adata(n), bdata(n);
         std::copy(src, src + n, std::begin(adata));
-        auto *a = meta::data(adata);
-        auto *b = meta::data(bdata);
+        auto* a = meta::data(adata);
+        auto* b = meta::data(bdata);
         for (Integer i = n >> 1; i > 0; i >>= 1) {
             for (Integer j = 0; j < n; j++) {
-                s = j / i % 2;
-                b[j]= a[(s ? -i : 0) + j]
-                        + (s ? -1 : 1) * a[(s ? 0 : i) + j];
+                s    = j / i % 2;
+                b[j] = a[(s ? -i : 0) + j] + (s ? -1 : 1) * a[(s ? 0 : i) + j];
             }
             std::swap(a, b);
-            tmp = a; a = b; b = tmp;
+            tmp = a;
+            a   = b;
+            b   = tmp;
         }
         std::copy(std::cbegin(a), std::cend(a), dst);
     }
-}}
+}} // namespace easy::dsp
 
 #endif // EASYDSP_FHT_IMPL_HPP

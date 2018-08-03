@@ -29,6 +29,18 @@
 
 namespace easy { namespace dsp { namespace filter {
 
+    enum class BiquadType {
+        LowPass,
+        HighPass,
+        BandPassSkirtGain,
+        BandPassPeakGain,
+        Notch,
+        AllPass,
+        PeakingEQ,
+        LowShelf,
+        HighShelf
+    };
+
     template <typename T>
     class Biquad {
     public:
@@ -57,10 +69,10 @@ namespace easy { namespace dsp { namespace filter {
         constexpr void setB2(T value) noexcept;
 
         template <typename BiIterator>
-        constexpr void apply(BiIterator first, BiIterator last);
+        constexpr void filter(BiIterator first, BiIterator last);
 
         template <typename InputIterator, typename OutputIterator>
-        constexpr void apply(InputIterator first, InputIterator last, OutputIterator out);
+        constexpr void filter(InputIterator first, InputIterator last, OutputIterator out);
 
         constexpr void reset() noexcept;
         constexpr bool isStable() const noexcept;
@@ -138,13 +150,13 @@ namespace easy { namespace dsp { namespace filter {
 
     template <typename T>
     template <typename BiIterator>
-    constexpr void Biquad<T>::apply(BiIterator first, BiIterator last) {
-        apply(first, last, first);
+    constexpr void Biquad<T>::filter(BiIterator first, BiIterator last) {
+        filter(first, last, first);
     }
 
     template <typename T>
     template <typename InputIterator, typename OutputIterator>
-    constexpr void Biquad<T>::apply(InputIterator first, InputIterator last, OutputIterator out) {
+    constexpr void Biquad<T>::filter(InputIterator first, InputIterator last, OutputIterator out) {
         static_assert(std::is_same<typename std::iterator_traits<InputIterator>::value_type, T>::value &&
                           std::is_same<typename std::iterator_traits<OutputIterator>::value_type, T>::value,
                       "Iterator does not math the value type. No implicit conversion is allowed");
@@ -153,6 +165,7 @@ namespace easy { namespace dsp { namespace filter {
 
     template <typename T>
     constexpr typename Biquad<T>::value_type Biquad<T>::operator()(const value_type tick) noexcept {
+        // Using Direct Form I
         const auto out = b0_ * tick + w0_;
         w0_            = b1_ * tick - a1_ * out + w1_;
         w1_            = b2_ * tick - a2_ * out;

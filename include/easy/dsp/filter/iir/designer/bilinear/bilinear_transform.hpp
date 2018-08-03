@@ -15,28 +15,27 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: fwht_impl.hpp
+ * Filename: bilinear_transform.hpp
  * Author: Mohammed Boujemaoui
  * Date: 3/8/2018
  */
-#ifndef EASYDSP_FWHT_IMPL_HPP
-#define EASYDSP_FWHT_IMPL_HPP
+#ifndef EASYDSP_FILTER_BILINEAR_TRANSFORM_HPP
+#define EASYDSP_FILTER_BILINEAR_TRANSFORM_HPP
 
-#include <algorithm>
-#include <cmath>
+#include <complex>
 
-namespace easy { namespace dsp {
-    template <typename Integer, typename Type>
-    void fwht_plan(Type data, Integer N) {
-        const auto log2 = std::log2(N) - 1;
-        for (Integer i = 0; i < log2; ++i) {
-            for (Integer j = 0; j < (1 << log2); j += 1 << (i + 1)) {
-                for (Integer k = 0; k < (1 << i); ++k) {
-                    std::swap(data[j + k], data[j + k + (1 << i)]);
-                }
-            }
-        }
+namespace easy { namespace dsp { namespace filter {
+
+    template <typename T>
+    constexpr std::complex<T> blt(const std::complex<T>& sz) {
+        const std::complex<T> two(2, 0);
+        return ((two + sz) / (two - sz));
     }
-}} // namespace easy::dsp
 
-#endif // EASYDSP_FWHT_IMPL_HPP
+    template <typename T>
+    constexpr T blt_gain(const std::complex<T>& sz) noexcept {
+        return std::abs(std::complex<T>(2, 0) - sz);
+    }
+}}}
+
+#endif // EASYDSP_FILTER_BILINEAR_TRANSFORM_HPP
