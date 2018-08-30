@@ -30,5 +30,4 @@ namespace easy {
     using expected = tl::optional<T, E>;
 }
 
-
 #endif // EASYDSP_OPTIONAL_HPP

@@ -31,7 +31,7 @@
 namespace easy { namespace dsp { namespace filter { namespace butterworth {
 
     namespace {
-        struct LowPassAnalogDesigner  {
+        struct LowPassAnalogDesigner {
             template <typename T, std::size_t MaxSize>
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles) const {
                 meta::expects(num_poles < MaxSize, "Index out of bounds");
@@ -40,10 +40,11 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
                 analog.setNormalGain(1);
                 analog.reset();
 
-                const auto size = static_cast<T>(num_poles * 2);
+                const auto size  = static_cast<T>(num_poles * 2);
                 const auto pairs = num_poles / 2;
                 for (auto i = 0ul; i < pairs; ++i) {
-                    const std::complex<T> c = std::polar(1, constants<T>::two_pi + (2 * i + 1) * constants<T>::pi / size);
+                    const std::complex<T> c =
+                        std::polar(1, constants<T>::two_pi + (2 * i + 1) * constants<T>::pi / size);
                     analog.insert_conjugate(c, math::infinity<T>());
                 }
 
@@ -52,7 +53,6 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
                 }
             }
         };
-
 
         struct LowShelfAnalogDesigner {
             template <typename T, std::size_t MaxSize>
@@ -63,10 +63,10 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
                 analog.setNormalGain(1);
                 analog.reset();
 
-                const auto size = static_cast<T>(num_poles * 2);
-                const auto g = std::pow(dsp::db2mag(gain), math::inv(n2));
-                const auto gp = - math::inv(g);
-                const auto gz = - g;
+                const auto size  = static_cast<T>(num_poles * 2);
+                const auto g     = std::pow(dsp::db2mag(gain), math::inv(n2));
+                const auto gp    = -math::inv(g);
+                const auto gz    = -g;
                 const auto pairs = num_poles / 2;
                 for (auto i = 0ul; i < pairs; ++i) {
                     const auto theta = constants<T>::pi * (0.5 - (2 * i - 1) / size);
@@ -78,7 +78,7 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
                 }
             }
         };
-    }
+    } // namespace
 
     template <typename T, std::size_t MaxSize>
     class LowPass : public AbstractFilter<T, LowPass, MaxSize> {
@@ -104,7 +104,7 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
     class BandPass : public AbstractFilter<T, BandPass, MaxSize, 2 * MaxSize> {
         friend class AbstractFilter<T, BandPass, MaxSize>;
         void design(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency) {
-            const auto normalized_center = center_frequency / sample_rate;
+            const auto normalized_center    = center_frequency / sample_rate;
             const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
             LowPassAnalogDesigner::design(analog_, order);
             BandPassTransformer{normalized_center, normalized_bandwidth}(digital_, analog_);
@@ -115,7 +115,7 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
     class BandStopPass : public AbstractFilter<T, BandStopPass, MaxSize, 2 * MaxSize> {
         friend class AbstractFilter<T, BandStopPass, MaxSize>;
         void design(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency) {
-            const auto normalized_center = center_frequency / sample_rate;
+            const auto normalized_center    = center_frequency / sample_rate;
             const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
             LowPassAnalogDesigner::design(analog_, order);
             BandStopTransformer{normalized_center, normalized_bandwidth}(digital_, analog_);
@@ -146,7 +146,7 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
     class BandShelfPass : public AbstractFilter<T, BandShelfPass, MaxSize, 2 * MaxSize> {
         friend class AbstractFilter<T, BandShelfPass, MaxSize, 2 * MaxSize>;
         void design(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency, T gain_db) {
-            const auto normalized_center = center_frequency / sample_rate;
+            const auto normalized_center    = center_frequency / sample_rate;
             const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
             LowShelfAnalogDesigner::design(analog_, order, gain_db);
             BandPassTransformer{normalized_center, normalized_bandwidth}(digital_, analog_);
@@ -157,7 +157,6 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
         }
     };
 
-}}}}
-
+}}}} // namespace easy::dsp::filter::butterworth
 
 #endif // EASYDSP_BIQUAD_BUTTERWORTH_HPP

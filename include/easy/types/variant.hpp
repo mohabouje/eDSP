@@ -36,7 +36,6 @@ namespace easy {
 
     template <typename Type, typename Visitor>
     using get = mpark::get<Type, Visitor>;
-}
-
+} // namespace easy
 
 #endif // EASYDSP_VARIANT_HPP

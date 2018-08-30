@@ -52,7 +52,7 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator>
     inline void Kaiser<T, Allocator>::initialize() {
-        const auto r      = math::square(2 * beta_ / static_cast<value_type>(parent::size()));
+        const auto r = math::square(2 * beta_ / static_cast<value_type>(parent::size()));
         for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
             //const auto t         = i - static_cast<value_type>(sz - 1) / 2 + mu_;
             //const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);

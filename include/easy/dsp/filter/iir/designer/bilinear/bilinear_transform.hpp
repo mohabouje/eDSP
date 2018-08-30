@@ -36,6 +36,6 @@ namespace easy { namespace dsp { namespace filter {
     constexpr T blt_gain(const std::complex<T>& sz) noexcept {
         return std::abs(std::complex<T>(2, 0) - sz);
     }
-}}}
+}}} // namespace easy::dsp::filter
 
 #endif // EASYDSP_FILTER_BILINEAR_TRANSFORM_HPP

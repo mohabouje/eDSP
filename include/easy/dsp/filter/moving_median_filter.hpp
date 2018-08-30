@@ -29,8 +29,7 @@
 
 namespace easy { namespace dsp { namespace filter {
 
-    template <typename T,
-              typename Allocator = std::allocator<T>>
+    template <typename T, typename Allocator = std::allocator<T>>
     class MovingMedianFilter {
     public:
         using size_type  = std::size_t;

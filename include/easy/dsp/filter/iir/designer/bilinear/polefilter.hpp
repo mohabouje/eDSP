@@ -30,16 +30,12 @@
 
 namespace easy { namespace dsp { namespace filter {
 
-
-    template <typename T,
-              class Designer,
-              std::size_t MaxAnalog,
-              std::size_t MaxDigital = MaxAnalog>
+    template <typename T, class Designer, std::size_t MaxAnalog, std::size_t MaxDigital = MaxAnalog>
     struct AbstractFilter {
         using digital_type = LayoutBase<T, MaxDigital>;
-        using analog_type = LayoutBase<T, MaxAnalog>;
+        using analog_type  = LayoutBase<T, MaxAnalog>;
 
-        template <typename...Args>
+        template <typename... Args>
         void design(Args... arg) {
             auto* designer = static_cast<Designer*>(this);
             designer.design(std::forward(arg...));
@@ -59,7 +55,6 @@ namespace easy { namespace dsp { namespace filter {
         LayoutBase<T, MaxDigital> digital_;
     };
 
-
-}}}
+}}} // namespace easy::dsp::filter
 
 #endif // EASYDSP_POLEFILTER_HPP

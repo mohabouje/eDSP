@@ -161,6 +161,6 @@ namespace easy { inline namespace math {
     constexpr auto euclidean_distance(T x, T y) {
         return square(manhattan_distance(x, y));
     }
-}} // namespace easy::meta::math
+}} // namespace easy::math
 
 #endif //EASYMETA_MATH_H

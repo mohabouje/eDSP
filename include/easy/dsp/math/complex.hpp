@@ -72,11 +72,9 @@ namespace easy { inline namespace math {
     }
 
     template <typename T>
-    constexpr std::complex<T> addmul(const std::complex<T>& left,
-                                     const T factor,
+    constexpr std::complex<T> addmul(const std::complex<T>& left, const T factor,
                                      const std::complex<T>& right) noexcept {
-        return std::complex <T> (left.real() + factor * right.real(),
-                                 left.imag() + factor * right.imag());
+        return std::complex<T>(left.real() + factor * right.real(), left.imag() + factor * right.imag());
     }
 
     template <typename>
@@ -84,7 +82,6 @@ namespace easy { inline namespace math {
         return std::complex<T>(std::numeric_limits<T>::infinity());
     }
 
-
-}} // namespace easy::meta::math
+}} // namespace easy::math
 
 #endif

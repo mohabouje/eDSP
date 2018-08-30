@@ -34,28 +34,23 @@ namespace easy { namespace dsp { namespace filter {
     template <typename T>
     struct complex_pair : public std::pair<std::complex<T>, std::complex<T>> {
         using base = std::pair<std::complex<T>, std::complex<T>>;
-        explicit constexpr complex_pair(const std::complex<T>& c1) :
-            base(c1, std::complex<T>(0, 0)) {}
+        explicit constexpr complex_pair(const std::complex<T>& c1) : base(c1, std::complex<T>(0, 0)) {}
 
-        constexpr complex_pair(const std::complex<T>& c1, const std::complex<T>& c2) :
-            base(c1, c2) {}
+        constexpr complex_pair(const std::complex<T>& c1, const std::complex<T>& c2) : base(c1, c2) {}
 
         constexpr isConjugate() const noexcept {
             return this->second == std::conj(first);
         }
 
         constexpr isReal() const noexcept {
-            return this->first.imag() == 0
-                    && this->second.imag() == 0;
+            return this->first.imag() == 0 && this->second.imag() == 0;
         }
 
         constexpr isMatchedPair() const noexcept {
             if (this->first.imag() != 0) {
-                return this->second == std::conj (first);
+                return this->second == std::conj(first);
             } else {
-                return this->second.imag () == 0 &&
-                     this->second.real () != 0 &&
-                     this->first.real () != 0;
+                return this->second.imag() == 0 && this->second.real() != 0 && this->first.real() != 0;
             }
         }
 
@@ -66,12 +61,11 @@ namespace easy { namespace dsp { namespace filter {
 
     template <typename T>
     struct pz_pair : std::pair<complex_pair<T>, complex_pair<T>> {
-        using base =  std::pair<complex_pair<T>, complex_pair<T>> ;
-        constexpr pz_pair(const std::complex<T>& p, const std::complex<T>& z) :
-            base(p, z) {}
+        using base = std::pair<complex_pair<T>, complex_pair<T>>;
+        constexpr pz_pair(const std::complex<T>& p, const std::complex<T>& z) : base(p, z) {}
 
-        constexpr pz_pair(const std::complex<T>& p1, const std::complex<T>& z1,
-                          const std::complex<T>& p2, const std::complex<T>& z2) :
+        constexpr pz_pair(const std::complex<T>& p1, const std::complex<T>& z1, const std::complex<T>& p2,
+                          const std::complex<T>& z2) :
             base(complex_pair(p1, z1), complex_pair(p2, z2)) {}
 
         constexpr isSinglePole() const noexcept {
@@ -97,20 +91,16 @@ namespace easy { namespace dsp { namespace filter {
         constexpr complex_pair<T>& zeros() noexcept {
             return this->second;
         }
-
     };
 
-
-    template <typename T,
-              std::size_t MaxSize = 50>
+    template <typename T, std::size_t MaxSize = 50>
     struct LayoutBase {
-        using value_type = pz_pair<T>;
-        using size_type = std::size_t;
-        using reference = value_type&;
+        using value_type      = pz_pair<T>;
+        using size_type       = std::size_t;
+        using reference       = value_type&;
         using const_reference = const value_type&;
-        using iterator = value_type*;
-        using const_iterator = const value_type*;
-
+        using iterator        = value_type*;
+        using const_iterator  = const value_type*;
 
         constexpr LayoutBase() = default;
 
@@ -191,6 +181,6 @@ namespace easy { namespace dsp { namespace filter {
         T normal_gain_{};
     };
 
-}}}
+}}} // namespace easy::dsp::filter
 
 #endif // EASYDSP_LAYOUT_BASE_HPP

@@ -41,8 +41,7 @@ namespace easy { namespace dsp {
         std::generate(meta::advance(first_out, input_size), last_out, generator);
     };
 
-    template <typename InputIterator, 
-              typename OutputIterator>
+    template <typename InputIterator, typename OutputIterator>
     constexpr void padder(InputIterator first, InputIterator last, OutputIterator first_out, OutputIterator last_out,
                           typename std::iterator_traits<InputIterator>::value_type value) {
         padder(first, last, first_out, last_out,

@@ -28,8 +28,7 @@
 
 namespace easy { namespace dsp { namespace filter {
 
-    template <typename T,
-              std::size_t MaxSize>
+    template <typename T, std::size_t MaxSize>
     struct BandStopTransformer {
         using value_type = T;
 
@@ -38,31 +37,30 @@ namespace easy { namespace dsp { namespace filter {
         }
 
         void initialize(value_type fc, value_type fw) {
-            ww = constants<T>::two_pi * fw;
+            ww  = constants<T>::two_pi * fw;
             wc2 = constants<T>::two_pi * fc - ww / 2;
-            wc = wc2 + ww;
+            wc  = wc2 + ww;
 
             if (wc2 < 1e-8)
                 wc2 = 1e-8;
-            if (wc  > constants<T>::pi - 1e-8)
-                wc  = constants<T>::pi - 1e-8;
+            if (wc > constants<T>::pi - 1e-8)
+                wc = constants<T>::pi - 1e-8;
 
-            a = std::cos ((wc + wc2) * 0.5) / std::cos ((wc - wc2) * 0.5);
-            b = math::inv(std::tan((wc - wc2) * 0.5));
+            a  = std::cos((wc + wc2) * 0.5) / std::cos((wc - wc2) * 0.5);
+            b  = math::inv(std::tan((wc - wc2) * 0.5));
             a2 = a * a;
             b2 = b * b;
         }
 
-        void operator()(LayoutBase<T, MaxSize>& digital,
-                        LayoutBase<T, MaxSize>& analog) {
+        void operator()(LayoutBase<T, MaxSize>& digital, LayoutBase<T, MaxSize>& analog) {
             digital.reset();
 
             const auto num_poles = analog.numberPoles();
             const auto num_pairs = num_poles / 2;
             for (auto i = 0ul; i < until; ++i) {
                 const auto& pair = analog[i];
-                const auto p = transform(pair.poles().first);
-                const auto z = transform(pair.zeros().first);
+                const auto p     = transform(pair.poles().first);
+                const auto z     = transform(pair.zeros().first);
 
                 if (z.second == z.first)
                     z.second = std::conj(z.first);
@@ -82,28 +80,26 @@ namespace easy { namespace dsp { namespace filter {
             digital.setNormalGain(analog.normalGain());
         }
 
-        complex_pair<T> transform (const std::complex<T>& initial) {
+        complex_pair<T> transform(const std::complex<T>& initial) {
             constexpr auto one = std::complex<T>(1, 0);
-            const auto c = meta::is_inf(c) ? std::complex<T>(-1, 0)
-                                           : (one + initial) / (one - initial);
+            const auto c       = meta::is_inf(c) ? std::complex<T>(-1, 0) : (one + initial) / (one - initial);
 
-            auto u = meta::addmul(std::complex<T>(0,0), 4 * (b2 + a2 - 1), c);
+            auto u = meta::addmul(std::complex<T>(0, 0), 4 * (b2 + a2 - 1), c);
             u += 8 * (b2 - a2 + 1);
             u *= c;
             u += 4 * (a2 + b2 - 1);
-            u = std::sqrt (u);
+            u = std::sqrt(u);
 
-
-            auto v = u * - std::complex<T>(0.5, 0);
+            auto v = u * -std::complex<T>(0.5, 0);
             v += a;
             v = math::addmul(v, -a, c);
 
             u *= std::complex<T>(0.5, 0);
             u += a;
-            u = addmul (u, -a, c);
+            u = addmul(u, -a, c);
 
-            auto d (b + 1);
-            d = math::addmul (d, b-1, c);
+            auto d(b + 1);
+            d = math::addmul(d, b - 1, c);
 
             return {u / d, v / d};
         }
@@ -115,8 +111,6 @@ namespace easy { namespace dsp { namespace filter {
         value_type a{0}, b{0}, a2{0}, b2{0}, ab{0}, ab_2{0};
     };
 
-}}}
-
-
+}}} // namespace easy::dsp::filter
 
 #endif // EASYDSP_BANDSTOP_TRANSFORMER_HPP
