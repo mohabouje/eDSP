@@ -24,7 +24,7 @@
 #define EASYDSP_FILTER_BIQUAD_HPP
 
 #include <easy/dsp/math/math.hpp>
-#include <easy/dsp/filter/filter.hpp>
+#include <easy/dsp/filter/filter_types.hpp>
 #include <algorithm>
 #include <cmath>
 #include <functional>

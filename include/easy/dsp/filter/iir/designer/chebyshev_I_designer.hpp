@@ -26,14 +26,14 @@
 #include <easy/meta/expects.hpp>
 #include <easy/dsp/math/complex.hpp>
 #include <easy/dsp/math/constant.hpp>
-#include <easy/dsp/filter/filter.hpp>
+#include <easy/dsp/filter/filter_types.hpp>
 #include <easy/dsp/filter/iir/designer/bilinear/bandpass_transformer.hpp>
 #include <easy/dsp/filter/iir/designer/bilinear/bandstop_transformer.hpp>
 #include <easy/dsp/filter/iir/designer/bilinear/lowpass_transformer.hpp>
 #include <easy/dsp/filter/iir/designer/bilinear/highpass_transformer.hpp>
 #include <easy/dsp/filter/iir/designer/abstract_designer.hpp>
 
-namespace easy { namespace dsp { namespace filter { namespace chebyshevI {
+namespace easy { namespace dsp { namespace filter {
 
     namespace {
         struct LowPassAnalogDesigner {
@@ -192,11 +192,12 @@ namespace easy { namespace dsp { namespace filter { namespace chebyshevI {
         };
     } // namespace
 
-    template <FilterType Type, typename T, std::size_t MaxOrder>
-    struct ChebyshevIIDesigner {};
+
+    template <typename T, FilterType Type, std::size_t MaxOrder>
+    struct ChebyshevIDesigner {};
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIIDesigner<FilterType::LowPass> {
+    struct ChebyshevIDesigner<T, FilterType::LowPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return LowPass<T, MaxOrder>{}(std::forward(arg...));
@@ -204,7 +205,7 @@ namespace easy { namespace dsp { namespace filter { namespace chebyshevI {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIIDesigner<FilterType::HighPass> {
+    struct ChebyshevIDesigner<T, FilterType::HighPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return HighPass<T, MaxOrder>{}(std::forward(arg...));
@@ -212,7 +213,7 @@ namespace easy { namespace dsp { namespace filter { namespace chebyshevI {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIIDesigner<FilterType::BandPass> {
+    struct ChebyshevIDesigner<T, FilterType::BandPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return BandPass<T, MaxOrder>{}(std::forward(arg...));
@@ -220,7 +221,7 @@ namespace easy { namespace dsp { namespace filter { namespace chebyshevI {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIIDesigner<FilterType::BandStop> {
+    struct ChebyshevIDesigner<T, FilterType::BandStop, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return BandStopPass<T, MaxOrder>{}(std::forward(arg...));
@@ -228,7 +229,7 @@ namespace easy { namespace dsp { namespace filter { namespace chebyshevI {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIIDesigner<FilterType::LowShelf> {
+    struct ChebyshevIDesigner<T, FilterType::LowShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return LowShelfPass<T, MaxOrder>{}(std::forward(arg...));
@@ -236,7 +237,7 @@ namespace easy { namespace dsp { namespace filter { namespace chebyshevI {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIIDesigner<FilterType::HighShelf> {
+    struct ChebyshevIIDesigner<T, FilterType::HighShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return HighShelfPass<T, MaxOrder>{}(std::forward(arg...));
@@ -244,13 +245,13 @@ namespace easy { namespace dsp { namespace filter { namespace chebyshevI {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIIDesigner<FilterType::BandShelf> {
+    struct ChebyshevIDesigner<T, FilterType::BandShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return BandShelfPass<T, MaxOrder>{}(std::forward(arg...));
         }
     };
 
-}}}} // namespace easy::dsp::filter::chebyshevI
+}}} // namespace easy::dsp::filter::chebyshevI
 
 #endif // EASYDSP_CHEBYSHEV_I_HPP

@@ -32,7 +32,7 @@
 #include <easy/dsp/filter/iir/designer/bilinear/highpass_transformer.hpp>
 #include <easy/dsp/filter/iir/designer/abstract_designer.hpp>
 
-namespace easy { namespace dsp { namespace filter { namespace butterworth {
+namespace easy { namespace dsp { namespace filter {
 
     namespace {
         struct LowPassAnalogDesigner {
@@ -162,11 +162,11 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
 
     } // namespace
 
-    template <FilterType Type, typename T, std::size_t MaxOrder>
+    template <typename T, FilterType Type, std::size_t MaxOrder>
     struct ButterworthDesigner {};
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<FilterType::LowPass> {
+    struct ButterworthDesigner<T, FilterType::LowPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return LowPass<T, MaxOrder>{}(std::forward(arg...));
@@ -174,7 +174,7 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<FilterType::HighPass> {
+    struct ButterworthDesigner<T, FilterType::HighPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return HighPass<T, MaxOrder>{}(std::forward(arg...));
@@ -182,7 +182,7 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<FilterType::BandPass> {
+    struct ButterworthDesigner<T, FilterType::BandPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return BandPass<T, MaxOrder>{}(std::forward(arg...));
@@ -190,7 +190,7 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<FilterType::BandStop> {
+    struct ButterworthDesigner<T, FilterType::BandStop, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return BandStopPass<T, MaxOrder>{}(std::forward(arg...));
@@ -198,7 +198,7 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<FilterType::LowShelf> {
+    struct ButterworthDesigner<T, FilterType::LowShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return LowShelfPass<T, MaxOrder>{}(std::forward(arg...));
@@ -206,7 +206,7 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<FilterType::HighShelf> {
+    struct ButterworthDesigner<T, FilterType::HighShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return HighShelfPass<T, MaxOrder>{}(std::forward(arg...));
@@ -214,13 +214,13 @@ namespace easy { namespace dsp { namespace filter { namespace butterworth {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<FilterType::BandShelf> {
+    struct ButterworthDesigner<T, FilterType::BandShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return BandShelfPass<T, MaxOrder>{}(std::forward(arg...));
         }
     };
 
-}}}} // namespace easy::dsp::filter::butterworth
+}}} // namespace easy::dsp::filter::butterworth
 
 #endif // EASYDSP_BIQUAD_BUTTERWORTH_HPP

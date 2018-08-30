@@ -26,7 +26,7 @@
 #include <easy/meta/expects.hpp>
 #include <easy/dsp/math/complex.hpp>
 #include <easy/dsp/math/constant.hpp>
-#include <easy/dsp/filter/filter.hpp>
+#include <easy/dsp/filter/filter_types.hpp>
 #include <easy/dsp/filter/iir/designer/bilinear/bandpass_transformer.hpp>
 #include <easy/dsp/filter/iir/designer/bilinear/bandstop_transformer.hpp>
 #include <easy/dsp/filter/iir/designer/bilinear/lowpass_transformer.hpp>
@@ -192,11 +192,12 @@ namespace easy { namespace dsp { namespace filter {
 
     } // namespace
 
-    template <FilterType Type, typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner {};
+
+    template <typename T, FilterType Type, std::size_t MaxOrder>
+    struct ChebyshevIIDesigner {};
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<FilterType::LowPass> {
+    struct ChebyshevIIDesigner<T, FilterType::LowPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return LowPass<T, MaxOrder>{}(std::forward(arg...));
@@ -204,7 +205,7 @@ namespace easy { namespace dsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<FilterType::HighPass> {
+    struct ChebyshevIIDesigner<T, FilterType::HighPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return HighPass<T, MaxOrder>{}(std::forward(arg...));
@@ -212,7 +213,7 @@ namespace easy { namespace dsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<FilterType::BandPass> {
+    struct ChebyshevIIDesigner<T, FilterType::BandPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return BandPass<T, MaxOrder>{}(std::forward(arg...));
@@ -220,7 +221,7 @@ namespace easy { namespace dsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<FilterType::BandStop> {
+    struct ChebyshevIIDesigner<T, FilterType::BandStop, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return BandStopPass<T, MaxOrder>{}(std::forward(arg...));
@@ -228,7 +229,7 @@ namespace easy { namespace dsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<FilterType::LowShelf> {
+    struct ChebyshevIIDesigner<T, FilterType::LowShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return LowShelfPass<T, MaxOrder>{}(std::forward(arg...));
@@ -236,7 +237,7 @@ namespace easy { namespace dsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<FilterType::HighShelf> {
+    struct ChebyshevIIDesigner<T, FilterType::HighShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return HighShelfPass<T, MaxOrder>{}(std::forward(arg...));
@@ -244,7 +245,7 @@ namespace easy { namespace dsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<FilterType::BandShelf> {
+    struct ChebyshevIIDesigner<T, FilterType::BandShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg) {
             return BandShelfPass<T, MaxOrder>{}(std::forward(arg...));

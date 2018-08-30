@@ -27,7 +27,7 @@
 #include <easy/dsp/math/constant.hpp>
 #include <easy/dsp/math/complex.hpp>
 #include <easy/dsp/filter/iir/designer/bilinear/layout_base.hpp>
-#include <easy/dsp/filter/biquad/biquad.hpp>
+#include <easy/dsp/filter/iir/biquad.hpp>
 
 namespace easy { namespace dsp { namespace filter {
 
