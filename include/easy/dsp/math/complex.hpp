@@ -24,6 +24,7 @@
 #define EASYMETA_COMPLEX_H
 
 #include <easy/meta/unused.hpp>
+#include <limits>
 #include <complex>
 #include <cmath>
 
@@ -77,6 +78,12 @@ namespace easy { inline namespace math {
         return std::complex <T> (left.real() + factor * right.real(),
                                  left.imag() + factor * right.imag());
     }
+
+    template <typename>
+    constexpr std::complex<T> infinity() noexcept {
+        return std::complex<T>(std::numeric_limits<T>::infinity());
+    }
+
 
 }} // namespace easy::meta::math
 
