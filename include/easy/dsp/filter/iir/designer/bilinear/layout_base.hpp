@@ -22,10 +22,12 @@
 #ifndef EASYDSP_LAYOUT_BASE_HPP
 #define EASYDSP_LAYOUT_BASE_HPP
 
-#include <easy/meta/math.hpp>
+#include <easy/dsp/math/math.hpp>
 #include <easy/meta/expects.hpp>
+#include <easy/meta/ensure.hpp>
 #include <complex>
 #include <vector>
+#include <array>
 
 namespace easy { namespace dsp { namespace filter {
 
@@ -80,77 +82,113 @@ namespace easy { namespace dsp { namespace filter {
             return this->first.isNaN() || this->second.isNaN();
         }
 
+        constexpr const complex_pair<T>& poles() const noexcept {
+            return this->first;
+        }
+
+        constexpr complex_pair<T>& poles() noexcept {
+            return this->first;
+        }
+
+        constexpr const complex_pair<T>& zeros() const noexcept {
+            return this->second;
+        }
+
+        constexpr complex_pair<T>& zeros() noexcept {
+            return this->second;
+        }
+
     };
 
 
     template <typename T,
-              typename Allocator = std::allocator<pz_pair>>
+              std::size_t MaxSize = 50>
     struct LayoutBase {
         using value_type = pz_pair<T>;
         using size_type = std::size_t;
+        using reference = value_type&;
+        using const_reference = const value_type&;
+        using iterator = value_type*;
+        using const_iterator = const value_type*;
 
-        explicit LayoutBase(size_type number_poles) :
-            num_poles_(number_poles)
-        {
-            pairs_.reserve(meta::is_odd(number_poles) ? number_poles / 2 + 1
-                                                      : number_poles / 2);
-        }
 
-        T normalW() const noexcept {
+        constexpr LayoutBase() = default;
+
+        constexpr T normalW() const noexcept {
             return normal_W_;
         }
 
-        T normalGain() const noexcept {
+        constexpr T normalGain() const noexcept {
             return normal_Gain_;
         }
 
-        size_type numberPoles() const noexcept {
+        constexpr size_type numberPoles() const noexcept {
             return num_poles_;
         }
 
-        void setNormalW(T normal_W) noexcept {
+        constexpr void setNormalW(T normal_W) noexcept {
             normal_W_ = normal_W;
         }
 
-        void setNormalGain(T normal_gain) noexcept {
+        constexpr void setNormalGain(T normal_gain) noexcept {
             normal_gain_ = normal_gain;
         }
 
-        void insert(const std::complex<T>& pole, const std::complex<T>& zero) {
-            pairs_.emplace_back(pole, zero);
-            ++num_poles_;
+        constexpr void insert(const std::complex<T>& pole, const std::complex<T>& zero) {
+            meta::ensure(math::is_even(num_poles_));
+            meta::expects(!math::is_nan(pole), "NAN number cannot be a pole");
+            pairs_[num_poles_ / 2] = pz_pair<T>(pole, zero);
+            num_poles_ += 1;
         }
 
-        void insert_conjugate(const std::complex<T>& pole, const std::complex<T>& zero) {
-            pairs_.emplace_back(pole, zero, std::conj(pole), std::conj(zero));
+        constexpr void insert_conjugate(const std::complex<T>& pole, const std::complex<T>& zero) {
+            meta::ensure(math::is_even(num_poles_));
+            meta::expects(!math::is_nan(pole), "NAN number cannot be a pole");
+            pairs_[num_poles_ / 2] = pz_pair<T>(pole, zero, std::conj(pole), std::conj(zero));
             num_poles_ += 2;
         }
 
-        void insert(const complex_pair& poles, const complex_pair& zeros) {
-            pairs_.emplace_back(poles.first, zeros.first, poles.second, zeros.second);
+        constexpr void insert(const complex_pair& poles, const complex_pair& zeros) {
+            meta::ensure(math::is_even(num_poles_));
+            meta::expects(poles.isMatchedPair(), "Expected conjugate pairs");
+            meta::expects(zeros.isMatchedPair(), "Expected conjugate pairs");
+            pairs_[num_poles_ / 2] = pz_pair<T>(poles.first, zeros.first, poles.second, zeros.second);
             num_poles_ += 2;
         }
 
-        void reset() noexcept {
+        constexpr void reset() noexcept {
             num_poles_ = 0;
-            pairs_.clear();
         }
 
-        const value_type& operator[](size_type index) const noexcept {
-            meta::expects(index < (num_poles_ + 1 ) / 2, "Index out of bounds");
+        constexpr size_type size() const noexcept {
+            return std::ceil(num_poles_ / 2) + 1;
+        }
+
+        constexpr const_iterator cbegin() const noexcept {
+            return std::cbegin(pairs_);
+        }
+
+        constexpr const_iterator cend() const noexcept {
+            return std::cbegin(pairs_) + size();
+        }
+
+        constexpr const_reference operator[](size_type index) const noexcept {
+            meta::expects(index < size(), "Index out of bounds");
             return pair_[index];
         }
 
-        value_type& operator[](size_type index) noexcept {
-            meta::expects(index < (num_poles_ + 1 ) / 2, "Index out of bounds");
+        constexpr const_reference at(size_type index) const {
+            if (index >= size()) {
+                throw std::runtime_error("Index out of bounds");
+            }
             return pair_[index];
         }
 
     private:
-        size_type num_poles_;
-        std::vector<value_type, Allocator> pairs_;
-        T normal_W_;
-        T normal_gain_;
+        size_type num_poles_{};
+        std::array<value_type, MaxSize> pairs_{};
+        T normal_W_{};
+        T normal_gain_{};
     };
 
 }}}

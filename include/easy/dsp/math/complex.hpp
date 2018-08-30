@@ -23,11 +23,11 @@
 #ifndef EASYMETA_COMPLEX_H
 #define EASYMETA_COMPLEX_H
 
-#include "unused.hpp"
+#include <easy/meta/unused.hpp>
 #include <complex>
 #include <cmath>
 
-namespace easy { namespace meta { inline namespace math {
+namespace easy { inline namespace math {
 
     template <typename T>
     constexpr T magnitude(const std::complex<T>& value) {
@@ -70,6 +70,14 @@ namespace easy { namespace meta { inline namespace math {
         return value;
     }
 
-}}} // namespace easy::meta::math
+    template <typename T>
+    constexpr std::complex<T> addmul(const std::complex<T>& left,
+                                     const T factor,
+                                     const std::complex<T>& right) noexcept {
+        return std::complex <T> (left.real() + factor * right.real(),
+                                 left.imag() + factor * right.imag());
+    }
+
+}} // namespace easy::meta::math
 
 #endif

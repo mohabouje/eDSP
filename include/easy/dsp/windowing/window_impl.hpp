@@ -22,12 +22,13 @@
 #ifndef EASYDSP_WINDOW_HPP
 #define EASYDSP_WINDOW_HPP
 
-#include "easy/dsp/math/constant.hpp"
+#include <easy/dsp/math/constant.hpp>
 #include <easy/meta/expects.hpp>
 #include <algorithm>
 #include <numeric>
 #include <iterator>
 #include <vector>
+#include <cmath>
 
 namespace easy { namespace dsp { namespace windowing {
 

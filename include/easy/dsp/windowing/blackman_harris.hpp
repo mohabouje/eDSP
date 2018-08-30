@@ -23,7 +23,6 @@
 #define EASYDSP_BLACKMANHARRIS_HARRIS_HPP
 
 #include "window_impl.hpp"
-#include <cmath>
 
 namespace easy { namespace dsp { namespace windowing {
 

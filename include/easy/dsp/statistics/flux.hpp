@@ -22,7 +22,7 @@
 #ifndef EASYDSP_STATISTICAL_FLUX_HPP
 #define EASYDSP_STATISTICAL_FLUX_HPP
 
-#include <easy/meta/math.hpp>
+#include <easy/dsp/math/math.hpp>
 #include <type_traits>
 #include <iterator>
 #include <cmath>

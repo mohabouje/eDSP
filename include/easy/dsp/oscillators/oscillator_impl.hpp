@@ -22,7 +22,7 @@
 #ifndef EASYDSP_OSCILLATOR_IMPL_HPP
 #define EASYDSP_OSCILLATOR_IMPL_HPP
 
-#include <easy/meta/math.hpp>
+#include <easy/dsp/math/math.hpp>
 
 namespace easy { namespace dsp { namespace oscillators {
 

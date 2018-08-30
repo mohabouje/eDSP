@@ -1,0 +1,74 @@
+/*
+ * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi
+ *
+ * This program is free software: you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation, either version 3 of the License, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along withº
+ * this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * Filename: lowpass_transformer.hpp
+ * Author: Mohammed Boujemaoui
+ * Date: 3/8/2018
+ */
+#ifndef EASYDSP_LOWPASS_TRANSFORM_HPP
+#define EASYDSP_LOWPASS_TRANSFORM_HPP
+
+#include "layout_base.hpp"
+#include <easy/dsp/math/constant.hpp>
+
+namespace easy { namespace dsp { namespace filter {
+
+    template <typename T,
+              std::size_t MaxSize>
+    struct LowPassTransformer {
+        using value_type = T;
+
+        LowPassTransformer(value_type fc) :
+            f(math::inv(std::tan(constants<value_type>::pi * fc))) {}
+
+        void operator()(LayoutBase<T, MaxSize>& digital,
+                        LayoutBase<T, MaxSize>& analog) {
+            digital.reset();
+            digital.setNormalW(analog.normalW());
+            digital.setNormalGain(analog.normalGain());
+
+            const auto num_poles = analog.numberPoles();
+            const auto num_pairs = num_poles / 2;
+            for (auto i = 0ul; i < until; ++i) {
+                const auto& pair = analog[i];
+                digital.insert_conjugate(transform(pair.poles().first),
+                                         transform(pair.zeros().second));
+            }
+
+            if (math::is_odd(num_poles)) {
+                const auto& pair = analog[num_pairs];
+                digital.insert(transform(pair.poles().first),
+                               transform(pair.zeros().first);
+            }
+        }
+
+        std::complex<T> transform (const std::complex<T>& c) {
+            if (meta::is_inf(c)) {
+                return std::complex<T>(-1, 0);
+            }
+            constexpr auto one = std::complex<T>(1, 0);
+            const auto element = f * c;
+            return (one + element) / (one - element);
+        }
+
+    private:
+        value_type f;
+    };
+
+}}}
+
+#endif // EASYDSP_LOWPASS_TRANSFORM_HPP

@@ -26,7 +26,7 @@
 #include <cmath>
 #include <cstdint>
 
-namespace easy { namespace meta { inline namespace math {
+namespace easy { inline namespace math {
 
     template <typename T>
     constexpr bool is_negative(const T& x) {
@@ -138,6 +138,11 @@ namespace easy { namespace meta { inline namespace math {
     }
 
     template <typename T>
+    constexpr T half(T value) {
+        return static_cast<T>(0.5) * value;
+    }
+
+    template <typename T>
     constexpr auto asinh(T x) {
         return static_cast<T>(std::log(x + std::sqrt(x * x + 1)));
     }
@@ -156,6 +161,6 @@ namespace easy { namespace meta { inline namespace math {
     constexpr auto euclidean_distance(T x, T y) {
         return square(manhattan_distance(x, y));
     }
-}}} // namespace easy::meta::math
+}} // namespace easy::meta::math
 
 #endif //EASYMETA_MATH_H

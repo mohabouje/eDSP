@@ -22,7 +22,7 @@
 #ifndef EASYDSP_FEATURE_TEMPORAL_ENVELOPE_HPP
 #define EASYDSP_FEATURE_TEMPORAL_ENVELOPE_HPP
 
-#include <easy/meta/math.hpp>
+#include <easy/dsp/math/math.hpp>
 #include <numeric>
 #include <cmath>
 

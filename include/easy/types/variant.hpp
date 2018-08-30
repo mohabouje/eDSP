@@ -15,27 +15,28 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: geometric_mean.hpp
+ * Filename: variant.hpp
  * Author: Mohammed Boujemaoui
- * Date: 2018-06-13
+ * Date: 30/8/2018
  */
-#ifndef EASYDSP_STATISTICAL_GEOMETRIC_MEAN_H
-#define EASYDSP_STATISTICAL_GEOMETRIC_MEAN_H
+#ifndef EASYDSP_VARIANT_HPP
+#define EASYDSP_VARIANT_HPP
 
-#include <easy/dsp/math/math.hpp>
-#include <numeric>
-#include <cmath>
-#include <iterator>
+#include <easy/third-party/mpark/variant.hpp>
 
-namespace easy { namespace dsp { namespace statistics {
+namespace easy {
 
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type geometric_mean(InputIterator first, InputIterator last) {
-        const value_type accumulated =
-            std::accumulate(first, last, static_cast<value_type>(0), std::multiplies<value_type>());
-        return std::pow(accumulated, meta::inv(std::distance(first, last)));
-    }
+    using monostate = mpark::monostate;
 
-}}} // namespace easy::dsp::statistics
+    template <typename... Ts>
+    using variant = mpark::variant<Ts...>;
 
-#endif // EASYDSP_STATISTICAL_GEOMETRIC_MEAN_H
+    template <typename Visitor, typename... Vs>
+    using visit = mpark::visit<Visitor, Vs...>;
+
+    template <typename Type, typename Visitor>
+    using get = mpark::get<Type, Visitor>;
+}
+
+
+#endif // EASYDSP_VARIANT_HPP

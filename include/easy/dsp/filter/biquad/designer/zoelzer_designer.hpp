@@ -25,7 +25,7 @@
 #include "easy/dsp/filter/biquad/biquad.hpp"
 #include "easy/dsp/math/constant.hpp"
 #include "easy/dsp/utilities/db2mag.hpp"
-#include <easy/meta/math.hpp>
+#include <easy/dsp/math/math.hpp>
 #include <easy/meta/unused.hpp>
 #include <cmath>
 

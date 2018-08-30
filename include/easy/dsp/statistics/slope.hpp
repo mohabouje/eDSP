@@ -23,7 +23,7 @@
 #define EASYDSP_STATISTICAL_SLOPE_HPP
 
 #include <iterator>
-#include <easy/meta/math.hpp>
+#include <easy/dsp/math/math.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
     template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>

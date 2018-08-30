@@ -26,7 +26,7 @@
 #include <easy/meta/advance.hpp>
 #include <easy/meta/complex.hpp>
 #include <easy/meta/data.hpp>
-#include <easy/meta/math.hpp>
+#include <easy/dsp/math/math.hpp>
 
 #include <algorithm>
 #include <vector>

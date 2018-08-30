@@ -22,7 +22,7 @@
 #ifndef EASYDSP_MOVING_RMS_FILTER_HPP
 #define EASYDSP_MOVING_RMS_FILTER_HPP
 
-#include <easy/meta/math.hpp>
+#include <easy/dsp/math/math.hpp>
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
 #include <boost/accumulators/statistics/rolling_mean.hpp>

@@ -15,30 +15,19 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: converter.hpp
+ * Filename: expected.hpp
  * Author: Mohammed Boujemaoui
- * Date: 27/7/2018
+ * Date: 30/8/2018
  */
-#ifndef EASYDSP_TRIGONOMETRY_HPP
-#define EASYDSP_TRIGONOMETRY_HPP
+#ifndef EASYDSP_EXPECTED_HPP
+#define EASYDSP_EXPECTED_HPP
 
-#include "constant.hpp"
-#include <cmath>
-#include <cstdlib>
-#include <numeric>
+#include <easy/third-party/tl/expected.hpp>
 
-namespace easy { namespace dsp { namespace math {
+namespace easy {
 
-    template <typename T>
-    constexpr T deg_to_rad(const T& x) {
-        return static_cast<T>(x * constants<T>::pi / 180);
-    }
+    template <class T, class E>
+    using expected = tl::expected<T, E>;
+}
 
-    template <typename T>
-    constexpr T rad_to_deg(const T& x) {
-        return static_cast<T>(x / constants<T>::pi * 180);
-    }
-
-}}} // namespace easy::dsp::math
-
-#endif // EASYDSP_TRIGONOMETRY_HPP
+#endif // EASYDSP_EXPECTED_HPP

@@ -15,55 +15,54 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: lowpass_transform.hpp
+ * Filename: highpass_transformer.hpp
  * Author: Mohammed Boujemaoui
- * Date: 3/8/2018
+ * Date: 30/8/2018
  */
-#ifndef EASYDSP_LOWPASS_TRANSFORM_HPP
-#define EASYDSP_LOWPASS_TRANSFORM_HPP
+#ifndef EASYDSP_HIGHPASS_TRANSFORMER_HPP
+#define EASYDSP_HIGHPASS_TRANSFORMER_HPP
 
 #include "layout_base.hpp"
-#include "easy/dsp/math/constant.hpp"
+#include <easy/dsp/math/constant.hpp>
 
 namespace easy { namespace dsp { namespace filter {
 
     template <typename T,
-              typename Allocator = std::allocator<pz_pair>>
-    struct LowPassTransformer {
+              std::size_t MaxSize>
+    struct HighPassTransformer {
         using value_type = T;
 
-        LowPassTransformer(value_type fc) :
+        HighPassTransformer(value_type fc) :
             f(std::tan(constants<value_type>::pi * fc)) {}
 
-        void operator()(LayoutBase<T, Allocator>& digital,
-                        LayoutBase<T, Allocator>& analog) {
+        void operator()(LayoutBase<T, MaxSize>& digital,
+                        LayoutBase<T, MaxSize>& analog) {
             digital.reset();
+            digital.setNormalW(constants<T>::pi - analog.normalW());
+            digital.setNormalGain(analog.normalGain());
 
             const auto num_poles = analog.numberPoles();
-            const auto pairs = num_poles / 2;
-            for (auto i = 0; i < pairs; ++i) {
+            const auto num_pairs = num_poles / 2;
+            for (auto i = 0ul; i < until; ++i) {
                 const auto& pair = analog[i];
-                digital.insert_conjugate(transform (pair.first.first),
-                                         transform (pair.second.first));
+                digital.insert_conjugate(transform(pair.poles().first),
+                                         transform(pair.zeros().second));
             }
 
-            if (num_poles & 1) {
-                const auto& pair = analog[pairs];
-                digital.insert(transform (pair.first.first),
-                            transform (pair.second.first));
+            if (math::is_odd(num_poles)) {
+                const auto& pair = analog[num_pairs];
+                digital.insert(transform(pair.poles().first),
+                               transform(pair.zeros().first);
             }
-
-            digital.setNormalW(analog.getNormalW());
-            digital.setNormalGain(analog.getNormalGain());
-
         }
 
         std::complex<T> transform (const std::complex<T>& c) {
             if (meta::is_inf(c)) {
-                return std::complex<T>(-1, 0);
+                return std::complex<T>(1, 0);
             }
+            constexpr auto one = std::complex<T>(1, 0);
             const auto element = f * c;
-            return (1. + element) / (1. - element);
+            return - (one + element) / (one - element);
         }
 
     private:
@@ -72,4 +71,5 @@ namespace easy { namespace dsp { namespace filter {
 
 }}}
 
-#endif // EASYDSP_LOWPASS_TRANSFORM_HPP
+
+#endif // EASYDSP_HIGHPASS_TRANSFORMER_HPP

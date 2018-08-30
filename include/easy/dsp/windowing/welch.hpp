@@ -22,7 +22,7 @@
 #ifndef EASYDSP_WELCH_HPP
 #define EASYDSP_WELCH_HPP
 
-#include <easy/meta/math.hpp>
+#include <easy/dsp/math/math.hpp>
 #include "window_impl.hpp"
 namespace easy { namespace dsp { namespace windowing {
 
