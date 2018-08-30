@@ -39,5 +39,5 @@ namespace easy { namespace dsp { namespace filter {
         PeakingEQ
     };
 
-}}}
+}}}    // namespace easy::dsp::filter
 #endif // EASYDSP_FILTER_HPP
