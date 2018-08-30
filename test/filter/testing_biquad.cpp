@@ -20,7 +20,7 @@
  * Created by: Mohammed Boujemaoui
  */
 
-#include <easy/dsp/filter/biquad/biquad.hpp>
+#include <easy/dsp/filter/iir/biquad.hpp>
 #include <array>
 #include <easy/meta/empty.hpp>
 #include <easy/meta/size.hpp>
