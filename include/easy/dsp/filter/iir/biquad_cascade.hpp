@@ -111,16 +111,18 @@ namespace easy { namespace dsp { namespace filter {
         constexpr void push_back(const Biquad<T>& biquad) {
             meta::ensure(num_stage_ < N, "No space available");
             cascade_[num_stage_] = biquad;
+            num_stage_++;
         }
 
         template <typename... Arg>
         constexpr void emplace_back(Arg... arg) {
             meta::ensure(num_stage_ < N, "No space available");
             cascade_[num_stage_] = Biquad<T>(arg...);
+            num_stage_++;
         }
 
     private:
-        std::size_t num_stage_;
+        std::size_t num_stage_{0};
         std::array<Biquad<T>, N> cascade_;
     };
 }}}    // namespace easy::dsp::filter

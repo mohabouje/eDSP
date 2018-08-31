@@ -56,9 +56,8 @@ namespace easy { namespace dsp { namespace filter {
             if (math::is_inf(c)) {
                 return std::complex<T>(-1, 0);
             }
-            constexpr auto one = std::complex<T>(1, 0);
             const auto element = f * c;
-            return (one + element) / (one - element);
+            return (std::complex<T>(1, 0) + element) / (std::complex<T>(1, 0) - element);
         }
 
     private:

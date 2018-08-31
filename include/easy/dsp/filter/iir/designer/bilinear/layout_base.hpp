@@ -34,10 +34,13 @@ namespace easy { namespace dsp { namespace filter {
     template <typename T>
     struct complex_pair : public std::pair<std::complex<T>, std::complex<T>> {
         using base = std::pair<std::complex<T>, std::complex<T>>;
-        explicit constexpr complex_pair(const std::complex<T>& c1) : base(c1, std::complex<T>(0, 0)) {}
+        explicit constexpr complex_pair(const std::complex<T>& c1) : base(c1, std::complex<T>(0, 0)) {
+            meta::expects(c1.imag() == 0, "Expected a real number");
+            meta::ensure(this->isReal(), "Expected a real initialization");
+        }
 
+        constexpr complex_pair() : base(std::complex<T>(0, 0), std::complex<T>(0, 0)) {}
         constexpr complex_pair(const std::complex<T>& c1, const std::complex<T>& c2) : base(c1, c2) {}
-
         constexpr bool isConjugate() const noexcept {
             return this->second == std::conj(this->first);
         }
@@ -50,7 +53,9 @@ namespace easy { namespace dsp { namespace filter {
             if (this->first.imag() != 0) {
                 return this->second == std::conj(this->first);
             } else {
-                return this->second.imag() == 0 && this->second.real() != 0 && this->first.real() != 0;
+                return this->second.imag() == 0
+                        && this->second.real() != 0
+                        && this->first.real() != 0;
             }
         }
 
@@ -62,14 +67,15 @@ namespace easy { namespace dsp { namespace filter {
     template <typename T>
     struct pz_pair : std::pair<complex_pair<T>, complex_pair<T>> {
         using base = std::pair<complex_pair<T>, complex_pair<T>>;
-        constexpr pz_pair() : base(std::complex<T>(0, 0), std::complex<T>(0, 0)) {}
+        constexpr pz_pair() : base(complex_pair<T>(), complex_pair<T>()) {}
         constexpr pz_pair(const std::complex<T>& p, const std::complex<T>& z) : base(p, z) {}
-        constexpr pz_pair(const std::complex<T>& p1, const std::complex<T>& z1, const std::complex<T>& p2,
-                          const std::complex<T>& z2) :
-            base(complex_pair<T>(p1, z1), complex_pair<T>(p2, z2)) {}
+        constexpr pz_pair(const std::complex<T>& p1, const std::complex<T>& z1,
+                          const std::complex<T>& p2, const std::complex<T>& z2) :
+            base(complex_pair<T>(p1, p2), complex_pair<T>(z1, z2)) {}
 
         constexpr bool isSinglePole() const noexcept {
-            return this->first.isReal() && this->second.isReal();
+            return poles().second == std::complex<T>(0, 0)
+                    && zeros().second == std::complex<T>(0, 0);
         }
 
         constexpr bool isNaN() const noexcept {
@@ -134,6 +140,7 @@ namespace easy { namespace dsp { namespace filter {
         constexpr void insert_conjugate(const std::complex<T>& pole, const std::complex<T>& zero) {
             meta::ensure(math::is_even(num_poles_));
             meta::expects(!math::is_nan(pole), "NAN number cannot be a pole");
+            meta::expects(!math::is_nan(zero), "NAN number cannot be a zero");
             pairs_[num_poles_ / 2] = pz_pair<T>(pole, zero, std::conj(pole), std::conj(zero));
             num_poles_ += 2;
         }
@@ -175,10 +182,10 @@ namespace easy { namespace dsp { namespace filter {
         }
 
     private:
-        size_type num_poles_{};
+        size_type num_poles_{0};
         std::array<value_type, MaxSize> pairs_{};
-        T normal_W_{};
-        T normal_gain_{};
+        T normal_W_{0};
+        T normal_gain_{1};
     };
 
 }}} // namespace easy::dsp::filter

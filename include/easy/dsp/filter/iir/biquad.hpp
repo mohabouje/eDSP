@@ -25,6 +25,7 @@
 
 #include <easy/dsp/math/math.hpp>
 #include <easy/dsp/filter/filter_types.hpp>
+#include <easy/meta/expects.hpp>
 #include <algorithm>
 #include <cmath>
 #include <functional>
@@ -43,8 +44,8 @@ namespace easy { namespace dsp { namespace filter {
         constexpr Biquad& operator=(const Biquad&) noexcept = default;
         constexpr Biquad& operator=(Biquad&&) noexcept = default;
         constexpr Biquad(const std::complex<T>& pole, const std::complex<T>& zero);
-        constexpr Biquad(const std::complex<T>& pole_first, const std::complex<T>& pole_second,
-                         const std::complex<T>& zero_first, const std::complex<T>& zero_second);
+        constexpr Biquad(const std::complex<T>& pole_first, const std::complex<T>& zero_first,
+                         const std::complex<T>& pole_second, const std::complex<T>& zero_second);
         constexpr Biquad(value_type a0, value_type a1, value_type a2, value_type b0, value_type b1,
                          value_type b2) noexcept;
         ~Biquad() = default;
@@ -103,25 +104,32 @@ namespace easy { namespace dsp { namespace filter {
         a2_(0),
         b0_(-zero.real()),
         b1_(1),
-        b2_(0) {}
+        b2_(0) {
+        meta::expects(pole.imag() == 0, "Expecting real pole");
+        meta::expects(zero.imag() == 0, "Expecting real zero");
+    }
 
     template <typename T>
-    constexpr Biquad<T>::Biquad(const std::complex<T>& pole_first, const std::complex<T>& pole_second,
-                                const std::complex<T>& zero_first, const std::complex<T>& zero_second) :
+    constexpr Biquad<T>::Biquad(const std::complex<T>& pole_first, const std::complex<T>& zero_first,
+                                const std::complex<T>& pole_second, const std::complex<T>& zero_second) :
         a0_(1),
         b0_(1) {
         if (pole_first.imag() != 0) {
+            meta::expects(pole_second == std::conj(pole_first), "Expecting complex conjugates");
             a1_ = -2 * pole_first.real();
-            a2_ = math::square(std::abs(pole_first));
+            a2_ = std::norm(pole_first);
         } else {
+            //meta::expects(pole_second.imag() != 0, "Expecting a complex number");
             a1_ = -(pole_first.real() + pole_second.real());
             a2_ = pole_first.real() * pole_second.real();
         }
 
         if (zero_first.imag() != 0) {
+            meta::expects(zero_second == std::conj(zero_first), "Expecting complex conjugates");
             b1_ = -2 * zero_first.real();
-            b2_ = math::square(std::abs(pole_first));
+            b2_ = std::norm(zero_first);
         } else {
+            //meta::expects(zero_second.imag() != 0, "Expecting a complex number");
             b1_ = -(zero_first.real() + zero_second.real());
             b2_ = zero_first.real() * zero_second.real();
         }
@@ -130,7 +138,7 @@ namespace easy { namespace dsp { namespace filter {
     template <typename T>
     constexpr void Biquad<T>::reset() noexcept {
         w0_ = 0;
-        w1_ = 1;
+        w1_ = 0;
     }
 
     template <typename T>

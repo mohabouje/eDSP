@@ -35,15 +35,16 @@ namespace easy { namespace dsp { namespace filter {
             if (pair.isSinglePole()) {
                 return Biquad<T>(pair.poles().first, pair.zeros().first);
             } else {
-                return Biquad<T>(pair.poles().first, pair.zeros().first, pair.poles().second, pair.zeros().second);
+                return Biquad<T>(pair.poles().first, pair.zeros().first,
+                                 pair.poles().second, pair.zeros().second);
             }
         }
 
         template <typename T>
         void apply_scale(Biquad<T>& biquad, T scale) noexcept {
-            biquad.setB0(biquad.b0() / scale);
-            biquad.setB1(biquad.b1() / scale);
-            biquad.setB2(biquad.b2() / scale);
+            biquad.setB0(biquad.b0() * scale);
+            biquad.setB1(biquad.b1() * scale);
+            biquad.setB2(biquad.b2() * scale);
         }
 
         template <typename T, std::size_t N>
@@ -57,11 +58,11 @@ namespace easy { namespace dsp { namespace filter {
             for (std::int32_t i = cascade.size(); --i >= 0;) {
                 const auto& stage = cascade[i];
                 auto cb           = std::complex<T>(1, 0);
-                auto ct           = std::complex<T>(cascade[i].b0() / stage.a0(), 0);
+                auto ct           = std::complex<T>(stage.b0() / stage.a0(), 0);
                 ct                = math::addmul(ct, stage.b1() / stage.a0(), czn1);
                 ct                = math::addmul(ct, stage.b2() / stage.a0(), czn2);
-                cb                = math::addmul(cb, stage.b1() / stage.a0(), czn1);
-                cb                = math::addmul(cb, stage.b2() / stage.a0(), czn2);
+                cb                = math::addmul(cb, stage.a1() / stage.a0(), czn1);
+                cb                = math::addmul(cb, stage.a2() / stage.a0(), czn2);
                 ch *= ct;
                 cbot *= cb;
             }
@@ -82,6 +83,7 @@ namespace easy { namespace dsp { namespace filter {
             for (auto i = 0ul; i < num_biquads; ++i) {
                 apply_scale(cascade[i], scale);
             }
+            return cascade;
         }
 
     } // namespace

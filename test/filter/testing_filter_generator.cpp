@@ -29,8 +29,8 @@ using namespace easy::dsp::filter;
 
 SCENARIO("Generating random filters", "[make_filter]") {
     GIVEN("A low pass filter to generate") {
-        constexpr auto sample_rate = 42000.0;
-        constexpr auto frequency   = 10000.0;
+        constexpr auto sample_rate = 44100.0;
+        constexpr auto frequency   = 600.0;
 
         WHEN("We want to generate a RBJ filter") {
             constexpr auto Q = 0.71;
@@ -45,9 +45,10 @@ SCENARIO("Generating random filters", "[make_filter]") {
         }
 
         WHEN("We want to generate a Butterworth") {
-            constexpr std::size_t order = 10;
+            constexpr std::size_t order = 8;
             const auto designed_filter =
                 make_filter<double, DesignerType::Butterworth, FilterType::LowPass, 100>(order, sample_rate, frequency);
+            constexpr auto i = 10;
         }
 
         WHEN("We want to generate a Butterworth") {
