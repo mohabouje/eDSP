@@ -9,6 +9,7 @@ set(SOURCE_FILES
         transform/testing_transforms.cpp
         filter/testing_biquad.cpp
         filter/testing_biquad_designer.cpp
+        filter/testing_filter_generator.cpp
         standard/testing_autocorrelation.cpp
         standard/testing_crosscorrelation.cpp)
 

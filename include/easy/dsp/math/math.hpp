@@ -25,6 +25,7 @@
 
 #include <cmath>
 #include <cstdint>
+#include <complex>
 
 namespace easy { inline namespace math {
 
@@ -118,7 +119,7 @@ namespace easy { inline namespace math {
     }
 
     template <typename T>
-    constexpr auto is_nan(T value) {
+    constexpr auto is_nan(T value) noexcept {
         return std::isnan(value);
     }
 

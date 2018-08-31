@@ -24,6 +24,7 @@
 #define EASYMETA_COMPLEX_H
 
 #include <easy/meta/unused.hpp>
+#include <easy/dsp/math/math.hpp>
 #include <limits>
 #include <complex>
 #include <cmath>
@@ -72,12 +73,22 @@ namespace easy { inline namespace math {
     }
 
     template <typename T>
+    constexpr auto is_nan(const std::complex<T>& value) noexcept {
+        return is_nan(value.real()) || is_nan(value.imag());
+    }
+
+    template <typename T>
+    constexpr auto is_inf(const std::complex<T>& value) noexcept {
+        return is_inf(value.real()) || is_inf(value.imag());
+    }
+
+    template <typename T>
     constexpr std::complex<T> addmul(const std::complex<T>& left, const T factor,
                                      const std::complex<T>& right) noexcept {
         return std::complex<T>(left.real() + factor * right.real(), left.imag() + factor * right.imag());
     }
 
-    template <typename>
+    template <typename T>
     constexpr std::complex<T> infinity() noexcept {
         return std::complex<T>(std::numeric_limits<T>::infinity());
     }

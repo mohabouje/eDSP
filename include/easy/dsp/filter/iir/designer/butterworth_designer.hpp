@@ -34,7 +34,7 @@
 
 namespace easy { namespace dsp { namespace filter {
 
-    namespace {
+    namespace butterworth {
         struct LowPassAnalogDesigner {
             template <typename T, std::size_t MaxSize>
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles) const {
@@ -48,7 +48,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto pairs = num_poles / 2;
                 for (auto i = 0ul; i < pairs; ++i) {
                     const std::complex<T> c =
-                        std::polar(1, constants<T>::two_pi + (2 * i + 1) * constants<T>::pi / size);
+                        std::polar(static_cast<T>(1), constants<T>::two_pi + (2 * i + 1) * constants<T>::pi / size);
                     analog.insert_conjugate(c, math::infinity<T>());
                 }
 
@@ -68,7 +68,7 @@ namespace easy { namespace dsp { namespace filter {
                 analog.reset();
 
                 const auto size  = static_cast<T>(num_poles * 2);
-                const auto g     = std::pow(dsp::db2mag(gain_db), math::inv(n2));
+                const auto g     = std::pow(dsp::db2mag(gain_db), math::inv(size));
                 const auto gp    = -math::inv(g);
                 const auto gz    = -g;
                 const auto pairs = num_poles / 2;
@@ -84,83 +84,83 @@ namespace easy { namespace dsp { namespace filter {
         };
 
         template <typename T, std::size_t MaxSize>
-        class LowPass : public AbstractDesigner<T, LowPass, MaxSize> {
-            friend class AbstractDesigner<T, LowPassk, MaxSize>;
-            void design(std::size_t order, T sample_rate, T cuttoff_frequency) {
+        class LowPass : public AbstractDesigner<T, LowPass<T, MaxSize>, MaxSize> {
+            friend class AbstractDesigner<T, LowPass, MaxSize>;
+            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
-                LowPassAnalogDesigner::design(analog_, order);
-                LowPassTransformer{normalized_frequency}(digital_, analog_);
+                LowPassAnalogDesigner{}.design(this->analog_, order);
+                LowPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
             }
         };
 
         template <typename T, std::size_t MaxSize>
-        class HighPass : public AbstractDesigner<T, HighPass, MaxSize> {
+        class HighPass : public AbstractDesigner<T, HighPass<T, MaxSize>, MaxSize> {
             friend class AbstractDesigner<T, HighPass, MaxSize>;
-            void design(std::size_t order, T sample_rate, T cuttoff_frequency) {
+            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
-                LowPassAnalogDesigner::design(analog_, order);
-                HighPassTransformer{normalized_frequency}(digital_, analog_);
+                LowPassAnalogDesigner{}.design(this->analog_, order);
+                HighPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
             }
         };
 
         template <typename T, std::size_t MaxSize>
-        class BandPass : public AbstractDesigner<T, BandPass, MaxSize, 2 * MaxSize> {
+        class BandPass : public AbstractDesigner<T, BandPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
             friend class AbstractDesigner<T, BandPass, MaxSize>;
-            void design(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency) {
+            void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency) {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
-                LowPassAnalogDesigner::design(analog_, order);
-                BandPassTransformer{normalized_center, normalized_bandwidth}(digital_, analog_);
+                LowPassAnalogDesigner{}.design(this->analog_, order);
+                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
             }
         };
 
         template <typename T, std::size_t MaxSize>
-        class BandStopPass : public AbstractDesigner<T, BandStopPass, MaxSize, 2 * MaxSize> {
+        class BandStopPass : public AbstractDesigner<T, BandStopPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
             friend class AbstractDesigner<T, BandStopPass, MaxSize>;
-            void design(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency) {
+            void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency) {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
-                LowPassAnalogDesigner::design(analog_, order);
-                BandStopTransformer{normalized_center, normalized_bandwidth}(digital_, analog_);
+                LowPassAnalogDesigner{}.design(this->analog_, order);
+                BandStopTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
             }
         };
 
         template <typename T, std::size_t MaxSize>
-        class LowShelfPass : public AbstractDesigner<T, LowShelfPass, MaxSize> {
+        class LowShelfPass : public AbstractDesigner<T, LowShelfPass<T, MaxSize>, MaxSize> {
             friend class AbstractDesigner<T, LowShelfPass, MaxSize>;
-            void design(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db) {
+            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
-                LowShelfAnalogDesigner::design(analog_, order, gain_db);
-                HighPassTransformer{normalized_frequency}(digital_, analog_);
+                LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db);
+                LowPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
             }
         };
 
         template <typename T, std::size_t MaxSize>
-        class HighShelfPass : public AbstractDesigner<T, HighShelfPass, MaxSize> {
+        class HighShelfPass : public AbstractDesigner<T, HighShelfPass<T, MaxSize>, MaxSize> {
             friend class AbstractDesigner<T, HighShelfPass, MaxSize>;
-            void design(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db) {
+            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
-                LowShelfAnalogDesigner::design(analog_, order, gain_db);
-                HighPassTransformer{normalized_frequency}(digital_, analog_);
+                LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db);
+                HighPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
             }
         };
 
         template <typename T, std::size_t MaxSize>
-        class BandShelfPass : public AbstractDesigner<T, BandShelfPass, MaxSize, 2 * MaxSize> {
+        class BandShelfPass : public AbstractDesigner<T, BandShelfPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
             friend class AbstractDesigner<T, BandShelfPass, MaxSize, 2 * MaxSize>;
-            void design(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency, T gain_db) {
+            void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency, T gain_db) {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
-                LowShelfAnalogDesigner::design(analog_, order, gain_db);
-                BandPassTransformer{normalized_center, normalized_bandwidth}(digital_, analog_);
+                LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db);
+                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
 
                 // HACK!
-                digital_.setNormalW(normalized_center < 0.25 ? constants<T>::pi : 0);
-                digital_.setNormalGain(1);
+                this->digital_.setNormalW(normalized_center < 0.25 ? constants<T>::pi : 0);
+                this->digital_.setNormalGain(1);
             }
         };
 
-    } // namespace
+    } // namespace butterworth
 
     template <typename T, FilterType Type, std::size_t MaxOrder>
     struct ButterworthDesigner {};
@@ -168,59 +168,66 @@ namespace easy { namespace dsp { namespace filter {
     template <typename T, std::size_t MaxOrder>
     struct ButterworthDesigner<T, FilterType::LowPass, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return LowPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(butterworth::LowPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return butterworth::LowPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
     template <typename T, std::size_t MaxOrder>
     struct ButterworthDesigner<T, FilterType::HighPass, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return HighPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(butterworth::HighPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return butterworth::HighPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
     template <typename T, std::size_t MaxOrder>
     struct ButterworthDesigner<T, FilterType::BandPass, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return BandPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(butterworth::BandPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return butterworth::BandPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
     template <typename T, std::size_t MaxOrder>
     struct ButterworthDesigner<T, FilterType::BandStop, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return BandStopPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(butterworth::BandStopPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return butterworth::BandStopPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
     template <typename T, std::size_t MaxOrder>
     struct ButterworthDesigner<T, FilterType::LowShelf, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return LowShelfPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(butterworth::LowShelfPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return butterworth::LowShelfPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
     template <typename T, std::size_t MaxOrder>
     struct ButterworthDesigner<T, FilterType::HighShelf, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return HighShelfPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(butterworth::HighShelfPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return butterworth::HighShelfPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
     template <typename T, std::size_t MaxOrder>
     struct ButterworthDesigner<T, FilterType::BandShelf, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return BandShelfPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(butterworth::BandShelfPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return butterworth::BandShelfPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
-}}} // namespace easy::dsp::filter::butterworth
+}}} // namespace easy::dsp::filter
 
 #endif // EASYDSP_BIQUAD_BUTTERWORTH_HPP

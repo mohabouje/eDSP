@@ -32,70 +32,61 @@
 #include <easy/dsp/filter/iir/designer/chebyshev_I_designer.hpp>
 #include <easy/dsp/filter/iir/designer/chebyshev_II_designer.hpp>
 
-namespace easy { namespace dsp  { namespace filter {
+namespace easy { namespace dsp { namespace filter {
 
-    template <typename T,
-              DesignerType Designer,
-              std::size_t MaxOrder>
+    template <typename T, DesignerType Designer, std::size_t MaxOrder>
     struct designer {};
 
-
-    template <typename T, std::size_t MaxOrder = 100>
+    template <typename T, std::size_t MaxOrder>
     struct designer<T, DesignerType::RBJ, MaxOrder> {
-        template <FilterType Type,
-                  typename... Args>
-        constexpr Biquad<T> design(Args... arg) const {
-            return RBJFilterDesigner<Type>{}(std::forward(arg...));
+        template <FilterType Type, typename... Args>
+        constexpr auto design(Args... arg) const -> decltype(RBJFilterDesigner<T, Type>{}(std::declval<Args&&>()...)) {
+            return RBJFilterDesigner<T, Type>{}(arg...);
         }
     };
 
-    template <typename T, std::size_t MaxOrder = 100>
+    template <typename T, std::size_t MaxOrder>
     struct designer<T, DesignerType::Zoelzer, MaxOrder> {
-        template <FilterType Type,
-                  typename... Args>
-        constexpr Biquad<T> design(Args... arg) const {
-            return ZoelzerFilterDesigner<Type>{}(std::forward(arg...));
+        template <FilterType Type, typename... Args>
+        constexpr auto design(Args... arg) const
+            -> decltype(ZoelzerFilterDesigner<T, Type>{}(std::declval<Args&&>()...)) {
+            return ZoelzerFilterDesigner<T, Type>{}(arg...);
         }
     };
 
-    template <typename T, std::size_t MaxOrder = 100>
+    template <typename T, std::size_t MaxOrder>
     struct designer<T, DesignerType::Butterworth, MaxOrder> {
-        template <FilterType Type,
-                  typename... Args>
-        constexpr auto design(Args... arg) const -> decltype(ButterworthDesigner<T, Type, MaxOrder>::operator()) {
-            return ButterworthDesigner<T, Type, MaxOrder>{}(std::forward(arg...));
+        template <FilterType Type, typename... Args>
+        constexpr auto design(Args... arg) const -> decltype(ButterworthDesigner<T, Type, MaxOrder>{}(arg...)) {
+            return ButterworthDesigner<T, Type, MaxOrder>{}.operator()(arg...);
         }
     };
 
-    template <typename T, std::size_t MaxOrder = 100>
+    template <typename T, std::size_t MaxOrder>
     struct designer<T, DesignerType::ChebyshevI, MaxOrder> {
-        template <FilterType Type,
-                  typename... Args>
-        constexpr auto design(Args... arg) const -> decltype(ChebyshevIDesigner<T, Type, MaxOrder>::operator()) {
-            return ChebyshevIDesigner<T, Type, MaxOrder>{}(std::forward(arg...));
+        template <FilterType Type, typename... Args>
+        constexpr auto design(Args... arg) const
+            -> decltype(ChebyshevIDesigner<T, Type, MaxOrder>{}(std::declval<Args&&>()...)) {
+            return ChebyshevIDesigner<T, Type, MaxOrder>{}(arg...);
         }
     };
 
-    template <typename T, std::size_t MaxOrder = 100>
-    struct designer<T, DesignerType::Butterworth, MaxOrder> {
-        template <FilterType Type,
-                  typename... Args>
-        constexpr auto design(Args... arg) const -> decltype(ChebyshevIIDesigner<T, Type, MaxOrder>::operator()) {
-            return ChebyshevIIDesigner<T, Type, MaxOrder>{}(std::forward(arg...));
+    template <typename T, std::size_t MaxOrder>
+    struct designer<T, DesignerType::ChebyshevII, MaxOrder> {
+        template <FilterType Type, typename... Args>
+        constexpr auto design(Args... arg) const
+            -> decltype(ChebyshevIIDesigner<T, Type, MaxOrder>{}(std::declval<Args&&>()...)) {
+            return ChebyshevIIDesigner<T, Type, MaxOrder>{}(arg...);
         }
     };
 
-
-    template <typename T,
-              DesignerType Designer,
-              FilterType Type,
-              std::size_t MaxSize,
-              typename... Arg>
-    constexpr auto make_filter(Arg... arg) -> decltype(designer<T, Designer, MaxOrder>::design<Type, Arg...>()) {
+    template <typename T, DesignerType Designer, FilterType Type, std::size_t MaxOrder, typename... Args>
+    constexpr auto make_filter(Args... arg)
+        -> decltype(designer<T, Designer, MaxOrder>{}.template design<Type>(std::declval<Args&&>()...)) {
         const auto creator = designer<T, Designer, MaxOrder>{};
-        return creator.design(std::forward(arg...));
+        return creator.template design<Type>(arg...);
     }
 
-}}}
+}}} // namespace easy::dsp::filter
 
 #endif // EASYDSP_FILTER_HPP

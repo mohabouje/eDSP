@@ -35,7 +35,7 @@
 
 namespace easy { namespace dsp { namespace filter {
 
-    namespace {
+    namespace chebyshevI {
         struct LowPassAnalogDesigner {
             template <typename T, std::size_t MaxSize>
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles, T ripple_db) const {
@@ -62,7 +62,7 @@ namespace easy { namespace dsp { namespace filter {
                     analog.setNormalGain(1);
                 } else {
                     analog.setNormalW(0);
-                    analog.setNormalGain(dsp::db2mag(-ripple));
+                    analog.setNormalGain(dsp::db2mag(-ripple_db));
                 }
             }
         };
@@ -92,13 +92,13 @@ namespace easy { namespace dsp { namespace filter {
                 const auto b =
                     std::pow(G / eps + Gb * std::sqrt(1 + math::inv(math::square(eps))), math::inv(num_poles));
                 const auto u      = log(b / g0);
-                const auto v      = log(pow(1. / eps + sqrt(1 + 1 / (eps * eps)), 1. / numPoles));
+                const auto v      = log(pow(1. / eps + sqrt(1 + 1 / (eps * eps)), 1. / num_poles));
                 const auto sinh_u = std::sinh(u);
                 const auto sinh_v = std::sinh(v);
                 const auto cosh_u = std::cosh(u);
                 const auto cosh_v = std::cosh(v);
                 const auto size   = static_cast<T>(2 * num_poles);
-                const auto pairs  = numPoles / 2;
+                const auto pairs  = num_poles / 2;
                 for (auto i = 0ul; i < pairs; ++i) {
                     const auto a  = constants<T>::pi * (2 * i - 1) / size;
                     const auto sn = std::sin(a);
@@ -114,84 +114,85 @@ namespace easy { namespace dsp { namespace filter {
         };
 
         template <typename T, std::size_t MaxSize>
-        class LowPass : public AbstractDesigner<T, LowPass, MaxSize> {
-            friend class AbstractDesigner<T, LowPassk, MaxSize>;
-            void design(std::size_t order, T sample_rate, T cuttoff_frequency, double ripple_db) {
+        class LowPass : public AbstractDesigner<T, LowPass<T, MaxSize>, MaxSize> {
+            friend class AbstractDesigner<T, LowPass, MaxSize>;
+            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, double ripple_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
-                LowPassAnalogDesigner::design(analog_, order, ripple_db);
-                LowPassTransformer{normalized_frequency}(digital_, analog_);
+                LowPassAnalogDesigner{}.design(this->analog_, order, ripple_db);
+                LowPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
             }
         };
 
         template <typename T, std::size_t MaxSize>
-        class HighPass : public AbstractDesigner<T, HighPass, MaxSize> {
+        class HighPass : public AbstractDesigner<T, HighPass<T, MaxSize>, MaxSize> {
             friend class AbstractDesigner<T, HighPass, MaxSize>;
-            void design(std::size_t order, T sample_rate, T cuttoff_frequency, double ripple_db) {
+            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, double ripple_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
-                LowPassAnalogDesigner::design(analog_, order, ripple_db);
-                HighPassTransformer{normalized_frequency}(digital_, analog_);
+                LowPassAnalogDesigner{}.design(this->analog_, order, ripple_db);
+                HighPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
             }
         };
 
         template <typename T, std::size_t MaxSize>
-        class BandPass : public AbstractDesigner<T, BandPass, MaxSize, 2 * MaxSize> {
+        class BandPass : public AbstractDesigner<T, BandPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
             friend class AbstractDesigner<T, BandPass, MaxSize>;
-            void design(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency, double ripple_db) {
+            void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency,
+                            double ripple_db) {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
-                LowPassAnalogDesigner::design(analog_, order, ripple_db);
-                BandPassTransformer{normalized_center, normalized_bandwidth}(digital_, analog_);
+                LowPassAnalogDesigner{}.design(this->analog_, order, ripple_db);
+                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
             }
         };
 
         template <typename T, std::size_t MaxSize>
-        class BandStopPass : public AbstractDesigner<T, BandStopPass, MaxSize, 2 * MaxSize> {
+        class BandStopPass : public AbstractDesigner<T, BandStopPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
             friend class AbstractDesigner<T, BandStopPass, MaxSize>;
-            void design(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency, double ripple_db) {
+            void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency,
+                            double ripple_db) {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
-                LowPassAnalogDesigner::design(analog_, order, ripple_db);
-                BandStopTransformer{normalized_center, normalized_bandwidth}(digital_, analog_);
+                LowPassAnalogDesigner{}.design(this->analog_, order, ripple_db);
+                BandStopTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
             }
         };
 
         template <typename T, std::size_t MaxSize>
-        class LowShelfPass : public AbstractDesigner<T, LowShelfPass, MaxSize> {
+        class LowShelfPass : public AbstractDesigner<T, LowShelfPass<T, MaxSize>, MaxSize> {
             friend class AbstractDesigner<T, LowShelfPass, MaxSize>;
-            void design(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, double ripple_db) {
+            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, double ripple_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
-                LowShelfAnalogDesigner::design(analog_, order, gain_db, ripple_db);
-                HighPassTransformer{normalized_frequency}(digital_, analog_);
+                LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, ripple_db);
+                LowPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
             }
         };
 
         template <typename T, std::size_t MaxSize>
-        class HighShelfPass : public AbstractDesigner<T, HighShelfPass, MaxSize> {
+        class HighShelfPass : public AbstractDesigner<T, HighShelfPass<T, MaxSize>, MaxSize> {
             friend class AbstractDesigner<T, HighShelfPass, MaxSize>;
-            void design(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, double ripple_db) {
+            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, double ripple_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
-                LowShelfAnalogDesigner::design(analog_, order, gain_db, ripple_db);
-                HighPassTransformer{normalized_frequency}(digital_, analog_);
+                LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, ripple_db);
+                HighPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
             }
         };
 
         template <typename T, std::size_t MaxSize>
-        class BandShelfPass : public AbstractDesigner<T, BandShelfPass, MaxSize, 2 * MaxSize> {
+        class BandShelfPass : public AbstractDesigner<T, BandShelfPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
             friend class AbstractDesigner<T, BandShelfPass, MaxSize, 2 * MaxSize>;
-            void design(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency, T gain_db,
-                        double ripple_db) {
+            void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency, T gain_db,
+                            double ripple_db) {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
-                LowShelfAnalogDesigner::design(analog_, order, gain_db, ripple_db);
-                BandPassTransformer{normalized_center, normalized_bandwidth}(digital_, analog_);
+                LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, ripple_db);
+                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
 
                 // HACK!
-                digital_.setNormalW(normalized_center < 0.25 ? constants<T>::pi : 0);
-                digital_.setNormalGain(1);
+                this->digital_.setNormalW(normalized_center < 0.25 ? constants<T>::pi : 0);
+                this->digital_.setNormalGain(1);
             }
         };
-    } // namespace
-
+    } // namespace chebyshevI
 
     template <typename T, FilterType Type, std::size_t MaxOrder>
     struct ChebyshevIDesigner {};
@@ -199,59 +200,66 @@ namespace easy { namespace dsp { namespace filter {
     template <typename T, std::size_t MaxOrder>
     struct ChebyshevIDesigner<T, FilterType::LowPass, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return LowPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(chebyshevI::LowPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return chebyshevI::LowPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
     template <typename T, std::size_t MaxOrder>
     struct ChebyshevIDesigner<T, FilterType::HighPass, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return HighPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(chebyshevI::HighPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return chebyshevI::HighPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
     template <typename T, std::size_t MaxOrder>
     struct ChebyshevIDesigner<T, FilterType::BandPass, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return BandPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(chebyshevI::BandPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return chebyshevI::BandPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
     template <typename T, std::size_t MaxOrder>
     struct ChebyshevIDesigner<T, FilterType::BandStop, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return BandStopPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(chebyshevI::BandStopPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return chebyshevI::BandStopPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
     template <typename T, std::size_t MaxOrder>
     struct ChebyshevIDesigner<T, FilterType::LowShelf, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return LowShelfPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(chebyshevI::LowShelfPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return chebyshevI::LowShelfPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIIDesigner<T, FilterType::HighShelf, MaxOrder> {
+    struct ChebyshevIDesigner<T, FilterType::HighShelf, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return HighShelfPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(chebyshevI::HighShelfPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return chebyshevI::HighShelfPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
     template <typename T, std::size_t MaxOrder>
     struct ChebyshevIDesigner<T, FilterType::BandShelf, MaxOrder> {
         template <typename... Arg>
-        constexpr auto operator()(Arg... arg) {
-            return BandShelfPass<T, MaxOrder>{}(std::forward(arg...));
+        constexpr auto operator()(Arg... arg)
+            -> decltype(chebyshevI::BandShelfPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
+            return chebyshevI::BandShelfPass<T, MaxOrder>{}.design(arg...);
         }
     };
 
-}}} // namespace easy::dsp::filter::chebyshevI
+}}} // namespace easy::dsp::filter
 
 #endif // EASYDSP_CHEBYSHEV_I_HPP

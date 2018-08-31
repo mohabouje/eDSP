@@ -60,6 +60,18 @@ namespace easy { namespace dsp { namespace filter {
             return cascade_[index];
         }
 
+        constexpr reference operator[](size_type index) noexcept {
+            return cascade_[index];
+        }
+
+        constexpr iterator begin() noexcept {
+            return std::begin(cascade_);
+        }
+
+        constexpr iterator end() noexcept {
+            return std::begin(cascade_) + size();
+        }
+
         constexpr const_iterator cbegin() const noexcept {
             return std::cbegin(cascade_);
         }
@@ -89,7 +101,6 @@ namespace easy { namespace dsp { namespace filter {
             filter(first, last, first);
         }
 
-        template <typename T>
         constexpr value_type operator()(value_type tick) noexcept {
             for (auto i = 0ul; i < num_stage_; ++i) {
                 tick = cascade_[i](tick);
@@ -105,7 +116,7 @@ namespace easy { namespace dsp { namespace filter {
         template <typename... Arg>
         constexpr void emplace_back(Arg... arg) {
             meta::ensure(num_stage_ < N, "No space available");
-            cascade_[num_stage_] = Biquad(std::forward(arg...));
+            cascade_[num_stage_] = Biquad<T>(arg...);
         }
 
     private:

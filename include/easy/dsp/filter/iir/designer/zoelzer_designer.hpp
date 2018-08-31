@@ -22,9 +22,9 @@
 #ifndef EASYDSP_ZOELZER_DESIGNER_HPP
 #define EASYDSP_ZOELZER_DESIGNER_HPP
 
-#include "easy/dsp/filter/iir/biquad.hpp"
-#include "easy/dsp/math/constant.hpp"
-#include "easy/dsp/utilities/db2mag.hpp"
+#include <easy/dsp/filter/iir/biquad.hpp>
+#include <easy/dsp/math/constant.hpp>
+#include <easy/dsp/utilities/db2mag.hpp>
 #include <easy/dsp/math/math.hpp>
 #include <easy/meta/unused.hpp>
 #include <cmath>
@@ -105,7 +105,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto b2   = (1 - V / Q * K + K * K) * norm;
                 const auto a1   = b1;
                 const auto a2   = (1 - 1 / Q * K + K * K) * norm;
-                return Biquad<T>(a0, a1, a2, b0, b1, b2);
+                return Biquad<T>(1, a1, a2, b0, b1, b2);
             } else { // cut
                 const auto norm = 1 / (1 + V / Q * K + K * K);
                 const auto b0   = (1 + 1 / Q * K + K * K) * norm;

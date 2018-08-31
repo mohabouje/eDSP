@@ -27,33 +27,33 @@
 
 namespace easy { namespace dsp { namespace filter {
 
-    template <typename T, std::size_t MaxSize>
+    template <typename T>
     struct LowPassTransformer {
         using value_type = T;
 
         LowPassTransformer(value_type fc) : f(math::inv(std::tan(constants<value_type>::pi * fc))) {}
 
-        void operator()(LayoutBase<T, MaxSize>& digital, LayoutBase<T, MaxSize>& analog) {
+        template <std::size_t AnalogMaxSize, std::size_t DigitalMaxSize>
+        void operator()(LayoutBase<T, AnalogMaxSize>& digital, LayoutBase<T, DigitalMaxSize>& analog) {
             digital.reset();
             digital.setNormalW(analog.normalW());
             digital.setNormalGain(analog.normalGain());
 
             const auto num_poles = analog.numberPoles();
             const auto num_pairs = num_poles / 2;
-            for (auto i = 0ul; i < until; ++i) {
+            for (auto i = 0ul; i < num_pairs; ++i) {
                 const auto& pair = analog[i];
                 digital.insert_conjugate(transform(pair.poles().first), transform(pair.zeros().second));
             }
 
             if (math::is_odd(num_poles)) {
                 const auto& pair = analog[num_pairs];
-                digital.insert(transform(pair.poles().first),
-                               transform(pair.zeros().first);
+                digital.insert(transform(pair.poles().first), transform(pair.zeros().first));
             }
         }
 
         std::complex<T> transform(const std::complex<T>& c) {
-            if (meta::is_inf(c)) {
+            if (math::is_inf(c)) {
                 return std::complex<T>(-1, 0);
             }
             constexpr auto one = std::complex<T>(1, 0);

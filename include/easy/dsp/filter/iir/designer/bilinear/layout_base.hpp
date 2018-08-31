@@ -38,23 +38,23 @@ namespace easy { namespace dsp { namespace filter {
 
         constexpr complex_pair(const std::complex<T>& c1, const std::complex<T>& c2) : base(c1, c2) {}
 
-        constexpr isConjugate() const noexcept {
-            return this->second == std::conj(first);
+        constexpr bool isConjugate() const noexcept {
+            return this->second == std::conj(this->first);
         }
 
-        constexpr isReal() const noexcept {
+        constexpr bool isReal() const noexcept {
             return this->first.imag() == 0 && this->second.imag() == 0;
         }
 
-        constexpr isMatchedPair() const noexcept {
+        constexpr bool isMatchedPair() const noexcept {
             if (this->first.imag() != 0) {
-                return this->second == std::conj(first);
+                return this->second == std::conj(this->first);
             } else {
                 return this->second.imag() == 0 && this->second.real() != 0 && this->first.real() != 0;
             }
         }
 
-        constexpr isNaN() const noexcept {
+        constexpr bool isNaN() const noexcept {
             return std::isnan(this->first) || std::isnan(this->second);
         }
     };
@@ -62,17 +62,17 @@ namespace easy { namespace dsp { namespace filter {
     template <typename T>
     struct pz_pair : std::pair<complex_pair<T>, complex_pair<T>> {
         using base = std::pair<complex_pair<T>, complex_pair<T>>;
+        constexpr pz_pair() : base(std::complex<T>(0, 0), std::complex<T>(0, 0)) {}
         constexpr pz_pair(const std::complex<T>& p, const std::complex<T>& z) : base(p, z) {}
-
         constexpr pz_pair(const std::complex<T>& p1, const std::complex<T>& z1, const std::complex<T>& p2,
                           const std::complex<T>& z2) :
-            base(complex_pair(p1, z1), complex_pair(p2, z2)) {}
+            base(complex_pair<T>(p1, z1), complex_pair<T>(p2, z2)) {}
 
-        constexpr isSinglePole() const noexcept {
+        constexpr bool isSinglePole() const noexcept {
             return this->first.isReal() && this->second.isReal();
         }
 
-        constexpr isNaN() const noexcept {
+        constexpr bool isNaN() const noexcept {
             return this->first.isNaN() || this->second.isNaN();
         }
 
@@ -109,7 +109,7 @@ namespace easy { namespace dsp { namespace filter {
         }
 
         constexpr T normalGain() const noexcept {
-            return normal_Gain_;
+            return normal_gain_;
         }
 
         constexpr size_type numberPoles() const noexcept {
@@ -138,7 +138,7 @@ namespace easy { namespace dsp { namespace filter {
             num_poles_ += 2;
         }
 
-        constexpr void insert(const complex_pair& poles, const complex_pair& zeros) {
+        constexpr void insert(const complex_pair<T>& poles, const complex_pair<T>& zeros) {
             meta::ensure(math::is_even(num_poles_));
             meta::expects(poles.isMatchedPair(), "Expected conjugate pairs");
             meta::expects(zeros.isMatchedPair(), "Expected conjugate pairs");
@@ -164,14 +164,14 @@ namespace easy { namespace dsp { namespace filter {
 
         constexpr const_reference operator[](size_type index) const noexcept {
             meta::expects(index < size(), "Index out of bounds");
-            return pair_[index];
+            return pairs_[index];
         }
 
         constexpr const_reference at(size_type index) const {
             if (index >= size()) {
                 throw std::runtime_error("Index out of bounds");
             }
-            return pair_[index];
+            return pairs_[index];
         }
 
     private:

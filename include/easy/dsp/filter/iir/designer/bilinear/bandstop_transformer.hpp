@@ -28,7 +28,7 @@
 
 namespace easy { namespace dsp { namespace filter {
 
-    template <typename T, std::size_t MaxSize>
+    template <typename T>
     struct BandStopTransformer {
         using value_type = T;
 
@@ -52,12 +52,13 @@ namespace easy { namespace dsp { namespace filter {
             b2 = b * b;
         }
 
-        void operator()(LayoutBase<T, MaxSize>& digital, LayoutBase<T, MaxSize>& analog) {
+        template <std::size_t AnalogMaxSize, std::size_t DigitalMaxSize>
+        void operator()(LayoutBase<T, AnalogMaxSize>& digital, LayoutBase<T, DigitalMaxSize>& analog) {
             digital.reset();
 
             const auto num_poles = analog.numberPoles();
             const auto num_pairs = num_poles / 2;
-            for (auto i = 0ul; i < until; ++i) {
+            for (auto i = 0ul; i < num_pairs; ++i) {
                 const auto& pair = analog[i];
                 const auto p     = transform(pair.poles().first);
                 const auto z     = transform(pair.zeros().first);
@@ -82,9 +83,9 @@ namespace easy { namespace dsp { namespace filter {
 
         complex_pair<T> transform(const std::complex<T>& initial) {
             constexpr auto one = std::complex<T>(1, 0);
-            const auto c       = meta::is_inf(c) ? std::complex<T>(-1, 0) : (one + initial) / (one - initial);
+            const auto c       = math::is_inf(initial) ? std::complex<T>(-1, 0) : (one + initial) / (one - initial);
 
-            auto u = meta::addmul(std::complex<T>(0, 0), 4 * (b2 + a2 - 1), c);
+            auto u = math::addmul(std::complex<T>(0, 0), 4 * (b2 + a2 - 1), c);
             u += 8 * (b2 - a2 + 1);
             u *= c;
             u += 4 * (a2 + b2 - 1);

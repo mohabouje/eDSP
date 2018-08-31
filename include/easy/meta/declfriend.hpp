@@ -15,31 +15,20 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: filter.hpp
+ * Filename: make_friend.hpp
  * Author: Mohammed Boujemaoui
- * Date: 30/8/2018
+ * Date: 31/8/2018
  */
-#ifndef EASYDSP_FILTER_TYPES_HPP
-#define EASYDSP_FILTER_TYPES_HPP
+#ifndef EASYMETA_MAKE_FRIEND_HPP
+#define EASYMETA_MAKE_FRIEND_HPP
 
-namespace easy { namespace dsp { namespace filter {
+namespace easy { namespace meta {
 
-    enum class FilterType {
-        LowPass,
-        HighPass,
-        BandPassSkirtGain,
-        BandPassPeakGain,
-        BandPass,
-        BandStop,
-        AllPass,
-        LowShelf,
-        HighShelf,
-        BandShelf,
-        Notch,
-        PeakingEQ
+    template <typename T>
+    struct declfriend {
+        typedef T type;
     };
 
-    enum class DesignerType { RBJ, Zoelzer, Butterworth, ChebyshevI, ChebyshevII, Elliptic, Legendre };
+}} // namespace easy::meta
 
-}}}    // namespace easy::dsp::filter
-#endif // EASYDSP_FILTER_TYPES_HPP
+#endif // EASYMETA_MAKE_FRIEND_HPP

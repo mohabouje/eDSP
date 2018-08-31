@@ -28,7 +28,7 @@
 
 namespace easy { namespace dsp { namespace filter {
 
-    template <typename T, std::size_t MaxSize>
+    template <typename T>
     struct BandPassTransformer {
         using value_type = T;
 
@@ -54,12 +54,13 @@ namespace easy { namespace dsp { namespace filter {
             ab_2 = 2 * ab;
         }
 
-        void operator()(LayoutBase<T, MaxSize>& digital, LayoutBase<T, MaxSize>& analog) {
+        template <std::size_t AnalogMaxSize, std::size_t DigitalMaxSize>
+        void operator()(LayoutBase<T, AnalogMaxSize>& digital, LayoutBase<T, DigitalMaxSize>& analog) {
             digital.reset();
 
             const auto num_poles = analog.numberPoles();
             const auto num_pairs = num_poles / 2;
-            for (auto i = 0ul; i < until; ++i) {
+            for (auto i = 0ul; i < num_pairs; ++i) {
                 const auto& pair = analog[i];
                 const auto p1    = transform(pair.poles().first);
                 const auto z1    = transform(pair.zeros().first);
@@ -80,7 +81,7 @@ namespace easy { namespace dsp { namespace filter {
         }
 
         complex_pair<T> transform(const std::complex<T>& initial) {
-            if (meta::is_inf(c)) {
+            if (math::is_inf(initial)) {
                 return std::complex<T>(-1, 1);
             }
             constexpr auto one = std::complex<T>(1, 0);
