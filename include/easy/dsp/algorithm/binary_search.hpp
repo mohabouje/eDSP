@@ -24,7 +24,7 @@
 
 #include <algorithm>
 
-namespace easy {
+namespace easy { namespace dsp {
 
     template <typename Iterator, typename value_type = typename std::iterator_traits<Iterator>::value_type>
     Iterator binary_search(Iterator first, Iterator last, const value_type& value) {
@@ -32,6 +32,6 @@ namespace easy {
         return (it != last && (value == *it)) ? it : last;
     }
 
-} // namespace easy
+}} // namespace easy::dsp
 
 #endif // EASYDSP_BINARY_SEARCH_HPP

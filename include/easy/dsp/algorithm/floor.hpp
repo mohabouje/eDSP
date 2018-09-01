@@ -29,7 +29,7 @@
 namespace easy { namespace dsp {
 
     template <typename InputIterator>
-    constexpr void fix(InputIterator first, InputIterator last) {
+    constexpr void floor(InputIterator first, InputIterator last) {
         std::for_each(first, last, std::floor);
     }
 
