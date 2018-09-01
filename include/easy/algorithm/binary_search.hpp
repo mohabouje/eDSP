@@ -27,7 +27,7 @@
 namespace easy {
 
     template <typename Iterator, typename value_type = typename std::iterator_traits<Iterator>::value_type>
-    Iterator linear_search(Iterator first, Iterator last, const value_type& value) {
+    Iterator binary_search(Iterator first, Iterator last, const value_type& value) {
         const auto it = std::lower_bound(first, last, value);
         return (it != last && (value == *it)) ? it : last;
     }

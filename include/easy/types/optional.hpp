@@ -26,8 +26,8 @@
 
 namespace easy {
 
-    template <class T, class E>
-    using expected = tl::optional<T, E>;
+    template <class T>
+    using optional = tl::optional<T>;
 }
 
 #endif // EASYDSP_OPTIONAL_HPP
