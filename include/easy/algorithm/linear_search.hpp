@@ -15,23 +15,21 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: deg2rad.hpp
+ * Filename: linear_search.hpp
  * Author: Mohammed Boujemaoui
- * Date: 2/8/2018
+ * Date: 1/9/2018
  */
-#ifndef EASYDSP_DEGB2RAD_HPP
-#define EASYDSP_DEGMARAD_HPP
+#ifndef EASYDSP_LINEAR_SEARCH_HPP
+#define EASYDSP_LINEAR_SEARCH_HPP
 
-#include "easy/dsp/math/constant.hpp"
-#include <cmath>
+#include <algorithm>
+namespace easy {
 
-namespace easy { namespace dsp {
-
-    template <typename T>
-    constexpr T deg2rad(T value) noexcept {
-        return value * constants<T>::pi / static_cast<T>(180);
+    template <typename Iterator,
+              typename value_type = typename std::iterator_traits<Iterator>::value_type>
+    Iterator linear_search(Iterator first, Iterator last, const value_type& value) {
+        return std::search(first, last, value);
     }
+}
 
-}} // namespace easy::dsp
-
-#endif // EASYDSP_DEG2RAD_HPP
+#endif // EASYDSP_LINEAR_SEARCH_HPP
