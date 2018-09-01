@@ -82,8 +82,9 @@ namespace easy { namespace dsp { namespace filter {
         }
 
         complex_pair<T> transform(const std::complex<T>& initial) {
-            const auto c       = math::is_inf(initial) ? std::complex<T>(-1, 0)
-                                                       : (std::complex<T>(1, 0) + initial) / (std::complex<T>(1, 0) - initial);
+            const auto c = math::is_inf(initial)
+                               ? std::complex<T>(-1, 0)
+                               : (std::complex<T>(1, 0) + initial) / (std::complex<T>(1, 0) - initial);
 
             auto u = math::addmul(std::complex<T>(0, 0), 4 * (b2 + a2 - 1), c);
             u += 8 * (b2 - a2 + 1);

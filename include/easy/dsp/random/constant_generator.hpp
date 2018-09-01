@@ -27,7 +27,7 @@ namespace easy { namespace dsp { namespace random {
     template <typename T>
     struct ConstantGenerator {
         using result_type = T;
-        inline ConstantGenerator(result_type constant) : constant_(constant) {}
+        inline explicit ConstantGenerator(result_type constant) : constant_(constant) {}
 
         inline result_type operator()() {
             return constant_;

@@ -53,7 +53,7 @@ namespace easy { namespace dsp { namespace random {
                   typename result_type = typename Distribution::result_type>
         struct RandomGeneratorImpl {
             template <typename... Args>
-            RandomGeneratorImpl(Args... arg) :
+            explicit RandomGeneratorImpl(Args... arg) :
                 generator_(
                     Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
                 distribution_(Distribution(std::forward(arg...))) {}

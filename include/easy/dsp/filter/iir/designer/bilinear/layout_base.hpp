@@ -53,9 +53,7 @@ namespace easy { namespace dsp { namespace filter {
             if (this->first.imag() != 0) {
                 return this->second == std::conj(this->first);
             } else {
-                return this->second.imag() == 0
-                        && this->second.real() != 0
-                        && this->first.real() != 0;
+                return this->second.imag() == 0 && this->second.real() != 0 && this->first.real() != 0;
             }
         }
 
@@ -69,13 +67,12 @@ namespace easy { namespace dsp { namespace filter {
         using base = std::pair<complex_pair<T>, complex_pair<T>>;
         constexpr pz_pair() : base(complex_pair<T>(), complex_pair<T>()) {}
         constexpr pz_pair(const std::complex<T>& p, const std::complex<T>& z) : base(p, z) {}
-        constexpr pz_pair(const std::complex<T>& p1, const std::complex<T>& z1,
-                          const std::complex<T>& p2, const std::complex<T>& z2) :
+        constexpr pz_pair(const std::complex<T>& p1, const std::complex<T>& z1, const std::complex<T>& p2,
+                          const std::complex<T>& z2) :
             base(complex_pair<T>(p1, p2), complex_pair<T>(z1, z2)) {}
 
         constexpr bool isSinglePole() const noexcept {
-            return poles().second == std::complex<T>(0, 0)
-                    && zeros().second == std::complex<T>(0, 0);
+            return poles().second == std::complex<T>(0, 0) && zeros().second == std::complex<T>(0, 0);
         }
 
         constexpr bool isNaN() const noexcept {

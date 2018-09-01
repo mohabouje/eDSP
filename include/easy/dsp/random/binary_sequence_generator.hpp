@@ -31,7 +31,7 @@ namespace easy { namespace dsp { namespace random {
     template <typename T, typename Engine = std::mt19937>
     struct BinarySequenceGenerator {
         using result_type = T;
-        inline BinarySequenceGenerator(result_type probability) :
+        inline explicit BinarySequenceGenerator(result_type probability) :
             generator_(Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
             distribution_(std::bernoulli_distribution(probability)) {}
 

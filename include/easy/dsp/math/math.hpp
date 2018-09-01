@@ -154,14 +154,20 @@ namespace easy { inline namespace math {
     }
 
     template <typename T>
-    constexpr auto manhattan_distance(T x, T y) {
+    constexpr auto manhattan_distance(T x, T y) noexcept {
         return x - y;
     }
 
     template <typename T>
-    constexpr auto euclidean_distance(T x, T y) {
+    constexpr auto euclidean_distance(T x, T y) noexcept {
         return square(manhattan_distance(x, y));
     }
+
+    template <typename T>
+    constexpr auto logarithmic_distance(T x, T y) noexcept {
+        return std::log(std::abs(x) / std::abs(y));
+    }
+
 }} // namespace easy::math
 
 #endif //EASYMETA_MATH_H

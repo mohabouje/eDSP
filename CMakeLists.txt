@@ -11,15 +11,12 @@ else()
     message(FATAL_ERROR "Library FFTW not found")
 endif(FFTW_LIB)
 
-
 find_library(SAMPLERATE_LIB NAMES lsamplerate libsamplerate samplerate)
 if (SAMPLERATE_LIB)
     list(APPEND ${EASYDSP_DEPENDENCIES} ${SAMPLERATE_LIB})
 else()
     message(FATAL_ERROR "Library LibSampleRate not found")
 endif(SAMPLERATE_LIB)
-
-
 
 add_library(${PROJECT_NAME} INTERFACE)
 target_sources(${PROJECT_NAME} INTERFACE "${PROJECT_SOURCE_DIR}/include/")
