@@ -89,5 +89,5 @@ namespace easy { namespace meta {
     template <typename T>
     using result_of_t = typename std::result_of<T>::type;
 
-}}
+}}     // namespace easy::meta
 #endif // TYPE_TRAITS_HPP

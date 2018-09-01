@@ -20,10 +20,10 @@
  * Date: 2/8/2018
  */
 #ifndef EASYDSP_DEGB2RAD_HPP
-#define EASYDSP_DEGMARAD_HPP
+#    define EASYDSP_DEGMARAD_HPP
 
-#include "easy/dsp/math/constant.hpp"
-#include <cmath>
+#    include "easy/dsp/math/constant.hpp"
+#    include <cmath>
 
 namespace easy { namespace dsp {
 

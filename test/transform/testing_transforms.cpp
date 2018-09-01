@@ -55,7 +55,7 @@ static constexpr std::array<std::complex<float>, 64> hamming_fft = {
 SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
     GIVEN("A random input data") {
         constexpr auto sz = 1024;
-        std::vector<std::complex<float>> input(sz), data_fft(sz), data_ifft(sz);        
+        std::vector<std::complex<float>> input(sz), data_fft(sz), data_ifft(sz);
         for (std::size_t i = 0; i < sz; ++i) {
             input[i] = std::complex<float>(i, i);
         }
@@ -79,7 +79,7 @@ SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
 
     GIVEN("An input buffer storing a Hamming Window") {
         constexpr auto sz = meta::size(hamming);
-        std::vector<std::complex<float>> input(sz), data_fft(sz), data_ifft(sz);        
+        std::vector<std::complex<float>> input(sz), data_fft(sz), data_ifft(sz);
         dsp::real2complex(std::cbegin(hamming), std::cend(hamming), std::begin(input));
 
         REQUIRE(!meta::empty(input));

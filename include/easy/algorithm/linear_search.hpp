@@ -25,11 +25,10 @@
 #include <algorithm>
 namespace easy {
 
-    template <typename Iterator,
-              typename value_type = typename std::iterator_traits<Iterator>::value_type>
+    template <typename Iterator, typename value_type = typename std::iterator_traits<Iterator>::value_type>
     Iterator linear_search(Iterator first, Iterator last, const value_type& value) {
         return std::search(first, last, value);
     }
-}
+} // namespace easy
 
 #endif // EASYDSP_LINEAR_SEARCH_HPP

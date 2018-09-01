@@ -37,22 +37,19 @@ namespace easy { namespace dsp {
         return std::complex<T>(real, imag);
     }
 
-    template <typename InputIterator,
-              typename ComplexIterator>
+    template <typename InputIterator, typename ComplexIterator>
     constexpr void real2complex(InputIterator first, InputIterator last, ComplexIterator out) {
         using value_type = typename std::iterator_traits<InputIterator>::value_type;
         std::transform(first, last, out, real2complex<value_type>);
     };
 
-    template <typename InputIterator,
-              typename ComplexIterator>
-    constexpr void real2complex(InputIterator first_1, InputIterator last_1,
-                                InputIterator first_2, ComplexIterator out) {
+    template <typename InputIterator, typename ComplexIterator>
+    constexpr void real2complex(InputIterator first_1, InputIterator last_1, InputIterator first_2,
+                                ComplexIterator out) {
         using value_type = typename std::iterator_traits<InputIterator>::value_type;
         std::transform(first_1, last_1, first_2, out, real2complex<value_type>);
     };
 
-
-}}
+}} // namespace easy::dsp
 
 #endif // EASDY_REAL2COMPLEX_HPP
