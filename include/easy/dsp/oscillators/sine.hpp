@@ -47,7 +47,7 @@ namespace easy { namespace dsp { namespace oscillators {
         const value_type result =
             std::sin(constants<value_type>::two_pi *
                      (Oscillator<T>::frequency() * Oscillator<T>::timestamp() + Oscillator<T>::phase()));
-        setTimestamp(Oscillator<T>::timestamp() + Oscillator<T>::samplingPeriod());
+        this->setTimestamp(Oscillator<T>::timestamp() + Oscillator<T>::samplingPeriod());
         return result * Oscillator<T>::amplitude();
     }
 

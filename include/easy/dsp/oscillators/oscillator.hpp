@@ -29,7 +29,6 @@
 
 #include <iterator>
 #include <type_traits>
-#include <algorithm>
 
 namespace easy { namespace dsp {
 
@@ -74,7 +73,7 @@ namespace easy { namespace dsp {
 
     } // namespace internal
 
-    template <SignalType Type, typename T, typename... Args>
+    template <typename T, SignalType Type, typename... Args>
     constexpr auto make_oscillator(Args... arg) noexcept
         -> decltype(internal::_build_Generator<Type, T>{}.template build(std::declval<Args&&>()...)) {
         return internal::_build_Generator<Type, T>{}.build(arg...);

@@ -66,7 +66,7 @@ namespace easy { namespace dsp { namespace oscillators {
         }
 
         const value_type increased = t + Oscillator<T>::samplingPeriod();
-        setTimestamp((increased > 1. / Oscillator<T>::frequency()) ? 0 : increased);
+        this->setTimestamp((increased > 1. / Oscillator<T>::frequency()) ? 0 : increased);
         return result * Oscillator<T>::amplitude();
     }
 
