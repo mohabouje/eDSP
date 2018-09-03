@@ -22,64 +22,62 @@
 #ifndef EASYDSP_OSCILLATOR_HPP
 #define EASYDSP_OSCILLATOR_HPP
 
-#include "sawtooth.hpp"
-#include "sine.hpp"
-#include "square.hpp"
-#include "triangular.hpp"
+#include <easy/dsp/oscillators/sawtooth.hpp>
+#include <easy/dsp/oscillators/square.hpp>
+#include <easy/dsp/oscillators/triangular.hpp>
+#include <easy/dsp/oscillators/sine.hpp>
 
 #include <iterator>
 #include <type_traits>
 #include <algorithm>
 
 namespace easy { namespace dsp {
-    enum class SignalType { Sine, Square, Sawtooth, Triangular };
 
-    namespace {
+    enum class SignalType { Sinusoidal, Square, Sawtooth, Triangular };
 
-        template <SignalType type>
-        struct Generator;
+    namespace internal {
 
-        template <>
-        struct Generator<SignalType::Sine> {
-            template <typename OutputIterator, typename... Args>
-            constexpr void operator()(OutputIterator first, OutputIterator last, Args... arg) {
-                using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-                std::generate(first, last, oscillators::SinOscillator<value_type>(std::forward(arg...)));
+        template <SignalType Type, typename T>
+        struct _build_Generator;
+
+        template <typename T>
+        struct _build_Generator<SignalType::Sinusoidal, T> {
+            template <typename... Args>
+            constexpr auto build(Args... arg) -> oscillators::SinOscillator<T> {
+                return oscillators::SinOscillator<T>(arg...);
             }
         };
 
-        template <>
-        struct Generator<SignalType::Square> {
-            template <typename OutputIterator, typename... Args>
-            constexpr void operator()(OutputIterator first, OutputIterator last, Args... arg) {
-                using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-                std::generate(first, last, oscillators::SquareOscillator<value_type>(std::forward(arg...)));
+        template <typename T>
+        struct _build_Generator<SignalType::Square, T> {
+            template <typename... Args>
+            constexpr auto build(Args... arg) -> oscillators::SquareOscillator<T> {
+                return oscillators::SquareOscillator<T>(arg...);
             }
         };
 
-        template <>
-        struct Generator<SignalType::Sawtooth> {
-            template <typename OutputIterator, typename... Args>
-            constexpr void operator()(OutputIterator first, OutputIterator last, Args... arg) {
-                using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-                std::generate(first, last, oscillators::SawtoothOscillator<value_type>(std::forward(arg...)));
+        template <typename T>
+        struct _build_Generator<SignalType::Triangular, T> {
+            template <typename... Args>
+            constexpr auto build(Args... arg) -> oscillators::TriangularOscillator<T> {
+                return oscillators::TriangularOscillator<T>(arg...);
             }
         };
 
-        template <>
-        struct Generator<SignalType::Triangular> {
-            template <typename OutputIterator, typename... Args>
-            constexpr void operator()(OutputIterator first, OutputIterator last, Args... arg) {
-                using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-                std::generate(first, last, oscillators::TriangularOscillator<value_type>(std::forward(arg...)));
+        template <typename T>
+        struct _build_Generator<SignalType::Sawtooth, T> {
+            template <typename... Args>
+            constexpr auto build(Args... arg) -> oscillators::SawtoothOscillator<T> {
+                return oscillators::SawtoothOscillator<T>(arg...);
             }
         };
 
-    } // namespace
+    } // namespace internal
 
-    template <SignalType type, typename OutputIterator, typename... Args>
-    void oscillator(OutputIterator first, OutputIterator last, Args... arg) {
-        Generator<type>{}(first, last, std::forward(arg...));
+    template <SignalType Type, typename T, typename... Args>
+    constexpr auto make_oscillator(Args... arg) noexcept
+        -> decltype(internal::_build_Generator<Type, T>{}.template build(std::declval<Args&&>()...)) {
+        return internal::_build_Generator<Type, T>{}.build(arg...);
     }
 
 }} // namespace easy::dsp

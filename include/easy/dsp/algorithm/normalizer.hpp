@@ -24,23 +24,22 @@
 #define EASYDSP_NORMALIZER_HPP
 
 #include <algorithm>
-#include <iterator>
 
 namespace easy { namespace dsp {
-    template <typename InputIterator, typename OutputIterator,
-              typename value_type = typename std::iterator_traits<InputIterator>::value_type>
+    template <typename InputIterator, typename OutputIterator>
     constexpr void normalizer(InputIterator first, InputIterator last, OutputIterator out) {
+        using value_type  = typename std::iterator_traits<InputIterator>::value_type;
         const auto limits = std::minmax_element(first, last);
         const auto factor = std::max(std::abs(limits.first), std::abs(limits.second));
-        std::transform(first, last, out, [factor](const double val) { return val / factor; });
+        std::transform(first, last, out, [factor](const value_type val) { return val / factor; });
     };
 
-    template <typename BiIterator, typename value_type = typename std::iterator_traits<BiIterator>::value_type>
+    template <typename BiIterator>
     constexpr void normalizer(BiIterator first, BiIterator last) {
         normalizer(first, last, first);
     };
 
-    template <typename Container, typename value_type = typename Container::value_type>
+    template <typename Container>
     constexpr void normalizer(Container& container) {
         normalizer(std::begin(container), std::end(container));
     };

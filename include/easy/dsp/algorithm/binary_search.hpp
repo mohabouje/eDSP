@@ -23,6 +23,7 @@
 #define EASYDSP_BINARY_SEARCH_HPP
 
 #include <algorithm>
+#include <iterator>
 
 namespace easy { namespace dsp {
 

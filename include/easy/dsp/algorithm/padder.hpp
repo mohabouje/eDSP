@@ -23,7 +23,7 @@
 #ifndef EASYDSP_PADDER_HPP
 #define EASYDSP_PADDER_HPP
 
-#include "easy/dsp/random/constant_generator.hpp"
+#include <easy/dsp/random/constant_generator.hpp>
 #include <easy/meta/expects.hpp>
 #include <easy/meta/advance.hpp>
 #include <algorithm>

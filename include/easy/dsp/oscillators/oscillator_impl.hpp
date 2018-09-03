@@ -59,7 +59,7 @@ namespace easy { namespace dsp { namespace oscillators {
                                         value_type phase) noexcept :
         amplitude_(amplitude),
         samplerate_(samplerate),
-        sampling_period_(meta::inv(samplerate)),
+        sampling_period_(math::inv(samplerate)),
         frequency_(frequency),
         phase_(phase) {}
 
