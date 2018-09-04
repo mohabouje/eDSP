@@ -15,28 +15,11 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: fwht_impl.hpp
+ * Filename: aafft_impl.hpp
  * Author: Mohammed Boujemaoui
- * Date: 3/8/2018
+ * Date: 4/9/2018
  */
-#ifndef EASYDSP_FWHT_IMPL_HPP
-#define EASYDSP_FWHT_IMPL_HPP
+#ifndef EASYDSP_AAFFT_IMPL_HPP
+#define EASYDSP_AAFFT_IMPL_HPP
 
-#include <algorithm>
-#include <cmath>
-
-namespace easy { namespace dsp {
-    template <typename Integer, typename Type>
-    void fwht_plan(Type data, Integer N) {
-        const auto log2 = std::log2(N) - 1;
-        for (Integer i = 0; i < log2; ++i) {
-            for (Integer j = 0; j < (1 << log2); j += 1 << (i + 1)) {
-                for (Integer k = 0; k < (1 << i); ++k) {
-                    std::swap(data[j + k], data[j + k + (1 << i)]);
-                }
-            }
-        }
-    }
-}} // namespace easy::dsp
-
-#endif // EASYDSP_FWHT_IMPL_HPP
+#endif // EASYDSP_AAFFT_IMPL_HPP

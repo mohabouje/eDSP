@@ -23,7 +23,7 @@
 #ifndef EASYDSP_CONVOLUTION_HPP
 #define EASYDSP_CONVOLUTION_HPP
 
-#include "easy/dsp/transform/fft_impl.hpp"
+#include <easy/dsp/transform/internal/fftw_impl.hpp>
 #include <easy/meta/expects.hpp>
 #include <easy/meta/advance.hpp>
 #include <algorithm>
@@ -56,8 +56,8 @@ namespace easy { namespace dsp {
 
     template <typename T, typename Allocator>
     inline Convolution<T, Allocator>::Convolution(size_type sz) :
-        fft_data_left_(static_cast<size_type>(std::floor(sz / 2) + 1)),
-        fft_data_right_(static_cast<size_type>(std::floor(sz / 2) + 1)),
+        fft_data_left_(make_fft_size(sz)),
+        fft_data_right_(make_fft_size(sz)),
         size_(sz) {}
 
     template <typename T, typename Allocator>
@@ -87,7 +87,8 @@ namespace easy { namespace dsp {
                        std::begin(fft_data_right_), std::multiplies<>());
 
         ifft_.idft(fftw_cast(fft_data_right_.data()), fftw_cast(&(*out)), size_);
-        std::transform(out, meta::advance(out, size_), out, [factor = size_](value_type val) { return val / factor; });
+        const auto factor = static_cast<value_type>(size_);
+        std::transform(out, meta::advance(out, size_), out, [factor](value_type val) { return val / factor; });
     }
 
     template <typename InputIterator, typename OutputIterator>

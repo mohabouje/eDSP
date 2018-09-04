@@ -23,7 +23,7 @@
 #ifndef EASYDSP_AUTOCORRELATION_HPP
 #define EASYDSP_AUTOCORRELATION_HPP
 
-#include "easy/dsp/transform/fft_impl.hpp"
+#include <easy/dsp/transform/internal/fftw_impl.hpp>
 #include <easy/meta/expects.hpp>
 #include <easy/meta/advance.hpp>
 #include <vector>
@@ -57,7 +57,7 @@ namespace easy { namespace dsp {
 
     template <typename T, typename Allocator>
     inline AutoCorrelation<T, Allocator>::AutoCorrelation(size_type sz, ScaleOpt opt) :
-        fft_data_(static_cast<size_type>(std::floor(sz / 2) + 1)),
+        fft_data_(make_fft_size(sz)),
         size_(sz),
         scale_(opt) {}
 
@@ -89,7 +89,7 @@ namespace easy { namespace dsp {
                        });
 
         ifft_.idft(fftw_cast(fft_data_.data()), fftw_cast(&(*out)), size_);
-        const auto factor = size_ * (scale_ == ScaleOpt::Biased ? size_ : 1);
+        const auto factor = static_cast<value_type>(size_ * (scale_ == ScaleOpt::Biased ? size_ : 1));
         std::transform(out, meta::advance(out, size_), out, [factor](value_type val) { return val / factor; });
     }
 

@@ -22,7 +22,8 @@
 #ifndef EASYDSP_SPECTROGRAM_HPP
 #define EASYDSP_SPECTROGRAM_HPP
 
-#include "easy/dsp/transform/fft_impl.hpp"
+#include <easy/dsp/transform/internal/fftw_impl.hpp>
+#include <easy/dsp/math/math.hpp>
 #include <easy/meta/expects.hpp>
 #include <algorithm>
 #include <vector>
@@ -53,7 +54,7 @@ namespace easy { namespace dsp {
 
     template <typename T, typename Allocator>
     inline Spectrum<T, Allocator>::Spectrum(size_type sz) :
-        fft_data_(static_cast<size_type>(std::floor(sz / 2) + 1)),
+        fft_data_(make_fft_size(sz)),
         size_(sz) {}
 
     template <typename T, typename Allocator>
@@ -77,8 +78,7 @@ namespace easy { namespace dsp {
         meta::expects(std::distance(first, last) == size_, "Buffer size mismatch");
         fft_.dft(fftw_cast(&(*first)), fftw_cast(fft_data_.data()), size_);
         std::transform(std::begin(fft_data_), std::end(fft_data_), out, [](const std::complex<value_type>& value) {
-            const auto tmp = std::abs(value);
-            return (tmp * tmp);
+            return math::square(std::abs(value));
         });
     }
 

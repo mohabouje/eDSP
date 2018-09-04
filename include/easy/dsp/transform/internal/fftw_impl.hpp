@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: dft.hpp
+ * Filename: fftw_impl.hpp
  * Created at: 09/06/18
  * Created by: Mohammed Boujemaoui
  */
@@ -30,6 +30,17 @@
 namespace easy { namespace dsp {
 
     enum class DCT_Type { Type_I, Type_II, Type_III, Type_IV };
+
+    template <typename Integer>
+    constexpr Integer make_fft_size(Integer real_size) {
+        return std::floor(real_size / 2) + 1;
+    }
+
+    template <typename Integer>
+    constexpr Integer make_ifft_size(Integer complex_size) {
+        return 2 * (complex_size - 1);
+    }
+
 
     template <typename T>
     inline T* fftw_cast(const T* p) {
@@ -68,20 +79,23 @@ namespace easy { namespace dsp {
         }
 
         inline void idft(complex_type* src, complex_type* dst, size_type nfft) {
-            if (meta::is_null(plan_))
+            if (meta::is_null(plan_)) {
                 plan_ = fftwf_plan_dft_1d(nfft, src, dst, FFTW_BACKWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+            }
             fftwf_execute_dft(plan_, src, dst);
         }
 
         inline void dft(value_type* src, complex_type* dst, size_type nfft) {
-            if (meta::is_null(plan_))
+            if (meta::is_null(plan_)) {
                 plan_ = fftwf_plan_dft_r2c_1d(nfft, src, dst, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+            }
             fftwf_execute_dft_r2c(plan_, src, dst);
         }
 
         inline void idft(complex_type* src, value_type* dst, size_type nfft) {
-            if (meta::is_null(plan_))
+            if (meta::is_null(plan_)) {
                 plan_ = fftwf_plan_dft_c2r_1d(nfft, src, dst, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+            }
             fftwf_execute_dft_c2r(plan_, src, dst);
         }
 
