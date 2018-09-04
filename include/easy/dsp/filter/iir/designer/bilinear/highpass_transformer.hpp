@@ -34,7 +34,7 @@ namespace easy { namespace dsp { namespace filter {
         HighPassTransformer(value_type fc) : f(std::tan(constants<value_type>::pi * fc)) {}
 
         template <std::size_t AnalogMaxSize, std::size_t DigitalMaxSize>
-        void operator()(LayoutBase<T, AnalogMaxSize>& digital, LayoutBase<T, DigitalMaxSize>& analog) {
+        void operator()(const LayoutBase<T, AnalogMaxSize>& analog, LayoutBase<T, DigitalMaxSize>& digital) {
             digital.reset();
             digital.setNormalW(constants<T>::pi - analog.normalW());
             digital.setNormalGain(analog.normalGain());

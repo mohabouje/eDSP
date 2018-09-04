@@ -35,7 +35,8 @@ namespace easy { namespace dsp { namespace filter {
             if (pair.isSinglePole()) {
                 return Biquad<T>(pair.poles().first, pair.zeros().first);
             } else {
-                return Biquad<T>(pair.poles().first, pair.zeros().first, pair.poles().second, pair.zeros().second);
+                return Biquad<T>(pair.poles().first, pair.zeros().first,
+                                 pair.poles().second, pair.zeros().second);
             }
         }
 
@@ -54,8 +55,8 @@ namespace easy { namespace dsp { namespace filter {
             auto ch         = std::complex<T>(1, 0);
             auto cbot       = std::complex<T>(1, 0);
 
-            for (std::int32_t i = cascade.size(); --i >= 0;) {
-                const auto& stage = cascade[i];
+            for (std::int32_t i = cascade.size(), index = 0; --i >= 0; ++index) {
+                const auto& stage = cascade[index];
                 auto cb           = std::complex<T>(1, 0);
                 auto ct           = std::complex<T>(stage.b0() / stage.a0(), 0);
                 ct                = math::addmul(ct, stage.b1() / stage.a0(), czn1);
@@ -74,14 +75,12 @@ namespace easy { namespace dsp { namespace filter {
             const auto num_poles   = digital.numberPoles();
             const auto num_biquads = (num_poles + 1) / 2;
             for (auto i = 0ul; i < num_biquads; ++i) {
-                cascade.emplace_back(make_biquad(digital[i]));
+                cascade.emplace_back(std::move(make_biquad(digital[i])));
             }
 
             const auto response = make_response(cascade, digital.normalW() / constants<T>::two_pi);
             const auto scale    = digital.normalGain() / std::abs(response);
-            for (auto i = 0ul; i < num_biquads; ++i) {
-                apply_scale(cascade[i], scale);
-            }
+            apply_scale(cascade[0], scale);
             return cascade;
         }
 

@@ -38,7 +38,7 @@ namespace easy { namespace dsp { namespace filter {
         struct LowPassAnalogDesigner {
             template <typename T, std::size_t MaxSize>
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles) const {
-                meta::expects(num_poles < MaxSize, "Index out of bounds");
+                meta::expects(num_poles <= MaxSize, "Index out of bounds");
 
                 analog.setNormalW(0);
                 analog.setNormalGain(1);
@@ -48,12 +48,12 @@ namespace easy { namespace dsp { namespace filter {
                 const auto pairs = num_poles / 2;
                 for (auto i = 0ul; i < pairs; ++i) {
                     const std::complex<T> c =
-                        std::polar(static_cast<T>(1), constants<T>::two_pi + (2 * i + 1) * constants<T>::pi / size);
+                        std::polar(static_cast<T>(1), constants<T>::half_pi + (2 * i + 1) * constants<T>::half_pi / size);
                     analog.insert_conjugate(c, math::infinity<T>());
                 }
 
                 if (math::is_odd(num_poles)) {
-                    analog.insert(std::complex<T>(-1), math::infinity<T>());
+                    analog.insert(std::complex<T>(-1, 0), math::infinity<T>());
                 }
             }
         };
@@ -89,7 +89,7 @@ namespace easy { namespace dsp { namespace filter {
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order);
-                LowPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
+                LowPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
             }
         };
 
@@ -99,7 +99,7 @@ namespace easy { namespace dsp { namespace filter {
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order);
-                HighPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
+                HighPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
             }
         };
 
@@ -110,7 +110,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order);
-                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
+                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
             }
         };
 
@@ -121,7 +121,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order);
-                BandStopTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
+                BandStopTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
             }
         };
 
@@ -131,7 +131,7 @@ namespace easy { namespace dsp { namespace filter {
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db);
-                LowPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
+                LowPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
             }
         };
 
@@ -141,7 +141,7 @@ namespace easy { namespace dsp { namespace filter {
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db);
-                HighPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
+                HighPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
             }
         };
 
@@ -152,7 +152,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db);
-                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
+                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
 
                 // HACK!
                 this->digital_.setNormalW(normalized_center < 0.25 ? constants<T>::pi : 0);

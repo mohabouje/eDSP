@@ -35,19 +35,19 @@ SCENARIO("Generating random filters", "[make_filter]") {
         WHEN("We want to generate a RBJ filter") {
             constexpr auto Q = 0.71;
             const auto designed_filter =
-                make_filter<double, DesignerType::RBJ, FilterType::LowPass, 100>(frequency, sample_rate, Q);
+                make_filter<double, DesignerType::RBJ, FilterType::LowPass, 8>(frequency, sample_rate, Q);
         }
 
         WHEN("We want to generate a Zoelzer filter") {
             constexpr auto Q = 0.71;
             const auto designed_filter =
-                make_filter<double, DesignerType::Zoelzer, FilterType::LowPass, 100>(frequency, sample_rate, Q);
+                make_filter<double, DesignerType::Zoelzer, FilterType::LowPass, 8>(frequency, sample_rate, Q);
         }
 
         WHEN("We want to generate a Butterworth") {
             constexpr std::size_t order = 8;
             const auto designed_filter =
-                make_filter<double, DesignerType::Butterworth, FilterType::LowPass, 100>(order, sample_rate, frequency);
+                make_filter<double, DesignerType::Butterworth, FilterType::LowPass, 8>(order, sample_rate, frequency);
             constexpr auto i = 10;
         }
 

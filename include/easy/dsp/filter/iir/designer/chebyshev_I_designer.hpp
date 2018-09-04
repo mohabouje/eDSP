@@ -119,7 +119,7 @@ namespace easy { namespace dsp { namespace filter {
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, double ripple_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, ripple_db);
-                LowPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
+                LowPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
             }
         };
 
@@ -129,7 +129,7 @@ namespace easy { namespace dsp { namespace filter {
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, double ripple_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, ripple_db);
-                HighPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
+                HighPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
             }
         };
 
@@ -141,7 +141,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, ripple_db);
-                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
+                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
             }
         };
 
@@ -153,7 +153,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, ripple_db);
-                BandStopTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
+                BandStopTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
             }
         };
 
@@ -163,7 +163,7 @@ namespace easy { namespace dsp { namespace filter {
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, double ripple_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, ripple_db);
-                LowPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
+                LowPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
             }
         };
 
@@ -173,7 +173,7 @@ namespace easy { namespace dsp { namespace filter {
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, double ripple_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, ripple_db);
-                HighPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
+                HighPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
             }
         };
 
@@ -185,7 +185,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, ripple_db);
-                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
+                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
 
                 // HACK!
                 this->digital_.setNormalW(normalized_center < 0.25 ? constants<T>::pi : 0);

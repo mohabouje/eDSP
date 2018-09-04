@@ -53,7 +53,7 @@ namespace easy { namespace dsp { namespace filter {
         }
 
         template <std::size_t AnalogMaxSize, std::size_t DigitalMaxSize>
-        void operator()(LayoutBase<T, AnalogMaxSize>& digital, LayoutBase<T, DigitalMaxSize>& analog) {
+        void operator()(const LayoutBase<T, AnalogMaxSize>& analog, LayoutBase<T, DigitalMaxSize>& digital) {
             digital.reset();
 
             const auto num_poles = analog.numberPoles();
