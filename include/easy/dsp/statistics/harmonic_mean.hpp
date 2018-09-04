@@ -22,18 +22,20 @@
 #ifndef EASYDSP_STATISTICAL_HARMONIC_MEAN_H
 #define EASYDSP_STATISTICAL_HARMONIC_MEAN_H
 
+#include <easy/dsp/math/math.hpp>
 #include <numeric>
 #include <cmath>
 #include <iterator>
+#include <functional>
 
 namespace easy { namespace dsp { namespace statistics {
 
     template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     inline value_type harmonic_mean(InputIterator first, InputIterator last) {
         const auto predicate = [](const value_type prev, const value_type current) {
-            return static_cast<value_type>(prev + (1 / current));
+            return static_cast<value_type>(prev + math::inv(current));
         };
-        const value_type accumulated = std::accumulate(first, last, static_cast<value_type>(0), predicate);
+        const value_type accumulated = std::accumulate(first, last, static_cast<value_type>(0), std::cref(predicate));
         return static_cast<value_type>(std::distance(first, last) / accumulated);
     }
 }}} // namespace easy::dsp::statistics

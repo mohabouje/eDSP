@@ -22,17 +22,12 @@
 #ifndef EASYDSP_STATISTICAL_STANDARD_DEVIATION_H
 #define EASYDSP_STATISTICAL_STANDARD_DEVIATION_H
 
-#include <boost/accumulators/accumulators.hpp>
-#include <boost/accumulators/statistics.hpp>
-#include <numeric>
+#include <easy/dsp/statistics/variance.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
     template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     inline value_type standard_deviation(InputIterator first, InputIterator last) {
-        using namespace boost::accumulators;
-        accumulator_set<value_type, features<tag::variance>> acc;
-        acc = std::for_each(first, last, acc);
-        return std::sqrt(boost::accumulators::variance(acc));
+        return std::sqrt(variance(first, last));
     }
 
 }}} // namespace easy::dsp::statistics

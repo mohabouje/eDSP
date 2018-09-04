@@ -25,6 +25,7 @@
 #include <numeric>
 #include <cmath>
 #include <iterator>
+#include <functional>
 
 namespace easy { namespace dsp { namespace statistics {
 
@@ -35,7 +36,7 @@ namespace easy { namespace dsp { namespace statistics {
         const auto predicate = [beta](const value_type prev, const value_type current) {
             return static_cast<value_type>(prev + std::pow(current, beta));
         };
-        const value_type accumulated = std::accumulate(first, last, static_cast<value_type>(0), predicate);
+        const value_type accumulated = std::accumulate(first, last, static_cast<value_type>(0), std::cref(predicate));
         const value_type temp        = accumulated / static_cast<value_type>(std::distance(first, last));
         return static_cast<value_type>(std::pow(temp, 1 / static_cast<value_type>(beta)));
     }
