@@ -35,6 +35,15 @@ The library also relies on a **C++14** compiler and the standard library (STL). 
 
 The easy way to enable/disable the different modules of the framework is by using the [ccmake](https://cmake.org/cmake/help/v3.0/manual/ccmake.1.html).
 
+## TODO
+- [] Test the different features
+- [] Benchmark the library
+- [] Write Documentation
+- [] Python Wrapper
+- [] OpenFramework Wrapper
+- [] Compile time optimizations: constexpr & traits
+- [] Modern C++: const method, noexcept construction, contract, assertions...
+
 ## Features
 
 Those are the list of features that are implemented or scheduled to be. All of those features will be wrapped in to a Python & JavaScript binding to allow an easy with third party tools.
