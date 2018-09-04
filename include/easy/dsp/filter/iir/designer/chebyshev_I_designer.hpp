@@ -39,18 +39,21 @@ namespace easy { namespace dsp { namespace filter {
         struct LowPassAnalogDesigner {
             template <typename T, std::size_t MaxSize>
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles, T ripple_db) const {
-                meta::expects(num_poles < MaxSize, "Index out of bounds");
+                meta::expects(num_poles <= MaxSize, "Index out of bounds");
                 analog.reset();
 
-                const auto eps     = std::sqrt(math::inv(std::exp(-ripple_db * 0.1 * constants<T>::ln_ten) - 1));
+                const auto eps     = std::sqrt(math::inv(std::exp(-ripple_db
+                                                                  * static_cast<T>(0.1)
+                                                                  * constants<T>::ln_ten)
+                                                                  - static_cast<T>(1)));
                 const auto v0      = std::asinh(math::inv(eps)) / num_poles;
                 const auto sinh_v0 = -std::sinh(v0);
                 const auto cosh_v0 = std::cosh(v0);
 
                 const auto size  = static_cast<T>(num_poles * 2);
                 const auto pairs = num_poles / 2;
-                for (auto i = 0ul; i < pairs; ++i) {
-                    const auto k = 2 * i + 1 - num_poles;
+                for (auto i = 0; i < pairs; ++i) {
+                    const auto k = static_cast<T>(2 * i + 1 - num_poles);
                     const auto a = sinh_v0 * std::cos(k * constants<T>::pi / size);
                     const auto b = cosh_v0 * std::sin(k * constants<T>::pi / size);
                     analog.insert_conjugate(std::complex<T>(a, b), math::infinity<T>());

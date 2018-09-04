@@ -39,22 +39,24 @@ namespace easy { namespace dsp { namespace filter {
         struct LowPassAnalogDesigner {
             template <typename T, std::size_t MaxSize>
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles, T stopband_db) const {
-                meta::expects(num_poles < MaxSize, "Index out of bounds");
+                meta::expects(num_poles <= MaxSize, "Index out of bounds");
                 analog.setNormalW(0);
                 analog.setNormalGain(1);
                 analog.reset();
 
-                const auto eps     = std::sqrt(math::inv(std::exp(-stopband_db * 0.1 * constants<T>::ln_ten) - 1));
+                const auto eps     = std::sqrt(math::inv(std::exp(-stopband_db
+                                                                  * static_cast<T>(0.1)
+                                                                  * constants<T>::ln_ten)
+                                                                  - static_cast<T>(1)));
                 const auto v0      = std::asinh(math::inv(eps)) / num_poles;
                 const auto sinh_v0 = -std::sinh(v0);
                 const auto cosh_v0 = std::cosh(v0);
-                const auto fn      = constants<T>::pi / (2 * num_poles);
-                const auto pairs   = num_poles / 2;
-                for (std::int32_t k = 1, i = pairs; --i >= 0; k += 2) {
-                    const auto a  = sinh_v0 * std::cos((k - num_poles) * fn);
-                    const auto b  = cosh_v0 * std::sin((k - num_poles) * fn);
+                const auto fn      = constants<T>::pi / static_cast<T>(2 * num_poles);
+                for (std::int32_t k = 1, i = num_poles / 2; --i >= 0; k += 2) {
+                    const auto a  = sinh_v0 * std::cos((k - static_cast<std::int32_t>(num_poles)) * fn);
+                    const auto b  = cosh_v0 * std::sin((k - static_cast<std::int32_t>(num_poles)) * fn);
                     const auto d2 = a * a + b * b;
-                    const auto im = 1 / cos(k * fn);
+                    const auto im = math::inv(std::cos(k * fn));
                     analog.insert_conjugate(std::complex<T>(a / d2, b / d2), std::complex<T>(0, im));
                 }
 
