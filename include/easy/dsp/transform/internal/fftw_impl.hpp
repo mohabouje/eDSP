@@ -41,7 +41,6 @@ namespace easy { namespace dsp {
         return 2 * (complex_size - 1);
     }
 
-
     template <typename T>
     inline T* fftw_cast(const T* p) {
         return const_cast<T*>(p);

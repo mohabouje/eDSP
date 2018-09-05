@@ -46,6 +46,10 @@ namespace easy { namespace dsp { namespace filter {
             return num_stage_;
         }
 
+        constexpr size_type maximum_size() const noexcept {
+            return N;
+        }
+
         constexpr void clear() {
             num_stage_ = 0;
         }

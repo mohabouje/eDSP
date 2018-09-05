@@ -53,9 +53,7 @@ namespace easy { namespace dsp {
     };
 
     template <typename T, typename Allocator>
-    inline Spectrum<T, Allocator>::Spectrum(size_type sz) :
-        fft_data_(make_fft_size(sz)),
-        size_(sz) {}
+    inline Spectrum<T, Allocator>::Spectrum(size_type sz) : fft_data_(make_fft_size(sz)), size_(sz) {}
 
     template <typename T, typename Allocator>
     inline typename Spectrum<T, Allocator>::size_type Spectrum<T, Allocator>::size() const noexcept {
@@ -77,9 +75,8 @@ namespace easy { namespace dsp {
                       "Iterator does not math the value type. No implicit conversion is allowed");
         meta::expects(std::distance(first, last) == size_, "Buffer size mismatch");
         fft_.dft(fftw_cast(&(*first)), fftw_cast(fft_data_.data()), size_);
-        std::transform(std::begin(fft_data_), std::end(fft_data_), out, [](const std::complex<value_type>& value) {
-            return math::square(std::abs(value));
-        });
+        std::transform(std::begin(fft_data_), std::end(fft_data_), out,
+                       [](const std::complex<value_type>& value) { return math::square(std::abs(value)); });
     }
 
     template <typename InputIterator, typename OutputIterator,

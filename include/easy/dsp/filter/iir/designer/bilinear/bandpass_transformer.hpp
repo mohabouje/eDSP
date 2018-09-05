@@ -82,7 +82,7 @@ namespace easy { namespace dsp { namespace filter {
 
         complex_pair<T> transform(const std::complex<T>& initial) {
             if (math::is_inf(initial)) {
-                return std::complex<T>(-1, 1);
+                return complex_pair<T>(std::complex<T>(-1, 0), std::complex<T>(1, 0));
             }
             const auto c = (std::complex<T>(1, 0) + initial) / (std::complex<T>(1, 0) - initial);
 

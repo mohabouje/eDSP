@@ -53,9 +53,7 @@ namespace easy { namespace dsp {
     };
 
     template <typename T, typename Allocator>
-    inline Cepstrum<T, Allocator>::Cepstrum(size_type sz) :
-        fft_data_(make_fft_size(sz)),
-        size_(sz) {}
+    inline Cepstrum<T, Allocator>::Cepstrum(size_type sz) : fft_data_(make_fft_size(sz)), size_(sz) {}
 
     template <typename T, typename Allocator>
     inline typename Cepstrum<T, Allocator>::size_type Cepstrum<T, Allocator>::size() const noexcept {

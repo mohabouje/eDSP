@@ -119,7 +119,7 @@ namespace easy { namespace dsp { namespace filter {
             a1_ = -2 * pole_first.real();
             a2_ = std::norm(pole_first);
         } else {
-            //meta::expects(pole_second.imag() != 0, "Expecting a complex number");
+            meta::expects(pole_second.imag() == 0, "Expecting a complex number");
             a1_ = -(pole_first.real() + pole_second.real());
             a2_ = pole_first.real() * pole_second.real();
         }
@@ -129,7 +129,7 @@ namespace easy { namespace dsp { namespace filter {
             b1_ = -2 * zero_first.real();
             b2_ = std::norm(zero_first);
         } else {
-            //meta::expects(zero_second.imag() != 0, "Expecting a complex number");
+            meta::expects(zero_second.imag() == 0, "Expecting a complex number");
             b1_ = -(zero_first.real() + zero_second.real());
             b2_ = zero_first.real() * zero_second.real();
         }

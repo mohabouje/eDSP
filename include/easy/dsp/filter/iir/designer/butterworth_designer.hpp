@@ -48,7 +48,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto pairs = num_poles / 2;
                 for (auto i = 0ul; i < pairs; ++i) {
                     const std::complex<T> c =
-                        std::polar(static_cast<T>(1), constants<T>::half_pi + (2 * i + 1) * constants<T>::half_pi / size);
+                        std::polar(static_cast<T>(1), constants<T>::half_pi + (2 * i + 1) * constants<T>::pi / size);
                     analog.insert_conjugate(c, math::infinity<T>());
                 }
 
@@ -61,7 +61,7 @@ namespace easy { namespace dsp { namespace filter {
         struct LowShelfAnalogDesigner {
             template <typename T, std::size_t MaxSize>
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles, T gain_db) const {
-                meta::expects(num_poles < MaxSize, "Index out of bounds");
+                meta::expects(num_poles <= MaxSize, "Index out of bounds");
 
                 analog.setNormalW(constants<T>::pi);
                 analog.setNormalGain(1);
@@ -72,7 +72,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto gp    = -math::inv(g);
                 const auto gz    = -g;
                 const auto pairs = num_poles / 2;
-                for (auto i = 0ul; i < pairs; ++i) {
+                for (auto i = 1; i <= pairs; ++i) {
                     const auto theta = constants<T>::pi * (0.5 - (2 * i - 1) / size);
                     analog.insert_conjugate(std::polar(gp, theta), std::polar(gz, theta));
                 }
@@ -105,7 +105,7 @@ namespace easy { namespace dsp { namespace filter {
 
         template <typename T, std::size_t MaxSize>
         class BandPass : public AbstractDesigner<T, BandPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
-            friend class AbstractDesigner<T, BandPass, MaxSize>;
+            friend class AbstractDesigner<T, BandPass, MaxSize, 2 * MaxSize>;
             void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency) {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
@@ -116,7 +116,7 @@ namespace easy { namespace dsp { namespace filter {
 
         template <typename T, std::size_t MaxSize>
         class BandStopPass : public AbstractDesigner<T, BandStopPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
-            friend class AbstractDesigner<T, BandStopPass, MaxSize>;
+            friend class AbstractDesigner<T, BandStopPass, MaxSize, 2 * MaxSize>;
             void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency) {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;

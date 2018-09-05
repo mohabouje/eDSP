@@ -39,8 +39,7 @@ namespace easy { namespace dsp { namespace statistics {
             square_index_sum += math::square(i);
         }
         const auto size = std::distance(first, last);
-        return (size * weighted_sum - index_sum * unweighted_sum)
-                / (size * square_index_sum - math::square(index_sum));
+        return (size * weighted_sum - index_sum * unweighted_sum) / (size * square_index_sum - math::square(index_sum));
     }
 }}} // namespace easy::dsp::statistics
 

@@ -44,10 +44,7 @@ namespace easy { namespace dsp { namespace filter {
                 analog.setNormalGain(1);
                 analog.reset();
 
-                const auto eps     = std::sqrt(math::inv(std::exp(-stopband_db
-                                                                  * static_cast<T>(0.1)
-                                                                  * constants<T>::ln_ten)
-                                                                  - static_cast<T>(1)));
+                const auto eps     = std::sqrt(math::inv(std::exp(-stopband_db * 0.1 * constants<T>::ln_ten)) - 1);
                 const auto v0      = std::asinh(math::inv(eps)) / num_poles;
                 const auto sinh_v0 = -std::sinh(v0);
                 const auto cosh_v0 = std::cosh(v0);
@@ -55,7 +52,7 @@ namespace easy { namespace dsp { namespace filter {
                 for (std::int32_t k = 1, i = num_poles / 2; --i >= 0; k += 2) {
                     const auto a  = sinh_v0 * std::cos((k - static_cast<std::int32_t>(num_poles)) * fn);
                     const auto b  = cosh_v0 * std::sin((k - static_cast<std::int32_t>(num_poles)) * fn);
-                    const auto d2 = a * a + b * b;
+                    const auto d2 = math::square(a) + math::square(b);
                     const auto im = math::inv(std::cos(k * fn));
                     analog.insert_conjugate(std::complex<T>(a / d2, b / d2), std::complex<T>(0, im));
                 }
@@ -69,7 +66,7 @@ namespace easy { namespace dsp { namespace filter {
         struct LowShelfAnalogDesigner {
             template <typename T, std::size_t MaxSize>
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles, T gain_db, T stopband_db) const {
-                meta::expects(num_poles < MaxSize, "Index out of bounds");
+                meta::expects(num_poles <= MaxSize, "Index out of bounds");
 
                 analog.setNormalW(constants<T>::pi);
                 analog.setNormalGain(1);
@@ -88,18 +85,17 @@ namespace easy { namespace dsp { namespace filter {
                 const auto eps =
                     (Gb != G0) ? std::sqrt((math::square(G) - math::square(Gb)) / (math::square(Gb) - math::square(G0)))
                                : G - 1;
-                const auto b =
-                    std::pow(G / eps + Gb * std::sqrt(1 + math::inv(math::square(eps))), math::inv(num_poles));
-                const auto u      = log(b / g0);
-                const auto v      = log(pow(1. / eps + sqrt(1 + 1 / (eps * eps)), 1. / num_poles));
+                const auto exponent = std::sqrt(1 + math::inv(math::square(eps)));
+                const auto b        = std::pow(G / eps + Gb * exponent, math::inv(static_cast<T>(num_poles)));
+                const auto v      = std::log(std::pow(math::inv(eps) + exponent, math::inv(static_cast<T>(num_poles))));
+                const auto u      = std::log(b / g0);
                 const auto sinh_u = std::sinh(u);
                 const auto sinh_v = std::sinh(v);
                 const auto cosh_u = std::cosh(u);
                 const auto cosh_v = std::cosh(v);
                 const auto size   = static_cast<T>(2 * num_poles);
-                const auto pairs  = num_poles / 2;
-                for (auto i = 0ul; i < pairs; ++i) {
-                    const auto a  = constants<T>::pi * (2 * i - 1) / size;
+                for (std::int32_t i = 0, pairs = num_poles / 2; i < pairs; ++i) {
+                    const auto a  = constants<T>::pi * static_cast<T>(2 * i - 1) / size;
                     const auto sn = std::sin(a);
                     const auto cs = std::cos(a);
                     analog.insert_conjugate(std::complex<T>(-sn * sinh_u, cs * cosh_u),
@@ -159,7 +155,7 @@ namespace easy { namespace dsp { namespace filter {
         template <typename T, std::size_t MaxSize>
         class LowShelfPass : public AbstractDesigner<T, LowShelfPass<T, MaxSize>, MaxSize> {
             friend class AbstractDesigner<T, LowShelfPass, MaxSize>;
-            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, double stopband_db) {
+            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, T stopband_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, stopband_db);
                 LowPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
@@ -169,7 +165,7 @@ namespace easy { namespace dsp { namespace filter {
         template <typename T, std::size_t MaxSize>
         class HighShelfPass : public AbstractDesigner<T, HighShelfPass<T, MaxSize>, MaxSize> {
             friend class AbstractDesigner<T, HighShelfPass, MaxSize>;
-            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, double stopband_db) {
+            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, T stopband_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, stopband_db);
                 HighPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);

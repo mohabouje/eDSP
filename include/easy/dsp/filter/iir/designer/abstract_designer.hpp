@@ -35,8 +35,7 @@ namespace easy { namespace dsp { namespace filter {
             if (pair.isSinglePole()) {
                 return Biquad<T>(pair.poles().first, pair.zeros().first);
             } else {
-                return Biquad<T>(pair.poles().first, pair.zeros().first,
-                                 pair.poles().second, pair.zeros().second);
+                return Biquad<T>(pair.poles().first, pair.zeros().first, pair.poles().second, pair.zeros().second);
             }
         }
 
