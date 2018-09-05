@@ -39,22 +39,24 @@ namespace easy { namespace dsp { namespace filter {
         struct LowPassAnalogDesigner {
             template <typename T, std::size_t MaxSize>
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles, T stopband_db) const {
-                meta::expects(num_poles < MaxSize, "Index out of bounds");
+                meta::expects(num_poles <= MaxSize, "Index out of bounds");
                 analog.setNormalW(0);
                 analog.setNormalGain(1);
                 analog.reset();
 
-                const auto eps     = std::sqrt(math::inv(std::exp(-stopband_db * 0.1 * constants<T>::ln_ten) - 1));
+                const auto eps     = std::sqrt(math::inv(std::exp(-stopband_db
+                                                                  * static_cast<T>(0.1)
+                                                                  * constants<T>::ln_ten)
+                                                                  - static_cast<T>(1)));
                 const auto v0      = std::asinh(math::inv(eps)) / num_poles;
                 const auto sinh_v0 = -std::sinh(v0);
                 const auto cosh_v0 = std::cosh(v0);
-                const auto fn      = constants<T>::pi / (2 * num_poles);
-                const auto pairs   = num_poles / 2;
-                for (std::int32_t k = 1, i = pairs; --i >= 0; k += 2) {
-                    const auto a  = sinh_v0 * std::cos((k - num_poles) * fn);
-                    const auto b  = cosh_v0 * std::sin((k - num_poles) * fn);
+                const auto fn      = constants<T>::pi / static_cast<T>(2 * num_poles);
+                for (std::int32_t k = 1, i = num_poles / 2; --i >= 0; k += 2) {
+                    const auto a  = sinh_v0 * std::cos((k - static_cast<std::int32_t>(num_poles)) * fn);
+                    const auto b  = cosh_v0 * std::sin((k - static_cast<std::int32_t>(num_poles)) * fn);
                     const auto d2 = a * a + b * b;
-                    const auto im = 1 / cos(k * fn);
+                    const auto im = math::inv(std::cos(k * fn));
                     analog.insert_conjugate(std::complex<T>(a / d2, b / d2), std::complex<T>(0, im));
                 }
 
@@ -116,7 +118,7 @@ namespace easy { namespace dsp { namespace filter {
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, double stopband_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, stopband_db);
-                LowPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
+                LowPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
             }
         };
 
@@ -126,7 +128,7 @@ namespace easy { namespace dsp { namespace filter {
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, double stopband_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, stopband_db);
-                HighPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
+                HighPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
             }
         };
 
@@ -138,7 +140,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, stopband_db);
-                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
+                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
             }
         };
 
@@ -150,7 +152,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, stopband_db);
-                BandStopTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
+                BandStopTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
             }
         };
 
@@ -160,7 +162,7 @@ namespace easy { namespace dsp { namespace filter {
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, double stopband_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, stopband_db);
-                LowPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
+                LowPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
             }
         };
 
@@ -170,7 +172,7 @@ namespace easy { namespace dsp { namespace filter {
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, double stopband_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, stopband_db);
-                HighPassTransformer<T>{normalized_frequency}(this->digital_, this->analog_);
+                HighPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
             }
         };
 
@@ -182,7 +184,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, stopband_db);
-                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->digital_, this->analog_);
+                BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
 
                 // HACK!
                 this->digital_.setNormalW(normalized_center < 0.25 ? constants<T>::pi : 0);

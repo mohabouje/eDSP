@@ -30,7 +30,7 @@ namespace easy { namespace dsp {
 
     template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     constexpr value_type rssq(InputIterator first, InputIterator last) {
-        const value_type sum_square = std::inner_product(first, last, first, static_cast<value_type>(0));
+        const value_type sum_square = std::inner_product(first, last, first, static_cast<value_type>(1));
         return std::sqrt(sum_square);
     }
 

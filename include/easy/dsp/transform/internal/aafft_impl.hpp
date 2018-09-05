@@ -15,19 +15,11 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: expected.hpp
+ * Filename: aafft_impl.hpp
  * Author: Mohammed Boujemaoui
- * Date: 30/8/2018
+ * Date: 4/9/2018
  */
-#ifndef EASYDSP_EXPECTED_HPP
-#define EASYDSP_EXPECTED_HPP
+#ifndef EASYDSP_AAFFT_IMPL_HPP
+#define EASYDSP_AAFFT_IMPL_HPP
 
-#include <easy/third-party/tl/expected.hpp>
-
-namespace easy {
-
-    template <class T, class E>
-    using expected = tl::expected<T, E>;
-}
-
-#endif // EASYDSP_EXPECTED_HPP
+#endif // EASYDSP_AAFFT_IMPL_HPP

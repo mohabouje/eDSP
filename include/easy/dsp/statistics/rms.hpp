@@ -30,7 +30,7 @@ namespace easy { namespace dsp { namespace statistics {
 
     template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     inline value_type rms(InputIterator first, InputIterator last) {
-        const value_type accumulated = std::inner_product(first, last, static_cast<value_type>(0));
+        const value_type accumulated = std::inner_product(first, last, first, static_cast<value_type>(1));
         return std::sqrt(accumulated / static_cast<value_type>(std::distance(first, last)));
     }
 }}} // namespace easy::dsp::statistics

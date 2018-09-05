@@ -22,9 +22,9 @@
 #ifndef EASYDSP_HARTLEY_HPP
 #define EASYDSP_HARTLEY_HPP
 
-#include "fft_impl.hpp"
+#include <easy/dsp/transform/internal/fftw_impl.hpp>
+#include <easy/dsp/math/complex.hpp>
 #include <easy/meta/data.hpp>
-#include <easy/meta/complex.hpp>
 
 namespace easy { namespace dsp {
 

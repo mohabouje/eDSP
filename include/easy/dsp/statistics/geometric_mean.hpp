@@ -33,7 +33,7 @@ namespace easy { namespace dsp { namespace statistics {
     inline value_type geometric_mean(InputIterator first, InputIterator last) {
         const value_type accumulated =
             std::accumulate(first, last, static_cast<value_type>(0), std::multiplies<value_type>());
-        return std::pow(accumulated, meta::inv(std::distance(first, last)));
+        return std::pow(accumulated, math::inv(std::distance(first, last)));
     }
 
 }}} // namespace easy::dsp::statistics

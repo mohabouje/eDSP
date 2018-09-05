@@ -24,6 +24,7 @@
 
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
+#include <boost/accumulators/statistics/moment.hpp>
 #include <numeric>
 
 namespace easy { namespace dsp { namespace statistics {
@@ -34,7 +35,7 @@ namespace easy { namespace dsp { namespace statistics {
         using namespace boost::accumulators;
         accumulator_set<value_type, features<tag::moment<N>>> acc;
         acc = std::for_each(first, last, acc);
-        return boost::accumulators::kurtosis(acc);
+        return boost::accumulators::momment<N>(acc);
     }
 
 }}} // namespace easy::dsp::statistics

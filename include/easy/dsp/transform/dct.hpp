@@ -23,7 +23,7 @@
 #ifndef EASYDSP_DCT_HPP
 #define EASYDSP_DCT_HPP
 
-#include "fft_impl.hpp"
+#include <easy/dsp/transform/internal/fftw_impl.hpp>
 #include <algorithm>
 
 namespace easy { namespace dsp {
@@ -33,12 +33,12 @@ namespace easy { namespace dsp {
         fftw_plan<value_type> plan;
         plan.dct(fftw_cast(&(*first)), fftw_cast(&(*out)),
                  static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last)), type);
-    };
+    }
 
     template <typename Container>
     inline void dct(const Container& input, Container& output, DCT_Type type = DCT_Type::Type_II) {
         dct(std::cbegin(input), std::cend(input), std::begin(output), type);
-    };
+    }
 
     template <typename InputIterator, typename OutputIterator>
     inline void idct(InputIterator first, InputIterator last, OutputIterator out, DCT_Type type = DCT_Type::Type_II) {
@@ -49,12 +49,12 @@ namespace easy { namespace dsp {
         fftw_plan<value_type> plan;
         plan.idct(fftw_cast(&(*first)), fftw_cast(&(*out)), nfft, type);
         std::transform(out, out + nfft, out, [scaling](output_value_type value) { return value / scaling; });
-    };
+    }
 
     template <typename Container>
     inline void idct(const Container& input, Container& output, DCT_Type type = DCT_Type::Type_II) {
         idct(std::cbegin(input), std::cend(input), std::begin(output), type);
-    };
+    }
 }} // namespace easy::dsp
 
 #endif // EASYDSP_DCT_HPP

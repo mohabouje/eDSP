@@ -31,10 +31,10 @@ namespace easy { namespace dsp { namespace filter {
     struct LowPassTransformer {
         using value_type = T;
 
-        LowPassTransformer(value_type fc) : f(math::inv(std::tan(constants<value_type>::pi * fc))) {}
+        LowPassTransformer(value_type fc) : f(std::tan(constants<value_type>::pi * fc)) {}
 
         template <std::size_t AnalogMaxSize, std::size_t DigitalMaxSize>
-        void operator()(LayoutBase<T, AnalogMaxSize>& digital, LayoutBase<T, DigitalMaxSize>& analog) {
+        void operator()(const LayoutBase<T, AnalogMaxSize>& analog, LayoutBase<T, DigitalMaxSize>& digital) {
             digital.reset();
             digital.setNormalW(analog.normalW());
             digital.setNormalGain(analog.normalGain());

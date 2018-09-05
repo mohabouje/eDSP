@@ -23,7 +23,7 @@
 #ifndef EASYDSP_CROSSCORRELATION_HPP
 #define EASYDSP_CROSSCORRELATION_HPP
 
-#include "easy/dsp/transform/fft_impl.hpp"
+#include <easy/dsp/transform/internal/fftw_impl.hpp>
 #include <easy/meta/expects.hpp>
 #include <easy/meta/advance.hpp>
 #include <algorithm>
@@ -58,8 +58,8 @@ namespace easy { namespace dsp {
 
     template <typename T, typename Allocator>
     inline CrossCorrelation<T, Allocator>::CrossCorrelation(size_type sz, ScaleOpt opt) :
-        fft_data_left_(static_cast<size_type>(std::floor(sz / 2) + 1)),
-        fft_data_right_(static_cast<size_type>(std::floor(sz / 2) + 1)),
+        fft_data_left_(make_fft_size(sz)),
+        fft_data_right_(make_fft_size(sz)),
         size_(sz),
         scale_(opt) {}
 

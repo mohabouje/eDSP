@@ -23,8 +23,8 @@
 #ifndef EASYDSP_DFT_HPP
 #define EASYDSP_DFT_HPP
 
+#include <easy/dsp/transform/internal/fftw_impl.hpp>
 #include <algorithm>
-#include "fft_impl.hpp"
 
 namespace easy { namespace dsp {
 

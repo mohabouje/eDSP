@@ -22,7 +22,7 @@
 #ifndef EASYDSP_CEPSTRUM_HPP
 #define EASYDSP_CEPSTRUM_HPP
 
-#include "easy/dsp/transform/fft_impl.hpp"
+#include <easy/dsp/transform/internal/fftw_impl.hpp>
 #include <easy/meta/expects.hpp>
 #include <easy/meta/advance.hpp>
 #include <algorithm>
@@ -54,7 +54,7 @@ namespace easy { namespace dsp {
 
     template <typename T, typename Allocator>
     inline Cepstrum<T, Allocator>::Cepstrum(size_type sz) :
-        fft_data_(static_cast<size_type>(std::floor(sz / 2) + 1)),
+        fft_data_(make_fft_size(sz)),
         size_(sz) {}
 
     template <typename T, typename Allocator>
@@ -84,7 +84,8 @@ namespace easy { namespace dsp {
                        });
 
         ifft_.idft(fftw_cast(fft_data_.data()), fftw_cast(&(*out)), size_);
-        std::transform(out, meta::advance(out, size_), out, [factor = size_](value_type val) { return val / factor; });
+        const auto factor = static_cast<value_type>(size_);
+        std::transform(out, meta::advance(out, size_), out, [factor](value_type val) { return val / factor; });
     }
 
     template <typename InputIterator, typename OutputIterator,
