@@ -34,7 +34,7 @@ SCENARIO("Designing a Low Pass ChebyshevII filter", "[make_filter]") {
         WHEN("We want to generate a Low Pass Filter at 4000Hz (8 order)") {
             constexpr std::size_t ORDER = 8;
             constexpr auto frequency    = 4000.0;
-            constexpr auto stopband_db    = 2.0;
+            constexpr auto stopband_db  = 2.0;
             const auto designed_filter  = make_filter<double, DesignerType::ChebyshevII, FilterType::LowPass, ORDER>(
                 ORDER, sample_rate, frequency, stopband_db);
 
@@ -67,7 +67,7 @@ SCENARIO("Designing a Low Pass ChebyshevII filter", "[make_filter]") {
         WHEN("We want to generate a Low Pass Filter at 4000Hz (16 order)") {
             constexpr std::size_t ORDER = 16;
             constexpr auto frequency    = 4000.0;
-            constexpr auto stopband_db    = 2.0;
+            constexpr auto stopband_db  = 2.0;
             const auto designed_filter  = make_filter<double, DesignerType::ChebyshevII, FilterType::LowPass, ORDER>(
                 ORDER, sample_rate, frequency, stopband_db);
 
@@ -104,7 +104,7 @@ SCENARIO("Designing a Low Pass ChebyshevII filter", "[make_filter]") {
         WHEN("We want to generate a Low Pass Filter at 16000Hz (4 order)") {
             constexpr std::size_t ORDER = 4;
             constexpr auto frequency    = 16000.0;
-            constexpr auto stopband_db    = 2.0;
+            constexpr auto stopband_db  = 2.0;
             const auto designed_filter  = make_filter<double, DesignerType::ChebyshevII, FilterType::LowPass, ORDER>(
                 ORDER, sample_rate, frequency, stopband_db);
 
@@ -140,14 +140,14 @@ SCENARIO("Designing a High Pass ChebyshevII filter", "[make_filter]") {
         WHEN("We want to generate a High Pass Filter at 4000Hz (8 order)") {
             constexpr std::size_t ORDER = 8;
             constexpr auto frequency    = 4000.0;
-            constexpr auto stopband_db    = 2.0;
+            constexpr auto stopband_db  = 2.0;
             const auto designed_filter  = make_filter<double, DesignerType::ChebyshevII, FilterType::HighPass, ORDER>(
                 ORDER, sample_rate, frequency, stopband_db);
 
             THEN("The BiquadCascade stores 4 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
                 REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                typename std::remove_const<decltype(designed_filter)>::type>::value);
+                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -173,14 +173,14 @@ SCENARIO("Designing a High Pass ChebyshevII filter", "[make_filter]") {
         WHEN("We want to generate a High Pass Filter at 4000Hz (16 order)") {
             constexpr std::size_t ORDER = 16;
             constexpr auto frequency    = 4000.0;
-            constexpr auto stopband_db    = 2.0;
+            constexpr auto stopband_db  = 2.0;
             const auto designed_filter  = make_filter<double, DesignerType::ChebyshevII, FilterType::HighPass, ORDER>(
                 ORDER, sample_rate, frequency, stopband_db);
 
             THEN("The BiquadCascade stores 16 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
                 REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                typename std::remove_const<decltype(designed_filter)>::type>::value);
+                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -210,14 +210,14 @@ SCENARIO("Designing a High Pass ChebyshevII filter", "[make_filter]") {
         WHEN("We want to generate a Low Pass Filter at 16000Hz (4 order)") {
             constexpr std::size_t ORDER = 4;
             constexpr auto frequency    = 16000.0;
-            constexpr auto stopband_db    = 2.0;
+            constexpr auto stopband_db  = 2.0;
             const auto designed_filter  = make_filter<double, DesignerType::ChebyshevII, FilterType::HighPass, ORDER>(
                 ORDER, sample_rate, frequency, stopband_db);
 
             THEN("The BiquadCascade stores 2 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
                 REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                typename std::remove_const<decltype(designed_filter)>::type>::value);
+                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -243,7 +243,7 @@ SCENARIO("Designing a High Pass ChebyshevII filter", "[make_filter]") {
 SCENARIO("Designing a Low Shelf Pass ChebyshevII filter", "[make_filter]") {
     GIVEN("A sample rate and a gain in db") {
         constexpr auto sample_rate = 44100.0;
-        constexpr auto stopband_db    = 2.0;
+        constexpr auto stopband_db = 2.0;
         constexpr auto gain_db     = 5.0;
         WHEN("We want to generate a Low Pass Filter at 4000Hz (8 order)") {
             constexpr std::size_t ORDER = 8;
@@ -254,16 +254,17 @@ SCENARIO("Designing a Low Shelf Pass ChebyshevII filter", "[make_filter]") {
             THEN("The BiquadCascade stores 4 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
                 REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                typename std::remove_const<decltype(designed_filter)>::type>::value);
+                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
                 using holder                      = std::array<std::array<double, 6>, BIQUAD_CASCADE>;
-                constexpr holder expected_results = {
-                    {{{1, -1.673621129, 0.9784075215, 1.085318308, -1.801275159, 1.049427852}},
-                      {{1, -1.71816545, 0.9384328827, 1, -1.685760368, 0.906713586}},
-                      {{1, -1.804782608, 0.9064808059, 1, -1.755850661, 0.8594980423}},
-                      {{1, -1.872481693, 0.8882171721, 1, -1.812996632, 0.8328677531}},}};
+                constexpr holder expected_results = {{
+                    {{1, -1.673621129, 0.9784075215, 1.085318308, -1.801275159, 1.049427852}},
+                    {{1, -1.71816545, 0.9384328827, 1, -1.685760368, 0.906713586}},
+                    {{1, -1.804782608, 0.9064808059, 1, -1.755850661, 0.8594980423}},
+                    {{1, -1.872481693, 0.8882171721, 1, -1.812996632, 0.8328677531}},
+                }};
 
                 for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
@@ -280,14 +281,14 @@ SCENARIO("Designing a Low Shelf Pass ChebyshevII filter", "[make_filter]") {
         WHEN("We want to generate a Low Pass Filter at 4000Hz (16 order)") {
             constexpr std::size_t ORDER = 16;
             constexpr auto frequency    = 4000.0;
-            constexpr auto stopband_db    = 2.0;
+            constexpr auto stopband_db  = 2.0;
             const auto designed_filter  = make_filter<double, DesignerType::ChebyshevII, FilterType::LowShelf, ORDER>(
                 ORDER, sample_rate, frequency, gain_db, stopband_db);
 
             THEN("The BiquadCascade stores 16 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
                 REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                typename std::remove_const<decltype(designed_filter)>::type>::value);
+                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -317,14 +318,14 @@ SCENARIO("Designing a Low Shelf Pass ChebyshevII filter", "[make_filter]") {
         WHEN("We want to generate a Low Pass Filter at 16000Hz (4 order)") {
             constexpr std::size_t ORDER = 4;
             constexpr auto frequency    = 16000.0;
-            constexpr auto stopband_db    = 2.0;
+            constexpr auto stopband_db  = 2.0;
             const auto designed_filter  = make_filter<double, DesignerType::ChebyshevII, FilterType::LowShelf, ORDER>(
                 ORDER, sample_rate, frequency, gain_db, stopband_db);
 
             THEN("The BiquadCascade stores 2 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
                 REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                typename std::remove_const<decltype(designed_filter)>::type>::value);
+                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -351,7 +352,7 @@ SCENARIO("Designing a High Shelf Pass ChebyshevII filter", "[make_filter]") {
     GIVEN("A sample rate and a gain in db") {
         constexpr auto sample_rate = 44100.0;
         constexpr auto gain_db     = 5.0;
-        constexpr auto stopband_db    = 2.0;
+        constexpr auto stopband_db = 2.0;
         WHEN("We want to generate a High Pass Filter at 4000Hz (8 order)") {
             constexpr std::size_t ORDER = 8;
             constexpr auto frequency    = 4000.0;
@@ -361,16 +362,16 @@ SCENARIO("Designing a High Shelf Pass ChebyshevII filter", "[make_filter]") {
             THEN("The BiquadCascade stores 4 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
                 REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                typename std::remove_const<decltype(designed_filter)>::type>::value);
+                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
                 using holder                      = std::array<std::array<double, 6>, BIQUAD_CASCADE>;
                 constexpr holder expected_results = {
                     {{{1, -1.657222221, 0.9779029776, 1.439405076, -2.378070854, 1.391302949}},
-                      {{1, -1.500240108, 0.918019413, 1, -1.476812728, 0.8784507834}},
-                      {{1, -1.025360025, 0.7787468216, 1, -0.9979531794, 0.687629488}},
-                      {{1, 0.3818178669, 0.3871868645, 1, 0.184918661, 0.2391680825}}}};
+                     {{1, -1.500240108, 0.918019413, 1, -1.476812728, 0.8784507834}},
+                     {{1, -1.025360025, 0.7787468216, 1, -0.9979531794, 0.687629488}},
+                     {{1, 0.3818178669, 0.3871868645, 1, 0.184918661, 0.2391680825}}}};
 
                 for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
@@ -387,14 +388,14 @@ SCENARIO("Designing a High Shelf Pass ChebyshevII filter", "[make_filter]") {
         WHEN("We want to generate a High Pass Filter at 4000Hz (16 order)") {
             constexpr std::size_t ORDER = 16;
             constexpr auto frequency    = 4000.0;
-            constexpr auto stopband_db    = 2.0;
+            constexpr auto stopband_db  = 2.0;
             const auto designed_filter  = make_filter<double, DesignerType::ChebyshevII, FilterType::HighShelf, ORDER>(
                 ORDER, sample_rate, frequency, gain_db, stopband_db);
 
             THEN("The BiquadCascade stores 16 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
                 REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                typename std::remove_const<decltype(designed_filter)>::type>::value);
+                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -424,21 +425,21 @@ SCENARIO("Designing a High Shelf Pass ChebyshevII filter", "[make_filter]") {
         WHEN("We want to generate a Low Pass Filter at 16000Hz (4 order)") {
             constexpr std::size_t ORDER = 4;
             constexpr auto frequency    = 16000.0;
-            constexpr auto stopband_db    = 2.0;
+            constexpr auto stopband_db  = 2.0;
             const auto designed_filter  = make_filter<double, DesignerType::ChebyshevII, FilterType::HighShelf, ORDER>(
                 ORDER, sample_rate, frequency, gain_db, stopband_db);
 
             THEN("The BiquadCascade stores 2 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
                 REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                typename std::remove_const<decltype(designed_filter)>::type>::value);
+                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
                 using holder                      = std::array<std::array<double, 6>, BIQUAD_CASCADE>;
                 constexpr holder expected_results = {
                     {{{1, 1.283434098, 0.8840522353, 1.137194558, 1.377903958, 0.9406802607}},
-                      {{1, 1.577643217, 0.7095025777, 1, 1.426550943, 0.586370326}}}};
+                     {{1, 1.577643217, 0.7095025777, 1, 1.426550943, 0.586370326}}}};
 
                 for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
@@ -456,11 +457,11 @@ SCENARIO("Designing a High Shelf Pass ChebyshevII filter", "[make_filter]") {
 
 SCENARIO("Designing a Band Pass ChebyshevII filter", "[make_filter]") {
     GIVEN("A set of parameters") {
-        constexpr auto sample_rate = 44100.0;
-        constexpr auto center_frequency = 6000.0;
+        constexpr auto sample_rate         = 44100.0;
+        constexpr auto center_frequency    = 6000.0;
         constexpr auto bandwidth_frequency = 400.0;
-        constexpr auto gain_db = 5.0;
-        constexpr auto stopband_db    = 2.0;
+        constexpr auto gain_db             = 5.0;
+        constexpr auto stopband_db         = 2.0;
         WHEN("We want to generate a Band Pass Filter (8 order)") {
             constexpr std::size_t ORDER = 8;
             const auto designed_filter  = make_filter<double, DesignerType::ChebyshevII, FilterType::BandPass, ORDER>(
@@ -469,7 +470,7 @@ SCENARIO("Designing a Band Pass ChebyshevII filter", "[make_filter]") {
             THEN("The BiquadCascade stores 8 biquads") {
                 constexpr auto BIQUAD_CASCADE = ORDER;
                 REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                typename std::remove_const<decltype(designed_filter)>::type>::value);
+                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = ORDER;
@@ -499,14 +500,14 @@ SCENARIO("Designing a Band Pass ChebyshevII filter", "[make_filter]") {
 
         WHEN("We want to generate a Band Shelf Pass Filter (8 order)") {
             constexpr std::size_t ORDER = 8;
-            constexpr auto stopband_db    = 2.0;
+            constexpr auto stopband_db  = 2.0;
             const auto designed_filter  = make_filter<double, DesignerType::ChebyshevII, FilterType::BandShelf, ORDER>(
                 ORDER, sample_rate, center_frequency, bandwidth_frequency, gain_db, stopband_db);
 
             THEN("The BiquadCascade stores 8 biquads") {
                 constexpr auto BIQUAD_CASCADE = ORDER;
                 REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                typename std::remove_const<decltype(designed_filter)>::type>::value);
+                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = ORDER;
@@ -532,7 +533,5 @@ SCENARIO("Designing a Band Pass ChebyshevII filter", "[make_filter]") {
                 }
             }
         }
-
     }
-
 }

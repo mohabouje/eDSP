@@ -28,17 +28,15 @@ using namespace easy::dsp;
 using namespace easy::dsp::oscillators;
 
 SCENARIO("Generating Oscillators", "[make_oscillator]") {
-
     GIVEN("A default configuration") {
         constexpr auto sample_rate = 44100.0;
         constexpr auto frequency   = 600.0;
-        constexpr auto amplitude = 1;
-        constexpr auto size = 1024;
+        constexpr auto amplitude   = 1;
+        constexpr auto size        = 1024;
 
         WHEN("We want to generate a sinusoidal oscillator") {
             constexpr auto phase = 0.15;
-            auto  sinusoidal =
-                    make_oscillator<double, SignalType::Sinusoidal>(amplitude, sample_rate, frequency, phase);
+            auto sinusoidal = make_oscillator<double, SignalType::Sinusoidal>(amplitude, sample_rate, frequency, phase);
 
             std::array<double, size> input;
             std::generate(std::begin(input), std::end(input), std::ref(sinusoidal));
@@ -46,8 +44,7 @@ SCENARIO("Generating Oscillators", "[make_oscillator]") {
 
         WHEN("We want to generate a square oscillator") {
             constexpr auto dutty = 0.5;
-            auto square =
-                    make_oscillator<double, SignalType::Square>(amplitude, sample_rate, frequency, dutty);
+            auto square = make_oscillator<double, SignalType::Square>(amplitude, sample_rate, frequency, dutty);
 
             std::array<double, size> input;
             std::generate(std::begin(input), std::end(input), std::ref(square));
@@ -55,10 +52,9 @@ SCENARIO("Generating Oscillators", "[make_oscillator]") {
 
         WHEN("We want to generate a triangular oscillator") {
             constexpr auto width = 0.2;
-            constexpr auto skew = 0.3;
+            constexpr auto skew  = 0.3;
             auto triangular =
-                    make_oscillator<double, SignalType::Triangular>(amplitude, sample_rate,
-                                                                    frequency, width, skew);
+                make_oscillator<double, SignalType::Triangular>(amplitude, sample_rate, frequency, width, skew);
 
             std::array<double, size> input;
             std::generate(std::begin(input), std::end(input), std::ref(triangular));
@@ -66,12 +62,10 @@ SCENARIO("Generating Oscillators", "[make_oscillator]") {
 
         WHEN("We want to generate a sawtooth oscillator") {
             constexpr auto width = 0.5;
-            auto sawtooth =
-                    make_oscillator<double, SignalType::Sawtooth>(amplitude, sample_rate, frequency, width);
+            auto sawtooth = make_oscillator<double, SignalType::Sawtooth>(amplitude, sample_rate, frequency, width);
 
             std::array<double, size> input;
             std::generate(std::begin(input), std::end(input), std::ref(sawtooth));
         }
     }
-
 }

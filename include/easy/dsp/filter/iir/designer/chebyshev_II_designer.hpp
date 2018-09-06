@@ -175,7 +175,8 @@ namespace easy { namespace dsp { namespace filter {
         template <typename T, std::size_t MaxSize>
         class BandShelfPass : public AbstractDesigner<T, BandShelfPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
             friend class AbstractDesigner<T, BandShelfPass, MaxSize, 2 * MaxSize>;
-            void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency, T gain_db, T stopband_db) {
+            void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency, T gain_db,
+                            T stopband_db) {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, stopband_db);
