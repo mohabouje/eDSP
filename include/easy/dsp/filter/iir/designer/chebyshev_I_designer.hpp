@@ -43,7 +43,7 @@ namespace easy { namespace dsp { namespace filter {
                 analog.reset();
 
                 const auto eps     = std::sqrt(math::inv(std::exp(-ripple_db * 0.1 * constants<T>::ln_ten)) - 1);
-                const auto v0      = std::asinh(math::inv(eps)) / num_poles;
+                const auto v0      = std::asinh(math::inv(eps)) / static_cast<T>(num_poles);
                 const auto sinh_v0 = -std::sinh(v0);
                 const auto cosh_v0 = std::cosh(v0);
 
@@ -97,8 +97,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto cosh_u = std::cosh(u);
                 const auto cosh_v = std::cosh(v);
                 const auto size   = static_cast<T>(2 * num_poles);
-                const auto pairs  = num_poles / 2;
-                for (auto i = 0ul; i < pairs; ++i) {
+                for (std::int32_t i = 1, pairs = num_poles / 2; i <= pairs; ++i) {
                     const auto a  = constants<T>::pi * (2 * i - 1) / size;
                     const auto sn = std::sin(a);
                     const auto cs = std::cos(a);
@@ -107,7 +106,7 @@ namespace easy { namespace dsp { namespace filter {
                 }
 
                 if (math::is_odd(num_poles)) {
-                    analog.insert(std::complex<T>(-sinh_u), std::complex<T>(-sinh_v));
+                    analog.insert(std::complex<T>(-sinh_u, 0), std::complex<T>(-sinh_v, 0));
                 }
             }
         };
@@ -115,7 +114,7 @@ namespace easy { namespace dsp { namespace filter {
         template <typename T, std::size_t MaxSize>
         class LowPass : public AbstractDesigner<T, LowPass<T, MaxSize>, MaxSize> {
             friend class AbstractDesigner<T, LowPass, MaxSize>;
-            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, double ripple_db) {
+            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T ripple_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, ripple_db);
                 LowPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
@@ -125,7 +124,7 @@ namespace easy { namespace dsp { namespace filter {
         template <typename T, std::size_t MaxSize>
         class HighPass : public AbstractDesigner<T, HighPass<T, MaxSize>, MaxSize> {
             friend class AbstractDesigner<T, HighPass, MaxSize>;
-            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, double ripple_db) {
+            void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T ripple_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, ripple_db);
                 HighPassTransformer<T>{normalized_frequency}(this->analog_, this->digital_);
@@ -134,9 +133,9 @@ namespace easy { namespace dsp { namespace filter {
 
         template <typename T, std::size_t MaxSize>
         class BandPass : public AbstractDesigner<T, BandPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
-            friend class AbstractDesigner<T, BandPass, MaxSize>;
+            friend class AbstractDesigner<T, BandPass, MaxSize, 2 * MaxSize>;
             void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency,
-                            double ripple_db) {
+                            T ripple_db) {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, ripple_db);
@@ -146,9 +145,9 @@ namespace easy { namespace dsp { namespace filter {
 
         template <typename T, std::size_t MaxSize>
         class BandStopPass : public AbstractDesigner<T, BandStopPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
-            friend class AbstractDesigner<T, BandStopPass, MaxSize>;
+            friend class AbstractDesigner<T, BandStopPass, MaxSize, 2 * MaxSize>;
             void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency,
-                            double ripple_db) {
+                            T ripple_db) {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, ripple_db);
@@ -180,7 +179,7 @@ namespace easy { namespace dsp { namespace filter {
         class BandShelfPass : public AbstractDesigner<T, BandShelfPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
             friend class AbstractDesigner<T, BandShelfPass, MaxSize, 2 * MaxSize>;
             void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency, T gain_db,
-                            double ripple_db) {
+                            T ripple_db) {
                 const auto normalized_center    = center_frequency / sample_rate;
                 const auto normalized_bandwidth = bandwidth_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, ripple_db);

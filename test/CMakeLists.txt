@@ -10,6 +10,8 @@ set(SOURCE_FILES
         filter/testing_biquad.cpp
         filter/testing_biquad_designer.cpp
         filter/testing_butterworth.cpp
+        filter/testing_chebyshev_i.cpp
+        filter/testing_chebyshev_ii.cpp
         standard/testing_autocorrelation.cpp
         standard/testing_crosscorrelation.cpp
         oscillators/testing_oscillators.cpp)
