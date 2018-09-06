@@ -30,8 +30,8 @@
 namespace easy { namespace dsp {
 
     template <typename InputIterator, typename OutputIterator>
-    constexpr void cat(InputIterator first, InputIterator last, InputIterator first2, InputIterator last2,
-                       OutputIterator out) {
+    constexpr void concatenate(InputIterator first, InputIterator last, InputIterator first2, InputIterator last2,
+                               OutputIterator out) {
         std::copy(first, last, out);
         std::copy(first2, last2, meta::advance(out, std::distance(first, last)));
     }

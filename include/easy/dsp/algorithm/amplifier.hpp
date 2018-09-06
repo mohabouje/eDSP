@@ -30,14 +30,14 @@ namespace easy { namespace dsp {
     template <typename InputIterator, typename OutputIterator,
               typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     constexpr void amplifier(InputIterator first, InputIterator last, OutputIterator out, value_type factor) {
-        std::transform(first, last, out, [factor](const double val) { return factor * val; });
+        std::transform(first, last, out, [factor](const value_type val) { return factor * val; });
     };
 
     template <typename InputIterator, typename OutputIterator,
               typename value_type = typename std::iterator_traits<InputIterator>::value_type>
     constexpr void amplifier(InputIterator first, InputIterator last, OutputIterator out, value_type factor,
                              value_type min, value_type max) {
-        std::transform(first, last, out, [factor, min, max](const double val) {
+        std::transform(first, last, out, [factor, min, max](const value_type val) {
             const auto scaled = factor * val;
             return (scaled < min) ? min : (scaled > max) ? max : scaled;
         });
