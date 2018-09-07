@@ -85,10 +85,8 @@ namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
     constexpr void Oscillator<T>::setSamplerate(value_type samplerate) noexcept {
-        samplerate_ = samplerate;
-        if (samplerate_ > 0) {
-            sampling_period_ = 1. / samplerate_;
-        }
+        samplerate_      = samplerate;
+        sampling_period_ = math::inv(samplerate_);
     }
 
     template <typename T>

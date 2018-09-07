@@ -29,6 +29,7 @@
 
 namespace easy { inline namespace math {
 
+
     template <typename T>
     constexpr bool is_negative(const T& x) {
         return x < 0;
@@ -38,6 +39,13 @@ namespace easy { inline namespace math {
     constexpr bool is_zero(const T& x) {
         return x == 0;
     }
+
+    template <typename T>
+    constexpr T sign(const T& value) noexcept {
+        return is_negative(value) ? static_cast<T>(-1)
+                                  : static_cast<T>(1);
+    }
+
 
     template <typename T>
     constexpr bool is_odd(const T& x) {
