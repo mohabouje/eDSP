@@ -46,13 +46,14 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator>
     void FlatTop<T, Allocator>::initialize() {
-        constexpr auto a0 = static_cast<value_type>(1);
-        constexpr auto a1 = static_cast<value_type>(1.9300);
-        constexpr auto a2 = static_cast<value_type>(1.2900);
-        constexpr auto a3 = static_cast<value_type>(0.3880);
-        constexpr auto a4 = static_cast<value_type>(0.0322);
+        constexpr auto a0 = static_cast<value_type>(0.21557895);
+        constexpr auto a1 = static_cast<value_type>(0.41663158);
+        constexpr auto a2 = static_cast<value_type>(0.277263158);
+        constexpr auto a3 = static_cast<value_type>(0.083578947);
+        constexpr auto a4 = static_cast<value_type>(0.006947368);
+        const auto factor = constants<value_type>::two_pi / static_cast<value_type>(parent::size() - 1);
         for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
+            const value_type tmp = factor * i;
             parent::data_[i] =
                 a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp) + a4 * std::cos(4 * tmp);
         }

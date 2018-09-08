@@ -38,7 +38,7 @@ SCENARIO("Generating Oscillators", "[make_oscillator]") {
             constexpr auto phase = 0.15;
             auto sinusoidal = make_oscillator<double, SignalType::Sinusoidal>(amplitude, sample_rate, frequency, phase);
 
-            std::array<double, size> input;
+            std::array<double, size> input{};
             std::generate(std::begin(input), std::end(input), std::ref(sinusoidal));
         }
 
@@ -46,7 +46,7 @@ SCENARIO("Generating Oscillators", "[make_oscillator]") {
             constexpr auto dutty = 0.5;
             auto square = make_oscillator<double, SignalType::Square>(amplitude, sample_rate, frequency, dutty);
 
-            std::array<double, size> input;
+            std::array<double, size> input{};
             std::generate(std::begin(input), std::end(input), std::ref(square));
         }
 
@@ -56,7 +56,7 @@ SCENARIO("Generating Oscillators", "[make_oscillator]") {
             auto triangular =
                 make_oscillator<double, SignalType::Triangular>(amplitude, sample_rate, frequency, width, skew);
 
-            std::array<double, size> input;
+            std::array<double, size> input{};
             std::generate(std::begin(input), std::end(input), std::ref(triangular));
         }
 
@@ -64,7 +64,7 @@ SCENARIO("Generating Oscillators", "[make_oscillator]") {
             constexpr auto width = 0.5;
             auto sawtooth = make_oscillator<double, SignalType::Sawtooth>(amplitude, sample_rate, frequency, width);
 
-            std::array<double, size> input;
+            std::array<double, size> input{};
             std::generate(std::begin(input), std::end(input), std::ref(sawtooth));
         }
     }

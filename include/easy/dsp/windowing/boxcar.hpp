@@ -44,7 +44,7 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator>
     inline void Boxcar<T, Allocator>::initialize() {
-        std::fill(std::begin(parent::data_), std::end(parent::data_), 1);
+        std::fill(std::begin(parent::data_), std::end(parent::data_), static_cast<value_type>(1));
     }
 
     template <typename OutputIterator, typename Integer>

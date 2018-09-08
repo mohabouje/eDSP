@@ -83,9 +83,9 @@ SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
 
     GIVEN("An input buffer storing a Hamming Window") {
         // TODO: check why it is crashing with the normal required size
-        constexpr auto sz        = meta::size(hamming);
-        constexpr auto fft_size  = sz; //easy::dsp::make_fft_size(sz);
-        constexpr auto ifft_size = sz; //easy::dsp::make_ifft_size(fft_size);
+        constexpr auto sz    = meta::size(hamming);
+        const auto fft_size  = easy::dsp::make_fft_size(sz);
+        const auto ifft_size = easy::dsp::make_ifft_size(fft_size);
         std::vector<std::complex<float>> input(sz);
         std::vector<std::complex<float>> data_fft(fft_size);
         std::vector<std::complex<float>> data_ifft(ifft_size);

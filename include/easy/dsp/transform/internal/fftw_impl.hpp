@@ -32,17 +32,17 @@ namespace easy { namespace dsp {
     enum class DCT_Type { Type_I, Type_II, Type_III, Type_IV };
 
     template <typename Integer>
-    constexpr Integer make_fft_size(Integer real_size) {
+    constexpr Integer make_fft_size(Integer real_size) noexcept {
         return std::floor(real_size / 2) + 1;
     }
 
     template <typename Integer>
-    constexpr Integer make_ifft_size(Integer complex_size) {
+    constexpr Integer make_ifft_size(Integer complex_size) noexcept {
         return 2 * (complex_size - 1);
     }
 
     template <typename T>
-    inline T* fftw_cast(const T* p) {
+    inline T* fftw_cast(const T* p) noexcept {
         return const_cast<T*>(p);
     }
 

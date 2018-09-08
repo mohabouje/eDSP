@@ -24,6 +24,7 @@
 
 #include <complex>
 #include <algorithm>
+#include <easy/meta/type_traits.hpp>
 
 namespace easy { namespace dsp {
 
