@@ -27,6 +27,7 @@ include_directories(${GTEST_INCLUDE_DIRS})
 set(GTestApp ${PROJECT_NAME}-gtest)
 set(SOURCE_FILES_GTEST
         testing_gtest.cpp
+        transform/testing_fft.cpp
         windowing/testing_windowing.cpp)
 
 add_executable(GTestApp ${SOURCE_FILES_GTEST})

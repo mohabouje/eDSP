@@ -27,28 +27,29 @@
 
 using namespace easy::dsp::windowing;
 
-std::string data_path(const std::string filename) {
-    std::string path = CURRENT_TEST_PATH;
-    path += "/windowing/data/";
-    path += filename;
-    return path;
-}
-
-template <typename T>
-std::vector<T> read_vector(const std::string& filename) {
-    std::ifstream input(filename.c_str());
-    if (!input.is_open()) {
-        return {};
+namespace {
+    std::string data_path(const std::string filename) {
+        std::string path = CURRENT_TEST_PATH;
+        path += "/windowing/data/";
+        path += filename;
+        return path;
     }
 
-    std::vector<T> data;
-    std::string line;
-    while (std::getline(input, line)) {
-        data.push_back(static_cast<T>(std::stod(line)));
-    }
-    return data;
-}
+    template <typename T>
+    std::vector<T> read_vector(const std::string& filename) {
+        std::ifstream input(filename.c_str());
+        if (!input.is_open()) {
+            return {};
+        }
 
+        std::vector<T> data;
+        std::string line;
+        while (std::getline(input, line)) {
+            data.push_back(static_cast<T>(std::stod(line)));
+        }
+        return data;
+    }
+}
 static std::unordered_map<WindowType, std::string> AssociatedFile = {
     {WindowType::Bartlett, data_path("bartlett.csv")},
     {WindowType::Blackman, data_path("blackman.csv")},
