@@ -99,12 +99,13 @@ namespace easy { namespace dsp { namespace filter {
 
     template <typename T>
     constexpr Biquad<T>::Biquad(const std::complex<T>& pole, const std::complex<T>& zero) :
-        a0_(1),
-        a1_(-pole.real()),
-        a2_(0),
-        b0_(-zero.real()),
+        b2_(0),
         b1_(1),
-        b2_(0) {
+        b0_(-zero.real()),
+        a2_(0),
+        a1_(-pole.real()),
+        a0_(1)
+      {
         meta::expects(pole.imag() == 0, "Expecting real pole");
         meta::expects(zero.imag() == 0, "Expecting real zero");
     }
@@ -112,8 +113,8 @@ namespace easy { namespace dsp { namespace filter {
     template <typename T>
     constexpr Biquad<T>::Biquad(const std::complex<T>& pole_first, const std::complex<T>& zero_first,
                                 const std::complex<T>& pole_second, const std::complex<T>& zero_second) :
-        a0_(1),
-        b0_(1) {
+        b0_(1),
+        a0_(1) {
         if (pole_first.imag() != 0) {
             meta::expects(pole_second == std::conj(pole_first), "Expecting complex conjugates");
             a1_ = -2 * pole_first.real();

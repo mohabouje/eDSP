@@ -105,8 +105,8 @@ namespace easy { namespace dsp { namespace filter {
             return digital_;
         }
 
-    private:
-        friend class meta::declfriend<Designer>::type;
+    protected:
+        //friend decltype(meta::declfriend<Designer>::type);
         LayoutBase<T, MaxAnalog> analog_;
         LayoutBase<T, MaxDigital> digital_;
     };

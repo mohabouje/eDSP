@@ -110,7 +110,7 @@ namespace easy { namespace dsp { namespace filter {
 
         template <typename T, std::size_t MaxSize>
         class LowPass : public AbstractDesigner<T, LowPass<T, MaxSize>, MaxSize> {
-            friend class AbstractDesigner<T, LowPass, MaxSize>;
+            friend struct AbstractDesigner<T, LowPass, MaxSize>;
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T stopband_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, stopband_db);
@@ -120,7 +120,7 @@ namespace easy { namespace dsp { namespace filter {
 
         template <typename T, std::size_t MaxSize>
         class HighPass : public AbstractDesigner<T, HighPass<T, MaxSize>, MaxSize> {
-            friend class AbstractDesigner<T, HighPass, MaxSize>;
+            friend struct AbstractDesigner<T, HighPass, MaxSize>;
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T stopband_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowPassAnalogDesigner{}.design(this->analog_, order, stopband_db);
@@ -130,7 +130,7 @@ namespace easy { namespace dsp { namespace filter {
 
         template <typename T, std::size_t MaxSize>
         class BandPass : public AbstractDesigner<T, BandPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
-            friend class AbstractDesigner<T, BandPass, MaxSize, 2 * MaxSize>;
+            friend struct AbstractDesigner<T, BandPass, MaxSize, 2 * MaxSize>;
             void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency,
                             T stopband_db) {
                 const auto normalized_center    = center_frequency / sample_rate;
@@ -142,7 +142,7 @@ namespace easy { namespace dsp { namespace filter {
 
         template <typename T, std::size_t MaxSize>
         class BandStopPass : public AbstractDesigner<T, BandStopPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
-            friend class AbstractDesigner<T, BandStopPass, MaxSize, 2 * MaxSize>;
+            friend struct AbstractDesigner<T, BandStopPass, MaxSize, 2 * MaxSize>;
             void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency,
                             T stopband_db) {
                 const auto normalized_center    = center_frequency / sample_rate;
@@ -154,7 +154,7 @@ namespace easy { namespace dsp { namespace filter {
 
         template <typename T, std::size_t MaxSize>
         class LowShelfPass : public AbstractDesigner<T, LowShelfPass<T, MaxSize>, MaxSize> {
-            friend class AbstractDesigner<T, LowShelfPass, MaxSize>;
+            friend struct AbstractDesigner<T, LowShelfPass, MaxSize>;
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, T stopband_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, stopband_db);
@@ -164,7 +164,7 @@ namespace easy { namespace dsp { namespace filter {
 
         template <typename T, std::size_t MaxSize>
         class HighShelfPass : public AbstractDesigner<T, HighShelfPass<T, MaxSize>, MaxSize> {
-            friend class AbstractDesigner<T, HighShelfPass, MaxSize>;
+            friend struct AbstractDesigner<T, HighShelfPass, MaxSize>;
             void operator()(std::size_t order, T sample_rate, T cuttoff_frequency, T gain_db, T stopband_db) {
                 const auto normalized_frequency = cuttoff_frequency / sample_rate;
                 LowShelfAnalogDesigner{}.design(this->analog_, order, gain_db, stopband_db);
@@ -174,7 +174,7 @@ namespace easy { namespace dsp { namespace filter {
 
         template <typename T, std::size_t MaxSize>
         class BandShelfPass : public AbstractDesigner<T, BandShelfPass<T, MaxSize>, MaxSize, 2 * MaxSize> {
-            friend class AbstractDesigner<T, BandShelfPass, MaxSize, 2 * MaxSize>;
+            friend struct AbstractDesigner<T, BandShelfPass, MaxSize, 2 * MaxSize>;
             void operator()(std::size_t order, T sample_rate, T center_frequency, T bandwidth_frequency, T gain_db,
                             T stopband_db) {
                 const auto normalized_center    = center_frequency / sample_rate;

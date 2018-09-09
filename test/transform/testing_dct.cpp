@@ -32,7 +32,7 @@
 using namespace easy::dsp::windowing;
 
 TEST(TestingDCT, TransformHanningWindow) {
-    const auto size = 128;
+    const auto size = 128ul;
     const auto window = make_window<double, WindowType::Hanning>(size);
 
     std::vector<double> transformed(size), inverse(size);
@@ -45,7 +45,7 @@ TEST(TestingDCT, TransformHanningWindow) {
 }
 
 TEST(TestingDCT, TransformHammingWindow) {
-    const auto size = 128;
+    const auto size = 128ul;
     const auto window = make_window<double, WindowType::Hamming>(size);
 
     std::vector<double> transformed(size), inverse(size);
@@ -58,7 +58,7 @@ TEST(TestingDCT, TransformHammingWindow) {
 }
 
 TEST(TestingDCT, TransformHammingWindowDCT_I) {
-    const auto size = 128;
+    const auto size = 128ul;
     const auto window = make_window<double, WindowType::Hamming>(size);
 
     std::vector<double> transformed(size), inverse(size);
@@ -71,7 +71,7 @@ TEST(TestingDCT, TransformHammingWindowDCT_I) {
 }
 
 TEST(TestingDCT, TransformHammingWindowDCT_III) {
-    const auto size = 128;
+    const auto size = 128ul;
     const auto window = make_window<double, WindowType::Hamming>(size);
 
     std::vector<double> transformed(size), inverse(size);
@@ -84,7 +84,7 @@ TEST(TestingDCT, TransformHammingWindowDCT_III) {
 }
 
 TEST(TestingDCT, TransformHammingWindowDCT_IV) {
-    const auto size = 128;
+    const auto size = 128ul;
     const auto window = make_window<double, WindowType::Hamming>(size);
 
     std::vector<double> transformed(size), inverse(size);
@@ -97,7 +97,7 @@ TEST(TestingDCT, TransformHammingWindowDCT_IV) {
 }
 
 TEST(TestingDCT, TransformBlackmanWindow) {
-    const auto size = 128;
+    const auto size = 128ul;
     const auto window = make_window<double, WindowType::Blackman>(size);
 
     std::vector<double> transformed(size), inverse(size);

@@ -60,6 +60,7 @@ typename Window::value_type window_getitem(const Window& v, typename Window::siz
     } else {
         PyErr_SetString(PyExc_IndexError, "index out of range");
         throw_error_already_set();
+        return -1;
     }
 }
 
