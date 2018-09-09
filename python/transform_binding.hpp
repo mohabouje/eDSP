@@ -30,7 +30,7 @@
 #include <boost/python/iterator.hpp>
 
 #include <easy/dsp/transform/dct.hpp>
-#include <easy/dsp/transform/hilbert.hpp>
+#include <easy/dsp/transform/hartley.hpp>
 #include <easy/dsp/transform/dft.hpp>
 #include <vector>
 
@@ -99,7 +99,7 @@ public:
         for (std::size_t i = 0; i < size; ++i) {
             real_data[i] = boost::python::extract<double>(data[i]);
         }
-        ::hilbert(std::cbegin(real_data), std::cend(real_data), std::begin(transfor_data));
+        ::hartley(std::cbegin(real_data), std::cend(real_data), std::begin(transfor_data));
         boost::python::list output;
         for (const auto& element : transfor_data) {
             output.append(element);

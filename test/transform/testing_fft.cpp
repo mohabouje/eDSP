@@ -22,6 +22,7 @@
 
 #include <easy/dsp/windowing/windowing.hpp>
 #include <easy/dsp/transform/dft.hpp>
+#include <easy/dsp/utilities/real2complex.hpp>
 
 #include <gtest/gtest.h>
 #include <unordered_map>
@@ -104,5 +105,38 @@ TEST(TestingFFT, TransformBlackmanWindow) {
     for (auto i = 0ul; i < middle; ++i) {
         EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.001);
         EXPECT_NEAR(reference[i].imag(), transformed[i].imag(), 0.001);
+    }
+}
+
+
+
+TEST(TestingIFFT, InverseTransformRealData) {
+    const auto size = 512ul;
+    const auto window = make_window<double, WindowType::Hamming>(size);
+
+    std::vector<std::complex<double>> transformed(easy::dsp::make_fft_size(size));
+    std::vector<double> inverse(window.size());
+    easy::dsp::dft(std::begin(window), std::end(window), std::begin(transformed));
+    easy::dsp::idft(std::begin(transformed), std::end(transformed), std::begin(inverse));
+
+    for (auto i = 0ul; i < window.size(); ++i) {
+        EXPECT_NEAR(inverse[i], window[i], 0.001);
+    }
+}
+
+TEST(TestingIFFT, InverseTransformComplexData) {
+    const auto size = 512ul;
+    const auto window = make_window<double, WindowType::Blackman>(size);
+
+    std::vector<std::complex<double>>
+            input(window.size()),
+            inverse(window.size()),
+            transformed(window.size());
+    easy::dsp::real2complex(window.begin(), window.end(), std::begin(input));
+    easy::dsp::complex_dft<double>(std::begin(input), std::end(input), std::begin(transformed));
+    easy::dsp::complex_idft<double>(std::begin(transformed), std::end(transformed), std::begin(inverse));
+    for (auto i = 0ul; i < window.size(); ++i) {
+        EXPECT_NEAR(inverse[i].real(), input[i].real(), 0.001);
+        EXPECT_NEAR(inverse[i].imag(), input[i].imag(), 0.001);
     }
 }

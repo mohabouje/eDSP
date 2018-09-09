@@ -24,8 +24,10 @@
 #define EASYDSP_FFTW_IMPL_HPP
 
 #include <easy/meta/is_null.hpp>
+#include <easy/meta/advance.hpp>
 #include <complex>
 #include <fftw3.h>
+#include <algorithm>
 
 namespace easy { namespace dsp {
 
@@ -53,6 +55,7 @@ namespace easy { namespace dsp {
     inline fftw_complex* fftw_cast(const std::complex<double>* p) {
         return const_cast<fftw_complex*>(reinterpret_cast<const fftw_complex*>(p));
     }
+
 
     template <typename T>
     struct fftw_plan {};
@@ -98,6 +101,7 @@ namespace easy { namespace dsp {
             fftwf_execute_dft_c2r(plan_, src, dst);
         }
 
+
         inline void dht(value_type* src, value_type* dst, size_type nfft) {
             if (meta::is_null(plan_)) {
                 plan_ = fftwf_plan_r2r_1d(nfft, src, dst, FFTW_DHT, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
@@ -141,6 +145,28 @@ namespace easy { namespace dsp {
                 plan_ = fftwf_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
             fftwf_execute_r2r(plan_, src, dst);
+        }
+
+        inline void idft_scale(value_type* dst, size_type nfft) {
+            const auto scaling  = static_cast<value_type>(nfft);
+            for (size_type i = 0; i < nfft; ++i) {
+                dst[i] /= scaling;
+            }
+        }
+
+        inline void idft_scale(complex_type* dst, size_type nfft) {
+            const auto scaling  = static_cast<value_type>(nfft);
+            for (size_type i = 0; i < nfft; ++i) {
+                dst[i][0] /= scaling;
+                dst[i][1] /= scaling;
+            }
+        }
+
+        inline void idct_scale(value_type* dst, size_type nfft, DCT_Type type) {
+            const auto scaling  = (type == DCT_Type::Type_I) ? 2 * (nfft - 1) : 2 * nfft;
+            for (size_type i = 0; i < nfft; ++i) {
+                dst[i] /= scaling;
+            }
         }
     };
 
@@ -225,6 +251,28 @@ namespace easy { namespace dsp {
                 plan_ = fftw_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
             fftw_execute_r2r(plan_, src, dst);
+        }
+
+        inline void idft_scale(value_type* dst, size_type nfft) {
+            const auto scaling  = static_cast<value_type>(nfft);
+            for (size_type i = 0; i < nfft; ++i) {
+                dst[i] /= scaling;
+            }
+        }
+
+        inline void idft_scale(complex_type* dst, size_type nfft) {
+            const auto scaling  = static_cast<value_type>(nfft);
+            for (size_type i = 0; i < nfft; ++i) {
+                dst[i][0] /= scaling;
+                dst[i][1] /= scaling;
+            }
+        }
+
+        inline void idct_scale(value_type* dst, size_type nfft, DCT_Type type) {
+            const auto scaling  = (type == DCT_Type::Type_I) ? 2 * (nfft - 1) : 2 * nfft;
+            for (size_type i = 0; i < nfft; ++i) {
+                dst[i] /= scaling;
+            }
         }
     };
 

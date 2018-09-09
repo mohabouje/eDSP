@@ -28,6 +28,9 @@ set(GTestApp ${PROJECT_NAME}-gtest)
 set(SOURCE_FILES_GTEST
         testing_gtest.cpp
         transform/testing_fft.cpp
+        transform/testing_dct.cpp
+        transform/testing_hartley.cpp
+        transform/testing_hilbert.cpp
         windowing/testing_windowing.cpp)
 
 add_executable(GTestApp ${SOURCE_FILES_GTEST})

@@ -42,14 +42,10 @@ namespace easy { namespace dsp {
 
     template <typename T, typename InputIterator, typename OutputIterator>
     inline void complex_idft(InputIterator first, InputIterator last, OutputIterator out) {
-        using value_type = typename std::iterator_traits<InputIterator>::value_type;
         const auto nfft  = static_cast<typename fftw_plan<T>::size_type>(std::distance(first, last));
         fftw_plan<T> plan;
         plan.idft(fftw_cast(&(*first)), fftw_cast(&(*out)), nfft);
-        std::transform(out, out + nfft, out, [nfft](value_type value) -> value_type {
-            return value / static_cast<value_type>(nfft);
-            ;
-        });
+        plan.idft_scale(fftw_cast(&(*out)), nfft);
     }
 
     template <typename T, typename Container>
@@ -73,10 +69,11 @@ namespace easy { namespace dsp {
     template <typename InputIterator, typename OutputIterator>
     void idft(InputIterator first, InputIterator last, OutputIterator out) {
         using value_type = typename std::iterator_traits<OutputIterator>::value_type;
+        const auto nfft = static_cast<typename fftw_plan<value_type>::size_type>(
+                    make_ifft_size(std::distance(first, last)));
         fftw_plan<value_type> plan;
-        const auto nfft = static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last));
         plan.idft(fftw_cast(&(*first)), fftw_cast(&(*out)), nfft);
-        std::transform(out, out + nfft, out, [nfft](value_type value) { return value / nfft; });
+        plan.idft_scale(fftw_cast(&(*out)), nfft);
     }
 
     template <typename RealContainer, typename ComplexContainer>

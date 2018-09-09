@@ -48,7 +48,7 @@ namespace easy { namespace dsp {
         const auto scaling      = (type == DCT_Type::Type_I) ? 2 * (nfft - 1) : 2 * nfft;
         fftw_plan<value_type> plan;
         plan.idct(fftw_cast(&(*first)), fftw_cast(&(*out)), nfft, type);
-        std::transform(out, out + nfft, out, [scaling](output_value_type value) { return value / scaling; });
+        plan.idct_scale(fftw_cast(&(*out)), nfft, type);
     }
 
     template <typename Container>
