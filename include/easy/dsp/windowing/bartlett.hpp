@@ -46,15 +46,15 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator>
     inline void Bartlett<T, Allocator>::initialize() {
-        const auto size = parent::size();
+        const auto size   = parent::size();
         const auto middle = math::is_even(size) ? size / 2 : (size + 1) / 2;
         const auto factor = math::inv(static_cast<value_type>(size - 1));
         for (size_type i = 0; i < middle; ++i) {
-            parent::data_[i] =  2 * i * factor;
+            parent::data_[i] = 2 * i * factor;
         }
 
         for (size_type i = middle; i < size; ++i) {
-            parent::data_[i] =  2 - 2 * i * factor;
+            parent::data_[i] = 2 - 2 * i * factor;
         }
     }
 

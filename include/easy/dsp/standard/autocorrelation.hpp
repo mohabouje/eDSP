@@ -79,7 +79,7 @@ namespace easy { namespace dsp {
         static_assert(std::is_same<typename std::iterator_traits<InputIterator>::value_type, T>::value &&
                           std::is_same<typename std::iterator_traits<OutputIterator>::value_type, T>::value,
                       "Iterator does not math the value type. No implicit conversion is allowed");
-        meta::expects(std::distance(first, last) == size_, "Buffer size mismatch");
+        meta::expects(static_cast<size_type>(std::distance(first, last)) == size_, "Buffer size mismatch");
         fft_.dft(fftw_cast(&(*first)), fftw_cast(fft_data_.data()), size_);
 
         std::transform(std::cbegin(fft_data_), std::cend(fft_data_), std::begin(fft_data_),

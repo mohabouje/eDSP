@@ -51,9 +51,8 @@ namespace {
         std::string line;
         while (std::getline(input, line)) {
             std::vector<std::string> results;
-            boost::split(results, line, [](char c){return c == ',';});
-            data.emplace_back(static_cast<T>(std::stod(results[0])),
-                              static_cast<T>(std::stod(results[1])));
+            boost::split(results, line, [](char c) { return c == ','; });
+            data.emplace_back(static_cast<T>(std::stod(results[0])), static_cast<T>(std::stod(results[1])));
         }
         return data;
     }
@@ -63,12 +62,12 @@ namespace {
         {WindowType::Hamming, data_path("hilbert_hamming.csv")},
         {WindowType::Hanning, data_path("hilbert_hanning.csv")},
     };
-}
+} // namespace
 
 TEST(TestingHilbert, TransformHanningWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hanning]);
-    const auto size = reference.size();
-    const auto window = make_window<double, WindowType::Hanning>(size);
+    const auto size      = reference.size();
+    const auto window    = make_window<double, WindowType::Hanning>(size);
 
     std::vector<std::complex<double>> transformed(size);
     easy::dsp::hilbert(std::begin(window), std::end(window), std::begin(transformed));
@@ -81,8 +80,8 @@ TEST(TestingHilbert, TransformHanningWindow) {
 
 TEST(TestingHilbert, TransformHammingWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hamming]);
-    const auto size = reference.size();
-    const auto window = make_window<double, WindowType::Hamming>(size);
+    const auto size      = reference.size();
+    const auto window    = make_window<double, WindowType::Hamming>(size);
 
     std::vector<std::complex<double>> transformed(size);
     easy::dsp::hilbert(std::cbegin(window), std::cend(window), std::begin(transformed));
@@ -95,8 +94,8 @@ TEST(TestingHilbert, TransformHammingWindow) {
 
 TEST(TestingHilbert, TransformBlackmanWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Blackman]);
-    const auto size = reference.size();
-    const auto window = make_window<double, WindowType::Blackman>(size);
+    const auto size      = reference.size();
+    const auto window    = make_window<double, WindowType::Blackman>(size);
 
     std::vector<std::complex<double>> transformed(size);
     easy::dsp::hilbert(std::begin(window), std::end(window), std::begin(transformed));
@@ -106,4 +105,3 @@ TEST(TestingHilbert, TransformBlackmanWindow) {
         EXPECT_NEAR(reference[i].imag(), transformed[i].imag(), 0.001);
     }
 }
-

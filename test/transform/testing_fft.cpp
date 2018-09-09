@@ -50,9 +50,8 @@ std::vector<std::complex<T>> read_vector(const std::string& filename) {
     std::string line;
     while (std::getline(input, line)) {
         std::vector<std::string> results;
-        boost::split(results, line, [](char c){return c == ',';});
-        data.emplace_back(static_cast<T>(std::stod(results[0])),
-                          static_cast<T>(std::stod(results[1])));
+        boost::split(results, line, [](char c) { return c == ','; });
+        data.emplace_back(static_cast<T>(std::stod(results[0])), static_cast<T>(std::stod(results[1])));
     }
     return data;
 }
@@ -65,8 +64,8 @@ static std::unordered_map<WindowType, std::string> AssociatedFile = {
 
 TEST(TestingFFT, TransformHanningWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hanning]);
-    const auto size = reference.size();
-    const auto window = make_window<double, WindowType::Hanning>(size);
+    const auto size      = reference.size();
+    const auto window    = make_window<double, WindowType::Hanning>(size);
 
     std::vector<std::complex<double>> transformed(easy::dsp::make_fft_size(size));
     easy::dsp::dft(std::begin(window), std::end(window), std::begin(transformed));
@@ -80,8 +79,8 @@ TEST(TestingFFT, TransformHanningWindow) {
 
 TEST(TestingFFT, TransformHammingWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hamming]);
-    const auto size = reference.size();
-    const auto window = make_window<double, WindowType::Hamming>(size);
+    const auto size      = reference.size();
+    const auto window    = make_window<double, WindowType::Hamming>(size);
 
     std::vector<std::complex<double>> transformed(easy::dsp::make_fft_size(size));
     easy::dsp::dft(std::begin(window), std::end(window), std::begin(transformed));
@@ -95,8 +94,8 @@ TEST(TestingFFT, TransformHammingWindow) {
 
 TEST(TestingFFT, TransformBlackmanWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Blackman]);
-    const auto size = reference.size();
-    const auto window = make_window<double, WindowType::Blackman>(size);
+    const auto size      = reference.size();
+    const auto window    = make_window<double, WindowType::Blackman>(size);
 
     std::vector<std::complex<double>> transformed(easy::dsp::make_fft_size(size));
     easy::dsp::dft(std::begin(window), std::end(window), std::begin(transformed));
@@ -108,10 +107,8 @@ TEST(TestingFFT, TransformBlackmanWindow) {
     }
 }
 
-
-
 TEST(TestingIFFT, InverseTransformRealData) {
-    const auto size = 512ul;
+    const auto size   = 512ul;
     const auto window = make_window<double, WindowType::Hamming>(size);
 
     std::vector<std::complex<double>> transformed(easy::dsp::make_fft_size(size));
@@ -125,13 +122,10 @@ TEST(TestingIFFT, InverseTransformRealData) {
 }
 
 TEST(TestingIFFT, InverseTransformComplexData) {
-    const auto size = 512ul;
+    const auto size   = 512ul;
     const auto window = make_window<double, WindowType::Blackman>(size);
 
-    std::vector<std::complex<double>>
-            input(window.size()),
-            inverse(window.size()),
-            transformed(window.size());
+    std::vector<std::complex<double>> input(window.size()), inverse(window.size()), transformed(window.size());
     easy::dsp::real2complex(window.begin(), window.end(), std::begin(input));
     easy::dsp::complex_dft<double>(std::begin(input), std::end(input), std::begin(transformed));
     easy::dsp::complex_idft<double>(std::begin(transformed), std::end(transformed), std::begin(inverse));

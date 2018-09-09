@@ -48,7 +48,7 @@ namespace easy { namespace dsp {
 
         const auto limit_1 = math::is_even(nfft) ? nfft / 2 : (nfft + 1) / 2;
         const auto limit_2 = math::is_even(nfft) ? limit_1 + 1 : limit_1;
-        for (auto i = 1ul; i <  limit_1; ++i) {
+        for (auto i = 1; i < limit_1; ++i) {
             complex_data[i] *= 2;
         }
 

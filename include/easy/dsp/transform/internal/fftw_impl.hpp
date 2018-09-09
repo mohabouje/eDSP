@@ -56,7 +56,6 @@ namespace easy { namespace dsp {
         return const_cast<fftw_complex*>(reinterpret_cast<const fftw_complex*>(p));
     }
 
-
     template <typename T>
     struct fftw_plan {};
 
@@ -101,7 +100,6 @@ namespace easy { namespace dsp {
             fftwf_execute_dft_c2r(plan_, src, dst);
         }
 
-
         inline void dht(value_type* src, value_type* dst, size_type nfft) {
             if (meta::is_null(plan_)) {
                 plan_ = fftwf_plan_r2r_1d(nfft, src, dst, FFTW_DHT, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
@@ -122,6 +120,7 @@ namespace easy { namespace dsp {
                         case DCT_Type::Type_IV:
                             return FFTW_REDFT11;
                     }
+                    return FFTW_REDFT00;
                 }();
                 plan_ = fftwf_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
@@ -141,6 +140,7 @@ namespace easy { namespace dsp {
                         case DCT_Type::Type_IV:
                             return FFTW_REDFT11;
                     }
+                    return FFTW_REDFT00;
                 }();
                 plan_ = fftwf_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
@@ -148,14 +148,14 @@ namespace easy { namespace dsp {
         }
 
         inline void idft_scale(value_type* dst, size_type nfft) {
-            const auto scaling  = static_cast<value_type>(nfft);
+            const auto scaling = static_cast<value_type>(nfft);
             for (size_type i = 0; i < nfft; ++i) {
                 dst[i] /= scaling;
             }
         }
 
         inline void idft_scale(complex_type* dst, size_type nfft) {
-            const auto scaling  = static_cast<value_type>(nfft);
+            const auto scaling = static_cast<value_type>(nfft);
             for (size_type i = 0; i < nfft; ++i) {
                 dst[i][0] /= scaling;
                 dst[i][1] /= scaling;
@@ -163,7 +163,7 @@ namespace easy { namespace dsp {
         }
 
         inline void idct_scale(value_type* dst, size_type nfft, DCT_Type type) {
-            const auto scaling  = (type == DCT_Type::Type_I) ? 2 * (nfft - 1) : 2 * nfft;
+            const auto scaling = (type == DCT_Type::Type_I) ? 2 * (nfft - 1) : 2 * nfft;
             for (size_type i = 0; i < nfft; ++i) {
                 dst[i] /= scaling;
             }
@@ -228,6 +228,7 @@ namespace easy { namespace dsp {
                         case DCT_Type::Type_IV:
                             return FFTW_REDFT11;
                     }
+                    return FFTW_REDFT00;
                 }();
                 plan_ = fftw_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
@@ -247,6 +248,7 @@ namespace easy { namespace dsp {
                         case DCT_Type::Type_IV:
                             return FFTW_REDFT11;
                     }
+                    return FFTW_REDFT00;
                 }();
                 plan_ = fftw_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
@@ -254,14 +256,14 @@ namespace easy { namespace dsp {
         }
 
         inline void idft_scale(value_type* dst, size_type nfft) {
-            const auto scaling  = static_cast<value_type>(nfft);
+            const auto scaling = static_cast<value_type>(nfft);
             for (size_type i = 0; i < nfft; ++i) {
                 dst[i] /= scaling;
             }
         }
 
         inline void idft_scale(complex_type* dst, size_type nfft) {
-            const auto scaling  = static_cast<value_type>(nfft);
+            const auto scaling = static_cast<value_type>(nfft);
             for (size_type i = 0; i < nfft; ++i) {
                 dst[i][0] /= scaling;
                 dst[i][1] /= scaling;
@@ -269,7 +271,7 @@ namespace easy { namespace dsp {
         }
 
         inline void idct_scale(value_type* dst, size_type nfft, DCT_Type type) {
-            const auto scaling  = (type == DCT_Type::Type_I) ? 2 * (nfft - 1) : 2 * nfft;
+            const auto scaling = (type == DCT_Type::Type_I) ? 2 * (nfft - 1) : 2 * nfft;
             for (size_type i = 0; i < nfft; ++i) {
                 dst[i] /= scaling;
             }

@@ -104,8 +104,7 @@ namespace easy { namespace dsp { namespace filter {
         b0_(-zero.real()),
         a2_(0),
         a1_(-pole.real()),
-        a0_(1)
-      {
+        a0_(1) {
         meta::expects(pole.imag() == 0, "Expecting real pole");
         meta::expects(zero.imag() == 0, "Expecting real zero");
     }

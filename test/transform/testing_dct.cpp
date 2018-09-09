@@ -32,7 +32,7 @@
 using namespace easy::dsp::windowing;
 
 TEST(TestingDCT, TransformHanningWindow) {
-    const auto size = 128ul;
+    const auto size   = 128ul;
     const auto window = make_window<double, WindowType::Hanning>(size);
 
     std::vector<double> transformed(size), inverse(size);
@@ -45,7 +45,7 @@ TEST(TestingDCT, TransformHanningWindow) {
 }
 
 TEST(TestingDCT, TransformHammingWindow) {
-    const auto size = 128ul;
+    const auto size   = 128ul;
     const auto window = make_window<double, WindowType::Hamming>(size);
 
     std::vector<double> transformed(size), inverse(size);
@@ -58,7 +58,7 @@ TEST(TestingDCT, TransformHammingWindow) {
 }
 
 TEST(TestingDCT, TransformHammingWindowDCT_I) {
-    const auto size = 128ul;
+    const auto size   = 128ul;
     const auto window = make_window<double, WindowType::Hamming>(size);
 
     std::vector<double> transformed(size), inverse(size);
@@ -71,12 +71,13 @@ TEST(TestingDCT, TransformHammingWindowDCT_I) {
 }
 
 TEST(TestingDCT, TransformHammingWindowDCT_III) {
-    const auto size = 128ul;
+    const auto size   = 128ul;
     const auto window = make_window<double, WindowType::Hamming>(size);
 
     std::vector<double> transformed(size), inverse(size);
     easy::dsp::dct(std::cbegin(window), std::cend(window), std::begin(transformed), easy::dsp::DCT_Type::Type_III);
-    easy::dsp::idct(std::cbegin(transformed), std::cend(transformed), std::begin(inverse), easy::dsp::DCT_Type::Type_III);
+    easy::dsp::idct(std::cbegin(transformed), std::cend(transformed), std::begin(inverse),
+                    easy::dsp::DCT_Type::Type_III);
 
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(window[i], inverse[i], 0.001);
@@ -84,12 +85,13 @@ TEST(TestingDCT, TransformHammingWindowDCT_III) {
 }
 
 TEST(TestingDCT, TransformHammingWindowDCT_IV) {
-    const auto size = 128ul;
+    const auto size   = 128ul;
     const auto window = make_window<double, WindowType::Hamming>(size);
 
     std::vector<double> transformed(size), inverse(size);
     easy::dsp::dct(std::cbegin(window), std::cend(window), std::begin(transformed), easy::dsp::DCT_Type::Type_IV);
-    easy::dsp::idct(std::cbegin(transformed), std::cend(transformed), std::begin(inverse), easy::dsp::DCT_Type::Type_IV);
+    easy::dsp::idct(std::cbegin(transformed), std::cend(transformed), std::begin(inverse),
+                    easy::dsp::DCT_Type::Type_IV);
 
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(window[i], inverse[i], 0.001);
@@ -97,7 +99,7 @@ TEST(TestingDCT, TransformHammingWindowDCT_IV) {
 }
 
 TEST(TestingDCT, TransformBlackmanWindow) {
-    const auto size = 128ul;
+    const auto size   = 128ul;
     const auto window = make_window<double, WindowType::Blackman>(size);
 
     std::vector<double> transformed(size), inverse(size);

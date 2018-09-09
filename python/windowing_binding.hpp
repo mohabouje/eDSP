@@ -20,25 +20,26 @@
  * Date: 2018-07-29
  */
 #ifndef PYTHON_BINDING_WINDOWING_H
-#    define PYTHON_BINDING_WINGOWING_H
+#define PYTHON_BINDING_WINDOWING_H
 
-#    include <boost/python.hpp>
-#    include <boost/python/module.hpp>
-#    include <boost/python/class.hpp>
-#    include <boost/python/scope.hpp>
-#    include <boost/python/iterator.hpp>
+#include <boost/python.hpp>
+#include <boost/python/module.hpp>
+#include <boost/python/class.hpp>
+#include <boost/python/scope.hpp>
+#include <boost/python/iterator.hpp>
 
-#    include <easy/dsp/windowing/flat_top.hpp>
-#    include <easy/dsp/windowing/blackman.hpp>
-#    include <easy/dsp/windowing/hanning.hpp>
-#    include <easy/dsp/windowing/hamming.hpp>
-#    include <easy/dsp/windowing/rectangular.hpp>
-#    include <easy/dsp/windowing/bartlett.hpp>
-#    include <easy/dsp/windowing/triangular.hpp>
-#    include <easy/dsp/windowing/windowing.hpp>
-#    include <easy/dsp/windowing/window_impl.hpp>
-#    include <cstdint>
-#    include <vector>
+#include <easy/dsp/windowing/flat_top.hpp>
+#include <easy/dsp/windowing/blackman.hpp>
+#include <easy/dsp/windowing/hanning.hpp>
+#include <easy/dsp/windowing/hamming.hpp>
+#include <easy/dsp/windowing/rectangular.hpp>
+#include <easy/dsp/windowing/bartlett.hpp>
+#include <easy/dsp/windowing/triangular.hpp>
+#include <easy/dsp/windowing/windowing.hpp>
+#include <easy/dsp/windowing/window_impl.hpp>
+#include <easy/meta/unused.hpp>
+#include <cstdint>
+#include <vector>
 
 using namespace boost::python;
 using namespace easy::dsp::windowing;
@@ -66,6 +67,8 @@ typename Window::value_type window_getitem(const Window& v, typename Window::siz
 
 template <class Window>
 void window_delitem(Window& v, typename Window::size_type index) {
+    easy::meta::unused(v);
+    easy::meta::unused(index);
     PyErr_SetString(PyExc_IndexError, "operation not allowed");
     throw_error_already_set();
 }
@@ -92,8 +95,7 @@ boost::python::list window_apply(Window& w, boost::python::list data) {
 
 template <typename W>
 void declare_window(const char* name) {
-    using value_type = typename W::value_type;
-    using size_type  = typename W::size_type;
+    using size_type = typename W::size_type;
     class_<W>(name, init<size_type>())
         .def("__iter__", iterator<W>())
         .def("__len__", &W::size)
@@ -133,6 +135,7 @@ public:
         } else {
             PyErr_SetString(PyExc_IndexError, "window does not exist");
             throw_error_already_set();
+            return boost::python::list();
         }
     }
 };

@@ -152,7 +152,8 @@ namespace easy { namespace dsp { namespace windowing {
     template <typename InputIterator, typename OutputIterator>
     inline void Window<Implementation, T, Allocator>::compute(InputIterator first, InputIterator last,
                                                               OutputIterator out) {
-        meta::expects(std::distance(first, last) == size(), "Expecting a buffer with the same size");
+        meta::expects(static_cast<size_type>(std::distance(first, last)) == size(),
+                      "Expecting a buffer with the same size");
         std::transform(first, last, std::begin(data_), out, std::multiplies<T>());
     }
 

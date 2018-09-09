@@ -50,7 +50,7 @@ namespace easy { namespace dsp { namespace windowing {
         constexpr auto a1 = static_cast<value_type>(0.4891775);
         constexpr auto a2 = static_cast<value_type>(0.1365995);
         constexpr auto a3 = static_cast<value_type>(0.0106411);
-        const auto size = parent::size();
+        const auto size   = parent::size();
         const auto middle = math::is_even(size) ? size / 2 : (size + 1) / 2;
         const auto factor = constants<value_type>::two_pi / static_cast<value_type>(size - 1);
 

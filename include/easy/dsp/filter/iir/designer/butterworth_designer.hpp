@@ -72,7 +72,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto gp    = -math::inv(g);
                 const auto gz    = -g;
                 const auto pairs = num_poles / 2;
-                for (auto i = 1; i <= pairs; ++i) {
+                for (auto i = 1ul; i <= pairs; ++i) {
                     const auto theta = constants<T>::pi * (0.5 - (2 * i - 1) / size);
                     analog.insert_conjugate(std::polar(gp, theta), std::polar(gz, theta));
                 }

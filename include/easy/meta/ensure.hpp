@@ -24,17 +24,21 @@
 #define EASYMETA_ENSURE_H
 
 #include "data.hpp"
+#include <easy/meta/unused.hpp>
 #include <cassert>
 #include <string>
 
 namespace easy { namespace meta {
 
     constexpr void ensure(bool condition) {
+        meta::unused(condition);
         assert(condition);
     }
 
     template <typename Char>
     constexpr void ensure(bool condition, const Char* msg) {
+        meta::unused(condition);
+        meta::unused(msg);
         assert(condition && msg);
     }
 
