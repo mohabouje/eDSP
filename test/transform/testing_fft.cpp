@@ -73,8 +73,8 @@ TEST(TestingFFT, TransformHanningWindow) {
 
     const auto middle = transformed.size();
     for (auto i = 0ul; i < middle; ++i) {
-        EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.001);
-        EXPECT_NEAR(reference[i].imag(), transformed[i].imag(), 0.001);
+        EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.01);
+        EXPECT_NEAR(reference[i].imag(), transformed[i].imag(), 0.01);
     }
 }
 
@@ -88,8 +88,8 @@ TEST(TestingFFT, TransformHammingWindow) {
 
     const auto middle = transformed.size();
     for (auto i = 0ul; i < middle; ++i) {
-        EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.001);
-        EXPECT_NEAR(reference[i].imag(), transformed[i].imag(), 0.001);
+        EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.01);
+        EXPECT_NEAR(reference[i].imag(), transformed[i].imag(), 0.01);
     }
 }
 
@@ -103,8 +103,8 @@ TEST(TestingFFT, TransformBlackmanWindow) {
 
     const auto middle = transformed.size();
     for (auto i = 0ul; i < middle; ++i) {
-        EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.001);
-        EXPECT_NEAR(reference[i].imag(), transformed[i].imag(), 0.001);
+        EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.01);
+        EXPECT_NEAR(reference[i].imag(), transformed[i].imag(), 0.01);
     }
 }
 

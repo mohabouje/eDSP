@@ -1,13 +1,12 @@
-Size = 128;
 format long
-Array = hilbert(hamming(Size));
+Array = hilbert(hamming(128));
 Array = [real(Array), imag(Array)];
 csvwrite('hilbert_hamming.csv', Array);
 
-Array = hilbert(hann(Size));
+Array = hilbert(hann(257));
 Array = [real(Array), imag(Array)];
 csvwrite('hilbert_hanning.csv', Array);
 
-Array = hilbert(blackman(Size));
+Array = hilbert(blackman(2048));
 Array = [real(Array), imag(Array)];
 csvwrite('hilbert_blackman.csv', Array);

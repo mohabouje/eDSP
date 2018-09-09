@@ -70,7 +70,7 @@ TEST(TestingDHT, TransformHanningWindow) {
     easy::dsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
-        EXPECT_NEAR(transformed[i], reference[i], 0.001);
+        EXPECT_NEAR(transformed[i], reference[i], 0.01);
     }
 }
 
@@ -83,7 +83,7 @@ TEST(TestingDHT, TransformHammingWindow) {
     easy::dsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
-        EXPECT_NEAR(transformed[i], reference[i], 0.001);
+        EXPECT_NEAR(transformed[i], reference[i], 0.01);
     }
 }
 
@@ -96,6 +96,6 @@ TEST(TestingDHT, TransformBlackmanWindow) {
     easy::dsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
-        EXPECT_NEAR(transformed[i], reference[i], 0.001);
+        EXPECT_NEAR(transformed[i], reference[i], 0.01);
     }
 }

@@ -1,11 +1,10 @@
-Size = 128;
 format long
 
-Array = fht(hamming(Size));
+Array = fht(hamming(128));
 csvwrite('dht_hamming.csv', Array);
 
-Array = fht(hann(Size));
+Array = fht(hann(513));
 csvwrite('dht_hanning.csv', Array);
 
-Array = fht(blackman(Size));
+Array = fht(blackman(2048));
 csvwrite('dht_blackman.csv', Array);
