@@ -40,8 +40,7 @@ SCENARIO("Designing a Low Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 4 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -52,7 +51,7 @@ SCENARIO("Designing a Low Pass ChebyshevI filter", "[make_filter]") {
                      {{1, -1.776496159, 0.8790953474, 1, 2, 1}},
                      {{1, -1.837981981, 0.8558897977, 1, 2, 1}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);
@@ -73,8 +72,7 @@ SCENARIO("Designing a Low Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 16 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -89,7 +87,7 @@ SCENARIO("Designing a Low Pass ChebyshevI filter", "[make_filter]") {
                      {{1, -1.898190923, 0.927357083, 1, 2, 1}},
                      {{1, -1.919417237, 0.9240990544, 1, 2, 1}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);
@@ -110,8 +108,7 @@ SCENARIO("Designing a Low Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 2 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -120,7 +117,7 @@ SCENARIO("Designing a Low Pass ChebyshevI filter", "[make_filter]") {
                     {{{1, 1.160052694, 0.8439901443, 0.1985009247, 0.3970018495, 0.1985009247}},
                      {{1, 0.03044055671, 0.3005543558, 1, 2, 1}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);
@@ -146,8 +143,7 @@ SCENARIO("Designing a High Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 4 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -158,7 +154,7 @@ SCENARIO("Designing a High Pass ChebyshevI filter", "[make_filter]") {
                      {{1, -1.007387408, 0.7238378997, 1, -2, 1}},
                      {{1, 0.2659935318, 0.2917333819, 1, -2, 1}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);
@@ -179,8 +175,7 @@ SCENARIO("Designing a High Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 16 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -195,7 +190,7 @@ SCENARIO("Designing a High Pass ChebyshevI filter", "[make_filter]") {
                      {{1, -0.02868987663, 0.6427906603, 1, -2, 1}},
                      {{1, 1.026661726, 0.4337387949, 1, -2, 1}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);
@@ -216,8 +211,7 @@ SCENARIO("Designing a High Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 2 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -226,7 +220,7 @@ SCENARIO("Designing a High Pass ChebyshevI filter", "[make_filter]") {
                     {{{1, 1.243254394, 0.8507774211, 0.004416420859, -0.008832841718, 0.004416420859}},
                      {{1, 1.489629661, 0.6360588613, 1, -2, 1}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);
@@ -253,8 +247,7 @@ SCENARIO("Designing a Low Shelf Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 4 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -265,7 +258,7 @@ SCENARIO("Designing a Low Shelf Pass ChebyshevI filter", "[make_filter]") {
                      {{1, -1.804782608, 0.9064808059, 1, -1.755850661, 0.8594980423}},
                      {{1, -1.872481693, 0.8882171721, 1, -1.812996632, 0.8328677531}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);
@@ -286,8 +279,7 @@ SCENARIO("Designing a Low Shelf Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 16 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -302,7 +294,7 @@ SCENARIO("Designing a Low Shelf Pass ChebyshevI filter", "[make_filter]") {
                      {{1, -1.91532162, 0.9441102642, 1, -1.885719031, 0.9152640971}},
                      {{1, -1.937494732, 0.9415807804, 1, -1.906269557, 0.9114886867}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);
@@ -323,8 +315,7 @@ SCENARIO("Designing a Low Shelf Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 2 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -333,7 +324,7 @@ SCENARIO("Designing a Low Shelf Pass ChebyshevI filter", "[make_filter]") {
                     {{{1, 1.160237742, 0.8760679736, 1.384837082, 1.611431146, 1.139349944}},
                      {{1, -0.07513912361, 0.3883145211, 1, 0.107064778, 0.254780595}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);
@@ -360,8 +351,7 @@ SCENARIO("Designing a High Shelf Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 4 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -372,7 +362,7 @@ SCENARIO("Designing a High Shelf Pass ChebyshevI filter", "[make_filter]") {
                      {{1, -1.025360025, 0.7787468216, 1, -0.9979531794, 0.687629488}},
                      {{1, 0.3818178669, 0.3871868645, 1, 0.184918661, 0.2391680825}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);
@@ -393,8 +383,7 @@ SCENARIO("Designing a High Shelf Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 16 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -409,7 +398,7 @@ SCENARIO("Designing a High Shelf Pass ChebyshevI filter", "[make_filter]") {
                      {{1, -0.01120626668, 0.7128154709, 1, -0.04331861221, 0.5964685107}},
                      {{1, 1.147073444, 0.5301081742, 1, 0.9435430289, 0.3738452209}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);
@@ -430,8 +419,7 @@ SCENARIO("Designing a High Shelf Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 2 biquads") {
                 constexpr auto BIQUAD_CASCADE = (ORDER + 1) / 2;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = (ORDER + 1) / 2;
@@ -440,7 +428,7 @@ SCENARIO("Designing a High Shelf Pass ChebyshevI filter", "[make_filter]") {
                     {{{1, 1.283434098, 0.8840522353, 1.137194558, 1.377903958, 0.9406802607}},
                      {{1, 1.577643217, 0.7095025777, 1, 1.426550943, 0.586370326}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);
@@ -468,8 +456,7 @@ SCENARIO("Designing a Band Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 8 biquads") {
                 constexpr auto BIQUAD_CASCADE = ORDER;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = ORDER;
@@ -484,7 +471,7 @@ SCENARIO("Designing a Band Pass ChebyshevI filter", "[make_filter]") {
                      {{1, -1.2997242, 0.9923997615, 1, 2, 1}},
                      {{1, -1.316638939, 0.9924733779, 1, -2, 1}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     // TODO: review why this part fails.
                     /*REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
@@ -505,8 +492,7 @@ SCENARIO("Designing a Band Pass ChebyshevI filter", "[make_filter]") {
 
             THEN("The BiquadCascade stores 8 biquads") {
                 constexpr auto BIQUAD_CASCADE = ORDER;
-                REQUIRE(std::is_same<BiquadCascade<double, BIQUAD_CASCADE>,
-                                     typename std::remove_const<decltype(designed_filter)>::type>::value);
+                REQUIRE(typeid(BiquadCascade<double, BIQUAD_CASCADE>) == typeid(designed_filter));
             }
             AND_THEN("Each Biquad has the right values") {
                 constexpr auto BIQUAD_CASCADE     = ORDER;
@@ -521,7 +507,7 @@ SCENARIO("Designing a Band Pass ChebyshevI filter", "[make_filter]") {
                      {{1, -1.30093385, 0.9942042977, 1, -1.298830896, 0.9910753244}},
                      {{1, -1.31778788, 0.9942602725, 1, -1.31580113, 0.9911620086}}}};
 
-                for (auto i = 0; i < BIQUAD_CASCADE; ++i) {
+                for (auto i = 0ul; i < BIQUAD_CASCADE; ++i) {
                     const auto& stage = designed_filter[i];
                     REQUIRE(Approx(stage.a0()) == expected_results[i][0]);
                     REQUIRE(Approx(stage.a1()) == expected_results[i][1]);

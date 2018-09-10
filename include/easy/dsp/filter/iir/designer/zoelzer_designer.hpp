@@ -111,7 +111,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto b0   = (1 + 1 / Q * K + K * K) * norm;
                 const auto b1   = 2 * (K * K - 1) * norm;
                 const auto b2   = (1 - 1 / Q * K + K * K) * norm;
-                const auto a1   = a1;
+                const auto a1   = b1;
                 const auto a2   = (1 - V / Q * K + K * K) * norm;
                 return Biquad<T>(1, a1, a2, b0, b1, b2);
             }

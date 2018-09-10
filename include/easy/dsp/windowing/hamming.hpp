@@ -46,11 +46,11 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator>
     inline void Hamming<T, Allocator>::initialize() {
-        constexpr auto a0 = static_cast<value_type>(0.54);
-        constexpr auto a1 = static_cast<value_type>(0.46);
+        constexpr auto a0       = static_cast<value_type>(0.54);
+        constexpr auto a1       = static_cast<value_type>(1 - a0);
+        const value_type factor = constants<value_type>::two_pi / static_cast<value_type>(parent::size() - 1);
         for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
-            parent::data_[i]     = a0 - a1 * std::cos(tmp);
+            parent::data_[i] = a0 - a1 * std::cos(factor * i);
         }
     }
 

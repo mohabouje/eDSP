@@ -48,9 +48,9 @@ namespace easy { namespace dsp { namespace windowing {
     inline void Hanning<T, Allocator>::initialize() {
         constexpr auto a0 = static_cast<value_type>(0.5);
         constexpr auto a1 = static_cast<value_type>(0.5);
+        const auto factor = constants<value_type>::two_pi / static_cast<value_type>(parent::size() - 1);
         for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            const value_type tmp = constants<value_type>::two_pi * i / static_cast<value_type>(sz);
-            parent::data_[i]     = a0 - a1 * std::cos(tmp);
+            parent::data_[i] = a0 - a1 * std::cos(factor * i);
         }
     }
 

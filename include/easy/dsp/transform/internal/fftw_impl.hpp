@@ -24,25 +24,27 @@
 #define EASYDSP_FFTW_IMPL_HPP
 
 #include <easy/meta/is_null.hpp>
+#include <easy/meta/advance.hpp>
 #include <complex>
 #include <fftw3.h>
+#include <algorithm>
 
 namespace easy { namespace dsp {
 
     enum class DCT_Type { Type_I, Type_II, Type_III, Type_IV };
 
     template <typename Integer>
-    constexpr Integer make_fft_size(Integer real_size) {
+    constexpr Integer make_fft_size(Integer real_size) noexcept {
         return std::floor(real_size / 2) + 1;
     }
 
     template <typename Integer>
-    constexpr Integer make_ifft_size(Integer complex_size) {
+    constexpr Integer make_ifft_size(Integer complex_size) noexcept {
         return 2 * (complex_size - 1);
     }
 
     template <typename T>
-    inline T* fftw_cast(const T* p) {
+    inline T* fftw_cast(const T* p) noexcept {
         return const_cast<T*>(p);
     }
 
@@ -118,6 +120,7 @@ namespace easy { namespace dsp {
                         case DCT_Type::Type_IV:
                             return FFTW_REDFT11;
                     }
+                    return FFTW_REDFT00;
                 }();
                 plan_ = fftwf_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
@@ -137,10 +140,33 @@ namespace easy { namespace dsp {
                         case DCT_Type::Type_IV:
                             return FFTW_REDFT11;
                     }
+                    return FFTW_REDFT00;
                 }();
                 plan_ = fftwf_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
             fftwf_execute_r2r(plan_, src, dst);
+        }
+
+        inline void idft_scale(value_type* dst, size_type nfft) {
+            const auto scaling = static_cast<value_type>(nfft);
+            for (size_type i = 0; i < nfft; ++i) {
+                dst[i] /= scaling;
+            }
+        }
+
+        inline void idft_scale(complex_type* dst, size_type nfft) {
+            const auto scaling = static_cast<value_type>(nfft);
+            for (size_type i = 0; i < nfft; ++i) {
+                dst[i][0] /= scaling;
+                dst[i][1] /= scaling;
+            }
+        }
+
+        inline void idct_scale(value_type* dst, size_type nfft, DCT_Type type) {
+            const auto scaling = (type == DCT_Type::Type_I) ? 2 * (nfft - 1) : 2 * nfft;
+            for (size_type i = 0; i < nfft; ++i) {
+                dst[i] /= scaling;
+            }
         }
     };
 
@@ -202,6 +228,7 @@ namespace easy { namespace dsp {
                         case DCT_Type::Type_IV:
                             return FFTW_REDFT11;
                     }
+                    return FFTW_REDFT00;
                 }();
                 plan_ = fftw_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
@@ -221,10 +248,33 @@ namespace easy { namespace dsp {
                         case DCT_Type::Type_IV:
                             return FFTW_REDFT11;
                     }
+                    return FFTW_REDFT00;
                 }();
                 plan_ = fftw_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
             fftw_execute_r2r(plan_, src, dst);
+        }
+
+        inline void idft_scale(value_type* dst, size_type nfft) {
+            const auto scaling = static_cast<value_type>(nfft);
+            for (size_type i = 0; i < nfft; ++i) {
+                dst[i] /= scaling;
+            }
+        }
+
+        inline void idft_scale(complex_type* dst, size_type nfft) {
+            const auto scaling = static_cast<value_type>(nfft);
+            for (size_type i = 0; i < nfft; ++i) {
+                dst[i][0] /= scaling;
+                dst[i][1] /= scaling;
+            }
+        }
+
+        inline void idct_scale(value_type* dst, size_type nfft, DCT_Type type) {
+            const auto scaling = (type == DCT_Type::Type_I) ? 2 * (nfft - 1) : 2 * nfft;
+            for (size_type i = 0; i < nfft; ++i) {
+                dst[i] /= scaling;
+            }
         }
     };
 

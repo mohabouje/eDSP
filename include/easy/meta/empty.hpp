@@ -23,6 +23,7 @@
 #ifndef EASYMETA_EMPTY_HPP
 #define EASYMETA_EMPTY_HPP
 
+#include <easy/meta/unused.hpp>
 #include <initializer_list>
 
 namespace easy { namespace meta {
@@ -34,6 +35,7 @@ namespace easy { namespace meta {
 
     template <class T, std::size_t N>
     constexpr bool empty(const T (&array)[N]) noexcept {
+        unused(array);
         return false;
     }
 

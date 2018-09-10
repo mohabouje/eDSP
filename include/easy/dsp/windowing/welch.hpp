@@ -49,7 +49,7 @@ namespace easy { namespace dsp { namespace windowing {
     inline void Welch<T, Allocator>::initialize() {
         const value_type N = parent::size() / 2;
         for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            parent::data_[i] = 1 - meta::square(static_cast<value_type>(i - N) / N);
+            parent::data_[i] = 1 - math::square(static_cast<value_type>(i - N) / N);
         }
     }
 

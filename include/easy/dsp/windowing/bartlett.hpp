@@ -23,6 +23,7 @@
 #define EASYDSP_BARTLETT_HPP
 
 #include "window_impl.hpp"
+#include <easy/dsp/math/math.hpp>
 
 namespace easy { namespace dsp { namespace windowing {
 
@@ -45,11 +46,15 @@ namespace easy { namespace dsp { namespace windowing {
 
     template <typename T, typename Allocator>
     inline void Bartlett<T, Allocator>::initialize() {
-        const value_type N = parent::size() - 1;
-        value_type half    = 0;
-        std::modf(N / static_cast<value_type>(2), &half);
-        for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            parent::data_[i] = ((i <= half) ? 2 * i : (2 - 2 * i)) / N;
+        const auto size   = parent::size();
+        const auto middle = math::is_even(size) ? size / 2 : (size + 1) / 2;
+        const auto factor = math::inv(static_cast<value_type>(size - 1));
+        for (size_type i = 0; i < middle; ++i) {
+            parent::data_[i] = 2 * i * factor;
+        }
+
+        for (size_type i = middle; i < size; ++i) {
+            parent::data_[i] = 2 - 2 * i * factor;
         }
     }
 

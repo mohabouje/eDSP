@@ -24,6 +24,7 @@
 
 #include <complex>
 #include <algorithm>
+#include <easy/meta/type_traits.hpp>
 
 namespace easy { namespace dsp {
 
@@ -39,16 +40,20 @@ namespace easy { namespace dsp {
 
     template <typename InputIterator, typename ComplexIterator>
     constexpr void real2complex(InputIterator first, InputIterator last, ComplexIterator out) {
-        using value_type = typename std::iterator_traits<InputIterator>::value_type;
-        std::transform(first, last, out, real2complex<value_type>);
-    };
+        using value_type  = typename std::iterator_traits<InputIterator>::value_type;
+        using output_type = typename std::iterator_traits<ComplexIterator>::value_type;
+        std::transform(first, last, out, [](const value_type value) -> output_type { return value; });
+    }
 
     template <typename InputIterator, typename ComplexIterator>
     constexpr void real2complex(InputIterator first_1, InputIterator last_1, InputIterator first_2,
                                 ComplexIterator out) {
-        using value_type = typename std::iterator_traits<InputIterator>::value_type;
-        std::transform(first_1, last_1, first_2, out, real2complex<value_type>);
-    };
+        using value_type  = typename std::iterator_traits<InputIterator>::value_type;
+        using output_type = typename std::iterator_traits<ComplexIterator>::value_type;
+        std::transform(first_1, last_1, first_2, out, [](const value_type real, const value_type imag) -> output_type {
+            return {real, imag};
+        });
+    }
 
 }} // namespace easy::dsp
 
