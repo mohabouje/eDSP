@@ -33,12 +33,15 @@
 
 # Exclude editor files
 *.user
+*.kdev4
 .idea/
 .vscode/
+.kdev4/
 
 # Exclude build folder
 .output/
 ./build
+
 build/
 cmake-build*/
 
