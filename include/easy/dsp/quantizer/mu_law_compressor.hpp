@@ -29,43 +29,38 @@
 
 namespace easy { namespace dsp { namespace quantizer {
 
-    template <typename InputIterator,
-              typename OutputIterator>
+    template <typename InputIterator, typename OutputIterator>
     constexpr void mu_law_compression(InputIterator first, InputIterator last, OutputIterator out,
                                       value_type_t<Iterator> absolute_max_value,
                                       diff_type_t<Iterator> compression_factor) {
         meta::expects(absolute_max_value > 0, "Expected a maximum absolute value higher than zero");
         meta::expects(compression_factor > 0, "The compression factor should be a positive number");
-        using value_type = value_type_t<Iterator>;
+        using value_type  = value_type_t<Iterator>;
         const auto lambda = [absolute_max_value](const value_type input) -> value_type {
             const auto ratio = std::fabs(input) / absolute_max_value;
-            return math::sign(input) * absolute_max_value
-                    * std::log(static_cast<value_type>(1 + compression_factor * ratio))
-                    / std::log(static_cast<value_type>(1 + compression_factor));
+            return math::sign(input) * absolute_max_value *
+                   std::log(static_cast<value_type>(1 + compression_factor * ratio)) /
+                   std::log(static_cast<value_type>(1 + compression_factor));
         };
         std::transform(first, last, out, std::cref(lambda));
     }
 
-    template <typename InputIterator,
-              typename OutputIterator>
+    template <typename InputIterator, typename OutputIterator>
     constexpr void inverse_mu_law_compression(InputIterator first, InputIterator last, OutputIterator out,
-                                      value_type_t<Iterator> absolute_max_value,
-                                      diff_type_t<Iterator> compression_factor) {
+                                              value_type_t<Iterator> absolute_max_value,
+                                              diff_type_t<Iterator> compression_factor) {
         meta::expects(absolute_max_value > 0, "Expected a maximum absolute value higher than zero");
         meta::expects(compression_factor > 0, "The compression factor should be a positive number");
-        using value_type = value_type_t<Iterator>;
+        using value_type  = value_type_t<Iterator>;
         const auto lambda = [absolute_max_value](const value_type input) -> value_type {
             const auto ratio = std::fabs(input) / absolute_max_value;
-            return math::sign(input) * absolute_max_value
-                    * (std::pow(static_cast<value_type>(1 + compression_factor), ratio) - 1)
-                    / std::log(static_cast<value_type>(1 + compression_factor));
+            return math::sign(input) * absolute_max_value *
+                   (std::pow(static_cast<value_type>(1 + compression_factor), ratio) - 1) /
+                   std::log(static_cast<value_type>(1 + compression_factor));
         };
         std::transform(first, last, out, std::cref(lambda));
     }
 
-
-
-}}}
-
+}}} // namespace easy::dsp::quantizer
 
 #endif // EASYDSP_MU_LAW_COMPRESSOR_HPP

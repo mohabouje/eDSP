@@ -30,6 +30,6 @@ namespace easy { inline namespace meta {
         return static_cast<Casted>(value);
     }
 
-}}
+}} // namespace easy::meta
 
 #endif // EASYDSP_CAST_HPP

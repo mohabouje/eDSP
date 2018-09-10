@@ -33,5 +33,5 @@ namespace easy { inline namespace meta {
     template <typename Iterator>
     using diff_type_t = typename std::iterator_traits<Iterator>::difference_type;
 
-}}
+}}     // namespace easy::meta
 #endif // EASYDSP_ITERATOR_HPP
