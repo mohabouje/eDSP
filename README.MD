@@ -4,6 +4,7 @@
 ![issues](https://img.shields.io/github/issues/mohabouje/eDSP.svg)
 ![license](https://img.shields.io/github/license/mohabouje/eDSP.svg)
 ![built](https://img.shields.io/badge/built%20with-GCC-6f62ba.svg)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmohabouje%2FeDSP.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmohabouje%2FeDSP?ref=badge_shield)
 
 [![GitHub forks](https://img.shields.io/github/forks/mohabouje/eDSP.svg?style=social&label=Fork)]()
 [![GitHub stars](https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star)]()
@@ -173,3 +174,7 @@ auto fft_data = std::vector<std::complex<double>>(size );
 // Create an fft object with the expected output size as parameter
 easy::dsp::complex_dft(std::cbegin(real_data), std::cend(real_data), std::begin(fft_data));
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmohabouje%2FeDSP.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmohabouje%2FeDSP?ref=badge_large)
