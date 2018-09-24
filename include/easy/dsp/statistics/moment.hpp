@@ -15,38 +15,38 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: arithmetic_mean.hpp
+ * Filename: moment.hpp
  * Author: Mohammed Boujemaoui
  * Date: 2018-06-13
  */
-#ifndef EASYDSP_STATISTICAL_MEAN_H
-#define EASYDSP_STATISTICAL_MEAN_H
+#ifndef EASYDSP_STATISTICAL_MOMENT_H
+#define EASYDSP_STATISTICAL_MOMENT_H
 
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
+#include <boost/accumulators/statistics/moment.hpp>
 #include <easy/meta/iterator.hpp>
+#include <numeric>
 
 namespace easy { namespace dsp { namespace statistics {
 
     /**
-     * @brief Computes the average or mean value of the range [first, last)
-     *
-     * The average is defined as:
-     * \f[
-     *      \mu = \frac{1}{N}\sum_{n=0}^{N-1}x(n)
-     * \f]
+     * @brief Computes the n-th moment of the range [first, last)
      *
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
-     * @returns The average of the input range.
+     * @tparam N Order of the moment.
+     * @returns The kurtosis of the input range.
      */
-    template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> mean(ForwardIt first, ForwardIt last) {
+    template <std::size_t N, typename ForwardIt>
+    constexpr value_type_t<ForwardIt> moment(ForwardIt first, ForwardIt last) {
         using namespace boost::accumulators;
-        accumulator_set<value_type, features<tag::mean>> acc;
+        using input_t = value_type_t<ForwardIt>;
+        accumulator_set<input_t, features<tag::moment<N>>> acc;
         acc = std::for_each(first, last, acc);
-        return boost::accumulators::mean(acc);
+        return boost::accumulators::momment<N>(acc);
     }
+
 }}} // namespace easy::dsp::statistics
 
-#endif // EASYDSP_STATISTICAL_MEAN_H
+#endif // EASYDSP_STATISTICAL_MOMMENT_H

@@ -1,7 +1,7 @@
 DOXYFILE_ENCODING = UTF-8
 PROJECT_NAME           = "@CMAKE_PROJECT_NAME@"
 PROJECT_NUMBER         = @VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@
-PROJECT_BRIEF = "A cross-platform DSP library written in C++. This library harnesses the power of C++ templates to implement a complete set of DSP algorithms."
+PROJECT_BRIEF = "A cross-platform DSP library written in C++."
 PROJECT_LOGO = 
 OUTPUT_LANGUAGE = English
 
@@ -32,8 +32,7 @@ EXCLUDE_SYMBOLS += DECLARE_*
 EXCLUDE_SYMBOLS += *_v
 
 
-HTML_EXTRA_STYLESHEET = @PROJECT_SOURCE_DIR@/docs/customdoxygen.css
-LAYOUT_FILE = @PROJECT_SOURCE_DIR@/docs/DoxygenLayout.xml
+
 GENERATE_XML=YES
 HIDE_UNDOC_MEMBERS     = YES
 HIDE_UNDOC_CLASSES     = YES
