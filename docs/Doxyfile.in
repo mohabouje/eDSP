@@ -1,0 +1,40 @@
+DOXYFILE_ENCODING = UTF-8
+PROJECT_NAME           = "@CMAKE_PROJECT_NAME@"
+PROJECT_NUMBER         = @VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@
+PROJECT_BRIEF = "A cross-platform DSP library written in C++. This library harnesses the power of C++ templates to implement a complete set of DSP algorithms."
+PROJECT_LOGO = 
+OUTPUT_LANGUAGE = English
+
+
+STRIP_FROM_PATH        = @PROJECT_SOURCE_DIR@/include/easy \
+                         @PROJECT_BINARY_DIR@/include/easy
+
+INPUT                  = @PROJECT_SOURCE_DIR@/include/easy \
+                         @PROJECT_BINARY_DIR@/include/easy
+
+FILE_PATTERNS          = *.hpp \
+                         *.h
+
+EXAMPLE_PATH = @PROJECT_SOURCE_DIR@/bin
+EXAMPLE_PATH += @PROJECT_SOURCE_DIR@/include/third-party/
+
+RECURSIVE              = YES
+
+INPUT += @PROJECT_SOURCE_DIR@/README.md
+USE_MDFILE_AS_MAINPAGE = @PROJECT_SOURCE_DIR@/README.md
+EXTRACT_ALL = YES
+EXTRACT_PRIVATE = NO
+SHOW_FILES = YES
+ENABLE_PREPROCESSING   = NO
+MACRO_EXPANSION        = NO
+EXCLUDE_SYMBOLS = internal
+EXCLUDE_SYMBOLS += DECLARE_*
+EXCLUDE_SYMBOLS += *_v
+
+
+HTML_EXTRA_STYLESHEET = @PROJECT_SOURCE_DIR@/docs/customdoxygen.css
+LAYOUT_FILE = @PROJECT_SOURCE_DIR@/docs/DoxygenLayout.xml
+GENERATE_XML=YES
+HIDE_UNDOC_MEMBERS     = YES
+HIDE_UNDOC_CLASSES     = YES
+USE_MATHJAX = YES

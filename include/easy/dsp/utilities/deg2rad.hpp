@@ -19,19 +19,27 @@
  * Author: Mohammed Boujemaoui
  * Date: 2/8/2018
  */
-#ifndef EASYDSP_DEGB2RAD_HPP
-#    define EASYDSP_DEGMARAD_HPP
+#ifndef EASYDSP_DEG2RAD_HPP
+#define EASYDSP_DEG2RAD_HPP
 
-#    include "easy/dsp/math/constant.hpp"
-#    include <cmath>
+#include <cmath>
+namespace easy { namespace dsp { inline namespace utility {
 
-namespace easy { namespace dsp {
-
+    /**
+     * @brief Convert angle from degrees to radians.
+     *
+     * The output is computed as follows:
+     * \f[
+     *      y =  \frac{x\pi}{180}
+     * \f]
+     * @param degree Angle in degrees
+     * @returns Angle in radians
+     */
     template <typename T>
-    constexpr T deg2rad(T value) noexcept {
-        return value * constants<T>::pi / static_cast<T>(180);
+    constexpr T deg2rad(T degree) noexcept {
+        return degree * constants<T>::pi / static_cast<T>(180);
     }
 
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_DEG2RAD_HPP

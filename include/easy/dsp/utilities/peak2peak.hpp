@@ -22,17 +22,23 @@
 #ifndef EASYDSP_PEAK2PEAK_HPP
 #define EASYDSP_PEAK2PEAK_HPP
 
-#include <easy/meta/expects.hpp>
+#include <easy/meta/iterator.hpp>
 #include <cmath>
-#include <algorithm>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace utility {
 
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    constexpr value_type peak2peak(InputIterator first, InputIterator last) noexcept {
+    /**
+     * @brief Maximum-to-minimum difference in the range [first, last)
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns Maximum-to-minimum difference.
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> peak2peak(ForwardIt first, ForwardIt last) {
         const auto pair = std::minmax_element(first, last);
         return std::abs(pair.second) - std::abs(pair.first);
     }
-}} // namespace easy::dsp
+
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_RMS2PEAK_HPP

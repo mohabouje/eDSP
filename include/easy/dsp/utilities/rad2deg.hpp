@@ -22,16 +22,26 @@
 #ifndef EASYDSP_RAD2DEG_HPP
 #define EASYDSP_RAD2DEG_HPP
 
-#include "easy/dsp/math/constant.hpp"
+#include <easy/dsp/math/constant.hpp>
 #include <cmath>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace utility {
 
+    /**
+     * @brief Convert angle from radians to degrees.
+     *
+     * The output is computed as follows:
+     * \f[
+     *      y =  x \frac{180}{\pi}
+     * \f]
+     * @param radians Angle in radians.
+     * @returns Angle in degrees.
+     */
     template <typename T>
-    constexpr T rad2deg(T value) noexcept {
-        return value / constants<T>::pi * static_cast<T>(180);
+    constexpr T rad2deg(T radians) noexcept {
+        return radians / constants<T>::pi * static_cast<T>(180);
     }
 
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_RAD2DEG_HPP

@@ -25,13 +25,23 @@
 #include <easy/meta/expects.hpp>
 #include <cmath>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace utility {
 
+    /**
+     * @brief Convert magnitude to decibels (dB)
+     *
+     * The output is computed as follows:
+     * \f[
+     *      y = 20 \log10{ \left( x \right) }
+     * \f]
+     * @param magnitude Scalar number in magnitude scale.
+     * @return Scalar number in decibels.
+     */
     template <typename T>
-    constexpr T mag2db(T value) noexcept {
-        meta::expects(value >= 0, "Expected non negative value");
-        return 20 * std::log10(value);
+    constexpr T mag2db(T magnitude) noexcept {
+        meta::expects(magnitude > 0, "Expected non negative value");
+        return 20 * std::log10(magnitude);
     }
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_MAG2DB_HPP

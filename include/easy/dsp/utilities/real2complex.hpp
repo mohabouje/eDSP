@@ -22,39 +22,60 @@
 #ifndef EASYDSP_REAL2COMPLEX_HPP
 #define EASYDSP_REAL2COMPLEX_HPP
 
-#include <complex>
+#include <easy/meta/iterator.hpp>
 #include <algorithm>
-#include <easy/meta/type_traits.hpp>
+#include <complex>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace utility {
 
+    /**
+     * @brief Converts a real scalar to an equivalent complex number.
+     * @param real Scalar number representing the real part of the complex number.
+     * @param imag Scalar number representing the imaginary part of the complex number.
+     * @returns Returns the complex-valued.
+     */
     template <typename T>
-    constexpr std::complex<T> real2complex(T real) noexcept {
-        return std::complex<T>(real, 0);
-    }
-
-    template <typename T>
-    constexpr std::complex<T> real2complex(T real, T imag) noexcept {
+    constexpr std::complex<T> real2complex(T real, T imag = static_cast<T>(0)) noexcept {
         return std::complex<T>(real, imag);
     }
 
-    template <typename InputIterator, typename ComplexIterator>
-    constexpr void real2complex(InputIterator first, InputIterator last, ComplexIterator out) {
-        using value_type  = typename std::iterator_traits<InputIterator>::value_type;
-        using output_type = typename std::iterator_traits<ComplexIterator>::value_type;
-        std::transform(first, last, out, [](const value_type value) -> output_type { return value; });
+
+    /**
+     * @brief Converts a range of scalar numbers in to an equivalent complex number
+     * and stores the result in another range.
+     *
+     * @note Use this function when the output range does not have an imaginary part.
+     * @param first Input iterator defining the beginnning of the range representing the real part.
+     * @param last Input iterator defining the ending of the range representing the real part.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     */
+    template <typename InputIt, typename OutputIt>
+    constexpr void real2complex(InputIt first, InputIt last, OutputIt d_first) {
+        using input_t  = value_type_t<InputIt>;
+        using output_t = value_type_t<InputIt>;
+        std::transform(first, last, d_first, [](const input_t value) -> output_t  {
+            return value;
+        });
     }
 
-    template <typename InputIterator, typename ComplexIterator>
-    constexpr void real2complex(InputIterator first_1, InputIterator last_1, InputIterator first_2,
-                                ComplexIterator out) {
-        using value_type  = typename std::iterator_traits<InputIterator>::value_type;
-        using output_type = typename std::iterator_traits<ComplexIterator>::value_type;
-        std::transform(first_1, last_1, first_2, out, [](const value_type real, const value_type imag) -> output_type {
+    /**
+     * @brief Converts a range of scalar numbers in to an equivalent complex number
+     * and stores the result in another range.
+     *
+     * @param first1 Input iterator defining the beginnning of the range representing the real part.
+     * @param last1 Input iterator defining the ending of the range representing the real part.
+     * @param first2 Input iterator defining the beginnning of the range representing the imaginary part.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     */
+    template <typename InputIt, typename OutputIt>
+    constexpr void real2complex(InputIt first1, InputIt last1, InputIt first2, OutputIt d_first) {
+        using input_t  = value_type_t<InputIt>;
+        using output_t = value_type_t<InputIt>;
+        std::transform(first1, last1, first2, d_first, [](const input_t real, const input_t imag) -> output_t {
             return {real, imag};
         });
     }
 
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASDY_REAL2COMPLEX_HPP

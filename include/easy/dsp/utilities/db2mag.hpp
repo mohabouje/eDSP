@@ -22,16 +22,24 @@
 #ifndef EASYDSP_DB2MAG_HPP
 #define EASYDSP_DB2MAG_HPP
 
-#include <easy/meta/expects.hpp>
 #include <cmath>
+namespace easy { namespace dsp { inline namespace utility {
 
-namespace easy { namespace dsp {
-
+    /**
+     * @brief Convert decibels to magnitude.
+     *
+     * The output is computed as follows:
+     * \f[
+     *      y = 10^{\frac{x}{20}}
+     * \f]
+     * @param db Scalar number in decibels.
+     * @returns Magnitude measurement, returned as a scalar.
+     */
     template <typename T>
-    constexpr T db2mag(T value) noexcept {
-        return std::pow(static_cast<T>(10), value / static_cast<T>(20));
+    constexpr T db2mag(T db) noexcept {
+        return std::pow(static_cast<T>(10), db / static_cast<T>(20));
     }
 
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_DB2POW_HPP

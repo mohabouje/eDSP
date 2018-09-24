@@ -22,16 +22,24 @@
 #ifndef EASYDSP_DB2POW_HPP
 #define EASYDSP_DB2POW_HPP
 
-#include <easy/meta/expects.hpp>
 #include <cmath>
+namespace easy { namespace dsp { inline namespace utility {
 
-namespace easy { namespace dsp {
-
+    /**
+     * @brief Convert decibels to power.
+     *
+     * The output is computed as follows:
+     * \f[
+     *      y = 10^{\frac{x}{10}}
+     * \f]
+     * @param db Scalar number in decibels.
+     * @returns Power measurements.
+     */
     template <typename T>
-    constexpr T db2pow(T value) noexcept {
-        return std::pow(10, value / static_cast<T>(10));
+    constexpr T db2pow(T db) noexcept {
+        return std::pow(10, db / static_cast<T>(10));
     }
 
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_DB2POW_HPP

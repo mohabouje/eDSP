@@ -25,13 +25,23 @@
 #include <easy/meta/expects.hpp>
 #include <cmath>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace utility {
 
+    /**
+     * @brief Convert power to decibels
+     *
+     * The output is computed as follows:
+     * \f[
+     *      y = 10 \log10{\left( x \right)}
+     * \f]
+     * @param power Scalar number representing the power of a sample.
+     * @returns Power measurement in decibel (dB).
+     */
     template <typename T>
-    constexpr T pow2db(T value) noexcept {
-        meta::expects(value >= 0, "Expected non negative value");
-        return 10 * std::log10(value);
+    constexpr T pow2db(T power) noexcept {
+        meta::expects(power > 0, "Expected non negative value");
+        return 10 * std::log10(power);
     }
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_POW2DB_HPP
