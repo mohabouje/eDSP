@@ -24,15 +24,47 @@
 
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
-#include <numeric>
+#include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type variance(InputIterator first, InputIterator last) {
+
+
+    /**
+     * @brief Computes the variance of the range [first, last)
+     *
+     * The variance is defined as:
+     * \f[
+     *     v =\sum _{i=1}^{n}p_{i}\cdot (x_{i}-\mu )^{2}
+     * \f]
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The variance of the input range.
+     * @see standard_deviation
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> variance(ForwardIt first, ForwardIt last) {
         using namespace boost::accumulators;
-        accumulator_set<value_type, features<tag::variance>> acc;
+        using input_t = value_type_t<ForwardIt>;
+        accumulator_set<input_t, features<tag::variance>> acc;
         acc = std::for_each(first, last, acc);
         return boost::accumulators::variance(acc);
+    }
+
+    /**
+     * @brief Computes the standard deviation of the range [first, last)
+     *
+     * The standard deviation is defined as the square root of the variance:
+     * \f[
+     *     \sigma = \sqrt(v)
+     * \f]
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The variance of the input range.
+     * @see standard_deviation
+     */
+    template <typename ForwardIt>
+    inline value_type_t<ForwardIt> standard_deviation(ForwardIt first, ForwardIt last) {
+        return std::sqrt(dsp::variance(first, last));
     }
 
 }}} // namespace easy::dsp::statistics

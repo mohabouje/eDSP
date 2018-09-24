@@ -23,20 +23,32 @@
 #define EASYDSP_STATISTICAL_HARMONIC_MEAN_H
 
 #include <easy/dsp/math/math.hpp>
+#include <easy/meta/iterator.hpp>
 #include <numeric>
-#include <cmath>
-#include <iterator>
-#include <functional>
 
 namespace easy { namespace dsp { namespace statistics {
 
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type harmonic_mean(InputIterator first, InputIterator last) {
-        const auto predicate = [](const value_type prev, const value_type current) {
-            return static_cast<value_type>(prev + math::inv(current));
+    /**
+     * @brief Computes the harmonic mean of the range [first, last)
+     *
+     * The harmonic mean is defined as:
+     * \f[
+     *     {\displaystyle H={\frac {n}{{\frac {1}{x_{1}}}+{\frac {1}{x_{2}}}+\cdots +{\frac {1}{x_{n}}}}}
+     *          ={\frac {n}{\sum \limits _{i=1}^{n}{\frac {1}{x_{i}}}}}=\left({\frac {\sum \limits _{i=1}^{n}x_{i}^{-1}}{n}}\right)^{-1}.}
+     * \f]
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The geometric mean of the input range.
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> harmonic_mean(ForwardIt first, ForwardIt last) {
+        using input_t = value_type_t<ForwardIt>;
+        const auto predicate = [](const input_t prev, const input_t current) {
+            return prev + math::inv(current);
         };
-        const value_type accumulated = std::accumulate(first, last, static_cast<value_type>(0), std::cref(predicate));
-        return static_cast<value_type>(std::distance(first, last) / accumulated);
+        const auto acc = std::accumulate(first, last, static_cast<input_t>(0), std::cref(predicate));
+        return static_cast<input_t>(std::distance(first, last)) / acc;
     }
 }}} // namespace easy::dsp::statistics
 

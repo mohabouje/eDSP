@@ -22,14 +22,28 @@
 #ifndef EASYDSP_STATISTICAL_CREST_HPP
 #define EASYDSP_STATISTICAL_CREST_HPP
 
-#include "arithmetic_mean.hpp"
+#include <easy/dsp/statistics/arithmetic_mean.hpp>
+#include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
 
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type crest(InputIterator first, InputIterator last) {
-        const value_type computed_mean = statistics::mean(first, last);
-        const value_type computed_max  = *std::max_element(first, last);
+    /**
+     * @brief Computes the crest value of the range [first, last)
+     *
+     * It is calculated as the division of mean of the the signal and the maximum value of the magnitudes.
+     * \f[
+     *      y = \frac{ \frac{1}{N} \sum_{n=0}^{N-1}x(n)}{max \left( x \right)}
+     * \f]
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The crest value of the input range.
+     * @see mean
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> crest(ForwardIt first, ForwardIt last) {
+        const auto computed_mean = statistics::mean(first, last);
+        const auto computed_max  = *std::max_element(first, last);
         return computed_max / computed_mean;
     }
 

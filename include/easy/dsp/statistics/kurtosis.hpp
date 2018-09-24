@@ -24,13 +24,31 @@
 
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
-#include <numeric>
+#include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type kurtosis(InputIterator first, InputIterator last) {
+
+
+    /**
+     * @brief Computes the kurtosis of the range [first, last)
+     *
+     * The kurtosis is the fourth standardized moment, defined as:
+     * \f[
+     *     {\displaystyle K [X]
+     *      =E \left[\left({\frac {X-\mu }{\sigma }}\right)^{4}\right]={\frac {\mu _{4}}{\sigma ^{4}}}
+     *      ={\frac {E [(X-\mu )^{4}]}{(E[(X-\mu )^{2}])^{2}}},}
+     * \f]
+     * where \f$ \mu_4 \f$ is the fourth central moment and \f$ \sigma \f$ is the standard deviation.
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The kurtosis of the input range.
+     * @see moment, standard_deviation
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> kurtosis(ForwardIt first, ForwardIt last) {
         using namespace boost::accumulators;
-        accumulator_set<value_type, features<tag::kurtosis>> acc;
+        using input_t = value_type_t<ForwardIt>;
+        accumulator_set<input_t, features<tag::kurtosis>> acc;
         acc = std::for_each(first, last, acc);
         return boost::accumulators::kurtosis(acc);
     }

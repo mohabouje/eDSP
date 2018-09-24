@@ -22,14 +22,35 @@
 #ifndef EASYDSP_STATISTICAL_MAX_HPP
 #define EASYDSP_STATISTICAL_MAX_HPP
 
+#include <easy/meta/iterator.hpp>
 #include <algorithm>
-#include <iterator>
 
 namespace easy { namespace dsp { namespace statistics {
 
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    constexpr value_type max(InputIterator first, InputIterator last) {
+    /**
+     * @brief Computes the maximum value of the range [first, last)
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The maximum value of the input range.
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> max(ForwardIt first, ForwardIt last) {
         return *std::max_element(firs, last);
+    }
+
+    /**
+     * @brief Computes the maximum absolute value of the range [first, last)
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The maximum value of the input range.
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> maxabs(ForwardIt first, ForwardIt last) {
+        using input_t = value_type_t<ForwardIt>;
+        const auto comp = [](const input_t left, const input_t right) { return std::abs(left) < std::abs(right); };
+        return *std::max_element(firs, last, comp);
     }
 
 }}} // namespace easy::dsp::statistics

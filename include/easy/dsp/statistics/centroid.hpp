@@ -22,19 +22,61 @@
 #ifndef EASYDSP_STATISTICAL_CENTROID_HPP
 #define EASYDSP_STATISTICAL_CENTROID_HPP
 
-#include <iterator>
+#include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    constexpr value_type centroid(InputIterator first, InputIterator last) {
-        value_type weighted_sum   = static_cast<value_type>(0);
-        value_type unweighted_sum = static_cast<value_type>(0);
-        for (value_type i = 0; first != last; ++first, ++i) {
+
+    /**
+     * @brief Computes the centroid value of the range [first, last)
+     *
+     * It is calculated as the division of the weighted mean of the the signal and the average of the magnitudes.
+     * \f[
+     *      y = \frac{\sum_{n=0}^{N-1}nx(n)}{\sum_{n=0}^{N-1}x(n)}
+     * \f]
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The centroid value of the input range.
+     * @see mean
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> centroid(ForwardIt first, ForwardIt last) {
+        using input_t = value_type_t<ForwardIt>;
+        auto weighted_sum   = static_cast<input_t>(0);
+        auto unweighted_sum = static_cast<input_t>(0);
+        for (input_t i = 0; first != last; ++first, ++i) {
             weighted_sum += i * (*first);
             unweighted_sum += *first;
         }
         return weighted_sum / unweighted_sum;
     }
+
+    /**
+     * @brief Computes the centroid value of the range [first1, last1)
+     *
+     * It is calculated as the division of the weighted mean of the the signal and the average of the magnitudes.
+     * \f[
+     *      y = \frac{\sum_{n=0}^{N-1}f(n)x(n)}{\sum_{n=0}^{N-1}x(n)}
+     * \f]
+     *
+     * @param first1 Forward iterator defining the begin of the range to examine.
+     * @param last1 Forward iterator defining the end of the range to examine.
+     * @param first2 Forward iterator defining the beginning of the range representing the weights, \f$f(i)\f$.
+     * @returns The centroid value of the input range.
+     * @see mean
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> centroid(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
+        using input_t = value_type_t<ForwardIt>;
+        auto weighted_sum   = static_cast<input_t>(0);
+        auto unweighted_sum = static_cast<input_t>(0);
+        for (; first1 != last1; ++first1, ++first2) {
+            weighted_sum += (*first2) * (*first1);
+            unweighted_sum += *first1;
+        }
+        return weighted_sum / unweighted_sum;
+    }
+
 
 }}} // namespace easy::dsp::statistics
 

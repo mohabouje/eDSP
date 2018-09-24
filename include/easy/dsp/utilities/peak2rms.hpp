@@ -34,7 +34,7 @@ namespace easy { namespace dsp { inline namespace utility {
      * Returns the ratio of the largest absolute value in the range [first, last) to
      * the root-mean-square (RMS) value of the range. The Peak-magnitude-to-RMS Level is:
      * \f[
-     *      y =\frac{\left| x \right|_{\infty}}{\sqrt{\frac{1}{N}\sum_{n 0}^{N-1}\left|x\left(i\right)\right|^2}}
+     *      y =\frac{\left| x \right|_{\infty}}{\sqrt{\frac{1}{N}\sum_{n=0}^{N-1}\left|x\left(i\right)\right|^2}}
      * \f]
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.

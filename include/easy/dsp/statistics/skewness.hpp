@@ -24,13 +24,31 @@
 
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
-#include <numeric>
+#include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type skewness(InputIterator first, InputIterator last) {
+
+
+    /**
+     * @brief Computes the skewness of the range [first, last)
+     *
+     * The skewness is the third standardized moment, defined as:
+     * \f[
+     *     {\displaystyle K [X]
+     *      =E \left[\left({\frac {X-\mu }{\sigma }}\right)^{3}\right]={\frac {\mu _{3}}{\sigma ^{3}}}
+     *      ={\frac {E [(X-\mu )^{3}]}{(E[(X-\mu )^{2}])^{2}}},}
+     * \f]
+     * where \f$ \mu_3 \f$ is the fourth central moment and \f$ \sigma \f$ is the standard deviation.
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The skewness of the input range.
+     * @see moment, standard_deviation
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> skewness(ForwardIt first, ForwardIt last) {
         using namespace boost::accumulators;
-        accumulator_set<value_type, features<tag::skewness>> acc;
+        using input_t = value_type_t<ForwardIt>;
+        accumulator_set<input_t, features<tag::skewness>> acc;
         acc = std::for_each(first, last, acc);
         return boost::accumulators::skewness(acc);
     }

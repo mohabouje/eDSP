@@ -22,23 +22,35 @@
 #ifndef EASYDSP_STATISTICAL_GENERALIZED_MEAN_H
 #define EASYDSP_STATISTICAL_GENERALIZED_MEAN_H
 
+#include <easy/dsp/math/math.hpp>
+#include <easy/meta/iterator.hpp>
 #include <numeric>
-#include <cmath>
-#include <iterator>
-#include <functional>
 
 namespace easy { namespace dsp { namespace statistics {
 
-    template <typename InputIterator, typename Integer,
-              typename value_type = typename std::iterator_traits<InputIterator>::value_type,
-              typename            = typename std::enable_if<std::is_integral<Integer>::value>::type>
-    inline value_type generalized_mean(InputIterator first, InputIterator last, Integer beta) {
-        const auto predicate = [beta](const value_type prev, const value_type current) {
-            return static_cast<value_type>(prev + std::pow(current, beta));
+    /**
+     * @brief Computes the generalized mean of the range [first, last)
+     *
+     * The generalized mean or power mean with exponent \f$ \beta \f$ is defined as:
+     * \f[
+     *      \mu_{\beta} = \left( \frac{1}{N}\sum_{n=0}^{N-1}x(n)^{\beta} \right) ^{\frac{1}{\beta}}
+     * \f]
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @param beta Exponent (\f$ \beta \f$).
+     * @returns The generalized mean of the input range.
+     */
+    template <typename ForwardIt, typename Integer>
+    constexpr value_type_t<ForwardIt> generalized_mean(ForwardIt first, ForwardIt last, Integer beta) {
+        using input_t = value_type_t<ForwardIt>;
+        const auto b = static_cast<int>(beta);
+        const auto predicate = [b](const input_t prev, const input_t current) {
+            return static_cast<value_type>(prev + std::pow(current, b));
         };
-        const value_type accumulated = std::accumulate(first, last, static_cast<value_type>(0), std::cref(predicate));
-        const value_type temp        = accumulated / static_cast<value_type>(std::distance(first, last));
-        return static_cast<value_type>(std::pow(temp, 1 / static_cast<value_type>(beta)));
+        const input_t accumulated = std::accumulate(first, last, static_cast<input_t>(0), std::cref(predicate));
+        const input_t temp        = accumulated / static_cast<input_t>(std::distance(first, last));
+        return std::pow(temp, math::inv(static_cast<input_t>(b)));
     }
 
 }}} // namespace easy::dsp::statistics

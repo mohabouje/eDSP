@@ -22,16 +22,37 @@
 #ifndef EASYDSP_STATISTICAL_ENTROPY_HPP
 #define EASYDSP_STATISTICAL_ENTROPY_HPP
 
-#include <cmath>
-#include <numeric>
+#include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type entropy(InputIterator first, InputIterator last) {
-        const auto sum       = std::accumulate(first, last, static_cast<value_type>(0));
-        const auto predicate = [sum](const value_type accumulated, const value_type current) {
-            const auto normalized = current / sum;
-            return (accumulated + std::log2(normalized) * normalized);
+
+    /**
+     * @brief The EntropyBase enum defines the base of the logarithm used to compute the entropy.
+     */
+    enum EntropyBase {
+        Bits,  /*!< Base 2 */
+        Nats,  /*!< Base e */
+        Bans   /*!< Base 10 */
+    };
+
+    /**
+     * @brief Computes the entropy of the probability mass function given in the range [first, last)
+     *
+     * Given a normalized probability mass function \f$ p(n) \f$, the entropy can explicitly be written as:
+     *
+     * \f[
+     *      h =  \sum_{n=0}^{N-1} p(n) \log2 \left( p(n) \right)
+     * \f]
+     *
+     * @param first Forward iterator defining the begin of the probability mass function.
+     * @param last Forward iterator defining the end of the probability mass function.
+     * @returns The entropy of the probability mass function.
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> entropy(ForwardIt first, ForwardIt last) {
+        using input_t = value_type_t<ForwardIt>;
+        const auto predicate = [](const input_t accumulated, const input_t current) {
+            return (accumulated + std::log2(current) * current);
         };
         return std::accumulate(first, last, static_cast<value_type>(0), predicate);
     }

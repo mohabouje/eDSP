@@ -24,13 +24,27 @@
 
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
+#include <easy/meta/iterator.hpp>
 #include <numeric>
 
 namespace easy { namespace dsp { namespace statistics {
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type median(InputIterator first, InputIterator last) {
+
+    /**
+     * @brief Computes the median of the range [first, last)
+     *
+     * The median of a finite list of numbers can be found by arranging all the numbers from smallest to greatest.
+     * If there is an odd number of numbers, the middle one is picked. If there is an even number of observations,
+     * then there is no single middle value; the median is then usually defined to be the mean of the two middle values
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The median of the input range.
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> median(ForwardIt first, ForwardIt last) {
         using namespace boost::accumulators;
-        accumulator_set<value_type, features<tag::median>> acc;
+        using input_t = value_type_t<ForwardIt>;
+        accumulator_set<input_t, features<tag::median>> acc;
         acc = std::for_each(first, last, acc);
         return boost::accumulators::median(acc);
     }

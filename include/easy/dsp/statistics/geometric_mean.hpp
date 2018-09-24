@@ -23,17 +23,31 @@
 #define EASYDSP_STATISTICAL_GEOMETRIC_MEAN_H
 
 #include <easy/dsp/math/math.hpp>
+#include <easy/meta/iterator.hpp>
 #include <numeric>
-#include <cmath>
-#include <iterator>
+
 
 namespace easy { namespace dsp { namespace statistics {
 
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type geometric_mean(InputIterator first, InputIterator last) {
-        const value_type accumulated =
-            std::accumulate(first, last, static_cast<value_type>(0), std::multiplies<value_type>());
-        return std::pow(accumulated, math::inv(std::distance(first, last)));
+
+    /**
+     * @brief Computes the geometric mean of the range [first, last)
+     *
+     * The geometric mean is defined as:
+     * \f[
+     *     {\displaystyle \left(\prod _{i=1}^{n}x_{i}\right)^{\frac {1}{n}}={\sqrt[{n}]{x_{1}x_{2}\cdots x_{n}}}}
+     * \f]
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The geometric mean of the input range.
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> geometric_mean(ForwardIt first, ForwardIt last) {
+        using input_t = value_type_t<ForwardIt>;
+        const auto acc = std::accumulate(first, last, static_cast<input_t>(0), std::multiplies<input_t>());
+        const auto sz = static_cast<input_t>(std::distance(first, last));
+        return std::pow(acc, math::inv(sz));
     }
 
 }}} // namespace easy::dsp::statistics

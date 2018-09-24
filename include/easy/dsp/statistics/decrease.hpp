@@ -22,16 +22,24 @@
 #ifndef EASYDSP_STATISTICAL_DECREASE_HPP
 #define EASYDSP_STATISTICAL_DECREASE_HPP
 
-#include <iterator>
+#include <easy/meta/iterator.hpp>
+#include <easy/dsp/math/math.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    constexpr value_type decrease(InputIterator first, InputIterator last) {
-        const auto size           = std::distance(first, last);
-        value_type weighted_sum   = static_cast<value_type>(0);
-        value_type unweighted_sum = static_cast<value_type>(0);
-        for (value_type i = 0, initial = *first; first != last; ++first, ++i) {
-            weighted_sum += (1 / i) * ((*first) - initial);
+    /**
+     * @brief Computes the decrease value of the range [first, last)
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The decrease value of the input range.
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> decrease(ForwardIt first, ForwardIt last) {
+        using input_t = value_type_t<ForwardIt>;
+        auto weighted_sum   = static_cast<input_t>(0);
+        auto unweighted_sum = static_cast<input_t>(0);
+        for (input_t i = 0, initial = *first; first != last; ++first, ++i) {
+            weighted_sum += math::inv(i) * ((*first) - initial);
             unweighted_sum += *first;
         }
         return weighted_sum / unweighted_sum;

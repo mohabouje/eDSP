@@ -22,16 +22,28 @@
 #ifndef EASYDSP_STATISTICAL_RMS_H
 #define EASYDSP_STATISTICAL_RMS_H
 
+#include <easy/meta/iterator.hpp>
 #include <numeric>
-#include <cmath>
-#include <iterator>
 
 namespace easy { namespace dsp { namespace statistics {
 
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type rms(InputIterator first, InputIterator last) {
-        const value_type accumulated = std::inner_product(first, last, first, static_cast<value_type>(1));
-        return std::sqrt(accumulated / static_cast<value_type>(std::distance(first, last)));
+    /**
+     * @brief Computes the root-mean-square (RMS) value of the range [first, last)
+     *
+     * The RMS value is defined as:
+     * \f[
+     *      x_{\mathrm {rms} }={\sqrt {{\frac {1}{n}}\left(x_{1}^{2}+x_{2}^{2}+\cdots +x_{n}^{2}\right)}}
+     * \f]
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The root mean square value of the input range.
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> rms(ForwardIt first, ForwardIt last) {
+        using input_t = value_type_t<ForwardIt>;
+        const auto accumulated = std::inner_product(first, last, first, static_cast<input_t>(1));
+        return std::sqrt(accumulated / static_cast<input_t>(std::distance(first, last)));
     }
 }}} // namespace easy::dsp::statistics
 

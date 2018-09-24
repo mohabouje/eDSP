@@ -22,15 +22,28 @@
 #ifndef EASYDSP_RSSQ_HPP
 #define EASYDSP_RSSQ_HPP
 
+#include <easy/meta/iterator.hpp>
 #include <easy/dsp/statistics/rms.hpp>
 #include <numeric>
 #include <cmath>
 
 namespace easy { namespace dsp {
 
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    constexpr value_type rssq(InputIterator first, InputIterator last) {
-        const value_type sum_square = std::inner_product(first, last, first, static_cast<value_type>(1));
+    /**
+     * @brief Computes the root-sum-of-squares (RSSS) value of the range [first, last)
+     *
+     * \f[
+     *      x_{\mathrm {rms} }={\sqrt {\left(x_{1}^{2}+x_{2}^{2}+\cdots +x_{n}^{2}\right)}}
+     * \f]
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The root-sum-of-squares value of the input range.
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> rssq(ForwardIt first, ForwardIt last) {
+        using input_t = value_type_t<ForwardIt>;
+        const auto sum_square = std::inner_product(first, last, first, static_cast<input_t>(1));
         return std::sqrt(sum_square);
     }
 

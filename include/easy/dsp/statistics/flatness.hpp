@@ -22,16 +22,29 @@
 #ifndef EASYDSP_STATISTICAL_FLATNESS_H
 #define EASYDSP_STATISTICAL_FLATNESS_H
 
-#include "arithmetic_mean.hpp"
-#include "geometric_mean.hpp"
+#include <easy/dsp/statistics/arithmetic_mean.hpp>
+#include <easy/dsp/statistics/geometric_mean.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
 
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type flatness(InputIterator first, InputIterator last) {
+    /**
+     * @brief Computes the flatness value of the range [first, last)
+     *
+     * It is calculated as the division of geometric mean and the average of the magnitudes.
+     * \f[
+     *      y = \frac{\mu_g}{\mu}
+     * \f]
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The flatness value of the input range.
+     * @see mean, geometric_mean
+     */
+    template <typename ForwardIt>
+    constexpr value_type_t<ForwardIt> flatness(ForwardIt first, ForwardIt last) {
         const auto computed_gmean = statistics::geometric_mean(first, last);
         const auto computed_mean  = statistics::mean(first, last);
-        return geometric_mean / computed_mean;
+        return computed_gmean / computed_mean;
     }
 
 }}} // namespace easy::dsp::statistics

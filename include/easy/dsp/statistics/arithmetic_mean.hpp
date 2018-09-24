@@ -24,11 +24,24 @@
 
 #include <boost/accumulators/accumulators.hpp>
 #include <boost/accumulators/statistics.hpp>
-#include <numeric>
+#include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
-    template <typename InputIterator, typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    inline value_type mean(InputIterator first, InputIterator last) {
+
+    /**
+     * @brief Computes the average or mean value of the range [first, last)
+     *
+     * The average is defined as:
+     * \f[
+     *      \mu = \frac{1}{N}\sum_{n=0}^{N-1}x(n)
+     * \f]
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The average of the input range.
+     */
+    template <typename ForwardIt>
+    inline value_type_t<ForwardIt> mean(ForwardIt first, ForwardIt last) {
         using namespace boost::accumulators;
         accumulator_set<value_type, features<tag::mean>> acc;
         acc = std::for_each(first, last, acc);
