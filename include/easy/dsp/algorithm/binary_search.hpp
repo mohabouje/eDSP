@@ -55,12 +55,12 @@ namespace easy { namespace dsp { inline namespace algorithm {
      * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
      */
     template <typename ForwardIt, class Compare>
-    constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, const value_type_t<ForwardIt>& value, Compare comp) {
+    constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, const value_type_t<ForwardIt>& value,
+                                      Compare comp) {
         const auto it = std::lower_bound(first, last, value, comp);
         return (it != last && (value == *it)) ? it : last;
     }
 
-
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::algorithm
 
 #endif // EASYDSP_BINARY_SEARCH_HPP

@@ -39,6 +39,6 @@ namespace easy { namespace dsp { inline namespace utility {
         return std::abs(pair.second) - std::abs(pair.first);
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::utility
 
 #endif // EASYDSP_RMS2PEAK_HPP

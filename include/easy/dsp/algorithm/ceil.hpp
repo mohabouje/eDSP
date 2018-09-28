@@ -38,11 +38,10 @@ namespace easy { namespace dsp { inline namespace algorithm {
      */
     template <typename InputIt, typename OutputIt>
     constexpr void ceil(InputIt first, InputIt last, OutputIt d_first) {
-        std::transform(first, last, d_first, [](const value_type_t<InputIt> value) -> value_type_t<OutputIt> {
-            return std::ceil(value);
-        });
+        std::transform(first, last, d_first,
+                       [](const value_type_t<InputIt> value) -> value_type_t<OutputIt> { return std::ceil(value); });
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::algorithm
 
 #endif // EASYDSP_CEIL_HPP

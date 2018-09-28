@@ -46,6 +46,6 @@ namespace easy { namespace dsp { inline namespace utility {
         const auto max_abs = std::max(std::abs(pair.first), std::abs(pair.second));
         return max_abs / statistics::rms(first, last);
     }
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::utility
 
 #endif // EASYDSP_PEAK2RMS_HPP

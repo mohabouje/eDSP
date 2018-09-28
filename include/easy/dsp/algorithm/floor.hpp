@@ -38,11 +38,10 @@ namespace easy { namespace dsp { inline namespace algorithm {
      */
     template <typename InputIt, typename OutputIt>
     constexpr void floor(InputIt first, InputIt last, OutputIt d_first) {
-        std::transform(first, last, d_first, [](const value_type_t<InputIt> value) -> value_type_t<OutputIt> {
-            return std::floor(value);
-        });
+        std::transform(first, last, d_first,
+                       [](const value_type_t<InputIt> value) -> value_type_t<OutputIt> { return std::floor(value); });
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::algorithm
 
 #endif // EASYDSP_UTILITIES_FLOOR_HPP

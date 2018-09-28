@@ -42,7 +42,7 @@ namespace easy { namespace dsp {
      */
     template <typename ForwardIt>
     constexpr value_type_t<ForwardIt> rssq(ForwardIt first, ForwardIt last) {
-        using input_t = value_type_t<ForwardIt>;
+        using input_t         = value_type_t<ForwardIt>;
         const auto sum_square = std::inner_product(first, last, first, static_cast<input_t>(1));
         return std::sqrt(sum_square);
     }

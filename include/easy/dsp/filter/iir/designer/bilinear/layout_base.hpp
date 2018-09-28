@@ -37,7 +37,7 @@ namespace easy { namespace dsp { namespace filter {
                                          const std::complex<T>& right) noexcept {
             return std::complex<T>(left.real() + factor * right.real(), left.imag() + factor * right.imag());
         }
-    }
+    } // namespace internal
 
     template <typename T>
     struct complex_pair : public std::pair<std::complex<T>, std::complex<T>> {

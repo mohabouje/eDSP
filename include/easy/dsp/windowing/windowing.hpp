@@ -40,17 +40,17 @@ namespace easy { namespace dsp { namespace windowing {
      * @brief The WindowType enum represents the type of availables windows
      */
     enum class WindowType {
-        Bartlett = 0, /*!< Bartlett Window */
-        Blackman, /*!< Blackman Window */
-        BlackmanHarris, /*!< Blackman-Harris Window */
+        Bartlett = 0,    /*!< Bartlett Window */
+        Blackman,        /*!< Blackman Window */
+        BlackmanHarris,  /*!< Blackman-Harris Window */
         BlackmanNuttall, /*!< Blackman-Nuttall Window*/
-        Boxcar, /*!< Boxcar Window */
-        FlatTop, /*!< FlatTop Window */
-        Hamming, /*!< Hamming Window */
-        Hanning, /*!< Hanning Window */
-        Rectangular, /*!< Rectangular Window */
-        Triangular, /*!< Triangular Window */
-        Welch /*!< Welch Window */
+        Boxcar,          /*!< Boxcar Window */
+        FlatTop,         /*!< FlatTop Window */
+        Hamming,         /*!< Hamming Window */
+        Hanning,         /*!< Hanning Window */
+        Rectangular,     /*!< Rectangular Window */
+        Triangular,      /*!< Triangular Window */
+        Welch            /*!< Welch Window */
     };
 
     namespace internal {
@@ -90,11 +90,10 @@ namespace easy { namespace dsp { namespace windowing {
             }
         };
 
-
         template <>
         struct _build_window<WindowType::Boxcar> {
             template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N)  {
+            constexpr void operator()(OutIterator d_first, Integer N) {
                 boxcar(d_first, N);
             }
         };
@@ -126,7 +125,7 @@ namespace easy { namespace dsp { namespace windowing {
         template <>
         struct _build_window<WindowType::Rectangular> {
             template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N)  {
+            constexpr void operator()(OutIterator d_first, Integer N) {
                 rectangular(d_first, N);
             }
         };
@@ -158,7 +157,6 @@ namespace easy { namespace dsp { namespace windowing {
     constexpr void make_window(OutIterator d_first, Integer N) {
         return internal::_build_window<Type>{}(d_first, N);
     }
-
 
 }}} // namespace easy::dsp::windowing
 

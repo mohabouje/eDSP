@@ -50,6 +50,6 @@ namespace easy { namespace dsp { inline namespace algorithm {
     constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, UnaryPredicate p) {
         return std::find(first, last, p);
     }
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::algorithm
 
 #endif // EASYDSP_LINEAR_SEARCH_HPP

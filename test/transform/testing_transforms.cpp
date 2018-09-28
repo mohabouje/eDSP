@@ -129,7 +129,7 @@ SCENARIO("Testing the DCT implementation", "[DCT]") {
         REQUIRE(meta::size(input) == meta::size(data_idct));
 
         WHEN("We want to compute the DCT-Type I") {
-            dsp::dct(input.begin(), input.end(),  data_dct.begin(), dsp::DCT_Type::Type_I);
+            dsp::dct(input.begin(), input.end(), data_dct.begin(), dsp::DCT_Type::Type_I);
             AND_WHEN("We compute the inverse fft") {
                 dsp::idct(data_dct.begin(), data_dct.end(), data_idct.begin(), dsp::DCT_Type::Type_I);
                 THEN("The output data should be same as the original signal") {
@@ -141,7 +141,7 @@ SCENARIO("Testing the DCT implementation", "[DCT]") {
         }
 
         WHEN("We want to compute the DCT-Type II") {
-            dsp::dct(input.begin(), input.end(),  data_dct.begin(), dsp::DCT_Type::Type_II);
+            dsp::dct(input.begin(), input.end(), data_dct.begin(), dsp::DCT_Type::Type_II);
             AND_WHEN("We compute the inverse fft") {
                 dsp::idct(data_dct.begin(), data_dct.end(), data_idct.begin(), dsp::DCT_Type::Type_II);
                 THEN("The output data should be same as the original signal") {
@@ -153,7 +153,7 @@ SCENARIO("Testing the DCT implementation", "[DCT]") {
         }
 
         WHEN("We want to compute the DCT-Type III") {
-            dsp::dct(input.begin(), input.end(),  data_dct.begin(), dsp::DCT_Type::Type_III);
+            dsp::dct(input.begin(), input.end(), data_dct.begin(), dsp::DCT_Type::Type_III);
             AND_WHEN("We compute the inverse fft") {
                 dsp::idct(data_dct.begin(), data_dct.end(), data_idct.begin(), dsp::DCT_Type::Type_III);
                 THEN("The output data should be same as the original signal") {
@@ -165,7 +165,7 @@ SCENARIO("Testing the DCT implementation", "[DCT]") {
         }
 
         WHEN("We want to compute the DCT-Type IV") {
-            dsp::dct(input.begin(), input.end(),  data_dct.begin(), dsp::DCT_Type::Type_IV);
+            dsp::dct(input.begin(), input.end(), data_dct.begin(), dsp::DCT_Type::Type_IV);
             AND_WHEN("We compute the inverse fft") {
                 dsp::idct(data_dct.begin(), data_dct.end(), data_idct.begin(), dsp::DCT_Type::Type_IV);
                 THEN("The output data should be same as the original signal") {

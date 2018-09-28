@@ -33,7 +33,6 @@
 
 namespace easy { namespace dsp { inline namespace spectral {
 
-
     /**
      * @brief Computes the Discrete-Time analytic signal using Hilbert transform of the range [first, last)
      * and stores the result in another range, beginning at d_first.
@@ -52,7 +51,8 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @param d_first Output irerator defining the beginning of the destination range.
      * @see complex_idft
      */
-    template <typename InputIt, typename OutputIt, typename Allocator = std::allocator<std::complex<value_type_t<InputIt>>>>
+    template <typename InputIt, typename OutputIt,
+              typename Allocator = std::allocator<std::complex<value_type_t<InputIt>>>>
     inline void hilbert(InputIt first, InputIt last, OutputIt d_first) {
         using value_type = value_type_t<InputIt>;
         const auto nfft  = static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last));
@@ -79,6 +79,6 @@ namespace easy { namespace dsp { inline namespace spectral {
         ifft.idft_scale(fftw_cast(&(*d_first)), nfft);
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::spectral
 
 #endif // EASYDSP_HIRTLEY_HPP

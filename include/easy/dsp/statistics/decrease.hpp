@@ -35,7 +35,7 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr value_type_t<ForwardIt> decrease(ForwardIt first, ForwardIt last) {
-        using input_t = value_type_t<ForwardIt>;
+        using input_t       = value_type_t<ForwardIt>;
         auto weighted_sum   = static_cast<input_t>(0);
         auto unweighted_sum = static_cast<input_t>(0);
         for (input_t i = 0, initial = *first; first != last; ++first, ++i) {

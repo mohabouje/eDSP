@@ -43,8 +43,8 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt, typename Integer>
     constexpr value_type_t<ForwardIt> generalized_mean(ForwardIt first, ForwardIt last, Integer beta) {
-        using input_t = value_type_t<ForwardIt>;
-        const auto b = static_cast<int>(beta);
+        using input_t        = value_type_t<ForwardIt>;
+        const auto b         = static_cast<int>(beta);
         const auto predicate = [b](const input_t prev, const input_t current) {
             return static_cast<value_type>(prev + std::pow(current, b));
         };

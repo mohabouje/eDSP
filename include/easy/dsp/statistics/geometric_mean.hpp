@@ -26,9 +26,7 @@
 #include <easy/meta/iterator.hpp>
 #include <numeric>
 
-
 namespace easy { namespace dsp { namespace statistics {
-
 
     /**
      * @brief Computes the geometric mean of the range [first, last)
@@ -44,9 +42,9 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr value_type_t<ForwardIt> geometric_mean(ForwardIt first, ForwardIt last) {
-        using input_t = value_type_t<ForwardIt>;
+        using input_t  = value_type_t<ForwardIt>;
         const auto acc = std::accumulate(first, last, static_cast<input_t>(0), std::multiplies<input_t>());
-        const auto sz = static_cast<input_t>(std::distance(first, last));
+        const auto sz  = static_cast<input_t>(std::distance(first, last));
         return std::pow(acc, math::inv(sz));
     }
 

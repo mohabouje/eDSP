@@ -39,7 +39,6 @@ namespace easy { namespace dsp { inline namespace utility {
         return std::complex<T>(real, imag);
     }
 
-
     /**
      * @brief Converts a range of scalar numbers in to an equivalent complex number
      * and stores the result in another range.
@@ -53,9 +52,7 @@ namespace easy { namespace dsp { inline namespace utility {
     constexpr void real2complex(InputIt first, InputIt last, OutputIt d_first) {
         using input_t  = value_type_t<InputIt>;
         using output_t = value_type_t<InputIt>;
-        std::transform(first, last, d_first, [](const input_t value) -> output_t  {
-            return value;
-        });
+        std::transform(first, last, d_first, [](const input_t value) -> output_t { return value; });
     }
 
     /**
@@ -76,6 +73,6 @@ namespace easy { namespace dsp { inline namespace utility {
         });
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::utility
 
 #endif // EASDY_REAL2COMPLEX_HPP

@@ -101,7 +101,6 @@ TEST(TestingFFT, TransformBlackmanWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Blackman>(std::begin(window), size);
 
-
     std::vector<std::complex<double>> transformed(easy::dsp::make_fft_size(size));
     easy::dsp::dft(std::begin(window), std::end(window), std::begin(transformed));
 
@@ -113,7 +112,7 @@ TEST(TestingFFT, TransformBlackmanWindow) {
 }
 
 TEST(TestingIFFT, InverseTransformRealData) {
-    const auto size   = 512ul;
+    const auto size = 512ul;
     std::vector<double> window(size);
     make_window<WindowType::Hamming>(std::begin(window), size);
 
@@ -128,7 +127,7 @@ TEST(TestingIFFT, InverseTransformRealData) {
 }
 
 TEST(TestingIFFT, InverseTransformComplexData) {
-    const auto size   = 512ul;
+    const auto size = 512ul;
     std::vector<double> window(size);
     make_window<WindowType::Blackman>(std::begin(window), size);
 

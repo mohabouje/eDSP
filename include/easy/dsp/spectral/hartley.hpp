@@ -51,6 +51,6 @@ namespace easy { namespace dsp { inline namespace spectral {
                  static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last)));
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::spectral
 
 #endif // EASYDSP_HARTLEY_HPP

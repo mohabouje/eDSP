@@ -70,7 +70,6 @@ namespace easy { namespace dsp { inline namespace algorithm {
         });
     }
 
-
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::algorithm
 
 #endif // EASYDSP_NORMALIZER_HPP

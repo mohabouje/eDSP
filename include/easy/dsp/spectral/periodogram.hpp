@@ -50,7 +50,8 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @param d_first Output irerator defining the beginning of the destination range.
      * @param scale  Scale to be used in the output
      */
-    template <typename InputIt, typename OutputIt, typename Allocator = std::allocator<std::complex<value_type_t<OutputIt>>>>
+    template <typename InputIt, typename OutputIt,
+              typename Allocator = std::allocator<std::complex<value_type_t<OutputIt>>>>
     inline void periodogram(InputIt first, InputIt last, OutputIt d_first, SpectralScale scale) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
         using value_type = value_type_t<InputIt>;
@@ -60,17 +61,16 @@ namespace easy { namespace dsp { inline namespace spectral {
         fft_.dft(fftw_cast(&(*first)), fftw_cast(meta::data(fft_data_)), size);
         if (scale == SpectralScale::Linear) {
             std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
-                         [](const std::complex<value_type>& val) -> value_type_t<OutputIt> {
-                return math::square(std::abs(val));
-            });
+                           [](const std::complex<value_type>& val) -> value_type_t<OutputIt> {
+                               return math::square(std::abs(val));
+                           });
         } else {
-            std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
-                         [](const std::complex<value_type>& val) -> value_type_t<OutputIt> {
-                return mag2db(std::abs(val));
-            });
+            std::transform(
+                std::cbegin(fft_data_), std::cend(fft_data_), d_first,
+                [](const std::complex<value_type>& val) -> value_type_t<OutputIt> { return mag2db(std::abs(val)); });
         }
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::spectral
 
 #endif // EASYDSP_SPECTROGRAM_HPP

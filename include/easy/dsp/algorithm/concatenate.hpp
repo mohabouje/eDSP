@@ -40,12 +40,11 @@ namespace easy { namespace dsp { inline namespace algorithm {
      * @param d_first Output irerator defining the beginning of the destination range.
      */
     template <typename InputIt, typename OutputIt>
-    constexpr void concatenate(InputIt first1, InputIt last1,
-                               InputIt first2, InputIt last2, OutputIt d_first) {
+    constexpr void concatenate(InputIt first1, InputIt last1, InputIt first2, InputIt last2, OutputIt d_first) {
         std::copy(first1, last1, d_first);
         std::copy(first2, last2, meta::advance(out, std::distance(first, last)));
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::algorithm
 
 #endif // EASYDSP_UTILITIES_CAT_H

@@ -49,26 +49,29 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @param first2 Input iterator defining the beginnning of the second input range.
      * @param d_first Output irerator defining the beginning of the destination range.
      */
-    template <typename InputIt, typename OutputIt, typename Allocator = std::allocator<std::complex<value_type_t<OutputIt>>>>
+    template <typename InputIt, typename OutputIt,
+              typename Allocator = std::allocator<std::complex<value_type_t<OutputIt>>>>
     inline void conv(InputIt first1, InputIt last1, InputIt first2, OutputIt d_first) {
         meta::expects(std::distance(first1, last1) > 0, "Not expecting empty input");
         using value_type = value_type_t<InputIt>;
         fftw_plan<value_type> fft_{};
         fftw_plan<value_type> ifft_{};
         const auto size = std::distance(first1, last1);
-        std::vector<std::complex<value_type>, Allocator> left_data_(make_fft_size(size), std::complex<value_type>(0, 0));
-        std::vector<std::complex<value_type>, Allocator> right_data_(make_fft_size(size), std::complex<value_type>(0, 0));
+        std::vector<std::complex<value_type>, Allocator> left_data_(make_fft_size(size),
+                                                                    std::complex<value_type>(0, 0));
+        std::vector<std::complex<value_type>, Allocator> right_data_(make_fft_size(size),
+                                                                     std::complex<value_type>(0, 0));
 
         fft_.dft(fftw_cast(&(*first1)), fftw_cast(meta::data(left_data_)), size);
         fft_.dft(fftw_cast(&(*first2)), fftw_cast(meta::data(right_data_)), size);
 
-        std::transform(std::cbegin(left_data_), std::cend(left_data_), std::cbegin(right_data_),
-                       std::begin(left_data_), std::multiplies<>());
+        std::transform(std::cbegin(left_data_), std::cend(left_data_), std::cbegin(right_data_), std::begin(left_data_),
+                       std::multiplies<>());
 
         ifft_.idft(fftw_cast(meta::data(left_data_)), fftw_cast(&(*d_first)), size);
         ifft_.idft_scale(fftw_cast(&(*d_first)), size);
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::spectral
 
 #endif // EASYDSP_CONVOLUTION_HPP

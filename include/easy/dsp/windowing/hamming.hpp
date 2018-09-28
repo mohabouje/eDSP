@@ -45,15 +45,15 @@ namespace easy { namespace dsp { namespace windowing {
      */
     template <typename OutIterator, typename Integer>
     constexpr void hamming(OutIterator d_first, Integer N) {
-        using value_type = value_type_t<OutIterator>;
-        using size_type = diff_type_t<OutIterator>;
+        using value_type  = value_type_t<OutIterator>;
+        using size_type   = diff_type_t<OutIterator>;
         constexpr auto a0 = static_cast<value_type>(0.54);
         constexpr auto a1 = static_cast<value_type>(0.46);
         const auto size   = static_cast<size_type>(N);
         const auto factor = constants<value_type>::two_pi / static_cast<value_type>(size - 1);
         for (size_type i = 0; i < size; ++i, ++d_first) {
             const value_type tmp = factor * i;
-            *d_first     = a0 - a1 * std::cos(tmp);
+            *d_first             = a0 - a1 * std::cos(tmp);
         }
     }
 

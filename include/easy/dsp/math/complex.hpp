@@ -110,6 +110,6 @@ namespace easy { namespace dsp { inline namespace math {
         return std::complex<T>(std::numeric_limits<T>::infinity(), std::numeric_limits<T>::infinity());
     }
 
-}}} // namespace easy::math
+}}} // namespace easy::dsp::math
 
 #endif

@@ -40,6 +40,6 @@ namespace easy { namespace dsp { inline namespace utility {
         return std::pow(10, db / static_cast<T>(10));
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::utility
 
 #endif // EASYDSP_DB2POW_HPP

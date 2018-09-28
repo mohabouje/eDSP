@@ -44,11 +44,9 @@ namespace easy { namespace dsp { inline namespace algorithm {
      */
     template <typename InputIt, typename OutputIt, typename Numeric>
     constexpr void amplifier(InputIt first, InputIt last, OutputIt d_first, Numeric factor) {
-        std::transform(first, last, d_first, [=](const value_type_t<InputIt> val) -> value_type_t<OutputIt> {
-            return factor * val;
-        });
+        std::transform(first, last, d_first,
+                       [=](const value_type_t<InputIt> val) -> value_type_t<OutputIt> { return factor * val; });
     }
-
 
     /**
      * @brief Amplifies the signal in the range [first, last) and stores the result in another range, beginning at d_first.
@@ -70,16 +68,13 @@ namespace easy { namespace dsp { inline namespace algorithm {
      * @param max Maximum threshold value.
      */
     template <typename InputIt, typename OutputIt, typename Numeric>
-    constexpr void amplifier(InputIt first, InputIt last, OutputIt d_first,
-                             Numeric factor,
-                             Numeric min,
-                             Numeric max) {
+    constexpr void amplifier(InputIt first, InputIt last, OutputIt d_first, Numeric factor, Numeric min, Numeric max) {
         std::transform(first, last, d_first, [=](const value_type_t<InputIt> val) -> value_type_t<OutputIt> {
             const auto scaled = factor * val;
             return (scaled < min) ? min : (scaled > max) ? max : scaled;
         });
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::algorithm
 
 #endif // EASYDSP_AMPLIFIER_HPP

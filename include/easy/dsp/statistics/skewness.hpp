@@ -28,7 +28,6 @@
 
 namespace easy { namespace dsp { namespace statistics {
 
-
     /**
      * @brief Computes the skewness of the range [first, last)
      *

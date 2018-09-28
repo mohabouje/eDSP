@@ -28,7 +28,6 @@
 
 namespace easy { namespace dsp { inline namespace algorithm {
 
-
     /**
      * @brief Limits the values of the elements in the range [first, last) once it exceeds a threshold [min, max],
      * and stores the result in another range, beginning at d_first.
@@ -46,6 +45,6 @@ namespace easy { namespace dsp { inline namespace algorithm {
         });
     }
 
-}}}// namespace easy::dsp
+}}} // namespace easy::dsp::algorithm
 
 #endif // EASYDSP_CLIPPER_HPP

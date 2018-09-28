@@ -41,7 +41,7 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr value_type_t<ForwardIt> rms(ForwardIt first, ForwardIt last) {
-        using input_t = value_type_t<ForwardIt>;
+        using input_t          = value_type_t<ForwardIt>;
         const auto accumulated = std::inner_product(first, last, first, static_cast<input_t>(1));
         return std::sqrt(accumulated / static_cast<input_t>(std::distance(first, last)));
     }

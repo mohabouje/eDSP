@@ -118,6 +118,6 @@ namespace easy { namespace dsp { inline namespace spectral {
         plan.idft_scale(fftw_cast(&(*d_first)), nfft);
     }
 
-}}}// namespace easy::dsp
+}}} // namespace easy::dsp::spectral
 
 #endif // EASYDSP_DFT_HPP

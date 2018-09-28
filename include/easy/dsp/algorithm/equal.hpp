@@ -26,7 +26,6 @@
 
 namespace easy { namespace dsp { inline namespace algorithm {
 
-
     /**
      * @brief Returns true if the range [first1, last1) is equal to the range [first2, last2), and false otherwise.
      *
@@ -56,7 +55,6 @@ namespace easy { namespace dsp { inline namespace algorithm {
         return std::equal(first1, last1, first2, last2);
     }
 
-
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::algorithm
 
 #endif // EASYDSP_EQUAL_HPP

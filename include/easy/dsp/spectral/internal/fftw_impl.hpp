@@ -36,7 +36,7 @@ namespace easy { namespace dsp { inline namespace spectral {
      * represent the power spectral density
      */
     enum class SpectralScale {
-        Linear, /*!< Linear scale */
+        Linear,     /*!< Linear scale */
         Logarithmic /*!< Logarithmic scale */
     };
 
@@ -44,20 +44,15 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @brief The ScaleOpt enum defines the normalization option of the correlation function.
      */
     enum class CorrelationScale {
-        None, /*!< Raw, unscaled cross-correlation. */
-        Biased, /*!< Biased estimate of the cross-correlation. */
+        None,    /*!< Raw, unscaled cross-correlation. */
+        Biased,  /*!< Biased estimate of the cross-correlation. */
         Unbiased /*!< Unbiased estimate of the cross-correlation. */
     };
 
     /**
      * @brief The DCT_Type enum represents the different implementations to compute the DCT
      */
-    enum class DCT_Type {
-        Type_I,
-        Type_II,
-        Type_III,
-        Type_IV
-    };
+    enum class DCT_Type { Type_I, Type_II, Type_III, Type_IV };
 
     /**
      * @brief Computes the expected DFT size for a real-to-complex DFT transform
@@ -312,8 +307,8 @@ namespace easy { namespace dsp { inline namespace spectral {
                 }
             }
         };
-    }
+    } // namespace internal
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::spectral
 
 #endif // EASYDSP_FFTW_IMPL_HPP

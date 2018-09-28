@@ -42,6 +42,6 @@ namespace easy { namespace dsp { inline namespace utility {
         meta::expects(magnitude > 0, "Expected non negative value");
         return 20 * std::log10(magnitude);
     }
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::utility
 
 #endif // EASYDSP_MAG2DB_HPP

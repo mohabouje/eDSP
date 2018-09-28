@@ -42,16 +42,14 @@ namespace easy { namespace dsp { namespace windowing {
      */
     template <typename OutIterator, typename Integer>
     constexpr void welch(OutIterator d_first, Integer N) {
-        using value_type = value_type_t<OutIterator>;
-        using size_type = diff_type_t<OutIterator>;
-        const auto size   = static_cast<size_type>(N);
+        using value_type   = value_type_t<OutIterator>;
+        using size_type    = diff_type_t<OutIterator>;
+        const auto size    = static_cast<size_type>(N);
         const value_type L = size / 2;
         for (size_type i = 0; i < size; ++i, ++d_first) {
             *d_first = 1 - math::square(static_cast<value_type>(i - L) / L);
         }
     }
-
-
 
 }}} // namespace easy::dsp::windowing
 

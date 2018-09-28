@@ -43,9 +43,8 @@ namespace easy { namespace dsp { inline namespace algorithm {
         for (; x1 <= x2; x1 += increment, ++first) {
             *first = std::pow(10, x1);
         }
-
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::algorithm
 
 #endif // EASYDSP_UTILITIES_LOGSPACE_H

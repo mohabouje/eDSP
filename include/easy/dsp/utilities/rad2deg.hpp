@@ -42,6 +42,6 @@ namespace easy { namespace dsp { inline namespace utility {
         return radians / constants<T>::pi * static_cast<T>(180);
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::utility
 
 #endif // EASYDSP_RAD2DEG_HPP

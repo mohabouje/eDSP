@@ -41,7 +41,7 @@ namespace easy { namespace dsp { inline namespace spectral {
      */
     template <typename InputIt, typename OutputIt>
     inline void dct(InputIt first, InputIt last, OutputIt d_first, DCT_Type type = DCT_Type::Type_II) {
-        const auto nfft  = static_cast<typename fftw_plan<value_type_t<InputIt>>::size_type>(std::distance(first, last));
+        const auto nfft = static_cast<typename fftw_plan<value_type_t<InputIt>>::size_type>(std::distance(first, last));
         fftw_plan<value_type_t<InputIt>> plan;
         plan.dct(fftw_cast(&(*first)), fftw_cast(&(*d_first)), nfft, type);
     }
@@ -58,12 +58,12 @@ namespace easy { namespace dsp { inline namespace spectral {
      */
     template <typename InputIt, typename OutputIt>
     inline void idct(InputIt first, InputIt last, OutputIt d_first, DCT_Type type = DCT_Type::Type_II) {
-        const auto nfft  = static_cast<typename fftw_plan<value_type_t<InputIt>>::size_type>(std::distance(first, last));
+        const auto nfft = static_cast<typename fftw_plan<value_type_t<InputIt>>::size_type>(std::distance(first, last));
         fftw_plan<value_type_t<InputIt>> plan;
         plan.idct(fftw_cast(&(*first)), fftw_cast(&(*d_first)), nfft, type);
         plan.idct_scale(fftw_cast(&(*d_first)), nfft, type);
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::spectral
 
 #endif // EASYDSP_DCT_HPP

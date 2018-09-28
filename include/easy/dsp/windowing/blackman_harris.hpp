@@ -44,8 +44,8 @@ namespace easy { namespace dsp { namespace windowing {
      */
     template <typename OutIterator, typename Integer>
     constexpr void blackman_harris(OutIterator d_first, Integer N) {
-        using value_type = value_type_t<OutIterator>;
-        using size_type = diff_type_t<OutIterator>;
+        using value_type  = value_type_t<OutIterator>;
+        using size_type   = diff_type_t<OutIterator>;
         constexpr auto a0 = static_cast<value_type>(0.35875);
         constexpr auto a1 = static_cast<value_type>(0.48829);
         constexpr auto a2 = static_cast<value_type>(0.14128);
@@ -54,7 +54,7 @@ namespace easy { namespace dsp { namespace windowing {
         const auto factor = constants<value_type>::two_pi / static_cast<value_type>(size - 1);
         for (size_type i = 0; i < size; ++i, ++d_first) {
             const value_type tmp = factor * i;
-            *d_first     = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp);
+            *d_first             = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp);
         }
     }
 

@@ -178,7 +178,6 @@ namespace easy { namespace dsp { inline namespace math {
         }
     }
 
-
     /**
      * @brief Computes the square value of the input number.
      * @param x Number to evaluate.
@@ -219,7 +218,6 @@ namespace easy { namespace dsp { inline namespace math {
         return 0.5 * x;
     }
 
-
     template <typename T>
     constexpr T manhattan_distance(T x, T y) noexcept {
         return x - y;
@@ -235,6 +233,6 @@ namespace easy { namespace dsp { inline namespace math {
         return std::log(std::abs(x) / std::abs(y));
     }
 
-}}} // namespace easy::math
+}}} // namespace easy::dsp::math
 
 #endif //EASYMETA_MATH_H

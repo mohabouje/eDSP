@@ -40,6 +40,6 @@ namespace easy { namespace dsp { inline namespace utility {
         return degree * constants<T>::pi / static_cast<T>(180);
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::utility
 
 #endif // EASYDSP_DEG2RAD_HPP

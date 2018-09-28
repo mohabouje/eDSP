@@ -30,9 +30,9 @@ namespace easy { namespace dsp { namespace statistics {
      * @brief The EntropyBase enum defines the base of the logarithm used to compute the entropy.
      */
     enum EntropyBase {
-        Bits,  /*!< Base 2 */
-        Nats,  /*!< Base e */
-        Bans   /*!< Base 10 */
+        Bits, /*!< Base 2 */
+        Nats, /*!< Base e */
+        Bans  /*!< Base 10 */
     };
 
     /**
@@ -50,7 +50,7 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr value_type_t<ForwardIt> entropy(ForwardIt first, ForwardIt last) {
-        using input_t = value_type_t<ForwardIt>;
+        using input_t        = value_type_t<ForwardIt>;
         const auto predicate = [](const input_t accumulated, const input_t current) {
             return (accumulated + std::log2(current) * current);
         };

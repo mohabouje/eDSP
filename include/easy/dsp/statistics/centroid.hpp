@@ -41,7 +41,7 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr value_type_t<ForwardIt> centroid(ForwardIt first, ForwardIt last) {
-        using input_t = value_type_t<ForwardIt>;
+        using input_t       = value_type_t<ForwardIt>;
         auto weighted_sum   = static_cast<input_t>(0);
         auto unweighted_sum = static_cast<input_t>(0);
         for (input_t i = 0; first != last; ++first, ++i) {
@@ -67,7 +67,7 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr value_type_t<ForwardIt> centroid(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
-        using input_t = value_type_t<ForwardIt>;
+        using input_t       = value_type_t<ForwardIt>;
         auto weighted_sum   = static_cast<input_t>(0);
         auto unweighted_sum = static_cast<input_t>(0);
         for (; first1 != last1; ++first1, ++first2) {
@@ -76,7 +76,6 @@ namespace easy { namespace dsp { namespace statistics {
         }
         return weighted_sum / unweighted_sum;
     }
-
 
 }}} // namespace easy::dsp::statistics
 
