@@ -22,7 +22,7 @@
 #ifndef EASYDSP_HILBERT_HPP
 #define EASYDSP_HILBERT_HPP
 
-#include <easy/dsp/transform/internal/fftw_impl.hpp>
+#include <easy/dsp/spectral/internal/fftw_impl.hpp>
 #include <easy/dsp/math/complex.hpp>
 #include <easy/dsp/utilities/real2complex.hpp>
 #include <easy/meta/data.hpp>
@@ -31,16 +31,34 @@
 #include <vector>
 #include <complex>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace spectral {
 
-    // TODO: review https://stackoverflow.com/questions/39030463/computing-analytical-signal-using-fft-in-c
-    template <typename InputIterator, typename OutputIterator>
-    inline void hilbert(InputIterator first, InputIterator last, OutputIterator out) {
-        using value_type = typename std::iterator_traits<InputIterator>::value_type;
+
+    /**
+     * @brief Computes the Discrete-Time analytic signal using Hilbert transform of the range [first, last)
+     * and stores the result in another range, beginning at d_first.
+     *
+     * The Discrete-time analytic is the complex helical sequence obtained from a real data sequence.
+     * The analytic signal \f$ A_k = A_r + iA_i \f$ has a real part, \f$ A_r \f$, which is the original data,
+     * and an imaginary part, \f$ A_i \f$, which contains the Hilbert transform. The imaginary part is a version of the original real sequence with a 90° phase shift.
+     *
+     * The Hilbert transform is computed as follows:
+     * \f[
+     * {\displaystyle {\widehat {s}}(t)={\mathcal {H}}\{s\}(t)=(h*s)(t)={\frac {1}{\pi }}\int _{-\infty }^{\infty }{\frac {s(\tau )}{t-\tau }}\,d\tau .\,}
+     * \f]
+     *
+     * @param first Input iterator defining the beginnning of the input range.
+     * @param last Input iterator defining the ending of the input range.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     * @see complex_idft
+     */
+    template <typename InputIt, typename OutputIt, typename Allocator = std::allocator<std::complex<value_type_t<InputIt>>>>
+    inline void hilbert(InputIt first, InputIt last, OutputIt d_first) {
+        using value_type = value_type_t<InputIt>;
         const auto nfft  = static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last));
 
-        std::vector<std::complex<value_type>> input_data(nfft);
-        std::vector<std::complex<value_type>> complex_data(nfft);
+        std::vector<std::complex<value_type>, Allocator> input_data(nfft);
+        std::vector<std::complex<value_type>, Allocator> complex_data(nfft);
         easy::dsp::real2complex(first, last, std::begin(input_data));
 
         fftw_plan<value_type> fft;
@@ -57,15 +75,10 @@ namespace easy { namespace dsp {
         }
 
         fftw_plan<value_type> ifft;
-        ifft.idft(fftw_cast(meta::data(complex_data)), fftw_cast(&(*out)), nfft);
-        ifft.idft_scale(fftw_cast(&(*out)), nfft);
+        ifft.idft(fftw_cast(meta::data(complex_data)), fftw_cast(&(*d_first)), nfft);
+        ifft.idft_scale(fftw_cast(&(*d_first)), nfft);
     }
 
-    template <typename Container>
-    inline void hilbert(const Container& input, Container& output) {
-        hilbert(std::cbegin(input), std::cend(input), std::begin(output));
-    }
-
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_HIRTLEY_HPP

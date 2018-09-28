@@ -21,7 +21,7 @@
  */
 
 #include <easy/dsp/windowing/windowing.hpp>
-#include <easy/dsp/transform/dft.hpp>
+#include <easy/dsp/spectral/dft.hpp>
 #include <easy/dsp/utilities/real2complex.hpp>
 
 #include <gtest/gtest.h>
@@ -31,6 +31,7 @@
 #include <boost/algorithm/string.hpp>
 
 using namespace easy::dsp::windowing;
+using namespace easy::dsp::spectral;
 
 std::string data_path(const std::string filename) {
     std::string path = CURRENT_TEST_PATH;

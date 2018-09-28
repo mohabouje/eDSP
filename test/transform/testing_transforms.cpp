@@ -20,8 +20,8 @@
  * Created by: Mohammed Boujemaoui
  */
 
-#include <easy/dsp/transform/dct.hpp>
-#include <easy/dsp/transform/dft.hpp>
+#include <easy/dsp/spectral/dct.hpp>
+#include <easy/dsp/spectral/dft.hpp>
 #include <easy/dsp/utilities/real2complex.hpp>
 #include <easy/meta/empty.hpp>
 #include <easy/meta/size.hpp>
@@ -69,9 +69,9 @@ SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
         REQUIRE(meta::size(input) == meta::size(data_ifft));
 
         WHEN("We want to compute the fft and ifft to restore the original signal") {
-            dsp::complex_dft<float>(input, data_fft);
+            dsp::complex_dft<float>(input.begin(), input.end(), data_fft.begin());
             AND_WHEN("We compute the inverse fft") {
-                dsp::complex_idft<float>(data_fft, data_ifft);
+                dsp::complex_idft<float>(data_fft.begin(), data_fft.end(), data_ifft.begin());
                 THEN("The output data should be same as the original signal") {
                     for (std::size_t i = 0; i < sz; ++i) {
                         REQUIRE(input[i].real() == Approx(data_ifft[i].real()).margin(1));
@@ -95,19 +95,19 @@ SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
         REQUIRE(meta::size(input) == meta::size(data_ifft));
 
         WHEN("We want to compute the fft and ifft to restore the original signal") {
-            dsp::complex_dft<float>(input, data_fft);
+            dsp::complex_dft<float>(input.begin(), input.end(), data_fft.begin());
             AND_WHEN("We compute the inverse fft") {
-                dsp::complex_idft<float>(data_fft, data_ifft);
+                dsp::complex_idft<float>(data_fft.begin(), data_fft.end(), data_ifft.begin());
                 THEN("The output data should be same as the original signal") {
                     for (std::size_t i = 0; i < sz; ++i) {
-                        REQUIRE(input[i].real() == Approx(data_ifft[i].real()));
+                        REQUIRE(input[i].real() == Approx(data_ifft[i].real()).margin(1));
                     }
                 }
             }
         }
 
         WHEN("We want to compute the fft") {
-            dsp::complex_dft<float>(input, data_fft);
+            dsp::complex_dft<float>(input.begin(), input.end(), data_fft.begin());
             THEN("The output data should be same as the expected fft") {
                 for (std::size_t i = 0; i < sz; ++i) {
                     REQUIRE(hamming_fft[i].real() == Approx(data_fft[i].real()).margin(0.01));
@@ -129,9 +129,9 @@ SCENARIO("Testing the DCT implementation", "[DCT]") {
         REQUIRE(meta::size(input) == meta::size(data_idct));
 
         WHEN("We want to compute the DCT-Type I") {
-            dsp::dct(input, data_dct, dsp::DCT_Type::Type_I);
+            dsp::dct(input.begin(), input.end(),  data_dct.begin(), dsp::DCT_Type::Type_I);
             AND_WHEN("We compute the inverse fft") {
-                dsp::idct(data_dct, data_idct, dsp::DCT_Type::Type_I);
+                dsp::idct(data_dct.begin(), data_dct.end(), data_idct.begin(), dsp::DCT_Type::Type_I);
                 THEN("The output data should be same as the original signal") {
                     for (std::size_t i = 0; i < sz; ++i) {
                         REQUIRE(input[i] == Approx(data_idct[i]).margin(0.01));
@@ -141,9 +141,9 @@ SCENARIO("Testing the DCT implementation", "[DCT]") {
         }
 
         WHEN("We want to compute the DCT-Type II") {
-            dsp::dct(input, data_dct, dsp::DCT_Type::Type_II);
+            dsp::dct(input.begin(), input.end(),  data_dct.begin(), dsp::DCT_Type::Type_II);
             AND_WHEN("We compute the inverse fft") {
-                dsp::idct(data_dct, data_idct, dsp::DCT_Type::Type_II);
+                dsp::idct(data_dct.begin(), data_dct.end(), data_idct.begin(), dsp::DCT_Type::Type_II);
                 THEN("The output data should be same as the original signal") {
                     for (std::size_t i = 0; i < sz; ++i) {
                         REQUIRE(input[i] == Approx(data_idct[i]).margin(0.01));
@@ -153,9 +153,9 @@ SCENARIO("Testing the DCT implementation", "[DCT]") {
         }
 
         WHEN("We want to compute the DCT-Type III") {
-            dsp::dct(input, data_dct, dsp::DCT_Type::Type_III);
+            dsp::dct(input.begin(), input.end(),  data_dct.begin(), dsp::DCT_Type::Type_III);
             AND_WHEN("We compute the inverse fft") {
-                dsp::idct(data_dct, data_idct, dsp::DCT_Type::Type_III);
+                dsp::idct(data_dct.begin(), data_dct.end(), data_idct.begin(), dsp::DCT_Type::Type_III);
                 THEN("The output data should be same as the original signal") {
                     for (std::size_t i = 0; i < sz; ++i) {
                         REQUIRE(input[i] == Approx(data_idct[i]).margin(0.01));
@@ -165,9 +165,9 @@ SCENARIO("Testing the DCT implementation", "[DCT]") {
         }
 
         WHEN("We want to compute the DCT-Type IV") {
-            dsp::dct(input, data_dct, dsp::DCT_Type::Type_IV);
+            dsp::dct(input.begin(), input.end(),  data_dct.begin(), dsp::DCT_Type::Type_IV);
             AND_WHEN("We compute the inverse fft") {
-                dsp::idct(data_dct, data_idct, dsp::DCT_Type::Type_IV);
+                dsp::idct(data_dct.begin(), data_dct.end(), data_idct.begin(), dsp::DCT_Type::Type_IV);
                 THEN("The output data should be same as the original signal") {
                     for (std::size_t i = 0; i < sz; ++i) {
                         REQUIRE(input[i] == Approx(data_idct[i]).margin(0.01));

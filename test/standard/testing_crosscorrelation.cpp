@@ -20,36 +20,9 @@
  * Created by: Mohammed Boujemaoui
  */
 
-#include <easy/dsp/standard/autocorrelation.hpp>
-#include <easy/dsp/standard/crosscorrelation.hpp>
+#include <easy/dsp/spectral/correlation.hpp>
 #include <easy/meta/size.hpp>
 #include <catch/catch.hpp>
 
 using namespace easy;
 using namespace easy::dsp;
-
-static constexpr std::array<float, 24> hamming = {{0.080000f, 0.097058f, 0.146967f, 0.226026f, 0.328370f, 0.446410f,
-                                                   0.571392f, 0.694045f, 0.805273f, 0.896827f, 0.961917f, 0.995716f,
-                                                   0.995716f, 0.961917f, 0.896827f, 0.805273f, 0.694045f, 0.571392f,
-                                                   0.446410f, 0.328370f, 0.226026f, 0.146967f, 0.097058f, 0.080000f}};
-
-SCENARIO("Testing CrossCorrelation", "[CrossCorrelation]") {
-    GIVEN("An input buffer") {
-        WHEN("We want to apply the CrossCorrelation with the same signal") {
-            constexpr auto sz = meta::size(hamming);
-            std::vector<float> output_cross(sz), output_auto(sz);
-
-            CrossCorrelation<float> cross_correlation(sz, CrossCorrelation<float>::ScaleOpt::None);
-            cross_correlation.compute(std::cbegin(hamming), std::cend(hamming), std::cbegin(hamming),
-                                      std::begin(output_cross));
-
-            THEN("We should get the same output as with the AutoCorrelation class") {
-                AutoCorrelation<float> auto_correlation(sz, AutoCorrelation<float>::ScaleOpt::None);
-                auto_correlation.compute(std::cbegin(hamming), std::cend(hamming), std::begin(output_auto));
-                for (std::size_t i = 0; i < sz; ++i) {
-                    REQUIRE(Approx(output_cross[i]) == output_auto[i]);
-                }
-            }
-        }
-    }
-}

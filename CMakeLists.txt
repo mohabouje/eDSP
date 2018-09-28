@@ -79,7 +79,6 @@ install(TARGETS ${LIB_NAME}
 if (BUILD_TESTS)
     enable_testing()
     add_subdirectory(test)
-    add_subdirectory(python)
 endif (BUILD_TESTS)
 
 if (BUILD_DOCS)

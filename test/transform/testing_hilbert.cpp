@@ -21,7 +21,7 @@
  */
 
 #include <easy/dsp/windowing/windowing.hpp>
-#include <easy/dsp/transform/hilbert.hpp>
+#include <easy/dsp/spectral/hilbert.hpp>
 #include <easy/dsp/utilities/real2complex.hpp>
 
 #include <gtest/gtest.h>

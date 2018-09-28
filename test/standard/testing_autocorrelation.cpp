@@ -20,7 +20,7 @@
  * Created by: Mohammed Boujemaoui
  */
 
-#include <easy/dsp/standard/autocorrelation.hpp>
+#include <easy/dsp/spectral/correlation.hpp>
 
 using namespace easy;
 using namespace easy::dsp;

@@ -21,7 +21,7 @@
  */
 
 #include <easy/dsp/windowing/windowing.hpp>
-#include <easy/dsp/transform/hartley.hpp>
+#include <easy/dsp/spectral/hartley.hpp>
 
 #include <gtest/gtest.h>
 #include <unordered_map>

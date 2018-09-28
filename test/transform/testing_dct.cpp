@@ -21,7 +21,7 @@
  */
 
 #include <easy/dsp/windowing/windowing.hpp>
-#include <easy/dsp/transform/dct.hpp>
+#include <easy/dsp/spectral/dct.hpp>
 
 #include <gtest/gtest.h>
 #include <unordered_map>
