@@ -29,70 +29,87 @@
 #include <complex>
 #include <cmath>
 
-namespace easy { inline namespace math {
+namespace easy { namespace dsp { inline namespace math {
 
+    /**
+     * @brief Computes the magnitude of the complex number z.
+     * @param z Complex value
+     * @returns The magnitude of the complex number.
+     */
     template <typename T>
-    constexpr T magnitude(const std::complex<T>& value) {
-        return static_cast<T>(std::abs(value));
+    constexpr T magnitude(const std::complex<T>& z) {
+        return std::abs(z);
     }
 
+    /**
+     * @brief Computes the phase of the complex number z.
+     * @param z Complex value
+     * @returns The phase of the complex number.
+     */
     template <typename T>
-    constexpr T phase(const std::complex<T>& value) {
-        return static_cast<T>(std::arg(value));
+    constexpr T phase(const std::complex<T>& z) {
+        return std::arg(z);
     }
 
+    /**
+     * @brief Computes the real component of the complex number z.
+     * @param z Complex value
+     * @returns The real component of the complex number.
+     */
     template <typename T>
-    constexpr T real(const std::complex<T>& value) {
-        return std::real(value);
+    constexpr T real(const std::complex<T>& z) {
+        return std::real(z);
     }
 
+    /**
+     * @brief Computes the imaginary component of the complex number z.
+     * @param z Complex value
+     * @returns The imaginary component of the complex number.
+     */
     template <typename T>
-    constexpr T imag(const std::complex<T>& value) {
-        return std::imag(value);
+    constexpr T imag(const std::complex<T>& z) {
+        return std::imag(z);
     }
 
+    /**
+     * @brief Computes the complex conjugate of the complex number z.
+     * @param z Complex value
+     * @returns The complex conjugate of the complex number.
+     */
     template <typename T>
-    constexpr T conj(const std::complex<T>& value) {
-        return std::conj(value);
+    constexpr std::complex<T> conj(const std::complex<T>& z) {
+        return std::conj(z);
     }
 
+    /**
+     * @brief Determines if the given real or imaginary part of the complex number is a not-a-number (NaN) value.
+     * @param z Complex value
+     * @returns true if the number is a NaN, false otherwise
+     */
     template <typename T>
-    constexpr T real(T value) {
-        return value;
+    constexpr auto is_nan(const std::complex<T>& z) noexcept {
+        return std::isnan(z.real()) || std::isnan(z.imag());
     }
 
+    /**
+     * @brief Determines if the given real or imaginary part of the complex number is \f$ \infty \f$.
+     * @param z Complex value
+     * @returns true if the number is a \f$ \infty \f$, false otherwise
+     */
     template <typename T>
-    constexpr T imag(T value) {
-        meta::unused(value);
-        return 0;
+    constexpr auto is_inf(const std::complex<T>& z) noexcept {
+        return std::isinf(z.real()) || std::isinf(z.imag());
     }
 
-    template <typename T>
-    constexpr T conj(T value) {
-        return value;
-    }
-
-    template <typename T>
-    constexpr auto is_nan(const std::complex<T>& value) noexcept {
-        return is_nan(value.real()) || is_nan(value.imag());
-    }
-
-    template <typename T>
-    constexpr auto is_inf(const std::complex<T>& value) noexcept {
-        return is_inf(value.real()) || is_inf(value.imag());
-    }
-
-    template <typename T>
-    constexpr std::complex<T> addmul(const std::complex<T>& left, const T factor,
-                                     const std::complex<T>& right) noexcept {
-        return std::complex<T>(left.real() + factor * right.real(), left.imag() + factor * right.imag());
-    }
-
+    /**
+     * @brief Computes an \f$ \infty \f$ complex number.
+     * @returns An \f$ \infty \f$ complex number.
+     */
     template <typename T>
     constexpr std::complex<T> infinity() noexcept {
-        return std::complex<T>(std::numeric_limits<T>::infinity());
+        return std::complex<T>(std::numeric_limits<T>::infinity(), std::numeric_limits<T>::infinity());
     }
 
-}} // namespace easy::math
+}}} // namespace easy::math
 
 #endif

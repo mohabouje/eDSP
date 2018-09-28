@@ -23,16 +23,44 @@
 #define EASYDSP_BINARY_SEARCH_HPP
 
 #include <algorithm>
-#include <iterator>
+#include <easy/meta/iterator.hpp>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace algorithm {
 
-    template <typename Iterator, typename value_type = typename std::iterator_traits<Iterator>::value_type>
-    Iterator binary_search(Iterator first, Iterator last, const value_type& value) {
+    /**
+     * @brief Checks if an element equivalent to value appears within the range [first, last).
+     *
+     * For binary_search to succeed, the range [first, last) must be ordered.
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @param value Value to compare the elements to.
+     * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
+     */
+    template <typename ForwardIt>
+    constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, const value_type_t<ForwardIt>& value) {
         const auto it = std::lower_bound(first, last, value);
         return (it != last && (value == *it)) ? it : last;
     }
 
-}} // namespace easy::dsp
+    /**
+     * @brief Checks if an element equivalent to value appears within the range [first, last).
+     *
+     * For binary_search to succeed, the range [first, last) must be ordered.
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @param value Value to compare the elements to.
+     * @param comp Binary predicate which returns ​true if the first argument is less than the second.
+     * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
+     */
+    template <typename ForwardIt, class Compare>
+    constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, const value_type_t<ForwardIt>& value, Compare comp) {
+        const auto it = std::lower_bound(first, last, value, comp);
+        return (it != last && (value == *it)) ? it : last;
+    }
+
+
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_BINARY_SEARCH_HPP

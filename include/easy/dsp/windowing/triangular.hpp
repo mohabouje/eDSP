@@ -22,45 +22,35 @@
 #ifndef EASYDSP_TRIANGULAR_HPP
 #define EASYDSP_TRIANGULAR_HPP
 
-#include "window_impl.hpp"
+#include <easy/dsp/math/math.hpp>
+#include <easy/meta/iterator.hpp>
 #include <cmath>
 
 namespace easy { namespace dsp { namespace windowing {
 
-    template <typename T, typename Allocator = std::allocator<T>>
-    class Triangular : public Window<Triangular<T, Allocator>, T, Allocator> {
-        friend class Window<Triangular<T, Allocator>, T, Allocator>;
-        using parent = Window<Triangular<T, Allocator>, T, Allocator>;
-
-    public:
-        using value_type = typename parent::value_type;
-        using size_type  = typename parent::size_type;
-        inline explicit Triangular(size_type size);
-
-    private:
-        inline void initialize();
-    };
-
-    template <typename T, typename Allocator>
-    inline Triangular<T, Allocator>::Triangular(Triangular::size_type size) : parent(size) {}
-
-    template <typename T, typename Allocator>
-    inline void Triangular<T, Allocator>::initialize() {
-        const size_type sz   = parent::size();
-        const value_type rem = sz + std::remainder(sz, 2);
-        value_type initial   = -(sz - 1);
-        for (size_type i = 0; i < sz; ++i) {
-            parent::data_[i] = 1 - std::abs(initial / rem);
+    /**
+     * @brief Computes a triangular window of length N and stores the result in the range, beginning at d_first.
+     *
+     * Triangular windows are defined as:
+     *
+     * \f[
+     *  w(n)=1-\left|{\frac {n-{\frac {N-1}{2}}}{\frac {L}{2}}}\right|
+     * \f]
+     *
+     * @param N Number of elements to compute.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     */
+    template <typename OutIterator, typename Integer>
+    constexpr void triangular(OutIterator d_first, Integer N) {
+        using value_type = value_type_t<OutIterator>;
+        using size_type = diff_type_t<OutIterator>;
+        const auto size   = static_cast<size_type>(N);
+        const value_type rem = size + std::remainder(size, 2);
+        value_type initial   = -(size - 1);
+        for (size_type i = 0; i < size; ++i, ++d_first) {
+            *d_first = 1 - std::abs(initial / rem);
             initial += 2;
         }
-    }
-
-    template <typename OutputIterator, typename Integer>
-    inline void triang(Integer size, OutputIterator out) {
-        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        using size_type  = typename Triangular<value_type>::size_type;
-        Triangular<value_type> window(static_cast<size_type>(size));
-        std::copy(std::cbegin(window), std::cend(window), out);
     }
 
 }}} // namespace easy::dsp::windowing

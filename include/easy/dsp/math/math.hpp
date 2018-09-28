@@ -27,60 +27,107 @@
 #include <cstdint>
 #include <complex>
 
-namespace easy { inline namespace math {
+namespace easy { namespace dsp { inline namespace math {
 
+    /**
+     * @brief Determines if the number is negative.
+     * @param x Number to evaluate.
+     * @returns true if the number is a negative number, false otherwise
+     */
     template <typename T>
-    constexpr bool is_negative(const T& x) {
+    constexpr bool is_negative(T x) {
         return x < 0;
     }
 
+    /**
+     * @brief Determines if the number is odd.
+     * @param x Number to evaluate.
+     * @returns true if the number is odd, false otherwise
+     */
     template <typename T>
-    constexpr bool is_zero(const T& x) {
-        return x == 0;
-    }
-
-    template <typename T>
-    constexpr T sign(const T& value) noexcept {
-        return is_negative(value) ? static_cast<T>(-1) : static_cast<T>(1);
-    }
-
-    template <typename T>
-    constexpr bool is_odd(const T& x) {
+    constexpr bool is_odd(T x) {
         return (x % 2) == 1;
     }
 
+    /**
+     * @brief Determines if the number is even.
+     * @param x Number to evaluate.
+     * @returns true if the number is even, false otherwise
+     */
     template <typename T>
-    constexpr bool is_even(const T& x) {
+    constexpr bool is_even(T x) {
         return !is_odd(x);
     }
 
+    /**
+     * @brief Determines if the number is power of two.
+     * @param x Number to evaluate.
+     * @returns true if the number is a power of two, false otherwise
+     */
     template <typename T>
-    constexpr bool is_power_two(const T& tmp) {
-        const auto x = static_cast<std::int32_t>(tmp);
-        return x != 0 && !(x & (x - 1));
+    constexpr bool is_power_two(T x) {
+        const auto tmp = static_cast<std::int32_t>(tmp);
+        return tmp != 0 && !(tmp & (tmp - 1));
     }
 
+    /**
+     * @brief Determines if the number is denormal floating-point.
+     * @param x Number to evaluate.
+     * @returns true if the number is denormal, false otherwise
+     */
     template <typename T>
-    constexpr T next_power_two(T tmp) {
-        if (is_negative(tmp)) {
-            return 0;
-        } else if (is_power_two(tmp)) {
-            return tmp;
-        } else {
-            auto x = static_cast<int32_t>(tmp);
-            --x;
-            x |= x >> 1;
-            x |= x >> 2;
-            x |= x >> 4;
-            x |= x >> 8;
-            x |= x >> 16;
-            return static_cast<T>(x + 1);
-        }
+    constexpr bool is_denormal(T x) {
+        return std::fpclassify(x) == FP_SUBNORMAL;
     }
 
+    /**
+     * @brief Determines if the number is normal floating-point.
+     * @param x Number to evaluate.
+     * @returns true if the number is even, false otherwise
+     */
     template <typename T>
-    constexpr bool is_prime(T value) {
-        auto n = static_cast<std::uint64_t>(value);
+    constexpr bool is_normal(T x) {
+        return std::fpclassify(x) == FP_NORMAL;
+    }
+
+    /**
+     * @brief Determines if the number is zero.
+     * @param x Number to evaluate.
+     * @returns true if the number is zero, false otherwise
+     */
+    template <typename T>
+    constexpr bool is_zero(T x) {
+        return std::fpclassify(x) == FP_ZERO;
+    }
+
+    /**
+     * @brief Determines if the number is not-a-number (NAN).
+     * @param x Number to evaluate.
+     * @returns true if the number is NAN, false otherwise
+     */
+    template <typename T>
+    constexpr bool is_nan(T x) noexcept {
+        return std::isnan(x);
+    }
+
+    /**
+     * @brief Determines if the number is \f$ \infty \f$.
+     * @param x Number to evaluate.
+     * @returns true if the number is \f$ \infty \f$, false otherwise
+     */
+    template <typename T>
+    constexpr bool is_inf(T x) {
+        return std::fpclassify(x) == FP_INFINITE;
+    }
+
+    /**
+     * @brief Determines if the number is prime.
+     * @param x Number to evaluate.
+     * @returns true if the number is prime, false otherwise
+     */
+    template <typename T>
+    constexpr bool is_prime(T x) {
+        auto n = static_cast<std::uint64_t>(x);
         if (n <= 1)
             return 0;
         else if (n <= 3)
@@ -98,81 +145,96 @@ namespace easy { inline namespace math {
         return false;
     }
 
+    /**
+     * @brief Determines the sign of the input number.
+     * @param x Number to evaluate.
+     * @returns Returns -1 if the number is negative, 1 otherwise
+     */
     template <typename T>
-    constexpr auto square(T value) {
-        return value * value;
+    constexpr T sign(T x) noexcept {
+        return is_negative(x) ? static_cast<T>(-1) : static_cast<T>(1);
     }
 
+    /**
+     * @brief Computes the closest next higher power of 2 of the input number.
+     * @param x Number to evaluate.
+     * @returns Closest next higher power of 2.
+     */
     template <typename T>
-    constexpr auto fract(T value) {
-        return value - std::floor(value);
+    constexpr T next_power_two(T x) {
+        if (is_negative(x)) {
+            return 0;
+        } else if (is_power_two(x)) {
+            return x;
+        } else {
+            auto _x = static_cast<int32_t>(x);
+            --_x;
+            _x |= _x >> 1;
+            _x |= _x >> 2;
+            _x |= _x >> 4;
+            _x |= _x >> 8;
+            _x |= _x >> 16;
+            return static_cast<T>(_x + 1);
+        }
     }
 
+
+    /**
+     * @brief Computes the square value of the input number.
+     * @param x Number to evaluate.
+     * @returns Square value of the input number.
+     */
     template <typename T>
-    constexpr auto is_denormal(T value) {
-        return std::fpclassify(value) == FP_SUBNORMAL;
+    constexpr T square(T x) {
+        return x * x;
     }
 
+    /**
+     * @brief Computes the fractional part of the input number.
+     * @param x Number to evaluate.
+     * @returns Fractional part of the input number.
+     */
     template <typename T>
-    constexpr auto is_normal(T value) {
-        return std::fpclassify(value) == FP_NORMAL;
+    constexpr T fract(T x) {
+        return x - std::floor(x);
     }
 
+    /**
+     * @brief Computes the inverse value of the input number.
+     * @param x Number to evaluate.
+     * @returns Inverse value of the input number.
+     */
     template <typename T>
-    constexpr auto is_zero(T value) {
-        return std::fpclassify(value) == FP_ZERO;
+    constexpr T inv(T x) {
+        return static_cast<T>(1) / x;
     }
 
+    /**
+     * @brief Computes the half value of the input number.
+     * @param x Number to evaluate.
+     * @returns Half value of the input number.
+     */
     template <typename T>
-    constexpr auto is_nan(T value) noexcept {
-        return std::isnan(value);
+    constexpr T half(T x) {
+        return 0.5 * x;
     }
 
-    template <typename T>
-    constexpr auto is_inf(T value) {
-        return std::fpclassify(value) == FP_INFINITE;
-    }
 
     template <typename T>
-    constexpr auto is_negative(T value) noexcept {
-        return value < 0;
-    }
-
-    template <typename T>
-    constexpr T inv(T value) {
-        return static_cast<T>(1) / value;
-    }
-
-    template <typename T>
-    constexpr T half(T value) {
-        return static_cast<T>(0.5) * value;
-    }
-
-    template <typename T>
-    constexpr auto asinh(T x) {
-        return static_cast<T>(std::log(x + std::sqrt(x * x + 1)));
-    }
-
-    template <typename T>
-    constexpr auto acosh(T x) {
-        return static_cast<T>(std::log(x + std::sqrt(x * x - 1)));
-    }
-
-    template <typename T>
-    constexpr auto manhattan_distance(T x, T y) noexcept {
+    constexpr T manhattan_distance(T x, T y) noexcept {
         return x - y;
     }
 
     template <typename T>
-    constexpr auto euclidean_distance(T x, T y) noexcept {
+    constexpr T euclidean_distance(T x, T y) noexcept {
         return square(manhattan_distance(x, y));
     }
 
     template <typename T>
-    constexpr auto logarithmic_distance(T x, T y) noexcept {
+    constexpr T logarithmic_distance(T x, T y) noexcept {
         return std::log(std::abs(x) / std::abs(y));
     }
 
-}} // namespace easy::math
+}}} // namespace easy::math
 
 #endif //EASYMETA_MATH_H

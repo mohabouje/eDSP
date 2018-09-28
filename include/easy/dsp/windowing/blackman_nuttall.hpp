@@ -22,54 +22,39 @@
 #ifndef EASYDSP_BLACKMAN_NUTTAL_HARRIS_HPP
 #define EASYDSP_BLACKMAN_NUTTAL_HARRIS_HPP
 
-#include "window_impl.hpp"
 #include <easy/dsp/math/math.hpp>
+#include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { namespace windowing {
 
-    template <typename T, typename Allocator = std::allocator<T>>
-    class BlackmanNuttall : public Window<BlackmanNuttall<T, Allocator>, T, Allocator> {
-        friend class Window<BlackmanNuttall<T, Allocator>, T, Allocator>;
-        using parent = Window<BlackmanNuttall<T, Allocator>, T, Allocator>;
-
-    public:
-        using value_type = typename parent::value_type;
-        using size_type  = typename parent::size_type;
-        inline explicit BlackmanNuttall(size_type size);
-
-    private:
-        inline void initialize();
-    };
-
-    template <typename T, typename Allocator>
-    inline BlackmanNuttall<T, Allocator>::BlackmanNuttall(BlackmanNuttall::size_type size) : parent(size) {}
-
-    template <typename T, typename Allocator>
-    inline void BlackmanNuttall<T, Allocator>::initialize() {
+    /**
+     * @brief Computes a Blackman-Nuttall window of length N and stores the result in the range, beginning at d_first.
+     *
+     * Blackman-Nuttall windows are defined as:
+     *
+     * \f[
+     * w(n)=a_{0}-a_{1}\cos \left({\frac {2\pi n}{N-1}}\right)+a_{2}\cos \left({\frac {4\pi n}{N-1}}\right)-a_{3}\cos \left({\frac {6\pi n}{N-1}}\right)
+     * \f]
+     *
+     * where: \f$ a_{0}=0.3635819;\quad a_{1}=0.4891775;\quad a_{2}=0.1365995;\quad a_{3}=0.0106411\, \f$
+     *
+     * @param N Number of elements to compute.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     */
+    template <typename OutIterator, typename Integer>
+    constexpr void blackman_nutall(OutIterator d_first, Integer N) {
+        using value_type = value_type_t<OutIterator>;
+        using size_type = diff_type_t<OutIterator>;
         constexpr auto a0 = static_cast<value_type>(0.3635819);
         constexpr auto a1 = static_cast<value_type>(0.4891775);
         constexpr auto a2 = static_cast<value_type>(0.1365995);
         constexpr auto a3 = static_cast<value_type>(0.0106411);
-        const auto size   = parent::size();
-        const auto middle = math::is_even(size) ? size / 2 : (size + 1) / 2;
+        const auto size   = static_cast<size_type>(N);
         const auto factor = constants<value_type>::two_pi / static_cast<value_type>(size - 1);
-
-        for (size_type i = 0; i < middle; ++i) {
+        for (size_type i = 0; i < size; ++i, ++d_first) {
             const value_type tmp = factor * i;
-            parent::data_[i]     = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp);
+            *d_first     = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp);
         }
-
-        for (size_type i = middle; i < size; ++i) {
-            parent::data_[i] = parent::data_[size - i - 1];
-        }
-    }
-
-    template <typename OutputIterator, typename Integer>
-    inline void blackmannuttall(Integer size, OutputIterator out) {
-        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        using size_type  = typename BlackmanNuttall<value_type>::size_type;
-        BlackmanNuttall<value_type> window(static_cast<size_type>(size));
-        std::copy(std::cbegin(window), std::cend(window), out);
     }
 
 }}} // namespace easy::dsp::windowing

@@ -24,26 +24,53 @@
 #define EASYDSP_NORMALIZER_HPP
 
 #include <algorithm>
+#include <easy/dsp/statistics/rms.hpp>
+#include <easy/dsp/statistics/max.hpp>
+#include <easy/meta/iterator.hpp>
 
-namespace easy { namespace dsp {
-    template <typename InputIterator, typename OutputIterator>
-    constexpr void normalizer(InputIterator first, InputIterator last, OutputIterator out) {
-        using value_type  = typename std::iterator_traits<InputIterator>::value_type;
-        const auto limits = std::minmax_element(first, last);
-        const auto factor = std::max(std::abs(limits.first), std::abs(limits.second));
-        std::transform(first, last, out, [factor](const value_type val) { return val / factor; });
-    };
+namespace easy { namespace dsp { inline namespace algorithm {
 
-    template <typename BiIterator>
-    constexpr void normalizer(BiIterator first, BiIterator last) {
-        normalizer(first, last, first);
-    };
+    /**
+     * @brief Normalizes the elements in the range [first, last) and stores the result in another range, beginning at d_first.
+     *
+     * The denominator is the maximum absolute value of the signal.
+     * \f[
+     *      y = \frac{x}{\frac{\sum_{n=1}^{N}x(n)}{N}}
+     * \f]
+     * @param first Input iterator defining the beginnning of the input range.
+     * @param last Input iterator defining the ending of the input range.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     * @see maxabs
+     */
+    template <typename InputIt, typename OutputIt>
+    constexpr void normalizer(InputIt first, InputIt last, OutputIt d_first) {
+        const auto factor = statistics::maxabs(first, last);
+        std::transform(first, last, d_first, [factor](const value_type_t<InputIt> value) -> value_type_t<OutputIt> {
+            return static_cast<value_type_t<OutputIt>>(value) / factor;
+        });
+    }
 
-    template <typename Container>
-    constexpr void normalizer(Container& container) {
-        normalizer(std::begin(container), std::end(container));
-    };
+    /**
+     * @brief Normalizes the elements in the range [first, last) and stores the result in another range, beginning at d_first.
+     *
+     * The denominator is the RMS value of the signal.
+     * \f[
+     *   y = \frac{x}{\sqrt{\frac{\sum_{n=1}^{N}\left|x(n)^2\right|}{N}}}
+     * \f]
+     * @param first Input iterator defining the beginnning of the input range.
+     * @param last Input iterator defining the ending of the input range.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     * @see rms
+     */
+    template <typename InputIt, typename OutputIt>
+    constexpr void normalizer_rms(InputIt first, InputIt last, OutputIt d_first) {
+        const auto factor = statistics::rms(first, last);
+        std::transform(first, last, out, [d_first](const value_type_t<InputIt> value) -> value_type_t<OutputIt> {
+            return static_cast<value_type_t<OutputIt>>(value) / factor;
+        });
+    }
 
-}} // namespace easy::dsp
+
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_NORMALIZER_HPP

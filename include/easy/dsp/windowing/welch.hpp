@@ -23,43 +23,35 @@
 #define EASYDSP_WELCH_HPP
 
 #include <easy/dsp/math/math.hpp>
-#include "window_impl.hpp"
+#include <easy/meta/iterator.hpp>
+#include <cmath>
+
 namespace easy { namespace dsp { namespace windowing {
 
-    template <typename T, typename Allocator = std::allocator<T>>
-    class Welch : public Window<Welch<T, Allocator>, T, Allocator> {
-        friend class Window<Welch<T, Allocator>, T, Allocator>;
-        using parent = Window<Welch<T, Allocator>, T, Allocator>;
-
-    public:
-        using value_type = typename parent::value_type;
-        using size_type  = typename parent::size_type;
-        inline explicit Welch(size_type size);
-
-    private:
-        inline void initialize();
-    };
-
-    template <typename T, typename Allocator>
-    inline Welch<T, Allocator>::Welch(Welch::size_type size) : parent(size) {
-        meta::expects(size > 3, "Welch minimum size is 3");
-    }
-
-    template <typename T, typename Allocator>
-    inline void Welch<T, Allocator>::initialize() {
-        const value_type N = parent::size() / 2;
-        for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            parent::data_[i] = 1 - math::square(static_cast<value_type>(i - N) / N);
+    /**
+     * @brief Computes a Welch window of length N and stores the result in the range, beginning at d_first.
+     *
+     * Welch windows are defined as:
+     *
+     * \f[
+     *  w(n)=1-\left({\frac {n-{\frac {N-1}{2}}}{\frac {N-1}{2}}}\right)^{2}
+     * \f]
+     *
+     * @param N Number of elements to compute.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     */
+    template <typename OutIterator, typename Integer>
+    constexpr void welch(OutIterator d_first, Integer N) {
+        using value_type = value_type_t<OutIterator>;
+        using size_type = diff_type_t<OutIterator>;
+        const auto size   = static_cast<size_type>(N);
+        const value_type L = size / 2;
+        for (size_type i = 0; i < size; ++i, ++d_first) {
+            *d_first = 1 - math::square(static_cast<value_type>(i - L) / L);
         }
     }
 
-    template <typename OutputIterator, typename Integer>
-    inline void welch(Integer size, OutputIterator out) {
-        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        using size_type  = typename Welch<value_type>::size_type;
-        Welch<value_type> window(static_cast<size_type>(size));
-        std::copy(std::cbegin(window), std::cend(window), out);
-    }
+
 
 }}} // namespace easy::dsp::windowing
 

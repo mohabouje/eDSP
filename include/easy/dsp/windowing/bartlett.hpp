@@ -22,48 +22,29 @@
 #ifndef EASYDSP_BARTLETT_HPP
 #define EASYDSP_BARTLETT_HPP
 
-#include "window_impl.hpp"
 #include <easy/dsp/math/math.hpp>
+#include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { namespace windowing {
 
-    template <typename T, typename Allocator = std::allocator<T>>
-    class Bartlett : public Window<Bartlett<T, Allocator>, T, Allocator> {
-        friend class Window<Bartlett<T, Allocator>, T, Allocator>;
-        using parent = Window<Bartlett<T, Allocator>, T, Allocator>;
-
-    public:
-        using value_type = typename parent::value_type;
-        using size_type  = typename parent::size_type;
-        inline explicit Bartlett(size_type size);
-
-    private:
-        inline void initialize();
-    };
-
-    template <typename T, typename Allocator>
-    inline Bartlett<T, Allocator>::Bartlett(Bartlett::size_type size) : parent(size) {}
-
-    template <typename T, typename Allocator>
-    inline void Bartlett<T, Allocator>::initialize() {
-        const auto size   = parent::size();
+    /**
+     * @brief Computes a Bartlett window of length N and stores the result in the range, beginning at d_first.
+     * @param N Number of elements to compute.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     */
+    template <typename OutIterator, typename Integer>
+    constexpr void bartlett(OutIterator d_first, Integer N) {
+        using value_type = value_type_t<OutIterator>;
+        using size_type = diff_type_t<OutIterator>;
+        const auto size   = static_cast<size_type>(N);
         const auto middle = math::is_even(size) ? size / 2 : (size + 1) / 2;
         const auto factor = math::inv(static_cast<value_type>(size - 1));
-        for (size_type i = 0; i < middle; ++i) {
-            parent::data_[i] = 2 * i * factor;
+        for (size_type i = 0; i < middle; ++i, ++d_first) {
+            *d_first = 2 * i * factor;
         }
-
-        for (size_type i = middle; i < size; ++i) {
-            parent::data_[i] = 2 - 2 * i * factor;
+        for (size_type i = middle; i < size; ++i, ++d_first) {
+            *d_first = 2 - 2 * i * factor;
         }
-    }
-
-    template <typename OutputIterator, typename Integer>
-    inline void bartlett(Integer size, OutputIterator out) {
-        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        using size_type  = typename Bartlett<value_type>::size_type;
-        Bartlett<value_type> window(static_cast<size_type>(size));
-        std::copy(std::cbegin(window), std::cend(window), out);
     }
 
 }}} // namespace easy::dsp::windowing

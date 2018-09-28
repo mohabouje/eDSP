@@ -26,162 +26,139 @@
 #include <easy/dsp/windowing/blackman.hpp>
 #include <easy/dsp/windowing/blackman_harris.hpp>
 #include <easy/dsp/windowing/blackman_nuttall.hpp>
-#include <easy/dsp/windowing/bohman.hpp>
 #include <easy/dsp/windowing/boxcar.hpp>
 #include <easy/dsp/windowing/flat_top.hpp>
 #include <easy/dsp/windowing/hamming.hpp>
 #include <easy/dsp/windowing/hanning.hpp>
-#include <easy/dsp/windowing/kaiser.hpp>
 #include <easy/dsp/windowing/rectangular.hpp>
 #include <easy/dsp/windowing/triangular.hpp>
 #include <easy/dsp/windowing/welch.hpp>
 
 namespace easy { namespace dsp { namespace windowing {
 
+    /**
+     * @brief The WindowType enum represents the type of availables windows
+     */
     enum class WindowType {
-        Bartlett = 0,
-        Blackman,
-        BlackmanHarris,
-        BlackmanNuttall,
-        Bohman,
-        Boxcar,
-        FlatTop,
-        Hamming,
-        Hanning,
-        Kaiser,
-        Rectangular,
-        Triangular,
-        Welch
+        Bartlett = 0, /*!< Bartlett Window */
+        Blackman, /*!< Blackman Window */
+        BlackmanHarris, /*!< Blackman-Harris Window */
+        BlackmanNuttall, /*!< Blackman-Nuttall Window*/
+        Boxcar, /*!< Boxcar Window */
+        FlatTop, /*!< FlatTop Window */
+        Hamming, /*!< Hamming Window */
+        Hanning, /*!< Hanning Window */
+        Rectangular, /*!< Rectangular Window */
+        Triangular, /*!< Triangular Window */
+        Welch /*!< Welch Window */
     };
+
     namespace internal {
 
-        template <typename T, WindowType Type>
-        struct _buildWindow {};
+        template <WindowType Type>
+        struct _build_window {};
 
-        template <typename T>
-        struct _buildWindow<T, WindowType::Bartlett> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> Bartlett<T> {
-                return Bartlett<T>{arg...};
+        template <>
+        struct _build_window<WindowType::Bartlett> {
+            template <typename OutIterator, typename Integer>
+            constexpr void operator()(OutIterator d_first, Integer N) {
+                bartlett(d_first, N);
             }
         };
 
-        template <typename T>
-        struct _buildWindow<T, WindowType::Blackman> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> Blackman<T> {
-                return Blackman<T>{arg...};
+        template <>
+        struct _build_window<WindowType::Blackman> {
+            template <typename OutIterator, typename Integer>
+            constexpr void operator()(OutIterator d_first, Integer N) {
+                blackman(d_first, N);
             }
         };
 
-        template <typename T>
-        struct _buildWindow<T, WindowType::BlackmanHarris> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> BlackmanHarris<T> {
-                return BlackmanHarris<T>{arg...};
+        template <>
+        struct _build_window<WindowType::BlackmanHarris> {
+            template <typename OutIterator, typename Integer>
+            constexpr void operator()(OutIterator d_first, Integer N) {
+                blackman_harris(d_first, N);
             }
         };
 
-        template <typename T>
-        struct _buildWindow<T, WindowType::BlackmanNuttall> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> BlackmanNuttall<T> {
-                return BlackmanNuttall<T>{arg...};
+        template <>
+        struct _build_window<WindowType::BlackmanNuttall> {
+            template <typename OutIterator, typename Integer>
+            constexpr void operator()(OutIterator d_first, Integer N) {
+                blackman_nutall(d_first, N);
             }
         };
 
-        template <typename T>
-        struct _buildWindow<T, WindowType::Bohman> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> Bohman<T> {
-                return Bohman<T>{arg...};
+
+        template <>
+        struct _build_window<WindowType::Boxcar> {
+            template <typename OutIterator, typename Integer>
+            constexpr void operator()(OutIterator d_first, Integer N)  {
+                boxcar(d_first, N);
             }
         };
 
-        template <typename T>
-        struct _buildWindow<T, WindowType::Boxcar> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> Boxcar<T> {
-                return Boxcar<T>{arg...};
+        template <>
+        struct _build_window<WindowType::FlatTop> {
+            template <typename OutIterator, typename Integer>
+            constexpr void operator()(OutIterator d_first, Integer N) {
+                flattop(d_first, N);
             }
         };
 
-        template <typename T>
-        struct _buildWindow<T, WindowType::FlatTop> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> FlatTop<T> {
-                return FlatTop<T>{arg...};
+        template <>
+        struct _build_window<WindowType::Hamming> {
+            template <typename OutIterator, typename Integer>
+            constexpr void operator()(OutIterator d_first, Integer N) {
+                hamming(d_first, N);
             }
         };
 
-        template <typename T>
-        struct _buildWindow<T, WindowType::Hamming> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> Hamming<T> {
-                return Hamming<T>{arg...};
+        template <>
+        struct _build_window<WindowType::Hanning> {
+            template <typename OutIterator, typename Integer>
+            constexpr void operator()(OutIterator d_first, Integer N) {
+                hanning(d_first, N);
             }
         };
 
-        template <typename T>
-        struct _buildWindow<T, WindowType::Hanning> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> Hanning<T> {
-                return Hanning<T>{arg...};
+        template <>
+        struct _build_window<WindowType::Rectangular> {
+            template <typename OutIterator, typename Integer>
+            constexpr void operator()(OutIterator d_first, Integer N)  {
+                rectangular(d_first, N);
             }
         };
 
-        template <typename T>
-        struct _buildWindow<T, WindowType::Kaiser> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> Kaiser<T> {
-                return Kaiser<T>{arg...};
+        template <>
+        struct _build_window<WindowType::Triangular> {
+            template <typename OutIterator, typename Integer>
+            constexpr void operator()(OutIterator d_first, Integer N) {
+                triangular(d_first, N);
             }
         };
 
-        template <typename T>
-        struct _buildWindow<T, WindowType::Rectangular> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> Rectangular<T> {
-                return Rectangular<T>{arg...};
-            }
-        };
-
-        template <typename T>
-        struct _buildWindow<T, WindowType::Triangular> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> Triangular<T> {
-                return Triangular<T>{arg...};
-            }
-        };
-
-        template <typename T>
-        struct _buildWindow<T, WindowType::Welch> {
-            template <typename... Args>
-            constexpr auto operator()(Args... arg) -> Welch<T> {
-                return Welch<T>{arg...};
+        template <>
+        struct _build_window<WindowType::Welch> {
+            template <typename OutIterator, typename Integer>
+            constexpr void operator()(OutIterator d_first, Integer N) {
+                welch(d_first, N);
             }
         };
     } // namespace internal
 
-    template <typename T, WindowType Type, typename... Args>
-    constexpr auto make_window(Args... arg) -> decltype(internal::_buildWindow<T, Type>{}(std::declval<Args&&>()...)) {
-        return internal::_buildWindow<T, Type>{}(arg...);
+    /**
+     * @brief Computes a window of the given type and length N and stores the result in the range, beginning at d_first.
+     * @tparam Type Type of window to be computed
+     * @param N Number of elements to compute.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     */
+    template <WindowType Type, typename OutIterator, typename Integer>
+    constexpr void make_window(OutIterator d_first, Integer N) {
+        return internal::_build_window<Type>{}(d_first, N);
     }
 
-    template <typename Window, typename BiIterator, typename... Arg>
-    inline void generate_window(BiIterator first, BiIterator last, Arg... arg) {
-        using size_type   = typename Window::size_type;
-        const auto size   = static_cast<size_type>(std::distance(first, last));
-        const auto window = Window(size, std::forward(arg...));
-        std::copy(std::cbegin(window), std::cend(window), first);
-    }
-
-    template <typename Window, typename OutputIterator, typename Size, typename... Arg>
-    inline void generate_window(Size size, OutputIterator out, Arg... arg) {
-        using size_type   = typename Window::size_type;
-        const auto window = Window(static_cast<size_type>(size), std::forward(arg...));
-        std::copy(std::cbegin(window), std::cend(window), out);
-    }
 
 }}} // namespace easy::dsp::windowing
 

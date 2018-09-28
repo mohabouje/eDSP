@@ -22,44 +22,39 @@
 #ifndef EASYDSP_HAMMING_HPP
 #define EASYDSP_HAMMING_HPP
 
-#include "window_impl.hpp"
+#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/math/constant.hpp>
+#include <easy/meta/iterator.hpp>
 #include <cmath>
 
 namespace easy { namespace dsp { namespace windowing {
 
-    template <typename T, typename Allocator = std::allocator<T>>
-    class Hamming : public Window<Hamming<T, Allocator>, T, Allocator> {
-        friend class Window<Hamming<T, Allocator>, T, Allocator>;
-        using parent = Window<Hamming<T, Allocator>, T, Allocator>;
-
-    public:
-        using value_type = typename parent::value_type;
-        using size_type  = typename parent::size_type;
-        inline explicit Hamming(size_type size);
-
-    private:
-        inline void initialize();
-    };
-
-    template <typename T, typename Allocator>
-    inline Hamming<T, Allocator>::Hamming(Hamming::size_type size) : parent(size) {}
-
-    template <typename T, typename Allocator>
-    inline void Hamming<T, Allocator>::initialize() {
-        constexpr auto a0       = static_cast<value_type>(0.54);
-        constexpr auto a1       = static_cast<value_type>(1 - a0);
-        const value_type factor = constants<value_type>::two_pi / static_cast<value_type>(parent::size() - 1);
-        for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            parent::data_[i] = a0 - a1 * std::cos(factor * i);
+    /**
+     * @brief Computes a Hamming window of length N and stores the result in the range, beginning at d_first.
+     *
+     * Hamming windows are defined as:
+     *
+     * \f[
+     *  {\displaystyle w(n)=a_{0}-\underbrace {(1-a_{0})} _{a_{1}}\cdot \cos \left({\frac {2\pi n}{N-1}}\right),\quad 0\leq n\leq N-1,}
+     * \f]
+     *
+     * where: \f$ a_{0}=0.54;\quad a_{1}=0.46 \f$
+     *
+     * @param N Number of elements to compute.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     */
+    template <typename OutIterator, typename Integer>
+    constexpr void hamming(OutIterator d_first, Integer N) {
+        using value_type = value_type_t<OutIterator>;
+        using size_type = diff_type_t<OutIterator>;
+        constexpr auto a0 = static_cast<value_type>(0.54);
+        constexpr auto a1 = static_cast<value_type>(0.46);
+        const auto size   = static_cast<size_type>(N);
+        const auto factor = constants<value_type>::two_pi / static_cast<value_type>(size - 1);
+        for (size_type i = 0; i < size; ++i, ++d_first) {
+            const value_type tmp = factor * i;
+            *d_first     = a0 - a1 * std::cos(tmp);
         }
-    }
-
-    template <typename OutputIterator, typename Integer>
-    inline void hamming(Integer size, OutputIterator out) {
-        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        using size_type  = typename Hamming<value_type>::size_type;
-        Hamming<value_type> window(static_cast<size_type>(size));
-        std::copy(std::cbegin(window), std::cend(window), out);
     }
 
 }}}    // namespace easy::dsp::windowing

@@ -74,7 +74,7 @@ SCENARIO("Generating Sinusoidal Signals", "[make_oscillator]") {
         constexpr auto amplitude   = 1;
 
         WHEN("We want to generate a sinusoidal signal") {
-            constexpr auto phase = easy::constants<double>::pi;
+            constexpr auto phase = easy::dsp::constants<double>::pi;
             auto sinusoidal = make_oscillator<double, SignalType::Sinusoidal>(amplitude, sample_rate, frequency, phase);
             std::array<double, size> input;
             std::generate(std::begin(input), std::end(input), std::ref(sinusoidal));

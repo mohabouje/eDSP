@@ -86,20 +86,20 @@ namespace easy { namespace dsp { namespace filter {
             }
             const auto c = (std::complex<T>(1, 0) + initial) / (std::complex<T>(1, 0) - initial);
 
-            auto v = math::addmul(std::complex<T>(0, 0), 4 * (b2 * (a2 - 1) + 1), c);
+            auto v = addmul(std::complex<T>(0, 0), 4 * (b2 * (a2 - 1) + 1), c);
             v += 8 * (b2 * (a2 - 1) - 1);
             v *= c;
             v += 4 * (b2 * (a2 - 1) + 1);
             v = std::sqrt(v);
 
             auto u = -v;
-            u      = math::addmul(u, ab_2, c);
+            u      = addmul(u, ab_2, c);
             u += ab_2;
 
-            v = math::addmul(v, ab_2, c);
+            v = addmul(v, ab_2, c);
             v += ab_2;
 
-            const auto d = math::addmul(std::complex<T>(0, 0), 2 * (b - 1), c) + 2 * (1 + b);
+            const auto d = addmul(std::complex<T>(0, 0), 2 * (b - 1), c) + 2 * (1 + b);
 
             return {u / d, v / d};
         }

@@ -23,40 +23,40 @@
 #ifndef EASYDSP_PADDER_HPP
 #define EASYDSP_PADDER_HPP
 
-#include <easy/dsp/random/constant_generator.hpp>
+#include <easy/meta/iterator.hpp>
 #include <easy/meta/expects.hpp>
-#include <easy/meta/advance.hpp>
 #include <algorithm>
-#include <functional>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace algorithm {
 
-    template <typename InputIterator, typename OutputIterator, typename Generator>
-    constexpr void padder(InputIterator first, InputIterator last, OutputIterator first_out, OutputIterator last_out,
-                          Generator generator) {
-        const auto input_size  = std::distance(first, last);
-        const auto output_size = std::distance(first_out, last_out);
-        meta::expects(output_size >= input_size, "Output size should be greather or equal than the input size");
-        std::copy(first, last, first_out);
-        std::generate(meta::advance(first_out, input_size), last_out, generator);
-    };
+    /**
+     * @brief Extends the signal defined in the range [first, last) with zeros
+     * and stores the result in the range [d_first, d_last].
+     *
+     * \f[
+     *  y(n) = \left\{\begin{matrix}
+     *  x(n) & 0 <= n < N \\
+     *  0 & N <= n < M
+     *  \end{matrix}\right.
+     * \f]
+     *
+     * where N is the size of the input range and M the size of the output range.
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @param d_first Forward iterator defining the begin of the output range.
+     * @param d_last Forward iterator defining the end of the output range.
+     */
+    template <typename InputIt, typename OutputIt>
+    constexpr void padder(InputIt first, InputIt last, OutputIt d_first, OutputIt d_last) {
+        const auto i_size  = std::distance(first, last);
+        const auto d_size = std::distance(d_first, d_last);
+        meta::expects(d_size >= i_size, "Output size should be greather or equal than the input size");
+        std::copy(first, last, d_first);
+        std::fill(d_first + i_size, d_last, static_cast<value_type_t<OutputIt>(0));
+    }
 
-    template <typename InputIterator, typename OutputIterator>
-    constexpr void padder(InputIterator first, InputIterator last, OutputIterator first_out, OutputIterator last_out,
-                          typename std::iterator_traits<InputIterator>::value_type value) {
-        padder(first, last, first_out, last_out,
-               random::ConstantGenerator<typename std::iterator_traits<InputIterator>::value_type>(value));
-    };
 
-    template <typename Container>
-    constexpr void padder(const Container& input, Container& output, typename Container::value_type value) {
-        padder(std::cbegin(input), std::cend(input), std::begin(output), std::end(output), value);
-    };
-
-    template <typename Container, typename Generator>
-    constexpr void padder(const Container& input, Container& output, Generator generator) {
-        padder(std::cbegin(input), std::cend(input), std::begin(output), std::end(output), std::ref(generator));
-    };
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_PADDER_HPP

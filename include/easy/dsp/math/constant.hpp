@@ -25,7 +25,7 @@
 
 #include <limits>
 
-namespace easy {
+namespace easy { namespace dsp { inline namespace math {
     template <typename T>
     struct constants {
         static constexpr const T half                = static_cast<T>(5.000000000000000000000000000000000000e-01);
@@ -96,6 +96,6 @@ namespace easy {
         static constexpr const T two_div_pi               = static_cast<T>(6.366197723675813430755350534900574481e-01);
         static constexpr const T root_two_div_pi          = static_cast<T>(7.978845608028653558798921198687637369e-01);
     };
-} // namespace easy
+}}} // namespace easy
 
 #endif // EASYDSP_CONSTANT_HPP

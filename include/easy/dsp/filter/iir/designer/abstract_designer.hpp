@@ -58,10 +58,10 @@ namespace easy { namespace dsp { namespace filter {
                 const auto& stage = cascade[index];
                 auto cb           = std::complex<T>(1, 0);
                 auto ct           = std::complex<T>(stage.b0() / stage.a0(), 0);
-                ct                = math::addmul(ct, stage.b1() / stage.a0(), czn1);
-                ct                = math::addmul(ct, stage.b2() / stage.a0(), czn2);
-                cb                = math::addmul(cb, stage.a1() / stage.a0(), czn1);
-                cb                = math::addmul(cb, stage.a2() / stage.a0(), czn2);
+                ct                = addmul(ct, stage.b1() / stage.a0(), czn1);
+                ct                = addmul(ct, stage.b2() / stage.a0(), czn2);
+                cb                = addmul(cb, stage.a1() / stage.a0(), czn1);
+                cb                = addmul(cb, stage.a2() / stage.a0(), czn2);
                 ch *= ct;
                 cbot *= cb;
             }

@@ -15,8 +15,6 @@ INPUT                  = @PROJECT_SOURCE_DIR@/include/easy \
 FILE_PATTERNS          = *.hpp \
                          *.h
 
-EXAMPLE_PATH = @PROJECT_SOURCE_DIR@/bin
-EXAMPLE_PATH += @PROJECT_SOURCE_DIR@/include/third-party/
 
 RECURSIVE              = YES
 
@@ -30,6 +28,7 @@ MACRO_EXPANSION        = NO
 EXCLUDE_SYMBOLS = internal
 EXCLUDE_SYMBOLS += DECLARE_*
 EXCLUDE_SYMBOLS += *_v
+EXCLUDE_PATTERNS = */meta/*
 
 
 

@@ -22,44 +22,38 @@
 #ifndef EASYDSP_HANNING_HPP
 #define EASYDSP_HANNING_HPP
 
-#include "window_impl.hpp"
+#include <easy/dsp/math/math.hpp>
+#include <easy/meta/iterator.hpp>
 #include <cmath>
 
 namespace easy { namespace dsp { namespace windowing {
 
-    template <typename T, typename Allocator = std::allocator<T>>
-    class Hanning : public Window<Hanning<T, Allocator>, T, Allocator> {
-        friend class Window<Hanning<T, Allocator>, T, Allocator>;
-        using parent = Window<Hanning<T, Allocator>, T, Allocator>;
-
-    public:
-        using value_type = typename parent::value_type;
-        using size_type  = typename parent::size_type;
-        inline explicit Hanning(size_type size);
-
-    private:
-        inline void initialize();
-    };
-
-    template <typename T, typename Allocator>
-    inline Hanning<T, Allocator>::Hanning(Hanning::size_type size) : parent(size) {}
-
-    template <typename T, typename Allocator>
-    inline void Hanning<T, Allocator>::initialize() {
+    /**
+     * @brief Computes a Hann window of length N and stores the result in the range, beginning at d_first.
+     *
+     * Hann windows are defined as:
+     *
+     * \f[
+     *  {\displaystyle w(n)=a_{0}-\underbrace {(1-a_{0})} _{a_{1}}\cdot \cos \left({\frac {2\pi n}{N-1}}\right),\quad 0\leq n\leq N-1,}
+     * \f]
+     *
+     * where: \f$ a_{0}=0.5;\quad a_{1}=0.5 \f$
+     *
+     * @param N Number of elements to compute.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     */
+    template <typename OutIterator, typename Integer>
+    constexpr void hanning(OutIterator d_first, Integer N) {
+        using value_type = value_type_t<OutIterator>;
+        using size_type = diff_type_t<OutIterator>;
         constexpr auto a0 = static_cast<value_type>(0.5);
         constexpr auto a1 = static_cast<value_type>(0.5);
-        const auto factor = constants<value_type>::two_pi / static_cast<value_type>(parent::size() - 1);
-        for (size_type i = 0, sz = parent::size(); i < sz; ++i) {
-            parent::data_[i] = a0 - a1 * std::cos(factor * i);
+        const auto size   = static_cast<size_type>(N);
+        const auto factor = constants<value_type>::two_pi / static_cast<value_type>(size - 1);
+        for (size_type i = 0; i < size; ++i, ++d_first) {
+            const value_type tmp = factor * i;
+            *d_first     = a0 - a1 * std::cos(tmp);
         }
-    }
-
-    template <typename OutputIterator, typename Integer>
-    inline void hanning(Integer size, OutputIterator out) {
-        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        using size_type  = typename Hanning<value_type>::size_type;
-        Hanning<value_type> window(static_cast<size_type>(size));
-        std::copy(std::cbegin(window), std::cend(window), out);
     }
 
 }}}    // namespace easy::dsp::windowing

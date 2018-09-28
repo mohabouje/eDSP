@@ -24,27 +24,28 @@
 #define EASYDSP_CLIPPER_HPP
 
 #include <algorithm>
-#include <iterator>
+#include <easy/meta/iterator.hpp>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace algorithm {
 
-    template <typename InputIterator, typename OutputIterator,
-              typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    constexpr void clipper(InputIterator first, InputIterator last, OutputIterator out, value_type min,
-                           value_type max) {
-        std::transform(first, last, out,
-                       [min, max](const value_type val) { return (val < min) ? min : (val > max) ? max : val; });
-    };
 
-    template <typename BiIterator, typename value_type = typename std::iterator_traits<BiIterator>::value_type>
-    constexpr void clipper(BiIterator first, BiIterator last, value_type min, value_type max) {
-        clipper(first, last, first, min, max);
-    };
+    /**
+     * @brief Limits the values of the elements in the range [first, last) once it exceeds a threshold [min, max],
+     * and stores the result in another range, beginning at d_first.
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param min Minimum threshold value.
+     * @param max Maximum threshold value.
+     */
+    template <typename InputItr, typename OutputIt, typename Numeric>
+    constexpr void clipper(InputItr first, InputItr last, OutputIt d_first, Numeric min, Numeric max) {
+        std::transform(first, last, d_first, [=](const value_type_t<InputItr> val) -> value_type_t<OutputIt> {
+            return (val < min) ? min : (val > max) ? max : val;
+        });
+    }
 
-    template <typename Container, typename value_type = typename Container::value_type>
-    constexpr void clipper(Container& container, value_type min, value_type max) {
-        clipper(std::begin(container), std::end(container), min, max);
-    };
-}} // namespace easy::dsp
+}}}// namespace easy::dsp
 
 #endif // EASYDSP_CLIPPER_HPP

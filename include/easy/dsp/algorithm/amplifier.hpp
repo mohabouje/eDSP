@@ -23,45 +23,63 @@
 #ifndef EASYDSP_AMPLIFIER_HPP
 #define EASYDSP_AMPLIFIER_HPP
 
+#include <easy/meta/iterator.hpp>
 #include <algorithm>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace algorithm {
 
-    template <typename InputIterator, typename OutputIterator,
-              typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    constexpr void amplifier(InputIterator first, InputIterator last, OutputIterator out, value_type factor) {
-        std::transform(first, last, out, [factor](const value_type val) { return factor * val; });
-    };
+    /**
+     * @brief Amplifies the elements in the range [first, last) and stores the result in another range, beginning at d_first.
+     *
+     * This function increases the amplitude of the input signal defined in the range [first, last). The output signal is a
+     * proportionally amplitude signal dependent of the scale factor (\f$ \alpha \f$):
+     *
+     * \f[
+     *      y(n) = \alpha x(n)
+     * \f]
+     * @param first Input iterator defining the beginnning of the input range.
+     * @param last Input iterator defining the ending of the input range.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param factor Scale factor (\f$ \alpha \f$).
+     */
+    template <typename InputIt, typename OutputIt, typename Numeric>
+    constexpr void amplifier(InputIt first, InputIt last, OutputIt d_first, Numeric factor) {
+        std::transform(first, last, d_first, [=](const value_type_t<InputIt> val) -> value_type_t<OutputIt> {
+            return factor * val;
+        });
+    }
 
-    template <typename InputIterator, typename OutputIterator,
-              typename value_type = typename std::iterator_traits<InputIterator>::value_type>
-    constexpr void amplifier(InputIterator first, InputIterator last, OutputIterator out, value_type factor,
-                             value_type min, value_type max) {
-        std::transform(first, last, out, [factor, min, max](const value_type val) {
+
+    /**
+     * @brief Amplifies the signal in the range [first, last) and stores the result in another range, beginning at d_first.
+     *
+     * This function increases the amplitude of the input signal defined in the range [first, last). The output signal is a
+     * proportionally amplitude signal dependent of the scale factor (\f$ \alpha \f$):
+     *
+     * \f[
+     *      y(n) = \alpha x(n)
+     * \f]
+     *
+     * The output signal is then clipped to avoid exceding the threshold defined in the range [min, max].
+     *
+     * @param first Input iterator defining the beginnning of the input range.
+     * @param last Input iterator defining the ending of the input range.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param factor Scale factor (\f$ \alpha \f$).
+     * @param min Minimum threshold value.
+     * @param max Maximum threshold value.
+     */
+    template <typename InputIt, typename OutputIt, typename Numeric>
+    constexpr void amplifier(InputIt first, InputIt last, OutputIt d_first,
+                             Numeric factor,
+                             Numeric min,
+                             Numeric max) {
+        std::transform(first, last, d_first, [=](const value_type_t<InputIt> val) -> value_type_t<OutputIt> {
             const auto scaled = factor * val;
             return (scaled < min) ? min : (scaled > max) ? max : scaled;
         });
-    };
+    }
 
-    template <typename BiIterator, typename value_type = typename std::iterator_traits<BiIterator>::value_type>
-    constexpr void amplifier(BiIterator first, BiIterator last, value_type factor) {
-        amplifier(first, last, first, factor);
-    };
-
-    template <typename BiIterator, typename value_type = typename std::iterator_traits<BiIterator>::value_type>
-    constexpr void amplifier(BiIterator first, BiIterator last, value_type factor, value_type min, value_type max) {
-        amplifier(first, last, first, factor, min, max);
-    };
-
-    template <typename Container, typename value_type = typename Container::value_type>
-    constexpr void amplifier(Container& container, value_type factor) {
-        amplifier(std::begin(container), std::end(container), factor);
-    };
-
-    template <typename Container, typename value_type = typename Container::value_type>
-    constexpr void amplifier(Container& container, value_type factor, value_type min, value_type max) {
-        amplifier(std::begin(container), std::end(container), factor, min, max);
-    };
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_AMPLIFIER_HPP

@@ -22,38 +22,34 @@
 #ifndef EASYDSP_RECTANGULAR_HPP
 #define EASYDSP_RECTANGULAR_HPP
 
-#include "window_impl.hpp"
+#include <easy/dsp/math/math.hpp>
+#include <easy/meta/iterator.hpp>
+#include <cmath>
+
 namespace easy { namespace dsp { namespace windowing {
 
-    template <typename T, typename Allocator = std::allocator<T>>
-    class Rectangular : public Window<Rectangular<T, Allocator>, T, Allocator> {
-        friend class Window<Rectangular<T, Allocator>, T, Allocator>;
-        using parent = Window<Rectangular<T, Allocator>, T, Allocator>;
-
-    public:
-        using value_type = typename parent::value_type;
-        using size_type  = typename parent::size_type;
-        inline explicit Rectangular(size_type size);
-
-    private:
-        inline void initialize();
-    };
-
-    template <typename T, typename Allocator>
-    inline Rectangular<T, Allocator>::Rectangular(Rectangular::size_type size) : parent(size) {}
-
-    template <typename T, typename Allocator>
-    inline void Rectangular<T, Allocator>::initialize() {
-        std::fill(std::begin(parent::data_), std::end(parent::data_), 1);
+    /**
+     * @brief Computes a rectangular window of length N and stores the result in the range, beginning at d_first.
+     *
+     * Rectangular windows are defined as:
+     *
+     * \f[
+     *  w(n)=1
+     * \f]
+     *
+     * @param N Number of elements to compute.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     */
+    template <typename OutIterator, typename Integer>
+    constexpr void rectangular(OutIterator d_first, Integer N) {
+        using value_type = value_type_t<OutIterator>;
+        using size_type = diff_type_t<OutIterator>;
+        const auto size   = static_cast<size_type>(N);
+        for (size_type i = 0; i < size; ++i, ++d_first) {
+            *d_first     = static_cast<value_type>(1);
+        }
     }
 
-    template <typename OutputIterator, typename Integer>
-    inline void rectwin(Integer size, OutputIterator out) {
-        using value_type = typename std::iterator_traits<OutputIterator>::value_type;
-        using size_type  = typename Rectangular<value_type>::size_type;
-        Rectangular<value_type> window(static_cast<size_type>(size));
-        std::copy(std::cbegin(window), std::cend(window), out);
-    }
 
 }}} // namespace easy::dsp::windowing
 

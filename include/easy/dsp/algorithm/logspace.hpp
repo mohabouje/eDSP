@@ -22,24 +22,30 @@
 #ifndef EASYDSP_UTILITIES_LOGSPACE_H
 #define EASYDSP_UTILITIES_LOGSPACE_H
 
+#include <easy/meta/iterator.hpp>
 #include <easy/meta/advance.hpp>
 #include <numeric>
 #include <cmath>
-#include <iterator>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace algorithm {
 
-    template <typename BiIterator, typename Integer,
-              typename value_type = typename std::iterator_traits<BiIterator>::value_type>
-    constexpr void logspace(BiIterator first, Integer N, value_type starting, value_type ending) {
-        using diff_type      = typename std::iterator_traits<BiIterator>::difference_type;
-        const auto sz        = static_cast<diff_type>(N);
-        const auto increment = (ending - starting) / 2;
-        for (diff_type i = 0; i < N; ++N, starting += increment, ++first) {
-            *first = std::pow(10, starting);
+    /**
+     * @brief Generate N logarithmic spaced values between the range [x1,x2] and stores the result in another range, beginning at d_first.
+     *
+     * @param x1 Defines the beginning of the interval over which linspace generates points.
+     * @param x2 Defines the ending of the interval over which linspace generates points.
+     * @param N Number of points to generate.
+     * @param d_first The beginning of the destination range
+     */
+    template <typename OutputIt, typename Numeric>
+    constexpr void logspace(OutputIt d_first, Numeric N, Numeric x1, Numeric x2) {
+        const auto increment = (x2 - x1) / static_cast<value_type_t<OutputIt>>(std::trunc(N));
+        for (; x1 <= x2; x1 += increment, ++first) {
+            *first = std::pow(10, x1);
         }
+
     }
 
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_UTILITIES_LOGSPACE_H

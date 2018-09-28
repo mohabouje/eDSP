@@ -27,15 +27,25 @@
 #include <cmath>
 #include <iterator>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace algorithm {
 
-    template <typename InputIterator, typename OutputIterator>
-    constexpr void concatenate(InputIterator first, InputIterator last, InputIterator first2, InputIterator last2,
-                               OutputIterator out) {
-        std::copy(first, last, out);
+    /**
+     * @brief Concatenates the elements defined in the range [firs1, last1) and [first2, last2),
+     * and stores the result in another range, beginning at d_first.
+     *
+     * @param first1 Forward iterator defining the begin of the first range.
+     * @param last1 Forward iterator defining the end of the first range.
+     * @param first2 Forward iterator defining the begin of the second range.
+     * @param last2 Forward iterator defining the end of the second range.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     */
+    template <typename InputIt, typename OutputIt>
+    constexpr void concatenate(InputIt first1, InputIt last1,
+                               InputIt first2, InputIt last2, OutputIt d_first) {
+        std::copy(first1, last1, d_first);
         std::copy(first2, last2, meta::advance(out, std::distance(first, last)));
     }
 
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_UTILITIES_CAT_H

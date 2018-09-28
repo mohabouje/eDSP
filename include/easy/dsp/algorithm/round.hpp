@@ -22,17 +22,27 @@
 #ifndef EASYDSP_UTILITIES_ROUND_HPP
 #define EASYDSP_UTILITIES_ROUND_HPP
 
+#include <easy/meta/iterator.hpp>
 #include <algorithm>
 #include <cmath>
-#include <iterator>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace algorithm {
 
-    template <typename InputIterator>
-    constexpr void round(InputIterator first, InputIterator last) {
-        std::for_each(first, last, std::round);
+    /**
+     * @brief For each element in the range [first, last) computes the nearest integer value to the element's value
+     * rounding halfway cases away from zero, and stores the result in another range, beginning at d_first.
+     *
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @param d_first Output irerator defining the beginning of the destination range.
+     */
+    template <typename InputIt, typename OutputIt>
+    constexpr void round(InputIt first, InputIt last, OutputIt d_first) {
+        std::transform(first, last, d_first, [](const value_type_t<InputIt> value) -> value_type_t<OutputIt> {
+            return std::round(value);
+        });
     }
 
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_UTILITIES_ROUND_HPP

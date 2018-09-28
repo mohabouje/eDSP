@@ -31,6 +31,14 @@
 
 namespace easy { namespace dsp { namespace filter {
 
+    inline namespace internal {
+        template <typename T>
+        constexpr std::complex<T> addmul(const std::complex<T>& left, const T factor,
+                                         const std::complex<T>& right) noexcept {
+            return std::complex<T>(left.real() + factor * right.real(), left.imag() + factor * right.imag());
+        }
+    }
+
     template <typename T>
     struct complex_pair : public std::pair<std::complex<T>, std::complex<T>> {
         using base = std::pair<std::complex<T>, std::complex<T>>;

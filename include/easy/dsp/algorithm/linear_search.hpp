@@ -23,12 +23,33 @@
 #define EASYDSP_LINEAR_SEARCH_HPP
 
 #include <algorithm>
-namespace easy { namespace dsp {
+#include <easy/meta/iterator.hpp>
 
-    template <typename Iterator, typename value_type = typename std::iterator_traits<Iterator>::value_type>
-    Iterator linear_search(Iterator first, Iterator last, const value_type& value) {
+namespace easy { namespace dsp { inline namespace algorithm {
+
+    /**
+     * @brief Searches for an element equivalent to value in the range [first, last).
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @param value Value to UnaryPredicate the elements to.
+     * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
+     */
+    template <typename ForwardIt>
+    constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, const value_type_t<ForwardIt>& value) {
         return std::find(first, last, value);
     }
-}} // namespace easy::dsp
+
+    /**
+     * @brief Searches for an element for which predicate p returns true in the range [first, last).
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @param p Binary predicate which returns ​true for the required element. .
+     * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
+     */
+    template <typename ForwardIt, class UnaryPredicate>
+    constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, UnaryPredicate p) {
+        return std::find(first, last, p);
+    }
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_LINEAR_SEARCH_HPP

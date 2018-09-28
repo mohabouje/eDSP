@@ -21,19 +21,9 @@
  */
 
 #include "transform_binding.hpp"
-#include "windowing_binding.hpp"
 #include "standard_binding.hpp"
 
 BOOST_PYTHON_MODULE(PYTHON_MODULE_NAME) {
-    scope windowing = class_<Windowing>("Windowing").def("apply", &Windowing::apply).staticmethod("apply");
-
-    declare_window<Bartlett<double>>("Bartlett");
-    declare_window<Blackman<double>>("Blackman");
-    declare_window<Hamming<double>>("Hamming");
-    declare_window<Hanning<double>>("Hanning");
-    declare_window<Rectangular<double>>("Rectangular");
-    declare_window<FlatTop<double>>("FlatTop");
-    declare_window<Triangular<double>>("Triangular");
 
     scope transform = class_<Transform>("Transform")
                           .def("dft", &Transform::dft)

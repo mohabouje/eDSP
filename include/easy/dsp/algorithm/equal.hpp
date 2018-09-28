@@ -24,25 +24,39 @@
 
 #include <algorithm>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { inline namespace algorithm {
 
-    template <typename InputIterator_1, typename InputIterator_2, typename Predicate>
-    constexpr auto equal(InputIterator_1 first_1, InputIterator_2 last_1, InputIterator_2 first_2,
-                         InputIterator_2 last_2, Predicate predicate) {
-        std::equal(first_1, last_1, first_2, last_2, predicate);
+
+    /**
+     * @brief Returns true if the range [first1, last1) is equal to the range [first2, last2), and false otherwise.
+     *
+     * @param first1 Forward iterator defining the begin of the first range.
+     * @param last1 Forward iterator defining the end of the first range.
+     * @param first2 Forward iterator defining the begin of the second range.
+     * @param last2 Forward iterator defining the end of the second range.
+     * @param p  	Binary predicate which returns ​true if the elements should be treated as equal.
+     * @returns If the elements in the two ranges are equal, returns true. Otherwise returns false.
+     */
+    template <typename ForwardIt1, typename ForwardIt2, typename BinaryPredicate>
+    constexpr bool equal(ForwardIt1 first1, ForwardIt2 last1, ForwardIt2 first2, ForwardIt2 last2, BinaryPredicate p) {
+        return std::equal(first1, last_1, first2, last2, p);
     }
 
-    template <typename InputIterator_1, typename InputIterator_2>
-    constexpr auto equal(InputIterator_1 first_1, InputIterator_2 last_1, InputIterator_2 first_2,
-                         InputIterator_2 last_2) {
-        std::equal(first_1, last_1, first_2, last_2);
+    /**
+     * @brief Returns true if the range [first1, last1) is equal to the range [first2, last2), and false otherwise.
+     *
+     * @param first1 Forward iterator defining the begin of the first range.
+     * @param last1 Forward iterator defining the end of the first range.
+     * @param first2 Forward iterator defining the begin of the second range.
+     * @param last2 Forward iterator defining the end of the second range.
+     * @returns If the elements in the two ranges are equal, returns true. Otherwise returns false.
+     */
+    template <typename ForwardIt1, typename ForwardIt2>
+    constexpr bool equal(ForwardIt1 first1, ForwardIt2 last1, ForwardIt2 first2, ForwardIt2 last2) {
+        return std::equal(first1, last1, first2, last2);
     }
 
-    template <typename InputIterator_1, typename InputIterator_2>
-    constexpr auto equal(InputIterator_1 first_1, InputIterator_2 last_1, InputIterator_2 first_2) {
-        std::equal(first_1, last_1, first_2);
-    }
 
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_EQUAL_HPP

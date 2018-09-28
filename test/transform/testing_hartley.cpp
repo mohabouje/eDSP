@@ -64,8 +64,8 @@ namespace {
 TEST(TestingDHT, TransformHanningWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hanning]);
     const auto size      = reference.size();
-    const auto window    = make_window<double, WindowType::Hanning>(size);
-
+    std::vector<double> window(size);
+    make_window<WindowType::Hanning>(std::begin(window), size);
     std::vector<double> transformed(size);
     easy::dsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
 
@@ -77,8 +77,8 @@ TEST(TestingDHT, TransformHanningWindow) {
 TEST(TestingDHT, TransformHammingWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hamming]);
     const auto size      = reference.size();
-    const auto window    = make_window<double, WindowType::Hamming>(size);
-
+    std::vector<double> window(size);
+    make_window<WindowType::Hamming>(std::begin(window), size);
     std::vector<double> transformed(size);
     easy::dsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
 
@@ -90,8 +90,8 @@ TEST(TestingDHT, TransformHammingWindow) {
 TEST(TestingDHT, TransformBlackmanWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Blackman]);
     const auto size      = reference.size();
-    const auto window    = make_window<double, WindowType::Blackman>(size);
-
+    std::vector<double> window(size);
+    make_window<WindowType::Blackman>(std::begin(window), size);
     std::vector<double> transformed(size);
     easy::dsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
 

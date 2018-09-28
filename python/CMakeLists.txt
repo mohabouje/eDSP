@@ -14,8 +14,8 @@ endif()
 
 set(PYTHON_BINDINGS
     transform_binding.hpp
-    windowing_binding.hpp
     python_binding.cpp)
+
 add_library(${PROJECT_NAME} SHARED ${PYTHON_BINDINGS})
 target_include_directories(${PROJECT_NAME} PRIVATE ${Boost_INCLUDE_DIRS} ${PYTHON_INCLUDE_DIRS})
 target_link_libraries(${PROJECT_NAME} EasyDSP ${Boost_LIBRARIES}  ${PYTHON_LIBRARIES})
