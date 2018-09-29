@@ -46,9 +46,9 @@ namespace easy { namespace dsp { namespace statistics {
         using input_t        = value_type_t<ForwardIt>;
         const auto b         = static_cast<int>(beta);
         const auto predicate = [b](const input_t prev, const input_t current) {
-            return static_cast<value_type>(prev + std::pow(current, b));
+            return static_cast<input_t>(prev + std::pow(current, b));
         };
-        const input_t accumulated = std::accumulate(first, last, static_cast<input_t>(0), std::cref(predicate));
+        const input_t accumulated = std::accumulate(first, last, static_cast<input_t>(0), predicate);
         const input_t temp        = accumulated / static_cast<input_t>(std::distance(first, last));
         return std::pow(temp, math::inv(static_cast<input_t>(b)));
     }

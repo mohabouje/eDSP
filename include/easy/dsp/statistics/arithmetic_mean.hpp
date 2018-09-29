@@ -43,7 +43,7 @@ namespace easy { namespace dsp { namespace statistics {
     template <typename ForwardIt>
     constexpr value_type_t<ForwardIt> mean(ForwardIt first, ForwardIt last) {
         using namespace boost::accumulators;
-        accumulator_set<value_type, features<tag::mean>> acc;
+        accumulator_set<value_type_t<ForwardIt>, features<tag::mean>> acc;
         acc = std::for_each(first, last, acc);
         return boost::accumulators::mean(acc);
     }

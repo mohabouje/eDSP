@@ -44,7 +44,7 @@ namespace easy { namespace dsp { namespace statistics {
         using input_t = value_type_t<ForwardIt>;
         accumulator_set<input_t, features<tag::moment<N>>> acc;
         acc = std::for_each(first, last, acc);
-        return boost::accumulators::momment<N>(acc);
+        return boost::accumulators::moment<N>(acc);
     }
 
 }}} // namespace easy::dsp::statistics

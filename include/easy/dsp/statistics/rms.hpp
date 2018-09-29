@@ -24,6 +24,7 @@
 
 #include <easy/meta/iterator.hpp>
 #include <numeric>
+#include <cmath>
 
 namespace easy { namespace dsp { namespace statistics {
 

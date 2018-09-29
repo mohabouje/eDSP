@@ -23,6 +23,8 @@
 #define EASYDSP_STATISTICAL_ENTROPY_HPP
 
 #include <easy/meta/iterator.hpp>
+#include <numeric>
+#include <cmath>
 
 namespace easy { namespace dsp { namespace statistics {
 
@@ -54,7 +56,7 @@ namespace easy { namespace dsp { namespace statistics {
         const auto predicate = [](const input_t accumulated, const input_t current) {
             return (accumulated + std::log2(current) * current);
         };
-        return std::accumulate(first, last, static_cast<value_type>(0), predicate);
+        return std::accumulate(first, last, static_cast<input_t>(0), predicate);
     }
 
 }}} // namespace easy::dsp::statistics

@@ -41,6 +41,9 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename T, typename Allocator = std::allocator<std::pair<T, T>>>
     struct Histogram {
+        using size_type      = std::size_t;
+        using value_type     = T;
+
         /**
          * @brief Creates an %Histogram with the specified number of bins and cache size.
          * @param num_bins Number of bins.
@@ -67,8 +70,6 @@ namespace easy { namespace dsp { namespace statistics {
         }
 
     private:
-        using size_type      = std::size_t;
-        using value_type     = T;
         using density        = boost::accumulators::tag::density;
         using feature        = boost::accumulators::features<density>;
         using acc            = boost::accumulators::accumulator_set<T, feature>;

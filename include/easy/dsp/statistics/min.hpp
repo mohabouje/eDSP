@@ -36,7 +36,7 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr value_type_t<ForwardIt> min(ForwardIt first, ForwardIt last) {
-        return *std::min_element(firs, last);
+        return *std::min_element(first, last);
     }
 
     /**
@@ -50,7 +50,7 @@ namespace easy { namespace dsp { namespace statistics {
     constexpr value_type_t<ForwardIt> minabs(ForwardIt first, ForwardIt last) {
         using input_t   = value_type_t<ForwardIt>;
         const auto comp = [](const input_t left, const input_t right) { return std::abs(left) < std::abs(right); };
-        return *std::min_element(firs, last, comp);
+        return *std::min_element(first, last, comp);
     }
 
 }}} // namespace easy::dsp::statistics

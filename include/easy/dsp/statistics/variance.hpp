@@ -59,11 +59,11 @@ namespace easy { namespace dsp { namespace statistics {
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
      * @returns The variance of the input range.
-     * @see standard_deviation
+     * @see variance
      */
     template <typename ForwardIt>
     inline value_type_t<ForwardIt> standard_deviation(ForwardIt first, ForwardIt last) {
-        return std::sqrt(dsp::variance(first, last));
+        return std::sqrt(variance(first, last));
     }
 
 }}} // namespace easy::dsp::statistics
