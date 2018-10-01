@@ -26,7 +26,6 @@
 #include <easy/meta/ensure.hpp>
 #include <easy/dsp/math/constant.hpp>
 #include <easy/dsp/math/complex.hpp>
-#include <easy/dsp/filter/iir/designer/bilinear/layout_base.hpp>
 #include <easy/dsp/filter/iir/biquad.hpp>
 
 namespace easy { namespace dsp { namespace filter {
@@ -46,7 +45,7 @@ namespace easy { namespace dsp { namespace filter {
             return num_stage_;
         }
 
-        constexpr size_type maximum_size() const noexcept {
+        constexpr size_type max_size() const noexcept {
             return N;
         }
 
@@ -92,20 +91,14 @@ namespace easy { namespace dsp { namespace filter {
             return std::cbegin(cascade_) + size();
         }
 
-        template <typename InputIterator, typename OutputIterator>
-        constexpr void filter(InputIterator first, InputIterator last, OutputIterator out) {
-            static_assert(std::is_same<typename std::iterator_traits<InputIterator>::value_type, T>::value &&
-                              std::is_same<typename std::iterator_traits<OutputIterator>::value_type, T>::value,
-                          "Iterator does not math the value type. No implicit conversion is allowed");
-            std::transform(first, last, out, std::ref(*this));
+        template <typename InputIt, typename OutputIt>
+        constexpr void filter(InputIt first, InputIt last, OutputIt d_first) {
+            for (; first != last; ++first, ++d_first) {
+                *d_first = tick(*first);
+            }
         }
 
-        template <typename BiIterator>
-        constexpr void filter(BiIterator first, BiIterator last) {
-            filter(first, last, first);
-        }
-
-        constexpr value_type operator()(value_type tick) noexcept {
+        constexpr value_type tick(value_type tick) noexcept {
             for (auto i = 0ul; i < num_stage_; ++i) {
                 tick = cascade_[i](tick);
             }
