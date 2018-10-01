@@ -34,7 +34,7 @@ namespace easy { namespace dsp { inline namespace utility {
      * @returns Maximum-to-minimum difference.
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> peak2peak(ForwardIt first, ForwardIt last) {
+    constexpr meta::value_type_t<ForwardIt> peak2peak(ForwardIt first, ForwardIt last) {
         const auto pair = std::minmax_element(first, last);
         return std::abs(pair.second) - std::abs(pair.first);
     }

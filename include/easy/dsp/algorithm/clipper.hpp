@@ -40,7 +40,7 @@ namespace easy { namespace dsp { inline namespace algorithm {
      */
     template <typename InputItr, typename OutputIt, typename Numeric>
     constexpr void clipper(InputItr first, InputItr last, OutputIt d_first, Numeric min, Numeric max) {
-        std::transform(first, last, d_first, [=](const value_type_t<InputItr> val) -> value_type_t<OutputIt> {
+        std::transform(first, last, d_first, [=](const meta::value_type_t<InputItr> val) -> meta::value_type_t<OutputIt> {
             return (val < min) ? min : (val > max) ? max : val;
         });
     }

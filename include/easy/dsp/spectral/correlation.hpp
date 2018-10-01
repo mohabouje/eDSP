@@ -24,11 +24,7 @@
 #define EASYDSP_AUTOCORRELATION_HPP
 
 #include <easy/dsp/spectral/internal/fftw_impl.hpp>
-#include <easy/meta/expects.hpp>
-#include <easy/meta/advance.hpp>
-#include <easy/meta/iterator.hpp>
 #include <vector>
-#include <algorithm>
 
 namespace easy { namespace dsp { inline namespace spectral {
 
@@ -50,10 +46,10 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @param scale Scale factor to use.
      */
     template <typename InputIt, typename OutputIt,
-              typename Allocator = std::allocator<std::complex<value_type_t<OutputIt>>>>
+              typename Allocator = std::allocator<std::complex<meta::value_type_t<OutputIt>>>>
     inline void xcorr(InputIt first, InputIt last, OutputIt d_first, CorrelationScale scale = CorrelationScale::None) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
-        using value_type = value_type_t<InputIt>;
+        using value_type = meta::value_type_t<InputIt>;
         fftw_plan<value_type> fft_{};
         fftw_plan<value_type> ifft_{};
         const auto size = std::distance(first, last);
@@ -92,11 +88,11 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @param scale Scale factor to use.
      */
     template <typename InputIt, typename OutputIt,
-              typename Allocator = std::allocator<std::complex<value_type_t<OutputIt>>>>
+              typename Allocator = std::allocator<std::complex<meta::value_type_t<OutputIt>>>>
     inline void xcorr(InputIt first1, InputIt last1, InputIt first2, OutputIt d_first,
                       CorrelationScale scale = CorrelationScale::None) {
         meta::expects(std::distance(first1, last1) > 0, "Not expecting empty input");
-        using value_type = value_type_t<InputIt>;
+        using value_type = meta::value_type_t<InputIt>;
         fftw_plan<value_type> fft_{};
         fftw_plan<value_type> ifft_{};
         const auto size = std::distance(first1, last1);

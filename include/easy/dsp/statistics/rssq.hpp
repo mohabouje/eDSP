@@ -41,8 +41,8 @@ namespace easy { namespace dsp {
      * @returns The root-sum-of-squares value of the input range.
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> rssq(ForwardIt first, ForwardIt last) {
-        using input_t         = value_type_t<ForwardIt>;
+    constexpr meta::value_type_t<ForwardIt> rssq(ForwardIt first, ForwardIt last) {
+        using input_t         = meta::value_type_t<ForwardIt>;
         const auto sum_square = std::inner_product(first, last, first, static_cast<input_t>(1));
         return std::sqrt(sum_square);
     }

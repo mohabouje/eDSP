@@ -51,8 +51,8 @@ namespace easy { namespace dsp { namespace statistics {
      * @returns The entropy of the probability mass function.
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> entropy(ForwardIt first, ForwardIt last) {
-        using input_t        = value_type_t<ForwardIt>;
+    constexpr meta::value_type_t<ForwardIt> entropy(ForwardIt first, ForwardIt last) {
+        using input_t        = meta::value_type_t<ForwardIt>;
         const auto predicate = [](const input_t accumulated, const input_t current) {
             return (accumulated + std::log2(current) * current);
         };

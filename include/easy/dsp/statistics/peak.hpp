@@ -15,41 +15,47 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: linear_search.hpp
+ * Filename: peak.hpp
  * Author: Mohammed Boujemaoui
- * Date: 1/9/2018
+ * Date: 2018-10-01
  */
-#ifndef EASYDSP_LINEAR_SEARCH_HPP
-#define EASYDSP_LINEAR_SEARCH_HPP
+#ifndef EASYDSP_STATISTICAL_PEAK_HPP
+#define EASYDSP_STATISTICAL_PEAK_HPP
 
-#include <algorithm>
 #include <easy/meta/iterator.hpp>
+#include <algorithm>
 
-namespace easy { namespace dsp { inline namespace algorithm {
+namespace easy { namespace dsp { namespace statistics {
 
     /**
-     * @brief Searches for an element equivalent to value in the range [first, last).
+     * @brief Computes the peak value of the range [first, last)
+     *
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
-     * @param value Value to UnaryPredicate the elements to.
-     * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
+     * @returns Pair representing the index position and the value of the peak.
      */
     template <typename ForwardIt>
-    constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, const meta::value_type_t<ForwardIt>& value) {
-        return std::find(first, last, value);
+    constexpr std::pair<ForwardIt, meta::value_type_t<ForwardIt>> peak(ForwardIt first, ForwardIt last) {
+        const auto iter = *std::max_element(first, last);
+        return {iter, *iter};
     }
 
     /**
-     * @brief Searches for an element for which predicate p returns true in the range [first, last).
+     * @brief Computes the absolute peak value of the range [first, last)
+     *
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
-     * @param p Binary predicate which returns ​true for the required element. .
-     * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
+     * @returns Pair representing the index position and the value of the peak.
      */
-    template <typename ForwardIt, class UnaryPredicate>
-    constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, UnaryPredicate p) {
-        return std::find(first, last, p);
+    template <typename ForwardIt>
+    constexpr std::pair<ForwardIt, meta::value_type_t<ForwardIt>> peakabs(ForwardIt first, ForwardIt last) {
+        using input_t   = meta::value_type_t<ForwardIt>;
+        const auto comp = [](const input_t left, const input_t right) { return std::abs(left) < std::abs(right); };
+        const auto iter = std::max_element(first, last, comp);
+        return {iter, *iter};
     }
-}}} // namespace easy::dsp::algorithm
 
-#endif // EASYDSP_LINEAR_SEARCH_HPP
+
+}}}
+
+#endif // EASYDSP_STATISTICAL_PEAK_HPP

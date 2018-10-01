@@ -35,7 +35,7 @@ namespace easy { namespace dsp { namespace statistics {
      * @returns The maximum value of the input range.
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> max(ForwardIt first, ForwardIt last) {
+    constexpr meta::value_type_t<ForwardIt> max(ForwardIt first, ForwardIt last) {
         return *std::max_element(first, last);
     }
 
@@ -47,8 +47,8 @@ namespace easy { namespace dsp { namespace statistics {
      * @returns The maximum value of the input range.
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> maxabs(ForwardIt first, ForwardIt last) {
-        using input_t   = value_type_t<ForwardIt>;
+    constexpr meta::value_type_t<ForwardIt> maxabs(ForwardIt first, ForwardIt last) {
+        using input_t   = meta::value_type_t<ForwardIt>;
         const auto comp = [](const input_t left, const input_t right) { return std::abs(left) < std::abs(right); };
         return *std::max_element(first, last, comp);
     }

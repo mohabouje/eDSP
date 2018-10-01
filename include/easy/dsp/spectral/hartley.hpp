@@ -24,7 +24,6 @@
 #define EASYDSP_HARTLEY_HPP
 
 #include <easy/dsp/spectral/internal/fftw_impl.hpp>
-#include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { inline namespace spectral {
 
@@ -45,7 +44,7 @@ namespace easy { namespace dsp { inline namespace spectral {
      */
     template <typename InputIt, typename OutputIt>
     inline void hartley(InputIt first, InputIt last, OutputIt d_first) {
-        using value_type = value_type_t<InputIt>;
+        using value_type = meta::value_type_t<InputIt>;
         fftw_plan<value_type> plan;
         plan.dht(fftw_cast(&(*first)), fftw_cast(&(*d_first)),
                  static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last)));

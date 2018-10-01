@@ -42,8 +42,8 @@ namespace easy { namespace dsp { namespace statistics {
      * @returns The geometric mean of the input range.
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> harmonic_mean(ForwardIt first, ForwardIt last) {
-        using input_t        = value_type_t<ForwardIt>;
+    constexpr meta::value_type_t<ForwardIt> harmonic_mean(ForwardIt first, ForwardIt last) {
+        using input_t        = meta::value_type_t<ForwardIt>;
         const auto predicate = [](const input_t prev, const input_t current) { return prev + math::inv(current); };
         const auto acc       = std::accumulate(first, last, static_cast<input_t>(0), predicate);
         return static_cast<input_t>(std::distance(first, last)) / acc;

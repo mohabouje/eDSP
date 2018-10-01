@@ -44,9 +44,9 @@ namespace easy { namespace dsp { namespace statistics {
      * @see moment, standard_deviation
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> kurtosis(ForwardIt first, ForwardIt last) {
+    constexpr meta::value_type_t<ForwardIt> kurtosis(ForwardIt first, ForwardIt last) {
         using namespace boost::accumulators;
-        using input_t = value_type_t<ForwardIt>;
+        using input_t = meta::value_type_t<ForwardIt>;
         accumulator_set<input_t, features<tag::kurtosis>> acc;
         acc = std::for_each(first, last, acc);
         return boost::accumulators::kurtosis(acc);
