@@ -38,7 +38,7 @@ namespace easy { namespace dsp { namespace filter {
      * moving window:
      *
      * \f[
-     * { \lambda_i = \frac{x_{n} + x_{n-1}+ \cdots + x_{i-(N-2)} + x_{i-(N-1)}}{N}
+     *  \lambda_i = \frac{x_{n} + x_{n-1}+ \cdots + x_{i-(N-2)} + x_{i-(N-1)}}{N}
      * \f]
      *
      * @tparam T  Type of element.

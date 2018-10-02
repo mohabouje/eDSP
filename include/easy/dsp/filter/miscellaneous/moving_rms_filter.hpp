@@ -38,6 +38,10 @@ namespace easy { namespace dsp { namespace filter {
      * The filter implement a basic cumulative unweighted rms of the previous N data, where N is the length of the
      * moving window.
      *
+     * \f[
+     *  \lambda_i = \sqrt{ \frac{x_{n}^2 + x_{n-1}^2 + \cdots + x_{i-(N-2)}^2 + x_{i-(N-1)}^2}{N}}
+     * \f]
+     *
      * @tparam T  Type of element.
      * @tparam Allocator  Allocator type, defaults to std::allocator<T>.
      */

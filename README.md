@@ -24,12 +24,10 @@ The easyDSP project is a header-only library with basic dependencies:
 
 - FFTW: to compute the different Fourier transform
 - libsamplerate: to apply some re-sample functionalities.
-- boost: as an extension of the C++ language.
-
-If you are an Unix user, those libraries can be downloaded in a simple way. Example: using apt:
+- If you are an Unix user, those libraries can be downloaded in a simple way. Example: using apt:
 
 ```bash
-sudo apt-get install libfftw3-dev libsamplerate0-dev libboost-all-dev 
+sudo apt-get install libfftw3-dev libsamplerate0-dev
 ```
 
 The library also relies on a **C++14** compiler and the standard library (STL). Link the different libraries,  download the project and add the include/directory to  your compiler's header search path and you are done.
@@ -37,13 +35,13 @@ The library also relies on a **C++14** compiler and the standard library (STL). 
 The easy way to enable/disable the different modules of the framework is by using the [ccmake](https://cmake.org/cmake/help/v3.0/manual/ccmake.1.html).
 
 ## TODO
-- [] Test the different features
-- [] Benchmark the library
-- [] Write Documentation
-- [] Python Wrapper
-- [] OpenFramework Wrapper
-- [] Compile time optimizations: constexpr & traits
-- [] Modern C++: const method, noexcept construction, contract, assertions...
+- [ ] Test the different features [WIP]
+- [ ] Benchmark the library [WIP]
+- [ ] Write Documentation [WIP]
+- [ ] Python Wrapper
+- [ ] Open-Frameworks Wrapper
+- [x] Compile time optimizations: constexpr & traits
+- [x] Modern C++: const method, noexcept construction, contract, assertions...
 
 ## Features
 
@@ -52,37 +50,37 @@ Those are the list of features that are implemented or scheduled to be. All of t
 - [x] Pre-Processing Techniques
   - [x] Amplifier
   - [x] Clipper
-  - [x] DC Removal
-  - [x] De-Emphasis
-  - [x] Pre-Emphasis
-  - [x] Envelope Follower
   - [x] Mixer
   - [x] Normalizer
-  - [ ] Resampler
+  - [x] Resampler
+  - [x] Search
+  - [x] Lin-space
+  - [x] Log-space
+  - [x] Padder
+  - [x] Normalizer
   - [ ] Frame Cutter
   - [ ] Splitter
-- [ ] Implementing basic discrete transforms
+
+- [x] Implementing basic discrete transforms
   - [x] DFT : Discrete Fourier Transform
   - [x] DCT: Discrete Cosine Transform
-  - [x] DHT: Discrete Hilbert Transform
+  - [x] Discrete Hilbert Transform
+  - [x] Discrete Hartley Transform
+
 - [ ] Digital Filters
-  - [ ] FIR : Finite Impulse Response filter
+  - [x] FIR : Finite Impulse Response filter
   - [ ] IIR : Infinite Impulse Response filter
-  - [ ] Butterworth Filters
-  - [ ] Chebishev I && Chebishev II Filters
+  - [x] Butterworth Filters
+  - [x] Chebishev I && Chebishev II Filters
   - [ ] Elliptic Filters
-  - [x] Biquad
-    - [x] Low Pass
-    - [x] High Pass
-    - [x] Band Pass Skirt Gain
-    - [x] Band Pass Peak Gain
-    - [x] Notch
-    - [x] All Pass
-    - [x] Peaking EQ
-    - [x] Low Shelf
-    - [x] High Shelf
+  - [ ] Legendre Filters
+  - [ ] Bessel Filters
+  - [x] RBJ Filters
+  - [x] Zolzer Filters
   - [x] Moving Average Filter
   - [x] Moving Median Filter
+  - [x] Moving RMS Filter
+
 - [x] Windowing 
   - [x] Bartlett
   - [x] Blackman
@@ -90,17 +88,19 @@ Those are the list of features that are implemented or scheduled to be. All of t
   - [x] Hamming
   - [x] Hanning
   - [x] Triangular
-  - [ ] Blackman - Harris
-  - [ ] Blackman - Nuttal
-  - [ ] Bartlett - Hann
+  - [x] Blackman - Harris
+  - [x] Blackman - Nuttal
+  - [x] Bartlett - Hann
   - [ ] Kaiser
   - [ ] Gauss
+
 - [x] Implement basic oscillators
   - [x] Sinusoidal Oscillator
   - [x] Square Oscillator
   - [x] Triangular Oscillator
   - [x] Sawtooth Oscillator
-- [ ] Standard Operators
+
+- [ ] Spectral
   - [x] Auto Correlation
   - [x] Cross Correlation
   - [x] Convolution
@@ -113,13 +113,23 @@ Those are the list of features that are implemented or scheduled to be. All of t
     - [ ] Bark Filter Banks
     - [ ] Gamma Tone Filter Banks
     - [ ] ERB Filter Banks
-- [ ] Statistical Properties
-  - [ ] Density
-  - [ ] Mean
-  - [ ] Moment
-  - [ ] Variance
-  - [ ] Skewness
-  - [ ] Covariance
+
+- [x] Statistical Properties
+  - [x] Histogram
+  - [x] Mean
+  - [x] Moment
+  - [x] Variance
+  - [x] Skewness
+  - [x] Covariance
+
+- [x] Tools
+
+  - [x] DC Removal
+  - [x] De-Emphasis
+  - [x] Pre-Emphasis
+  - [x] Envelope Follower
+
+  	
 
 ### Example: Windowing an imput signal
 
@@ -175,6 +185,3 @@ auto fft_data = std::vector<std::complex<double>>(size );
 easy::dsp::complex_dft(std::cbegin(real_data), std::cend(real_data), std::begin(fft_data));
 ```
 
-
-## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmohabouje%2FeDSP.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmohabouje%2FeDSP?ref=badge_large)
