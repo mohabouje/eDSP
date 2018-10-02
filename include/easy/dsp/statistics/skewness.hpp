@@ -45,7 +45,7 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> skewness(ForwardIt first, ForwardIt last) {
-        const auto m = mean(first, last);
+        const auto m  = mean(first, last);
         const auto m3 = moment<3>(first, last, mean);
         const auto m2 = moment<2>(first, last, mean);
         return m3 / (m2 * std::sqrt(m2));

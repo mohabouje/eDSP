@@ -206,7 +206,8 @@ namespace easy { namespace dsp { namespace filter {
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::value_type BiquadCascade<T, N>::tick(BiquadCascade::value_type value) noexcept {
+    constexpr typename BiquadCascade<T, N>::value_type
+        BiquadCascade<T, N>::tick(BiquadCascade::value_type value) noexcept {
         for (auto i = 0ul; i < num_stage_; ++i) {
             value = cascade_[i](value);
         }
@@ -252,13 +253,14 @@ namespace easy { namespace dsp { namespace filter {
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::reference BiquadCascade<T, N>::operator[](BiquadCascade::size_type index) noexcept {
+    constexpr typename BiquadCascade<T, N>::reference BiquadCascade<T, N>::
+        operator[](BiquadCascade::size_type index) noexcept {
         return cascade_[index];
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::const_reference BiquadCascade<T, N>::operator[](BiquadCascade::size_type index) const
-        noexcept {
+    constexpr typename BiquadCascade<T, N>::const_reference BiquadCascade<T, N>::
+        operator[](BiquadCascade::size_type index) const noexcept {
         return cascade_[index];
     }
 

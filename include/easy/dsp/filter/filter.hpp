@@ -40,13 +40,13 @@ namespace easy { namespace dsp { namespace filter {
      */
     enum class DesignerType {
         RBJ,         /*!< Robert Bristow-Johnson formulas from the Audio-EQ-Cookbook */
-        Zolzer,     /*!< Udo Zölzer formulas from his book: Digital Audio Signal Processing */
+        Zolzer,      /*!< Udo Zölzer formulas from his book: Digital Audio Signal Processing */
         Butterworth, /*!< Digital implementation of the classic Butterworth filter by using the bilinear transform */
-        ChebyshevI,  /*!< Digital implementation of the Chebyshev polynomials (ripple in the passband) filter by using the bilinear transform */
+        ChebyshevI, /*!< Digital implementation of the Chebyshev polynomials (ripple in the passband) filter by using the bilinear transform */
         ChebyshevII, /*!< Digital implementation of the "Inverse Chebyshev" filters (ripple in the stopband) by using the bilinear transform */
         Bessel,
-        Elliptic,    /*!< Elliptic filters design */
-        Legendre     /*!< Legendre filters design */
+        Elliptic, /*!< Elliptic filters design */
+        Legendre  /*!< Legendre filters design */
     };
 
     template <typename T, DesignerType Designer, std::size_t MaxOrder>
@@ -59,7 +59,6 @@ namespace easy { namespace dsp { namespace filter {
      */
     template <typename T, std::size_t MaxOrder>
     struct designer<T, DesignerType::RBJ, MaxOrder> {
-
         /**
          * @brief Returns a filter which parameters represents the designed frequency response by using the RBJ formulas.
            @param sample_rate The sampling frequency in Hz.
@@ -99,7 +98,6 @@ namespace easy { namespace dsp { namespace filter {
             return ZoelzerFilterDesigner<T, Type>{}(fc, sample_rate, Q, gain_db);
         }
     };
-
 
     /**
      * @brief Udo Zölzer filter designer.

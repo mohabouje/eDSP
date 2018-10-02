@@ -31,31 +31,32 @@ namespace easy { namespace dsp { namespace statistics {
     namespace internal {
 
         // TODO: update this internal
-        template<int N, class T>
+        template <int N, class T>
         constexpr T nthPower(T x) {
             T ret = x;
-            for (int i=1; i < N; ++i) {
+            for (int i = 1; i < N; ++i) {
                 ret *= x;
             }
             return ret;
         }
 
-        template<class T, int N>
+        template <class T, int N>
         struct SumDiffNthPower {
-            explicit SumDiffNthPower(T x) : mean_(x) { }
-            constexpr T operator( )(T sum, T current) {
+            explicit SumDiffNthPower(T x) : mean_(x) {}
+            constexpr T operator()(T sum, T current) {
                 return sum + nthPower<N>(current - mean_);
             }
             T mean_;
         };
 
-        template<class T, int N, class Iter_T>
-        T nthMoment(Iter_T first, Iter_T last, T mean)  {
+        template <class T, int N, class Iter_T>
+        T nthMoment(Iter_T first, Iter_T last, T mean) {
             const auto cnt = std::distance(first, last);
-            return std::accumulate(first, last, T( ), SumDiffNthPower<T, N>(mean)) / static_cast<value_type_t<Iter_T>>(cnt);
+            return std::accumulate(first, last, T(), SumDiffNthPower<T, N>(mean)) /
+                   static_cast<value_type_t<Iter_T>>(cnt);
         }
 
-    }
+    } // namespace internal
 
     /**
      * @brief Computes the n-th moment of the range [first, last)
@@ -67,7 +68,7 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <std::size_t N, typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> moment(ForwardIt first, ForwardIt last) {
-        using input_t = meta::value_type_t<ForwardIt>;
+        using input_t   = meta::value_type_t<ForwardIt>;
         const auto mean = mean(first, last);
         return internal::nthMoment<input_t, N>(first, last, mean);
     }
@@ -83,11 +84,11 @@ namespace easy { namespace dsp { namespace statistics {
     * @see mean
     */
     template <std::size_t N, typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> moment(ForwardIt first, ForwardIt last, const value_type_t<ForwardIt> mean) {
+    constexpr meta::value_type_t<ForwardIt> moment(ForwardIt first, ForwardIt last,
+                                                   const value_type_t<ForwardIt> mean) {
         using input_t = meta::value_type_t<ForwardIt>;
         return internal::nthMoment<input_t, N>(first, last, mean);
     }
-
 
 }}} // namespace easy::dsp::statistics
 
