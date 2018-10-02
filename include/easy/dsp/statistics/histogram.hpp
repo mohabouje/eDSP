@@ -37,7 +37,7 @@ namespace easy { namespace dsp { namespace statistics {
      * @tparam Allocator  Allocator type, defaults to std::allocator<std::pair<T, T>>.
      */
     template <typename T, typename Allocator = std::allocator<std::pair<T, T>>>
-    struct Histogram {
+    struct histogram {
         using size_type  = std::size_t;
         using value_type = T;
 
@@ -46,7 +46,7 @@ namespace easy { namespace dsp { namespace statistics {
          * @param num_bins Number of bins.
          * @param cache_size Number of cached samples to determine the positions and sizes of the bins.
          */
-        constexpr Histogram(size_type num_bins, size_type cache_size) : num_bins_(num_bins), cache_size_(cache_size) {}
+        constexpr histogram(size_type num_bins, size_type cache_size) : num_bins_(num_bins), cache_size_(cache_size) {}
 
         /**
          * @brief Computes the histogram of the range [first, last).
@@ -67,21 +67,6 @@ namespace easy { namespace dsp { namespace statistics {
         size_type cache_size_;
     };
 
-    /**
-     * @brief Computes the histogram of the range [first, last)
-     *
-     * @param first Input iterator defining the begin of the range to examine.
-     * @param last Input iterator defining the end of the range to examine.
-     * @param num_bins Number of bins.
-     * @param cache_size Number of cached samples to determine the positions and sizes of the bins.
-     * @param out Output iterator containing the pairs (bin/sample).
-     * @see Histogram
-     */
-    template <typename InIterator, typename Integer, typename OutIterator>
-    constexpr void histogram(InIterator first, InIterator last, Integer num_bins, Integer cache_size, OutIterator out) {
-        auto histo = Histogram(num_bins, cache_size);
-        histo.compute(first, last, out);
-    }
 
 }}} // namespace easy::dsp::statistics
 
