@@ -22,80 +22,107 @@
 #ifndef EASYDSP_MOVING_RMS_FILTER_HPP
 #define EASYDSP_MOVING_RMS_FILTER_HPP
 
-#include <easy/dsp/math/math.hpp>
-#include <boost/accumulators/accumulators.hpp>
-#include <boost/accumulators/statistics.hpp>
-#include <boost/accumulators/statistics/rolling_mean.hpp>
+#include <easy/dsp/core/ring_buffer.hpp>
+#include <cmath>
 
 namespace easy { namespace dsp { namespace filter {
 
-    template <typename T>
-    class MovingRMSFilter {
+    /**
+     * @class moving_rms
+     * @brief This class implement a cumulative moving rms (rolling rms or running rms) filter.
+     *
+     * Given a series of numbers and a fixed subset size, the first element of the moving rms is obtained by taking
+     * the root-mean-square of the initial fixed subset of the number series. Then the subset is modified by "shifting forward";
+     * that is, excluding the first number of the series and including the next value in the subset.
+     *
+     * The filter implement a basic cumulative unweighted rms of the previous N data, where N is the length of the
+     * moving window.
+     *
+     * @tparam T  Type of element.
+     * @tparam Allocator  Allocator type, defaults to std::allocator<T>.
+     */
+    template <typename T, typename Allocator = std::allocator<T>>
+    class moving_rms {
     public:
         using size_type  = std::size_t;
         using value_type = T;
 
-        explicit MovingRMSFilter(size_type windowSize);
-        inline size_type windowSize() const;
-        inline void setWindowSize(size_type windowSize);
-        inline void reset();
+        /**
+        *  @brief Creates a %moving_rms with a window of length N.
+        *  @param N Length of the moving average window.
+        */
+        explicit moving_rms(size_type N);
 
-        template <typename BiIterator>
-        inline void apply(BiIterator first, BiIterator last);
+        /**
+        *  @brief Returns the size of the moving window.
+        *  @returns Number of elements in the moving window.
+        */
+        size_type size() const;
 
-        template <typename InputIterator, typename OutputIterator>
-        inline void apply(InputIterator first, InputIterator last, OutputIterator out);
+        /**
+        *  @brief Resizes the moving window to the specified number of elements.
+        *  @param N Number of elements the moving window should contain.
+        */
+        void resize(size_type N);
 
-        inline value_type operator()(value_type tick);
+        /**
+        * @brief Reset the moving window to the original state.
+        */
+        void reset();
+
+        /**
+        * @brief Applies a moving average filter to the elements in the range [first, last) and stores the result
+        * in another range, beginning at d_first.
+        *
+        * @param first Input iterator defining the beginning of the input range.
+        * @param last Input iterator defining the ending of the input range.
+        * @param d_first Output iterator defining the beginning of the destination range.
+        */
+        template <typename InputIt, typename OutputIt>
+        void filter(InputIt first, InputIt last, OutputIt d_first);
 
     private:
-        using maf =
-            boost::accumulators::accumulator_set<value_type,
-                                                 boost::accumulators::stats<boost::accumulators::tag::rolling_mean>>;
-        size_type window_size_{3};
-        maf acc_{boost::accumulators::tag::rolling_window::window_size = window_size_};
+        dsp::ring_buffer<T, Allocator> window_;
+        T accumulated_{0};
     };
 
-    template <typename T>
-    inline MovingRMSFilter<T>::MovingRMSFilter(size_type window_size) :
-        window_size_(window_size),
-        acc_(boost::accumulators::tag::rolling_window::window_size = window_size) {}
+    template <typename T, typename Allocator>
+    moving_rms<T, Allocator>::moving_rms(size_type N) : window_(N, T()) {}
 
-    template <typename T>
-    inline typename MovingRMSFilter<T>::size_type MovingRMSFilter<T>::windowSize() const {
-        return window_size_;
+    template <typename T, typename Allocator>
+    moving_rms<T, Allocator>::size_type moving_rms<T, Allocator>::size() const {
+        return window_.capacity();
     }
 
-    template <typename T>
-    inline void MovingRMSFilter<T>::setWindowSize(size_type window_size) {
-        window_size_ = window_size;
-        reset();
+    template <typename T, typename Allocator>
+    void moving_rms<T, Allocator>::reset() {
+        window_.clear();
     }
 
-    template <typename T>
-    inline void MovingRMSFilter<T>::reset() {
-        acc_ = maf(boost::accumulators::tag::rolling_window::window_size = window_size_);
+    template <typename T, typename Allocator>
+    template <typename InputIt, typename OutputIt>
+    void moving_rms<T, Allocator>::filter(InputIt first, InputIt last, OutputIt d_first) {
+        if (window_.full()) {
+            for (; first != last; ++d_first, ++first) {
+                const auto sqr = (*first) * (*first);
+                accumulated_ -= window_.front();
+                accumulated_ += sqr;
+                window_.push_back(sqr)
+                *d_first =  std::sqrt(accumulated_ / static_cast<T>(window_.size()));
+            }
+        } else {
+            for (; first != last; ++d_first, ++first) {
+                const auto sqr = (*first) * (*first);
+                accumulated_ += sqr;
+                window_.push_back(sqr)
+                *d_first =  std::sqrt(accumulated_ / static_cast<T>(window_.size()));
+            }
+        };
     }
 
-    template <typename T>
-    inline typename MovingRMSFilter<T>::value_type MovingRMSFilter<T>::operator()(value_type tick) {
-        acc_(meta::square(tick));
-        return std::sqrt(boost::accumulators::rolling_mean(acc_));
-    }
-
-    template <typename T>
-    template <typename BiIterator>
-    inline void MovingRMSFilter<T>::apply(BiIterator first, BiIterator last) {
-        apply(first, last, first);
-    }
-
-    template <typename T>
-    template <typename InputIterator, typename OutputIterator>
-    inline void MovingRMSFilter<T>::apply(InputIterator first, InputIterator last, OutputIterator out) {
-        static_assert(std::is_same<typename std::iterator_traits<InputIterator>::value_type, value_type>::value &&
-                          std::is_same<typename std::iterator_traits<OutputIterator>::value_type, value_type>::value,
-                      "Iterator does not math the value type. No implicit conversion is allowed");
-        std::transform(first, last, out, std::ref(*this));
+    template <typename T, typename Allocator>
+    void moving_rms<T, Allocator>::resize(size_type N) {
+        window_.resize(N);
     }
 
 }}} // namespace easy::dsp::filter

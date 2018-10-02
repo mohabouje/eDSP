@@ -22,79 +22,93 @@
 #ifndef EASYDSP_FILTER_MOVING_MEDIAN_FILTER_H
 #define EASYDSP_FILTER_MOVING_MEDIAN_FILTER_H
 
-#include <boost/accumulators/accumulators.hpp>
-#include <boost/accumulators/statistics.hpp>
-#include <boost/circular_buffer.hpp>
-#include <vector>
+#include <easy/dsp/core/ring_buffer.hpp>
+#include <easy/dsp/statistics/median.hpp>
 
 namespace easy { namespace dsp { namespace filter {
 
+    /**
+     * @class moving_median
+     * @brief This class implement a cumulative moving median (rolling median or running median) filter.
+     *
+     * Given a series of numbers and a fixed subset size, the first element of the moving median is obtained by taking
+     * the median of the initial fixed subset of the number series. Then the subset is modified by "shifting forward";
+     * that is, excluding the first number of the series and including the next value in the subset.
+     *
+     *
+     * @tparam T  Type of element.
+     * @tparam Allocator  Allocator type, defaults to std::allocator<T>.
+     */
     template <typename T, typename Allocator = std::allocator<T>>
-    class MovingMedianFilter {
+    class moving_median {
     public:
         using size_type  = std::size_t;
         using value_type = T;
-
-        inline explicit MovingMedianFilter(size_type windowSize);
-        inline size_type windowSize() const;
-        inline void setWindowSize(size_type windowSize);
-        inline void reset();
-
-        template <typename BiIterator>
-        inline void apply(BiIterator first, BiIterator last);
-
-        template <typename InputIterator, typename OutputIterator>
-        inline void apply(InputIterator first, InputIterator last, OutputIterator out);
-
-        inline value_type operator()(value_type tick);
-
+    
+        /**
+         *  @brief Creates a %moving_median with a window of length N.
+         *  @param N Length of the moving median window.
+         */
+        explicit moving_median(size_type N);
+    
+        /**
+         *  @brief Returns the size of the moving window.
+         *  @returns Number of elements in the moving window.
+         */
+        size_type size() const;
+    
+        /**
+         *  @brief Resizes the moving window to the specified number of elements.
+         *  @param N Number of elements the moving window should contain.
+         */
+        void resize(size_type N);
+    
+        /**
+         * @brief Reset the moving window to the original state.
+         */
+        void reset();
+    
+        /**
+         * @brief Applies a moving median filter to the elements in the range [first, last) and stores the result
+         * in another range, beginning at d_first.
+         *
+         * @param first Input iterator defining the beginning of the input range.
+         * @param last Input iterator defining the ending of the input range.
+         * @param d_first Output iterator defining the beginning of the destination range.
+         */
+        template <typename InputIt, typename OutputIt>
+        void filter(InputIt first, InputIt last, OutputIt d_first);
+    
     private:
-        using mmf =
-            boost::accumulators::accumulator_set<value_type,
-                                                 boost::accumulators::features<boost::accumulators::tag::median>>;
-        using buf = boost::circular_buffer<value_type, Allocator>;
-        buf buffer_{};
-        mmf acc_{};
+        dsp::ring_buffer<T, Allocator> window_;
+        T accumulated_{0};
     };
-
-    template <typename T>
-    inline MovingMedianFilter<T>::MovingMedianFilter(size_type window_size) : buffer_(window_size), acc_() {}
-
-    template <typename T>
-    inline typename MovingMedianFilter<T>::size_type MovingMedianFilter<T>::windowSize() const {
-        return buffer_.capacity();
+    
+    template <typename T, typename Allocator>
+    moving_median<T, Allocator>::moving_median(size_type N) : window_(N, T()) {}
+    
+    template <typename T, typename Allocator>
+    moving_median<T, Allocator>::size_type moving_median<T, Allocator>::size() const {
+        return window_.capacity();
     }
-
-    template <typename T>
-    inline void MovingMedianFilter<T>::setWindowSize(size_type window_size) {
-        buffer_ = buf(window_size);
+    
+    template <typename T, typename Allocator>
+    void moving_median<T, Allocator>::reset() {
+        window_.clear();
     }
-
-    template <typename T>
-    inline void MovingMedianFilter<T>::reset() {
-        buffer_.clear();
+    
+    template <typename T, typename Allocator>
+    template <typename InputIt, typename OutputIt>
+    void moving_median<T, Allocator>::filter(InputIt first, InputIt last, OutputIt d_first) {
+        for (; first != last; ++d_first, ++first) {
+            window_.push_back(*first);
+            *d_first = statistics::median(window_.cbegin(), window_.cend());
+        }
     }
-
-    template <typename T>
-    inline typename MovingMedianFilter<T>::value_type MovingMedianFilter<T>::operator()(value_type tick) {
-        buffer_.push_back(tick);
-        acc_ = std::for_each(std::cbegin(buffer_), std::cend(buffer_), acc_);
-        return boost::accumulators::median(acc_);
-    }
-
-    template <typename T>
-    template <typename BiIterator>
-    inline void MovingMedianFilter<T>::apply(BiIterator first, BiIterator last) {
-        apply(first, last, first);
-    }
-
-    template <typename T>
-    template <typename InputIterator, typename OutputIterator>
-    inline void MovingMedianFilter<T>::apply(InputIterator first, InputIterator last, OutputIterator out) {
-        static_assert(std::is_same<typename std::iterator_traits<InputIterator>::value_type, value_type>::value &&
-                          std::is_same<typename std::iterator_traits<OutputIterator>::value_type, value_type>::value,
-                      "Iterator does not math the value type. No implicit conversion is allowed");
-        std::transform(first, last, out, std::ref(*this));
+    
+    template <typename T, typename Allocator>
+    void moving_median<T, Allocator>::resize(size_type N) {
+        window_.resize(N);
     }
 
 }}} // namespace easy::dsp::filter

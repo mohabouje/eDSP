@@ -163,7 +163,6 @@ namespace easy { namespace dsp {
         constexpr ring_buffer& operator=(const ring_buffer&) = default;
         constexpr ring_buffer& operator=(ring_buffer&&) = default;
 
-
         /**
          *  @brief Creates a %ring_buffer with default constructed elements.
          *  @param N The number of elements to initially create.
@@ -172,7 +171,6 @@ namespace easy { namespace dsp {
          *  constructed elements.
          */
         explicit ring_buffer(size_type N) : buffer_(N) {}
-
 
         /**
          *  @brief  Creates a %ring_buffer with copies of an exemplar element.
@@ -192,6 +190,16 @@ namespace easy { namespace dsp {
          *  responsibility.
          */
         ~ring_buffer() = default;
+
+        /**
+         *  @brief Resizes the %ring_buffer to the specified number of elements.
+         *  @param size Number of elements the %ring_buffer should contain.
+         *
+         */
+        void resize(size_type size) {
+            buffer_.resize(size);
+            clear();
+        }
 
         /**
          *  Erases all the elements. Note that this function only erases the
@@ -248,7 +256,6 @@ namespace easy { namespace dsp {
         const_iterator end() const noexcept {
             return const_iterator(this, size());
         }
-
 
         /**
          * @brief Returns a read/write iterator that points to the first
@@ -515,7 +522,6 @@ namespace easy { namespace dsp {
             buffer_[tail_] = item;
         }
 
-
         /**
          *  @brief Removes the first element of the ring.
          *
@@ -541,7 +547,6 @@ namespace easy { namespace dsp {
         void pop_back() {
             _increment_tail();
         }
-
 
     private:
         std::vector<T, Allocator> buffer_{};
