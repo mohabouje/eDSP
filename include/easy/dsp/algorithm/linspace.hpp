@@ -39,7 +39,7 @@ namespace easy { namespace dsp { inline namespace algorithm {
      */
     template <typename OutputIt, typename Numeric>
     constexpr void linspace(OutputIt d_first, Numeric N, Numeric x1, Numeric x2) {
-        const auto increment = (x2 - x1) / static_cast<value_type_t<OutputIt>>(std::trunc(N));
+        const auto increment = (x2 - x1) / static_cast<meta::value_type_t<OutputIt>>(std::trunc(N));
         for (; x1 <= x2; x1 += increment, ++first) {
             *d_first = x1;
         }

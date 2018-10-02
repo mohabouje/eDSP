@@ -23,13 +23,8 @@
 #define EASYDSP_HILBERT_HPP
 
 #include <easy/dsp/spectral/internal/fftw_impl.hpp>
-#include <easy/dsp/math/complex.hpp>
 #include <easy/dsp/utilities/real2complex.hpp>
-#include <easy/meta/data.hpp>
-#include <easy/meta/advance.hpp>
-#include <algorithm>
 #include <vector>
-#include <complex>
 
 namespace easy { namespace dsp { inline namespace spectral {
 
@@ -52,9 +47,9 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @see complex_idft
      */
     template <typename InputIt, typename OutputIt,
-              typename Allocator = std::allocator<std::complex<value_type_t<InputIt>>>>
+              typename Allocator = std::allocator<std::complex<meta::value_type_t<InputIt>>>>
     inline void hilbert(InputIt first, InputIt last, OutputIt d_first) {
-        using value_type = value_type_t<InputIt>;
+        using value_type = meta::value_type_t<InputIt>;
         const auto nfft  = static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last));
 
         std::vector<std::complex<value_type>, Allocator> input_data(nfft);

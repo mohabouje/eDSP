@@ -25,9 +25,6 @@
 #include <easy/dsp/spectral/internal/fftw_impl.hpp>
 #include <easy/dsp/utilities/mag2db.hpp>
 #include <easy/dsp/math/math.hpp>
-#include <easy/meta/iterator.hpp>
-#include <easy/meta/expects.hpp>
-#include <algorithm>
 #include <vector>
 
 namespace easy { namespace dsp { inline namespace spectral {
@@ -51,23 +48,23 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @param scale  Scale to be used in the output
      */
     template <typename InputIt, typename OutputIt,
-              typename Allocator = std::allocator<std::complex<value_type_t<OutputIt>>>>
+              typename Allocator = std::allocator<std::complex<meta::value_type_t<OutputIt>>>>
     inline void periodogram(InputIt first, InputIt last, OutputIt d_first, SpectralScale scale) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
-        using value_type = value_type_t<InputIt>;
+        using value_type = meta::value_type_t<InputIt>;
         fftw_plan<value_type> fft_{};
         const auto size = std::distance(first, last);
         std::vector<std::complex<value_type>, Allocator> fft_data_(make_fft_size(size), std::complex<value_type>(0, 0));
         fft_.dft(fftw_cast(&(*first)), fftw_cast(meta::data(fft_data_)), size);
         if (scale == SpectralScale::Linear) {
             std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
-                           [](const std::complex<value_type>& val) -> value_type_t<OutputIt> {
+                           [](const std::complex<value_type>& val) -> meta::value_type_t<OutputIt> {
                                return math::square(std::abs(val));
                            });
         } else {
             std::transform(
                 std::cbegin(fft_data_), std::cend(fft_data_), d_first,
-                [](const std::complex<value_type>& val) -> value_type_t<OutputIt> { return mag2db(std::abs(val)); });
+                [](const std::complex<value_type>& val) -> meta::value_type_t<OutputIt> { return mag2db(std::abs(val)); });
         }
     }
 

@@ -23,9 +23,6 @@
 #define EASYDSP_CEPSTRUM_HPP
 
 #include <easy/dsp/spectral/internal/fftw_impl.hpp>
-#include <easy/meta/expects.hpp>
-#include <easy/meta/advance.hpp>
-#include <algorithm>
 #include <vector>
 
 namespace easy { namespace dsp { inline namespace spectral {
@@ -44,10 +41,10 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @param d_first Output irerator defining the beginning of the destination range.
      */
     template <typename InputIt, typename OutputIt,
-              typename Allocator = std::allocator<std::complex<value_type_t<OutputIt>>>>
+              typename Allocator = std::allocator<std::complex<meta::value_type_t<OutputIt>>>>
     inline void cepstrum(InputIt first, InputIt last, OutputIt d_first) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
-        using value_type = value_type_t<InputIt>;
+        using value_type = meta::value_type_t<InputIt>;
         fftw_plan<value_type> fft_{};
         fftw_plan<value_type> ifft_{};
         const auto size = std::distance(first, last);

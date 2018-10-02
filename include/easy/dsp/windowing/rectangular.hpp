@@ -42,7 +42,7 @@ namespace easy { namespace dsp { namespace windowing {
      */
     template <typename OutIterator, typename Integer>
     constexpr void rectangular(OutIterator d_first, Integer N) {
-        using value_type = value_type_t<OutIterator>;
+        using value_type = meta::value_type_t<OutIterator>;
         using size_type  = diff_type_t<OutIterator>;
         const auto size  = static_cast<size_type>(N);
         for (size_type i = 0; i < size; ++i, ++d_first) {

@@ -25,6 +25,10 @@
 
 #include <easy/meta/is_null.hpp>
 #include <easy/meta/advance.hpp>
+#include <easy/meta/iterator.hpp>
+#include <easy/meta/expects.hpp>
+#include <easy/meta/data.hpp>
+
 #include <complex>
 #include <fftw3.h>
 #include <algorithm>

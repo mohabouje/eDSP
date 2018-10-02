@@ -41,7 +41,7 @@ namespace easy { namespace dsp { namespace statistics {
      * @see mean, geometric_mean
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> flatness(ForwardIt first, ForwardIt last) {
+    constexpr meta::value_type_t<ForwardIt> flatness(ForwardIt first, ForwardIt last) {
         const auto computed_gmean = statistics::geometric_mean(first, last);
         const auto computed_mean  = statistics::mean(first, last);
         return computed_gmean / computed_mean;

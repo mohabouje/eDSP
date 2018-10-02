@@ -41,8 +41,8 @@ namespace easy { namespace dsp { namespace statistics {
      * @returns The root mean square value of the input range.
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> rms(ForwardIt first, ForwardIt last) {
-        using input_t          = value_type_t<ForwardIt>;
+    constexpr meta::value_type_t<ForwardIt> rms(ForwardIt first, ForwardIt last) {
+        using input_t          = meta::value_type_t<ForwardIt>;
         const auto accumulated = std::inner_product(first, last, first, static_cast<input_t>(1));
         return std::sqrt(accumulated / static_cast<input_t>(std::distance(first, last)));
     }

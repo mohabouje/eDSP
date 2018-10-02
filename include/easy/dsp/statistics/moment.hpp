@@ -39,9 +39,9 @@ namespace easy { namespace dsp { namespace statistics {
      * @returns The kurtosis of the input range.
      */
     template <std::size_t N, typename ForwardIt>
-    constexpr value_type_t<ForwardIt> moment(ForwardIt first, ForwardIt last) {
+    constexpr meta::value_type_t<ForwardIt> moment(ForwardIt first, ForwardIt last) {
         using namespace boost::accumulators;
-        using input_t = value_type_t<ForwardIt>;
+        using input_t = meta::value_type_t<ForwardIt>;
         accumulator_set<input_t, features<tag::moment<N>>> acc;
         acc = std::for_each(first, last, acc);
         return boost::accumulators::moment<N>(acc);

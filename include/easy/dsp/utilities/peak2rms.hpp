@@ -41,7 +41,7 @@ namespace easy { namespace dsp { inline namespace utility {
      * @returns Peak-magnitude-to-RMS ratio.
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> peak2rms(ForwardIt first, ForwardIt last) {
+    constexpr meta::value_type_t<ForwardIt> peak2rms(ForwardIt first, ForwardIt last) {
         const auto pair    = std::minmax_element(first, last);
         const auto max_abs = std::max(std::abs(pair.first), std::abs(pair.second));
         return max_abs / statistics::rms(first, last);

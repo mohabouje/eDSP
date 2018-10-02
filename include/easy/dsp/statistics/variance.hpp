@@ -41,9 +41,9 @@ namespace easy { namespace dsp { namespace statistics {
      * @see standard_deviation
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> variance(ForwardIt first, ForwardIt last) {
+    constexpr meta::value_type_t<ForwardIt> variance(ForwardIt first, ForwardIt last) {
         using namespace boost::accumulators;
-        using input_t = value_type_t<ForwardIt>;
+        using input_t = meta::value_type_t<ForwardIt>;
         accumulator_set<input_t, features<tag::variance>> acc;
         acc = std::for_each(first, last, acc);
         return boost::accumulators::variance(acc);
@@ -62,7 +62,7 @@ namespace easy { namespace dsp { namespace statistics {
      * @see variance
      */
     template <typename ForwardIt>
-    inline value_type_t<ForwardIt> standard_deviation(ForwardIt first, ForwardIt last) {
+    inline meta::value_type_t<ForwardIt> standard_deviation(ForwardIt first, ForwardIt last) {
         return std::sqrt(variance(first, last));
     }
 

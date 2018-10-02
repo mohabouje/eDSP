@@ -24,7 +24,6 @@
 #define EASYDSP_DFT_HPP
 
 #include <easy/dsp/spectral/internal/fftw_impl.hpp>
-#include <algorithm>
 
 namespace easy { namespace dsp { inline namespace spectral {
 

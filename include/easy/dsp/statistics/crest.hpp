@@ -23,7 +23,6 @@
 #define EASYDSP_STATISTICAL_CREST_HPP
 
 #include <easy/dsp/statistics/arithmetic_mean.hpp>
-#include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
 
@@ -41,7 +40,7 @@ namespace easy { namespace dsp { namespace statistics {
      * @see mean
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> crest(ForwardIt first, ForwardIt last) {
+    constexpr meta::value_type_t<ForwardIt> crest(ForwardIt first, ForwardIt last) {
         const auto computed_mean = statistics::mean(first, last);
         const auto computed_max  = *std::max_element(first, last);
         return computed_max / computed_mean;

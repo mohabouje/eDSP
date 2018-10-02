@@ -41,8 +41,8 @@ namespace easy { namespace dsp { namespace statistics {
      * @returns The geometric mean of the input range.
      */
     template <typename ForwardIt>
-    constexpr value_type_t<ForwardIt> geometric_mean(ForwardIt first, ForwardIt last) {
-        using input_t  = value_type_t<ForwardIt>;
+    constexpr meta::value_type_t<ForwardIt> geometric_mean(ForwardIt first, ForwardIt last) {
+        using input_t  = meta::value_type_t<ForwardIt>;
         const auto acc = std::accumulate(first, last, static_cast<input_t>(0), std::multiplies<input_t>());
         const auto sz  = static_cast<input_t>(std::distance(first, last));
         return std::pow(acc, math::inv(sz));

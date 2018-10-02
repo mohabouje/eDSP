@@ -29,7 +29,7 @@
 namespace easy { namespace dsp { inline namespace algorithm {
 
     /**
-     * @brief Amplifies the elements in the range [first, last) and stores the result in another range, beginning at d_first.
+     * @brief Amplifies or attenuates the elements in the range [first, last) and stores the result in another range, beginning at d_first.
      *
      * This function increases the amplitude of the input signal defined in the range [first, last). The output signal is a
      * proportionally amplitude signal dependent of the scale factor (\f$ \alpha \f$):
@@ -45,7 +45,7 @@ namespace easy { namespace dsp { inline namespace algorithm {
     template <typename InputIt, typename OutputIt, typename Numeric>
     constexpr void amplifier(InputIt first, InputIt last, OutputIt d_first, Numeric factor) {
         std::transform(first, last, d_first,
-                       [=](const value_type_t<InputIt> val) -> value_type_t<OutputIt> { return factor * val; });
+                       [=](const meta::value_type_t<InputIt> val) -> meta::value_type_t<OutputIt> { return factor * val; });
     }
 
     /**
@@ -69,7 +69,7 @@ namespace easy { namespace dsp { inline namespace algorithm {
      */
     template <typename InputIt, typename OutputIt, typename Numeric>
     constexpr void amplifier(InputIt first, InputIt last, OutputIt d_first, Numeric factor, Numeric min, Numeric max) {
-        std::transform(first, last, d_first, [=](const value_type_t<InputIt> val) -> value_type_t<OutputIt> {
+        std::transform(first, last, d_first, [=](const meta::value_type_t<InputIt> val) -> meta::value_type_t<OutputIt> {
             const auto scaled = factor * val;
             return (scaled < min) ? min : (scaled > max) ? max : scaled;
         });

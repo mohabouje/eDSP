@@ -50,8 +50,8 @@ namespace easy { namespace dsp { inline namespace utility {
      */
     template <typename InputIt, typename OutputIt>
     constexpr void real2complex(InputIt first, InputIt last, OutputIt d_first) {
-        using input_t  = value_type_t<InputIt>;
-        using output_t = value_type_t<InputIt>;
+        using input_t  = meta::value_type_t<InputIt>;
+        using output_t = meta::value_type_t<InputIt>;
         std::transform(first, last, d_first, [](const input_t value) -> output_t { return value; });
     }
 
@@ -66,8 +66,8 @@ namespace easy { namespace dsp { inline namespace utility {
      */
     template <typename InputIt, typename OutputIt>
     constexpr void real2complex(InputIt first1, InputIt last1, InputIt first2, OutputIt d_first) {
-        using input_t  = value_type_t<InputIt>;
-        using output_t = value_type_t<InputIt>;
+        using input_t  = meta::value_type_t<InputIt>;
+        using output_t = meta::value_type_t<InputIt>;
         std::transform(first1, last1, first2, d_first, [](const input_t real, const input_t imag) -> output_t {
             return {real, imag};
         });
