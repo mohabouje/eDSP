@@ -24,17 +24,29 @@
 
 namespace easy { namespace dsp { namespace random {
 
+    /**
+     * @class constant_generator
+     * @brief This class implements a constant generator.
+     */
     template <typename T>
-    struct ConstantGenerator {
-        using result_type = T;
-        inline explicit ConstantGenerator(result_type constant) : constant_(constant) {}
+    struct constant_generator {
+        using value_type = T;
 
-        inline result_type operator()() {
-            return constant_;
+        /**
+         * @brief Creates a random generator.
+         * @param value Constant number to be generated.
+         */
+        explicit constant_generator(const value_type& value) : generator_(value) {}
+
+        /**
+         * @brief Generates a constant number.
+         * @return The generated constant number.
+         */
+        value_type operator()() {
+            return generator_;
         }
-
     private:
-        result_type constant_;
+        T generator_;
     };
 
 }}} // namespace easy::dsp::random

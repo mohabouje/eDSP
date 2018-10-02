@@ -48,24 +48,27 @@ namespace easy { namespace dsp { namespace random {
         PieceWiseLinear
     };
 
-    namespace {
-        template <typename Distribution, typename Engine = std::mt19937,
-                  typename result_type = typename Distribution::result_type>
+
+    namespace internal {
+
+        template <typename Distribution, typename Engine = std::mt19937>
         struct RandomGeneratorImpl {
+            using value_type = typename Distribution::value_type;
             template <typename... Args>
             explicit RandomGeneratorImpl(Args... arg) :
-                generator_(
-                    Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
-                distribution_(Distribution(std::forward(arg...))) {}
+                    generator_(
+                            Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
+                    distribution_(Distribution(std::forward(arg...))) {}
 
-            inline result_type operator()() {
-                return static_cast<result_type>(distribution_(generator_));
+            inline value_type operator()() {
+                return static_cast<value_type>(distribution_(generator_));
             }
 
         private:
             Engine generator_;
             Distribution distribution_;
         };
+
 
         template <Distribution Type, typename T>
         struct _RandomGenerator;
@@ -135,8 +138,35 @@ namespace easy { namespace dsp { namespace random {
 
     } // namespace
 
+    /**
+     * @class random_generator
+     * @brief This class implements a random generator according to one of the discrete probability function availables
+     * in the c++ standard.
+     *
+     * @see Distribution
+     */
     template <Distribution dist, typename T>
-    struct RandomGenerator : public _RandomGenerator<dist, T> {};
+    struct random_generator {
+        using value_type = T;
+
+        /**
+         * @brief Creates a random generator.
+         * @param arg Arguments parameters to initialize the internal engine. It depends of the chosen distribution.
+         * @see https://en.cppreference.com/w/cpp/numeric/random
+         */
+        template <typename... Args>
+        explicit random_generator(Args... arg) : generator_(arg...) {}
+
+        /**
+         * @brief Generates a random number based in the chosen distribution.
+         * @return The generated random number.
+         */
+        value_type operator()() {
+            return generator_.operator()();
+        }
+    private:
+        internal::_RandomGenerator<dist, T> generator_;
+    };
 
 }}} // namespace easy::dsp::random
 

@@ -26,34 +26,46 @@
 
 namespace easy { namespace dsp { namespace random {
 
+    /**
+    * @class pink_noise_generator
+    * @brief This class implements a pink noise generator.
+    */
     template <typename T, typename Engine = std::mt19937>
-    struct PinkNoiseGenerator {
-        using result_type = T;
-        inline PinkNoiseGenerator(result_type min, result_type max) :
-            generator_(WhiteNoiseGenerator<result_type>(min, max)) {}
+    struct pink_noise_generator {
+        using value_type = T;
 
-        inline result_type operator()() {
-            result_type white  = generator_();
+        /**
+         * @brief Creates a pink noise sequence generator.
+         */
+        inline pink_noise_generator(value_type min, value_type max) :
+            generator_(white_noise_generator<value_type>(min, max)) {}
+
+        /**
+        * @brief Generates a random number following the noise distribution.
+        * @return The generated random number.
+        */
+        inline value_type operator()() {
+            value_type white  = generator_();
             b0                 = 0.99886 * b0 + white * 0.0555179;
             b1                 = 0.99332 * b1 + white * 0.0750759;
             b2                 = 0.96900 * b2 + white * 0.1538520;
             b3                 = 0.86650 * b3 + white * 0.3104856;
             b4                 = 0.55000 * b4 + white * 0.5329522;
             b5                 = -0.7616 * b5 - white * 0.0168980;
-            result_type output = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
+            value_type output = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.11;
             b6                 = white * 0.115926;
             return output;
         }
 
     private:
-        result_type b0{0};
-        result_type b1{0};
-        result_type b2{0};
-        result_type b3{0};
-        result_type b4{0};
-        result_type b5{0};
-        result_type b6{0};
-        WhiteNoiseGenerator<T, Engine> generator_;
+        value_type b0{0};
+        value_type b1{0};
+        value_type b2{0};
+        value_type b3{0};
+        value_type b4{0};
+        value_type b5{0};
+        value_type b6{0};
+        white_noise_generator<T, Engine> generator_;
     };
 
 }}} // namespace easy::dsp::random

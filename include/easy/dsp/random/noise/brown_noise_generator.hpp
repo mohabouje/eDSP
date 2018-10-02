@@ -26,22 +26,35 @@
 
 namespace easy { namespace dsp { namespace random {
 
+    /**
+    * @class brown_noise_generator
+    * @brief This class implements a brown noise generator.
+    */
     template <typename T, typename Engine = std::mt19937>
-    struct BrownNoiseGenerator {
-        using result_type = T;
-        inline BrownNoiseGenerator(result_type min, result_type max) :
-            generator_(WhiteNoiseGenerator<result_type>(min, max)) {}
+    struct brown_noise_generator {
+        using value_type = T;
 
-        inline result_type operator()() {
-            result_type white = generator_();
+        /**
+         * @brief Creates a brown noise sequence generator.
+         */
+        inline brown_noise_generator(value_type min, value_type max) :
+            generator_(white_noise_generator<value_type>(min, max)) {}
+
+
+        /**
+        * @brief Generates a random number following the noise distribution.
+        * @return The generated random number.
+        */    
+        inline value_type operator()() {
+            value_type white = generator_();
             last_output_ += (0.02 * white);
             last_output_ /= 1.02;
             return 3.5 * last_output_;
         }
 
     private:
-        result_type last_output_{0};
-        WhiteNoiseGenerator<T, Engine> generator_;
+        value_type last_output_{0};
+        white_noise_generator<T, Engine> generator_;
     };
 
 }}} // namespace easy::dsp::random

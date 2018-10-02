@@ -28,7 +28,7 @@
 
 namespace easy { namespace dsp { namespace random {
 
-    namespace {
+    inline namespace internal {
 
         template <typename T>
         constexpr T fade(T t) noexcept {
@@ -47,14 +47,27 @@ namespace easy { namespace dsp { namespace random {
 
     } // namespace
 
+
+    /**
+    * @class perlin_noise_generator
+    * @brief This class implements a Perlin noise generator.
+    */
     template <typename T, typename Engine = std::mt19937>
-    struct PerlinNoiseGenerator {
-        using result_type = T;
-        inline PerlinNoiseGenerator() :
+    struct perlin_noise_generator {
+        using value_type = T;
+
+        /**
+         * @brief Creates a Perlin noise sequence generator.
+         */
+        inline perlin_noise_generator() :
             generator_(Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
             distribution_(std::uniform_int_distribution<T>(0, 511)) {}
 
-        inline result_type operator()() {
+        /**
+        * @brief Generates a random number following the noise distribution.
+        * @return The generated random number.
+        */
+        inline value_type operator()() {
             const auto random_value = distribution_(generator_);
             const auto index        = static_cast<std::int64_t>(random_value) & 0xFF;
             const auto floor_value  = random_value - std::floor(random_value);

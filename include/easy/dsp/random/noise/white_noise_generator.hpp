@@ -27,15 +27,27 @@
 
 namespace easy { namespace dsp { namespace random {
 
+    /**
+    * @class white_noise_generator
+    * @brief This class implements a white noise generator.
+    */
     template <typename T, typename Engine = std::mt19937>
-    struct WhiteNoiseGenerator {
-        using result_type = T;
-        inline WhiteNoiseGenerator(result_type min, result_type max) :
+    struct white_noise_generator {
+        using value_type = T;
+
+        /**
+         * @brief Creates a white noise sequence generator.
+         */
+        inline white_noise_generator(value_type min, value_type max) :
             generator_(Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
             distribution_(std::uniform_int_distribution<T>(min, max)) {}
 
-        inline result_type operator()() {
-            return static_cast<result_type>(distribution_(generator_));
+        /**
+        * @brief Generates a random number following the noise distribution.
+        * @return The generated random number.
+        */
+        inline value_type operator()() {
+        return static_cast<value_type>(distribution_(generator_));
         }
 
     private:
