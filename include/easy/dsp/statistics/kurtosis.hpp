@@ -22,14 +22,14 @@
 #ifndef EASYDSP_STATISTICAL_KURTOSIS_HPP
 #define EASYDSP_STATISTICAL_KURTOSIS_HPP
 
-#include <boost/accumulators/accumulators.hpp>
-#include <boost/accumulators/statistics.hpp>
+#include <easy/dsp/statistics/moment.hpp>
 #include <easy/meta/iterator.hpp>
+#include <cmath>
 
 namespace easy { namespace dsp { namespace statistics {
 
     /**
-     * @brief Computes the kurtosis of the range [first, last)
+     * @brief Computes the Kurtosis of the range [first, last)
      *
      * The kurtosis is the fourth standardized moment, defined as:
      * \f[
@@ -40,16 +40,15 @@ namespace easy { namespace dsp { namespace statistics {
      * where \f$ \mu_4 \f$ is the fourth central moment and \f$ \sigma \f$ is the standard deviation.
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
-     * @returns The kurtosis of the input range.
+     * @returns The Kurtosis of the input range.
      * @see moment, standard_deviation
      */
     template <typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> kurtosis(ForwardIt first, ForwardIt last) {
-        using namespace boost::accumulators;
-        using input_t = meta::value_type_t<ForwardIt>;
-        accumulator_set<input_t, features<tag::kurtosis>> acc;
-        acc = std::for_each(first, last, acc);
-        return boost::accumulators::kurtosis(acc);
+        const auto m = mean(first, last);
+        const auto m4 = moment<4>(first, last, mean);
+        const auto m2 = moment<2>(first, last, mean);
+        return m4 / (m2 * m2) - 3;
     }
 
 }}} // namespace easy::dsp::statistics

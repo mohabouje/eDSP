@@ -22,9 +22,9 @@
 #ifndef EASYDSP_STATISTICAL_SKEWNESS_H
 #define EASYDSP_STATISTICAL_SKEWNESS_H
 
-#include <boost/accumulators/accumulators.hpp>
-#include <boost/accumulators/statistics.hpp>
+#include <easy/dsp/statistics/moment.hpp>
 #include <easy/meta/iterator.hpp>
+#include <cmath>
 
 namespace easy { namespace dsp { namespace statistics {
 
@@ -45,11 +45,10 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> skewness(ForwardIt first, ForwardIt last) {
-        using namespace boost::accumulators;
-        using input_t = meta::value_type_t<ForwardIt>;
-        accumulator_set<input_t, features<tag::skewness>> acc;
-        acc = std::for_each(first, last, acc);
-        return boost::accumulators::skewness(acc);
+        const auto m = mean(first, last);
+        const auto m3 = moment<3>(first, last, mean);
+        const auto m2 = moment<2>(first, last, mean);
+        return m3 / (m2 * std::sqrt(m2));
     }
 }}} // namespace easy::dsp::statistics
 

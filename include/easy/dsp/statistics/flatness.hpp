@@ -22,7 +22,7 @@
 #ifndef EASYDSP_STATISTICAL_FLATNESS_H
 #define EASYDSP_STATISTICAL_FLATNESS_H
 
-#include <easy/dsp/statistics/arithmetic_mean.hpp>
+#include <easy/dsp/statistics/mean.hpp>
 #include <easy/dsp/statistics/geometric_mean.hpp>
 
 namespace easy { namespace dsp { namespace statistics {

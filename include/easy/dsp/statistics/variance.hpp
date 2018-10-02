@@ -22,9 +22,9 @@
 #ifndef EASYDSP_STATISTICAL_VARIANCE_H
 #define EASYDSP_STATISTICAL_VARIANCE_H
 
-#include <boost/accumulators/accumulators.hpp>
-#include <boost/accumulators/statistics.hpp>
+#include <easy/dsp/statistics/moment.hpp>
 #include <easy/meta/iterator.hpp>
+#include <cmath>
 
 namespace easy { namespace dsp { namespace statistics {
 
@@ -42,11 +42,7 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> variance(ForwardIt first, ForwardIt last) {
-        using namespace boost::accumulators;
-        using input_t = meta::value_type_t<ForwardIt>;
-        accumulator_set<input_t, features<tag::variance>> acc;
-        acc = std::for_each(first, last, acc);
-        return boost::accumulators::variance(acc);
+        return moment<2>(first, last);
     }
 
     /**

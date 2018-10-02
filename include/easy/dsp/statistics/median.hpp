@@ -22,9 +22,8 @@
 #ifndef EASYDSP_STATISTICAL_MEDIANT_HPP
 #define EASYDSP_STATISTICAL_MEDIANT_HPP
 
-#include <boost/accumulators/accumulators.hpp>
-#include <boost/accumulators/statistics.hpp>
 #include <easy/meta/iterator.hpp>
+#include <algorithm>
 #include <numeric>
 
 namespace easy { namespace dsp { namespace statistics {
@@ -42,11 +41,8 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> median(ForwardIt first, ForwardIt last) {
-        using namespace boost::accumulators;
-        using input_t = meta::value_type_t<ForwardIt>;
-        accumulator_set<input_t, features<tag::median>> acc;
-        acc = std::for_each(first, last, acc);
-        return boost::accumulators::median(acc);
+        // TODO: implement the median: do not use sorting algorithm.
+        return 0;
     }
 
 }}} // namespace easy::dsp::statistics

@@ -15,16 +15,16 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: arithmetic_mean.hpp
+ * Filename: mean.hpp
  * Author: Mohammed Boujemaoui
  * Date: 2018-06-13
  */
 #ifndef EASYDSP_STATISTICAL_MEAN_H
 #define EASYDSP_STATISTICAL_MEAN_H
 
-#include <boost/accumulators/accumulators.hpp>
-#include <boost/accumulators/statistics.hpp>
 #include <easy/meta/iterator.hpp>
+#include <numeric>
+#include <algorithm>
 
 namespace easy { namespace dsp { namespace statistics {
 
@@ -42,10 +42,9 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> mean(ForwardIt first, ForwardIt last) {
-        using namespace boost::accumulators;
-        accumulator_set<meta::value_type_t<ForwardIt>, features<tag::mean>> acc;
-        acc = std::for_each(first, last, acc);
-        return boost::accumulators::mean(acc);
+        using input_t = meta::value_type_t<ForwardIt>;
+        const auto acc = std::accumulate(first, last, static_cast<input_t>(0));
+        return acc / static_cast<input_t>(std::distance(first, last));
     }
 }}} // namespace easy::dsp::statistics
 

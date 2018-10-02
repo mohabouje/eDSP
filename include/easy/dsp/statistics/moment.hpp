@@ -22,13 +22,40 @@
 #ifndef EASYDSP_STATISTICAL_MOMENT_H
 #define EASYDSP_STATISTICAL_MOMENT_H
 
-#include <boost/accumulators/accumulators.hpp>
-#include <boost/accumulators/statistics.hpp>
-#include <boost/accumulators/statistics/moment.hpp>
+#include <easy/dsp/statistics/mean.hpp>
 #include <easy/meta/iterator.hpp>
 #include <numeric>
 
 namespace easy { namespace dsp { namespace statistics {
+
+    namespace internal {
+
+        // TODO: update this internal
+        template<int N, class T>
+        constexpr T nthPower(T x) {
+            T ret = x;
+            for (int i=1; i < N; ++i) {
+                ret *= x;
+            }
+            return ret;
+        }
+
+        template<class T, int N>
+        struct SumDiffNthPower {
+            explicit SumDiffNthPower(T x) : mean_(x) { }
+            constexpr T operator( )(T sum, T current) {
+                return sum + nthPower<N>(current - mean_);
+            }
+            T mean_;
+        };
+
+        template<class T, int N, class Iter_T>
+        T nthMoment(Iter_T first, Iter_T last, T mean)  {
+            const auto cnt = std::distance(first, last);
+            return std::accumulate(first, last, T( ), SumDiffNthPower<T, N>(mean)) / static_cast<value_type_t<Iter_T>>(cnt);
+        }
+
+    }
 
     /**
      * @brief Computes the n-th moment of the range [first, last)
@@ -36,16 +63,31 @@ namespace easy { namespace dsp { namespace statistics {
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
      * @tparam N Order of the moment.
-     * @returns The kurtosis of the input range.
+     * @returns The n-th moment of the input range.
      */
     template <std::size_t N, typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> moment(ForwardIt first, ForwardIt last) {
-        using namespace boost::accumulators;
         using input_t = meta::value_type_t<ForwardIt>;
-        accumulator_set<input_t, features<tag::moment<N>>> acc;
-        acc = std::for_each(first, last, acc);
-        return boost::accumulators::moment<N>(acc);
+        const auto mean = mean(first, last);
+        return internal::nthMoment<input_t, N>(first, last, mean);
     }
+
+    /**
+    * @brief Computes the nth moment of the range [first, last)
+    *
+    * @param first Forward iterator defining the begin of the range to examine.
+    * @param last Forward iterator defining the end of the range to examine.
+    * @param mean Average of the range [first, last)
+    * @tparam N Order of the moment.
+    * @returns The n-th moment of the input range.
+    * @see mean
+    */
+    template <std::size_t N, typename ForwardIt>
+    constexpr meta::value_type_t<ForwardIt> moment(ForwardIt first, ForwardIt last, const value_type_t<ForwardIt> mean) {
+        using input_t = meta::value_type_t<ForwardIt>;
+        return internal::nthMoment<input_t, N>(first, last, mean);
+    }
+
 
 }}} // namespace easy::dsp::statistics
 

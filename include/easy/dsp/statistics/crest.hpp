@@ -22,7 +22,7 @@
 #ifndef EASYDSP_STATISTICAL_CREST_HPP
 #define EASYDSP_STATISTICAL_CREST_HPP
 
-#include <easy/dsp/statistics/arithmetic_mean.hpp>
+#include <easy/dsp/statistics/mean.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
 
