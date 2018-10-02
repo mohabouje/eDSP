@@ -22,7 +22,7 @@
 #ifndef EASYDSP_ZOELZER_DESIGNER_HPP
 #define EASYDSP_ZOELZER_DESIGNER_HPP
 
-#include <easy/dsp/filter/iir/biquad.hpp>
+#include <easy/dsp/filter/biquad.hpp>
 #include <easy/dsp/math/constant.hpp>
 #include <easy/dsp/utilities/db2mag.hpp>
 #include <easy/dsp/math/math.hpp>

@@ -33,7 +33,8 @@ USE_MATHJAX = YES
 EXCLUDE_SYMBOLS = internal \
                 DECLARE_* \
                 *_v
-EXCLUDE_PATTERNS = */meta/*
+EXCLUDE_PATTERNS = */meta/* \
+                   */internal/*
 
 
 

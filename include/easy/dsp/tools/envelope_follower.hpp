@@ -55,7 +55,7 @@ namespace easy { namespace dsp {
          * @param rectify If true, enables the rectification of the output signal.
          */
         constexpr EnvelopeFollower(value_type samplerate, value_type attackTime, value_type releaseTime,
-                           bool rectify = false) noexcept;
+                                   bool rectify = false) noexcept;
 
         /**
          * @brief Returns the sample rate in Hz.
@@ -134,8 +134,8 @@ namespace easy { namespace dsp {
     };
 
     template <typename T>
-    constexpr EnvelopeFollower<T>::EnvelopeFollower(value_type samplerate, value_type attack_time, value_type release_time,
-                                    bool rectify) noexcept :
+    constexpr EnvelopeFollower<T>::EnvelopeFollower(value_type samplerate, value_type attack_time,
+                                                    value_type release_time, bool rectify) noexcept :
         samplerate_(samplerate),
         attack_time_(attack_time),
         release_time_(release_time),
@@ -200,8 +200,8 @@ namespace easy { namespace dsp {
             const auto rectified = rectification_ ? std::abs(*first) : *first;
             const auto current   = (last_ < rectified) ? (1 - attack_gain_) * rectified + attack_gain_ * last_
                                                      : (1 - release_gain_) * rectified + release_gain_ * last_;
-            last_ = math::is_denormal(current) ? 0 : current;
-            *d_first  = last_;
+            last_    = math::is_denormal(current) ? 0 : current;
+            *d_first = last_;
         }
     }
 

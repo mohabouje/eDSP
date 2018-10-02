@@ -38,8 +38,9 @@ namespace easy { namespace dsp { inline namespace algorithm {
      */
     template <typename InputIt, typename OutputIt>
     constexpr void fix(InputIt first, InputIt last, OutputIt d_first) {
-        std::transform(first, last, d_first,
-                       [](const meta::value_type_t<InputIt> value) -> meta::value_type_t<OutputIt> { return std::trunc(value); });
+        std::transform(
+            first, last, d_first,
+            [](const meta::value_type_t<InputIt> value) -> meta::value_type_t<OutputIt> { return std::trunc(value); });
     }
 
 }}} // namespace easy::dsp::algorithm

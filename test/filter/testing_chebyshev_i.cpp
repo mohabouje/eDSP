@@ -20,9 +20,8 @@
  * Date: 31/8/2018
  */
 
-#include <easy/dsp/filter/filter_types.hpp>
 #include <easy/dsp/filter/filter.hpp>
-#include <easy/dsp/filter/iir/biquad_cascade.hpp>
+#include <easy/dsp/filter/biquad_cascade.hpp>
 #include <catch/catch.hpp>
 
 using namespace easy::dsp;

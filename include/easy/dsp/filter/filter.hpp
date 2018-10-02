@@ -22,35 +22,81 @@
 #ifndef EASYDSP_FILTER_HPP
 #define EASYDSP_FILTER_HPP
 
-#include <easy/dsp/filter/iir/biquad.hpp>
-#include <easy/dsp/filter/iir/biquad_cascade.hpp>
-#include <easy/dsp/filter/filter_types.hpp>
+#include <easy/dsp/filter/biquad.hpp>
+#include <easy/dsp/filter/biquad_cascade.hpp>
 
-#include <easy/dsp/filter/iir/designer/rbj_designer.hpp>
-#include <easy/dsp/filter/iir/designer/zoelzer_designer.hpp>
-#include <easy/dsp/filter/iir/designer/butterworth_designer.hpp>
-#include <easy/dsp/filter/iir/designer/chebyshev_I_designer.hpp>
-#include <easy/dsp/filter/iir/designer/chebyshev_II_designer.hpp>
+#include <easy/dsp/filter/internal/rbj_designer.hpp>
+#include <easy/dsp/filter/internal/zoelzer_designer.hpp>
+#include <easy/dsp/filter/internal/butterworth_designer.hpp>
+#include <easy/dsp/filter/internal/chebyshev_I_designer.hpp>
+#include <easy/dsp/filter/internal/chebyshev_II_designer.hpp>
 
 namespace easy { namespace dsp { namespace filter {
+
+    /**
+     * @brief The DesignerType enum defines the different filter's implementation
+     * from different authors.
+     * @see FilterType
+     */
+    enum class DesignerType {
+        RBJ,         /*!< Robert Bristow-Johnson formulas from the Audio-EQ-Cookbook */
+        Zoelzer,     /*!< Udo Zölzer formulas from his book: Digital Audio Signal Processing */
+        Butterworth, /*!< Digital implementation of the classic Butterworth filter by using the bilinear transform */
+        ChebyshevI,  /*!< Digital implementation of the Chebyshev polynomials (ripple in the passband) filter by using the bilinear transform */
+        ChebyshevII, /*!< Digital implementation of the "Inverse Chebyshev" filters (ripple in the stopband) by using the bilinear transform */
+        Bessel,
+        Elliptic,    /*!< Elliptic filters design */
+        Legendre     /*!< Legendre filters design */
+    };
 
     template <typename T, DesignerType Designer, std::size_t MaxOrder>
     struct designer {};
 
+    /**
+     * @brief Robert Bristow-Johnson filter designer.
+     * @tparam T Arithmetic type.
+     * @tparam MaxOrder Maximum order.
+     */
     template <typename T, std::size_t MaxOrder>
     struct designer<T, DesignerType::RBJ, MaxOrder> {
+
+        /**
+         * @brief Returns a filter which parameters represents the designed frequency response by using the RBJ formulas.
+           @param sample_rate The sampling frequency in Hz.
+           @param fc Center Frequency or Corner Frequency in Hz, or shelf midpoint frequency, depending on which filter type.
+           @param gain_db Gain in dB, used only for peaking and shelving filters.
+           @param Q Depending of the filter represents the Quality factor, the bandwidth in octaves (between -3 dB frequencies for BPF
+                    and notch or between midpoint (gain_db/2) gain frequencies for peaking EQ) or the "shelf slope" parameter.
+         * @return #Biquad filter with the computed coefficients.
+         * @see AudioEQ-CookBook:  \link http://www.musicdsp.org/showone.php?id=197 \endlink
+         */
         template <FilterType Type, typename... Args>
-        constexpr auto design(Args... arg) const -> decltype(RBJFilterDesigner<T, Type>{}(std::declval<Args&&>()...)) {
-            return RBJFilterDesigner<T, Type>{}(arg...);
+        constexpr Biquad<T> design(T fc, T sample_rate, T Q, T gain_db = 1) const {
+            return RBJFilterDesigner<T, Type>{}(fc, sample_rate, Q, gain_db);
         }
     };
 
+    /**
+     * @brief Udo Zölzer filter designer.
+     * @tparam T Arithmetic type.
+     * @tparam MaxOrder Maximum order.
+     */
     template <typename T, std::size_t MaxOrder>
     struct designer<T, DesignerType::Zoelzer, MaxOrder> {
+        /**
+         * @brief Returns a filter which parameters represents the designed frequency response by using the Zoelzer formulas.
+           @param sample_rate The sampling frequency in Hz.
+           @param fc Center Frequency or Corner Frequency in Hz, or shelf midpoint frequency, depending on which filter type.
+           @param gain_db Gain in dB, used only for peaking and shelving filters.
+           @param Q Depending of the filter represents the Quality factor, the bandwidth in octaves (between -3 dB frequencies for BPF
+                    and notch or between midpoint (gain_db/2) gain frequencies for peaking EQ) or the "shelf slope" parameter.
+         * @return Biquad filter with the computed coefficients.
+         * @see DAFX: Digital Audio Effects, Udo Zölzer:
+         * \link https://www.wiley.com/en-us/DAFX%3A+Digital+Audio+Effects%2C+2nd+Edition-p-9780470979679 \endlink
+         */
         template <FilterType Type, typename... Args>
-        constexpr auto design(Args... arg) const
-            -> decltype(ZoelzerFilterDesigner<T, Type>{}(std::declval<Args&&>()...)) {
-            return ZoelzerFilterDesigner<T, Type>{}(arg...);
+        constexpr Biquad<T> design(T fc, T sample_rate, T Q, T gain_db = 1) const {
+            return ZoelzerFilterDesigner<T, Type>{}(fc, sample_rate, Q, gain_db);
         }
     };
 

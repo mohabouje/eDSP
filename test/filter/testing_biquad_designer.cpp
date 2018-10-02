@@ -20,7 +20,7 @@
  * Date: 31/7/2018
  */
 
-#include <easy/dsp/filter/iir/designer/rbj_designer.hpp>
+#include <easy/dsp/filter/internal/rbj_designer.hpp>
 #include <catch/catch.hpp>
 
 using namespace easy;

@@ -23,8 +23,8 @@
 #define EASYDSP_POLEFILTER_HPP
 
 #include <easy/meta/declfriend.hpp>
-#include <easy/dsp/filter/iir/designer/bilinear/layout_base.hpp>
-#include <easy/dsp/filter/iir/biquad_cascade.hpp>
+#include <easy/dsp/filter/internal/bilinear/layout_base.hpp>
+#include <easy/dsp/filter/biquad_cascade.hpp>
 #include <complex>
 
 namespace easy { namespace dsp { namespace filter {

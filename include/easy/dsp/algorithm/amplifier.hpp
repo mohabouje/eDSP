@@ -44,8 +44,9 @@ namespace easy { namespace dsp { inline namespace algorithm {
      */
     template <typename InputIt, typename OutputIt, typename Numeric>
     constexpr void amplifier(InputIt first, InputIt last, OutputIt d_first, Numeric factor) {
-        std::transform(first, last, d_first,
-                       [=](const meta::value_type_t<InputIt> val) -> meta::value_type_t<OutputIt> { return factor * val; });
+        std::transform(
+            first, last, d_first,
+            [=](const meta::value_type_t<InputIt> val) -> meta::value_type_t<OutputIt> { return factor * val; });
     }
 
     /**
@@ -69,10 +70,11 @@ namespace easy { namespace dsp { inline namespace algorithm {
      */
     template <typename InputIt, typename OutputIt, typename Numeric>
     constexpr void amplifier(InputIt first, InputIt last, OutputIt d_first, Numeric factor, Numeric min, Numeric max) {
-        std::transform(first, last, d_first, [=](const meta::value_type_t<InputIt> val) -> meta::value_type_t<OutputIt> {
-            const auto scaled = factor * val;
-            return (scaled < min) ? min : (scaled > max) ? max : scaled;
-        });
+        std::transform(first, last, d_first,
+                       [=](const meta::value_type_t<InputIt> val) -> meta::value_type_t<OutputIt> {
+                           const auto scaled = factor * val;
+                           return (scaled < min) ? min : (scaled > max) ? max : scaled;
+                       });
     }
 
 }}} // namespace easy::dsp::algorithm

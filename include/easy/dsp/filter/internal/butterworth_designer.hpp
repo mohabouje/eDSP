@@ -26,11 +26,11 @@
 #include <easy/meta/expects.hpp>
 #include <easy/dsp/math/complex.hpp>
 #include <easy/dsp/math/constant.hpp>
-#include <easy/dsp/filter/iir/designer/bilinear/bandpass_transformer.hpp>
-#include <easy/dsp/filter/iir/designer/bilinear/bandstop_transformer.hpp>
-#include <easy/dsp/filter/iir/designer/bilinear/lowpass_transformer.hpp>
-#include <easy/dsp/filter/iir/designer/bilinear/highpass_transformer.hpp>
-#include <easy/dsp/filter/iir/designer/abstract_designer.hpp>
+#include <easy/dsp/filter/internal/bilinear/bandpass_transformer.hpp>
+#include <easy/dsp/filter/internal/bilinear/bandstop_transformer.hpp>
+#include <easy/dsp/filter/internal/bilinear/lowpass_transformer.hpp>
+#include <easy/dsp/filter/internal/bilinear/highpass_transformer.hpp>
+#include <easy/dsp/filter/internal/abstract_designer.hpp>
 
 namespace easy { namespace dsp { namespace filter {
 

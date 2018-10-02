@@ -24,7 +24,6 @@
 #define EASYDSP_FILTER_BIQUAD_HPP
 
 #include <easy/dsp/math/math.hpp>
-#include <easy/dsp/filter/filter_types.hpp>
 #include <easy/meta/expects.hpp>
 #include <algorithm>
 #include <cmath>
@@ -32,6 +31,24 @@
 #include <complex>
 
 namespace easy { namespace dsp { namespace filter {
+
+    /**
+    * @brief The FilterType enum defines the different available filters.
+    */
+    enum class FilterType {
+        LowPass,           /*!< Low pass filter */
+        HighPass,          /*!< High pass filter */
+        BandPassSkirtGain, /*!< Band pass skirt filter */
+        BandPassPeakGain,  /*!< Band pass peak filter */
+        BandPass,          /*!< Band pass filter */
+        BandStop,          /*!< Band stop filter */
+        AllPass,           /*!< All pass filter */
+        LowShelf,          /*!< Low shelf (shelving) filter */
+        HighShelf,         /*!< High shelf (shelving) filter */
+        BandShelf,         /*!< Band shelf (shelving) filter */
+        Notch,             /*!< Notch filter */
+        PeakingEQ          /*!< Peaking EQ filter */
+    };
 
     /**
      * @class Biquad
@@ -211,7 +228,6 @@ namespace easy { namespace dsp { namespace filter {
         value_type a0_{1};
         value_type w0_{0};
         value_type w1_{0};
-
     };
 
     template <typename T>

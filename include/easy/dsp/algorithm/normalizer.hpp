@@ -45,9 +45,10 @@ namespace easy { namespace dsp { inline namespace algorithm {
     template <typename InputIt, typename OutputIt>
     constexpr void normalizer(InputIt first, InputIt last, OutputIt d_first) {
         const auto factor = statistics::maxabs(first, last);
-        std::transform(first, last, d_first, [factor](const meta::value_type_t<InputIt> value) -> meta::value_type_t<OutputIt> {
-            return static_cast<meta::value_type_t<OutputIt>>(value) / factor;
-        });
+        std::transform(first, last, d_first,
+                       [factor](const meta::value_type_t<InputIt> value) -> meta::value_type_t<OutputIt> {
+                           return static_cast<meta::value_type_t<OutputIt>>(value) / factor;
+                       });
     }
 
     /**
@@ -65,9 +66,10 @@ namespace easy { namespace dsp { inline namespace algorithm {
     template <typename InputIt, typename OutputIt>
     constexpr void normalizer_rms(InputIt first, InputIt last, OutputIt d_first) {
         const auto factor = statistics::rms(first, last);
-        std::transform(first, last, out, [d_first](const meta::value_type_t<InputIt> value) -> meta::value_type_t<OutputIt> {
-            return static_cast<meta::value_type_t<OutputIt>>(value) / factor;
-        });
+        std::transform(first, last, out,
+                       [d_first](const meta::value_type_t<InputIt> value) -> meta::value_type_t<OutputIt> {
+                           return static_cast<meta::value_type_t<OutputIt>>(value) / factor;
+                       });
     }
 
 }}} // namespace easy::dsp::algorithm

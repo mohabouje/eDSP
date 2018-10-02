@@ -55,7 +55,6 @@ namespace easy { namespace dsp { namespace statistics {
         return {iter, *iter};
     }
 
-
-}}}
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_STATISTICAL_PEAK_HPP

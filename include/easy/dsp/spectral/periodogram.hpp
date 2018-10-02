@@ -62,9 +62,10 @@ namespace easy { namespace dsp { inline namespace spectral {
                                return math::square(std::abs(val));
                            });
         } else {
-            std::transform(
-                std::cbegin(fft_data_), std::cend(fft_data_), d_first,
-                [](const std::complex<value_type>& val) -> meta::value_type_t<OutputIt> { return mag2db(std::abs(val)); });
+            std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
+                           [](const std::complex<value_type>& val) -> meta::value_type_t<OutputIt> {
+                               return mag2db(std::abs(val));
+                           });
         }
     }
 

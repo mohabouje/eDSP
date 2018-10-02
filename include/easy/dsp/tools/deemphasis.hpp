@@ -23,7 +23,7 @@
 #ifndef EASYDSP_DE_EMPHASIS_HPP
 #define EASYDSP_DE_EMPHASIS_HPP
 
-#include <easy/dsp/filter/iir/biquad.hpp>
+#include <easy/dsp/filter/biquad.hpp>
 
 namespace easy { namespace dsp {
 

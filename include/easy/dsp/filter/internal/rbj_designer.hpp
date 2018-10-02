@@ -24,7 +24,7 @@
 #define EASYDSP_FILTER_RBJ_DESIGNER_HPP
 
 #include <easy/meta/unused.hpp>
-#include <easy/dsp/filter/iir/biquad.hpp>
+#include <easy/dsp/filter/biquad.hpp>
 #include <easy/dsp/math/constant.hpp>
 #include <cmath>
 
