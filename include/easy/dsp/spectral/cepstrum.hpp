@@ -36,9 +36,9 @@ namespace easy { namespace dsp { inline namespace spectral {
      * {\displaystyle C_K =\left|{\mathcal {F}}^{-1}\left\{\log \left(\left|{\mathcal {F}}\{f(t)\}\right|^{2}\right)\right\}\right|^{2}}
      * \f]
      *
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      */
     template <typename InputIt, typename OutputIt,
               typename Allocator = std::allocator<std::complex<meta::value_type_t<OutputIt>>>>

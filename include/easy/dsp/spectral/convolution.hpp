@@ -40,10 +40,10 @@ namespace easy { namespace dsp { inline namespace spectral {
      *
      * \f]
      *
-     * @param first1 Input iterator defining the beginnning of the first input range.
+     * @param first1 Input iterator defining the beginning of the first input range.
      * @param last1 Input iterator defining the ending of the first input range.
-     * @param first2 Input iterator defining the beginnning of the second input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param first2 Input iterator defining the beginning of the second input range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      */
     template <typename InputIt, typename OutputIt,
               typename Allocator = std::allocator<std::complex<meta::value_type_t<OutputIt>>>>

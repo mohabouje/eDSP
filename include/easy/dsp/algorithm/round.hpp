@@ -34,7 +34,7 @@ namespace easy { namespace dsp { inline namespace algorithm {
      *
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      */
     template <typename InputIt, typename OutputIt>
     constexpr void round(InputIt first, InputIt last, OutputIt d_first) {

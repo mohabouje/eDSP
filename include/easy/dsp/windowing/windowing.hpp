@@ -151,7 +151,7 @@ namespace easy { namespace dsp { namespace windowing {
      * @brief Computes a window of the given type and length N and stores the result in the range, beginning at d_first.
      * @tparam Type Type of window to be computed
      * @param N Number of elements to compute.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      */
     template <WindowType Type, typename OutIterator, typename Integer>
     constexpr void make_window(OutIterator d_first, Integer N) {

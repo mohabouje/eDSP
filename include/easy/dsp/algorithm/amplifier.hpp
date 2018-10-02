@@ -37,9 +37,9 @@ namespace easy { namespace dsp { inline namespace algorithm {
      * \f[
      *      y(n) = \alpha x(n)
      * \f]
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @param factor Scale factor (\f$ \alpha \f$).
      */
     template <typename InputIt, typename OutputIt, typename Numeric>
@@ -60,9 +60,9 @@ namespace easy { namespace dsp { inline namespace algorithm {
      *
      * The output signal is then clipped to avoid exceding the threshold defined in the range [min, max].
      *
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @param factor Scale factor (\f$ \alpha \f$).
      * @param min Minimum threshold value.
      * @param max Maximum threshold value.

@@ -40,7 +40,7 @@ namespace easy { namespace dsp { namespace windowing {
      * where: \f$ a_{0}=0.35875;\quad a_{1}=0.48829;\quad a_{2}=0.14128;\quad a_{3}=0.01168\, \f$
      *
      * @param N Number of elements to compute.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      */
     template <typename OutIterator, typename Integer>
     constexpr void blackman_harris(OutIterator d_first, Integer N) {

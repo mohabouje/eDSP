@@ -44,9 +44,9 @@ namespace easy { namespace dsp { inline namespace utility {
      * and stores the result in another range.
      *
      * @note Use this function when the output range does not have an imaginary part.
-     * @param first Input iterator defining the beginnning of the range representing the real part.
+     * @param first Input iterator defining the beginning of the range representing the real part.
      * @param last Input iterator defining the ending of the range representing the real part.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      */
     template <typename InputIt, typename OutputIt>
     constexpr void real2complex(InputIt first, InputIt last, OutputIt d_first) {
@@ -59,10 +59,10 @@ namespace easy { namespace dsp { inline namespace utility {
      * @brief Converts a range of scalar numbers in to an equivalent complex number
      * and stores the result in another range.
      *
-     * @param first1 Input iterator defining the beginnning of the range representing the real part.
+     * @param first1 Input iterator defining the beginning of the range representing the real part.
      * @param last1 Input iterator defining the ending of the range representing the real part.
-     * @param first2 Input iterator defining the beginnning of the range representing the imaginary part.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param first2 Input iterator defining the beginning of the range representing the imaginary part.
+     * @param d_first Output iterator defining the beginning of the destination range.
      */
     template <typename InputIt, typename OutputIt>
     constexpr void real2complex(InputIt first1, InputIt last1, InputIt first2, OutputIt d_first) {

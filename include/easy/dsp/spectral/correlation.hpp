@@ -40,9 +40,9 @@ namespace easy { namespace dsp { inline namespace spectral {
      *
      * \f]
      *
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @param scale Scale factor to use.
      */
     template <typename InputIt, typename OutputIt,
@@ -81,10 +81,10 @@ namespace easy { namespace dsp { inline namespace spectral {
      *
      * \f]
      *
-     * @param first1 Input iterator defining the beginnning of the first input range.
+     * @param first1 Input iterator defining the beginning of the first input range.
      * @param last1 Input iterator defining the ending of the first input range.
-     * @param first2 Input iterator defining the beginnning of the second input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param first2 Input iterator defining the beginning of the second input range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @param scale Scale factor to use.
      */
     template <typename InputIt, typename OutputIt,

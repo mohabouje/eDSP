@@ -37,7 +37,7 @@ namespace easy { namespace dsp { inline namespace algorithm {
      * @param last1 Forward iterator defining the end of the first range.
      * @param first2 Forward iterator defining the begin of the second range.
      * @param last2 Forward iterator defining the end of the second range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      */
     template <typename InputIt, typename OutputIt>
     constexpr void concatenate(InputIt first1, InputIt last1, InputIt first2, InputIt last2, OutputIt d_first) {

@@ -43,7 +43,8 @@ namespace easy { namespace dsp { namespace filter {
      *    H(z)={\frac  {b_{0}+b_{1}z^{{-1}}+b_{2}z^{{-2}}}{a_{0}+a_{1}z^{{-1}}+a_{2}z^{{-2}}}}
      * \f]
      *
-     * Which is often normalized by dividing all coefficients by a0. This class performs the filtering with a Direct Form I :
+     * Which is often normalized by dividing all coefficients by a0. This class performs the filtering with a Direct Form I:
+     *
      * \f[
      *  y[n]={\frac  {1}{a_{0}}}\left(b_{0}x[n]+b_{1}x[n-1]+b_{2}x[n-2]-a_{1}y[n-1]-a_{2}y[n-2]\right)
      * \f]
@@ -167,9 +168,9 @@ namespace easy { namespace dsp { namespace filter {
 
         /**
          * @brief Filters the signal in the range [first, last) and stores the result in another range, beginning at d_first.
-         * @param first Input iterator defining the beginnning of the input range.
+         * @param first Input iterator defining the beginning of the input range.
          * @param last Input iterator defining the ending of the input range.
-         * @param d_first Output irerator defining the beginning of the destination range.
+         * @param d_first Output iterator defining the beginning of the destination range.
          * @see tick
          */
         template <typename InputIt, typename OutputIt>
@@ -195,7 +196,7 @@ namespace easy { namespace dsp { namespace filter {
         constexpr operator bool() const noexcept;
 
         /**
-         * @brief Computes the output of filtering one digital timestep.
+         * @brief Computes the output of filtering one digital time-step.
          * @param value Input value to be filtered.
          * @return Filtered value.
          */
@@ -318,7 +319,6 @@ namespace easy { namespace dsp { namespace filter {
 
     template <typename T>
     constexpr typename Biquad<T>::value_type Biquad<T>::tick(const value_type value) noexcept {
-        // Using Direct Form I
         const auto out = b0_ * value + w0_;
         w0_            = b1_ * value - a1_ * out + w1_;
         w1_            = b2_ * value - a2_ * out;

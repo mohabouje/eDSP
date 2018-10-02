@@ -30,7 +30,7 @@ namespace easy { namespace dsp { namespace windowing {
     /**
      * @brief Computes a Bartlett window of length N and stores the result in the range, beginning at d_first.
      * @param N Number of elements to compute.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      */
     template <typename OutIterator, typename Integer>
     constexpr void bartlett(OutIterator d_first, Integer N) {

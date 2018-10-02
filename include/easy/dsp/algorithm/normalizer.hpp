@@ -37,9 +37,9 @@ namespace easy { namespace dsp { inline namespace algorithm {
      * \f[
      *      y = \frac{x}{\frac{\sum_{n=1}^{N}x(n)}{N}}
      * \f]
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @see maxabs
      */
     template <typename InputIt, typename OutputIt>
@@ -57,9 +57,9 @@ namespace easy { namespace dsp { inline namespace algorithm {
      * \f[
      *   y = \frac{x}{\sqrt{\frac{\sum_{n=1}^{N}\left|x(n)^2\right|}{N}}}
      * \f]
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @see rms
      */
     template <typename InputIt, typename OutputIt>

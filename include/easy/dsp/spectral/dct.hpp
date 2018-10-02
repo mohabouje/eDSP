@@ -31,9 +31,9 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @brief Computes the Discrete-Cosine-Transform of the range [first, last) and stores the result in another range,
      *  beginning at d_first.
      *
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @param type  Discrete cosine transform type
      * @see DCT_Type
      */
@@ -48,9 +48,9 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @brief Computes the Inverse-Discrete-Cosine-Transform of the range [first, last) and stores the result in another range,
      *  beginning at d_first.
      *
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @param type  Discrete cosine transform type
      * @see DCT_Type
      */

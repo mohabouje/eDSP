@@ -41,7 +41,7 @@ namespace easy { namespace dsp { namespace windowing {
      * where: \f$ a_{0}=0.54;\quad a_{1}=0.46 \f$
      *
      * @param N Number of elements to compute.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      */
     template <typename OutIterator, typename Integer>
     constexpr void hamming(OutIterator d_first, Integer N) {

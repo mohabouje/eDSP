@@ -40,7 +40,7 @@ namespace easy { namespace dsp { namespace windowing {
      * where: \f$ a_{0}=1;\quad a_{1}=1.93;\quad a_{2}=1.29;\quad a_{3}=0.388;\quad a_{4}=0.028\, \f$
      *
      * @param N Number of elements to compute.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      */
     template <typename OutIterator, typename Integer>
     constexpr void flattop(OutIterator d_first, Integer N) {

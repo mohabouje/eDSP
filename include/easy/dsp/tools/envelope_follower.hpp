@@ -116,9 +116,9 @@ namespace easy { namespace dsp {
          * @brief Computes the envelope of the element's value in the range [first, last),
          * and stores the result in another range, beginning at d_first.
          *
-         * @param first Input iterator defining the beginnning of the input range.
+         * @param first Input iterator defining the beginning of the input range.
          * @param last Input iterator defining the ending of the input range.
-         * @param d_first Output irerator defining the beginning of the destination range.
+         * @param d_first Output iterator defining the beginning of the destination range.
          */
         template <typename InIterator, typename OutIterator>
         constexpr void apply(InIterator first, InIterator last, OutIterator d_first);

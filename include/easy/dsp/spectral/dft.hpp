@@ -38,9 +38,9 @@ namespace easy { namespace dsp { inline namespace spectral {
      * \f]
      *
      * @tparam T Underlying type to perform the arithmetic operations (float, double or long double).
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @see complex_idft
      */
     template <typename T, typename InputIt, typename OutputIt>
@@ -60,9 +60,9 @@ namespace easy { namespace dsp { inline namespace spectral {
      * {\displaystyle x_{n}={\frac {1}{N}}\sum _{k=0}^{N-1}X_{k}e^{{\frac {2\pi i}{N}}kn}\quad \quad n=0,\dots ,N-1.}
      * \f]
      * @tparam T Underlying type to perform the arithmetic operations (float, double or long double).
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @see complex_dft
      */
     template <typename T, typename InputIt, typename OutputIt>
@@ -81,9 +81,9 @@ namespace easy { namespace dsp { inline namespace spectral {
      * \f$ F(i) \f$ is the conjugate of  \f$ F(N - i) \f$, where \f$ N \f$ is the size of the DFT. To benefit from this property (speed and space advantages), the input and output arrays are of different sizes and types: the input is \f$ N \f$ real numbers,
      * while the output is \f$ \frac{N}{2} + 1 \f$ complex numbers (the non-redundant outputs) where the division is rounded down.
      *
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @see make_fft_size
      */
     template <typename InputIt, typename OutputIt>
@@ -102,9 +102,9 @@ namespace easy { namespace dsp { inline namespace spectral {
      * \f$ F(i) \f$ is the conjugate of  \f$ F(N - i) \f$, where \f$ N \f$ is the size of the DFT. To benefit from this property (speed and space advantages), the input and output arrays are of different sizes and types: the input is \f$ N \f$ real numbers,
      * while the output is \f$ \frac{N}{2} + 1 \f$ complex numbers (the non-redundant outputs) where the division is rounded down.
      *
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @see make_ifft_size
      */
     template <typename InputIt, typename OutputIt>

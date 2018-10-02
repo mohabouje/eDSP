@@ -41,9 +41,9 @@ namespace easy { namespace dsp { inline namespace spectral {
      * {\displaystyle {\widehat {s}}(t)={\mathcal {H}}\{s\}(t)=(h*s)(t)={\frac {1}{\pi }}\int _{-\infty }^{\infty }{\frac {s(\tau )}{t-\tau }}\,d\tau .\,}
      * \f]
      *
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @see complex_idft
      */
     template <typename InputIt, typename OutputIt,

@@ -42,9 +42,9 @@ namespace easy { namespace dsp { inline namespace spectral {
      *
      * where T, is the inverse of the sample rate \f$ f_s \f$.
      *
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @param scale  Scale to be used in the output
      */
     template <typename InputIt, typename OutputIt,

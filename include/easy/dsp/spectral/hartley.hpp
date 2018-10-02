@@ -37,9 +37,9 @@ namespace easy { namespace dsp { inline namespace spectral {
         {\displaystyle H_{k}=\sum _{n=0}^{N-1}x_{n}\operatorname {cas} \left({\frac {2\pi }{N}}nk\right)=\sum _{n=0}^{N-1}x_{n}\left[\cos \left({\frac {2\pi }{N}}nk\right)+\sin \left({\frac {2\pi }{N}}nk\right)\right]\quad \quad k=0,\dots ,N-1}
      * \f]
      *
-     * @param first Input iterator defining the beginnning of the input range.
+     * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output irerator defining the beginning of the destination range.
+     * @param d_first Output iterator defining the beginning of the destination range.
      * @see complex_idft
      */
     template <typename InputIt, typename OutputIt>
