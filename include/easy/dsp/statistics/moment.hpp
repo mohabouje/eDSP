@@ -74,7 +74,7 @@ namespace easy { namespace dsp { namespace statistics {
     }
 
     /**
-    * @brief Computes the nth moment of the range [first, last)
+    * @brief Computes the nth moment of the range [first, last) considering the precomputed average.
     *
     * @param first Forward iterator defining the begin of the range to examine.
     * @param last Forward iterator defining the end of the range to examine.

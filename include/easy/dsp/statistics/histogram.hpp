@@ -58,15 +58,12 @@ namespace easy { namespace dsp { namespace statistics {
          * @param out Output iterator containing the pairs (bin/sample).
          */
         template <typename InIterator, typename OutIterator>
-        constexpr void compute(InIterator first, InIterator last, OutIterator out) {
-
-        }
+        constexpr void compute(InIterator first, InIterator last, OutIterator out) {}
 
     private:
         size_type num_bins_;
         size_type cache_size_;
     };
-
 
 }}} // namespace easy::dsp::statistics
 

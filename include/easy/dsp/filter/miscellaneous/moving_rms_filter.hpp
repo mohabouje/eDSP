@@ -111,15 +111,13 @@ namespace easy { namespace dsp { namespace filter {
                 const auto sqr = (*first) * (*first);
                 accumulated_ -= window_.front();
                 accumulated_ += sqr;
-                window_.push_back(sqr)
-                *d_first =  std::sqrt(accumulated_ / static_cast<T>(window_.size()));
+                window_.push_back(sqr)* d_first = std::sqrt(accumulated_ / static_cast<T>(window_.size()));
             }
         } else {
             for (; first != last; ++d_first, ++first) {
                 const auto sqr = (*first) * (*first);
                 accumulated_ += sqr;
-                window_.push_back(sqr)
-                *d_first =  std::sqrt(accumulated_ / static_cast<T>(window_.size()));
+                window_.push_back(sqr)* d_first = std::sqrt(accumulated_ / static_cast<T>(window_.size()));
             }
         };
     }

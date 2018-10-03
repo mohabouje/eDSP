@@ -95,10 +95,10 @@ Those are the list of features that are implemented or scheduled to be. All of t
   - [ ] Gauss
 
 - [x] Implement basic oscillators
-  - [x] Sinusoidal Oscillator
-  - [x] Square Oscillator
-  - [x] Triangular Oscillator
-  - [x] Sawtooth Oscillator
+  - [x] Sinusoidal oscillator
+  - [x] Square oscillator
+  - [x] Triangular oscillator
+  - [x] Sawtooth oscillator
 
 - [ ] Spectral
   - [x] Auto Correlation

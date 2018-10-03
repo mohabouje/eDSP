@@ -29,7 +29,7 @@ SKIP_FUNCTION_MACROS = YES
 HIDE_UNDOC_MEMBERS     = YES
 HIDE_UNDOC_CLASSES     = YES
 USE_MATHJAX = YES
-
+INHERIT_DOCS = YES
 EXCLUDE_SYMBOLS = internal \
                 DECLARE_* \
                 *_v

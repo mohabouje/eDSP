@@ -491,7 +491,7 @@ namespace easy { namespace dsp {
 
         /**
         *  @brief Inserts an object at the end of the %ring_buffer.
-        *  @param  args  Arguments.
+        *  @param arg  Arguments.
         *  @return  An iterator that points to the inserted data.
         *
         *  This function will insert an object of type T constructed

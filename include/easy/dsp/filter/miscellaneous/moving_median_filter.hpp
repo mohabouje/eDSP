@@ -44,30 +44,30 @@ namespace easy { namespace dsp { namespace filter {
     public:
         using size_type  = std::size_t;
         using value_type = T;
-    
+
         /**
          *  @brief Creates a %moving_median with a window of length N.
          *  @param N Length of the moving median window.
          */
         explicit moving_median(size_type N);
-    
+
         /**
          *  @brief Returns the size of the moving window.
          *  @returns Number of elements in the moving window.
          */
         size_type size() const;
-    
+
         /**
          *  @brief Resizes the moving window to the specified number of elements.
          *  @param N Number of elements the moving window should contain.
          */
         void resize(size_type N);
-    
+
         /**
          * @brief Reset the moving window to the original state.
          */
         void reset();
-    
+
         /**
          * @brief Applies a moving median filter to the elements in the range [first, last) and stores the result
          * in another range, beginning at d_first.
@@ -78,25 +78,25 @@ namespace easy { namespace dsp { namespace filter {
          */
         template <typename InputIt, typename OutputIt>
         void filter(InputIt first, InputIt last, OutputIt d_first);
-    
+
     private:
         dsp::ring_buffer<T, Allocator> window_;
         T accumulated_{0};
     };
-    
+
     template <typename T, typename Allocator>
     moving_median<T, Allocator>::moving_median(size_type N) : window_(N, T()) {}
-    
+
     template <typename T, typename Allocator>
     moving_median<T, Allocator>::size_type moving_median<T, Allocator>::size() const {
         return window_.capacity();
     }
-    
+
     template <typename T, typename Allocator>
     void moving_median<T, Allocator>::reset() {
         window_.clear();
     }
-    
+
     template <typename T, typename Allocator>
     template <typename InputIt, typename OutputIt>
     void moving_median<T, Allocator>::filter(InputIt first, InputIt last, OutputIt d_first) {
@@ -105,7 +105,7 @@ namespace easy { namespace dsp { namespace filter {
             *d_first = statistics::median(window_.cbegin(), window_.cend());
         }
     }
-    
+
     template <typename T, typename Allocator>
     void moving_median<T, Allocator>::resize(size_type N) {
         window_.resize(N);

@@ -22,49 +22,87 @@
 #ifndef EASYDSP_OSCILLATOR_SAWTOOTH_HPP
 #define EASYDSP_OSCILLATOR_SAWTOOTH_HPP
 
-#include "easy/dsp/oscillators/oscillator_impl.hpp"
-#include "easy/dsp/math/constant.hpp"
+#include <easy/dsp/oscillators/sinusoidal.hpp>
+#include <easy/dsp/math/constant.hpp>
 
 namespace easy { namespace dsp { namespace oscillators {
 
+    /**
+     * @class sawtooth_oscillator
+     * @brief The class %sawtooth_oscillator generates a sawtooth signal.
+     *
+     * The signal increases linearly from -1 to 1 in\f$ [0, 2  \pi  wi] \f$ interval, and decreases linearly from 1 to
+     * -1 in the interval \f$ 2  \pi  w, 2  \pi] \f$, where \f$ w \f$ is the width of the periodic signal.
+     *
+     * If \f$ w \f$ is 0.5, the function generates a standard triangular wave. The triangle wave shares many geometric
+     * similarities with the sawtooth wave, except it has two sloping line segments.
+     */
     template <typename T>
-    class SawtoothOscillator : public Oscillator<T> {
+    class sawtooth_oscillator : public oscillator<T> {
     public:
-        using value_type = typename Oscillator<T>::value_type;
-        constexpr SawtoothOscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                     value_type width) noexcept;
+        using value_type = T;
 
+        /**
+         * @brief Creates a sawtooth oscillator that generates a waveform with the configuration.
+         *
+         * @param amplitude Amplitude of the waveform.
+         * @param samplerate The sampling frequency in Hz.
+         * @param frequency The fundamental frequency of the signal (also known as pitch).
+         * @param width Width factor, numeric value from [0,1]
+         */
+        constexpr sawtooth_oscillator(value_type amplitude,
+                                      value_type samplerate,
+                                      value_type frequency,
+                                      value_type width) noexcept;
+        /**
+         * @brief Generates one step.
+         * @return Returns the value of the current step.
+         */
         constexpr value_type operator()();
-        constexpr void set_width(value_type dutty) noexcept;
+
+        /**
+         * @brief Set the width of the periodic signal
+         * @param width Numeric value from in the interval [0,1]
+         * @see width
+         */
+        constexpr void set_width(value_type width) noexcept;
+
+        /**
+         * @brief Returns the width of the periodic signal
+         *
+         * The width is a real number between 0 and 1 which specifies the point between
+         * 0 and \f$ 2  \pi \f$ where the maximum is.
+         * @return Numeric value from in the interval [0,1]
+         */
         constexpr value_type width() const noexcept;
 
     private:
-        value_type width_{0};
+        value_type width_{0.3};
     };
 
     template <typename T>
-    constexpr SawtoothOscillator<T>::SawtoothOscillator(value_type amplitude, value_type samplerate,
+    constexpr sawtooth_oscillator<T>::sawtooth_oscillator(value_type amplitude, value_type samplerate,
                                                         value_type frequency, value_type width) noexcept :
-        Oscillator<T>(amplitude, samplerate, frequency, 0),
+        oscillator<T>(amplitude, samplerate, frequency, 0),
         width_(width) {}
 
     template <typename T>
-    constexpr void SawtoothOscillator<T>::set_width(value_type dutty) noexcept {
-        width_ = dutty / Oscillator<T>::frequency();
+    constexpr void sawtooth_oscillator<T>::set_width(value_type width) noexcept {
+        width_ = width / oscillator<T>::frequency();
     }
 
     template <typename T>
-    constexpr typename Oscillator<T>::value_type SawtoothOscillator<T>::width() const noexcept {
-        return width_ * Oscillator<T>::frequency();
+    constexpr typename sawtooth_oscillator<T>::value_type sawtooth_oscillator<T>::width() const noexcept {
+        return width_ * oscillator<T>::frequency();
     }
 
     template <typename T>
-    constexpr typename Oscillator<T>::value_type SawtoothOscillator<T>::operator()() {
-        const auto t               = Oscillator<T>::timestamp();
+    constexpr typename sawtooth_oscillator<T>::value_type sawtooth_oscillator<T>::operator()() {
+        const auto t               = oscillator<T>::timestamp();
         const value_type result    = (t >= width_) ? -2 * t / (1 - width_) + 1 : 2 * t / width_ - 1;
-        const value_type increased = t + Oscillator<T>::samplingPeriod();
-        this->setTimestamp((increased > 1. / Oscillator<T>::frequency()) ? 0 : increased);
-        return result * Oscillator<T>::amplitude();
+        const value_type increased = t + oscillator<T>::sampling_period();
+        this->set_timestamp((increased > 1. / oscillator<T>::frequency()) ? 0 : increased);
+        return result * oscillator<T>::amplitude();
     }
 
 }}} // namespace easy::dsp::oscillators

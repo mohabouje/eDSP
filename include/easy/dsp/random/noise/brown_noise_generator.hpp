@@ -40,11 +40,10 @@ namespace easy { namespace dsp { namespace random {
         inline brown_noise_generator(value_type min, value_type max) :
             generator_(white_noise_generator<value_type>(min, max)) {}
 
-
         /**
         * @brief Generates a random number following the noise distribution.
         * @return The generated random number.
-        */    
+        */
         inline value_type operator()() {
             value_type white = generator_();
             last_output_ += (0.02 * white);

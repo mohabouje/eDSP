@@ -22,80 +22,43 @@
 #ifndef EASYDSP_OSCILLATOR_TRIANGLE_HPP
 #define EASYDSP_OSCILLATOR_TRIANGLE_HPP
 
-#include "easy/dsp/oscillators/oscillator_impl.hpp"
-#include "easy/dsp/math/constant.hpp"
+#include <easy/dsp/oscillators/sinusoidal.hpp>
+#include <easy/dsp/math/constant.hpp>
 
 namespace easy { namespace dsp { namespace oscillators {
 
+    /**
+     * @class triangular_oscillator
+     * @brief The class %triangular_oscillator generates a sawtooth signal.
+     *
+     * The signal increases linearly from -1 to 1 in\f$ [0, \pi ] \f$ interval, and decreases linearly from 1 to
+     * -1 in the interval \f$ [ \pi , 2 \pi] \f$.
+     *
+     * The triangle wave shares many geometric similarities with the sawtooth wave, except it has two sloping line segments.
+     * @see sawtooth_oscillator
+     */
     template <typename T>
-    class TriangularOscillator : public Oscillator<T> {
+    class triangular_oscillator : public sawtooth_oscillator<T> {
     public:
-        using value_type = typename Oscillator<T>::value_type;
-        constexpr TriangularOscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                       value_type width, value_type skew) noexcept;
-        constexpr value_type operator()();
-        constexpr void set_width(value_type width) noexcept;
-        constexpr value_type width() const noexcept;
-        constexpr void set_skew(value_type skew) noexcept;
-        constexpr value_type skew() const noexcept;
+        using value_type = T;
 
-    private:
-        value_type width_{0.3};
-        value_type skew_{0};
-        value_type peak_{0};
-        constexpr void compute_peak_position();
+        /**
+         * @brief Creates a sawtooth oscillator that generates a waveform with the configuration.
+         *
+         * @param amplitude Amplitude of the waveform.
+         * @param samplerate The sampling frequency in Hz.
+         * @param frequency The fundamental frequency of the signal (also known as pitch).
+         */
+        constexpr triangular_oscillator(value_type amplitude,
+                                      value_type samplerate,
+                                      value_type frequency) noexcept;
     };
 
     template <typename T>
-    constexpr TriangularOscillator<T>::TriangularOscillator(value_type amplitude, value_type samplerate,
-                                                            value_type frequency, value_type width,
-                                                            value_type skew) noexcept :
-        Oscillator<T>(amplitude, samplerate, frequency, 0),
-        width_(width),
-        skew_(skew) {}
-
-    template <typename T>
-    constexpr typename Oscillator<T>::value_type TriangularOscillator<T>::operator()() {
-        const auto half_w = width_ / 2;
-        const auto t      = Oscillator<T>::timestamp();
-        value_type result = 0;
-        if (t >= half_w && t < peak_) {
-            result = (t + half_w) / (peak_ + half_w);
-        } else if (t > peak_ && t < half_w) {
-            result = (t - half_w) / (peak_ - half_w);
-        }
-
-        const value_type increased = t + Oscillator<T>::samplingPeriod();
-        this->setTimestamp((increased > 1. / Oscillator<T>::frequency()) ? 0 : increased);
-        return result * Oscillator<T>::amplitude();
-    }
-
-    template <typename T>
-    constexpr typename Oscillator<T>::value_type TriangularOscillator<T>::skew() const noexcept {
-        return skew_;
-    }
-
-    template <typename T>
-    constexpr void TriangularOscillator<T>::set_skew(value_type skew) noexcept {
-        skew_ = skew;
-        compute_peak_position();
-    }
-
-    template <typename T>
-    constexpr typename Oscillator<T>::value_type TriangularOscillator<T>::width() const noexcept {
-        return width_;
-    }
-
-    template <typename T>
-    constexpr void TriangularOscillator<T>::set_width(value_type width) noexcept {
-        width_ = width;
-        compute_peak_position();
-    }
-
-    template <typename T>
-    constexpr void TriangularOscillator<T>::compute_peak_position() {
-        peak_ = skew_ * width_ / static_cast<T>(2);
-    }
+    constexpr triangular_oscillator<T>::triangular_oscillator(value_type amplitude,
+                                                              value_type samplerate,
+                                                          value_type frequency) noexcept :
+            sawtooth_oscillator<T>(amplitude, samplerate, frequency, 0.5) {}
 
 }}} // namespace easy::dsp::oscillators
 

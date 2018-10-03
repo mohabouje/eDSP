@@ -28,7 +28,6 @@
 
 namespace easy { namespace dsp { namespace random {
 
-
     /**
     * @class binary_generator
     * @brief This class implements a binary generator according to the discrete probability function.
@@ -46,9 +45,9 @@ namespace easy { namespace dsp { namespace random {
          * @param probability The p distribution parameter (probability of generating true)
          */
         explicit binary_generator(value_type probability) :
-                generator_(Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
+            generator_(Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
 
-                distribution_(std::bernoulli_distribution(probability)) {}
+            distribution_(std::bernoulli_distribution(probability)) {}
 
         /**
          * @brief Generates a boolean value according to the discrete probability function.
@@ -57,6 +56,7 @@ namespace easy { namespace dsp { namespace random {
         value_type operator()() {
             return static_cast<value_type>(distribution_(generator_));
         }
+
     private:
         Engine generator_;
         std::bernoulli_distribution distribution_;

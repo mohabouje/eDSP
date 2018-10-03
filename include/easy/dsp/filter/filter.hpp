@@ -140,6 +140,14 @@ namespace easy { namespace dsp { namespace filter {
         }
     };
 
+
+    /**
+     * @brief Creates a filter using args as the parameter list for the construction.
+     * @tparam T Value type
+     * @tparam Type Types of filter to be created.
+     * @param arg Arguments parameters to constructs the filter.
+     * @return A filter with the given configuration.
+     */
     template <typename T, DesignerType Designer, FilterType Type, std::size_t MaxOrder, typename... Args>
     constexpr auto make_filter(Args... arg)
         -> decltype(designer<T, Designer, MaxOrder>{}.template design<Type>(std::declval<Args&&>()...)) {

@@ -47,7 +47,7 @@ namespace easy { namespace dsp { namespace random {
         * @return The generated random number.
         */
         inline value_type operator()() {
-        return static_cast<value_type>(distribution_(generator_));
+            return static_cast<value_type>(distribution_(generator_));
         }
 
     private:

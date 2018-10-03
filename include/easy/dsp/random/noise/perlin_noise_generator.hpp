@@ -29,7 +29,6 @@
 namespace easy { namespace dsp { namespace random {
 
     inline namespace internal {
-
         template <typename T>
         constexpr T fade(T t) noexcept {
             return t * t * t * (t * (t * 6 - 15) + 10);
@@ -45,8 +44,7 @@ namespace easy { namespace dsp { namespace random {
             return (hash & 1) == 0 ? x : -x;
         }
 
-    } // namespace
-
+    } // namespace internal
 
     /**
     * @class perlin_noise_generator

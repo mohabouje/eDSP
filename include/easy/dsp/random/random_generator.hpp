@@ -27,27 +27,30 @@
 
 namespace easy { namespace dsp { namespace random {
 
-    enum class Distribution {
-        Uniform,
-        Bernoulli,
-        Binomial,
-        Geometric,
-        Poisson,
-        Exponential,
-        Gamma,
-        Weibull,
-        ExtremeValue,
-        Normal,
-        LogNormal,
-        ChiSquared,
-        Cauchy,
-        Fisher,
-        Student,
-        Discrete,
-        PieceWiseConstant,
-        PieceWiseLinear
+    /**
+     * @brief The DistributionType enum represents all the available distributions in the pseudo-random number
+     * generation library.
+     */
+    enum class DistributionType {
+        Uniform,           /*<! Produces real values evenly distributed across a range */
+        Bernoulli,         /*<! Produces random values on a Bernoulli distribution */
+        Binomial,          /*<! Produces random values on a binomial distribution */
+        Geometric,         /*<! Produces random values on a geometric distribution */
+        Poisson,           /*<! Produces random values on a Poisson distribution */
+        Exponential,       /*<! Produces random values on a exponential distribution */
+        Gamma,             /*<! Produces random values on a Gamma distribution */
+        Weibull,           /*<! Produces random values on a Weibull distribution */
+        ExtremeValue,      /*<! Produces random values on a extreme value distribution */
+        Normal,            /*<! Produces random values on a normal distribution */
+        LogNormal,         /*<! Produces random values on a logarithmic normal distribution */
+        ChiSquared,        /*<! Produces random values on a chi-squared distribution */
+        Cauchy,            /*<! Produces random values on a Cauchy distribution */
+        Fisher,            /*<! Produces random values on a Fisher distribution */
+        Student,           /*<! Produces random values on a Student distribution */
+        Discrete,          /*<! Produces random values on a discrete distribution */
+        PieceWiseConstant, /*<! Produces real values distributed on constant subintervals.  */
+        PieceWiseLinear    /*<! Produces real values distributed on defined subintervals.  */
     };
-
 
     namespace internal {
 
@@ -56,9 +59,9 @@ namespace easy { namespace dsp { namespace random {
             using value_type = typename Distribution::value_type;
             template <typename... Args>
             explicit RandomGeneratorImpl(Args... arg) :
-                    generator_(
-                            Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
-                    distribution_(Distribution(std::forward(arg...))) {}
+                generator_(
+                    Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
+                distribution_(Distribution(std::forward(arg...))) {}
 
             inline value_type operator()() {
                 return static_cast<value_type>(distribution_(generator_));
@@ -69,74 +72,76 @@ namespace easy { namespace dsp { namespace random {
             Distribution distribution_;
         };
 
-
-        template <Distribution Type, typename T>
+        template <DistributionType Type, typename T>
         struct _RandomGenerator;
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Uniform, T>
+        struct _RandomGenerator<DistributionType::Uniform, T>
             : public RandomGeneratorImpl<std::uniform_real_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Bernoulli, T>
+        struct _RandomGenerator<DistributionType::Bernoulli, T>
             : public RandomGeneratorImpl<std::bernoulli_distribution, T> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Binomial, T> : public RandomGeneratorImpl<std::binomial_distribution<T>> {
+        struct _RandomGenerator<DistributionType::Binomial, T> : public RandomGeneratorImpl<std::binomial_distribution<T>> {
         };
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Geometric, T>
+        struct _RandomGenerator<DistributionType::Geometric, T>
             : public RandomGeneratorImpl<std::geometric_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Poisson, T> : public RandomGeneratorImpl<std::poisson_distribution<T>> {};
+        struct _RandomGenerator<DistributionType::Poisson, T> : public RandomGeneratorImpl<std::poisson_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Exponential, T>
+        struct _RandomGenerator<DistributionType::Exponential, T>
             : public RandomGeneratorImpl<std::exponential_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Gamma, T> : public RandomGeneratorImpl<std::gamma_distribution<T>> {};
+        struct _RandomGenerator<DistributionType::Gamma, T> : public RandomGeneratorImpl<std::gamma_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Weibull, T> : public RandomGeneratorImpl<std::weibull_distribution<T>> {};
+        struct _RandomGenerator<DistributionType::Weibull, T> : public RandomGeneratorImpl<std::weibull_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::ExtremeValue, T>
+        struct _RandomGenerator<DistributionType::ExtremeValue, T>
             : public RandomGeneratorImpl<std::extreme_value_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Normal, T> : public RandomGeneratorImpl<std::normal_distribution<T>> {};
+        struct _RandomGenerator<DistributionType::Normal, T> : public RandomGeneratorImpl<std::normal_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::LogNormal, T>
+        struct _RandomGenerator<DistributionType::LogNormal, T>
             : public RandomGeneratorImpl<std::lognormal_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::ChiSquared, T>
+        struct _RandomGenerator<DistributionType::ChiSquared, T>
             : public RandomGeneratorImpl<std::chi_squared_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Fisher, T> : public RandomGeneratorImpl<std::fisher_f_distribution<T>> {};
+        struct _RandomGenerator<DistributionType::Fisher, T> : public RandomGeneratorImpl<std::fisher_f_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Student, T> : public RandomGeneratorImpl<std::student_t_distribution<T>> {
+        struct _RandomGenerator<DistributionType::Student, T> : public RandomGeneratorImpl<std::student_t_distribution<T>> {
         };
 
         template <typename T>
-        struct _RandomGenerator<Distribution::Discrete, T> : public RandomGeneratorImpl<std::discrete_distribution<T>> {
+        struct _RandomGenerator<DistributionType::Discrete, T> : public RandomGeneratorImpl<std::discrete_distribution<T>> {
         };
 
         template <typename T>
-        struct _RandomGenerator<Distribution::PieceWiseConstant, T>
+        struct _RandomGenerator<DistributionType::PieceWiseConstant, T>
             : public RandomGeneratorImpl<std::piecewise_constant_distribution<T>> {};
 
         template <typename T>
-        struct _RandomGenerator<Distribution::PieceWiseLinear, T>
+        struct _RandomGenerator<DistributionType::PieceWiseLinear, T>
             : public RandomGeneratorImpl<std::piecewise_linear_distribution<T>> {};
 
-    } // namespace
+        template <typename T>
+        struct _RandomGenerator<DistributionType::Cauchy, T> : public RandomGeneratorImpl<std::cauchy_distribution<T>> {};
+
+    } // namespace internal
 
     /**
      * @class random_generator
@@ -145,7 +150,7 @@ namespace easy { namespace dsp { namespace random {
      *
      * @see Distribution
      */
-    template <Distribution dist, typename T>
+    template <DistributionType dist, typename T>
     struct random_generator {
         using value_type = T;
 
@@ -164,6 +169,7 @@ namespace easy { namespace dsp { namespace random {
         value_type operator()() {
             return generator_.operator()();
         }
+
     private:
         internal::_RandomGenerator<dist, T> generator_;
     };

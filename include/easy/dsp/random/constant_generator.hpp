@@ -45,6 +45,7 @@ namespace easy { namespace dsp { namespace random {
         value_type operator()() {
             return generator_;
         }
+
     private:
         T generator_;
     };
