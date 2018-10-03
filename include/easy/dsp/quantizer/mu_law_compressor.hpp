@@ -26,39 +26,71 @@
 #include <easy/dsp/math/math.hpp>
 #include <easy/meta/iterator.hpp>
 #include <algorithm>
+#include <functional>
 
 namespace easy { namespace dsp { namespace quantizer {
 
-    template <typename InputIterator, typename OutputIterator>
-    constexpr void mu_law_compression(InputIterator first, InputIterator last, OutputIterator out,
-                                      meta::value_type_t<Iterator> absolute_max_value,
-                                      diff_type_t<Iterator> compression_factor) {
+    /**
+     * @brief The \f$ \mu \f$ law converts data in 16-bit linear formats to a 8-bit µ-law format.
+     *
+     * The compression process is performed as follows:
+     * \f[
+     * {\displaystyle y=F(x)=\operatorname {sgn}(x){\frac {\ln(1+\mu |x|)}{\ln(1+\mu )}}~~~~-1\leq x\leq 1}
+     * \f]
+     *
+     * @param first Input iterator defining the beginning of the input range.
+     * @param last Input iterator defining the ending of the input range.
+     * @param d_first Output iterator defining the beginning of the destination range.
+     * @param absolute_max_value Maximum value of the input
+     * @param compression_factor Compression ratio
+     */
+    template <typename InputIt, typename OutputIt>
+    constexpr void mu_law_compression(InputIt first, InputIt last, OutputIt d_first,
+                                      meta::value_type_t<InputIt> absolute_max_value,
+                                      meta::diff_type_t<InputIt> compression_factor) {
         meta::expects(absolute_max_value > 0, "Expected a maximum absolute value higher than zero");
         meta::expects(compression_factor > 0, "The compression factor should be a positive number");
-        using value_type  = meta::value_type_t<Iterator>;
+        using value_type  = meta::value_type_t<InputIt>;
         const auto lambda = [absolute_max_value](const value_type input) -> value_type {
             const auto ratio = std::fabs(input) / absolute_max_value;
             return math::sign(input) * absolute_max_value *
                    std::log(static_cast<value_type>(1 + compression_factor * ratio)) /
                    std::log(static_cast<value_type>(1 + compression_factor));
         };
-        std::transform(first, last, out, std::cref(lambda));
+        std::transform(first, last, d_first, std::cref(lambda));
     }
 
-    template <typename InputIterator, typename OutputIterator>
-    constexpr void inverse_mu_law_compression(InputIterator first, InputIterator last, OutputIterator out,
-                                              meta::value_type_t<Iterator> absolute_max_value,
-                                              diff_type_t<Iterator> compression_factor) {
+
+    /**
+     * @brief The \f$ \mu \f$ law converts data in 8-bit µ-law format to 16-bit linear formats.
+     *
+     * The de-compression process is performed as follows:
+     *
+     * \f[
+     * {\displaystyle F^{-1}(y)=\operatorname {sgn}(y){1 \over \mu }{\Bigl (}(1+\mu )^{|y|}-1{\Bigr )}~~~~-1\leq y\leq 1}
+     * \f]
+     *
+     * @param first Input iterator defining the beginning of the input range.
+     * @param last Input iterator defining the ending of the input range.
+     * @param d_first Output iterator defining the beginning of the destination range.
+     * @param absolute_max_value Maximum value of the input
+     * @param compression_factor Compression ratio
+     * @return
+     */
+    template <typename InputIt, typename OutputIt>
+    constexpr void inverse_mu_law_compression(InputIt first, InputIt last, OutputIt d_first,
+                                              meta::value_type_t<InputIt> absolute_max_value,
+                                              meta::diff_type_t<InputIt> compression_factor) {
         meta::expects(absolute_max_value > 0, "Expected a maximum absolute value higher than zero");
         meta::expects(compression_factor > 0, "The compression factor should be a positive number");
-        using value_type  = meta::value_type_t<Iterator>;
+        using value_type  = meta::value_type_t<InputIt>;
         const auto lambda = [absolute_max_value](const value_type input) -> value_type {
             const auto ratio = std::fabs(input) / absolute_max_value;
             return math::sign(input) * absolute_max_value *
                    (std::pow(static_cast<value_type>(1 + compression_factor), ratio) - 1) /
                    std::log(static_cast<value_type>(1 + compression_factor));
         };
-        std::transform(first, last, out, std::cref(lambda));
+        std::transform(first, last, d_first, std::cref(lambda));
     }
 
 }}} // namespace easy::dsp::quantizer

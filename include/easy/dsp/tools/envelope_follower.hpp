@@ -42,7 +42,7 @@ namespace easy { namespace dsp {
      * falls back to zero.     *
      */
     template <typename T>
-    class EnvelopeFollower {
+    class envelope_follower {
     public:
         using value_type = T;
         using size_type  = std::size_t;
@@ -54,50 +54,50 @@ namespace easy { namespace dsp {
          * @param releaseTime The release time of the first order lowpass in the attack phase in msecs.
          * @param rectify If true, enables the rectification of the output signal.
          */
-        constexpr EnvelopeFollower(value_type samplerate, value_type attackTime, value_type releaseTime,
+        constexpr envelope_follower(value_type samplerate, value_type attackTime, value_type releaseTime,
                                    bool rectify = false) noexcept;
 
         /**
          * @brief Returns the sample rate in Hz.
          * @return Sample rate in Hz.
          */
-        constexpr value_type sampleRate() const noexcept;
+        constexpr value_type samplerate() const noexcept;
 
         /**
          * @brief Sets the sample rate in Hz and resets the internal parameters.
          * @param samplerate Sample rate in Hz.
          */
-        constexpr void setSampleRate(value_type samplerate) noexcept;
+        constexpr void set_samplerate(value_type samplerate) noexcept;
 
         /**
          * @brief Returns the attack time of the first order lowpass in the attack phase.
          * @return Attack time in msecs.
          */
-        constexpr value_type attackTime() const noexcept;
+        constexpr value_type attack_time() const noexcept;
 
         /**
          * @brief Set the the attack time of the first order lowpass in the attack phase.
          * @param attackTime Attack time in msecs.
          */
-        constexpr void setAttackTime(value_type attackTime) noexcept;
+        constexpr void set_attack_time(value_type attackTime) noexcept;
 
         /**
          * @brief Returns the release time of the first order lowpass in the release phase.
          * @return Release time in msecs.
          */
-        constexpr value_type releaseTime() const noexcept;
+        constexpr value_type release_time() const noexcept;
 
         /**
          * @brief Set the the release time of the first order lowpass in the attack phase.
          * @param releaseTime Release time in msecs.
          */
-        constexpr void setReleaseTime(value_type releaseTime) noexcept;
+        constexpr void set_release_time(value_type releaseTime) noexcept;
 
         /**
          * @brief Checks if the rectification is enabled
          * @return true if the rectification is enabled, false otherwise.
          */
-        constexpr bool isRectificationEnabled() const noexcept;
+        constexpr bool rectification() const noexcept;
 
         /**
          * @brief Enables the rectification of the output signal.
@@ -105,7 +105,7 @@ namespace easy { namespace dsp {
          * If the rectification is enabled, the envelope-follower is based on the absolute value of signal
          * @param enabled State of the rectification.
          */
-        constexpr void enableRectification(bool enabled) noexcept;
+        constexpr void set_rectification(bool enabled) noexcept;
 
         /**
          * @brief Resets the temporal an internal data.
@@ -134,7 +134,7 @@ namespace easy { namespace dsp {
     };
 
     template <typename T>
-    constexpr EnvelopeFollower<T>::EnvelopeFollower(value_type samplerate, value_type attack_time,
+    constexpr envelope_follower<T>::envelope_follower(value_type samplerate, value_type attack_time,
                                                     value_type release_time, bool rectify) noexcept :
         samplerate_(samplerate),
         attack_time_(attack_time),
@@ -144,50 +144,50 @@ namespace easy { namespace dsp {
     }
 
     template <typename T>
-    constexpr typename EnvelopeFollower<T>::value_type EnvelopeFollower<T>::sampleRate() const noexcept {
+    constexpr typename envelope_follower<T>::value_type envelope_follower<T>::samplerate() const noexcept {
         return samplerate_;
     }
 
     template <typename T>
-    constexpr void EnvelopeFollower<T>::setSampleRate(value_type samplerate) noexcept {
+    constexpr void envelope_follower<T>::set_samplerate(value_type samplerate) noexcept {
         samplerate_ = samplerate;
         reset();
     }
 
     template <typename T>
-    constexpr typename EnvelopeFollower<T>::value_type EnvelopeFollower<T>::attackTime() const noexcept {
+    constexpr typename envelope_follower<T>::value_type envelope_follower<T>::attack_time() const noexcept {
         return attack_time_;
     }
 
     template <typename T>
-    constexpr void EnvelopeFollower<T>::setAttackTime(value_type attack_time) noexcept {
+    constexpr void envelope_follower<T>::set_attack_time(value_type attack_time) noexcept {
         attack_time_ = attack_time;
         reset();
     }
 
     template <typename T>
-    constexpr typename EnvelopeFollower<T>::value_type EnvelopeFollower<T>::releaseTime() const noexcept {
+    constexpr typename envelope_follower<T>::value_type envelope_follower<T>::release_time() const noexcept {
         return release_time_;
     }
 
     template <typename T>
-    constexpr void EnvelopeFollower<T>::setReleaseTime(value_type release_time) noexcept {
+    constexpr void envelope_follower<T>::set_release_time(value_type release_time) noexcept {
         release_time_ = release_time;
         reset();
     }
 
     template <typename T>
-    constexpr bool EnvelopeFollower<T>::isRectificationEnabled() const noexcept {
+    constexpr bool envelope_follower<T>::rectification() const noexcept {
         return rectification_;
     }
 
     template <typename T>
-    constexpr void EnvelopeFollower<T>::enableRectification(bool enabled) noexcept {
+    constexpr void envelope_follower<T>::set_rectification(bool enabled) noexcept {
         rectification_ = enabled;
     }
 
     template <typename T>
-    constexpr void EnvelopeFollower<T>::reset() noexcept {
+    constexpr void envelope_follower<T>::reset() noexcept {
         attack_gain_  = (attack_gain_ > 0) ? static_cast<value_type>(std::exp(-1 / (attack_time_ * samplerate_))) : 0;
         release_gain_ = (release_gain_ > 0) ? static_cast<value_type>(std::exp(-1 / (release_time_ * samplerate_))) : 0;
         last_         = 0;
@@ -195,7 +195,7 @@ namespace easy { namespace dsp {
 
     template <typename T>
     template <typename InIterator, typename OutIterator>
-    constexpr void EnvelopeFollower<T>::apply(InIterator first, InIterator last, OutIterator d_first) {
+    constexpr void envelope_follower<T>::apply(InIterator first, InIterator last, OutIterator d_first) {
         for (; first != last; ++first, ++d_first) {
             const auto rectified = rectification_ ? std::abs(*first) : *first;
             const auto current   = (last_ < rectified) ? (1 - attack_gain_) * rectified + attack_gain_ * last_
