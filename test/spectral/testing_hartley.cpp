@@ -15,14 +15,13 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: testing_hilbert.cpp
+ * Filename: testing_hartley.cpp
  * Author: Mohammed Boujemaoui
  * Date: 8/9/2018
  */
 
 #include <easy/dsp/windowing/windowing.hpp>
-#include <easy/dsp/spectral/hilbert.hpp>
-#include <easy/dsp/utilities/real2complex.hpp>
+#include <easy/dsp/spectral/hartley.hpp>
 
 #include <gtest/gtest.h>
 #include <unordered_map>
@@ -35,73 +34,68 @@ using namespace easy::dsp::windowing;
 namespace {
     std::string data_path(const std::string filename) {
         std::string path = CURRENT_TEST_PATH;
-        path += "/transform/data/hilbert/";
+        path += "/spectral/data/dht/";
         path += filename;
         return path;
     }
 
     template <typename T>
-    std::vector<std::complex<T>> read_vector(const std::string& filename) {
+    std::vector<T> read_vector(const std::string& filename) {
         std::ifstream input(filename.c_str());
         if (!input.is_open()) {
             return {};
         }
 
-        std::vector<std::complex<T>> data;
+        std::vector<T> data;
         std::string line;
         while (std::getline(input, line)) {
-            std::vector<std::string> results;
-            boost::split(results, line, [](char c) { return c == ','; });
-            data.emplace_back(static_cast<T>(std::stod(results[0])), static_cast<T>(std::stod(results[1])));
+            data.emplace_back(static_cast<T>(std::stod(line)));
         }
         return data;
     }
 
     static std::unordered_map<WindowType, std::string> AssociatedFile = {
-        {WindowType::Blackman, data_path("hilbert_blackman.csv")},
-        {WindowType::Hamming, data_path("hilbert_hamming.csv")},
-        {WindowType::Hanning, data_path("hilbert_hanning.csv")},
+        {WindowType::Blackman, data_path("dht_blackman.csv")},
+        {WindowType::Hamming, data_path("dht_hamming.csv")},
+        {WindowType::Hanning, data_path("dht_hanning.csv")},
     };
 } // namespace
 
-TEST(TestingHilbert, TransformHanningWindow) {
+TEST(TestingDHT, TransformHanningWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hanning]);
     const auto size      = reference.size();
     std::vector<double> window(size);
     make_window<WindowType::Hanning>(std::begin(window), size);
-    std::vector<std::complex<double>> transformed(size);
-    easy::dsp::hilbert(std::begin(window), std::end(window), std::begin(transformed));
+    std::vector<double> transformed(size);
+    easy::dsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
-        EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.001);
-        EXPECT_NEAR(reference[i].imag(), transformed[i].imag(), 0.001);
+        EXPECT_NEAR(transformed[i], reference[i], 0.01);
     }
 }
 
-TEST(TestingHilbert, TransformHammingWindow) {
+TEST(TestingDHT, TransformHammingWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hamming]);
     const auto size      = reference.size();
     std::vector<double> window(size);
     make_window<WindowType::Hamming>(std::begin(window), size);
-    std::vector<std::complex<double>> transformed(size);
-    easy::dsp::hilbert(std::cbegin(window), std::cend(window), std::begin(transformed));
+    std::vector<double> transformed(size);
+    easy::dsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
-        EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.001);
-        EXPECT_NEAR(reference[i].imag(), transformed[i].imag(), 0.001);
+        EXPECT_NEAR(transformed[i], reference[i], 0.01);
     }
 }
 
-TEST(TestingHilbert, TransformBlackmanWindow) {
+TEST(TestingDHT, TransformBlackmanWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Blackman]);
     const auto size      = reference.size();
     std::vector<double> window(size);
     make_window<WindowType::Blackman>(std::begin(window), size);
-    std::vector<std::complex<double>> transformed(size);
-    easy::dsp::hilbert(std::begin(window), std::end(window), std::begin(transformed));
+    std::vector<double> transformed(size);
+    easy::dsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
-        EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.001);
-        EXPECT_NEAR(reference[i].imag(), transformed[i].imag(), 0.001);
+        EXPECT_NEAR(transformed[i], reference[i], 0.01);
     }
 }

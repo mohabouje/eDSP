@@ -35,7 +35,7 @@ using namespace easy::dsp::spectral;
 
 std::string data_path(const std::string filename) {
     std::string path = CURRENT_TEST_PATH;
-    path += "/transform/data/fft/";
+    path += "/spectral/data/fft/";
     path += filename;
     return path;
 }
