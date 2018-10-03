@@ -42,7 +42,7 @@ namespace easy { namespace dsp { inline namespace algorithm {
     template <typename InputIt, typename OutputIt>
     constexpr void concatenate(InputIt first1, InputIt last1, InputIt first2, InputIt last2, OutputIt d_first) {
         std::copy(first1, last1, d_first);
-        std::copy(first2, last2, meta::advance(out, std::distance(first, last)));
+        std::copy(first2, last2, meta::advance(d_first, std::distance(first1, last1)));
     }
 
 }}} // namespace easy::dsp::algorithm

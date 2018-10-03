@@ -38,7 +38,7 @@ namespace easy { namespace dsp { inline namespace algorithm {
      */
     template <typename ForwardIt1, typename ForwardIt2, typename BinaryPredicate>
     constexpr bool equal(ForwardIt1 first1, ForwardIt2 last1, ForwardIt2 first2, ForwardIt2 last2, BinaryPredicate p) {
-        return std::equal(first1, last_1, first2, last2, p);
+        return std::equal(first1, last1, first2, last2, p);
     }
 
     /**

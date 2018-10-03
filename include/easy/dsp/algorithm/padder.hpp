@@ -53,7 +53,7 @@ namespace easy { namespace dsp { inline namespace algorithm {
         const auto d_size = std::distance(d_first, d_last);
         meta::expects(d_size >= i_size, "Output size should be greather or equal than the input size");
         std::copy(first, last, d_first);
-        std::fill(d_first + i_size, d_last, static_cast < meta::value_type_t<OutputIt>(0));
+        std::fill(d_first + i_size, d_last, static_cast<meta::value_type_t<OutputIt>>(0));
     }
 
 }}} // namespace easy::dsp::algorithm
