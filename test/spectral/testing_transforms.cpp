@@ -69,9 +69,9 @@ SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
         REQUIRE(meta::size(input) == meta::size(data_ifft));
 
         WHEN("We want to compute the fft and ifft to restore the original signal") {
-            dsp::complex_dft<float>(input.begin(), input.end(), data_fft.begin());
+            dsp::cdft(input.begin(), input.end(), data_fft.begin());
             AND_WHEN("We compute the inverse fft") {
-                dsp::complex_idft<float>(data_fft.begin(), data_fft.end(), data_ifft.begin());
+                dsp::cidft(data_fft.begin(), data_fft.end(), data_ifft.begin());
                 THEN("The output data should be same as the original signal") {
                     for (std::size_t i = 0; i < sz; ++i) {
                         REQUIRE(input[i].real() == Approx(data_ifft[i].real()).margin(1));
@@ -95,9 +95,9 @@ SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
         REQUIRE(meta::size(input) == meta::size(data_ifft));
 
         WHEN("We want to compute the fft and ifft to restore the original signal") {
-            dsp::complex_dft<float>(input.begin(), input.end(), data_fft.begin());
+            dsp::cdft(input.begin(), input.end(), data_fft.begin());
             AND_WHEN("We compute the inverse fft") {
-                dsp::complex_idft<float>(data_fft.begin(), data_fft.end(), data_ifft.begin());
+                dsp::cidft(data_fft.begin(), data_fft.end(), data_ifft.begin());
                 THEN("The output data should be same as the original signal") {
                     for (std::size_t i = 0; i < sz; ++i) {
                         REQUIRE(input[i].real() == Approx(data_ifft[i].real()).margin(1));
@@ -107,7 +107,7 @@ SCENARIO("Testing the integration with the FFTW library", "[FFT]") {
         }
 
         WHEN("We want to compute the fft") {
-            dsp::complex_dft<float>(input.begin(), input.end(), data_fft.begin());
+            dsp::cdft(input.begin(), input.end(), data_fft.begin());
             THEN("The output data should be same as the expected fft") {
                 for (std::size_t i = 0; i < sz; ++i) {
                     REQUIRE(hamming_fft[i].real() == Approx(data_fft[i].real()).margin(0.01));
