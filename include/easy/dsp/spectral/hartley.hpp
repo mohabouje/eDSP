@@ -34,7 +34,8 @@ namespace easy { namespace dsp { inline namespace spectral {
      * The DHT transforms  a sequence of \f$ N \f$ real numbers \f$ x_n \f$ into another sequence of real numbers \f$ H_k \f$:
      *
      * \f[
-        {\displaystyle H_{k}=\sum _{n=0}^{N-1}x_{n}\operatorname {cas} \left({\frac {2\pi }{N}}nk\right)=\sum _{n=0}^{N-1}x_{n}\left[\cos \left({\frac {2\pi }{N}}nk\right)+\sin \left({\frac {2\pi }{N}}nk\right)\right]\quad \quad k=0,\dots ,N-1}
+        {\displaystyle H_{k}=\sum _{n=0}^{N-1}x_{n}\operatorname {cas} \left({\frac {2\pi }{N}}nk\right)=\sum _{n=0}^{N-1}x_{n}
+        \left[\cos \left({\frac {2\pi }{N}}nk\right)+\sin \left({\frac {2\pi }{N}}nk\right)\right]\quad \quad k=0,\dots ,N-1}
      * \f]
      *
      * @param first Input iterator defining the beginning of the input range.

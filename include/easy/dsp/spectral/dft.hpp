@@ -28,6 +28,24 @@
 namespace easy { namespace dsp { inline namespace spectral {
 
     /**
+    * @brief Computes the expected DFT size for a real-to-complex DFT transform
+    * @returns Size of the DFT
+    */
+    template <typename Integer>
+    constexpr Integer make_fft_size(Integer real_size) noexcept {
+        return std::floor(real_size / 2) + 1;
+    }
+
+    /**
+     * @brief Computes the expected IDFT size for a complex-to-real IDFT transform
+     * @returns Size of the IDFT
+     */
+    template <typename Integer>
+    constexpr Integer make_ifft_size(Integer complex_size) noexcept {
+        return 2 * (complex_size - 1);
+    }
+
+    /**
      * @brief Computes the complex-to-complex Discrete-Fourier-Transform of the range [first, last)
      * and stores the result in another range, beginning at d_first.
      *
