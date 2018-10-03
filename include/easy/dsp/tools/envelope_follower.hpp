@@ -55,7 +55,7 @@ namespace easy { namespace dsp {
          * @param rectify If true, enables the rectification of the output signal.
          */
         constexpr envelope_follower(value_type samplerate, value_type attackTime, value_type releaseTime,
-                                   bool rectify = false) noexcept;
+                                    bool rectify = false) noexcept;
 
         /**
          * @brief Returns the sample rate in Hz.
@@ -135,7 +135,7 @@ namespace easy { namespace dsp {
 
     template <typename T>
     constexpr envelope_follower<T>::envelope_follower(value_type samplerate, value_type attack_time,
-                                                    value_type release_time, bool rectify) noexcept :
+                                                      value_type release_time, bool rectify) noexcept :
         samplerate_(samplerate),
         attack_time_(attack_time),
         release_time_(release_time),

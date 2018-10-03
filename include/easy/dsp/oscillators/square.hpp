@@ -58,10 +58,8 @@ namespace easy { namespace dsp { namespace oscillators {
          * @param frequency The fundamental frequency of the signal (also known as pitch).
          * @param duty Duty factor, numeric value from [0,1]
          */
-        constexpr square_oscillator(value_type amplitude,
-                                   value_type samplerate,
-                                   value_type frequency,
-                                   value_type duty) noexcept;
+        constexpr square_oscillator(value_type amplitude, value_type samplerate, value_type frequency,
+                                    value_type duty) noexcept;
 
         /**
          * @brief Generates one step.
@@ -91,7 +89,7 @@ namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
     constexpr square_oscillator<T>::square_oscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                                    value_type duty) noexcept :
+                                                      value_type duty) noexcept :
         oscillator<T>(amplitude, samplerate, frequency, 0),
         duty_(duty) {}
 

@@ -49,16 +49,13 @@ namespace easy { namespace dsp { namespace oscillators {
          * @param samplerate The sampling frequency in Hz.
          * @param frequency The fundamental frequency of the signal (also known as pitch).
          */
-        constexpr triangular_oscillator(value_type amplitude,
-                                      value_type samplerate,
-                                      value_type frequency) noexcept;
+        constexpr triangular_oscillator(value_type amplitude, value_type samplerate, value_type frequency) noexcept;
     };
 
     template <typename T>
-    constexpr triangular_oscillator<T>::triangular_oscillator(value_type amplitude,
-                                                              value_type samplerate,
-                                                          value_type frequency) noexcept :
-            sawtooth_oscillator<T>(amplitude, samplerate, frequency, 0.5) {}
+    constexpr triangular_oscillator<T>::triangular_oscillator(value_type amplitude, value_type samplerate,
+                                                              value_type frequency) noexcept :
+        sawtooth_oscillator<T>(amplitude, samplerate, frequency, 0.5) {}
 
 }}} // namespace easy::dsp::oscillators
 

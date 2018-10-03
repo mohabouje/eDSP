@@ -71,7 +71,6 @@ namespace easy { namespace dsp { namespace oscillators {
 
     } // namespace internal
 
-
     /**
      * @brief Creates an oscillator using args as the parameter list for the construction.
      * @tparam T Value type
@@ -82,10 +81,10 @@ namespace easy { namespace dsp { namespace oscillators {
      */
     template <typename T, OscillatorType Type, typename... Args>
     constexpr auto make_oscillator(Args... arg) noexcept
-    -> decltype(internal::_build_Generator<Type, T>{}.template build(std::declval<Args&&>()...)) {
+        -> decltype(internal::_build_Generator<Type, T>{}.template build(std::declval<Args&&>()...)) {
         return internal::_build_Generator<Type, T>{}.build(arg...);
     }
 
-}}}
+}}} // namespace easy::dsp::oscillators
 
 #endif //EASYDSP_MAKE_OSCILLATOR_HPP

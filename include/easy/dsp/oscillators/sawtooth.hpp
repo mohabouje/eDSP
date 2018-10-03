@@ -50,9 +50,7 @@ namespace easy { namespace dsp { namespace oscillators {
          * @param frequency The fundamental frequency of the signal (also known as pitch).
          * @param width Width factor, numeric value from [0,1]
          */
-        constexpr sawtooth_oscillator(value_type amplitude,
-                                      value_type samplerate,
-                                      value_type frequency,
+        constexpr sawtooth_oscillator(value_type amplitude, value_type samplerate, value_type frequency,
                                       value_type width) noexcept;
         /**
          * @brief Generates one step.
@@ -82,7 +80,7 @@ namespace easy { namespace dsp { namespace oscillators {
 
     template <typename T>
     constexpr sawtooth_oscillator<T>::sawtooth_oscillator(value_type amplitude, value_type samplerate,
-                                                        value_type frequency, value_type width) noexcept :
+                                                          value_type frequency, value_type width) noexcept :
         oscillator<T>(amplitude, samplerate, frequency, 0),
         width_(width) {}
 

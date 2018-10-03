@@ -60,7 +60,6 @@ namespace easy { namespace dsp { namespace quantizer {
         std::transform(first, last, d_first, std::cref(lambda));
     }
 
-
     /**
      * @brief The \f$ \mu \f$ law converts data in 8-bit µ-law format to 16-bit linear formats.
      *

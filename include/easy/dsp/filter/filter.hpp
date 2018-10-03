@@ -140,7 +140,6 @@ namespace easy { namespace dsp { namespace filter {
         }
     };
 
-
     /**
      * @brief Creates a filter using args as the parameter list for the construction.
      * @tparam T Value type
