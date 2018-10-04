@@ -104,7 +104,7 @@ If you want to install the library and make it accessible to all resources in yo
    The docs are available in different formats, for instance: html & latex. To build the docs, use:
 
    ```bash
-   make docs
+   make html
    ```
 
    Also, the latest development documentation is available [online]().
