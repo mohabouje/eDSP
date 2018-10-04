@@ -181,4 +181,4 @@ namespace easy { namespace dsp { namespace random {
 
 }}} // namespace easy::dsp::random
 
-#endif // EASYDSP_FISHER_DISTRIBUTION_HPP
+#endif // EASYDSP_RANDOM_GENERATORDISTRIBUTION_HPP
