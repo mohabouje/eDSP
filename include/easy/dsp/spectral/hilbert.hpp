@@ -23,7 +23,7 @@
 #define EASYDSP_HILBERT_HPP
 
 #include <easy/dsp/spectral/internal/fftw_impl.hpp>
-#include <easy/dsp/utilities/real2complex.hpp>
+#include <easy/dsp/converter/real2complex.hpp>
 #include <vector>
 
 namespace easy { namespace dsp { inline namespace spectral {

@@ -22,9 +22,9 @@
 #ifndef EASYDSP_OSCILLATOR_SIN_HPP
 #define EASYDSP_OSCILLATOR_SIN_HPP
 
-#include <easy/dsp/oscillators/oscillator.hpp>
+#include <easy/dsp/oscillator.hpp>
 #include <easy/dsp/math/constant.hpp>
-#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/math/numeric.hpp>
 #include <cmath>
 
 namespace easy { namespace dsp { namespace oscillators {

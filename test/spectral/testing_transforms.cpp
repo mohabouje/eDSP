@@ -22,7 +22,7 @@
 
 #include <easy/dsp/spectral/dct.hpp>
 #include <easy/dsp/spectral/dft.hpp>
-#include <easy/dsp/utilities/real2complex.hpp>
+#include <easy/dsp/converter/real2complex.hpp>
 #include <easy/meta/empty.hpp>
 #include <easy/meta/size.hpp>
 #include <catch/catch.hpp>

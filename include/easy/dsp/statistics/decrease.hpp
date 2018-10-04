@@ -23,7 +23,7 @@
 #define EASYDSP_STATISTICAL_DECREASE_HPP
 
 #include <easy/meta/iterator.hpp>
-#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/math/numeric.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
     /**

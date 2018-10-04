@@ -24,7 +24,7 @@
 #define EASYMETA_COMPLEX_H
 
 #include <easy/meta/unused.hpp>
-#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/math/numeric.hpp>
 #include <limits>
 #include <complex>
 #include <cmath>

@@ -37,7 +37,6 @@ endif(ENABLE_OPTIMIZATIONS)
 # Add the debug information, if it is enabled
 if (ENABLE_DEBUG_INFORMATION)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -g")
 endif (ENABLE_DEBUG_INFORMATION)
 
 # Set the default build type

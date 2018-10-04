@@ -19,8 +19,8 @@
  * Author: Mohammed Boujemaoui
  * Date: 02/08/2018
  */
-#ifndef EASYDSP_UTILITIES_LINSPACE_H
-#define EASYDSP_UTILITIES_LINSPACE_H
+#ifndef EASYDSP_ALGORITHM_LINSPACE_H
+#define EASYDSP_ALGORITHM_LINSPACE_H
 
 #include <easy/meta/iterator.hpp>
 #include <easy/meta/advance.hpp>
@@ -47,4 +47,4 @@ namespace easy { namespace dsp { inline namespace algorithm {
 
 }}} // namespace easy::dsp::algorithm
 
-#endif // EASYDSP_UTILITIES_LINSPACE_H
+#endif // EASYDSP_ALGORITHM_LINSPACE_H

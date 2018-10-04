@@ -21,7 +21,7 @@
  */
 
 #include <gtest/gtest.h>
-#include <easy/dsp/windowing/windowing.hpp>
+#include <easy/dsp/windowing.hpp>
 #include <unordered_map>
 #include <fstream>
 

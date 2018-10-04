@@ -19,8 +19,8 @@
  * Author: Mohammed Boujemaoui
  * Date: 02/08/2018
  */
-#ifndef EASYDSP_UTILITIES_CAT_H
-#define EASYDSP_UTILITIES_CAT_H
+#ifndef EASYDSP_ALGORITHM_CAT_H
+#define EASYDSP_ALGORITHM_CAT_H
 
 #include <easy/meta/advance.hpp>
 #include <numeric>
@@ -47,4 +47,4 @@ namespace easy { namespace dsp { inline namespace algorithm {
 
 }}} // namespace easy::dsp::algorithm
 
-#endif // EASYDSP_UTILITIES_CAT_H
+#endif // EASYDSP_ALGORITHM_CAT_H

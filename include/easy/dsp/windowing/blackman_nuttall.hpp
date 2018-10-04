@@ -22,7 +22,7 @@
 #ifndef EASYDSP_BLACKMAN_NUTTAL_HARRIS_HPP
 #define EASYDSP_BLACKMAN_NUTTAL_HARRIS_HPP
 
-#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/math/numeric.hpp>
 #include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { namespace windowing {

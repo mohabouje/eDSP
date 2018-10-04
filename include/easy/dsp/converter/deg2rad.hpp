@@ -15,33 +15,31 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: pow2db.hpp
+ * Filename: deg2rad.hpp
  * Author: Mohammed Boujemaoui
  * Date: 2/8/2018
  */
-#ifndef EASYDSP_POW2DB_HPP
-#define EASYDSP_POW2DB_HPP
+#ifndef EASYDSP_DEG2RAD_HPP
+#define EASYDSP_DEG2RAD_HPP
 
-#include <easy/meta/expects.hpp>
 #include <cmath>
-
-namespace easy { namespace dsp { inline namespace utility {
+namespace easy { namespace dsp { inline namespace converter {
 
     /**
-     * @brief Convert power to decibels
+     * @brief Convert angle from degrees to radians.
      *
      * The output is computed as follows:
      * \f[
-     *      y = 10 \log10{\left( x \right)}
+     *      y =  \frac{x\pi}{180}
      * \f]
-     * @param power Scalar number representing the power of a sample.
-     * @returns Power measurement in decibel (dB).
+     * @param degree Angle in degrees
+     * @returns Angle in radians
      */
     template <typename T>
-    constexpr T pow2db(T power) noexcept {
-        meta::expects(power > 0, "Expected non negative value");
-        return 10 * std::log10(power);
+    constexpr T deg2rad(T degree) noexcept {
+        return degree * constants<T>::pi / static_cast<T>(180);
     }
-}}} // namespace easy::dsp::utility
 
-#endif // EASYDSP_POW2DB_HPP
+}}} // namespace easy::dsp::converter
+
+#endif // EASYDSP_DEG2RAD_HPP

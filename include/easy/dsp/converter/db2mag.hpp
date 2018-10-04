@@ -15,33 +15,31 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: mag2db.hpp
+ * Filename: db2mag.hpp
  * Author: Mohammed Boujemaoui
  * Date: 2/8/2018
  */
-#ifndef EASYDSP_MAG2DB_HPP
-#define EASYDSP_MAG2DB_HPP
+#ifndef EASYDSP_DB2MAG_HPP
+#define EASYDSP_DB2MAG_HPP
 
-#include <easy/meta/expects.hpp>
 #include <cmath>
-
-namespace easy { namespace dsp { inline namespace utility {
+namespace easy { namespace dsp { inline namespace converter {
 
     /**
-     * @brief Convert magnitude to decibels (dB)
+     * @brief Convert decibels to magnitude.
      *
      * The output is computed as follows:
      * \f[
-     *      y = 20 \log10{ \left( x \right) }
+     *      y = 10^{\frac{x}{20}}
      * \f]
-     * @param magnitude Scalar number in magnitude scale.
-     * @return Scalar number in decibels.
+     * @param db Scalar number in decibels.
+     * @returns Magnitude measurement, returned as a scalar.
      */
     template <typename T>
-    constexpr T mag2db(T magnitude) noexcept {
-        meta::expects(magnitude > 0, "Expected non negative value");
-        return 20 * std::log10(magnitude);
+    constexpr T db2mag(T db) noexcept {
+        return std::pow(static_cast<T>(10), db / static_cast<T>(20));
     }
-}}} // namespace easy::dsp::utility
 
-#endif // EASYDSP_MAG2DB_HPP
+}}} // namespace easy::dsp::converter
+
+#endif // EASYDSP_DB2POW_HPP

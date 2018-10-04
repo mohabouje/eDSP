@@ -19,37 +19,32 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
- * File: types.hpp
- * Created by Mohammed Boujemaoui Boulaghmoudi on 03/10/18.
+ * File: statistics.hpp
+ * Created by Mohammed Boujemaoui Boulaghmoudi on 04/10/18.
  */
 
-#ifndef EASYDSP_TYPES_HPP
-#define EASYDSP_TYPES_HPP
+#ifndef EASYDSP_STATISTICS_HPP
+#define EASYDSP_STATISTICS_HPP
 
-namespace easy { namespace dsp { inline namespace spectral {
+#include <easy/dsp/statistics/centroid.hpp>
+#include <easy/dsp/statistics/crest.hpp>
+#include <easy/dsp/statistics/decrease.hpp>
+#include <easy/dsp/statistics/entropy.hpp>
+#include <easy/dsp/statistics/flatness.hpp>
+#include <easy/dsp/statistics/generalized_mean.hpp>
+#include <easy/dsp/statistics/geometric_mean.hpp>
+#include <easy/dsp/statistics/harmonic_mean.hpp>
+#include <easy/dsp/statistics/histogram.hpp>
+#include <easy/dsp/statistics/kurtosis.hpp>
+#include <easy/dsp/statistics/max.hpp>
+#include <easy/dsp/statistics/mean.hpp>
+#include <easy/dsp/statistics/median.hpp>
+#include <easy/dsp/statistics/min.hpp>
+#include <easy/dsp/statistics/moment.hpp>
+#include <easy/dsp/statistics/peak.hpp>
+#include <easy/dsp/statistics/rms.hpp>
+#include <easy/dsp/statistics/rssq.hpp>
+#include <easy/dsp/statistics/skewness.hpp>
+#include <easy/dsp/statistics/variance.hpp>
 
-    /**
-    * @brief The SpectralScale enum represent the scale used to
-    * represent the power spectral density
-    */
-    enum class SpectralScale {
-        Linear,     /*!< Linear scale */
-        Logarithmic /*!< Logarithmic scale */
-    };
-
-    /**
-    * @brief The ScaleOpt enum defines the normalization option of the correlation function.
-    */
-    enum class CorrelationScale {
-        None,    /*!< Raw, unscaled cross-correlation. */
-        Biased,  /*!< Biased estimate of the cross-correlation. */
-        Unbiased /*!< Unbiased estimate of the cross-correlation. */
-    };
-
-    /**
-    * @brief The DCT_Type enum represents the different implementations to compute the DCT
-    */
-    enum class DCT_Type { Type_I, Type_II, Type_III, Type_IV };
-}}} // namespace easy::dsp::spectral
-
-#endif //EASYDSP_TYPES_HPP
+#endif //EASYDSP_STATISTICS_HPP

@@ -23,7 +23,7 @@
 #ifndef EASYDSP_FILTER_BIQUAD_HPP
 #define EASYDSP_FILTER_BIQUAD_HPP
 
-#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/math/numeric.hpp>
 #include <easy/meta/expects.hpp>
 #include <algorithm>
 #include <cmath>

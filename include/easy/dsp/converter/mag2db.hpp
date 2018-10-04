@@ -15,14 +15,33 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: testing_crosscorrelation.cpp
- * Created at: 10/06/18
- * Created by: Mohammed Boujemaoui
+ * Filename: mag2db.hpp
+ * Author: Mohammed Boujemaoui
+ * Date: 2/8/2018
  */
+#ifndef EASYDSP_MAG2DB_HPP
+#define EASYDSP_MAG2DB_HPP
 
-#include <easy/dsp/spectral/correlation.hpp>
-#include <easy/meta/size.hpp>
-#include <catch/catch.hpp>
+#include <easy/meta/expects.hpp>
+#include <cmath>
 
-using namespace easy;
-using namespace easy::dsp;
+namespace easy { namespace dsp { inline namespace converter {
+
+    /**
+     * @brief Convert magnitude to decibels (dB)
+     *
+     * The output is computed as follows:
+     * \f[
+     *      y = 20 \log10{ \left( x \right) }
+     * \f]
+     * @param magnitude Scalar number in magnitude scale.
+     * @return Scalar number in decibels.
+     */
+    template <typename T>
+    constexpr T mag2db(T magnitude) noexcept {
+        meta::expects(magnitude > 0, "Expected non negative value");
+        return 20 * std::log10(magnitude);
+    }
+}}} // namespace easy::dsp::converter
+
+#endif // EASYDSP_MAG2DB_HPP

@@ -4,41 +4,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 project(EasyDSP-Test VERSION 0.0.0 LANGUAGES CXX)
 
-set(SOURCE_FILES
-        testing_catch.cpp
-        filter/testing_biquad.cpp
-        filter/testing_biquad_designer.cpp
-        filter/testing_butterworth.cpp
-        filter/testing_chebyshev_i.cpp
-        filter/testing_chebyshev_ii.cpp
-        spectral/testing_autocorrelation.cpp
-        spectral/testing_crosscorrelation.cpp
-        spectral/testing_transforms.cpp
-        oscillators/testing_oscillators.cpp)
-
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
-target_link_libraries(${PROJECT_NAME}
-    pthread
-    EasyDSP
-    fftw3f)
 
 find_package(GTest REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS})
-set(GTestApp ${PROJECT_NAME}-gtest)
-set(SOURCE_FILES_GTEST
+set(SOURCE_FILES
         testing_gtest.cpp
+        algorithm/algorithm.cpp
         spectral/testing_fft.cpp
         spectral/testing_dct.cpp
         spectral/testing_hartley.cpp
         spectral/testing_hilbert.cpp
         windowing/testing_windowing.cpp)
 
-add_executable(GTestApp ${SOURCE_FILES_GTEST})
-target_link_libraries(GTestApp
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+target_link_libraries(${PROJECT_NAME}
     ${GTEST_LIBRARIES}
     pthread
     EasyDSP
     fftw3f
     fftw3)
-
-target_compile_definitions(GTestApp PRIVATE CURRENT_TEST_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
+target_include_directories(${PROJECT_NAME} PRIVATE ${GTEST_INCLUDE_DIRS})
+target_compile_definitions(${PROJECT_NAME} PRIVATE CURRENT_TEST_PATH="${CMAKE_CURRENT_SOURCE_DIR}")

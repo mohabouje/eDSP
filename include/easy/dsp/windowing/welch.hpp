@@ -22,7 +22,7 @@
 #ifndef EASYDSP_WELCH_HPP
 #define EASYDSP_WELCH_HPP
 
-#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/math/numeric.hpp>
 #include <easy/meta/iterator.hpp>
 #include <cmath>
 

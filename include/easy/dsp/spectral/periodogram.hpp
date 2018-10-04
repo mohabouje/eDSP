@@ -23,8 +23,8 @@
 #define EASYDSP_SPECTROGRAM_HPP
 
 #include <easy/dsp/spectral/internal/fftw_impl.hpp>
-#include <easy/dsp/utilities/mag2db.hpp>
-#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/converter/mag2db.hpp>
+#include <easy/dsp/math/numeric.hpp>
 #include <vector>
 
 namespace easy { namespace dsp { inline namespace spectral {
@@ -64,7 +64,7 @@ namespace easy { namespace dsp { inline namespace spectral {
         } else {
             std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
                            [](const std::complex<value_type>& val) -> meta::value_type_t<OutputIt> {
-                               return mag2db(std::abs(val));
+                               return utility::mag2db(std::abs(val));
                            });
         }
     }

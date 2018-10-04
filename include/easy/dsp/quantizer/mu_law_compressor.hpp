@@ -23,7 +23,7 @@
 #define EASYDSP_MU_LAW_COMPRESSOR_HPP
 
 #include <easy/meta/expects.hpp>
-#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/math/numeric.hpp>
 #include <easy/meta/iterator.hpp>
 #include <algorithm>
 #include <functional>

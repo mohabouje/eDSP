@@ -22,7 +22,7 @@
 #ifndef EASYDSP_RECTANGULAR_HPP
 #define EASYDSP_RECTANGULAR_HPP
 
-#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/math/numeric.hpp>
 #include <easy/meta/iterator.hpp>
 #include <cmath>
 

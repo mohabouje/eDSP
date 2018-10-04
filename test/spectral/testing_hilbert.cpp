@@ -20,9 +20,9 @@
  * Date: 8/9/2018
  */
 
-#include <easy/dsp/windowing/windowing.hpp>
+#include <easy/dsp/windowing.hpp>
 #include <easy/dsp/spectral/hilbert.hpp>
-#include <easy/dsp/utilities/real2complex.hpp>
+#include <easy/dsp/converter/real2complex.hpp>
 
 #include <gtest/gtest.h>
 #include <unordered_map>

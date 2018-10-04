@@ -15,31 +15,16 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: db2pow.hpp
+ * Filename: math/numeric.hpp
  * Author: Mohammed Boujemaoui
- * Date: 2/8/2018
+ * Date: 2018-07-29
  */
-#ifndef EASYDSP_DB2POW_HPP
-#define EASYDSP_DB2POW_HPP
 
-#include <cmath>
-namespace easy { namespace dsp { inline namespace utility {
+#ifndef EASYMETA_MATH_H
+#define EASYMETA_MATH_H
 
-    /**
-     * @brief Convert decibels to power.
-     *
-     * The output is computed as follows:
-     * \f[
-     *      y = 10^{\frac{x}{10}}
-     * \f]
-     * @param db Scalar number in decibels.
-     * @returns Power measurements.
-     */
-    template <typename T>
-    constexpr T db2pow(T db) noexcept {
-        return std::pow(10, db / static_cast<T>(10));
-    }
+#include <easy/dsp/math/complex.hpp>
+#include <easy/dsp/math/constant.hpp>
+#include <easy/dsp/math/numeric.hpp>
 
-}}} // namespace easy::dsp::utility
-
-#endif // EASYDSP_DB2POW_HPP
+#endif //EASYMETA_MATH_H

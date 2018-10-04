@@ -67,7 +67,7 @@ namespace easy { namespace dsp { inline namespace algorithm {
     constexpr void normalizer_rms(InputIt first, InputIt last, OutputIt d_first) {
         const auto factor = statistics::rms(first, last);
         std::transform(first, last, d_first,
-                       [d_first](const meta::value_type_t<InputIt> value) -> meta::value_type_t<OutputIt> {
+                       [factor](const meta::value_type_t<InputIt> value) -> meta::value_type_t<OutputIt> {
                            return static_cast<meta::value_type_t<OutputIt>>(value) / factor;
                        });
     }

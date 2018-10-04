@@ -22,7 +22,7 @@
 #ifndef EASYDSP_LAYOUT_BASE_HPP
 #define EASYDSP_LAYOUT_BASE_HPP
 
-#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/math/numeric.hpp>
 #include <easy/meta/expects.hpp>
 #include <easy/meta/ensure.hpp>
 #include <complex>

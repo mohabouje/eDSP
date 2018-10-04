@@ -19,37 +19,22 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
- * File: types.hpp
- * Created by Mohammed Boujemaoui Boulaghmoudi on 03/10/18.
+ * Filename: converter.hpp
+ * Created at: 04/10/18
+ * Created by: Mohammed Boujemaoui Boulaghmoudi
  */
 
-#ifndef EASYDSP_TYPES_HPP
-#define EASYDSP_TYPES_HPP
+#ifndef EASYDSP_CONVERTER_HPP
+#define EASYDSP_CONVERTER_HPP
 
-namespace easy { namespace dsp { inline namespace spectral {
+#include <easy/dsp/converter/db2mag.hpp>
+#include <easy/dsp/converter/db2pow.hpp>
+#include <easy/dsp/converter/deg2rad.hpp>
+#include <easy/dsp/converter/mag2db.hpp>
+#include <easy/dsp/converter/peak2peak.hpp>
+#include <easy/dsp/converter/peak2rms.hpp>
+#include <easy/dsp/converter/pow2db.hpp>
+#include <easy/dsp/converter/rad2deg.hpp>
+#include <easy/dsp/converter/real2complex.hpp>
 
-    /**
-    * @brief The SpectralScale enum represent the scale used to
-    * represent the power spectral density
-    */
-    enum class SpectralScale {
-        Linear,     /*!< Linear scale */
-        Logarithmic /*!< Logarithmic scale */
-    };
-
-    /**
-    * @brief The ScaleOpt enum defines the normalization option of the correlation function.
-    */
-    enum class CorrelationScale {
-        None,    /*!< Raw, unscaled cross-correlation. */
-        Biased,  /*!< Biased estimate of the cross-correlation. */
-        Unbiased /*!< Unbiased estimate of the cross-correlation. */
-    };
-
-    /**
-    * @brief The DCT_Type enum represents the different implementations to compute the DCT
-    */
-    enum class DCT_Type { Type_I, Type_II, Type_III, Type_IV };
-}}} // namespace easy::dsp::spectral
-
-#endif //EASYDSP_TYPES_HPP
+#endif //EASYDSP_CONVERTER_HPP

@@ -19,8 +19,8 @@
  * Author: Mohammed Boujemaoui
  * Date: 3/8/2018
  */
-#ifndef EASYDSP_UTILITIES_FIX_HPP
-#define EASYDSP_UTILITIES_FIX_HPP
+#ifndef EASYDSP_ALGORITHM_FIX_HPP
+#define EASYDSP_ALGORITHM_FIX_HPP
 
 #include <easy/meta/iterator.hpp>
 #include <algorithm>
@@ -45,4 +45,4 @@ namespace easy { namespace dsp { inline namespace algorithm {
 
 }}} // namespace easy::dsp::algorithm
 
-#endif // EASYDSP_UTILITIES_FIX_HPP
+#endif // EASYDSP_ALGORITHM_FIX_HPP

@@ -15,31 +15,31 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: db2mag.hpp
+ * Filename: db2pow.hpp
  * Author: Mohammed Boujemaoui
  * Date: 2/8/2018
  */
-#ifndef EASYDSP_DB2MAG_HPP
-#define EASYDSP_DB2MAG_HPP
+#ifndef EASYDSP_DB2POW_HPP
+#define EASYDSP_DB2POW_HPP
 
 #include <cmath>
-namespace easy { namespace dsp { inline namespace utility {
+namespace easy { namespace dsp { inline namespace converter {
 
     /**
-     * @brief Convert decibels to magnitude.
+     * @brief Convert decibels to power.
      *
      * The output is computed as follows:
      * \f[
-     *      y = 10^{\frac{x}{20}}
+     *      y = 10^{\frac{x}{10}}
      * \f]
      * @param db Scalar number in decibels.
-     * @returns Magnitude measurement, returned as a scalar.
+     * @returns Power measurements.
      */
     template <typename T>
-    constexpr T db2mag(T db) noexcept {
-        return std::pow(static_cast<T>(10), db / static_cast<T>(20));
+    constexpr T db2pow(T db) noexcept {
+        return std::pow(10, db / static_cast<T>(10));
     }
 
-}}} // namespace easy::dsp::utility
+}}} // namespace easy::dsp::converter
 
 #endif // EASYDSP_DB2POW_HPP

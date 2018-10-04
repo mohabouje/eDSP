@@ -1,31 +1,36 @@
-/*
+/* 
  * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
- * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi
+ * Copyright (c) 2018  All rights reserved.
  *
- * This program is free software: you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation, either version 3 of the License, or (at your option)
- * any later version.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
  *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- * more details.
- *
- * You should have received a copy of the GNU General Public License along withº
- * this program.  If not, see <http://www.gnu.org/licenses/>
- *
- * Filename: math.hpp
- * Author: Mohammed Boujemaoui
- * Date: 2018-07-29
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+ * Filename: numeric.hpp
+ * Created at: 04/10/18
+ * Created by: Mohammed Boujemaoui Boulaghmoudi
  */
 
-#ifndef EASYMETA_MATH_H
-#define EASYMETA_MATH_H
+#ifndef EASYDSP_NUMERIC_HPP
+#define EASYDSP_NUMERIC_HPP
 
 #include <cmath>
 #include <cstdint>
 #include <complex>
+#include <random>
 
 namespace easy { namespace dsp { inline namespace math {
 
@@ -218,6 +223,64 @@ namespace easy { namespace dsp { inline namespace math {
         return 0.5 * x;
     }
 
+    /**
+    * @brief Computes a random number in the range [min, max].
+    *
+    * The generated numbers follow a uniform distribution.
+    * @param min Minimum number
+    * @param max Maximum number
+    * @return Random number in the range [min, max]
+    */
+    template <typename T>
+    constexpr typename std::enable_if<std::is_floating_point<T>::value, T>::type rand(T min, T max) {
+        std::random_device rd;
+        std::mt19937 eng(rd());
+        std::uniform_real_distribution<T> distribution(min, max);
+        return distribution(eng);
+    }
+
+    /**
+    * @brief Computes a random number.
+    * The generated numbers follow a uniform distribution.
+    * @return Random number.
+    */
+    template <typename T>
+    constexpr typename std::enable_if<std::is_floating_point<T>::value, T>::type rand() {
+        std::random_device rd;
+        std::mt19937 eng(rd());
+        std::uniform_real_distribution<T> distribution(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
+        return distribution(eng);
+    }
+
+    /**
+    * @brief Computes a random number in the range [min, max].
+    *
+    * The generated numbers follow a uniform distribution.
+    * @param min Minimum number
+    * @param max Maximum number
+    * @return Random number in the range [min, max]
+    */
+    template <typename T>
+    constexpr typename std::enable_if<std::is_integral<T>::value, T>::type rand(T min, T max) {
+        std::random_device rd;
+        std::mt19937 eng(rd());
+        std::uniform_int_distribution<T> distribution(min, max);
+        return distribution(eng);
+    }
+
+    /**
+    * @brief Computes a random number.
+    * The generated numbers follow a uniform distribution.
+    * @return Random number.
+    */
+    template <typename T>
+    constexpr typename std::enable_if<std::is_integral<T>::value, T>::type rand() {
+        std::random_device rd;
+        std::mt19937 eng(rd());
+        std::uniform_int_distribution<T> distribution(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
+        return distribution(eng);
+    }
+
     template <typename T>
     constexpr T manhattan_distance(T x, T y) noexcept {
         return x - y;
@@ -235,4 +298,4 @@ namespace easy { namespace dsp { inline namespace math {
 
 }}} // namespace easy::dsp::math
 
-#endif //EASYMETA_MATH_H
+#endif //EASYDSP_NUMERIC_HPP

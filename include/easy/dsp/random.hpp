@@ -19,37 +19,21 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
- * File: types.hpp
- * Created by Mohammed Boujemaoui Boulaghmoudi on 03/10/18.
+ * Filename: random.hpp
+ * Created at: 04/10/18
+ * Created by: Mohammed Boujemaoui Boulaghmoudi
  */
 
-#ifndef EASYDSP_TYPES_HPP
-#define EASYDSP_TYPES_HPP
+#ifndef EASYDSP_RANDOM_HPP
+#define EASYDSP_RANDOM_HPP
 
-namespace easy { namespace dsp { inline namespace spectral {
+#include <easy/dsp/math/numeric.hpp>
+#include <easy/dsp/random/noise/white_noise_generator.hpp>
+#include <easy/dsp/random/noise/brown_noise_generator.hpp>
+#include <easy/dsp/random/noise/pink_noise_generator.hpp>
+#include <easy/dsp/random/noise/perlin_noise_generator.hpp>
+#include <easy/dsp/random/binary_generator.hpp>
+#include <easy/dsp/random/constant_generator.hpp>
+#include <easy/dsp/random/random_generator.hpp>
 
-    /**
-    * @brief The SpectralScale enum represent the scale used to
-    * represent the power spectral density
-    */
-    enum class SpectralScale {
-        Linear,     /*!< Linear scale */
-        Logarithmic /*!< Logarithmic scale */
-    };
-
-    /**
-    * @brief The ScaleOpt enum defines the normalization option of the correlation function.
-    */
-    enum class CorrelationScale {
-        None,    /*!< Raw, unscaled cross-correlation. */
-        Biased,  /*!< Biased estimate of the cross-correlation. */
-        Unbiased /*!< Unbiased estimate of the cross-correlation. */
-    };
-
-    /**
-    * @brief The DCT_Type enum represents the different implementations to compute the DCT
-    */
-    enum class DCT_Type { Type_I, Type_II, Type_III, Type_IV };
-}}} // namespace easy::dsp::spectral
-
-#endif //EASYDSP_TYPES_HPP
+#endif //EASYDSP_RANDOM_HPP

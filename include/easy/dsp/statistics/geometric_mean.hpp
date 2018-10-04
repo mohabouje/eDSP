@@ -22,7 +22,7 @@
 #ifndef EASYDSP_STATISTICAL_GEOMETRIC_MEAN_H
 #define EASYDSP_STATISTICAL_GEOMETRIC_MEAN_H
 
-#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/math/numeric.hpp>
 #include <easy/meta/iterator.hpp>
 #include <numeric>
 

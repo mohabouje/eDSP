@@ -26,7 +26,7 @@
 #include <easy/meta/iterator.hpp>
 #include <cmath>
 
-namespace easy { namespace dsp { inline namespace utility {
+namespace easy { namespace dsp { inline namespace converter {
 
     /**
      * @brief Maximum Peak-magnitude-to-RMS ratio in the range [first, last)
@@ -46,6 +46,6 @@ namespace easy { namespace dsp { inline namespace utility {
         const auto max_abs = std::max(std::abs(pair.first), std::abs(pair.second));
         return max_abs / statistics::rms(first, last);
     }
-}}} // namespace easy::dsp::utility
+}}} // namespace easy::dsp::converter
 
 #endif // EASYDSP_PEAK2RMS_HPP

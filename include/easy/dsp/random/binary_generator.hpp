@@ -46,7 +46,6 @@ namespace easy { namespace dsp { namespace random {
          */
         explicit binary_generator(value_type probability) :
             generator_(Engine(static_cast<std::size_t>(std::chrono::system_clock::now().time_since_epoch().count()))),
-
             distribution_(std::bernoulli_distribution(probability)) {}
 
         /**

@@ -22,7 +22,7 @@
 #ifndef EASYDSP_CHEBYSHEV_II_HPP
 #define EASYDSP_CHEBYSHEV_II_HPP
 
-#include <easy/dsp/utilities/db2mag.hpp>
+#include <easy/dsp/converter/db2mag.hpp>
 #include <easy/meta/expects.hpp>
 #include <easy/dsp/math/complex.hpp>
 #include <easy/dsp/math/constant.hpp>

@@ -15,14 +15,33 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: dsp_testing.cpp
- * Created at: 10/06/18
- * Created by: Mohammed Boujemaoui
+ * Filename: rad2deg.hpp
+ * Author: Mohammed Boujemaoui
+ * Date: 2/8/2018
  */
+#ifndef EASYDSP_RAD2DEG_HPP
+#define EASYDSP_RAD2DEG_HPP
 
-#define CATCH_CONFIG_RUNNER
-#include <catch/catch.hpp>
+#include <easy/dsp/math/constant.hpp>
+#include <cmath>
 
-int main(int argc, char* argv[]) {
-    return Catch::Session().run(argc, argv);
-}
+namespace easy { namespace dsp { inline namespace converter {
+
+    /**
+     * @brief Convert angle from radians to degrees.
+     *
+     * The output is computed as follows:
+     * \f[
+     *      y =  x \frac{180}{\pi}
+     * \f]
+     * @param radians Angle in radians.
+     * @returns Angle in degrees.
+     */
+    template <typename T>
+    constexpr T rad2deg(T radians) noexcept {
+        return radians / constants<T>::pi * static_cast<T>(180);
+    }
+
+}}} // namespace easy::dsp::converter
+
+#endif // EASYDSP_RAD2DEG_HPP

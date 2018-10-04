@@ -20,7 +20,7 @@
  * Date: 8/9/2018
  */
 
-#include <easy/dsp/windowing/windowing.hpp>
+#include <easy/dsp/windowing.hpp>
 #include <easy/dsp/spectral/dct.hpp>
 
 #include <gtest/gtest.h>

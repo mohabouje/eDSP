@@ -1,5 +1,5 @@
 /* 
- * EasyDSP, just another repository with a bunch of utilities written in modern C++.
+ * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (c) 2018  All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of

@@ -15,33 +15,30 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: rad2deg.hpp
+ * Filename: peak2peak.hpp
  * Author: Mohammed Boujemaoui
  * Date: 2/8/2018
  */
-#ifndef EASYDSP_RAD2DEG_HPP
-#define EASYDSP_RAD2DEG_HPP
+#ifndef EASYDSP_PEAK2PEAK_HPP
+#define EASYDSP_PEAK2PEAK_HPP
 
-#include <easy/dsp/math/constant.hpp>
+#include <easy/meta/iterator.hpp>
 #include <cmath>
 
-namespace easy { namespace dsp { inline namespace utility {
+namespace easy { namespace dsp { inline namespace converter {
 
     /**
-     * @brief Convert angle from radians to degrees.
-     *
-     * The output is computed as follows:
-     * \f[
-     *      y =  x \frac{180}{\pi}
-     * \f]
-     * @param radians Angle in radians.
-     * @returns Angle in degrees.
+     * @brief Maximum-to-minimum difference in the range [first, last)
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns Maximum-to-minimum difference.
      */
-    template <typename T>
-    constexpr T rad2deg(T radians) noexcept {
-        return radians / constants<T>::pi * static_cast<T>(180);
+    template <typename ForwardIt>
+    constexpr meta::value_type_t<ForwardIt> peak2peak(ForwardIt first, ForwardIt last) {
+        const auto pair = std::minmax_element(first, last);
+        return std::abs(pair.second) - std::abs(pair.first);
     }
 
-}}} // namespace easy::dsp::utility
+}}} // namespace easy::dsp::converter
 
-#endif // EASYDSP_RAD2DEG_HPP
+#endif // EASYDSP_RMS2PEAK_HPP

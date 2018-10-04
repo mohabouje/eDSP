@@ -22,7 +22,7 @@
 #ifndef EASYDSP_FEATURE_TEMPORAL_EnvelopeFollower_HPP
 #define EASYDSP_FEATURE_TEMPORAL_EnvelopeFollower_HPP
 
-#include <easy/dsp/math/math.hpp>
+#include <easy/dsp/math/numeric.hpp>
 #include <numeric>
 #include <cmath>
 
