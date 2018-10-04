@@ -40,11 +40,11 @@ Those are the list of external tools dependencies:
 
 | Library                                            | Dependencies | Description                                                  |
 | -------------------------------------------------- | ------------ | ------------------------------------------------------------ |
-| [*libfftw*](http://www.fftw.org/)                  | Spectral     | Integrates one of the fastest FFT implementations.           |
-| [*libsamplerate*](http://www.mega-nerd.com/SRC/)   | Codec        | Integrates an efficient re-sampling algorithm.               |
-| [*libaudiofile*](https://audiofile.68k.org/)       | Codec        | Integrates an efficient decoder/encoder for different audio formats. |
+| [libfftw](http://www.fftw.org/)                  | Spectral     | Integrates one of the fastest FFT implementations.           |
+| [libsamplerate](http://www.mega-nerd.com/SRC/)   | Codec        | Integrates an efficient re-sampling algorithm.               |
+| [libaudiofile](https://audiofile.68k.org/)       | Codec        | Integrates an efficient decoder/encoder for different audio formats. |
 | [libsndfile](http://www.mega-nerd.com/libsndfile/) | Codec        | Integrates an efficient  decoder/encoder for different audio formats. |
-
+  [libgtest-dev](https://github.com/google/googletest) | Test | Integrates a simplest and modern framework for testing. |
 ### How to install it?
 
 The *easyDSP* project is a header-only library with basic dependencies. Link them,  download the project and add the include/directory to  your compiler's header search path and you are done.

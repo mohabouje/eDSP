@@ -11,6 +11,7 @@ matrix:
           - libsamplerate0-dev
           - libaudiofile-dev
           - libsndfile1-dev
+          - libgtest-dev
           sources:
           - ubuntu-toolchain-r-test
           - llvm-toolchain-trusty-5.0
@@ -31,6 +32,7 @@ matrix:
           - libsamplerate0-dev
           - libaudiofile-dev
           - libsndfile1-dev
+          - libgtest-dev
           sources:
           - ubuntu-toolchain-r-test
           - llvm-toolchain-trusty-5.0
@@ -39,6 +41,10 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
+  - cd /usr/src/gtest
+  - sudo cmake CMakeLists.txt
+  - sudo make
+  - sudo cp *.a /usr/lib
 
 script:
 - mkdir -p build
