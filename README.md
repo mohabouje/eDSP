@@ -4,7 +4,6 @@
 ![issues](https://img.shields.io/github/issues/mohabouje/eDSP.svg)
 ![license](https://img.shields.io/github/license/mohabouje/eDSP.svg)
 ![built](https://img.shields.io/badge/built%20with-GCC-6f62ba.svg)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmohabouje%2FeDSP.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmohabouje%2FeDSP?ref=badge_shield)
 
 [![GitHub forks](https://img.shields.io/github/forks/mohabouje/eDSP.svg?style=social&label=Fork)]()
 [![GitHub stars](https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star)]()
@@ -14,25 +13,115 @@
 
 It aims to provide efficient and streamlined base calculations while at the same time having a straightforward and easy-to-use interface similar to another numeric language like [MATLAB](https://www.mathworks.com/products/matlab.html). 
 
+
+
 ***The library is under construction.***
 
 <img src="https://openclipart.org/image/2400px/svg_to_png/293844/under-construction_geek_man_01.png" width="250">
 
+### Why other DSP library?
+
+The *easyDSP* project is a modern C++ DSP library that:
+
+- Aims to be ***cross-platform***
+- Has a modern ***STL-like API***
+- Supports modern ***C++11/14/17 features***
+- Integrates bindings for different languages: ***Python & Go***
+
+### Documentation
+
+Latest development documentation is available [online]().
+
+### Dependencies
+
+The *easyDSP* project is a header-only library that relies on a **C++14** compiler and the standard library (STL). A recent version of CMake is required. The minimum is 3.4, but tested primarily with 3.6 and newer.
+
+Those are the list of external tools dependencies:
+
+| Library                                            | Dependencies | Description                                                  |
+| -------------------------------------------------- | ------------ | ------------------------------------------------------------ |
+| [*libfftw*](http://www.fftw.org/)                  | Spectral     | Integrates one of the fastest FFT implementations.           |
+| [*libsamplerate*](http://www.mega-nerd.com/SRC/)   | Codec        | Integrates an efficient re-sampling algorithm.               |
+| [*libaudiofile*](https://audiofile.68k.org/)       | Codec        | Integrates an efficient decoder/encoder for different audio formats. |
+| [libsndfile](http://www.mega-nerd.com/libsndfile/) | Codec        | Integrates an efficient  decoder/encoder for different audio formats. |
+
 ### How to install it?
 
-The easyDSP project is a header-only library with basic dependencies:
+The *easyDSP* project is a header-only library with basic dependencies. Link them,  download the project and add the include/directory to  your compiler's header search path and you are done.
 
-- FFTW: to compute the different Fourier transform
-- libsamplerate: to apply some re-sample functionalities.
-- If you are an Unix user, those libraries can be downloaded in a simple way. Example: using apt:
+If you want to install the library and make it accessible to all resources in your system, follow those steps:
 
-```bash
-sudo apt-get install libfftw3-dev libsamplerate0-dev
-```
+1. Download the source code
 
-The library also relies on a **C++14** compiler and the standard library (STL). Link the different libraries,  download the project and add the include/directory to  your compiler's header search path and you are done.
+   Clone the repository from github or download the latest version from this [link]().
 
-The easy way to enable/disable the different modules of the framework is by using the [ccmake](https://cmake.org/cmake/help/v3.0/manual/ccmake.1.html).
+   ```bash
+   git clone https://github.com/mohabouje/eDSP.git --recursive
+   cd eDSP
+   ```
+
+2. Build the library
+
+   The build system uses CMake. The procedure is standard for CMake builds:
+
+   ```bash
+   mkdir build	
+   cd build
+   cmake -DCMAKE_BUILD_TYPE=Release ..
+   make -jN
+   ```
+
+   The user can enable/disable the different packages independently, probably the easy way to do so by using  [ccmake](https://cmake.org/cmake/help/v3.0/manual/ccmake.1.html). More details about *easyDSP* configuration options are located in the [User Documentation]().
+
+3. Building the tests
+
+   Install the different dependencies:
+
+   ```bash
+   sudo apt-get install libfftw3-dev libsamplerate0-dev libaudiofile-dev libsndfile1-dev
+   ```
+
+   To run all the test, use:
+
+   ```bash
+   make test
+   ```
+
+4. Building the examples
+
+   Several examples demonstrating specific usages can be found in the [examples](https://github.com/mohabouje/eDSP/master/examples) folder of the repository. More useful examples can be found on the [eDSP Wikie](https://github.com/mohabouje/eDSP/wiki).
+
+   To build the examples, use:
+
+   ```bash
+   make examples
+   ```
+
+   If you want to run an individual example, those are in subdirectories in examples (built products are in your build directory, the source is in   [examples](https://github.com/mohabouje/eDSP/master/examples) folder).
+
+5. Building the docs
+
+   The docs are available in different formats, for instance: html & latex. To build the docs, use:
+
+   ```bash
+   make docs
+   ```
+
+   Also, the latest development documentation is available [online]().
+
+6. Installing the library:
+
+   ```bash
+   sudo make install
+   ```
+
+### License
+
+Copyright (c) 2018, Mohammed Boujemaoui Boulaghmoudi (mohabouje@gmail.com), All rights reserved.
+
+Distributed under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.html).
+
+======================================================================================
 
 ## TODO
 - [ ] Test the different features [WIP]
@@ -129,7 +218,6 @@ Those are the list of features that are implemented or scheduled to be. All of t
   - [x] Pre-Emphasis
   - [x] Envelope Follower
 
-  	
 
 ### Example: Windowing an imput signal
 
