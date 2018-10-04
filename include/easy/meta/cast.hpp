@@ -23,7 +23,7 @@
 #ifndef EASYDSP_CAST_HPP
 #define EASYDSP_CAST_HPP
 
-namespace easy { inline namespace meta {
+namespace easy { namespace meta {
 
     template <typename Casted, typename Original>
     constexpr Casted sc(Original&& value) noexcept {

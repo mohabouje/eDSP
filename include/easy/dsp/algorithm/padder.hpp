@@ -51,7 +51,7 @@ namespace easy { namespace dsp { inline namespace algorithm {
     constexpr void padder(InputIt first, InputIt last, OutputIt d_first, OutputIt d_last) {
         const auto i_size = std::distance(first, last);
         const auto d_size = std::distance(d_first, d_last);
-        meta::expects(d_size >= i_size, "Output size should be greather or equal than the input size");
+        meta::expects(d_size >= i_size, "Output size should be greater or equal than the input size");
         std::copy(first, last, d_first);
         std::fill(d_first + i_size, d_last, static_cast<meta::value_type_t<OutputIt>>(0));
     }

@@ -45,7 +45,7 @@ namespace easy { namespace dsp { namespace windowing {
     template <typename OutIterator, typename Integer>
     constexpr void flattop(OutIterator d_first, Integer N) {
         using value_type  = meta::value_type_t<OutIterator>;
-        using size_type   = diff_type_t<OutIterator>;
+        using size_type   = meta::diff_type_t<OutIterator>;
         constexpr auto a0 = static_cast<value_type>(0.21557895);
         constexpr auto a1 = static_cast<value_type>(0.41663158);
         constexpr auto a2 = static_cast<value_type>(0.277263158);

@@ -25,7 +25,7 @@
 #include <type_traits>
 #include <iterator>
 
-namespace easy { inline namespace meta {
+namespace easy { namespace meta {
 
     template <typename Iterator>
     using value_type_t = typename std::iterator_traits<Iterator>::value_type;

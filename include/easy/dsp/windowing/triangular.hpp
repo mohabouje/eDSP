@@ -43,7 +43,7 @@ namespace easy { namespace dsp { namespace windowing {
     template <typename OutIterator, typename Integer>
     constexpr void triangular(OutIterator d_first, Integer N) {
         using value_type     = meta::value_type_t<OutIterator>;
-        using size_type      = diff_type_t<OutIterator>;
+        using size_type      = meta::diff_type_t<OutIterator>;
         const auto size      = static_cast<size_type>(N);
         const value_type rem = size + std::remainder(size, 2);
         value_type initial   = -(size - 1);

@@ -50,7 +50,7 @@ namespace easy { namespace dsp { namespace statistics {
     constexpr meta::value_type_t<ForwardIt> maxabs(ForwardIt first, ForwardIt last) {
         using input_t   = meta::value_type_t<ForwardIt>;
         const auto comp = [](const input_t left, const input_t right) { return std::abs(left) < std::abs(right); };
-        return *std::max_element(first, last, comp);
+        return std::abs(*std::max_element(first, last, comp));
     }
 
 }}} // namespace easy::dsp::statistics

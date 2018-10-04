@@ -71,7 +71,7 @@ namespace easy { namespace dsp { inline namespace math {
      */
     template <typename T>
     constexpr bool is_power_two(T x) {
-        const auto tmp = static_cast<std::int32_t>(tmp);
+        const auto tmp = static_cast<std::int32_t>(x);
         return tmp != 0 && !(tmp & (tmp - 1));
     }
 
@@ -232,7 +232,7 @@ namespace easy { namespace dsp { inline namespace math {
     * @return Random number in the range [min, max]
     */
     template <typename T>
-    constexpr typename std::enable_if<std::is_floating_point<T>::value, T>::type rand(T min, T max) {
+    inline typename std::enable_if<std::is_floating_point<T>::value, T>::type rand(T min, T max) {
         std::random_device rd;
         std::mt19937 eng(rd());
         std::uniform_real_distribution<T> distribution(min, max);
@@ -245,7 +245,7 @@ namespace easy { namespace dsp { inline namespace math {
     * @return Random number.
     */
     template <typename T>
-    constexpr typename std::enable_if<std::is_floating_point<T>::value, T>::type rand() {
+    inline typename std::enable_if<std::is_floating_point<T>::value, T>::type rand() {
         std::random_device rd;
         std::mt19937 eng(rd());
         std::uniform_real_distribution<T> distribution(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
@@ -261,7 +261,7 @@ namespace easy { namespace dsp { inline namespace math {
     * @return Random number in the range [min, max]
     */
     template <typename T>
-    constexpr typename std::enable_if<std::is_integral<T>::value, T>::type rand(T min, T max) {
+    inline typename std::enable_if<std::is_integral<T>::value, T>::type rand(T min, T max) {
         std::random_device rd;
         std::mt19937 eng(rd());
         std::uniform_int_distribution<T> distribution(min, max);
@@ -274,7 +274,7 @@ namespace easy { namespace dsp { inline namespace math {
     * @return Random number.
     */
     template <typename T>
-    constexpr typename std::enable_if<std::is_integral<T>::value, T>::type rand() {
+    inline typename std::enable_if<std::is_integral<T>::value, T>::type rand() {
         std::random_device rd;
         std::mt19937 eng(rd());
         std::uniform_int_distribution<T> distribution(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());

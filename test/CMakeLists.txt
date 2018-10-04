@@ -8,7 +8,7 @@ project(EasyDSP-Test VERSION 0.0.0 LANGUAGES CXX)
 find_package(GTest REQUIRED)
 set(SOURCE_FILES
         testing_gtest.cpp
-        algorithm/algorithm.cpp
+        algorithm/testing_algorithm.cpp
         spectral/testing_fft.cpp
         spectral/testing_dct.cpp
         spectral/testing_hartley.cpp

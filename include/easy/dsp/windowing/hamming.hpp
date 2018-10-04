@@ -46,7 +46,7 @@ namespace easy { namespace dsp { namespace windowing {
     template <typename OutIterator, typename Integer>
     constexpr void hamming(OutIterator d_first, Integer N) {
         using value_type  = meta::value_type_t<OutIterator>;
-        using size_type   = diff_type_t<OutIterator>;
+        using size_type   = meta::diff_type_t<OutIterator>;
         constexpr auto a0 = static_cast<value_type>(0.54);
         constexpr auto a1 = static_cast<value_type>(0.46);
         const auto size   = static_cast<size_type>(N);

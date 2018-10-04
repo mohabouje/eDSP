@@ -38,10 +38,12 @@ namespace easy { namespace dsp { inline namespace algorithm {
      * @param d_first The beginning of the destination range
      */
     template <typename OutputIt, typename Numeric>
-    constexpr void linspace(OutputIt d_first, Numeric N, Numeric x1, Numeric x2) {
-        const auto increment = (x2 - x1) / static_cast<meta::value_type_t<OutputIt>>(std::trunc(N));
-        for (; x1 <= x2; x1 += increment, ++d_first) {
+    constexpr void linspace(OutputIt d_first, Numeric N, meta::value_type_t<OutputIt> x1, meta::value_type_t<OutputIt> x2) {
+        const auto size = static_cast<meta::diff_type_t <OutputIt>>(std::trunc(N));
+        const auto increment = (x2 - x1) / static_cast<meta::value_type_t<OutputIt>>(size - 1);
+        for (auto i = 0; i < size; ++i, ++d_first) {
             *d_first = x1;
+            x1 += increment;
         }
     }
 

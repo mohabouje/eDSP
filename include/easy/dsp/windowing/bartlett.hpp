@@ -35,7 +35,7 @@ namespace easy { namespace dsp { namespace windowing {
     template <typename OutIterator, typename Integer>
     constexpr void bartlett(OutIterator d_first, Integer N) {
         using value_type  = meta::value_type_t<OutIterator>;
-        using size_type   = diff_type_t<OutIterator>;
+        using size_type   = meta::diff_type_t<OutIterator>;
         const auto size   = static_cast<size_type>(N);
         const auto middle = math::is_even(size) ? size / 2 : (size + 1) / 2;
         const auto factor = math::inv(static_cast<value_type>(size - 1));
