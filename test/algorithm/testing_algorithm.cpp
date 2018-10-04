@@ -170,8 +170,6 @@ TEST(TestingClipper, RandomNumbers) {
     }
 }
 
-
-
 TEST(TestingConcatenate, VectorsSameSizes) {
     const auto size1 = math::rand(MINIMUM_SIZE, MAXIMUM_SIZE);
     const auto size2 = size1;
@@ -185,8 +183,8 @@ TEST(TestingConcatenate, VectorsSameSizes) {
         element = math::rand<double>();
     }
 
-    algorithm::concatenate(std::cbegin(input1), std::cend(input1),
-                           std::cbegin(input2), std::cend(input2), std::begin(output));
+    algorithm::concatenate(std::cbegin(input1), std::cend(input1), std::cbegin(input2), std::cend(input2),
+                           std::begin(output));
 
     for (auto i = 0ul; i < size1; ++i) {
         EXPECT_EQ(input1[i], output[i]);
@@ -199,7 +197,8 @@ TEST(TestingConcatenate, VectorsSameSizes) {
 
 TEST(TestingConcatenate, VectorsDifferentSizes) {
     const auto size1 = math::rand(MINIMUM_SIZE, MAXIMUM_SIZE);
-    const auto size2 = math::rand(MINIMUM_SIZE, MAXIMUM_SIZE);;
+    const auto size2 = math::rand(MINIMUM_SIZE, MAXIMUM_SIZE);
+    ;
     std::vector<double> input1(size1), input2(size2), output(size1 + size2);
 
     for (auto& element : input1) {
@@ -210,8 +209,8 @@ TEST(TestingConcatenate, VectorsDifferentSizes) {
         element = math::rand<double>();
     }
 
-    algorithm::concatenate(std::cbegin(input1), std::cend(input1),
-                           std::cbegin(input2), std::cend(input2), std::begin(output));
+    algorithm::concatenate(std::cbegin(input1), std::cend(input1), std::cbegin(input2), std::cend(input2),
+                           std::begin(output));
 
     for (auto i = 0ul; i < size1; ++i) {
         EXPECT_EQ(input1[i], output[i]);
@@ -247,7 +246,7 @@ TEST(TestingEqual, OnlyOneDifferent) {
 
     std::copy(std::cbegin(input1), std::cend(input1), std::begin(input2));
     const auto random_index = math::rand(0ul, size);
-    input2[random_index] = 2 * input2[random_index];
+    input2[random_index]    = 2 * input2[random_index];
 
     EXPECT_FALSE(algorithm::equal(std::cbegin(input1), std::cend(input1), std::cbegin(input2), std::cend(input2)));
 }
@@ -321,8 +320,7 @@ TEST(TestingPadder, OutputBiggerThanInput) {
         element = math::rand<double>();
     }
 
-    algorithm::padder(std::cbegin(input), std::cend(input),
-                      std::begin(output), std::end(output));
+    algorithm::padder(std::cbegin(input), std::cend(input), std::begin(output), std::end(output));
     for (auto i = 0ul; i < i_size; ++i) {
         EXPECT_LE(output[i], input[i]);
     }
@@ -333,7 +331,7 @@ TEST(TestingPadder, OutputBiggerThanInput) {
 }
 
 TEST(TestingPadder, OutputSmallerThanInput) {
-    const auto lambda = [](){
+    const auto lambda = []() {
         const auto i_size = math::rand(MINIMUM_SIZE, MAXIMUM_SIZE);
         const auto o_size = math::rand(0ul, MINIMUM_SIZE);
         std::vector<double> input(i_size), output(o_size);
@@ -350,8 +348,7 @@ TEST(TestingPadder, OutputEqualThanInput) {
         element = math::rand<double>();
     }
 
-    algorithm::padder(std::cbegin(input), std::cend(input),
-                      std::begin(output), std::end(output));
+    algorithm::padder(std::cbegin(input), std::cend(input), std::begin(output), std::end(output));
     for (auto i = 0ul; i < i_size; ++i) {
         EXPECT_LE(output[i], input[i]);
     }
@@ -366,9 +363,10 @@ TEST(TestingLinspace, IncreasingOrder) {
     const auto min  = 10ul;
     const auto max  = 100ul;
 
-    const std::vector<double> expected = {10.000, 12.903, 15.806, 18.710, 21.613, 24.516, 27.419, 30.323, 33.226, 36.129, 39.032,
-                           41.935, 44.839, 47.742, 50.645, 53.548, 56.452, 59.355, 62.258, 65.161, 68.065, 70.968,
-                           73.871, 76.774, 79.677, 82.581, 85.484, 88.387, 91.290, 94.194, 97.097, 100.000};
+    const std::vector<double> expected = {10.000, 12.903, 15.806, 18.710, 21.613, 24.516, 27.419, 30.323,
+                                          33.226, 36.129, 39.032, 41.935, 44.839, 47.742, 50.645, 53.548,
+                                          56.452, 59.355, 62.258, 65.161, 68.065, 70.968, 73.871, 76.774,
+                                          79.677, 82.581, 85.484, 88.387, 91.290, 94.194, 97.097, 100.000};
 
     EXPECT_EQ(expected.size(), size);
     std::vector<double> computed(size);
@@ -383,9 +381,10 @@ TEST(TestingLinspace, DecreaseOrder) {
     const auto min  = 10ul;
     const auto max  = 100ul;
 
-    std::vector<double> expected = {10.000, 12.903, 15.806, 18.710, 21.613, 24.516, 27.419, 30.323, 33.226, 36.129, 39.032,
-                                          41.935, 44.839, 47.742, 50.645, 53.548, 56.452, 59.355, 62.258, 65.161, 68.065, 70.968,
-                                          73.871, 76.774, 79.677, 82.581, 85.484, 88.387, 91.290, 94.194, 97.097, 100.000};
+    std::vector<double> expected = {10.000, 12.903, 15.806, 18.710, 21.613, 24.516, 27.419, 30.323,
+                                    33.226, 36.129, 39.032, 41.935, 44.839, 47.742, 50.645, 53.548,
+                                    56.452, 59.355, 62.258, 65.161, 68.065, 70.968, 73.871, 76.774,
+                                    79.677, 82.581, 85.484, 88.387, 91.290, 94.194, 97.097, 100.000};
     std::reverse(std::begin(expected), std::end(expected));
     EXPECT_EQ(expected.size(), size);
 
@@ -401,13 +400,11 @@ TEST(TestingLinspace, NegativeRangeIncrease) {
     const auto min  = -100;
     const auto max  = -10;
 
-    const std::vector<double> expected = {
-        -100.000, -97.097, -94.194, -91.290, -88.387, -85.484, -82.581, -79.677, -76.774, -73.871, -70.968,
-        -68.065,  -65.161, -62.258, -59.355, -56.452, -53.548, -50.645, -47.742, -44.839, -41.935, -39.032,
-        -36.129,  -33.226, -30.323, -27.419, -24.516, -21.613, -18.710, -15.806, -12.903, -10.000
-    };
+    const std::vector<double> expected = {-100.000, -97.097, -94.194, -91.290, -88.387, -85.484, -82.581, -79.677,
+                                          -76.774,  -73.871, -70.968, -68.065, -65.161, -62.258, -59.355, -56.452,
+                                          -53.548,  -50.645, -47.742, -44.839, -41.935, -39.032, -36.129, -33.226,
+                                          -30.323,  -27.419, -24.516, -21.613, -18.710, -15.806, -12.903, -10.000};
     EXPECT_EQ(expected.size(), size);
-
 
     std::vector<double> computed(size);
     algorithm::linspace(std::begin(computed), size, min, max);
@@ -421,11 +418,10 @@ TEST(TestingLinspace, NegativeRangeDecrease) {
     const auto min  = -100;
     const auto max  = -10;
 
-    std::vector<double> expected = {
-            -100.000, -97.097, -94.194, -91.290, -88.387, -85.484, -82.581, -79.677, -76.774, -73.871, -70.968,
-            -68.065,  -65.161, -62.258, -59.355, -56.452, -53.548, -50.645, -47.742, -44.839, -41.935, -39.032,
-            -36.129,  -33.226, -30.323, -27.419, -24.516, -21.613, -18.710, -15.806, -12.903, -10.000
-    };
+    std::vector<double> expected = {-100.000, -97.097, -94.194, -91.290, -88.387, -85.484, -82.581, -79.677,
+                                    -76.774,  -73.871, -70.968, -68.065, -65.161, -62.258, -59.355, -56.452,
+                                    -53.548,  -50.645, -47.742, -44.839, -41.935, -39.032, -36.129, -33.226,
+                                    -30.323,  -27.419, -24.516, -21.613, -18.710, -15.806, -12.903, -10.000};
     std::reverse(std::begin(expected), std::end(expected));
     EXPECT_EQ(expected.size(), size);
 
@@ -436,19 +432,16 @@ TEST(TestingLinspace, NegativeRangeDecrease) {
     }
 }
 
-
 TEST(TestingLinspace, MixedIncrease) {
     const auto size = 32ul;
     const auto min  = -10;
     const auto max  = 10;
 
     const std::vector<double> expected = {
-            -10.00000, -9.35484, -8.70968, -8.06452, -7.41935, -6.77419, -6.12903, -5.48387, -4.83871, -4.19355, -3.54839,
-            -2.90323,  -2.25806, -1.61290, -0.96774, -0.32258, 0.32258,  0.96774,  1.61290,  2.25806,  2.90323,  3.54839,
-            4.19355,   4.83871,  5.48387,  6.12903,  6.77419,  7.41935,  8.06452,  8.70968,  9.35484,  10.00000
-    };
+        -10.00000, -9.35484, -8.70968, -8.06452, -7.41935, -6.77419, -6.12903, -5.48387, -4.83871, -4.19355, -3.54839,
+        -2.90323,  -2.25806, -1.61290, -0.96774, -0.32258, 0.32258,  0.96774,  1.61290,  2.25806,  2.90323,  3.54839,
+        4.19355,   4.83871,  5.48387,  6.12903,  6.77419,  7.41935,  8.06452,  8.70968,  9.35484,  10.00000};
     EXPECT_EQ(expected.size(), size);
-
 
     std::vector<double> computed(size);
     algorithm::linspace(std::begin(computed), size, min, max);
@@ -462,11 +455,10 @@ TEST(TestingLinspace, MixedDecrease) {
     const auto min  = -10;
     const auto max  = 10;
 
-    std::vector<double> expected = {
-        -10.00000, -9.35484, -8.70968, -8.06452, -7.41935, -6.77419, -6.12903, -5.48387, -4.83871, -4.19355, -3.54839,
-        -2.90323,  -2.25806, -1.61290, -0.96774, -0.32258, 0.32258,  0.96774,  1.61290,  2.25806,  2.90323,  3.54839,
-        4.19355,   4.83871,  5.48387,  6.12903,  6.77419,  7.41935,  8.06452,  8.70968,  9.35484,  10.00000
-    };
+    std::vector<double> expected = {-10.00000, -9.35484, -8.70968, -8.06452, -7.41935, -6.77419, -6.12903, -5.48387,
+                                    -4.83871,  -4.19355, -3.54839, -2.90323, -2.25806, -1.61290, -0.96774, -0.32258,
+                                    0.32258,   0.96774,  1.61290,  2.25806,  2.90323,  3.54839,  4.19355,  4.83871,
+                                    5.48387,   6.12903,  6.77419,  7.41935,  8.06452,  8.70968,  9.35484,  10.00000};
     std::reverse(std::begin(expected), std::end(expected));
     EXPECT_EQ(expected.size(), size);
 
@@ -476,7 +468,6 @@ TEST(TestingLinspace, MixedDecrease) {
         EXPECT_NEAR(computed[i], expected[i], 0.001);
     }
 }
-
 
 TEST(TestingLogspace, IncreaseOrder) {
     const auto size = 32ul;
@@ -493,7 +484,6 @@ TEST(TestingLogspace, IncreaseOrder) {
                                           640.4004271197283, 742.9639507594950, 861.9535664753032, 1000.0000000000000};
     EXPECT_EQ(expected.size(), size);
 
-
     std::vector<double> computed(size);
     algorithm::logspace(std::begin(computed), size, min, max);
     for (auto i = 0ul; i < size; ++i) {
@@ -507,13 +497,13 @@ TEST(TestingLogspace, DecreaseOrder) {
     const auto max  = 3;
 
     std::vector<double> expected = {10.0000000000000,  11.6015530173997,  13.4596032415536,  15.6152300600050,
-                                          18.1160919420041,  21.0174801133249,  24.3835409826883,  28.2886943462597,
-                                          32.8192787251147,  38.0754602122237,  44.1734470314007,  51.2480587696093,
-                                          59.4557070854439,  68.9778537938765,  80.0250227816105,  92.8414544519474,
-                                          107.7105056036769, 124.9609141291987, 144.9740670372632, 168.1924324880869,
-                                          195.1293422635962, 226.3803409521446, 262.6363527653332, 304.6989570903508,
-                                          353.4981105030106, 410.1127070551300, 475.7944314009409, 551.9954321281573,
-                                          640.4004271197283, 742.9639507594950, 861.9535664753032, 1000.0000000000000};
+                                    18.1160919420041,  21.0174801133249,  24.3835409826883,  28.2886943462597,
+                                    32.8192787251147,  38.0754602122237,  44.1734470314007,  51.2480587696093,
+                                    59.4557070854439,  68.9778537938765,  80.0250227816105,  92.8414544519474,
+                                    107.7105056036769, 124.9609141291987, 144.9740670372632, 168.1924324880869,
+                                    195.1293422635962, 226.3803409521446, 262.6363527653332, 304.6989570903508,
+                                    353.4981105030106, 410.1127070551300, 475.7944314009409, 551.9954321281573,
+                                    640.4004271197283, 742.9639507594950, 861.9535664753032, 1000.0000000000000};
     std::reverse(std::begin(expected), std::end(expected));
     EXPECT_EQ(expected.size(), size);
 
