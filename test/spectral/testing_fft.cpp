@@ -133,8 +133,8 @@ TEST(TestingIFFT, InverseTransformComplexData) {
 
     std::vector<std::complex<double>> input(window.size()), inverse(window.size()), transformed(window.size());
     easy::dsp::real2complex(window.begin(), window.end(), std::begin(input));
-    easy::dsp::complex_dft<double>(std::begin(input), std::end(input), std::begin(transformed));
-    easy::dsp::complex_idft<double>(std::begin(transformed), std::end(transformed), std::begin(inverse));
+    easy::dsp::cdft(std::begin(input), std::end(input), std::begin(transformed));
+    easy::dsp::cidft(std::begin(transformed), std::end(transformed), std::begin(inverse));
     for (auto i = 0ul; i < window.size(); ++i) {
         EXPECT_NEAR(inverse[i].real(), input[i].real(), 0.001);
         EXPECT_NEAR(inverse[i].imag(), input[i].imag(), 0.001);

@@ -61,11 +61,13 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @param d_first Output iterator defining the beginning of the destination range.
      * @see complex_idft
      */
-    template <typename T, typename InputIt, typename OutputIt>
-    inline void complex_dft(InputIt first, InputIt last, OutputIt d_first) {
-        fftw_plan<T> plan;
-        plan.dft(fftw_cast(&(*first)), fftw_cast(&(*d_first)),
-                 static_cast<typename fftw_plan<T>::size_type>(std::distance(first, last)));
+    template <typename InputIt, typename OutputIt>
+    inline void cdft(InputIt first, InputIt last, OutputIt d_first) {
+        using complex_t    = meta::value_type_t<InputIt>;
+        using underlying_t = typename complex_t::value_type;
+        const auto nfft    = static_cast<typename fftw_plan<underlying_t>::size_type>(std::distance(first, last));
+        fftw_plan<underlying_t> plan;
+        plan.dft(fftw_cast(&(*first)), fftw_cast(&(*d_first)), nfft);
     }
 
     /**
@@ -83,10 +85,12 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @param d_first Output iterator defining the beginning of the destination range.
      * @see complex_dft
      */
-    template <typename T, typename InputIt, typename OutputIt>
-    inline void complex_idft(InputIt first, InputIt last, OutputIt d_first) {
-        const auto nfft = static_cast<typename fftw_plan<T>::size_type>(std::distance(first, last));
-        fftw_plan<T> plan;
+    template <typename InputIt, typename OutputIt>
+    inline void cidft(InputIt first, InputIt last, OutputIt d_first) {
+        using complex_t    = meta::value_type_t<InputIt>;
+        using underlying_t = typename complex_t::value_type;
+        const auto nfft    = static_cast<typename fftw_plan<underlying_t>::size_type>(std::distance(first, last));
+        fftw_plan<underlying_t> plan;
         plan.idft(fftw_cast(&(*first)), fftw_cast(&(*d_first)), nfft);
         plan.idft_scale(fftw_cast(&(*d_first)), nfft);
     }
