@@ -50,6 +50,6 @@ before_install:
 script:
 - mkdir -p build
 - cd build
-- cmake -DBUILD_TESTS=ON -DBUILD_DOCS=ON -DBUILD_EXAMPLES=ON ..
+- cmake -DBUILD_TESTS=ON -DBUILD_DOCS=OFF -DBUILD_EXAMPLES=ON ..
 - make -j4
 - make test
