@@ -1,6 +1,6 @@
 /*
  * EasyMeta, Yet another header-only library for C++ meta-programming.
- * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi
+ * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
