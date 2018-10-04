@@ -2,42 +2,40 @@ language: cpp
 matrix:
   include:
     - os: linux
-      dist: xenial
-      sudo: true
-      compiler: gcc
       addons:
         apt:
           packages:
-          - gcc-6
-          - g++-6
+          - clang-5.0
+          - cmake
           - libfftw3-dev
           - libsamplerate0-dev
           - libaudiofile-dev
           - libsndfile1-dev
           sources:
           - ubuntu-toolchain-r-test
-          - llvm-toolchain-precise-3.7
+          - llvm-toolchain-trusty-5.0
       env:
-      - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+      - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
-  - os: linux
-    dist: xenial
-    sudo: true
-    compiler: gcc
-    addons:
-      apt:
-        packages:
-        - gcc-7
-        - g++-7
-        - libfftw3-dev
-        - libsamplerate0-dev
-        - libaudiofile-dev
-        - libsndfile1-dev
-        sources:
-        - ubuntu-toolchain-r-test
-        - llvm-toolchain-precise-3.7
-    env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+    - os: linux
+      dist: xenial
+      sudo: true
+      compiler: gcc
+      addons:
+        apt:
+          packages:
+          - gcc-7
+          - g++-7
+          - cmake
+          - libfftw3-dev
+          - libsamplerate0-dev
+          - libaudiofile-dev
+          - libsndfile1-dev
+          sources:
+          - ubuntu-toolchain-r-test
+          - llvm-toolchain-trusty-5.0
+      env:
+          - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
 before_install:
   - eval "${MATRIX_EVAL}"
