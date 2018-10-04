@@ -24,6 +24,7 @@
 #define EASYDSP_AUTOCORRELATION_HPP
 
 #include <easy/dsp/spectral/internal/fftw_impl.hpp>
+#include <easy/dsp/spectral/dft.hpp>
 #include <vector>
 
 namespace easy { namespace dsp { inline namespace spectral {
