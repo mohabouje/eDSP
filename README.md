@@ -4,6 +4,7 @@
 ![issues](https://img.shields.io/github/issues/mohabouje/eDSP.svg)
 ![license](https://img.shields.io/github/license/mohabouje/eDSP.svg)
 ![built](https://img.shields.io/badge/built%20with-GCC-6f62ba.svg)
+[![Build Status](https://travis-ci.org/mohabouje/eDSP.svg?branch=master)](https://travis-ci.org/mohabouje/eDSP)
 
 [![GitHub forks](https://img.shields.io/github/forks/mohabouje/eDSP.svg?style=social&label=Fork)]()
 [![GitHub stars](https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star)]()
