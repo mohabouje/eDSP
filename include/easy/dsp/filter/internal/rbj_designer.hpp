@@ -34,7 +34,7 @@ namespace easy { namespace dsp { namespace filter {
 
     template <typename T>
     struct RBJFilterDesigner<T, FilterType::LowPass> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
@@ -48,13 +48,13 @@ namespace easy { namespace dsp { namespace filter {
             b[0] = static_cast<T>((1 - omega_c) / 2);
             b[1] = static_cast<T>(1 - omega_c);
             b[2] = b[0];
-            return Biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
+            return biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
         }
     };
 
     template <typename T>
     struct RBJFilterDesigner<T, FilterType::HighPass> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
@@ -68,13 +68,13 @@ namespace easy { namespace dsp { namespace filter {
             b[0] = static_cast<T>((1 + omega_c) / 2);
             b[1] = static_cast<T>(-(1 + omega_c));
             b[2] = b[0];
-            return Biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
+            return biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
         }
     };
 
     template <typename T>
     struct RBJFilterDesigner<T, FilterType::BandPassSkirtGain> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
@@ -88,12 +88,12 @@ namespace easy { namespace dsp { namespace filter {
             b[0] = static_cast<T>(Q * alpha);
             b[1] = 0;
             b[2] = static_cast<T>(-Q * alpha);
-            return Biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
+            return biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
         }
     };
     template <typename T>
     struct RBJFilterDesigner<T, FilterType::BandPassPeakGain> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
@@ -107,13 +107,13 @@ namespace easy { namespace dsp { namespace filter {
             b[0] = static_cast<T>(alpha);
             b[1] = 0;
             b[2] = static_cast<T>(-alpha);
-            return Biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
+            return biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
         }
     };
 
     template <typename T>
     struct RBJFilterDesigner<T, FilterType::Notch> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
@@ -127,13 +127,13 @@ namespace easy { namespace dsp { namespace filter {
             b[0] = 1;
             b[1] = a[1];
             b[2] = 1;
-            return Biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
+            return biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
         }
     };
 
     template <typename T>
     struct RBJFilterDesigner<T, FilterType::AllPass> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
@@ -147,13 +147,13 @@ namespace easy { namespace dsp { namespace filter {
             b[0] = a[2];
             b[1] = a[1];
             b[2] = a[0];
-            return Biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
+            return biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
         }
     };
 
     template <typename T>
     struct RBJFilterDesigner<T, FilterType::PeakingEQ> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             const T A          = std::sqrt(std::pow(10, gain_db / 20));
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
@@ -167,13 +167,13 @@ namespace easy { namespace dsp { namespace filter {
             b[0] = static_cast<T>(1 + alpha * A);
             b[1] = a[1];
             b[2] = static_cast<T>(1 - alpha * A);
-            return Biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
+            return biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
         }
     };
 
     template <typename T>
     struct RBJFilterDesigner<T, FilterType::LowShelf> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             const T A          = std::sqrt(std::pow(10., gain_db / 20));
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
@@ -187,13 +187,13 @@ namespace easy { namespace dsp { namespace filter {
             b[0] = static_cast<T>(A * ((A + 1) - (A - 1) * omega_c + beta * omega_s));
             b[1] = static_cast<T>(2 * A * ((A - 1) - (A + 1) * omega_c));
             b[2] = static_cast<T>(A * ((A + 1) - (A - 1) * omega_c - beta * omega_s));
-            return Biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
+            return biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
         }
     };
 
     template <typename T>
     struct RBJFilterDesigner<T, FilterType::HighShelf> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             const T A          = std::sqrt(std::pow(10, gain_db / 20));
             const auto omega   = 2 * constants<T>::pi * fc / sample_rate;
             const auto omega_s = std::sin(omega);
@@ -207,7 +207,7 @@ namespace easy { namespace dsp { namespace filter {
             b[0] = static_cast<T>(A * ((A + 1) + (A - 1) * omega_c + beta * omega_s));
             b[1] = static_cast<T>(-2 * A * ((A - 1) + (A + 1) * omega_c));
             b[2] = static_cast<T>(A * ((A + 1) + (A - 1) * omega_c - beta * omega_s));
-            return Biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
+            return biquad<T>(a[0], a[1], a[2], b[0], b[1], b[2]);
         }
     };
 

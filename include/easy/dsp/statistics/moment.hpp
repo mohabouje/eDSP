@@ -53,7 +53,7 @@ namespace easy { namespace dsp { namespace statistics {
         T nthMoment(Iter_T first, Iter_T last, T mean) {
             const auto cnt = std::distance(first, last);
             return std::accumulate(first, last, T(), SumDiffNthPower<T, N>(mean)) /
-                   static_cast<value_type_t<Iter_T>>(cnt);
+                   static_cast<meta::value_type_t<Iter_T>>(cnt);
         }
 
     } // namespace internal
@@ -69,8 +69,8 @@ namespace easy { namespace dsp { namespace statistics {
     template <std::size_t N, typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> moment(ForwardIt first, ForwardIt last) {
         using input_t   = meta::value_type_t<ForwardIt>;
-        const auto mean = mean(first, last);
-        return internal::nthMoment<input_t, N>(first, last, mean);
+        const auto m = mean(first, last);
+        return internal::nthMoment<input_t, N>(first, last, m);
     }
 
     /**
@@ -85,7 +85,7 @@ namespace easy { namespace dsp { namespace statistics {
     */
     template <std::size_t N, typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> moment(ForwardIt first, ForwardIt last,
-                                                   const value_type_t<ForwardIt> mean) {
+                                                   const meta::value_type_t<ForwardIt> mean) {
         using input_t = meta::value_type_t<ForwardIt>;
         return internal::nthMoment<input_t, N>(first, last, mean);
     }

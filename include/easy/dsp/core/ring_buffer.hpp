@@ -159,7 +159,7 @@ namespace easy { namespace dsp {
 
         constexpr ring_buffer()                   = default;
         constexpr ring_buffer(const ring_buffer&) = default;
-        constexpr ring_buffer(ring_buffer&&)      = default;
+        constexpr ring_buffer(ring_buffer&&) noexcept = default;
         constexpr ring_buffer& operator=(const ring_buffer&) = default;
         constexpr ring_buffer& operator=(ring_buffer&&) = default;
 
@@ -179,7 +179,7 @@ namespace easy { namespace dsp {
          *  This constructor fills the %ring_buffer with N copies of value.
          */
         ring_buffer(size_type N, const value_type& value) : buffer_(N) {
-            std::fill(begin(), end(), value);
+            //std::fill(begin(), end(), value);
         }
 
         /**

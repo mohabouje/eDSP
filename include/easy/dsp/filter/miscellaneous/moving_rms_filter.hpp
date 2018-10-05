@@ -94,7 +94,7 @@ namespace easy { namespace dsp { namespace filter {
     moving_rms<T, Allocator>::moving_rms(size_type N) : window_(N, T()) {}
 
     template <typename T, typename Allocator>
-    moving_rms<T, Allocator>::size_type moving_rms<T, Allocator>::size() const {
+    typename moving_rms<T, Allocator>::size_type moving_rms<T, Allocator>::size() const {
         return window_.capacity();
     }
 

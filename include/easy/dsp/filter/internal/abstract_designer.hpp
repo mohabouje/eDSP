@@ -31,23 +31,23 @@ namespace easy { namespace dsp { namespace filter {
 
     namespace {
         template <typename T>
-        Biquad<T> make_biquad(const pz_pair<T>& pair) noexcept {
+        biquad<T> make_biquad(const pz_pair<T>& pair) noexcept {
             if (pair.isSinglePole()) {
-                return Biquad<T>(pair.poles().first, pair.zeros().first);
+                return biquad<T>(pair.poles().first, pair.zeros().first);
             } else {
-                return Biquad<T>(pair.poles().first, pair.zeros().first, pair.poles().second, pair.zeros().second);
+                return biquad<T>(pair.poles().first, pair.zeros().first, pair.poles().second, pair.zeros().second);
             }
         }
 
         template <typename T>
-        void apply_scale(Biquad<T>& biquad, T scale) noexcept {
+        void apply_scale(biquad<T>& biquad, T scale) noexcept {
             biquad.setB0(biquad.b0() * scale);
             biquad.setB1(biquad.b1() * scale);
             biquad.setB2(biquad.b2() * scale);
         }
 
         template <typename T, std::size_t N>
-        std::complex<T> make_response(const BiquadCascade<T, N>& cascade, T normalized_frequency) {
+        std::complex<T> make_response(const biquad_cascade<T, N>& cascade, T normalized_frequency) {
             const auto w    = constants<T>::two_pi * normalized_frequency;
             const auto czn1 = std::polar(static_cast<T>(1), -w);
             const auto czn2 = std::polar(static_cast<T>(1), -2 * w);
@@ -69,8 +69,8 @@ namespace easy { namespace dsp { namespace filter {
         }
 
         template <typename T, std::size_t N>
-        constexpr BiquadCascade<T, (N + 1) / 2> make_cascade(const LayoutBase<T, N>& digital) noexcept {
-            BiquadCascade<T, (N + 1) / 2> cascade;
+        constexpr biquad_cascade<T, (N + 1) / 2> make_cascade(const LayoutBase<T, N>& digital) noexcept {
+            biquad_cascade<T, (N + 1) / 2> cascade;
             const auto num_poles   = digital.numberPoles();
             const auto num_biquads = (num_poles + 1) / 2;
             for (auto i = 0ul; i < num_biquads; ++i) {
@@ -91,7 +91,7 @@ namespace easy { namespace dsp { namespace filter {
         using analog_type  = LayoutBase<T, MaxAnalog>;
 
         template <typename... Args>
-        BiquadCascade<T, (MaxDigital + 1) / 2> design(Args... arg) {
+        biquad_cascade<T, (MaxDigital + 1) / 2> design(Args... arg) {
             auto* designer = static_cast<Designer*>(this);
             designer->operator()(arg...);
             return make_cascade(digital_);

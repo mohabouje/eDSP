@@ -35,7 +35,7 @@ namespace easy { namespace dsp { namespace filter {
 
     template <typename T>
     struct ZoelzerFilterDesigner<T, FilterType::LowPass> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto K    = std::tan(constants<T>::pi * fc / sample_rate);
             const auto norm = 1 / (1 + K / Q + K * K);
@@ -44,13 +44,13 @@ namespace easy { namespace dsp { namespace filter {
             const auto b2   = b0;
             const auto a1   = 2 * (K * K - 1) * norm;
             const auto a2   = (1 - K / Q + K * K) * norm;
-            return Biquad<T>(1, a1, a2, b0, b1, b2);
+            return biquad<T>(1, a1, a2, b0, b1, b2);
         }
     };
 
     template <typename T>
     struct ZoelzerFilterDesigner<T, FilterType::HighPass> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto K    = std::tan(constants<T>::pi * fc / sample_rate);
             const auto norm = 1 / (1 + K / Q + K * K);
@@ -59,13 +59,13 @@ namespace easy { namespace dsp { namespace filter {
             const auto b2   = b0;
             const auto a1   = 2 * (K * K - 1) * norm;
             const auto a2   = (1 - K / Q + K * K) * norm;
-            return Biquad<T>(1, a1, a2, b0, b1, b2);
+            return biquad<T>(1, a1, a2, b0, b1, b2);
         }
     };
 
     template <typename T>
     struct ZoelzerFilterDesigner<T, FilterType::BandPassSkirtGain> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto K    = std::tan(constants<T>::pi * fc / sample_rate);
             const auto norm = 1 / (1 + K / Q + K * K);
@@ -74,13 +74,13 @@ namespace easy { namespace dsp { namespace filter {
             const auto b2   = -b0;
             const auto a1   = 2 * (K * K - 1) * norm;
             const auto a2   = (1 - K / Q + K * K) * norm;
-            return Biquad<T>(1, a1, a2, b0, b1, b2);
+            return biquad<T>(1, a1, a2, b0, b1, b2);
         }
     };
 
     template <typename T>
     struct ZoelzerFilterDesigner<T, FilterType::Notch> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto K    = std::tan(constants<T>::pi * fc / sample_rate);
             const auto norm = 1 / (1 + K / Q + K * K);
@@ -89,13 +89,13 @@ namespace easy { namespace dsp { namespace filter {
             const auto b2   = b0;
             const auto a1   = b1;
             const auto a2   = (1 - K / Q + K * K) * norm;
-            return Biquad<T>(1, a1, a2, b0, b1, b2);
+            return biquad<T>(1, a1, a2, b0, b1, b2);
         }
     };
 
     template <typename T>
     struct ZoelzerFilterDesigner<T, FilterType::PeakingEQ> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             const auto V = db2mag(gain_db);
             const auto K = std::tan(constants<T>::pi * fc / sample_rate);
             if (gain_db >= 0) { // boost
@@ -105,7 +105,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto b2   = (1 - V / Q * K + K * K) * norm;
                 const auto a1   = b1;
                 const auto a2   = (1 - 1 / Q * K + K * K) * norm;
-                return Biquad<T>(1, a1, a2, b0, b1, b2);
+                return biquad<T>(1, a1, a2, b0, b1, b2);
             } else { // cut
                 const auto norm = 1 / (1 + V / Q * K + K * K);
                 const auto b0   = (1 + 1 / Q * K + K * K) * norm;
@@ -113,14 +113,14 @@ namespace easy { namespace dsp { namespace filter {
                 const auto b2   = (1 - 1 / Q * K + K * K) * norm;
                 const auto a1   = b1;
                 const auto a2   = (1 - V / Q * K + K * K) * norm;
-                return Biquad<T>(1, a1, a2, b0, b1, b2);
+                return biquad<T>(1, a1, a2, b0, b1, b2);
             }
         }
     };
 
     template <typename T>
     struct ZoelzerFilterDesigner<T, FilterType::LowShelf> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(Q);
             const auto V = db2mag(gain_db);
             const auto K = std::tan(constants<T>::pi * fc / sample_rate);
@@ -131,7 +131,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto b2   = (1 - std::sqrt(2 * V) * K + V * K * K) * norm;
                 const auto a1   = 2 * (K * K - 1) * norm;
                 const auto a2   = (1 - constants<T>::root_two * K + K * K) * norm;
-                return Biquad<T>(1, a1, a2, b0, b1, b2);
+                return biquad<T>(1, a1, a2, b0, b1, b2);
             } else { // cut
                 const auto norm = 1 / (1 + std::sqrt(2 * V) * K + V * K * K);
                 const auto b0   = (1 + constants<T>::root_two * K + K * K) * norm;
@@ -139,14 +139,14 @@ namespace easy { namespace dsp { namespace filter {
                 const auto b2   = (1 - constants<T>::root_two * K + K * K) * norm;
                 const auto a1   = 2 * (V * K * K - 1) * norm;
                 const auto a2   = (1 - std::sqrt(2 * V) * K + V * K * K) * norm;
-                return Biquad<T>(1, a1, a2, b0, b1, b2);
+                return biquad<T>(1, a1, a2, b0, b1, b2);
             }
         }
     };
 
     template <typename T>
     struct ZoelzerFilterDesigner<T, FilterType::HighShelf> {
-        constexpr Biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(Q);
             const auto V = db2mag(gain_db);
             const auto K = std::tan(constants<T>::pi * fc / sample_rate);
@@ -157,7 +157,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto b2   = (V - std::sqrt(2 * V) * K + K * K) * norm;
                 const auto a1   = 2 * (K * K - 1) * norm;
                 const auto a2   = (1 - constants<T>::root_two * K + K * K) * norm;
-                return Biquad<T>(1, a1, a2, b0, b1, b2);
+                return biquad<T>(1, a1, a2, b0, b1, b2);
             } else { // cut
                 const auto norm = 1 / (V + std::sqrt(2 * V) * K + K * K);
                 const auto b0   = (1 + constants<T>::root_two * K + K * K) * norm;
@@ -165,7 +165,7 @@ namespace easy { namespace dsp { namespace filter {
                 const auto b2   = (1 - constants<T>::root_two * K + K * K) * norm;
                 const auto a1   = 2 * (K * K - V) * norm;
                 const auto a2   = (V - std::sqrt(2 * V) * K + K * K) * norm;
-                return Biquad<T>(b0, b1, b2, a1, a1, a2);
+                return biquad<T>(b0, b1, b2, a1, a1, a2);
             }
         }
     };

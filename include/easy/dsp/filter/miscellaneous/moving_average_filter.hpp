@@ -93,7 +93,7 @@ namespace easy { namespace dsp { namespace filter {
     moving_average<T, Allocator>::moving_average(size_type N) : window_(N, T()) {}
 
     template <typename T, typename Allocator>
-    moving_average<T, Allocator>::size_type moving_average<T, Allocator>::size() const {
+    typename moving_average<T, Allocator>::size_type moving_average<T, Allocator>::size() const {
         return window_.capacity();
     }
 

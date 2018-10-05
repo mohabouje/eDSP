@@ -26,6 +26,7 @@
 #include <easy/meta/ensure.hpp>
 #include <easy/dsp/filter/biquad.hpp>
 #include <array>
+#include <easy/meta/iterator.hpp>
 
 namespace easy { namespace dsp { namespace filter {
 
@@ -40,8 +41,9 @@ namespace easy { namespace dsp { namespace filter {
      * @tparam N Number representing the maximum size (number of Biquad).
      */
     template <typename T, std::size_t N>
-    struct BiquadCascade {
-        using value_type      = Biquad<T>;
+    class biquad_cascade {
+    public:
+        using value_type      = biquad<T>;
         using reference       = value_type&;
         using const_reference = const value_type&;
         using iterator        = value_type*;
@@ -51,12 +53,12 @@ namespace easy { namespace dsp { namespace filter {
         /**
          * @brief Creates an empty #BiquadCascade
          */
-        constexpr BiquadCascade() = default;
+        constexpr biquad_cascade() = default;
 
         /**
          * @brief Default destructor
          */
-        ~BiquadCascade() = default;
+        ~biquad_cascade() = default;
 
         /**
          * @brief Returns the number of Biquads
@@ -160,13 +162,13 @@ namespace easy { namespace dsp { namespace filter {
          * @param value Input value to be filtered.
          * @return Filtered value.
          */
-        constexpr value_type tick(value_type value) noexcept;
+        constexpr T tick(T value) noexcept;
 
         /**
          * @brief Appends the given Biquad at the end.
          * @param biquad Biquad to append.
          */
-        constexpr void push_back(const Biquad<T>& biquad);
+        constexpr void push_back(const biquad<T>& biquad);
 
         /**
          * @brief Construct a Biquad in-place at the end.
@@ -177,107 +179,106 @@ namespace easy { namespace dsp { namespace filter {
 
     private:
         std::size_t num_stage_{0};
-        std::array<Biquad<T>, N> cascade_{};
+        std::array<biquad<T>, N> cascade_{};
     };
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::size_type BiquadCascade<T, N>::size() const noexcept {
+    constexpr typename biquad_cascade<T, N>::size_type biquad_cascade<T, N>::size() const noexcept {
         return num_stage_;
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::size_type BiquadCascade<T, N>::max_size() const noexcept {
+    constexpr typename biquad_cascade<T, N>::size_type biquad_cascade<T, N>::max_size() const noexcept {
         return N;
     }
 
     template <typename T, size_t N>
     template <typename... Arg>
-    constexpr void BiquadCascade<T, N>::emplace_back(Arg... arg) {
+    constexpr void biquad_cascade<T, N>::emplace_back(Arg... arg) {
         meta::ensure(num_stage_ < N, "No space available");
-        cascade_[num_stage_] = Biquad<T>(arg...);
+        cascade_[num_stage_] = biquad<T>(arg...);
         num_stage_++;
     }
 
     template <typename T, size_t N>
-    constexpr void BiquadCascade<T, N>::push_back(const Biquad<T>& biquad) {
+    constexpr void biquad_cascade<T, N>::push_back(const biquad<T>& biquad) {
         meta::ensure(num_stage_ < N, "No space available");
         cascade_[num_stage_] = biquad;
         num_stage_++;
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::value_type
-        BiquadCascade<T, N>::tick(BiquadCascade::value_type value) noexcept {
+    constexpr T biquad_cascade<T, N>::tick(T value) noexcept {
         for (auto i = 0ul; i < num_stage_; ++i) {
-            value = cascade_[i](value);
+            value = cascade_[i].tick(value);
         }
         return value;
     }
 
     template <typename T, size_t N>
     template <typename InputIt, typename OutputIt>
-    constexpr void BiquadCascade<T, N>::filter(InputIt first, InputIt last, OutputIt d_first) {
+    constexpr void biquad_cascade<T, N>::filter(InputIt first, InputIt last, OutputIt d_first) {
         for (; first != last; ++first, ++d_first) {
             *d_first = tick(*first);
         }
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::const_iterator BiquadCascade<T, N>::end() const noexcept {
+    constexpr typename biquad_cascade<T, N>::const_iterator biquad_cascade<T, N>::end() const noexcept {
         return std::cbegin(cascade_) + size();
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::const_iterator BiquadCascade<T, N>::cend() const noexcept {
+    constexpr typename biquad_cascade<T, N>::const_iterator biquad_cascade<T, N>::cend() const noexcept {
         return std::cbegin(cascade_) + size();
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::const_iterator BiquadCascade<T, N>::begin() const noexcept {
+    constexpr typename biquad_cascade<T, N>::const_iterator biquad_cascade<T, N>::begin() const noexcept {
         return std::cbegin(cascade_);
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::const_iterator BiquadCascade<T, N>::cbegin() const noexcept {
+    constexpr typename biquad_cascade<T, N>::const_iterator biquad_cascade<T, N>::cbegin() const noexcept {
         return std::cbegin(cascade_);
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::iterator BiquadCascade<T, N>::end() noexcept {
+    constexpr typename biquad_cascade<T, N>::iterator biquad_cascade<T, N>::end() noexcept {
         return std::begin(cascade_) + size();
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::iterator BiquadCascade<T, N>::begin() noexcept {
+    constexpr typename biquad_cascade<T, N>::iterator biquad_cascade<T, N>::begin() noexcept {
         return std::begin(cascade_);
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::reference BiquadCascade<T, N>::
-        operator[](BiquadCascade::size_type index) noexcept {
+    constexpr typename biquad_cascade<T, N>::reference biquad_cascade<T, N>::
+        operator[](biquad_cascade::size_type index) noexcept {
         return cascade_[index];
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::const_reference BiquadCascade<T, N>::
-        operator[](BiquadCascade::size_type index) const noexcept {
+    constexpr typename biquad_cascade<T, N>::const_reference biquad_cascade<T, N>::
+        operator[](biquad_cascade::size_type index) const noexcept {
         return cascade_[index];
     }
 
     template <typename T, size_t N>
-    constexpr void BiquadCascade<T, N>::reset() {
+    constexpr void biquad_cascade<T, N>::reset() {
         for (auto i = 0ul; i < num_stage_; ++i) {
             cascade_[i].reset();
         }
     }
 
     template <typename T, size_t N>
-    constexpr void BiquadCascade<T, N>::clear() {
+    constexpr void biquad_cascade<T, N>::clear() {
         num_stage_ = 0;
     }
 
     template <typename T, size_t N>
-    constexpr typename BiquadCascade<T, N>::size_type BiquadCascade<T, N>::capacity() const noexcept {
+    constexpr typename biquad_cascade<T, N>::size_type biquad_cascade<T, N>::capacity() const noexcept {
         return N;
     }
 }}}    // namespace easy::dsp::filter

@@ -31,6 +31,10 @@
 #include <easy/dsp/filter/internal/chebyshev_I_designer.hpp>
 #include <easy/dsp/filter/internal/chebyshev_II_designer.hpp>
 
+#include <easy/dsp/filter/miscellaneous/moving_median_filter.hpp>
+#include <easy/dsp/filter/miscellaneous/moving_average_filter.hpp>
+#include <easy/dsp/filter/miscellaneous/moving_rms_filter.hpp>
+
 namespace easy { namespace dsp { namespace filter {
 
     /**
@@ -70,7 +74,7 @@ namespace easy { namespace dsp { namespace filter {
          * @see AudioEQ-CookBook:  \link http://www.musicdsp.org/showone.php?id=197 \endlink
          */
         template <FilterType Type, typename... Args>
-        constexpr Biquad<T> design(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> design(T fc, T sample_rate, T Q, T gain_db = 1) const {
             return RBJFilterDesigner<T, Type>{}(fc, sample_rate, Q, gain_db);
         }
     };
@@ -94,7 +98,7 @@ namespace easy { namespace dsp { namespace filter {
          * \link https://www.wiley.com/en-us/DAFX%3A+Digital+Audio+Effects%2C+2nd+Edition-p-9780470979679 \endlink
          */
         template <FilterType Type, typename... Args>
-        constexpr Biquad<T> design(T fc, T sample_rate, T Q, T gain_db = 1) const {
+        constexpr biquad<T> design(T fc, T sample_rate, T Q, T gain_db = 1) const {
             return ZoelzerFilterDesigner<T, Type>{}(fc, sample_rate, Q, gain_db);
         }
     };

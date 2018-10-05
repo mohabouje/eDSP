@@ -13,7 +13,11 @@ set(SOURCE_FILES
         spectral/testing_hartley.cpp
         spectral/testing_hilbert.cpp
         windowing/testing_windowing.cpp
-        spectral/testing_correlation.cpp)
+        spectral/testing_correlation.cpp
+        oscillators/testing_oscillators.cpp
+        filter/testing_filter.cpp
+        statistics/testing_statistics.cpp
+        tools/testing_tools.cpp)
 
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})

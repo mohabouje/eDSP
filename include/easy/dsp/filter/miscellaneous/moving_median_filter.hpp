@@ -88,7 +88,7 @@ namespace easy { namespace dsp { namespace filter {
     moving_median<T, Allocator>::moving_median(size_type N) : window_(N, T()) {}
 
     template <typename T, typename Allocator>
-    moving_median<T, Allocator>::size_type moving_median<T, Allocator>::size() const {
+    typename moving_median<T, Allocator>::size_type moving_median<T, Allocator>::size() const {
         return window_.capacity();
     }
 

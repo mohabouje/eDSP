@@ -69,22 +69,22 @@ namespace easy { namespace dsp { namespace filter {
      */
 
     template <typename T>
-    class Biquad {
+    class biquad {
     public:
         using value_type = T;
 
-        constexpr Biquad() noexcept              = default;
-        constexpr Biquad(const Biquad&) noexcept = default;
-        constexpr Biquad(Biquad&&) noexcept      = default;
-        constexpr Biquad& operator=(const Biquad&) noexcept = default;
-        constexpr Biquad& operator=(Biquad&&) noexcept = default;
+        constexpr biquad() noexcept              = default;
+        constexpr biquad(const biquad&) noexcept = default;
+        constexpr biquad(biquad&&) noexcept      = default;
+        constexpr biquad& operator=(const biquad&) noexcept = default;
+        constexpr biquad& operator=(biquad&&) noexcept = default;
 
         /**
          * @brief Initialize a Biquad filter with one single pole and zero.
          * @param pole Complex value representing the pole.
          * @param zero Complex value representing the zero.
          */
-        constexpr Biquad(const std::complex<T>& pole, const std::complex<T>& zero);
+        constexpr biquad(const std::complex<T>& pole, const std::complex<T>& zero);
 
         /**
          * @brief Initialize a Biquad filter with a pair of zero-pole.
@@ -93,7 +93,7 @@ namespace easy { namespace dsp { namespace filter {
          * @param pole_second Complex value representing the second pole.
          * @param zero_second Complex value representing the second zeo.
          */
-        constexpr Biquad(const std::complex<T>& pole_first, const std::complex<T>& zero_first,
+        constexpr biquad(const std::complex<T>& pole_first, const std::complex<T>& zero_first,
                          const std::complex<T>& pole_second, const std::complex<T>& zero_second);
 
         /**
@@ -105,12 +105,12 @@ namespace easy { namespace dsp { namespace filter {
          * @param b1 Value of the coefficient \f$ b_1 \f$.
          * @param b2 Value of the coefficient \f$ b_2 \f$.
          */
-        constexpr Biquad(value_type a0, value_type a1, value_type a2, value_type b0, value_type b1,
+        constexpr biquad(value_type a0, value_type a1, value_type a2, value_type b0, value_type b1,
                          value_type b2) noexcept;
         /**
          * @brief Default destructor.
          */
-        ~Biquad() = default;
+        ~biquad() = default;
 
         /**
          * @brief Returns the value of the coefficient \f$ a_0 \f$.
@@ -231,7 +231,7 @@ namespace easy { namespace dsp { namespace filter {
     };
 
     template <typename T>
-    constexpr Biquad<T>::Biquad(value_type a0, value_type a1, value_type a2, value_type b0, value_type b1,
+    constexpr biquad<T>::biquad(value_type a0, value_type a1, value_type a2, value_type b0, value_type b1,
                                 value_type b2) noexcept :
         b2_(b2 / a0),
         b1_(b1 / a0),
@@ -241,7 +241,7 @@ namespace easy { namespace dsp { namespace filter {
         a0_(1) {}
 
     template <typename T>
-    constexpr Biquad<T>::Biquad(const std::complex<T>& pole, const std::complex<T>& zero) :
+    constexpr biquad<T>::biquad(const std::complex<T>& pole, const std::complex<T>& zero) :
         b2_(0),
         b1_(1),
         b0_(-zero.real()),
@@ -253,7 +253,7 @@ namespace easy { namespace dsp { namespace filter {
     }
 
     template <typename T>
-    constexpr Biquad<T>::Biquad(const std::complex<T>& pole_first, const std::complex<T>& zero_first,
+    constexpr biquad<T>::biquad(const std::complex<T>& pole_first, const std::complex<T>& zero_first,
                                 const std::complex<T>& pole_second, const std::complex<T>& zero_second) :
         b0_(1),
         a0_(1) {
@@ -279,62 +279,62 @@ namespace easy { namespace dsp { namespace filter {
     }
 
     template <typename T>
-    constexpr void Biquad<T>::reset() noexcept {
+    constexpr void biquad<T>::reset() noexcept {
         w0_ = 0;
         w1_ = 0;
     }
 
     template <typename T>
-    constexpr bool Biquad<T>::stability() const noexcept {
+    constexpr bool biquad<T>::stability() const noexcept {
         return std::abs(a2_) < 1 && (std::abs(a1_) < (1 + a2_));
     }
 
     template <typename T>
-    constexpr void Biquad<T>::setA0(const value_type value) noexcept {
+    constexpr void biquad<T>::setA0(const value_type value) noexcept {
         a0_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void Biquad<T>::setA1(const value_type value) noexcept {
+    constexpr void biquad<T>::setA1(const value_type value) noexcept {
         a1_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void Biquad<T>::setA2(const value_type value) noexcept {
+    constexpr void biquad<T>::setA2(const value_type value) noexcept {
         a2_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void Biquad<T>::setB0(const value_type value) noexcept {
+    constexpr void biquad<T>::setB0(const value_type value) noexcept {
         b0_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void Biquad<T>::setB1(const value_type value) noexcept {
+    constexpr void biquad<T>::setB1(const value_type value) noexcept {
         b1_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void Biquad<T>::setB2(const value_type value) noexcept {
+    constexpr void biquad<T>::setB2(const value_type value) noexcept {
         b2_ = value;
         reset();
     }
 
     template <typename T>
     template <typename InputIt, typename OutputIt>
-    constexpr void Biquad<T>::filter(InputIt first, InputIt last, OutputIt d_first) {
+    constexpr void biquad<T>::filter(InputIt first, InputIt last, OutputIt d_first) {
         for (; first != last; ++first, ++d_first) {
             *d_first = tick(*first);
         }
     }
 
     template <typename T>
-    constexpr typename Biquad<T>::value_type Biquad<T>::tick(const value_type value) noexcept {
+    constexpr typename biquad<T>::value_type biquad<T>::tick(const value_type value) noexcept {
         const auto out = b0_ * value + w0_;
         w0_            = b1_ * value - a1_ * out + w1_;
         w1_            = b2_ * value - a2_ * out;
@@ -342,37 +342,37 @@ namespace easy { namespace dsp { namespace filter {
     }
 
     template <typename T>
-    constexpr Biquad<T>::operator bool() const noexcept {
+    constexpr biquad<T>::operator bool() const noexcept {
         return stability();
     }
 
     template <typename T>
-    constexpr typename Biquad<T>::value_type Biquad<T>::a0() const noexcept {
+    constexpr typename biquad<T>::value_type biquad<T>::a0() const noexcept {
         return a0_;
     }
 
     template <typename T>
-    constexpr typename Biquad<T>::value_type Biquad<T>::a1() const noexcept {
+    constexpr typename biquad<T>::value_type biquad<T>::a1() const noexcept {
         return a1_;
     }
 
     template <typename T>
-    constexpr typename Biquad<T>::value_type Biquad<T>::a2() const noexcept {
+    constexpr typename biquad<T>::value_type biquad<T>::a2() const noexcept {
         return a2_;
     }
 
     template <typename T>
-    constexpr typename Biquad<T>::value_type Biquad<T>::b0() const noexcept {
+    constexpr typename biquad<T>::value_type biquad<T>::b0() const noexcept {
         return b0_;
     }
 
     template <typename T>
-    constexpr typename Biquad<T>::value_type Biquad<T>::b1() const noexcept {
+    constexpr typename biquad<T>::value_type biquad<T>::b1() const noexcept {
         return b1_;
     }
 
     template <typename T>
-    constexpr typename Biquad<T>::value_type Biquad<T>::b2() const noexcept {
+    constexpr typename biquad<T>::value_type biquad<T>::b2() const noexcept {
         return b2_;
     }
 }}} // namespace easy::dsp::filter
