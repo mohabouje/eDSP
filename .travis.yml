@@ -49,4 +49,4 @@ after_success:
   - lcov --directory . --capture --output-file coverage.info
   - lcov --remove coverage.info '/usr/*' --output-file coverage.info
   - lcov --list coverage.info
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -t 69069f21-5a1a-4d45-a6c2-e7a5af9bd63d
