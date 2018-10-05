@@ -2,24 +2,6 @@ language: cpp
 matrix:
   include:
     - os: linux
-      addons:
-        apt:
-          packages:
-          - clang-5.0
-          - cmake
-          - libfftw3-dev
-          - libsamplerate0-dev
-          - libaudiofile-dev
-          - libsndfile1-dev
-          - libgtest-dev
-          - libboost-all-dev
-          sources:
-          - ubuntu-toolchain-r-test
-          - llvm-toolchain-trusty-5.0
-      env:
-      - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
-
-    - os: linux
       dist: xenial
       sudo: true
       compiler: gcc
