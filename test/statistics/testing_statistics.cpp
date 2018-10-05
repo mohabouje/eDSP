@@ -173,6 +173,25 @@ TEST(TestingStatistics, ComputeHammingWindowRSSQ) {
     EXPECT_NEAR(::rssq(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution, 1e-1);
 }
 
+TEST(TestingStatistics, ComputeHammingWindowHarmonicMean) {
+    constexpr auto hamming_reference_solution = 0.277348750286192;
+    EXPECT_NEAR(::harmonic_mean(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution, 1e-1);
+}
+
+TEST(TestingStatistics, ComputeHammingWindowGeometricMean) {
+    constexpr auto hamming_reference_solution = 0.406191289618840;
+    EXPECT_NEAR(::geometric_mean(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution, 1e-1);
+}
+
+
+TEST(TestingStatistics, ComputeHammingWindowGeneralizedMean) {
+    EXPECT_NEAR(::generalized_mean(std::cbegin(hamming_reference), std::cend(hamming_reference), 1),
+                ::mean(std::cbegin(hamming_reference), std::cend(hamming_reference)), 1e-6);
+
+    EXPECT_NEAR(::generalized_mean(std::cbegin(hamming_reference), std::cend(hamming_reference), -1),
+                ::harmonic_mean(std::cbegin(hamming_reference), std::cend(hamming_reference)), 1e-6);
+}
+
 TEST(TestingStatistics, ComputeHammingWindowPeak) {
     const auto candidate = ::peak(std::cbegin(hamming_reference), std::cend(hamming_reference));
     const auto maximum = ::max(std::cbegin(hamming_reference), std::cend(hamming_reference));
