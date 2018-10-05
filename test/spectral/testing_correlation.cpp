@@ -27,7 +27,6 @@
 #include <unordered_map>
 #include <fstream>
 #include <istream>
-#include <boost/algorithm/string.hpp>
 
 using namespace easy::dsp::windowing;
 

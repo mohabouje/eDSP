@@ -23,13 +23,14 @@
 #include <easy/dsp/windowing.hpp>
 #include <easy/dsp/spectral/hilbert.hpp>
 #include <easy/dsp/converter/real2complex.hpp>
+#include <easy/dsp/string/split.hpp>
 
 #include <gtest/gtest.h>
 #include <unordered_map>
 #include <fstream>
 #include <istream>
-#include <boost/algorithm/string.hpp>
 
+using namespace easy::dsp;
 using namespace easy::dsp::windowing;
 
 namespace {
@@ -51,7 +52,7 @@ namespace {
         std::string line;
         while (std::getline(input, line)) {
             std::vector<std::string> results;
-            boost::split(results, line, [](char c) { return c == ','; });
+            string::split(line, std::back_inserter(results), ',');
             data.emplace_back(static_cast<T>(std::stod(results[0])), static_cast<T>(std::stod(results[1])));
         }
         return data;
