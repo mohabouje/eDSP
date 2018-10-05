@@ -25,15 +25,19 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
+  - pip install --user cpp-coveralls
   - cd /usr/src/gtest
   - sudo cmake CMakeLists.txt
   - sudo make
   - sudo cp *.a /usr/lib
   - cd -
 
+notifications:
+  email: false
+
 script:
-- mkdir -p build
-- cd build
-- cmake -DBUILD_TESTS=ON -DBUILD_DOCS=OFF -DBUILD_EXAMPLES=ON ..
-- make -j4
-- make test
+  - mkdir -p build
+  - cd build
+  - cmake -DBUILD_TESTS=ON -DBUILD_DOCS=OFF -DBUILD_EXAMPLES=ON ..
+  - make -j4
+  - make test
