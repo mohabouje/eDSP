@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
 RED='\033[0;31m' # Red
 BB='\033[0;34m'  # Blue
 NC='\033[0m' # No Color
@@ -27,4 +28,4 @@ if [ $? -ne 0 ]; then
     exit 4
 fi
 
-workingprocess "Success: All tests compile and pass."
+showinfo "Success: All tests compile and pass."

@@ -42,7 +42,7 @@ notifications:
 
 script:
   - cd ${TRAVIS_BUILD_DIR}
-  - ./travis.sh
+  - sh travis.sh
 
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
