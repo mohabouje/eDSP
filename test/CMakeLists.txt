@@ -13,8 +13,9 @@ set(SOURCE_FILES
         spectral/testing_dct.cpp
         spectral/testing_hartley.cpp
         spectral/testing_hilbert.cpp
-        windowing/testing_windowing.cpp spectral/testing_correlation.cpp spectral/testing_cepstrum.cpp)
-
+        windowing/testing_windowing.cpp
+        spectral/testing_correlation.cpp)
+enable_testing()
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME}
     ${GTEST_LIBRARIES}
@@ -24,3 +25,6 @@ target_link_libraries(${PROJECT_NAME}
     fftw3)
 target_include_directories(${PROJECT_NAME} PRIVATE ${GTEST_INCLUDE_DIRS})
 target_compile_definitions(${PROJECT_NAME} PRIVATE CURRENT_TEST_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
+
+add_test(NAME ${PROJECT_NAME}
+         COMMAND ${PROJECT_NAME})

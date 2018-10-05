@@ -1,6 +1,6 @@
 /* 
  * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
- * Copyright (c) 2018  All rights reserved.
+ * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
