@@ -36,10 +36,9 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr auto peak(ForwardIt first, ForwardIt last)
-    -> std::pair<typename meta::diff_type_t <ForwardIt>, typename meta::value_type_t<ForwardIt>>  {
+        -> std::pair<typename meta::diff_type_t<ForwardIt>, typename meta::value_type_t<ForwardIt>> {
         const auto iter = std::max_element(first, last);
-        return {std::distance(first, iter),
-                *iter};
+        return {std::distance(first, iter), *iter};
     }
 
     /**
@@ -51,12 +50,12 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr auto peakabs(ForwardIt first, ForwardIt last)
-    -> std::pair<typename meta::diff_type_t <ForwardIt>, typename meta::value_type_t<ForwardIt>>  {
+        -> std::pair<typename meta::diff_type_t<ForwardIt>, typename meta::value_type_t<ForwardIt>> {
         using input_t   = meta::value_type_t<ForwardIt>;
         const auto comp = [](const input_t left, const input_t right) { return std::abs(left) < std::abs(right); };
         const auto iter = std::max_element(first, last, comp);
-        return {std::distance(first, iter),
-                *iter};    }
+        return {std::distance(first, iter), *iter};
+    }
 
 }}} // namespace easy::dsp::statistics
 

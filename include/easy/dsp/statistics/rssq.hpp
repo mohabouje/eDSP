@@ -47,6 +47,6 @@ namespace easy { namespace dsp { namespace statistics {
         return std::sqrt(sum_square);
     }
 
-}}} // namespace easy::dsp
+}}} // namespace easy::dsp::statistics
 
 #endif // EASYDSP_RSSQ_HPP

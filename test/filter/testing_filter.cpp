@@ -31,6 +31,5 @@ template class easy::dsp::filter::moving_median<float>;
 template class easy::dsp::filter::moving_average<float>;
 template class easy::dsp::filter::moving_rms<float>;
 
-
 template class easy::dsp::filter::biquad<float>;
 template class easy::dsp::filter::biquad_cascade<float, 10>;

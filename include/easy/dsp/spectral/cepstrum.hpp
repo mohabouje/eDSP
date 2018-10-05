@@ -41,7 +41,7 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @param d_first Output iterator defining the beginning of the destination range.
      */
     template <typename InputIt, typename OutputIt, typename RAllocator = std::allocator<meta::value_type_t<InputIt>>,
-            typename CAllocator = std::allocator<std::complex<meta::value_type_t<OutputIt>>>>
+              typename CAllocator = std::allocator<std::complex<meta::value_type_t<OutputIt>>>>
     inline void cepstrum(InputIt first, InputIt last, OutputIt d_first) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
@@ -56,11 +56,10 @@ namespace easy { namespace dsp { inline namespace spectral {
         std::vector<std::complex<value_type>, CAllocator> fft_data_(make_fft_size(nfft));
         fft_.dft(fftw_cast(meta::data(temp_input)), fftw_cast(meta::data(fft_data_)), nfft);
 
-        std::transform(
-                std::cbegin(fft_data_), std::cend(fft_data_), std::begin(fft_data_),
-                [](const std::complex<value_type>& val) -> std::complex<value_type> {
-                    return std::complex<value_type>(std::log(std::abs(val)), 0);
-                });
+        std::transform(std::cbegin(fft_data_), std::cend(fft_data_), std::begin(fft_data_),
+                       [](const std::complex<value_type>& val) -> std::complex<value_type> {
+                           return std::complex<value_type>(std::log(std::abs(val)), 0);
+                       });
 
         ifft_.idft(fftw_cast(meta::data(fft_data_)), fftw_cast(meta::data(temp_output)), nfft);
         std::copy(std::cbegin(temp_output), std::cbegin(temp_output) + size, d_first);

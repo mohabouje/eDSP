@@ -23,9 +23,7 @@
 #include <easy/dsp/statistics.hpp>
 #include <gtest/gtest.h>
 
-
 using namespace easy::dsp::statistics;
-template class easy::dsp::statistics::histogram<float>;
 
 // Kaiser window
 static const std::array<double, 128> kaiser_reference = {
@@ -52,7 +50,6 @@ static const std::array<double, 128> kaiser_reference = {
     0.952588912569041, 0.950917285185670, 0.949217843477105, 0.947490665417824, 0.945735830246360, 0.943953418461233,
     0.942143511816820, 0.940306193319157};
 
-
 TEST(TestingStatistics, ComputeKaiserWindowMean) {
     constexpr auto kaiser_reference_solution = 0.979665937752067;
     EXPECT_NEAR(::mean(std::cbegin(kaiser_reference), std::cend(kaiser_reference)), kaiser_reference_solution, 1e-4);
@@ -75,24 +72,27 @@ TEST(TestingStatistics, ComputeKaiserWindowMedian) {
 
 TEST(TestingStatistics, ComputeKaiserWindowVariance) {
     constexpr auto kaiser_reference_solution = 3.30637767761220e-04;
-    EXPECT_NEAR(::variance(std::cbegin(kaiser_reference), std::cend(kaiser_reference)), kaiser_reference_solution, 1e-4);
+    EXPECT_NEAR(::variance(std::cbegin(kaiser_reference), std::cend(kaiser_reference)), kaiser_reference_solution,
+                1e-4);
 }
 
 TEST(TestingStatistics, ComputeKaiserWindowStandardDeviation) {
     constexpr auto kaiser_reference_solution = 0.0181834476313272;
-    EXPECT_NEAR(::standard_deviation(std::cbegin(kaiser_reference), std::cend(kaiser_reference)), kaiser_reference_solution, 1e-4);
+    EXPECT_NEAR(::standard_deviation(std::cbegin(kaiser_reference), std::cend(kaiser_reference)),
+                kaiser_reference_solution, 1e-4);
 }
 
 TEST(TestingStatistics, ComputeKaiserWindowSkewness) {
     constexpr auto kaiser_reference_solution = -0.628013603349620;
-    EXPECT_NEAR(::skewness(std::cbegin(kaiser_reference), std::cend(kaiser_reference)), kaiser_reference_solution, 1e-4);
+    EXPECT_NEAR(::skewness(std::cbegin(kaiser_reference), std::cend(kaiser_reference)), kaiser_reference_solution,
+                1e-4);
 }
 
 TEST(TestingStatistics, ComputeKaiserWindowKurtosis) {
     constexpr auto kaiser_reference_solution = 2.12461664834483;
-    EXPECT_NEAR(::kurtosis(std::cbegin(kaiser_reference), std::cend(kaiser_reference)), kaiser_reference_solution, 1e-4);
+    EXPECT_NEAR(::kurtosis(std::cbegin(kaiser_reference), std::cend(kaiser_reference)), kaiser_reference_solution,
+                1e-4);
 }
-
 
 // Hamming window
 static const std::array<double, 128> hamming_reference = {
@@ -145,22 +145,26 @@ TEST(TestingStatistics, ComputeHammingWindowMedian) {
 
 TEST(TestingStatistics, ComputeHammingWindowVariance) {
     constexpr auto hamming_reference_solution = 0.107453125000000;
-    EXPECT_NEAR(::variance(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution, 1e-2);
+    EXPECT_NEAR(::variance(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution,
+                1e-2);
 }
 
 TEST(TestingStatistics, ComputeHammingWindowStandardDeviation) {
     constexpr auto hamming_reference_solution = 0.327800434716002;
-    EXPECT_NEAR(::standard_deviation(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution, 1e-2);
+    EXPECT_NEAR(::standard_deviation(std::cbegin(hamming_reference), std::cend(hamming_reference)),
+                hamming_reference_solution, 1e-2);
 }
 
 TEST(TestingStatistics, ComputeHammingWindowSkewness) {
     constexpr auto hamming_reference_solution = 0.0111756306502672;
-    EXPECT_NEAR(::skewness(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution, 1e-4);
+    EXPECT_NEAR(::skewness(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution,
+                1e-4);
 }
 
 TEST(TestingStatistics, ComputeHammingWindowKurtosis) {
     constexpr auto hamming_reference_solution = 1.49619158551927;
-    EXPECT_NEAR(::kurtosis(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution, 1e-4);
+    EXPECT_NEAR(::kurtosis(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution,
+                1e-4);
 }
 
 TEST(TestingStatistics, ComputeHammingWindowRMS) {
@@ -175,14 +179,15 @@ TEST(TestingStatistics, ComputeHammingWindowRSSQ) {
 
 TEST(TestingStatistics, ComputeHammingWindowHarmonicMean) {
     constexpr auto hamming_reference_solution = 0.277348750286192;
-    EXPECT_NEAR(::harmonic_mean(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution, 1e-1);
+    EXPECT_NEAR(::harmonic_mean(std::cbegin(hamming_reference), std::cend(hamming_reference)),
+                hamming_reference_solution, 1e-1);
 }
 
 TEST(TestingStatistics, ComputeHammingWindowGeometricMean) {
     constexpr auto hamming_reference_solution = 0.406191289618840;
-    EXPECT_NEAR(::geometric_mean(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution, 1e-1);
+    EXPECT_NEAR(::geometric_mean(std::cbegin(hamming_reference), std::cend(hamming_reference)),
+                hamming_reference_solution, 1e-1);
 }
-
 
 TEST(TestingStatistics, ComputeHammingWindowGeneralizedMean) {
     EXPECT_NEAR(::generalized_mean(std::cbegin(hamming_reference), std::cend(hamming_reference), 1),
@@ -194,12 +199,12 @@ TEST(TestingStatistics, ComputeHammingWindowGeneralizedMean) {
 
 TEST(TestingStatistics, ComputeHammingWindowPeak) {
     const auto candidate = ::peak(std::cbegin(hamming_reference), std::cend(hamming_reference));
-    const auto maximum = ::max(std::cbegin(hamming_reference), std::cend(hamming_reference));
+    const auto maximum   = ::max(std::cbegin(hamming_reference), std::cend(hamming_reference));
     EXPECT_EQ(candidate.second, maximum);
     EXPECT_EQ(hamming_reference[candidate.first], maximum);
 
     const auto candidate_abs = ::peakabs(std::cbegin(hamming_reference), std::cend(hamming_reference));
-    const auto maximum_abs = ::maxabs(std::cbegin(hamming_reference), std::cend(hamming_reference));
+    const auto maximum_abs   = ::maxabs(std::cbegin(hamming_reference), std::cend(hamming_reference));
     EXPECT_EQ(candidate_abs.second, maximum_abs);
     EXPECT_EQ(hamming_reference[candidate_abs.first], maximum_abs);
 }

@@ -68,8 +68,8 @@ namespace easy { namespace dsp { namespace statistics {
      */
     template <std::size_t N, typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> moment(ForwardIt first, ForwardIt last) {
-        using input_t   = meta::value_type_t<ForwardIt>;
-        const auto m = mean(first, last);
+        using input_t = meta::value_type_t<ForwardIt>;
+        const auto m  = mean(first, last);
         return internal::nthMoment<input_t, N>(first, last, m);
     }
 

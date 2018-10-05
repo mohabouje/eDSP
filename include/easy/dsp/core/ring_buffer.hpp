@@ -157,8 +157,8 @@ namespace easy { namespace dsp {
         typedef std::reverse_iterator<iterator> reverse_iterator;
         typedef std::reverse_iterator<const_iterator> const_reverse_iterator;
 
-        constexpr ring_buffer()                   = default;
-        constexpr ring_buffer(const ring_buffer&) = default;
+        constexpr ring_buffer()                       = default;
+        constexpr ring_buffer(const ring_buffer&)     = default;
         constexpr ring_buffer(ring_buffer&&) noexcept = default;
         constexpr ring_buffer& operator=(const ring_buffer&) = default;
         constexpr ring_buffer& operator=(ring_buffer&&) = default;

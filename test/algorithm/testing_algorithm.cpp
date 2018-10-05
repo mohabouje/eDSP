@@ -258,9 +258,8 @@ TEST(TestingEqual, SameVector) {
     std::copy(std::cbegin(input1), std::cend(input1), std::begin(input2));
 
     EXPECT_TRUE(algorithm::equal(std::cbegin(input1), std::cend(input1), std::cbegin(input2), std::cend(input2)));
-    EXPECT_TRUE(algorithm::equal(std::cbegin(input1), std::cend(input1),
-                                 std::cbegin(input2), std::cend(input2), std::less_equal<double>()));
-
+    EXPECT_TRUE(algorithm::equal(std::cbegin(input1), std::cend(input1), std::cbegin(input2), std::cend(input2),
+                                 std::less_equal<double>()));
 }
 
 TEST(TestingNormalizer, PositiveValues) {
