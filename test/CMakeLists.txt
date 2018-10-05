@@ -13,7 +13,7 @@ set(SOURCE_FILES
         spectral/testing_dct.cpp
         spectral/testing_hartley.cpp
         spectral/testing_hilbert.cpp
-        windowing/testing_windowing.cpp)
+        windowing/testing_windowing.cpp spectral/testing_correlation.cpp spectral/testing_cepstrum.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME}

@@ -22,7 +22,7 @@
 #ifndef EASYDSP_CEPSTRUM_HPP
 #define EASYDSP_CEPSTRUM_HPP
 
-#include <easy/dsp/spectral/internal/fftw_impl.hpp>
+#include <easy/dsp/spectral/dft.hpp>
 #include <vector>
 
 namespace easy { namespace dsp { inline namespace spectral {
@@ -40,23 +40,30 @@ namespace easy { namespace dsp { inline namespace spectral {
      * @param last Input iterator defining the ending of the input range.
      * @param d_first Output iterator defining the beginning of the destination range.
      */
-    template <typename InputIt, typename OutputIt,
-              typename Allocator = std::allocator<std::complex<meta::value_type_t<OutputIt>>>>
+    template <typename InputIt, typename OutputIt, typename RAllocator = std::allocator<meta::value_type_t<InputIt>>,
+            typename CAllocator = std::allocator<std::complex<meta::value_type_t<OutputIt>>>>
     inline void cepstrum(InputIt first, InputIt last, OutputIt d_first) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
         fftw_plan<value_type> fft_{};
         fftw_plan<value_type> ifft_{};
         const auto size = std::distance(first, last);
-        std::vector<std::complex<value_type>, Allocator> fft_data_(make_fft_size(size), std::complex<value_type>(0, 0));
-        fft_.dft(fftw_cast(&(*first)), fftw_cast(meta::data(fft_data_)), size);
+        const auto nfft = 2 * size;
 
-        std::transform(std::cbegin(fft_data_), std::cend(fft_data_), std::begin(fft_data_),
-                       [](std::complex<value_type> value) -> std::complex<value_type> {
-                           return std::complex<value_type>(2 * std::log(std::abs(value)), 0);
-                       });
+        std::vector<value_type, RAllocator> temp_input(nfft, static_cast<value_type>(0)), temp_output(nfft);
+        std::copy(first, last, std::begin(temp_input));
 
-        ifft_.idft(fftw_cast(meta::data(fft_data_)), fftw_cast(&(*d_first)), size);
+        std::vector<std::complex<value_type>, CAllocator> fft_data_(make_fft_size(nfft));
+        fft_.dft(fftw_cast(meta::data(temp_input)), fftw_cast(meta::data(fft_data_)), nfft);
+
+        std::transform(
+                std::cbegin(fft_data_), std::cend(fft_data_), std::begin(fft_data_),
+                [](const std::complex<value_type>& val) -> std::complex<value_type> {
+                    return std::complex<value_type>(std::log(std::abs(val)), 0);
+                });
+
+        ifft_.idft(fftw_cast(meta::data(fft_data_)), fftw_cast(meta::data(temp_output)), nfft);
+        std::copy(std::cbegin(temp_output), std::cbegin(temp_output) + size, d_first);
         ifft_.idft_scale(fftw_cast(&(*d_first)), size);
     }
 
