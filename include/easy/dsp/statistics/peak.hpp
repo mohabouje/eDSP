@@ -35,9 +35,11 @@ namespace easy { namespace dsp { namespace statistics {
      * @returns Pair representing the index position and the value of the peak.
      */
     template <typename ForwardIt>
-    constexpr std::pair<ForwardIt, meta::value_type_t<ForwardIt>> peak(ForwardIt first, ForwardIt last) {
-        const auto iter = *std::max_element(first, last);
-        return {iter, *iter};
+    constexpr auto peak(ForwardIt first, ForwardIt last)
+    -> std::pair<typename meta::diff_type_t <ForwardIt>, typename meta::value_type_t<ForwardIt>>  {
+        const auto iter = std::max_element(first, last);
+        return {std::distance(first, iter),
+                *iter};
     }
 
     /**
@@ -48,12 +50,13 @@ namespace easy { namespace dsp { namespace statistics {
      * @returns Pair representing the index position and the value of the peak.
      */
     template <typename ForwardIt>
-    constexpr std::pair<ForwardIt, meta::value_type_t<ForwardIt>> peakabs(ForwardIt first, ForwardIt last) {
+    constexpr auto peakabs(ForwardIt first, ForwardIt last)
+    -> std::pair<typename meta::diff_type_t <ForwardIt>, typename meta::value_type_t<ForwardIt>>  {
         using input_t   = meta::value_type_t<ForwardIt>;
         const auto comp = [](const input_t left, const input_t right) { return std::abs(left) < std::abs(right); };
         const auto iter = std::max_element(first, last, comp);
-        return {iter, *iter};
-    }
+        return {std::distance(first, iter),
+                *iter};    }
 
 }}} // namespace easy::dsp::statistics
 

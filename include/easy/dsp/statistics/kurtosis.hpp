@@ -46,9 +46,9 @@ namespace easy { namespace dsp { namespace statistics {
     template <typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> kurtosis(ForwardIt first, ForwardIt last) {
         const auto m  = mean(first, last);
-        const auto m4 = moment<4>(first, last, mean);
-        const auto m2 = moment<2>(first, last, mean);
-        return m4 / (m2 * m2) - 3;
+        const auto m4 = moment<4>(first, last, m);
+        const auto m2 = moment<2>(first, last, m);
+        return m4 / (m2 * m2);
     }
 
 }}} // namespace easy::dsp::statistics

@@ -45,6 +45,7 @@ namespace easy { namespace dsp { namespace statistics {
         return moment<2>(first, last);
     }
 
+
     /**
      * @brief Computes the standard deviation of the range [first, last)
      *

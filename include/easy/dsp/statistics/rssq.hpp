@@ -27,7 +27,7 @@
 #include <numeric>
 #include <cmath>
 
-namespace easy { namespace dsp {
+namespace easy { namespace dsp { namespace statistics {
 
     /**
      * @brief Computes the root-sum-of-squares (RSSS) value of the range [first, last)
@@ -47,6 +47,6 @@ namespace easy { namespace dsp {
         return std::sqrt(sum_square);
     }
 
-}} // namespace easy::dsp
+}}} // namespace easy::dsp
 
 #endif // EASYDSP_RSSQ_HPP
