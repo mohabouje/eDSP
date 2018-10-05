@@ -36,7 +36,7 @@ fi
 workingprocess "Generating the test-only code coverage..."
 cd ${TRAVIS_BUILD_DIR}
 lcov --capture --directory . --ouput-file test-only.info
-lcov --add-tracefile header-only.info --add-tracefile test-onle.info --output-file coverage.info
+lcov --add-tracefile header-only.info --add-tracefile test-only.info --output-file coverage.info
 lcov --remove coverage.info '/usr/*' --output-file coverage.info
 
 workingprocess "Displaying the final results..."
