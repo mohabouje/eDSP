@@ -11,6 +11,9 @@
 [![GitHub stars](https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star)]()
 [![GitHub watchers](https://img.shields.io/github/watchers/mohabouje/eDSP.svg?style=social&label=Watch)]()
 
+***
+
+
 **easyDSP** is a digital signal processing library written in C/C++ that implements some of the common functions and algorithms frequently used in digital signal processing & telecommunications systems. 
 
 It aims to provide efficient and streamlined base calculations while at the same time having a straightforward and easy-to-use interface similar to another numeric language like [MATLAB](https://www.mathworks.com/products/matlab.html). 
