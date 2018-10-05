@@ -15,9 +15,11 @@
  * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: testing_coscillators.cpp
+ * Filename: testing_statistics.cpp
  * Author: Mohammed Boujemaoui
  * Date: 05/10/2018
  */
 
 #include <easy/dsp/statistics.hpp>
+
+template class easy::dsp::statistics::histogram<float>;

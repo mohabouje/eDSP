@@ -22,7 +22,7 @@
 #ifndef EASYDSP_FISHER_HISTOGRAM_HPP
 #define EASYDSP_FISHER_HISTOGRAM_HPP
 
-#include <vector>
+#include <easy/meta/unused.hpp>
 
 namespace easy { namespace dsp { namespace statistics {
 
@@ -58,7 +58,12 @@ namespace easy { namespace dsp { namespace statistics {
          * @param out Output iterator containing the pairs (bin/sample).
          */
         template <typename InIterator, typename OutIterator>
-        constexpr void compute(InIterator first, InIterator last, OutIterator out) {}
+        constexpr void compute(InIterator first, InIterator last, OutIterator out) {
+            // TODO: implement the histogram class
+            meta::unused(first);
+            meta::unused(last);
+            meta::unused(out);
+        }
 
     private:
         size_type num_bins_;

@@ -23,6 +23,7 @@
 #define EASYDSP_STATISTICAL_MEDIANT_HPP
 
 #include <easy/meta/iterator.hpp>
+#include <easy/meta/unused.hpp>
 #include <algorithm>
 #include <numeric>
 
@@ -42,6 +43,8 @@ namespace easy { namespace dsp { namespace statistics {
     template <typename ForwardIt>
     constexpr meta::value_type_t<ForwardIt> median(ForwardIt first, ForwardIt last) {
         // TODO: implement the median: do not use sorting algorithm.
+        meta::unused(first);
+        meta::unused(last);
         return 0;
     }
 
