@@ -41,6 +41,7 @@ notifications:
   email: false
 
 script:
+  - cd ${TRAVIS_BUILD_DIR}
   - ./travis.sh
 
 after_success:
