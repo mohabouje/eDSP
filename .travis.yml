@@ -12,6 +12,7 @@ matrix:
           - libaudiofile-dev
           - libsndfile1-dev
           - libgtest-dev
+          - libboost-all-dev
           sources:
           - ubuntu-toolchain-r-test
           - llvm-toolchain-trusty-5.0
@@ -33,6 +34,7 @@ matrix:
           - libaudiofile-dev
           - libsndfile1-dev
           - libgtest-dev
+          - libboost-all-dev
           sources:
           - ubuntu-toolchain-r-test
           - llvm-toolchain-trusty-5.0
