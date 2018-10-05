@@ -51,7 +51,6 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/bin)
 
-
 set(EASYDSP_DEPENDENCIES)
 find_library(FFTW_LIB NAMES lfftw3f libfftw3f fftw3f)
 if (FFTW_LIB)
@@ -76,11 +75,15 @@ install(TARGETS ${LIB_NAME}
 )
 
 if (BUILD_TESTS)
+
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -fprofile-arcs -coverage")
     enable_testing()
     add_subdirectory(test)
+
 endif (BUILD_TESTS)
 
 if (BUILD_DOCS)
+
     find_package(Doxygen REQUIRED dot mscgen dia)
     set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/docs/Doxyfile.in)
     set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
@@ -92,5 +95,6 @@ if (BUILD_DOCS)
             VERBATIM )
 
     #install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html DESTINATION share/doc)
+
 endif (BUILD_DOCS)
 

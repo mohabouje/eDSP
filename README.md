@@ -3,8 +3,9 @@
 ![releases](https://img.shields.io/github/tag/mohabouje/eDSP.svg)
 ![issues](https://img.shields.io/github/issues/mohabouje/eDSP.svg)
 ![license](https://img.shields.io/github/license/mohabouje/eDSP.svg)
-![built](https://img.shields.io/badge/built%20with-GCC-6f62ba.svg)
-[![Build Status](https://travis-ci.org/mohabouje/eDSP.svg?branch=master)](https://travis-ci.org/mohabouje/eDSP)
+[![Build Status][travis-badge]][travis-link]
+[![codecov][codecov-badge]][codecov-link]
+
 
 [![GitHub forks](https://img.shields.io/github/forks/mohabouje/eDSP.svg?style=social&label=Fork)]()
 [![GitHub stars](https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star)]()
@@ -274,3 +275,8 @@ auto fft_data = std::vector<std::complex<double>>(size );
 easy::dsp::complex_dft(std::cbegin(real_data), std::cend(real_data), std::begin(fft_data));
 ```
 
+
+[travis-badge]:    https://travis-ci.org/mohabouje/eDSP.svg?branch=master
+[travis-link]:     https://travis-ci.org/mohabouje/eDSP
+[codecov-badge]:   https://codecov.io/gh/mohabouje/eDSP/branch/master/graph/badge.svg
+[codecov-link]:    https://codecov.io/gh/mohabouje/eDSP

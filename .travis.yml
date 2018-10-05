@@ -11,6 +11,7 @@ matrix:
           - gcc-7
           - g++-7
           - cmake
+          - lcov
           - libfftw3-dev
           - libsamplerate0-dev
           - libaudiofile-dev
@@ -23,9 +24,13 @@ matrix:
       env:
           - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
+branches:
+  only:
+  - master
+
 before_install:
   - eval "${MATRIX_EVAL}"
-  - pip install --user cpp-coveralls
+  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
   - cd /usr/src/gtest
   - sudo cmake CMakeLists.txt
   - sudo make
@@ -36,8 +41,11 @@ notifications:
   email: false
 
 script:
-  - mkdir -p build
-  - cd build
-  - cmake -DBUILD_TESTS=ON -DBUILD_DOCS=OFF -DBUILD_EXAMPLES=ON ..
-  - make -j4
-  - make test
+  - ./travis.sh
+
+after_success:
+  - cd ${TRAVIS_BUILD_DIR}
+  - lcov --directory . --capture --output-file coverage.info
+  - lcov --remove coverage.info '/usr/*' --output-file coverage.info
+  - lcov --list coverage.info
+  - bash <(curl -s https://codecov.io/bash)
