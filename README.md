@@ -3,6 +3,8 @@
   <img src="https://github.com/mohabouje/eDSP/blob/master/logo.svg"/>
 </p>
 
+# Welcome to eDSP
+
 ![releases](https://img.shields.io/github/tag/mohabouje/eDSP.svg)
 ![issues](https://img.shields.io/github/issues/mohabouje/eDSP.svg)
 ![license](https://img.shields.io/github/license/mohabouje/eDSP.svg)
@@ -15,7 +17,6 @@
 
 ***
 
-# Welcome to eDSP
 
 *eDSP* (easy Digital Signal Processing) is a digital signal processing framework written in modern C++ that implements some of the common functions and algorithms frequently used in digital signal processing, audio engineering & telecommunications systems.
 
