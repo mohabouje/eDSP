@@ -25,7 +25,7 @@ target_link_libraries(${PROJECT_NAME}
     ${GTEST_LIBRARIES}
     gcov
     pthread
-    EasyDSP
+    eDSP
     fftw3f
     fftw3)
 

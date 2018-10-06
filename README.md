@@ -5,19 +5,16 @@
 
 # Welcome to eDSP
 
-<p align="left">
-  <img src="https://img.shields.io/github/tag/mohabouje/eDSP.svg"/>
-  <img src="https://img.shields.io/github/issues/mohabouje/eDSP.svg"/>
-  <img src="https://img.shields.io/github/license/mohabouje/eDSP.svg"/>
-  <img src="https://travis-ci.org/mohabouje/eDSP.svg?branch=master"/>
-  <img src="https://codecov.io/gh/mohabouje/eDSP/branch/master/graph/badge.svg"/>
-</p>
+![releases](https://img.shields.io/github/tag/mohabouje/eDSP.svg)
+![issues](https://img.shields.io/github/issues/mohabouje/eDSP.svg)
+![license](https://img.shields.io/github/license/mohabouje/eDSP.svg)
+![Build Status](https://travis-ci.org/mohabouje/eDSP.svg?branch=master)
+![codecov](https://codecov.io/gh/mohabouje/eDSP/branch/master/graph/badge.svg)
 
-<p align="left">
-  <img src="https://img.shields.io/github/forks/mohabouje/eDSP.svg?style=social&label=Fork"/>
-  <img src="https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star"/>
-  <img src="https://img.shields.io/github/watchers/mohabouje/eDSP.svg?style=social&label=Watch"/>
-</p>
+![GitHub forks](https://img.shields.io/github/forks/mohabouje/eDSP.svg?style=social&label=Fork)
+![GitHub stars](https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star)
+![GitHub watchers](https://img.shields.io/github/watchers/mohabouje/eDSP.svg?style=social&label=Watch)
+
 
 *eDSP* (easy Digital Signal Processing) is a digital signal processing framework written in modern C++ that implements some of the common functions and algorithms frequently used in digital signal processing, audio engineering & telecommunications systems.
 
