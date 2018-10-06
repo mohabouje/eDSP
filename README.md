@@ -7,8 +7,9 @@
 ![releases](https://img.shields.io/github/tag/mohabouje/eDSP.svg)
 ![issues](https://img.shields.io/github/issues/mohabouje/eDSP.svg)
 ![license](https://img.shields.io/github/license/mohabouje/eDSP.svg)
-![Build Status](https://travis-ci.org/mohabouje/eDSP.svg?branch=master)
-![codecov](https://codecov.io/gh/mohabouje/eDSP/branch/master/graph/badge.svg)
+![GitHub contributors](https://img.shields.io/github/contributors/mohabouje/eDSP.svg)
+[![Build Status][travis-badge]][travis-link]
+[![codecov][codecov-badge]][codecov-link]
 
 ![GitHub forks](https://img.shields.io/github/forks/mohabouje/eDSP.svg?style=social&label=Fork)
 ![GitHub stars](https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star)
@@ -97,3 +98,8 @@ Check the [Kanban](https://github.com/mohabouje/eDSP/projects/1) of this project
 Copyright (c) 2018, [Mohammed Boujemaoui Boulaghmoudi](mohabouje@gmail.com), All rights reserved.
 
 Distributed under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.html).
+
+[travis-badge]: https://travis-ci.org/mohabouje/eDSP.svg?branch=master
+[travis-link]: https://travis-ci.org/mohabouje/eDSP
+[codecov-badge]: https://codecov.io/gh/mohabouje/eDSP/branch/master/graph/badge.svg
+[codecov-link]: https://codecov.io/gh/mohabouje/eDSP
