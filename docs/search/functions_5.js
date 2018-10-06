@@ -7,6 +7,6 @@ var searchData=
   ['floor',['floor',['../d3/db4/namespaceedsp_1_1algorithm.html#a9a1cdac2f97928debf45e3f08158ac88',1,'edsp::algorithm']]],
   ['fract',['fract',['../de/d95/namespaceedsp_1_1math.html#a289da63f9141eec113c1579cacc2e1ab',1,'edsp::math']]],
   ['frequency',['frequency',['../dc/d96/classedsp_1_1oscillators_1_1oscillator.html#aeb4d036608790680940dcc3dfe766c2c',1,'edsp::oscillators::oscillator']]],
-  ['front',['front',['../d1/d1f/classedsp_1_1ring__buffer.html#ac6900e8410e31f505ef4dfb54fe3d7ca',1,'edsp::ring_buffer::front()'],['../d1/d1f/classedsp_1_1ring__buffer.html#acbbeba1d8c18700401344926f937a8d2',1,'edsp::ring_buffer::front() const ']]],
-  ['full',['full',['../d1/d1f/classedsp_1_1ring__buffer.html#a7078494dca21e372ba11507d8fd7fb0d',1,'edsp::ring_buffer']]]
+  ['front',['front',['../d1/d1f/classedsp_1_1ring__buffer.html#ac6900e8410e31f505ef4dfb54fe3d7ca',1,'edsp::ring_buffer::front()'],['../d1/d1f/classedsp_1_1ring__buffer.html#a7d542931ee67c6b60632065cabbd51b9',1,'edsp::ring_buffer::front() const']]],
+  ['full',['full',['../d1/d1f/classedsp_1_1ring__buffer.html#a18cc5d954673fad138154093cd1771a4',1,'edsp::ring_buffer']]]
 ];

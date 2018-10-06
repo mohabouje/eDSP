@@ -6,6 +6,6 @@ var searchData=
   ['amplifier',['amplifier',['../d3/db4/namespaceedsp_1_1algorithm.html#ac3a233eb9ab9fbf08d13c2ee755a1ca6',1,'edsp::algorithm::amplifier(InputIt first, InputIt last, OutputIt d_first, Numeric factor)'],['../d3/db4/namespaceedsp_1_1algorithm.html#a15c860fa7617915a65982a4acfc3af71',1,'edsp::algorithm::amplifier(InputIt first, InputIt last, OutputIt d_first, Numeric factor, Numeric min, Numeric max)']]],
   ['amplitude',['amplitude',['../dc/d96/classedsp_1_1oscillators_1_1oscillator.html#a0e694934dcedc687e70b4d5f8770155a',1,'edsp::oscillators::oscillator']]],
   ['apply',['apply',['../da/dcc/classedsp_1_1envelope__follower.html#a4dd737b3014b7d020b1940d99254808d',1,'edsp::envelope_follower']]],
-  ['at',['at',['../d1/d1f/classedsp_1_1ring__buffer.html#a5780178be108f6e616bde6dfe7f1718b',1,'edsp::ring_buffer::at(std::size_t i)'],['../d1/d1f/classedsp_1_1ring__buffer.html#a172d397c3e8de7c2e41b38fbb969b961',1,'edsp::ring_buffer::at(std::size_t i) const ']]],
+  ['at',['at',['../d1/d1f/classedsp_1_1ring__buffer.html#a5780178be108f6e616bde6dfe7f1718b',1,'edsp::ring_buffer::at(std::size_t i)'],['../d1/d1f/classedsp_1_1ring__buffer.html#afd7cefc8bf6c0ace441ba39e65043771',1,'edsp::ring_buffer::at(std::size_t i) const']]],
   ['attack_5ftime',['attack_time',['../da/dcc/classedsp_1_1envelope__follower.html#adb3f7cc45bcde09d93a77fc1a4107aab',1,'edsp::envelope_follower']]]
 ];
