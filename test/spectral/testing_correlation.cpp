@@ -64,7 +64,7 @@ TEST(TestingCorrelation, CorrelationHanningWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hanning]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::Hanning>(std::begin(window), size);
+    make_window<WindowType::Hanning>(std::begin(window), std::end(window));
     std::vector<double> transformed(size);
     edsp::xcorr(std::begin(window), std::end(window), std::begin(transformed));
 
@@ -77,7 +77,7 @@ TEST(TestingCorrelation, CorrelationHammingWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hamming]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::Hamming>(std::begin(window), size);
+    make_window<WindowType::Hamming>(std::begin(window), std::end(window));
     std::vector<double> transformed(size);
     edsp::xcorr(std::begin(window), std::end(window), std::begin(window), std::begin(transformed));
 
@@ -90,7 +90,7 @@ TEST(TestingCorrelation, CorrelationBlackmanWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Blackman]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::Blackman>(std::begin(window), size);
+    make_window<WindowType::Blackman>(std::begin(window), std::end(window));
     std::vector<double> transformed(size);
     edsp::xcorr(std::begin(window), std::end(window), std::begin(transformed));
 

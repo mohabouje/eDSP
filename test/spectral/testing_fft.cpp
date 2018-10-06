@@ -68,7 +68,7 @@ TEST(TestingFFT, TransformHanningWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hanning]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::Hanning>(std::begin(window), size);
+    make_window<WindowType::Hanning>(std::begin(window), std::end(window));
 
     std::vector<std::complex<double>> transformed(edsp::make_fft_size(size));
     edsp::dft(std::begin(window), std::end(window), std::begin(transformed));
@@ -84,7 +84,7 @@ TEST(TestingFFT, TransformHammingWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hamming]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::Hamming>(std::begin(window), size);
+    make_window<WindowType::Hamming>(std::begin(window), std::end(window));
 
     std::vector<std::complex<double>> transformed(edsp::make_fft_size(size));
     edsp::dft(std::begin(window), std::end(window), std::begin(transformed));
@@ -100,7 +100,7 @@ TEST(TestingFFT, TransformBlackmanWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Blackman]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::Blackman>(std::begin(window), size);
+    make_window<WindowType::Blackman>(std::begin(window), std::end(window));
 
     std::vector<std::complex<double>> transformed(edsp::make_fft_size(size));
     edsp::dft(std::begin(window), std::end(window), std::begin(transformed));
@@ -115,7 +115,7 @@ TEST(TestingFFT, TransformBlackmanWindow) {
 TEST(TestingIFFT, InverseTransformRealData) {
     const auto size = 512ul;
     std::vector<double> window(size);
-    make_window<WindowType::Hamming>(std::begin(window), size);
+    make_window<WindowType::Hamming>(std::begin(window), std::end(window));
 
     std::vector<std::complex<double>> transformed(edsp::make_fft_size(size));
     std::vector<double> inverse(window.size());
@@ -130,7 +130,7 @@ TEST(TestingIFFT, InverseTransformRealData) {
 TEST(TestingIFFT, InverseTransformComplexData) {
     const auto size = 512ul;
     std::vector<double> window(size);
-    make_window<WindowType::Blackman>(std::begin(window), size);
+    make_window<WindowType::Blackman>(std::begin(window), std::end(window));
 
     std::vector<std::complex<double>> input(window.size()), inverse(window.size()), transformed(window.size());
     edsp::real2complex(window.begin(), window.end(), std::begin(input));

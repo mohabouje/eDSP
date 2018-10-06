@@ -60,89 +60,89 @@ namespace edsp { namespace windowing {
 
         template <>
         struct _build_window<WindowType::Bartlett> {
-            template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N) {
-                bartlett(d_first, N);
+            template <typename OutputIt>
+            constexpr void operator()(OutputIt first, OutputIt last) {
+                bartlett(first, last);
             }
         };
 
         template <>
         struct _build_window<WindowType::Blackman> {
-            template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N) {
-                blackman(d_first, N);
+            template <typename OutputIt>
+            constexpr void operator()(OutputIt first, OutputIt last) {
+                blackman(first, last);
             }
         };
 
         template <>
         struct _build_window<WindowType::BlackmanHarris> {
-            template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N) {
-                blackman_harris(d_first, N);
+            template <typename OutputIt>
+            constexpr void operator()(OutputIt first, OutputIt last) {
+                blackman_harris(first, last);
             }
         };
 
         template <>
         struct _build_window<WindowType::BlackmanNuttall> {
-            template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N) {
-                blackman_nutall(d_first, N);
+            template <typename OutputIt>
+            constexpr void operator()(OutputIt first, OutputIt last) {
+                blackman_nutall(first, last);
             }
         };
 
         template <>
         struct _build_window<WindowType::Boxcar> {
-            template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N) {
-                boxcar(d_first, N);
+            template <typename OutputIt>
+            constexpr void operator()(OutputIt first, OutputIt last) {
+                boxcar(first, last);
             }
         };
 
         template <>
         struct _build_window<WindowType::FlatTop> {
-            template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N) {
-                flattop(d_first, N);
+            template <typename OutputIt>
+            constexpr void operator()(OutputIt first, OutputIt last) {
+                flattop(first, last);
             }
         };
 
         template <>
         struct _build_window<WindowType::Hamming> {
-            template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N) {
-                hamming(d_first, N);
+            template <typename OutputIt>
+            constexpr void operator()(OutputIt first, OutputIt last) {
+                hamming(first, last);
             }
         };
 
         template <>
         struct _build_window<WindowType::Hanning> {
-            template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N) {
-                hanning(d_first, N);
+            template <typename OutputIt>
+            constexpr void operator()(OutputIt first, OutputIt last) {
+                hanning(first, last);
             }
         };
 
         template <>
         struct _build_window<WindowType::Rectangular> {
-            template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N) {
-                rectangular(d_first, N);
+            template <typename OutputIt>
+            constexpr void operator()(OutputIt first, OutputIt last) {
+                rectangular(first, last);
             }
         };
 
         template <>
         struct _build_window<WindowType::Triangular> {
-            template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N) {
-                triangular(d_first, N);
+            template <typename OutputIt>
+            constexpr void operator()(OutputIt first, OutputIt last) {
+                triangular(first, last);
             }
         };
 
         template <>
         struct _build_window<WindowType::Welch> {
-            template <typename OutIterator, typename Integer>
-            constexpr void operator()(OutIterator d_first, Integer N) {
-                welch(d_first, N);
+            template <typename OutputIt>
+            constexpr void operator()(OutputIt first, OutputIt last) {
+                welch(first, last);
             }
         };
     } // namespace internal
@@ -153,9 +153,9 @@ namespace edsp { namespace windowing {
      * @param N Number of elements to compute.
      * @param d_first Output iterator defining the beginning of the destination range.
      */
-    template <WindowType Type, typename OutIterator, typename Integer>
-    constexpr void make_window(OutIterator d_first, Integer N) {
-        return internal::_build_window<Type>{}(d_first, N);
+    template <WindowType Type, typename OutputIt>
+    constexpr void make_window(OutputIt first, OutputIt last) {
+        return internal::_build_window<Type>{}(first, last);
     }
 
 }} // namespace edsp::windowing

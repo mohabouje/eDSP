@@ -37,17 +37,17 @@ namespace edsp { namespace windowing {
      *  w(n)=1-\left({\frac {n-{\frac {N-1}{2}}}{\frac {N-1}{2}}}\right)^{2}
      * \f]
      *
-     * @param N Number of elements to compute.
-     * @param d_first Output iterator defining the beginning of the destination range.
+     * @param first Input iterator defining the beginning of the output range.
+     * @param last Input iterator defining the ending of the output range.
      */
-    template <typename OutIterator, typename Integer>
-    constexpr void welch(OutIterator d_first, Integer N) {
-        using value_type   = meta::value_type_t<OutIterator>;
-        using size_type    = meta::diff_type_t<OutIterator>;
-        const auto size    = static_cast<size_type>(N);
+    template <typename OutputIt>
+    constexpr void welch(OutputIt first, OutputIt last) {
+        using value_type   = meta::value_type_t<OutputIt>;
+        using size_type    = meta::diff_type_t<OutputIt>;
+        const auto size   = static_cast<size_type>(std::distance(first, last));
         const value_type L = size / 2;
-        for (size_type i = 0; i < size; ++i, ++d_first) {
-            *d_first = 1 - math::square(static_cast<value_type>(i - L) / L);
+        for (size_type i = 0; i < size; ++i, ++first) {
+            *first = 1 - math::square(static_cast<value_type>(i - L) / L);
         }
     }
 

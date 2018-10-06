@@ -120,8 +120,8 @@ namespace edsp {
          * @param last Input iterator defining the ending of the input range.
          * @param d_first Output iterator defining the beginning of the destination range.
          */
-        template <typename InIterator, typename OutIterator>
-        constexpr void apply(InIterator first, InIterator last, OutIterator d_first);
+        template <typename InIterator, typename OutputIt>
+        constexpr void apply(InIterator first, InIterator last, OutputIt d_first);
 
     private:
         value_type samplerate_{44100};
@@ -194,8 +194,8 @@ namespace edsp {
     }
 
     template <typename T>
-    template <typename InIterator, typename OutIterator>
-    constexpr void envelope_follower<T>::apply(InIterator first, InIterator last, OutIterator d_first) {
+    template <typename InIterator, typename OutputIt>
+    constexpr void envelope_follower<T>::apply(InIterator first, InIterator last, OutputIt d_first) {
         for (; first != last; ++first, ++d_first) {
             const auto rectified = rectification_ ? std::abs(*first) : *first;
             const auto current   = (last_ < rectified) ? (1 - attack_gain_) * rectified + attack_gain_ * last_

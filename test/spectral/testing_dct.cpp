@@ -33,7 +33,7 @@ using namespace edsp::windowing;
 TEST(TestingDCT, TransformHanningWindow) {
     const auto size = 128ul;
     std::vector<double> window(size);
-    make_window<WindowType::Hanning>(std::begin(window), size);
+    make_window<WindowType::Hanning>(std::begin(window), std::end(window));
     std::vector<double> transformed(size), inverse(size);
     edsp::dct(std::cbegin(window), std::cend(window), std::begin(transformed));
     edsp::idct(std::cbegin(transformed), std::cend(transformed), std::begin(inverse));
@@ -46,7 +46,7 @@ TEST(TestingDCT, TransformHanningWindow) {
 TEST(TestingDCT, TransformHammingWindow) {
     const auto size = 128ul;
     std::vector<double> window(size);
-    make_window<WindowType::Hamming>(std::begin(window), size);
+    make_window<WindowType::Hamming>(std::begin(window), std::end(window));
     std::vector<double> transformed(size), inverse(size);
     edsp::dct(std::cbegin(window), std::cend(window), std::begin(transformed));
     edsp::idct(std::cbegin(transformed), std::cend(transformed), std::begin(inverse));
@@ -59,7 +59,7 @@ TEST(TestingDCT, TransformHammingWindow) {
 TEST(TestingDCT, TransformHammingWindowDCT_I) {
     const auto size = 128ul;
     std::vector<double> window(size);
-    make_window<WindowType::Hamming>(std::begin(window), size);
+    make_window<WindowType::Hamming>(std::begin(window), std::end(window));
     std::vector<double> transformed(size), inverse(size);
     edsp::dct(std::cbegin(window), std::cend(window), std::begin(transformed), edsp::DCT_Type::Type_I);
     edsp::idct(std::cbegin(transformed), std::cend(transformed), std::begin(inverse), edsp::DCT_Type::Type_I);
@@ -72,7 +72,7 @@ TEST(TestingDCT, TransformHammingWindowDCT_I) {
 TEST(TestingDCT, TransformHammingWindowDCT_III) {
     const auto size = 128ul;
     std::vector<double> window(size);
-    make_window<WindowType::Hamming>(std::begin(window), size);
+    make_window<WindowType::Hamming>(std::begin(window), std::end(window));
     std::vector<double> transformed(size), inverse(size);
     edsp::dct(std::cbegin(window), std::cend(window), std::begin(transformed), edsp::DCT_Type::Type_III);
     edsp::idct(std::cbegin(transformed), std::cend(transformed), std::begin(inverse), edsp::DCT_Type::Type_III);
@@ -85,7 +85,7 @@ TEST(TestingDCT, TransformHammingWindowDCT_III) {
 TEST(TestingDCT, TransformHammingWindowDCT_IV) {
     const auto size = 128ul;
     std::vector<double> window(size);
-    make_window<WindowType::Hamming>(std::begin(window), size);
+    make_window<WindowType::Hamming>(std::begin(window), std::end(window));
     std::vector<double> transformed(size), inverse(size);
     edsp::dct(std::cbegin(window), std::cend(window), std::begin(transformed), edsp::DCT_Type::Type_IV);
     edsp::idct(std::cbegin(transformed), std::cend(transformed), std::begin(inverse), edsp::DCT_Type::Type_IV);
@@ -98,7 +98,7 @@ TEST(TestingDCT, TransformHammingWindowDCT_IV) {
 TEST(TestingDCT, TransformBlackmanWindow) {
     const auto size = 128ul;
     std::vector<double> window(size);
-    make_window<WindowType::Blackman>(std::begin(window), size);
+    make_window<WindowType::Blackman>(std::begin(window), std::end(window));
     std::vector<double> transformed(size), inverse(size);
     edsp::dct(std::cbegin(window), std::cend(window), std::begin(transformed));
     edsp::idct(std::cbegin(transformed), std::cend(transformed), std::begin(inverse));

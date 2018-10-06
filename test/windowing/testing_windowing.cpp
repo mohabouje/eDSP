@@ -65,7 +65,7 @@ TEST(TestingWindowing, CreatingHammingWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hamming]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::Hamming>(std::begin(window), size);
+    make_window<WindowType::Hamming>(std::begin(window), std::end(window));
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(window[i], reference[i], 0.00001);
     }
@@ -75,7 +75,7 @@ TEST(TestingWindowing, CreatingHanningWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hanning]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::Hanning>(std::begin(window), size);
+    make_window<WindowType::Hanning>(std::begin(window), std::end(window));
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(window[i], reference[i], 0.00001);
     }
@@ -85,7 +85,7 @@ TEST(TestingWindowing, CreatingBlackman) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Blackman]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::Blackman>(std::begin(window), size);
+    make_window<WindowType::Blackman>(std::begin(window), std::end(window));
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(window[i], reference[i], 0.00001);
     }
@@ -95,7 +95,7 @@ TEST(TestingWindowing, CreatingBlackmanHarris) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::BlackmanHarris]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::BlackmanHarris>(std::begin(window), size);
+    make_window<WindowType::BlackmanHarris>(std::begin(window), std::end(window));
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(window[i], reference[i], 0.00001);
     }
@@ -105,7 +105,7 @@ TEST(TestingWindowing, CreatingBlackmanNuttall) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::BlackmanNuttall]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::BlackmanNuttall>(std::begin(window), size);
+    make_window<WindowType::BlackmanNuttall>(std::begin(window), std::end(window));
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(window[i], reference[i], 0.00001);
     }
@@ -115,7 +115,7 @@ TEST(TestingWindowing, CreatingBartlett) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Bartlett]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::Bartlett>(std::begin(window), size);
+    make_window<WindowType::Bartlett>(std::begin(window), std::end(window));
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(window[i], reference[i], 0.00001);
     }
@@ -125,7 +125,7 @@ TEST(TestingWindowing, CreatingBoxcar) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Boxcar]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::Boxcar>(std::begin(window), size);
+    make_window<WindowType::Boxcar>(std::begin(window), std::end(window));
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(window[i], reference[i], 0.00001);
     }
@@ -135,7 +135,7 @@ TEST(TestingWindowing, CreatingFlatTop) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::FlatTop]);
     const auto size      = reference.size();
     std::vector<double> window(size);
-    make_window<WindowType::FlatTop>(std::begin(window), size);
+    make_window<WindowType::FlatTop>(std::begin(window), std::end(window));
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(window[i], reference[i], 0.00001);
     }

@@ -57,8 +57,8 @@ namespace edsp { namespace statistics {
          * @param last Input iterator defining the end of the range to examine.
          * @param out Output iterator containing the pairs (bin/sample).
          */
-        template <typename InIterator, typename OutIterator>
-        constexpr void compute(InIterator first, InIterator last, OutIterator out) {
+        template <typename InIterator, typename OutputIt>
+        constexpr void compute(InIterator first, InIterator last, OutputIt out) {
             // TODO: implement the histogram class
             meta::unused(first);
             meta::unused(last);

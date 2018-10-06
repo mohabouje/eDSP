@@ -38,22 +38,22 @@ namespace edsp { namespace windowing {
      *
      * where: \f$ a_{0}=0.3635819;\quad a_{1}=0.4891775;\quad a_{2}=0.1365995;\quad a_{3}=0.0106411\, \f$
      *
-     * @param N Number of elements to compute.
-     * @param d_first Output iterator defining the beginning of the destination range.
+     * @param first Input iterator defining the beginning of the output range.
+     * @param last Input iterator defining the ending of the output range.
      */
-    template <typename OutIterator, typename Integer>
-    constexpr void blackman_nutall(OutIterator d_first, Integer N) {
-        using value_type  = meta::value_type_t<OutIterator>;
-        using size_type   = meta::diff_type_t<OutIterator>;
+    template <typename OutputIt>
+    constexpr void blackman_nutall(OutputIt first, OutputIt last) {
+        using value_type  = meta::value_type_t<OutputIt>;
+        using size_type   = meta::diff_type_t<OutputIt>;
         constexpr auto a0 = static_cast<value_type>(0.3635819);
         constexpr auto a1 = static_cast<value_type>(0.4891775);
         constexpr auto a2 = static_cast<value_type>(0.1365995);
         constexpr auto a3 = static_cast<value_type>(0.0106411);
-        const auto size   = static_cast<size_type>(N);
+        const auto size   = static_cast<size_type>(std::distance(first, last));
         const auto factor = constants<value_type>::two_pi / static_cast<value_type>(size - 1);
-        for (size_type i = 0; i < size; ++i, ++d_first) {
+        for (size_type i = 0; i < size; ++i, ++first) {
             const value_type tmp = factor * i;
-            *d_first             = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp);
+            *first             = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp);
         }
     }
 

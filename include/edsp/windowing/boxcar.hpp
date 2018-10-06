@@ -36,16 +36,16 @@ namespace edsp { namespace windowing {
      *  w(n)=1
      * \f]
      *
-     * @param N Number of elements to compute.
-     * @param d_first Output iterator defining the beginning of the destination range.
+     * @param first Input iterator defining the beginning of the output range.
+     * @param last Input iterator defining the ending of the output range.
      */
-    template <typename OutIterator, typename Integer>
-    constexpr void boxcar(OutIterator d_first, Integer N) {
-        using value_type = meta::value_type_t<OutIterator>;
-        using size_type  = meta::diff_type_t<OutIterator>;
-        const auto size  = static_cast<size_type>(N);
-        for (size_type i = 0; i < size; ++i, ++d_first) {
-            *d_first = static_cast<value_type>(1);
+    template <typename OutputIt>
+    constexpr void boxcar(OutputIt first, OutputIt last) {
+        using value_type = meta::value_type_t<OutputIt>;
+        using size_type  = meta::diff_type_t<OutputIt>;
+        const auto size   = static_cast<size_type>(std::distance(first, last));
+        for (size_type i = 0; i < size; ++i, ++first) {
+            *first = static_cast<value_type>(1);
         }
     }
 

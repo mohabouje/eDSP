@@ -39,22 +39,22 @@ namespace edsp { namespace windowing {
      *
      * where: \f$ a_{0}=0.35875;\quad a_{1}=0.48829;\quad a_{2}=0.14128;\quad a_{3}=0.01168\, \f$
      *
-     * @param N Number of elements to compute.
-     * @param d_first Output iterator defining the beginning of the destination range.
+     * @param first Input iterator defining the beginning of the output range.
+     * @param last Input iterator defining the ending of the output range.
      */
-    template <typename OutIterator, typename Integer>
-    constexpr void blackman_harris(OutIterator d_first, Integer N) {
-        using value_type  = meta::value_type_t<OutIterator>;
-        using size_type   = meta::diff_type_t<OutIterator>;
+    template <typename OutputIt>
+    constexpr void blackman_harris(OutputIt first, OutputIt last) {
+        using value_type  = meta::value_type_t<OutputIt>;
+        using size_type   = meta::diff_type_t<OutputIt>;
         constexpr auto a0 = static_cast<value_type>(0.35875);
         constexpr auto a1 = static_cast<value_type>(0.48829);
         constexpr auto a2 = static_cast<value_type>(0.14128);
         constexpr auto a3 = static_cast<value_type>(0.01168);
-        const auto size   = static_cast<size_type>(N);
-        const auto factor = constants<value_type>::two_pi / static_cast<value_type>(size - 1);
-        for (size_type i = 0; i < size; ++i, ++d_first) {
+        const auto size   = static_cast<size_type>(std::distance(first, last));
+        const auto factor = math::constants<value_type>::two_pi / static_cast<value_type>(size - 1);
+        for (size_type i = 0; i < size; ++i, ++first) {
             const value_type tmp = factor * i;
-            *d_first             = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp);
+            *first             = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp);
         }
     }
 
