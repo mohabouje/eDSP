@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://github.com/mohabouje/eDSP/blob/master/logo.svg"/>
+  <img src="logo.svg" width="350" title="hover text">
 </p>
 
 # Welcome to eDSP
