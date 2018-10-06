@@ -31,7 +31,6 @@
 namespace edsp { namespace filter {
 
     /**
-     * @class BiquadCascade
      * @brief The BiquadCascade class implements a cascade of Biquad filters.
      *
      * This class implements arbitrary order recursive (IIR) filters as a cascade of second order Biquad sections. In this implementation

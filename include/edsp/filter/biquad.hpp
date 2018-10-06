@@ -51,7 +51,6 @@ namespace edsp { namespace filter {
     };
 
     /**
-     * @class Biquad
      * @brief This Biquad class implements a second-order recursive linear filter, containing two poles and two zeros.
      *
      * In the Z domain, its transfer function is:

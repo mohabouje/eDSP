@@ -2,7 +2,7 @@ DOXYFILE_ENCODING = UTF-8
 PROJECT_NAME           = "@CMAKE_PROJECT_NAME@"
 PROJECT_NUMBER         = @VERSION_MAJOR@.@VERSION_MINOR@.@VERSION_PATCH@
 PROJECT_BRIEF = "A cross-platform DSP library written in C++."
-PROJECT_LOGO =
+PROJECT_LOGO = @PROJECT_SOURCE_DIR@/logo.svg
 OUTPUT_LANGUAGE = English
 
 
@@ -34,7 +34,9 @@ EXCLUDE_SYMBOLS = internal \
                 DECLARE_* \
                 *_v
 EXCLUDE_PATTERNS = */meta/* \
-                   */internal/*
+                   */internal/* \
+                   */test/* \
+                   */benchmark/* \
 
 
 

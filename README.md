@@ -1,16 +1,21 @@
-# Welcome to eDSP!
+
+<p align="center">
+  <img src="https://github.com/mohabouje/eDSP/blob/master/logo.svg"/>
+</p>
 
 ![releases](https://img.shields.io/github/tag/mohabouje/eDSP.svg)
 ![issues](https://img.shields.io/github/issues/mohabouje/eDSP.svg)
 ![license](https://img.shields.io/github/license/mohabouje/eDSP.svg)
-[![Build Status][travis-badge]][travis-link]
-[![codecov][codecov-badge]][codecov-link]
+![Build Status](https://travis-ci.org/mohabouje/eDSP.svg?branch=master)
+![codecov](https://codecov.io/gh/mohabouje/eDSP/branch/master/graph/badge.svg)
 
-[![GitHub forks](https://img.shields.io/github/forks/mohabouje/eDSP.svg?style=social&label=Fork)]()
-[![GitHub stars](https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star)]()
-[![GitHub watchers](https://img.shields.io/github/watchers/mohabouje/eDSP.svg?style=social&label=Watch)]()
+![GitHub forks](https://img.shields.io/github/forks/mohabouje/eDSP.svg?style=social&label=Fork)
+![GitHub stars](https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star)
+![GitHub watchers](https://img.shields.io/github/watchers/mohabouje/eDSP.svg?style=social&label=Watch)
 
 ***
+
+# Welcome to eDSP
 
 *eDSP* (easy Digital Signal Processing) is a digital signal processing framework written in modern C++ that implements some of the common functions and algorithms frequently used in digital signal processing, audio engineering & telecommunications systems.
 
@@ -75,11 +80,6 @@ Please check the official [docs]() or the list of [available features](https://g
 
 Check the [wiki](https://github.com/mohabouje/eDSP/wiki) for more information. The latest development documentation is available [online]().
 
-### License
-
-Copyright (c) 2018, [Mohammed Boujemaoui Boulaghmoudi](mohabouje@gmail.com), All rights reserved.
-
-Distributed under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.html).
 
 ## TODO
 
@@ -94,11 +94,8 @@ Distributed under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.html)
 Check the [Kanban](https://github.com/mohabouje/eDSP/projects/1) of this project to get more information about the current state.
 
 
+### License
 
+Copyright (c) 2018, [Mohammed Boujemaoui Boulaghmoudi](mohabouje@gmail.com), All rights reserved.
 
-
-
-[travis-badge]:    https://travis-ci.org/mohabouje/eDSP.svg?branch=master
-[travis-link]:     https://travis-ci.org/mohabouje/eDSP
-[codecov-badge]:   https://codecov.io/gh/mohabouje/eDSP/branch/master/graph/badge.svg
-[codecov-link]:    https://codecov.io/gh/mohabouje/eDSP
+Distributed under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.html).
