@@ -20,15 +20,15 @@
  * Date: 04/10/2018
  */
 
-#include <easy/dsp/windowing.hpp>
-#include <easy/dsp/spectral/correlation.hpp>
+#include <edsp/windowing.hpp>
+#include <edsp/spectral/correlation.hpp>
 
 #include <gtest/gtest.h>
 #include <unordered_map>
 #include <fstream>
 #include <istream>
 
-using namespace easy::dsp::windowing;
+using namespace edsp::windowing;
 
 namespace {
     std::string data_path(const std::string filename) {
@@ -66,7 +66,7 @@ TEST(TestingCorrelation, CorrelationHanningWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Hanning>(std::begin(window), size);
     std::vector<double> transformed(size);
-    easy::dsp::xcorr(std::begin(window), std::end(window), std::begin(transformed));
+    edsp::xcorr(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(transformed[i], reference[i], 0.01);
@@ -79,7 +79,7 @@ TEST(TestingCorrelation, CorrelationHammingWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Hamming>(std::begin(window), size);
     std::vector<double> transformed(size);
-    easy::dsp::xcorr(std::begin(window), std::end(window), std::begin(window), std::begin(transformed));
+    edsp::xcorr(std::begin(window), std::end(window), std::begin(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(transformed[i], reference[i], 0.01);
@@ -92,7 +92,7 @@ TEST(TestingCorrelation, CorrelationBlackmanWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Blackman>(std::begin(window), size);
     std::vector<double> transformed(size);
-    easy::dsp::xcorr(std::begin(window), std::end(window), std::begin(transformed));
+    edsp::xcorr(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(transformed[i], reference[i], 0.01);

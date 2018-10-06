@@ -19,14 +19,14 @@
  * Created by Mohammed Boujemaoui Boulaghmoudi on 04/10/18.
  */
 
-#include <easy/dsp/algorithm.hpp>
-#include <easy/dsp/math/numeric.hpp>
+#include <edsp/algorithm.hpp>
+#include <edsp/math/numeric.hpp>
 #include <gtest/gtest.h>
 
 static const auto MINIMUM_SIZE = 16ul;
 static const auto MAXIMUM_SIZE = 2048ul;
 
-using namespace easy::dsp;
+using namespace edsp;
 
 TEST(TestingAmplifier, TestingAttenuation) {
     const auto size = math::rand(MINIMUM_SIZE, MAXIMUM_SIZE);

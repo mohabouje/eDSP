@@ -20,6 +20,6 @@
  * Date: 05/10/2018
  */
 
-#include <easy/dsp/tools.hpp>
+#include <edsp/tools.hpp>
 
-template class easy::dsp::envelope_follower<float>;
+template class edsp::envelope_follower<float>;

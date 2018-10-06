@@ -20,9 +20,9 @@
  * Date: 05/10/2018
  */
 
-#include <easy/dsp/oscillator.hpp>
+#include <edsp/oscillator.hpp>
 
-template class easy::dsp::oscillators::square_oscillator<float>;
-template class easy::dsp::oscillators::sin_oscillator<float>;
-template class easy::dsp::oscillators::triangular_oscillator<float>;
-template class easy::dsp::oscillators::sawtooth_oscillator<float>;
+template class edsp::oscillators::square_oscillator<float>;
+template class edsp::oscillators::sin_oscillator<float>;
+template class edsp::oscillators::triangular_oscillator<float>;
+template class edsp::oscillators::sawtooth_oscillator<float>;

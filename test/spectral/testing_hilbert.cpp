@@ -20,18 +20,18 @@
  * Date: 8/9/2018
  */
 
-#include <easy/dsp/windowing.hpp>
-#include <easy/dsp/spectral/hilbert.hpp>
-#include <easy/dsp/converter/real2complex.hpp>
-#include <easy/dsp/string/split.hpp>
+#include <edsp/windowing.hpp>
+#include <edsp/spectral/hilbert.hpp>
+#include <edsp/converter/real2complex.hpp>
+#include <edsp/string/split.hpp>
 
 #include <gtest/gtest.h>
 #include <unordered_map>
 #include <fstream>
 #include <istream>
 
-using namespace easy::dsp;
-using namespace easy::dsp::windowing;
+using namespace edsp;
+using namespace edsp::windowing;
 
 namespace {
     std::string data_path(const std::string filename) {
@@ -71,7 +71,7 @@ TEST(TestingHilbert, TransformHanningWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Hanning>(std::begin(window), size);
     std::vector<std::complex<double>> transformed(size);
-    easy::dsp::hilbert(std::begin(window), std::end(window), std::begin(transformed));
+    edsp::hilbert(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.001);
@@ -85,7 +85,7 @@ TEST(TestingHilbert, TransformHammingWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Hamming>(std::begin(window), size);
     std::vector<std::complex<double>> transformed(size);
-    easy::dsp::hilbert(std::cbegin(window), std::cend(window), std::begin(transformed));
+    edsp::hilbert(std::cbegin(window), std::cend(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.001);
@@ -99,7 +99,7 @@ TEST(TestingHilbert, TransformBlackmanWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Blackman>(std::begin(window), size);
     std::vector<std::complex<double>> transformed(size);
-    easy::dsp::hilbert(std::begin(window), std::end(window), std::begin(transformed));
+    edsp::hilbert(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(reference[i].real(), transformed[i].real(), 0.001);

@@ -20,10 +20,10 @@
  * Date: 05/10/2018
  */
 
-#include <easy/dsp/statistics.hpp>
+#include <edsp/statistics.hpp>
 #include <gtest/gtest.h>
 
-using namespace easy::dsp::statistics;
+using namespace edsp::statistics;
 
 // Kaiser window
 static const std::array<double, 128> kaiser_reference = {

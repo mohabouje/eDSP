@@ -21,11 +21,11 @@
  */
 
 #include <gtest/gtest.h>
-#include <easy/dsp/windowing.hpp>
+#include <edsp/windowing.hpp>
 #include <unordered_map>
 #include <fstream>
 
-using namespace easy::dsp::windowing;
+using namespace edsp::windowing;
 
 namespace {
     std::string data_path(const std::string filename) {

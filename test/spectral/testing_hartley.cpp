@@ -20,15 +20,15 @@
  * Date: 8/9/2018
  */
 
-#include <easy/dsp/windowing.hpp>
-#include <easy/dsp/spectral/hartley.hpp>
+#include <edsp/windowing.hpp>
+#include <edsp/spectral/hartley.hpp>
 
 #include <gtest/gtest.h>
 #include <unordered_map>
 #include <fstream>
 #include <istream>
 
-using namespace easy::dsp::windowing;
+using namespace edsp::windowing;
 
 namespace {
     std::string data_path(const std::string filename) {
@@ -66,7 +66,7 @@ TEST(TestingDHT, TransformHanningWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Hanning>(std::begin(window), size);
     std::vector<double> transformed(size);
-    easy::dsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
+    edsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(transformed[i], reference[i], 0.01);
@@ -79,7 +79,7 @@ TEST(TestingDHT, TransformHammingWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Hamming>(std::begin(window), size);
     std::vector<double> transformed(size);
-    easy::dsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
+    edsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(transformed[i], reference[i], 0.01);
@@ -92,7 +92,7 @@ TEST(TestingDHT, TransformBlackmanWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Blackman>(std::begin(window), size);
     std::vector<double> transformed(size);
-    easy::dsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
+    edsp::hartley(std::begin(window), std::end(window), std::begin(transformed));
 
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(transformed[i], reference[i], 0.01);

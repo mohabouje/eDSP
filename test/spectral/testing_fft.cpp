@@ -20,20 +20,19 @@
  * Date: 8/9/2018
  */
 
-#include <easy/dsp/windowing.hpp>
-#include <easy/dsp/spectral/dft.hpp>
-#include <easy/dsp/converter/real2complex.hpp>
-#include <easy/dsp/string/split.hpp>
+#include <edsp/windowing.hpp>
+#include <edsp/spectral/dft.hpp>
+#include <edsp/converter/real2complex.hpp>
+#include <edsp/string/split.hpp>
 
 #include <gtest/gtest.h>
 #include <unordered_map>
 #include <fstream>
 #include <istream>
 
-using namespace easy::dsp;
-using namespace easy::dsp::windowing;
-using namespace easy::dsp::spectral;
-
+using namespace edsp;
+using namespace edsp::windowing;
+using namespace edsp::spectral;
 
 std::string data_path(const std::string filename) {
     std::string path = CURRENT_TEST_PATH;
@@ -71,8 +70,8 @@ TEST(TestingFFT, TransformHanningWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Hanning>(std::begin(window), size);
 
-    std::vector<std::complex<double>> transformed(easy::dsp::make_fft_size(size));
-    easy::dsp::dft(std::begin(window), std::end(window), std::begin(transformed));
+    std::vector<std::complex<double>> transformed(edsp::make_fft_size(size));
+    edsp::dft(std::begin(window), std::end(window), std::begin(transformed));
 
     const auto middle = transformed.size();
     for (auto i = 0ul; i < middle; ++i) {
@@ -87,8 +86,8 @@ TEST(TestingFFT, TransformHammingWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Hamming>(std::begin(window), size);
 
-    std::vector<std::complex<double>> transformed(easy::dsp::make_fft_size(size));
-    easy::dsp::dft(std::begin(window), std::end(window), std::begin(transformed));
+    std::vector<std::complex<double>> transformed(edsp::make_fft_size(size));
+    edsp::dft(std::begin(window), std::end(window), std::begin(transformed));
 
     const auto middle = transformed.size();
     for (auto i = 0ul; i < middle; ++i) {
@@ -103,8 +102,8 @@ TEST(TestingFFT, TransformBlackmanWindow) {
     std::vector<double> window(size);
     make_window<WindowType::Blackman>(std::begin(window), size);
 
-    std::vector<std::complex<double>> transformed(easy::dsp::make_fft_size(size));
-    easy::dsp::dft(std::begin(window), std::end(window), std::begin(transformed));
+    std::vector<std::complex<double>> transformed(edsp::make_fft_size(size));
+    edsp::dft(std::begin(window), std::end(window), std::begin(transformed));
 
     const auto middle = transformed.size();
     for (auto i = 0ul; i < middle; ++i) {
@@ -118,10 +117,10 @@ TEST(TestingIFFT, InverseTransformRealData) {
     std::vector<double> window(size);
     make_window<WindowType::Hamming>(std::begin(window), size);
 
-    std::vector<std::complex<double>> transformed(easy::dsp::make_fft_size(size));
+    std::vector<std::complex<double>> transformed(edsp::make_fft_size(size));
     std::vector<double> inverse(window.size());
-    easy::dsp::dft(std::begin(window), std::end(window), std::begin(transformed));
-    easy::dsp::idft(std::begin(transformed), std::end(transformed), std::begin(inverse));
+    edsp::dft(std::begin(window), std::end(window), std::begin(transformed));
+    edsp::idft(std::begin(transformed), std::end(transformed), std::begin(inverse));
 
     for (auto i = 0ul; i < window.size(); ++i) {
         EXPECT_NEAR(inverse[i], window[i], 0.001);
@@ -134,9 +133,9 @@ TEST(TestingIFFT, InverseTransformComplexData) {
     make_window<WindowType::Blackman>(std::begin(window), size);
 
     std::vector<std::complex<double>> input(window.size()), inverse(window.size()), transformed(window.size());
-    easy::dsp::real2complex(window.begin(), window.end(), std::begin(input));
-    easy::dsp::cdft(std::begin(input), std::end(input), std::begin(transformed));
-    easy::dsp::cidft(std::begin(transformed), std::end(transformed), std::begin(inverse));
+    edsp::real2complex(window.begin(), window.end(), std::begin(input));
+    edsp::cdft(std::begin(input), std::end(input), std::begin(transformed));
+    edsp::cidft(std::begin(transformed), std::end(transformed), std::begin(inverse));
     for (auto i = 0ul; i < window.size(); ++i) {
         EXPECT_NEAR(inverse[i].real(), input[i].real(), 0.001);
         EXPECT_NEAR(inverse[i].imag(), input[i].imag(), 0.001);

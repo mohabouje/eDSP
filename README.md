@@ -229,7 +229,7 @@ Those are the list of features that are implemented or scheduled to be. All of t
 This example show how to apply a Hamming window to an input signal $x(n)$ and store the output in a signal $y(n)$:
 
 ```c++
-using namespace easy::dsp;
+using namespace edsp;
 
 constexpr std::size_t size = 1024;
 auto x = std::vector<double>(size);
@@ -275,7 +275,7 @@ auto real_data = std::vector<double>(size);
 auto fft_data = std::vector<std::complex<double>>(size );
 
 // Create an fft object with the expected output size as parameter
-easy::dsp::complex_dft(std::cbegin(real_data), std::cend(real_data), std::begin(fft_data));
+edsp::complex_dft(std::cbegin(real_data), std::cend(real_data), std::begin(fft_data));
 ```
 
 
