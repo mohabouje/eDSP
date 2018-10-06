@@ -77,7 +77,7 @@ Please check the official [docs]() or the list of [available features](https://g
 
 ### Documentation
 
-Check the [wiki](https://github.com/mohabouje/eDSP/wiki) for more information. The latest development documentation is available [online]().
+Check the [wiki](https://github.com/mohabouje/eDSP/wiki) for more information. The latest development documentation is available [online](https://mohabouje.github.io/eDSP).
 
 
 ## TODO
