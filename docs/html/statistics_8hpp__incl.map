@@ -1,0 +1,23 @@
+<map id="statistics.hpp" name="statistics.hpp">
+<area shape="rect" id="node2" href="$centroid_8hpp.html" title="edsp/statistics/centroid.hpp" alt="" coords="1923,80,2105,107"/>
+<area shape="rect" id="node4" href="$crest_8hpp.html" title="edsp/statistics/crest.hpp" alt="" coords="1818,162,1983,189"/>
+<area shape="rect" id="node5" href="$mean_8hpp.html" title="edsp/statistics/mean.hpp" alt="" coords="1533,244,1701,271"/>
+<area shape="rect" id="node8" href="$decrease_8hpp.html" title="edsp/statistics/decrease.hpp" alt="" coords="875,162,1065,189"/>
+<area shape="rect" id="node14" href="$entropy_8hpp.html" title="edsp/statistics/entropy.hpp" alt="" coords="773,244,951,271"/>
+<area shape="rect" id="node15" href="$flatness_8hpp.html" title="edsp/statistics/flatness.hpp" alt="" coords="927,80,1109,107"/>
+<area shape="rect" id="node16" href="$geometric__mean_8hpp.html" title="edsp/statistics/geometric\l_mean.hpp" alt="" coords="395,155,563,196"/>
+<area shape="rect" id="node17" href="$generalized__mean_8hpp.html" title="edsp/statistics/generalized\l_mean.hpp" alt="" coords="193,155,371,196"/>
+<area shape="rect" id="node18" href="$harmonic__mean_8hpp.html" title="edsp/statistics/harmonic\l_mean.hpp" alt="" coords="5,155,169,196"/>
+<area shape="rect" id="node19" href="$histogram_8hpp.html" title="edsp/statistics/histogram.hpp" alt="" coords="2451,80,2644,107"/>
+<area shape="rect" id="node21" href="$kurtosis_8hpp.html" title="edsp/statistics/kurtosis.hpp" alt="" coords="1133,80,1316,107"/>
+<area shape="rect" id="node22" href="$moment_8hpp.html" title="edsp/statistics/moment.hpp" alt="" coords="1459,162,1641,189"/>
+<area shape="rect" id="node23" href="$max_8hpp.html" title="edsp/statistics/max.hpp" alt="" coords="2015,244,2176,271"/>
+<area shape="rect" id="node24" href="$median_8hpp.html" title="edsp/statistics/median.hpp" alt="" coords="2382,244,2561,271"/>
+<area shape="rect" id="node25" href="$min_8hpp.html" title="edsp/statistics/min.hpp" alt="" coords="2201,244,2358,271"/>
+<area shape="rect" id="node26" href="$peak_8hpp.html" title="edsp/statistics/peak.hpp" alt="" coords="1827,244,1991,271"/>
+<area shape="rect" id="node27" href="$rms_8hpp.html" title="edsp/statistics/rms.hpp" alt="" coords="589,244,748,271"/>
+<area shape="rect" id="node28" href="$rssq_8hpp.html" title="edsp/statistics/rssq.hpp" alt="" coords="588,162,749,189"/>
+<area shape="rect" id="node29" href="$skewness_8hpp.html" title="edsp/statistics/skewness.hpp" alt="" coords="1341,80,1535,107"/>
+<area shape="rect" id="node30" href="$variance_8hpp.html" title="edsp/statistics/variance.hpp" alt="" coords="1611,80,1796,107"/>
+<area shape="rect" id="node9" href="$numeric_8hpp.html" title="edsp/math/numeric.hpp" alt="" coords="152,244,311,271"/>
+</map>

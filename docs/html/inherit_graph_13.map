@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classedsp_1_1oscillators_1_1oscillator.html" title="The oscillator class generates a periodic signal. " alt="" coords="5,71,131,112"/>
+<area shape="rect" id="node2" href="$classedsp_1_1oscillators_1_1sawtooth__oscillator.html" title="The class sawtooth_oscillator generates a sawtooth signal. " alt="" coords="179,5,345,47"/>
+<area shape="rect" id="node4" href="$classedsp_1_1oscillators_1_1sin__oscillator.html" title="The class sin_oscillator generates a sinusoidal signal. " alt="" coords="197,71,327,112"/>
+<area shape="rect" id="node5" href="$classedsp_1_1oscillators_1_1square__oscillator.html" title="The class square_oscillator generates a square signal. " alt="" coords="186,136,338,177"/>
+<area shape="rect" id="node3" href="$classedsp_1_1oscillators_1_1triangular__oscillator.html" title="The class triangular_oscillator generates a triangular signal. " alt="" coords="393,5,560,47"/>
+</map>

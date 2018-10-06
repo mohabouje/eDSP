@@ -1,0 +1,17 @@
+<map id="algorithm.hpp" name="algorithm.hpp">
+<area shape="rect" id="node2" href="$amplifier_8hpp.html" title="edsp/algorithm/amplifier.hpp" alt="" coords="255,162,440,189"/>
+<area shape="rect" id="node5" href="$binary__search_8hpp.html" title="edsp/algorithm/binary\l_search.hpp" alt="" coords="465,155,611,196"/>
+<area shape="rect" id="node6" href="$ceil_8hpp.html" title="edsp/algorithm/ceil.hpp" alt="" coords="1316,162,1472,189"/>
+<area shape="rect" id="node8" href="$clipper_8hpp.html" title="edsp/algorithm/clipper.hpp" alt="" coords="636,162,811,189"/>
+<area shape="rect" id="node9" href="$concatenate_8hpp.html" title="edsp/algorithm/concatenate.hpp" alt="" coords="2460,162,2667,189"/>
+<area shape="rect" id="node13" href="$equal_8hpp.html" title="edsp/algorithm/equal.hpp" alt="" coords="5,80,172,107"/>
+<area shape="rect" id="node14" href="$fix_8hpp.html" title="edsp/algorithm/fix.hpp" alt="" coords="1496,162,1647,189"/>
+<area shape="rect" id="node15" href="$floor_8hpp.html" title="edsp/algorithm/floor.hpp" alt="" coords="1671,162,1832,189"/>
+<area shape="rect" id="node16" href="$linspace_8hpp.html" title="edsp/algorithm/linspace.hpp" alt="" coords="2039,162,2223,189"/>
+<area shape="rect" id="node17" href="$logspace_8hpp.html" title="edsp/algorithm/logspace.hpp" alt="" coords="2248,162,2436,189"/>
+<area shape="rect" id="node18" href="$normalizer_8hpp.html" title="edsp/algorithm/normalizer.hpp" alt="" coords="980,80,1176,107"/>
+<area shape="rect" id="node21" href="$padder_8hpp.html" title="edsp/algorithm/padder.hpp" alt="" coords="56,162,231,189"/>
+<area shape="rect" id="node23" href="$round_8hpp.html" title="edsp/algorithm/round.hpp" alt="" coords="1123,162,1291,189"/>
+<area shape="rect" id="node19" href="$rms_8hpp.html" title="edsp/statistics/rms.hpp" alt="" coords="1856,162,2015,189"/>
+<area shape="rect" id="node20" href="$max_8hpp.html" title="edsp/statistics/max.hpp" alt="" coords="887,162,1048,189"/>
+</map>
