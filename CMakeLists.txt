@@ -11,7 +11,7 @@ set(${LIB_NAME}_VERSION_PATCH       "0")
 
 option(BUILD_TESTS "Enable to build tests" ON)
 option(BUILD_DOCS "Enable to build docs" OFF)
-option(BUIL_EXAMPLES "Enable to build examples" OFF)
+option(BUILD_EXAMPLES "Enable to build examples" OFF)
 option(BUILD_TOOLS "Enable to build tools" OFF)
 option(ENABLE_OPTIMIZATIONS "Enable all the optimizations, in release mode" ON)
 option(ENABLE_WARNINGS "Enable all warning during compilation" ON)
