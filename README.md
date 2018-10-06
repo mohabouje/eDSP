@@ -15,8 +15,6 @@
 ![GitHub stars](https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star)
 ![GitHub watchers](https://img.shields.io/github/watchers/mohabouje/eDSP.svg?style=social&label=Watch)
 
-***
-
 
 *eDSP* (easy Digital Signal Processing) is a digital signal processing framework written in modern C++ that implements some of the common functions and algorithms frequently used in digital signal processing, audio engineering & telecommunications systems.
 
@@ -28,8 +26,8 @@ Got it! Excellent question! There are plenty of established DSP frameworks for C
 
 *eDSP is a modern framework written for modern C++ developers*. It is an alternative for those who want a powerful template DSP library that keeps a simple STL-like API. *eDSP* is a framework that:
 
-- **Headers only**, just copy and use.
-- **Template library**: supports single and double floating point, and fixed-point operations.
+- Is implemented as a **Headers only** library, just copy and use.
+- Is **Template library**: supports single and double floating point, and fixed-point operations.
 - Integrates an **easy** to use interface,  **STL-like API**. 
 - Provides **fast** implementations: check the available [benchmarks](https://github.com/mohabouje/eDSP/wiki/Benchmark).
 - Aims to be **cross-platform**
