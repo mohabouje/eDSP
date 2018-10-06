@@ -66,7 +66,7 @@ eDSP is organized in different modules. Each module integrates different related
 
 **Note:** *eDSP is a framework under construction. Some features are scheduled for future development.*
 
-Please check the official [docs]() or the list of [available features](https://github.com/mohabouje/eDSP/wiki/Modules) to find a detailed information of each module. 
+Please check the official [docs](https://mohabouje.github.io/eDSP/) or the list of [available features](https://github.com/mohabouje/eDSP/wiki/Modules) to find a detailed information of each module.
 
 ### Quick start
 
