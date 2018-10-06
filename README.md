@@ -91,7 +91,7 @@ Distributed under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.html)
 - [x] Compile time optimizations: constexpr & traits
 - [x] Modern C++: const method, noexcept construction, contract, assertions...
 
-
+Check the [Kanban](https://github.com/mohabouje/eDSP/projects/1) of this project to get more information about the current state.
 
 
 
