@@ -6,11 +6,11 @@ PROJECT_LOGO =
 OUTPUT_LANGUAGE = English
 
 
-STRIP_FROM_PATH        = @PROJECT_SOURCE_DIR@/include/easy \
-                         @PROJECT_BINARY_DIR@/include/easy
+STRIP_FROM_PATH        = @PROJECT_SOURCE_DIR@/include/edsp \
+                         @PROJECT_BINARY_DIR@/include/edsp
 
-INPUT                  = @PROJECT_SOURCE_DIR@/include/easy \
-                         @PROJECT_BINARY_DIR@/include/easy \
+INPUT                  = @PROJECT_SOURCE_DIR@/include/edsp \
+                         @PROJECT_BINARY_DIR@/include/edsp \
                          @PROJECT_SOURCE_DIR@/README.md
 USE_MDFILE_AS_MAINPAGE = @PROJECT_SOURCE_DIR@/README.md
 FILE_PATTERNS          = *.hpp \

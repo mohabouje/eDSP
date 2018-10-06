@@ -104,7 +104,7 @@ namespace edsp { namespace filter {
     };
 
     /**
-     * @brief Udo Zölzer filter designer.
+     * @brief Butterworth filter designer.
      * @tparam T Arithmetic type.
      * @tparam MaxOrder Maximum order.
      */
@@ -117,7 +117,7 @@ namespace edsp { namespace filter {
     };
 
     /**
-     * @brief Udo Zölzer filter designer.
+     * @brief Chebyshev filter designer.
      * @tparam T Arithmetic type.
      * @tparam MaxOrder Maximum order.
      */

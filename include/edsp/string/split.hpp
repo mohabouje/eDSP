@@ -42,7 +42,7 @@ namespace edsp { namespace string {
             *d_first = segment;
             ++d_first;
         }
-    };
+    }
 
 }} // namespace edsp::string
 

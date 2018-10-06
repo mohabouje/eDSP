@@ -29,7 +29,7 @@ namespace edsp { namespace oscillators {
 
     /**
      * @class triangular_oscillator
-     * @brief The class %triangular_oscillator generates a sawtooth signal.
+     * @brief The class %triangular_oscillator generates a triangular signal.
      *
      * The signal increases linearly from -1 to 1 in\f$ [0, \pi ] \f$ interval, and decreases linearly from 1 to
      * -1 in the interval \f$ [ \pi , 2 \pi] \f$.
