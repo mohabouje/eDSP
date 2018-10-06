@@ -3,7 +3,6 @@
   <img src="logo.svg" width="350" title="hover text">
 </p>
 
-# Welcome to eDSP
 
 ![releases](https://img.shields.io/github/tag/mohabouje/eDSP.svg)
 ![issues](https://img.shields.io/github/issues/mohabouje/eDSP.svg)
