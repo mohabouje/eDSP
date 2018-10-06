@@ -1,8 +1,0 @@
-<map id="oscillators/triangular.hpp" name="oscillators/triangular.hpp">
-<area shape="rect" id="node2" href="$sinusoidal_8hpp.html" title="edsp/oscillators/sinusoidal.hpp" alt="" coords="269,80,469,107"/>
-<area shape="rect" id="node5" href="$constant_8hpp.html" title="edsp/math/constant.hpp" alt="" coords="147,304,310,331"/>
-<area shape="rect" id="node3" href="$oscillator_8hpp.html" title="edsp/oscillator.hpp" alt="" coords="158,155,289,181"/>
-<area shape="rect" id="node8" href="$numeric_8hpp.html" title="edsp/math/numeric.hpp" alt="" coords="559,155,717,181"/>
-<area shape="rect" id="node4" href="$sawtooth_8hpp.html" title="edsp/oscillators/sawtooth.hpp" alt="" coords="238,229,433,256"/>
-<area shape="rect" id="node7" href="$square_8hpp.html" title="edsp/oscillators/square.hpp" alt="" coords="33,229,214,256"/>
-</map>
