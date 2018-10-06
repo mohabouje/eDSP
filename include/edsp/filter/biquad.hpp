@@ -152,36 +152,36 @@ namespace edsp { namespace filter {
          * @brief Updates the value of the coefficient \f$ a_0 \f$.
          * @return value Value of the coefficient \f$ a_0 \f$.
          */
-        constexpr void setA0(T value) noexcept;
+        constexpr void set_a0(T value) noexcept;
         /**
          * @brief Updates the value of the coefficient \f$ a_1 \f$.
          * @return value Value of the coefficient \f$ a_1 \f$.
          */
-        constexpr void setA1(T value) noexcept;
+        constexpr void set_a1(T value) noexcept;
 
         /**
          * @brief Updates the value of the coefficient \f$ a_2 \f$.
          * @return value Value of the coefficient \f$ a_2 \f$.
          */
-        constexpr void setA2(T value) noexcept;
+        constexpr void set_a2(T value) noexcept;
 
         /**
          * @brief Updates the value of the coefficient \f$ b_0 \f$.
          * @return value Value of the coefficient \f$ b_0 \f$.
          */
-        constexpr void setB0(T value) noexcept;
+        constexpr void set_b0(T value) noexcept;
 
         /**
          * @brief Updates the value of the coefficient \f$ b_1 \f$.
          * @return value Value of the coefficient \f$ b_1 \f$.
          */
-        constexpr void setB1(T value) noexcept;
+        constexpr void set_b1(T value) noexcept;
 
         /**
          * @brief Updates the value of the coefficient \f$ b_2 \f$.
          * @return value Value of the coefficient \f$ b_2 \f$.
          */
-        constexpr void setB2(T value) noexcept;
+        constexpr void set_b2(T value) noexcept;
 
         /**
          * @brief Filters the signal in the range [first, last) and stores the result in another range, beginning at d_first.
@@ -210,7 +210,7 @@ namespace edsp { namespace filter {
          * @brief Boolean operator to checks if the filter is stable.
          * @see stability
          */
-        constexpr operator bool() const noexcept;
+        constexpr explicit operator bool() const noexcept;
 
         /**
          * @brief Computes the output of filtering one digital time-step.
@@ -290,37 +290,37 @@ namespace edsp { namespace filter {
     }
 
     template <typename T>
-    constexpr void biquad<T>::setA0(const value_type value) noexcept {
+    constexpr void biquad<T>::set_a0(const value_type value) noexcept {
         a0_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void biquad<T>::setA1(const value_type value) noexcept {
+    constexpr void biquad<T>::set_a1(const value_type value) noexcept {
         a1_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void biquad<T>::setA2(const value_type value) noexcept {
+    constexpr void biquad<T>::set_a2(const value_type value) noexcept {
         a2_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void biquad<T>::setB0(const value_type value) noexcept {
+    constexpr void biquad<T>::set_b0(const value_type value) noexcept {
         b0_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void biquad<T>::setB1(const value_type value) noexcept {
+    constexpr void biquad<T>::set_b1(const value_type value) noexcept {
         b1_ = value;
         reset();
     }
 
     template <typename T>
-    constexpr void biquad<T>::setB2(const value_type value) noexcept {
+    constexpr void biquad<T>::set_b2(const value_type value) noexcept {
         b2_ = value;
         reset();
     }

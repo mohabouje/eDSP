@@ -41,9 +41,9 @@ namespace edsp { namespace filter {
 
         template <typename T>
         void apply_scale(biquad<T>& biquad, T scale) noexcept {
-            biquad.setB0(biquad.b0() * scale);
-            biquad.setB1(biquad.b1() * scale);
-            biquad.setB2(biquad.b2() * scale);
+            biquad.set_b0(biquad.b0() * scale);
+            biquad.set_b1(biquad.b1() * scale);
+            biquad.set_b2(biquad.b2() * scale);
         }
 
         template <typename T, std::size_t N>
