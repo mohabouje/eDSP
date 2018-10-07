@@ -28,6 +28,8 @@
 namespace edsp { inline namespace types {
 
     using nonstd::expected;
+    using nonstd::make_unexpected;
+
 }} // namespace edsp::types
 
 #endif //EDSP_EXPECTED_HPP

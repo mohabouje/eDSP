@@ -43,11 +43,11 @@ namespace edsp { inline namespace core {
          * to a message handler
          */
         enum class MessageType {
-            Info = 0, /*<! Information Message >*/
-            Debug,    /*<! Debug Message >*/
-            Warning,  /*<! Warning Message >*/
-            Critical, /*<! Critical Message >*/
-            Error     /*<! Error Message >*/
+            Info = 0, /*!< Information Message */
+            Debug,    /*!< Debug Message */
+            Warning,  /*!< Warning Message */
+            Critical, /*!< Critical Message */
+            Error     /*!< Error Message */
         };
 
         /**
@@ -162,6 +162,7 @@ namespace edsp { inline namespace core {
                 break;
         }
 #else
+        meta::unused(type_);
         std::cout << msg_;
 #endif
     }

@@ -54,6 +54,7 @@ EXCLUDE_PATTERNS = */meta/* \
                    */internal/* \
                    */test/* \
                    */benchmark/* \
+                   */thirdparty/*
 
 
 

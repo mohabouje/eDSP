@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['sawtooth',['Sawtooth',['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6ac9ddac7ef9ee84d6bd4691f6bece1d80',1,'edsp::oscillators']]],
-  ['sinusoidal',['Sinusoidal',['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6a50a9359a7fadec7eea863d788796861d',1,'edsp::oscillators']]],
-  ['square',['Square',['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6aceb46ca115d05c51aa5a16a8867c3304',1,'edsp::oscillators']]],
-  ['student',['Student',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159caf5c0a1c9384c2e25e79ba1abf5d9a037',1,'edsp::random']]]
+  ['peakingeq',['PeakingEQ',['../d7/d47/namespaceedsp_1_1filter.html#a8d892edc768c28dbf779f67b63a6456aa88cac9c896436c8692fae64a8ea13a92',1,'edsp::filter']]],
+  ['piecewiseconstant',['PieceWiseConstant',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159caf6c1b12eccfd603c1628c04cd3e3497e',1,'edsp::random']]],
+  ['piecewiselinear',['PieceWiseLinear',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159caedf6afad31667f6b35d27c3fc285a48c',1,'edsp::random']]],
+  ['poisson',['Poisson',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159cadff200b0bb8d3c69fbd54cb43664cd7e',1,'edsp::random']]]
 ];

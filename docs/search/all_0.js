@@ -8,8 +8,12 @@ var searchData=
   ['amplifier',['amplifier',['../d3/db4/namespaceedsp_1_1algorithm.html#ac3a233eb9ab9fbf08d13c2ee755a1ca6',1,'edsp::algorithm::amplifier(InputIt first, InputIt last, OutputIt d_first, Numeric factor)'],['../d3/db4/namespaceedsp_1_1algorithm.html#a15c860fa7617915a65982a4acfc3af71',1,'edsp::algorithm::amplifier(InputIt first, InputIt last, OutputIt d_first, Numeric factor, Numeric min, Numeric max)']]],
   ['amplifier_2ehpp',['amplifier.hpp',['../d1/dd8/amplifier_8hpp.html',1,'']]],
   ['amplitude',['amplitude',['../dc/d96/classedsp_1_1oscillators_1_1oscillator.html#a0e694934dcedc687e70b4d5f8770155a',1,'edsp::oscillators::oscillator']]],
+  ['android',['Android',['../d7/d34/namespaceedsp_1_1core.html#ae91e1b47ab5b7f795210a10491f0b985ae84e30b9390cdb64db6db2c9ab87846d',1,'edsp::core']]],
+  ['any_2ehpp',['any.hpp',['../d2/d62/any_8hpp.html',1,'']]],
   ['apply',['apply',['../da/dcc/classedsp_1_1envelope__follower.html#a4dd737b3014b7d020b1940d99254808d',1,'edsp::envelope_follower']]],
+  ['architecture',['architecture',['../df/d9c/structedsp_1_1core_1_1system__info.html#a294be658f0ba1efc05350a29f57c457b',1,'edsp::core::system_info']]],
   ['arg',['arg',['../d9/da2/structedsp_1_1filter_1_1designer_3_01T_00_01DesignerType_1_1Butterworth_00_01MaxOrder_01_4.html#a8b3640ba7242ee525889d584e1adf08b',1,'edsp::filter::designer&lt; T, DesignerType::Butterworth, MaxOrder &gt;']]],
-  ['at',['at',['../d1/d1f/classedsp_1_1ring__buffer.html#a5780178be108f6e616bde6dfe7f1718b',1,'edsp::ring_buffer::at(std::size_t i)'],['../d1/d1f/classedsp_1_1ring__buffer.html#a172d397c3e8de7c2e41b38fbb969b961',1,'edsp::ring_buffer::at(std::size_t i) const ']]],
+  ['arm',['arm',['../d7/d34/namespaceedsp_1_1core.html#a8984b0349fdae35f45a4746829a658baaf926b3e222d7afee57071b2256839701',1,'edsp::core']]],
+  ['at',['at',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a59ffbf191566051d5fe2b1fea6495fed',1,'edsp::types::fixed_ring_buffer::at(std::size_t i)'],['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#ae4af340dd7c2ff98c96338b07be0c174',1,'edsp::types::fixed_ring_buffer::at(std::size_t i) const '],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#a0f4667a8d839cf9189e6ef5894b8069e',1,'edsp::types::ring_buffer::at(std::size_t i)'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#ad6a680fec5fa16a2039ec86d5a04c9d8',1,'edsp::types::ring_buffer::at(std::size_t i) const ']]],
   ['attack_5ftime',['attack_time',['../da/dcc/classedsp_1_1envelope__follower.html#adb3f7cc45bcde09d93a77fc1a4107aab',1,'edsp::envelope_follower']]]
 ];

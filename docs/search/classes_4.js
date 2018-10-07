@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['histogram',['histogram',['../d8/d22/structedsp_1_1statistics_1_1histogram.html',1,'edsp::statistics']]]
+  ['fixed_5fring_5fbuffer',['fixed_ring_buffer',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html',1,'edsp::types']]]
 ];

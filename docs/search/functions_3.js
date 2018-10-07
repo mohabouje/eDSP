@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['data',['data',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#af3e5d513a28996cb0f210cdbdfc0e2a2',1,'edsp::types::fixed_ring_buffer::data()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#adfd9a506e8ee0727372d986922859023',1,'edsp::types::ring_buffer::data()']]],
   ['db2mag',['db2mag',['../dd/d22/namespaceedsp_1_1converter.html#aa83cce6c7c3f82c5ea3decf5a4c7c4d6',1,'edsp::converter']]],
   ['db2pow',['db2pow',['../dd/d22/namespaceedsp_1_1converter.html#a19583ee0ef09f01076e9e6b0ee491199',1,'edsp::converter']]],
   ['dct',['dct',['../d6/de9/namespaceedsp_1_1spectral.html#a12d6d8f7deb75525c15db8f77f128ff3',1,'edsp::spectral']]],

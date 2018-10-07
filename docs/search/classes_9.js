@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['sawtooth_5foscillator',['sawtooth_oscillator',['../d7/dbe/classedsp_1_1oscillators_1_1sawtooth__oscillator.html',1,'edsp::oscillators']]],
-  ['sin_5foscillator',['sin_oscillator',['../d8/d07/classedsp_1_1oscillators_1_1sin__oscillator.html',1,'edsp::oscillators']]],
-  ['square_5foscillator',['square_oscillator',['../de/de0/classedsp_1_1oscillators_1_1square__oscillator.html',1,'edsp::oscillators']]]
+  ['perlin_5fnoise_5fgenerator',['perlin_noise_generator',['../da/da9/structedsp_1_1random_1_1perlin__noise__generator.html',1,'edsp::random']]],
+  ['pink_5fnoise_5fgenerator',['pink_noise_generator',['../da/d58/structedsp_1_1random_1_1pink__noise__generator.html',1,'edsp::random']]]
 ];

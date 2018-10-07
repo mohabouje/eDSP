@@ -2,6 +2,7 @@ var searchData=
 [
   ['algorithm',['algorithm',['../d3/db4/namespaceedsp_1_1algorithm.html',1,'edsp']]],
   ['converter',['converter',['../dd/d22/namespaceedsp_1_1converter.html',1,'edsp']]],
+  ['core',['core',['../d7/d34/namespaceedsp_1_1core.html',1,'edsp']]],
   ['edsp',['edsp',['../d7/daa/namespaceedsp.html',1,'']]],
   ['filter',['filter',['../d7/d47/namespaceedsp_1_1filter.html',1,'edsp']]],
   ['math',['math',['../de/d95/namespaceedsp_1_1math.html',1,'edsp']]],
@@ -11,5 +12,6 @@ var searchData=
   ['spectral',['spectral',['../d6/de9/namespaceedsp_1_1spectral.html',1,'edsp']]],
   ['statistics',['statistics',['../d1/db9/namespaceedsp_1_1statistics.html',1,'edsp']]],
   ['string',['string',['../dd/d65/namespaceedsp_1_1string.html',1,'edsp']]],
+  ['types',['types',['../d1/d1c/namespaceedsp_1_1types.html',1,'edsp']]],
   ['windowing',['windowing',['../d3/d0f/namespaceedsp_1_1windowing.html',1,'edsp']]]
 ];

@@ -9,7 +9,7 @@ var searchData=
   ['make_5fwindow',['make_window',['../d3/d0f/namespaceedsp_1_1windowing.html#a9790b33a44fd775fab9685ea02f9f311',1,'edsp::windowing']]],
   ['manhattan_5fdistance',['manhattan_distance',['../de/d95/namespaceedsp_1_1math.html#a0af43122bda672f60cdbccf0322c9422',1,'edsp::math']]],
   ['max',['max',['../d1/db9/namespaceedsp_1_1statistics.html#a17e05fbca744ea829ee2b684011de4c6',1,'edsp::statistics']]],
-  ['max_5fsize',['max_size',['../d1/d1f/classedsp_1_1ring__buffer.html#aee55538f62744486cb6ef2df430643cd',1,'edsp::ring_buffer::max_size()'],['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a8bb4afd455a38652b9cf5fb8f981d7af',1,'edsp::filter::biquad_cascade::max_size()']]],
+  ['max_5fsize',['max_size',['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a8bb4afd455a38652b9cf5fb8f981d7af',1,'edsp::filter::biquad_cascade::max_size()'],['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#adb8bab0627d86dd03aada63e9047e60d',1,'edsp::types::fixed_ring_buffer::max_size()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#abb6f98783e2a3586f434a7f529244295',1,'edsp::types::ring_buffer::max_size()']]],
   ['maxabs',['maxabs',['../d1/db9/namespaceedsp_1_1statistics.html#ae5006f9f8775300217590d880c67db73',1,'edsp::statistics']]],
   ['mean',['mean',['../d1/db9/namespaceedsp_1_1statistics.html#a1271739ce74de0c375ccf53b4592ac59',1,'edsp::statistics']]],
   ['median',['median',['../d1/db9/namespaceedsp_1_1statistics.html#ad502fda3e8305791754cbc6ba636145c',1,'edsp::statistics']]],

@@ -91,7 +91,6 @@
 #    error "eDSP does not support this standard"
 #endif
 
-
 #ifdef __cplusplus
 #    define EXTERN_C_START extern "C" {
 #    define EXTERN_C_END }
@@ -107,5 +106,8 @@
 #    define E_LIKELY(x) (!!(x))
 #    define E_UNLIKELY(x) (!!(x))
 #endif
+
+#define E_BUILD_DATE __DATE__
+#define E_BUILD_TIME __TIME__
 
 #endif //EDSP_CONFIG_HPP

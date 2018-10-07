@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['data',['data',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#af3e5d513a28996cb0f210cdbdfc0e2a2',1,'edsp::types::fixed_ring_buffer::data()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#adfd9a506e8ee0727372d986922859023',1,'edsp::types::ring_buffer::data()']]],
   ['db2mag',['db2mag',['../dd/d22/namespaceedsp_1_1converter.html#aa83cce6c7c3f82c5ea3decf5a4c7c4d6',1,'edsp::converter']]],
   ['db2mag_2ehpp',['db2mag.hpp',['../de/dcd/db2mag_8hpp.html',1,'']]],
   ['db2pow',['db2pow',['../dd/d22/namespaceedsp_1_1converter.html#a19583ee0ef09f01076e9e6b0ee491199',1,'edsp::converter']]],
@@ -7,6 +8,7 @@ var searchData=
   ['dct',['dct',['../d6/de9/namespaceedsp_1_1spectral.html#a12d6d8f7deb75525c15db8f77f128ff3',1,'edsp::spectral']]],
   ['dct_2ehpp',['dct.hpp',['../d6/dd4/dct_8hpp.html',1,'']]],
   ['dct_5ftype',['DCT_Type',['../d6/de9/namespaceedsp_1_1spectral.html#ab83d29951235344aee5cb0b40f17f91c',1,'edsp::spectral']]],
+  ['debug',['Debug',['../d6/dd0/classedsp_1_1core_1_1logger.html#a99038d52ca69e7aba52fe7ddf6d67919aa603905470e2a5b8c13e96b579ef0dba',1,'edsp::core::logger']]],
   ['decrease',['decrease',['../d1/db9/namespaceedsp_1_1statistics.html#a17c653746ef4b4a0b79971b372d91c18',1,'edsp::statistics']]],
   ['decrease_2ehpp',['decrease.hpp',['../d2/dad/decrease_8hpp.html',1,'']]],
   ['deg2rad',['deg2rad',['../dd/d22/namespaceedsp_1_1converter.html#a1476ef1498d67df842137591e616dd0c',1,'edsp::converter']]],
@@ -23,8 +25,11 @@ var searchData=
   ['designertype',['DesignerType',['../d7/d47/namespaceedsp_1_1filter.html#a7697522d00c54d9bef2c9f71cfa8d6bf',1,'edsp::filter']]],
   ['dft',['dft',['../d6/de9/namespaceedsp_1_1spectral.html#a7e477447935b6782fd4fa1edd0a631c6',1,'edsp::spectral']]],
   ['dft_2ehpp',['dft.hpp',['../dc/d6d/dft_8hpp.html',1,'']]],
-  ['difference_5ftype',['difference_type',['../d1/d1f/classedsp_1_1ring__buffer.html#a0ec1e0e45087ccf97ff5e0841145dd5f',1,'edsp::ring_buffer']]],
+  ['difference_5ftype',['difference_type',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a8c8dd46906291108572c5682f8fe438a',1,'edsp::types::fixed_ring_buffer::difference_type()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#a1ad7b1b69736e9e4ff25fd45b7c19107',1,'edsp::types::ring_buffer::difference_type()']]],
   ['discrete',['Discrete',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159ca4984667940802dedc139aa7a430a6553',1,'edsp::random']]],
   ['distributiontype',['DistributionType',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159c',1,'edsp::random']]],
+  ['dllexport',['DLLEXPORT',['../d8/dfd/config_8hpp.html#a808e08638be3cba36e36759e5b150de0',1,'config.hpp']]],
+  ['dllhide',['DLLHIDE',['../d8/dfd/config_8hpp.html#a5b3253ba17072a8b974e098014970870',1,'config.hpp']]],
+  ['dllimport',['DLLIMPORT',['../d8/dfd/config_8hpp.html#aae8fdf6bcc88c172ca8a75ad80f17a95',1,'config.hpp']]],
   ['duty',['duty',['../de/de0/classedsp_1_1oscillators_1_1square__oscillator.html#a4ebc3ba07ee7406dc00cd1924b796f15',1,'edsp::oscillators::square_oscillator']]]
 ];

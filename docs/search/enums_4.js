@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['oscillatortype',['OscillatorType',['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6',1,'edsp::oscillators']]]
+  ['messagetype',['MessageType',['../d6/dd0/classedsp_1_1core_1_1logger.html#a99038d52ca69e7aba52fe7ddf6d67919',1,'edsp::core::logger']]]
 ];

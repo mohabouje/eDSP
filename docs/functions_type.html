@@ -102,6 +102,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
       <li class="current"><a href="functions_type.html"><span>Typedefs</span></a></li>
+      <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
+      <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -136,24 +138,33 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
 <li>const_iterator
 : <a class="el" href="d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#abd6d67a88a1df51449e9ea0a33c9c4d2">edsp::filter::biquad_cascade&lt; T, N &gt;</a>
-, <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#ab6f1bee8a818f2725943f6b364c0098b">edsp::ring_buffer&lt; T, Allocator &gt;</a>
+, <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a3d93ac5a5eb9d291a15276d63c2e317a">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a51cc3c433b48870fb20abef7d57a66e9">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
 </li>
 <li>const_pointer
-: <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#a44087c46078636ab5ee16595b457e786">edsp::ring_buffer&lt; T, Allocator &gt;</a>
+: <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#ac84d76b9f651f846e90d54975fc2d3aa">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a8e84827293796dd0f47ee03637d8e620">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
 </li>
 <li>const_reference
 : <a class="el" href="d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#ada5594fcc58d9209836c8de71dee04de">edsp::filter::biquad_cascade&lt; T, N &gt;</a>
-, <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#a7b016c118ea98b53a8eafd0a7855d0ee">edsp::ring_buffer&lt; T, Allocator &gt;</a>
+, <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#acdaad392721880fc4ce60b1e8ab3891a">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a0bf4fbc8c74f80a28625a470af84df8f">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
 </li>
 <li>const_reverse_iterator
-: <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#a8bcac877a56b406de8f1ad652ac7e804">edsp::ring_buffer&lt; T, Allocator &gt;</a>
+: <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a535dcec992cd99aeb5268fcdf772ef84">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a3cc47d10acc897ef39fd95d2e722237b">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
+</li>
+<li>container_type
+: <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#aceb6c5a9f8cd309fa5561c643399ab25">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a8335fb6229a0fd50ff762d9e62b486f7">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
 <li>difference_type
-: <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#a0ec1e0e45087ccf97ff5e0841145dd5f">edsp::ring_buffer&lt; T, Allocator &gt;</a>
+: <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a8c8dd46906291108572c5682f8fe438a">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a1ad7b1b69736e9e4ff25fd45b7c19107">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
 </li>
 </ul>
 
@@ -161,14 +172,16 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
 <li>iterator
 : <a class="el" href="d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a4cdce6cc72eb8128e9f0b97f6f230d34">edsp::filter::biquad_cascade&lt; T, N &gt;</a>
-, <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#a2312e1d4e8f22847b27eeac8e5cba407">edsp::ring_buffer&lt; T, Allocator &gt;</a>
+, <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a8e2dfad9ab84a4cd282becedf8a8f688">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a57bea09c4d4fbadb02e04ce16286ce14">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>pointer
-: <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#aa4de351caca02e8c1d6ddc45e7a8bc7c">edsp::ring_buffer&lt; T, Allocator &gt;</a>
+: <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#abf5e611eb892076cc5e7353b6833374a">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a4d69e70f204c4c09279f8efa922d86d6">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
 </li>
 </ul>
 
@@ -176,26 +189,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
 <li>reference
 : <a class="el" href="d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a093d30e8334b5e20f4aae6befdff1ad6">edsp::filter::biquad_cascade&lt; T, N &gt;</a>
-, <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#a760fd3853f380e85672538d23a8a87ee">edsp::ring_buffer&lt; T, Allocator &gt;</a>
+, <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a03addf67a420c32882731604b2997f21">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a4eccb1b903a71bc7d280568bb2cb1546">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
 </li>
 <li>reverse_iterator
-: <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#a93cedf5ca13879c92db08307f88d990d">edsp::ring_buffer&lt; T, Allocator &gt;</a>
+: <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#ac1c54a2629bc27cfaf922eb602f03a39">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a520bcd0775a41dd02354b67112b304f0">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
-<li>self_type
-: <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#a2523b1d2013263f0f589d5f1220ce01d">edsp::ring_buffer&lt; T, Allocator &gt;</a>
-</li>
 <li>size_type
 : <a class="el" href="da/dcc/classedsp_1_1envelope__follower.html#a1d4fcb43c0608d9a86bad1868d7a8459">edsp::envelope_follower&lt; T &gt;</a>
 , <a class="el" href="d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#aa7933cd2b979c231dfd2afdc0afd73ea">edsp::filter::biquad_cascade&lt; T, N &gt;</a>
 , <a class="el" href="db/df2/classedsp_1_1filter_1_1moving__average.html#a815345b4d0fd6a4e1b5cfb8cbfa509c8">edsp::filter::moving_average&lt; T, Allocator &gt;</a>
 , <a class="el" href="d9/d0c/classedsp_1_1filter_1_1moving__median.html#a371e4c6b83f8fe3f6e4bbe56b6d9cc9f">edsp::filter::moving_median&lt; T, Allocator &gt;</a>
 , <a class="el" href="d8/de4/classedsp_1_1filter_1_1moving__rms.html#aa7b73187adcb48928b3c44161e2d887f">edsp::filter::moving_rms&lt; T, Allocator &gt;</a>
-, <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#a716804d010b751e34cf81d0ed50add90">edsp::ring_buffer&lt; T, Allocator &gt;</a>
 , <a class="el" href="d8/d22/structedsp_1_1statistics_1_1histogram.html#ac247f3dc163dfa5bdb01347cecbb8304">edsp::statistics::histogram&lt; T, Allocator &gt;</a>
+, <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#ac4d6a00bd1e2a1d5c93648c03f0f44bd">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a02ca435693aa7e4208f2e943176ee118">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
 </li>
 </ul>
 
@@ -220,8 +233,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="da/d58/structedsp_1_1random_1_1pink__noise__generator.html#a87a0329d323acf9bb37af8244e4ceae6">edsp::random::pink_noise_generator&lt; T, Engine &gt;</a>
 , <a class="el" href="d9/d06/structedsp_1_1random_1_1random__generator.html#a3d8d15ea45dbed15ac24a169b174d7b5">edsp::random::random_generator&lt; dist, T &gt;</a>
 , <a class="el" href="df/dcb/structedsp_1_1random_1_1white__noise__generator.html#a75f0eb915f734f291879b089e166588c">edsp::random::white_noise_generator&lt; T, Engine &gt;</a>
-, <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#a50952d1ad4089381fdf10144bb3596ec">edsp::ring_buffer&lt; T, Allocator &gt;</a>
 , <a class="el" href="d8/d22/structedsp_1_1statistics_1_1histogram.html#a99b4af3558243957453b01e8bd764cbc">edsp::statistics::histogram&lt; T, Allocator &gt;</a>
+, <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a486108f39e977088d072d7acbdf82303">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a7b7cd205d6e97861c9c9a28b58942d7a">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
 </li>
 </ul>
 </div><!-- contents -->

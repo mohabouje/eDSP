@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['windowtype',['WindowType',['../d3/d0f/namespaceedsp_1_1windowing.html#a18fb11a4c3c068f95176d9938e662709',1,'edsp::windowing']]]
+  ['processortype',['ProcessorType',['../d7/d34/namespaceedsp_1_1core.html#a8984b0349fdae35f45a4746829a658ba',1,'edsp::core']]]
 ];

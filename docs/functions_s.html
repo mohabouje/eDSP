@@ -102,6 +102,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_func.html"><span>Functions</span></a></li>
       <li><a href="functions_vars.html"><span>Variables</span></a></li>
       <li><a href="functions_type.html"><span>Typedefs</span></a></li>
+      <li><a href="functions_enum.html"><span>Enumerations</span></a></li>
+      <li><a href="functions_eval.html"><span>Enumerator</span></a></li>
     </ul>
   </div>
   <div id="navrow4" class="tabs3">
@@ -118,11 +120,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="functions_k.html#index_k"><span>k</span></a></li>
       <li><a href="functions_l.html#index_l"><span>l</span></a></li>
       <li><a href="functions_m.html#index_m"><span>m</span></a></li>
+      <li><a href="functions_n.html#index_n"><span>n</span></a></li>
       <li><a href="functions_o.html#index_o"><span>o</span></a></li>
       <li><a href="functions_p.html#index_p"><span>p</span></a></li>
       <li><a href="functions_r.html#index_r"><span>r</span></a></li>
       <li class="current"><a href="functions_s.html#index_s"><span>s</span></a></li>
       <li><a href="functions_t.html#index_t"><span>t</span></a></li>
+      <li><a href="functions_u.html#index_u"><span>u</span></a></li>
       <li><a href="functions_v.html#index_v"><span>v</span></a></li>
       <li><a href="functions_w.html#index_w"><span>w</span></a></li>
       <li><a href="functions_z.html#index_z"><span>z</span></a></li>
@@ -158,9 +162,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>sawtooth_oscillator()
 : <a class="el" href="d7/dbe/classedsp_1_1oscillators_1_1sawtooth__oscillator.html#af7c3fe8b68e35e881951b687a2d78698">edsp::oscillators::sawtooth_oscillator&lt; T &gt;</a>
 </li>
-<li>self_type
-: <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#a2523b1d2013263f0f589d5f1220ce01d">edsp::ring_buffer&lt; T, Allocator &gt;</a>
-</li>
 <li>set_a0()
 : <a class="el" href="dc/d81/classedsp_1_1filter_1_1biquad.html#a5e5760afbb65097e31f6614c837a7713">edsp::filter::biquad&lt; T &gt;</a>
 </li>
@@ -187,6 +188,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </li>
 <li>set_duty()
 : <a class="el" href="de/de0/classedsp_1_1oscillators_1_1square__oscillator.html#af5dbbc8cbb067896452bf5ecbd9f6dfc">edsp::oscillators::square_oscillator&lt; T &gt;</a>
+</li>
+<li>set_env()
+: <a class="el" href="dc/de4/structedsp_1_1core_1_1system__env.html#a9dd1ae3a20a19048b73defe3a6bcbd86">edsp::core::system_env</a>
 </li>
 <li>set_frequency()
 : <a class="el" href="dc/d96/classedsp_1_1oscillators_1_1oscillator.html#a24f33fcfad985f284b58b69a338cb479">edsp::oscillators::oscillator&lt; T &gt;</a>
@@ -230,7 +234,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="db/df2/classedsp_1_1filter_1_1moving__average.html#a98d1fed2add449791e0519a3982c8fc2">edsp::filter::moving_average&lt; T, Allocator &gt;</a>
 , <a class="el" href="d9/d0c/classedsp_1_1filter_1_1moving__median.html#a724364f2b3354c95f3e61fd0bbf40840">edsp::filter::moving_median&lt; T, Allocator &gt;</a>
 , <a class="el" href="d8/de4/classedsp_1_1filter_1_1moving__rms.html#ade7358d17522c2ef952dc1d2471779c2">edsp::filter::moving_rms&lt; T, Allocator &gt;</a>
-, <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#ab1d1fabc20de4f15364c77b96fb773e9">edsp::ring_buffer&lt; T, Allocator &gt;</a>
+, <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a3a56fd53bbc5c902ab62f1ab0604061d">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a4bad548f9eaed63ea4b094be70f5ecb9">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
 </li>
 <li>size_type
 : <a class="el" href="da/dcc/classedsp_1_1envelope__follower.html#a1d4fcb43c0608d9a86bad1868d7a8459">edsp::envelope_follower&lt; T &gt;</a>
@@ -238,8 +243,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="db/df2/classedsp_1_1filter_1_1moving__average.html#a815345b4d0fd6a4e1b5cfb8cbfa509c8">edsp::filter::moving_average&lt; T, Allocator &gt;</a>
 , <a class="el" href="d9/d0c/classedsp_1_1filter_1_1moving__median.html#a371e4c6b83f8fe3f6e4bbe56b6d9cc9f">edsp::filter::moving_median&lt; T, Allocator &gt;</a>
 , <a class="el" href="d8/de4/classedsp_1_1filter_1_1moving__rms.html#aa7b73187adcb48928b3c44161e2d887f">edsp::filter::moving_rms&lt; T, Allocator &gt;</a>
-, <a class="el" href="d1/d1f/classedsp_1_1ring__buffer.html#a716804d010b751e34cf81d0ed50add90">edsp::ring_buffer&lt; T, Allocator &gt;</a>
 , <a class="el" href="d8/d22/structedsp_1_1statistics_1_1histogram.html#ac247f3dc163dfa5bdb01347cecbb8304">edsp::statistics::histogram&lt; T, Allocator &gt;</a>
+, <a class="el" href="d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#ac4d6a00bd1e2a1d5c93648c03f0f44bd">edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;</a>
+, <a class="el" href="d5/d74/classedsp_1_1types_1_1ring__buffer.html#a02ca435693aa7e4208f2e943176ee118">edsp::types::ring_buffer&lt; T, Allocator &gt;</a>
+</li>
+<li>space()
+: <a class="el" href="d6/dd0/classedsp_1_1core_1_1logger.html#a87418dc7f3e14c77b8ae1bcd8f052ff3">edsp::core::logger</a>
 </li>
 <li>square_oscillator()
 : <a class="el" href="de/de0/classedsp_1_1oscillators_1_1square__oscillator.html#afe0dd398e9d4aa106d3f1815a2492f6c">edsp::oscillators::square_oscillator&lt; T &gt;</a>
@@ -250,6 +259,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>std::declval()
 : <a class="el" href="d6/db5/structedsp_1_1filter_1_1designer_3_01T_00_01DesignerType_1_1ChebyshevI_00_01MaxOrder_01_4.html#a1b1054d4c0a0fbe86ac883b91d6c77da">edsp::filter::designer&lt; T, DesignerType::ChebyshevI, MaxOrder &gt;</a>
 , <a class="el" href="d9/d2e/structedsp_1_1filter_1_1designer_3_01T_00_01DesignerType_1_1ChebyshevII_00_01MaxOrder_01_4.html#aac64cd1b47b4920a502a09480f4254dd">edsp::filter::designer&lt; T, DesignerType::ChebyshevII, MaxOrder &gt;</a>
+</li>
+<li>SystemEnvironmentError
+: <a class="el" href="dc/de4/structedsp_1_1core_1_1system__env.html#a084e19a01bbc8fb7027dda5a4d8b210f">edsp::core::system_env</a>
 </li>
 </ul>
 </div><!-- contents -->
