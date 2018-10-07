@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['capacity',['capacity',['../d1/d1f/classedsp_1_1ring__buffer.html#ae4742d081e40d40cef6dc48bff154b5f',1,'edsp::ring_buffer::capacity()'],['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a3546339ace1221cb21ed909b7a1db250',1,'edsp::filter::biquad_cascade::capacity()']]],
+  ['capacity',['capacity',['../d1/d1f/classedsp_1_1ring__buffer.html#af3212be6384de9cadd47026714522ead',1,'edsp::ring_buffer::capacity()'],['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a3546339ace1221cb21ed909b7a1db250',1,'edsp::filter::biquad_cascade::capacity()']]],
   ['catalan',['catalan',['../d8/df5/structedsp_1_1math_1_1constants.html#a000f668e185940394789cc3d689c1cc3',1,'edsp::math::constants']]],
   ['cauchy',['Cauchy',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159ca2ee21c55474972b3e65b31a6b0b57dc8',1,'edsp::random']]],
   ['cbegin',['cbegin',['../d1/d1f/classedsp_1_1ring__buffer.html#af2aff658defc5e597088e0291d2a8119',1,'edsp::ring_buffer::cbegin()'],['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#ab7c3fcd84a9120fe5fdf0bea5a6adaa6',1,'edsp::filter::biquad_cascade::cbegin()']]],
@@ -32,8 +32,7 @@ var searchData=
   ['const_5freference',['const_reference',['../d1/d1f/classedsp_1_1ring__buffer.html#a7b016c118ea98b53a8eafd0a7855d0ee',1,'edsp::ring_buffer::const_reference()'],['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#ada5594fcc58d9209836c8de71dee04de',1,'edsp::filter::biquad_cascade::const_reference()']]],
   ['const_5freverse_5fiterator',['const_reverse_iterator',['../d1/d1f/classedsp_1_1ring__buffer.html#a8bcac877a56b406de8f1ad652ac7e804',1,'edsp::ring_buffer']]],
   ['constant_2ehpp',['constant.hpp',['../d8/dbf/constant_8hpp.html',1,'']]],
-  ['constant_5fgenerator',['constant_generator',['../de/dd4/structedsp_1_1random_1_1constant__generator.html#a33555cf20814299c51f569bbf274669b',1,'edsp::random::constant_generator']]],
-  ['constant_5fgenerator',['constant_generator',['../de/dd4/structedsp_1_1random_1_1constant__generator.html',1,'edsp::random']]],
+  ['constant_5fgenerator',['constant_generator',['../de/dd4/structedsp_1_1random_1_1constant__generator.html',1,'edsp::random::constant_generator&lt; T &gt;'],['../de/dd4/structedsp_1_1random_1_1constant__generator.html#a33555cf20814299c51f569bbf274669b',1,'edsp::random::constant_generator::constant_generator()']]],
   ['constant_5fgenerator_2ehpp',['constant_generator.hpp',['../db/d91/constant__generator_8hpp.html',1,'']]],
   ['constants',['constants',['../d8/df5/structedsp_1_1math_1_1constants.html',1,'edsp::math']]],
   ['conv',['conv',['../d6/de9/namespaceedsp_1_1spectral.html#aeeda512b03d80d32d452baeb48a7b2c9',1,'edsp::spectral']]],

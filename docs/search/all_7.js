@@ -15,7 +15,6 @@ var searchData=
   ['highshelf',['HighShelf',['../d7/d47/namespaceedsp_1_1filter.html#a8d892edc768c28dbf779f67b63a6456aaaafe3de5c829706a2fda73dd43fd740e',1,'edsp::filter']]],
   ['hilbert',['hilbert',['../d6/de9/namespaceedsp_1_1spectral.html#aba5da854a1ab14643715e2a4b2bd7b9e',1,'edsp::spectral']]],
   ['hilbert_2ehpp',['hilbert.hpp',['../dd/d14/hilbert_8hpp.html',1,'']]],
-  ['histogram',['histogram',['../d8/d22/structedsp_1_1statistics_1_1histogram.html#ad9b1257f62cc51c7653460a6c5df4afa',1,'edsp::statistics::histogram']]],
-  ['histogram',['histogram',['../d8/d22/structedsp_1_1statistics_1_1histogram.html',1,'edsp::statistics']]],
+  ['histogram',['histogram',['../d8/d22/structedsp_1_1statistics_1_1histogram.html',1,'edsp::statistics::histogram&lt; T, Allocator &gt;'],['../d8/d22/structedsp_1_1statistics_1_1histogram.html#ad9b1257f62cc51c7653460a6c5df4afa',1,'edsp::statistics::histogram::histogram()']]],
   ['histogram_2ehpp',['histogram.hpp',['../d5/d6e/histogram_8hpp.html',1,'']]]
 ];
