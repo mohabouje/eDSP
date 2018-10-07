@@ -15,6 +15,16 @@ INPUT                  = @PROJECT_SOURCE_DIR@/include/edsp \
 USE_MDFILE_AS_MAINPAGE = @PROJECT_SOURCE_DIR@/README.md
 FILE_PATTERNS          = *.hpp \
                          *.h
+HTML_OUTPUT	       = @PROJECT_SOURCE_DIR@/docs/
+HTML_HEADER            = @PROJECT_SOURCE_DIR@/doxygen/header.html
+HTML_FOOTER            = @PROJECT_SOURCE_DIR@/doxygen/footer.html
+HTML_STYLESHEET        =
+HTML_EXTRA_STYLESHEET  = @PROJECT_SOURCE_DIR@/doxygen/customdoxygen.css
+HTML_EXTRA_FILES       = @PROJECT_SOURCE_DIR@/doxygen/doxy-boot.js \
+			@PROJECT_SOURCE_DIR@/doxygen/jquery.smartmenus.js \
+			@PROJECT_SOURCE_DIR@/doxygen/addons/bootstrap/jquery.smartmenus.bootstrap.js \
+			@PROJECT_SOURCE_DIR@/doxygen/addons/bootstrap/jquery.smartmenus.bootstrap.css
+
 GENERATE_XML = NO
 GENERATE_LATEX = NO
 GENERATE_HTML = YES
@@ -35,6 +45,8 @@ CREATE_SUBDIRS = YES
 CALL_GRAPH = NO
 CALLER_GRAPH = NO
 HAVE_DOT = NO
+DISABLE_INDEX = NO
+GENERATE_TREEVIEW = NO
 EXCLUDE_SYMBOLS = internal \
                 DECLARE_* \
                 *_v
