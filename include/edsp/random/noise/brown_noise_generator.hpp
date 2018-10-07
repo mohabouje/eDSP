@@ -22,7 +22,7 @@
 #ifndef EDSP_BROWN_NOISE_HPP
 #define EDSP_BROWN_NOISE_HPP
 
-#include "white_noise_generator.hpp"
+#include <edsp/random/noise/white_noise_generator.hpp>
 
 namespace edsp { namespace random {
 

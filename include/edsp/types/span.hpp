@@ -15,19 +15,19 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* File: expected.hpp
+* File: span.hpp
 * Author: Mohammed Boujemaoui
 * Date: 07/10/18
 */
 
-#ifndef EDSP_EXPECTED_HPP
-#define EDSP_EXPECTED_HPP
+#ifndef EDSP_SPAN_HPP
+#define EDSP_SPAN_HPP
 
-#include <edsp/thirdparty/nonstd/expected.hpp>
+#include <edsp/thirdparty/nonstd/span.hpp>
 
-namespace edsp { inline namespace core {
+namespace edsp { inline namespace types {
 
-    using nonstd::expected;
-}}
+    using nonstd::span;
+}} // namespace edsp::types
 
-#endif //EDSP_EXPECTED_HPP
+#endif //EDSP_SPAN_HPP

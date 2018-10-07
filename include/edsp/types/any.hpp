@@ -15,19 +15,19 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* File: variant.hpp
+* File: any.hpp
 * Author: Mohammed Boujemaoui
 * Date: 07/10/18
 */
 
-#ifndef EDSP_VARIANT_HPP
-#define EDSP_VARIANT_HPP
+#ifndef EDSP_ANY_HPP
+#define EDSP_ANY_HPP
 
-#include <edsp/thirdparty/nonstd/variant.hpp>
+#include <edsp/thirdparty/nonstd/any.hpp>
 
-namespace edsp { inline namespace core {
+namespace edsp { inline namespace types {
 
-    using nonstd::variant;
-}}
+    using nonstd::any;
+}} // namespace edsp::types
 
-#endif //EDSP_VARIANT_HPP
+#endif //EDSP_ANY_HPP

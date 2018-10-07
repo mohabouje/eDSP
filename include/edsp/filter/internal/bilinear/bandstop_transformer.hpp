@@ -22,7 +22,7 @@
 #ifndef EDSP_BANDSTOP_TRANSFORMER_HPP
 #define EDSP_BANDSTOP_TRANSFORMER_HPP
 
-#include "layout_base.hpp"
+#include <edsp/filter/internal/bilinear/layout_base.hpp>
 #include <edsp/math/constant.hpp>
 #include <edsp/math/complex.hpp>
 

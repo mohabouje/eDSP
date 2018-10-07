@@ -22,7 +22,7 @@
 #ifndef EDSP_HIGHPASS_TRANSFORMER_HPP
 #define EDSP_HIGHPASS_TRANSFORMER_HPP
 
-#include "layout_base.hpp"
+#include <edsp/filter/internal/bilinear/layout_base.hpp>
 #include <edsp/math/constant.hpp>
 
 namespace edsp { namespace filter {

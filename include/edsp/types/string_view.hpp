@@ -15,19 +15,19 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* File: optional.hpp
+* File: string_view.hpp
 * Author: Mohammed Boujemaoui
 * Date: 07/10/18
 */
 
-#ifndef EDSP_OPTIONAL_HPP
-#define EDSP_OPTIONAL_HPP
+#ifndef EDSP_STRING_VIEW_HPP
+#define EDSP_STRING_VIEW_HPP
 
-#include <edsp/thirdparty/nonstd/optional.hpp>
+#include <edsp/thirdparty/nonstd/string_view.hpp>
 
-namespace edsp { inline namespace core {
+namespace edsp { inline namespace types {
 
-    using nonstd::optional;
-}}
+    using nonstd::string_view;
+}} // namespace edsp::types
 
-#endif //EDSP_OPTIONAL_HPP
+#endif //EDSP_STRING_VIEW_HPP

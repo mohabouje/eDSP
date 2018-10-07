@@ -23,7 +23,8 @@
 #ifndef EDSP_META_EXPECTS_H
 #define EDSP_META_EXPECTS_H
 
-#include "data.hpp"
+#include <edsp/core/logger.hpp>
+#include <edsp/meta/data.hpp>
 #include <edsp/meta/unused.hpp>
 #include <cassert>
 #include <string>
@@ -35,15 +36,10 @@ namespace edsp { namespace meta {
         assert(condition);
     }
 
-    template <typename Char>
-    constexpr void expects(bool condition, const Char* msg) {
-        meta::unused(condition);
-        meta::unused(msg);
-        assert(condition && msg);
-    }
-
-    template <typename Char>
-    constexpr void expects(bool condition, const std::basic_string<Char>& msg) {
+    constexpr void expects(bool condition, const edsp::string_view& msg) {
+        if (!condition) {
+            eCritical() << msg;
+        }
         assert(condition && data(msg));
     }
 

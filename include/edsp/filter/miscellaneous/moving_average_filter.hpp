@@ -22,7 +22,7 @@
 #ifndef EDSP_FILTER_MOVING_AVERAGE_FILTER_H
 #define EDSP_FILTER_MOVING_AVERAGE_FILTER_H
 
-#include <edsp/core/ring_buffer.hpp>
+#include <edsp/types/ring_buffer.hpp>
 
 namespace edsp { namespace filter {
 

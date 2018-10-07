@@ -15,19 +15,19 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* File: any.hpp
+* File: optional.hpp
 * Author: Mohammed Boujemaoui
 * Date: 07/10/18
 */
 
-#ifndef EDSP_ANY_HPP
-#define EDSP_ANY_HPP
+#ifndef EDSP_OPTIONAL_HPP
+#define EDSP_OPTIONAL_HPP
 
-#include <edsp/thirdparty/nonstd/any.hpp>
+#include <edsp/thirdparty/nonstd/optional.hpp>
 
-namespace edsp { inline namespace core {
+namespace edsp { inline namespace types {
 
-    using nonstd::any;
-}}
+    using nonstd::optional;
+}} // namespace edsp::types
 
-#endif //EDSP_ANY_HPP
+#endif //EDSP_OPTIONAL_HPP

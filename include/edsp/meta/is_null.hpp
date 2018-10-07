@@ -23,8 +23,8 @@
 #ifndef EDSP_META_ISNULL_HPP
 #define EDSP_META_ISNULL_HPP
 
-#include "data.hpp"
-#include "unused.hpp"
+#include <edsp/meta/data.hpp>
+#include <edsp/meta/unused.hpp>
 #include <cstring>
 
 namespace edsp { namespace meta {

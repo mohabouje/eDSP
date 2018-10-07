@@ -23,7 +23,7 @@
 #ifndef EDSP_META_SIZE_H
 #define EDSP_META_SIZE_H
 
-#include "unused.hpp"
+#include <edsp/meta/unused.hpp>
 #include <cstdint>
 #include <array>
 

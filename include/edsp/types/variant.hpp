@@ -15,19 +15,19 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* File: string_view.hpp
+* File: variant.hpp
 * Author: Mohammed Boujemaoui
 * Date: 07/10/18
 */
 
-#ifndef EDSP_STRING_VIEW_HPP
-#define EDSP_STRING_VIEW_HPP
+#ifndef EDSP_VARIANT_HPP
+#define EDSP_VARIANT_HPP
 
-#include <edsp/thirdparty/nonstd/string_view.hpp>
+#include <edsp/thirdparty/nonstd/variant.hpp>
 
-namespace edsp { inline namespace core {
+namespace edsp { inline namespace types {
 
-    using nonstd::string_view;
-}}
+    using nonstd::variant;
+}} // namespace edsp::types
 
-#endif //EDSP_STRING_VIEW_HPP
+#endif //EDSP_VARIANT_HPP

@@ -1,49 +1,52 @@
-/*
-* eDSP, A cross-platform Digital Signal Processing library written in modern C++.
-* Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
-*
-* This program is free software: you can redistribute it and/or modify it
-* under the terms of the GNU General Public License as published by the Free
-* Software Foundation, either version 3 of the License, or (at your option)
-* any later version.
-*
-* This program is distributed in the hope that it will be useful, but WITHOUT
-* ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or
-* FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-* more details.
-*
-* You should have received a copy of the GNU General Public License along withº
-* this program.  If not, see <http://www.gnu.org/licenses/>
-*
-* File: fixed_fixed_ring_buffer.hpp
-* Author: Mohammed Boujemaoui
-* Date: 07/10/18
-*/
+/* 
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-#ifndef EDSP_FIXED_RING_BUFFER_HPP
-#define EDSP_FIXED_RING_BUFFER_HPP
+ * File: ring_buffer.hpp
+ * Author Mohammed Boujemaoui Boulaghmoudi on 02/10/18.
+ */
+
+#ifndef EDSP_RING_BUFFER_HPP
+#define EDSP_RING_BUFFER_HPP
 
 #include <edsp/meta/unused.hpp>
-#include <edsp/core/ring_span.hpp>
-#include <array>
+#include <edsp/types/ring_span.hpp>
+#include <vector>
 
 namespace edsp { inline namespace core {
 
     /**
-     * @class fixed_ring_buffer
+     * @class ring_buffer
      * @brief This class implements a ring buffer, also called circular buffer.
      *
      * The term ring buffer refers to an area in memory which is used to store incoming data. When the buffer is filled,
      * new data is written starting at the beginning of the buffer and overwriting the old.
      *
-     * The fixed_ring_buffer is a STL compliant container. It supports random access iterators, constant time insert and erase
+     * The ring_buffer is a STL compliant container. It supports random access iterators, constant time insert and erase
      * operations at the beginning or the end of the buffer and interoperability with std algorithms.
      *
      * @tparam T  Type of element.
      * @tparam Allocator  Allocator type, defaults to std::allocator<T>.
      */
-    template <typename T, std::size_t MaxSize>
-    class fixed_ring_buffer {
+    template <typename T, typename Allocator = std::allocator<T>>
+    class ring_buffer {
     public:
         typedef typename ring_span<T>::value_type value_type;
         typedef typename ring_span<T>::pointer pointer;
@@ -56,14 +59,37 @@ namespace edsp { inline namespace core {
         typedef typename ring_span<value_type>::const_reverse_iterator const_reverse_iterator;
         typedef typename ring_span<value_type>::size_type size_type;
         typedef std::ptrdiff_t difference_type;
-        typedef std::array<T, MaxSize> container_type;
+        typedef std::vector<T, Allocator> container_type;
 
-        fixed_ring_buffer()                       = default;
-        fixed_ring_buffer(const fixed_ring_buffer&)     = default;
-        fixed_ring_buffer(fixed_ring_buffer&&) noexcept = default;
-        fixed_ring_buffer& operator=(const fixed_ring_buffer&) = default;
-        fixed_ring_buffer& operator=(fixed_ring_buffer&&) noexcept = default;
-        
+        constexpr ring_buffer()                       = default;
+        constexpr ring_buffer(const ring_buffer&)     = default;
+        constexpr ring_buffer(ring_buffer&&) noexcept = default;
+        constexpr ring_buffer& operator=(const ring_buffer&) = default;
+        constexpr ring_buffer& operator=(ring_buffer&&) noexcept = default;
+
+        /**
+         *  @brief Creates a %ring_buffer with default constructed elements.
+         *  @param N The number of elements to initially create.
+         *
+         *  This constructor fills the %ring_buffer with N default
+         *  constructed elements.
+         */
+        explicit ring_buffer(size_type N) {
+            buffer_.resize(N);
+            ring_ = edsp::ring_span<T>(std::begin(buffer_), std::end(buffer_));
+        }
+
+        /**
+         *  @brief  Creates a %ring_buffer with copies of an exemplar element.
+         *  @param  N  The number of elements to initially create.
+         *  @param  value  An element to copy.
+         *  This constructor fills the %ring_buffer with N copies of value.
+         */
+        ring_buffer(size_type N, const value_type& value) {
+            buffer_.resize(N);
+            ring_ = edsp::ring_span<T>(std::begin(buffer_), std::end(buffer_), std::begin(buffer_), N);
+            std::fill(begin(), end(), value);
+        }
 
         /**
          *  @brief Default destructor.
@@ -72,8 +98,17 @@ namespace edsp { inline namespace core {
          *  not touched in any way.  Managing the pointer is the user's
          *  responsibility.
          */
-        ~fixed_ring_buffer() = default;
-        
+        ~ring_buffer() = default;
+
+        /**
+         *  @brief Resizes the %ring_buffer to the specified number of elements.
+         *  @param size Number of elements the %ring_buffer should contain.
+         *
+         */
+        void resize(size_type size) {
+            buffer_.resize(size);
+            ring_ = edsp::ring_span<T>(std::begin(buffer_), std::end(buffer_));
+        }
 
         /**
          *  Erases all the elements. Note that this function only erases the
@@ -82,12 +117,12 @@ namespace edsp { inline namespace core {
          *  the user's responsibility.
          */
         void clear() {
-            ring_ = edsp::ring_span<T>(std::begin(buffer_), std::end(buffer_));
+            ring_ = edsp::ring_span<T>(std::begin(buffer_), std::end(buffer_), std::begin(buffer_), 0);
         }
 
         /**
          * @brief Returns a read/write iterator that points to the first
-         * element in the %fixed_ring_buffer.
+         * element in the %ring_buffer.
          *
          * Iteration is done in ordinary element order.
          * @returns Iterator pointing to the first element.
@@ -98,7 +133,7 @@ namespace edsp { inline namespace core {
 
         /**
          * @brief Returns a read-only iterator that points to the first
-         * element in the %fixed_ring_buffer.
+         * element in the %ring_buffer.
          *
          * Iteration is done in ordinary element order.
          * @returns Iterator pointing to the first element.
@@ -109,7 +144,7 @@ namespace edsp { inline namespace core {
 
         /**
          * @brief Returns a read/write iterator that points to the last
-         * element in the %fixed_ring_buffer.
+         * element in the %ring_buffer.
          *
          * Iteration is done in ordinary element order.
          * @returns Iterator pointing to the last element.
@@ -120,7 +155,7 @@ namespace edsp { inline namespace core {
 
         /**
          * @brief Returns a read-only iterator that points to the last
-         * element in the %fixed_ring_buffer.
+         * element in the %ring_buffer.
          *
          * Iteration is done in ordinary element order.
          * @returns Iterator pointing to the last element.
@@ -141,7 +176,7 @@ namespace edsp { inline namespace core {
 
         /**
          * @brief Returns a read-only iterator that points to the first
-         * element in the %fixed_ring_buffer.
+         * element in the %ring_buffer.
          *
          * Iteration is done in reverse element order.
          * @returns Iterator pointing to the first element.
@@ -152,7 +187,7 @@ namespace edsp { inline namespace core {
 
         /**
          * @brief Returns a read/write iterator that points to the last
-         * element in the %fixed_ring_buffer.
+         * element in the %ring_buffer.
          *
          * Iteration is done in reverse element order.
          * @returns Iterator pointing to the last element.
@@ -163,7 +198,7 @@ namespace edsp { inline namespace core {
 
         /*
          * @brief Returns a read-only iterator that points to the last
-         * element in the %fixed_ring_buffer.
+         * element in the %ring_buffer.
          *
          * Iteration is done in reverse element order.
          * @returns Iterator pointing to the last element.
@@ -174,7 +209,7 @@ namespace edsp { inline namespace core {
 
         /**
          * @brief Returns a read-only iterator that points to the first
-         * element in the %fixed_ring_buffer.
+         * element in the %ring_buffer.
          *
          * Iteration is done in ordinary element order.
          * @returns Iterator pointing to the first element.
@@ -185,7 +220,7 @@ namespace edsp { inline namespace core {
 
         /**
          * @brief Returns a read-only te iterator that points to the last
-         * element in the %fixed_ring_buffer.
+         * element in the %ring_buffer.
          *
          * Iteration is done in ordinary element order.
          * @returns Iterator pointing to the last element.
@@ -196,7 +231,7 @@ namespace edsp { inline namespace core {
 
         /**
          * @brief Returns a read-only iterator that points to the first
-         * element in the %fixed_ring_buffer.
+         * element in the %ring_buffer.
          *
          * Iteration is done in reverse element order.
          * @returns Iterator pointing to the first element.
@@ -207,7 +242,7 @@ namespace edsp { inline namespace core {
 
         /**
          * @brief Returns a read-only iterator that points to the last
-         * element in the %fixed_ring_buffer.
+         * element in the %ring_buffer.
          *
          * Iteration is done in reverse element order.
          * @returns Iterator pointing to the last element.
@@ -217,47 +252,47 @@ namespace edsp { inline namespace core {
         }
 
         /**
-         * @brief Returns the number of elements in the %fixed_ring_buffer.
-         * @return Number of elements in the fixed_ring_buffer
+         * @brief Returns the number of elements in the %ring_buffer.
+         * @return Number of elements in the ring_buffer
          */
-        size_type size() const {
+        constexpr size_type size() const {
             return ring_.size();
         }
 
         /**
-         * Returns the size() of the largest possible %fixed_ring_buffer.
+         * Returns the size() of the largest possible %ring_buffer.
          * @return Maximum allowed size.
          */
-        size_type max_size() const {
-            return MaxSize;
+        constexpr size_type max_size() const {
+            return buffer_.max_size();
         }
 
         /**
-         * Returns true if the %fixed_ring_buffer is empty.
-         * @return true if the fixed_ring_buffer is empty, false otherwise.
+         * Returns true if the %ring_buffer is empty.
+         * @return true if the ring_buffer is empty, false otherwise.
          */
-        bool empty() const {
+        constexpr bool empty() const {
             return ring_.empty();
         }
 
         /**
-         * Returns true if the %fixed_ring_buffer is full.
-         * @return true if the fixed_ring_buffer is full, false otherwise.
+         * Returns true if the %ring_buffer is full.
+         * @return true if the ring_buffer is full, false otherwise.
          */
-        bool full() const {
+        constexpr bool full() const {
             return ring_.full();
         }
 
         /**
-         * Returns the total number of elements that the %fixed_ring_buffer can hold.
-         * @return Number of elements that the fixed_ring_buffer can hold.
+         * Returns the total number of elements that the %ring_buffer can hold.
+         * @return Number of elements that the ring_buffer can hold.
          */
-        size_type capacity() const {
+        constexpr size_type capacity() const {
             return ring_.capacity();
         }
 
         /**
-         *  @brief Subscript access to the data contained in the %fixed_ring_buffer.
+         *  @brief Subscript access to the data contained in the %ring_buffer.
          *  @param i The index of the element for which data should be
          *  accessed.
          *  @return  Read/write reference to data.
@@ -272,7 +307,7 @@ namespace edsp { inline namespace core {
         }
 
         /**
-         *  @brief Subscript access to the data contained in the %fixed_ring_buffer.
+         *  @brief Subscript access to the data contained in the %ring_buffer.
          *  @param i The index of the element for which data should be
          *  accessed.
          *  @return  Read/write reference to data.
@@ -287,7 +322,7 @@ namespace edsp { inline namespace core {
         }
 
         /**
-         *  @brief Provides access to the data contained in the %fixed_ring_buffer.
+         *  @brief Provides access to the data contained in the %ring_buffer.
          *  @param i The index of the element for which data should be
          *  accessed.
          *  @return  Read/write reference to data.
@@ -302,7 +337,7 @@ namespace edsp { inline namespace core {
         }
 
         /**
-         *  @brief Provides access to the data contained in the %fixed_ring_buffer.
+         *  @brief Provides access to the data contained in the %ring_buffer.
          *  @param i The index of the element for which data should be
          *  accessed.
          *  @return  Read/write reference to data.
@@ -318,8 +353,8 @@ namespace edsp { inline namespace core {
 
         /**
          *  @brief Returns a read/write reference to the data at the first
-         *  element of the %fixed_ring_buffer.
-         *  @returns Reference to the first element in the fixed_ring_buffer.
+         *  element of the %ring_buffer.
+         *  @returns Reference to the first element in the ring_buffer.
          */
         reference front() {
             return ring_.front();
@@ -327,8 +362,8 @@ namespace edsp { inline namespace core {
 
         /**
          *  @brief Returns a read-only reference to the data at the first
-         *  element of the %fixed_ring_buffer.
-         *  @returns Reference to the first element in the fixed_ring_buffer.
+         *  element of the %ring_buffer.
+         *  @returns Reference to the first element in the ring_buffer.
          */
         const_reference front() const {
             return ring_.front();
@@ -336,8 +371,8 @@ namespace edsp { inline namespace core {
 
         /**
          *  @brief Returns a read/write reference to the data at the last
-         *  element of the %fixed_ring_buffer.
-         *  @returns Reference to the last element in the fixed_ring_buffer.
+         *  element of the %ring_buffer.
+         *  @returns Reference to the last element in the ring_buffer.
          */
         reference back() {
             return ring_.back();
@@ -345,15 +380,15 @@ namespace edsp { inline namespace core {
 
         /**
          *  @brief Returns a read-only reference to the data at the last
-         *  element of the %fixed_ring_buffer.
-         *  @returns Reference to the last element in the fixed_ring_buffer.
+         *  element of the %ring_buffer.
+         *  @returns Reference to the last element in the ring_buffer.
          */
         const_reference back() const {
             return ring_.back();
         }
 
         /**
-         *  @brief Inserts an object at the front of the %fixed_ring_buffer.
+         *  @brief Inserts an object at the front of the %ring_buffer.
          *  @param arg  Arguments.
          *  @return  An iterator that points to the inserted data.
          *
@@ -366,7 +401,7 @@ namespace edsp { inline namespace core {
         }
 
         /**
-        *  @brief Inserts an object at the end of the %fixed_ring_buffer.
+        *  @brief Inserts an object at the end of the %ring_buffer.
         *  @param arg  Arguments.
         *  @return  An iterator that points to the inserted data.
         *
@@ -379,11 +414,11 @@ namespace edsp { inline namespace core {
         }
 
         /**
-         *  @brief Add data to the end of the %fixed_ring_buffer.
+         *  @brief Add data to the end of the %ring_buffer.
          *  @param item  Data to be added.
          *
          *  This is a typical stack operation. The function creates an
-         *  element at the end of the %fixed_ring_buffer and assigns the given data
+         *  element at the end of the %ring_buffer and assigns the given data
          *  to it.
          */
         void push_back(const value_type& item) {
@@ -404,7 +439,7 @@ namespace edsp { inline namespace core {
         }
 
         /**
-         *  @brief Removes the last element of the fixed_ring_buffer.
+         *  @brief Removes the last element of the ring_buffer.
          *
          *  This is a typical stack operation.
          *
@@ -437,7 +472,6 @@ namespace edsp { inline namespace core {
         edsp::ring_span<T> ring_{std::begin(buffer_), std::end(buffer_)};
     };
 
-}} // namespace edsp
+}} // namespace edsp::core
 
-
-#endif //EDSP_FIXED_RING_BUFFER_HPP
+#endif //EDSP_RING_BUFFER_HPP

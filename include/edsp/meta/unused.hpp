@@ -22,7 +22,8 @@
 #ifndef EDSP_META_UNUSED_HPP
 #define EDSP_META_UNUSED_HPP
 
-#include "data.hpp"
+#include <edsp/types/string_view.hpp>
+#include <edsp/meta/data.hpp>
 #include <string>
 
 namespace edsp { namespace meta {
@@ -33,14 +34,9 @@ namespace edsp { namespace meta {
     }
 
     template <typename T>
-    constexpr void unused(const T& variable, const char* message) {
+    constexpr void unused(const T& variable, const edsp::string_view& message) {
         unused(variable);
         unused(message);
-    }
-
-    template <typename T, typename Char>
-    constexpr void unused(const T& variable, const std::basic_string<Char>& message) {
-        unused(variable, meta::data(message));
     }
 
 }} // namespace edsp::meta

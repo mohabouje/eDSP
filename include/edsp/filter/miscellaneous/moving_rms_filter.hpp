@@ -22,7 +22,7 @@
 #ifndef EDSP_MOVING_RMS_FILTER_HPP
 #define EDSP_MOVING_RMS_FILTER_HPP
 
-#include <edsp/core/ring_buffer.hpp>
+#include <edsp/types/ring_buffer.hpp>
 #include <cmath>
 
 namespace edsp { namespace filter {
