@@ -149,7 +149,7 @@ namespace edsp { namespace io {
          */
         template <typename OutputIt>
         index_type read(OutputIt d_first, OutputIt d_last) {
-            impl_.read(d_first, d_last);
+            return impl_.read(d_first, d_last);
         }
 
     private:
