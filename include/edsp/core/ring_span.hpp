@@ -25,9 +25,9 @@
 
 #include <edsp/thirdparty/nonstd/ring_span.hpp>
 
-namespace edsp {
+namespace edsp { inline namespace core {
 
     using nonstd::ring_span;
-}
+}}
 
 #endif //EDSP_RING_SPAN_HPP

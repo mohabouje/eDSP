@@ -25,9 +25,9 @@
 
 #include <edsp/thirdparty/nonstd/any.hpp>
 
-namespace edsp {
+namespace edsp { inline namespace core {
 
     using nonstd::any;
-}
+}}
 
 #endif //EDSP_ANY_HPP

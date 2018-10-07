@@ -25,9 +25,9 @@
 
 #include <edsp/thirdparty/nonstd/optional.hpp>
 
-namespace edsp {
+namespace edsp { inline namespace core {
 
     using nonstd::optional;
-}
+}}
 
 #endif //EDSP_OPTIONAL_HPP

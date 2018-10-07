@@ -25,9 +25,9 @@
 
 #include <edsp/thirdparty/nonstd/string_view.hpp>
 
-namespace edsp {
+namespace edsp { inline namespace core {
 
     using nonstd::string_view;
-}
+}}
 
 #endif //EDSP_STRING_VIEW_HPP

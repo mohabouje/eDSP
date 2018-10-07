@@ -25,9 +25,9 @@
 
 #include <edsp/thirdparty/nonstd/variant.hpp>
 
-namespace edsp {
+namespace edsp { inline namespace core {
 
     using nonstd::variant;
-}
+}}
 
 #endif //EDSP_VARIANT_HPP

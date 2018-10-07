@@ -25,9 +25,9 @@
 
 #include <edsp/thirdparty/nonstd/expected.hpp>
 
-namespace edsp {
+namespace edsp { inline namespace core {
 
     using nonstd::expected;
-}
+}}
 
 #endif //EDSP_EXPECTED_HPP

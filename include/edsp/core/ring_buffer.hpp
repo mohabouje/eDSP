@@ -30,7 +30,7 @@
 #include <edsp/core/ring_span.hpp>
 #include <vector>
 
-namespace edsp {
+namespace edsp { inline namespace core {
 
     /**
      * @class ring_buffer
@@ -472,6 +472,6 @@ namespace edsp {
         edsp::ring_span<T> ring_{std::begin(buffer_), std::end(buffer_)};
     };
 
-} // namespace edsp
+}} // namespace edsp
 
 #endif //EDSP_RING_BUFFER_HPP

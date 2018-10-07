@@ -25,9 +25,9 @@
 
 #include <edsp/thirdparty/nonstd/span.hpp>
 
-namespace edsp {
+namespace edsp { inline namespace core {
 
     using nonstd::span;
-}
+}}
 
 #endif //EDSP_SPAN_HPP
