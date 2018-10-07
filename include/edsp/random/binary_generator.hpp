@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -16,12 +16,12 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>
 
  *
- * Filename: binary_sequence_generator.hpp
+ * File: binary_sequence_generator.hpp
  * Author: Mohammed Boujemaoui
  * Date: 31/7/2018
  */
-#ifndef EASYDSP_BINARY_SEQUENCE_GENERATOR_HPP
-#define EASYDSP_BINARY_SEQUENCE_GENERATOR_HPP
+#ifndef EDSP_BINARY_SEQUENCE_GENERATOR_HPP
+#define EDSP_BINARY_SEQUENCE_GENERATOR_HPP
 
 #include <random>
 #include <chrono>
@@ -63,4 +63,4 @@ namespace edsp { namespace random {
 
 }} // namespace edsp::random
 
-#endif // EASYDSP_BINARY_SEQUENCE_GENERATOR_HPP
+#endif // EDSP_BINARY_SEQUENCE_GENERATOR_HPP

@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: deg2rad.hpp
+ * File: deg2rad.hpp
  * Author: Mohammed Boujemaoui
  * Date: 2/8/2018
  */
-#ifndef EASYDSP_DEG2RAD_HPP
-#define EASYDSP_DEG2RAD_HPP
+#ifndef EDSP_DEG2RAD_HPP
+#define EDSP_DEG2RAD_HPP
 
 #include <cmath>
 namespace edsp { inline namespace converter {
@@ -42,4 +42,4 @@ namespace edsp { inline namespace converter {
 
 }} // namespace edsp::converter
 
-#endif // EASYDSP_DEG2RAD_HPP
+#endif // EDSP_DEG2RAD_HPP

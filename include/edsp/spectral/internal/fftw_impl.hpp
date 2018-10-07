@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: fftw_impl.hpp
- * Created at: 09/06/18
- * Created by: Mohammed Boujemaoui
+ * File: fftw_impl.hpp
+ * Date: 09/06/18
+ * Author: Mohammed Boujemaoui
  */
 
-#ifndef EASYDSP_FFTW_IMPL_HPP
-#define EASYDSP_FFTW_IMPL_HPP
+#ifndef EDSP_FFTW_IMPL_HPP
+#define EDSP_FFTW_IMPL_HPP
 
 #include <edsp/meta/is_null.hpp>
 #include <edsp/meta/advance.hpp>
@@ -271,4 +271,4 @@ namespace edsp { inline namespace spectral { inline namespace internal {
     };
 }}} // namespace edsp::spectral::internal
 
-#endif // EASYDSP_FFTW_IMPL_HPP
+#endif // EDSP_FFTW_IMPL_HPP

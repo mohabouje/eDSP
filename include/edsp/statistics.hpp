@@ -1,5 +1,5 @@
 /* 
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -16,11 +16,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>
 
  * File: statistics.hpp
- * Created by Mohammed Boujemaoui Boulaghmoudi on 04/10/18.
+ * Author Mohammed Boujemaoui Boulaghmoudi on 04/10/18.
  */
 
-#ifndef EASYDSP_STATISTICS_HPP
-#define EASYDSP_STATISTICS_HPP
+#ifndef EDSP_STATISTICS_HPP
+#define EDSP_STATISTICS_HPP
 
 #include <edsp/statistics/centroid.hpp>
 #include <edsp/statistics/crest.hpp>
@@ -43,4 +43,4 @@
 #include <edsp/statistics/skewness.hpp>
 #include <edsp/statistics/variance.hpp>
 
-#endif //EASYDSP_STATISTICS_HPP
+#endif //EDSP_STATISTICS_HPP

@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: pink_noise.hpp
+ * File: pink_noise.hpp
  * Author: Mohammed Boujemaoui
  * Date: 01/08/2018
  */
-#ifndef EASYDSP_CONSTANT_GENERATOR_HPP
-#define EASYDSP_CONSTANT_GENERATOR_HPP
+#ifndef EDSP_CONSTANT_GENERATOR_HPP
+#define EDSP_CONSTANT_GENERATOR_HPP
 
 namespace edsp { namespace random {
 
@@ -52,4 +52,4 @@ namespace edsp { namespace random {
 
 }} // namespace edsp::random
 
-#endif // EASYDSP_CONSTANT_GENERATOR_HPP
+#endif // EDSP_CONSTANT_GENERATOR_HPP

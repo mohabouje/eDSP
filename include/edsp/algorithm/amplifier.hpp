@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: amplifier.hpp
- * Created at: 09/06/18
- * Created by: Mohammed Boujemaoui
+ * File: amplifier.hpp
+ * Date: 09/06/18
+ * Author: Mohammed Boujemaoui
  */
 
-#ifndef EASYDSP_AMPLIFIER_HPP
-#define EASYDSP_AMPLIFIER_HPP
+#ifndef EDSP_AMPLIFIER_HPP
+#define EDSP_AMPLIFIER_HPP
 
 #include <edsp/meta/iterator.hpp>
 #include <algorithm>
@@ -79,4 +79,4 @@ namespace edsp { inline namespace algorithm {
 
 }} // namespace edsp::algorithm
 
-#endif // EASYDSP_AMPLIFIER_HPP
+#endif // EDSP_AMPLIFIER_HPP

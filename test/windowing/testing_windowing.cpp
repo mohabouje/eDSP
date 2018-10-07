@@ -15,9 +15,9 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: testing_fft.cpp
- * Created at: 08/09/18
- * Created by: Mohammed Boujemaoui
+ * File: testing_fft.cpp
+ * Date: 08/09/18
+ * Author: Mohammed Boujemaoui
  */
 
 #include <gtest/gtest.h>

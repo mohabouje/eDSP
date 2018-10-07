@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: hartley.hpp
+ * File: hartley.hpp
  * Author: Mohammed Boujemaoui
  * Date: 3/8/2018
  */
-#ifndef EASYDSP_HILBERT_HPP
-#define EASYDSP_HILBERT_HPP
+#ifndef EDSP_HILBERT_HPP
+#define EDSP_HILBERT_HPP
 
 #include <edsp/spectral/internal/fftw_impl.hpp>
 #include <edsp/converter/real2complex.hpp>
@@ -76,4 +76,4 @@ namespace edsp { inline namespace spectral {
 
 }} // namespace edsp::spectral
 
-#endif // EASYDSP_HIRTLEY_HPP
+#endif // EDSP_HIRTLEY_HPP

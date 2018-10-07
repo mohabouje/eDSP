@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: zoelzer_designer.hpp
+ * File: zoelzer_designer.hpp
  * Author: Mohammed Boujemaoui
  * Date: 3/8/2018
  */
-#ifndef EASYDSP_ZOELZER_DESIGNER_HPP
-#define EASYDSP_ZOELZER_DESIGNER_HPP
+#ifndef EDSP_ZOELZER_DESIGNER_HPP
+#define EDSP_ZOELZER_DESIGNER_HPP
 
 #include <edsp/filter/biquad.hpp>
 #include <edsp/math/constant.hpp>
@@ -172,4 +172,4 @@ namespace edsp { namespace filter {
 
 }} // namespace edsp::filter
 
-#endif // EASYDSP_ZOELZER_DESIGNER_HPP
+#endif // EDSP_ZOELZER_DESIGNER_HPP

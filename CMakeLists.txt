@@ -51,10 +51,10 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/bin)
 
-set(EASYDSP_DEPENDENCIES)
+set(EDSP_DEPENDENCIES)
 find_library(FFTW_LIB NAMES lfftw3f libfftw3f fftw3f)
 if (FFTW_LIB)
-    list(APPEND ${EASYDSP_DEPENDENCIES} ${FFTW_LIB})
+    list(APPEND ${EDSP_DEPENDENCIES} ${FFTW_LIB})
 else()
     message(FATAL_ERROR "Library FFTW not found")
 endif(FFTW_LIB)
@@ -65,7 +65,7 @@ target_sources(${LIB_NAME} INTERFACE
         $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>
         $<INSTALL_INTERFACE:include>)
 target_include_directories(${LIB_NAME} INTERFACE "${PROJECT_SOURCE_DIR}/include/")
-target_link_libraries(${LIB_NAME} INTERFACE ${EASYDSP_DEPENDENCIES})
+target_link_libraries(${LIB_NAME} INTERFACE ${EDSP_DEPENDENCIES})
 
 include(GNUInstallDirs)
 install(TARGETS ${LIB_NAME}

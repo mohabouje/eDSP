@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: rms.hpp
+ * File: rms.hpp
  * Author: Mohammed Boujemaoui
  * Date: 01/08/2018
  */
-#ifndef EASYDSP_RSSQ_HPP
-#define EASYDSP_RSSQ_HPP
+#ifndef EDSP_RSSQ_HPP
+#define EDSP_RSSQ_HPP
 
 #include <edsp/meta/iterator.hpp>
 #include <edsp/statistics/rms.hpp>
@@ -49,4 +49,4 @@ namespace edsp { namespace statistics {
 
 }} // namespace edsp::statistics
 
-#endif // EASYDSP_RSSQ_HPP
+#endif // EDSP_RSSQ_HPP

@@ -1,5 +1,5 @@
 /* 
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
 
- * Filename: random.hpp
- * Created at: 04/10/18
- * Created by: Mohammed Boujemaoui Boulaghmoudi
+ * File: random.hpp
+ * Date: 04/10/18
+ * Author: Mohammed Boujemaoui Boulaghmoudi
  */
 
-#ifndef EASYDSP_RANDOM_HPP
-#define EASYDSP_RANDOM_HPP
+#ifndef EDSP_RANDOM_HPP
+#define EDSP_RANDOM_HPP
 
 #include <edsp/math/numeric.hpp>
 #include <edsp/random/noise/white_noise_generator.hpp>
@@ -32,4 +32,4 @@
 #include <edsp/random/constant_generator.hpp>
 #include <edsp/random/random_generator.hpp>
 
-#endif //EASYDSP_RANDOM_HPP
+#endif //EDSP_RANDOM_HPP

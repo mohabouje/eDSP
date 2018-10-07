@@ -1,5 +1,5 @@
 /* 
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -20,11 +20,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
  * File: ring_buffer.hpp
- * Created by Mohammed Boujemaoui Boulaghmoudi on 02/10/18.
+ * Author Mohammed Boujemaoui Boulaghmoudi on 02/10/18.
  */
 
-#ifndef EASYDSP_RING_BUFFER_HPP
-#define EASYDSP_RING_BUFFER_HPP
+#ifndef EDSP_RING_BUFFER_HPP
+#define EDSP_RING_BUFFER_HPP
 
 #include <edsp/meta/unused.hpp>
 #include <edsp/core/ring_span.hpp>
@@ -474,4 +474,4 @@ namespace edsp {
 
 } // namespace edsp
 
-#endif //EASYDSP_RING_BUFFER_HPP
+#endif //EDSP_RING_BUFFER_HPP

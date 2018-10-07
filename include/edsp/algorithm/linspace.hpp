@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: linspace.hpp
+ * File: linspace.hpp
  * Author: Mohammed Boujemaoui
  * Date: 02/08/2018
  */
-#ifndef EASYDSP_ALGORITHM_LINSPACE_H
-#define EASYDSP_ALGORITHM_LINSPACE_H
+#ifndef EDSP_ALGORITHM_LINSPACE_H
+#define EDSP_ALGORITHM_LINSPACE_H
 
 #include <edsp/meta/iterator.hpp>
 #include <edsp/meta/advance.hpp>
@@ -50,4 +50,4 @@ namespace edsp { inline namespace algorithm {
 
 }} // namespace edsp::algorithm
 
-#endif // EASYDSP_ALGORITHM_LINSPACE_H
+#endif // EDSP_ALGORITHM_LINSPACE_H

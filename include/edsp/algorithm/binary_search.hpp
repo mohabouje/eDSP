@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: binary_search.hpp
+ * File: binary_search.hpp
  * Author: Mohammed Boujemaoui
  * Date: 1/9/2018
  */
-#ifndef EASYDSP_BINARY_SEARCH_HPP
-#define EASYDSP_BINARY_SEARCH_HPP
+#ifndef EDSP_BINARY_SEARCH_HPP
+#define EDSP_BINARY_SEARCH_HPP
 
 #include <algorithm>
 #include <edsp/meta/iterator.hpp>
@@ -63,4 +63,4 @@ namespace edsp { inline namespace algorithm {
 
 }} // namespace edsp::algorithm
 
-#endif // EASYDSP_BINARY_SEARCH_HPP
+#endif // EDSP_BINARY_SEARCH_HPP

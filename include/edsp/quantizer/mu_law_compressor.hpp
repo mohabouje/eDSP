@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: mu_law_compressor.hpp
+ * File: mu_law_compressor.hpp
  * Author: Mohammed Boujemaoui
  * Date: 7/9/2018
  */
-#ifndef EASYDSP_MU_LAW_COMPRESSOR_HPP
-#define EASYDSP_MU_LAW_COMPRESSOR_HPP
+#ifndef EDSP_MU_LAW_COMPRESSOR_HPP
+#define EDSP_MU_LAW_COMPRESSOR_HPP
 
 #include <edsp/meta/expects.hpp>
 #include <edsp/math/numeric.hpp>
@@ -94,4 +94,4 @@ namespace edsp { namespace quantizer {
 
 }} // namespace edsp::quantizer
 
-#endif // EASYDSP_MU_LAW_COMPRESSOR_HPP
+#endif // EDSP_MU_LAW_COMPRESSOR_HPP

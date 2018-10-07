@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: butterworth.hpp
+ * File: butterworth.hpp
  * Author: Mohammed Boujemaoui
  * Date: 30/8/2018
  */
-#ifndef EASYDSP_BIQUAD_BUTTERWORTH_HPP
-#define EASYDSP_BIQUAD_BUTTERWORTH_HPP
+#ifndef EDSP_BIQUAD_BUTTERWORTH_HPP
+#define EDSP_BIQUAD_BUTTERWORTH_HPP
 
 #include <edsp/converter/db2mag.hpp>
 #include <edsp/meta/expects.hpp>
@@ -231,4 +231,4 @@ namespace edsp { namespace filter {
 
 }} // namespace edsp::filter
 
-#endif // EASYDSP_BIQUAD_BUTTERWORTH_HPP
+#endif // EDSP_BIQUAD_BUTTERWORTH_HPP

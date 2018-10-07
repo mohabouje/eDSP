@@ -15,7 +15,7 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* Filename: ring_span.hpp
+* File: ring_span.hpp
 * Author: Mohammed Boujemaoui
 * Date: 07/10/18
 */

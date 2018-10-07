@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: normalizer.hpp
- * Created at: 09/06/18
- * Created by: Mohammed Boujemaoui
+ * File: normalizer.hpp
+ * Date: 09/06/18
+ * Author: Mohammed Boujemaoui
  */
 
-#ifndef EASYDSP_NORMALIZER_HPP
-#define EASYDSP_NORMALIZER_HPP
+#ifndef EDSP_NORMALIZER_HPP
+#define EDSP_NORMALIZER_HPP
 
 #include <algorithm>
 #include <edsp/statistics/rms.hpp>
@@ -74,4 +74,4 @@ namespace edsp { inline namespace algorithm {
 
 }} // namespace edsp::algorithm
 
-#endif // EASYDSP_NORMALIZER_HPP
+#endif // EDSP_NORMALIZER_HPP

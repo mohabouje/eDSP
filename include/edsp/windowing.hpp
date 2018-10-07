@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: windowing.hpp
+ * File: windowing.hpp
  * Author: Mohammed Boujemaoui
  * Date: 27/7/2018
  */
-#ifndef EASYDSP_WINDOWING_HPP
-#define EASYDSP_WINDOWING_HPP
+#ifndef EDSP_WINDOWING_HPP
+#define EDSP_WINDOWING_HPP
 
 #include <edsp/windowing/bartlett.hpp>
 #include <edsp/windowing/blackman.hpp>
@@ -160,4 +160,4 @@ namespace edsp { namespace windowing {
 
 }} // namespace edsp::windowing
 
-#endif // EASYDSP_WINDOWING_HPP
+#endif // EDSP_WINDOWING_HPP

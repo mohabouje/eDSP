@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: moving_median_filter.hpp
+ * File: moving_median_filter.hpp
  * Author: Mohammed Boujemaoui
  * Date: 14/6/2018
  */
-#ifndef EASYDSP_FILTER_MOVING_MEDIAN_FILTER_H
-#define EASYDSP_FILTER_MOVING_MEDIAN_FILTER_H
+#ifndef EDSP_FILTER_MOVING_MEDIAN_FILTER_H
+#define EDSP_FILTER_MOVING_MEDIAN_FILTER_H
 
 #include <edsp/core/ring_buffer.hpp>
 #include <edsp/statistics/median.hpp>
@@ -113,4 +113,4 @@ namespace edsp { namespace filter {
 
 }} // namespace edsp::filter
 
-#endif // EASYDSP_FILTER_MOVING_MEDIAN_FILTER_H
+#endif // EDSP_FILTER_MOVING_MEDIAN_FILTER_H

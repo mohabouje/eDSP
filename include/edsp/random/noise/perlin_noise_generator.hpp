@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: perlin_noise_generator.hpp
+ * File: perlin_noise_generator.hpp
  * Author: Mohammed Boujemaoui
  * Date: 1/8/2018
  */
-#ifndef EASYDSP_PERLIN_NOISE_GENERATOR_HPP
-#define EASYDSP_PERLIN_NOISE_GENERATOR_HPP
+#ifndef EDSP_PERLIN_NOISE_GENERATOR_HPP
+#define EDSP_PERLIN_NOISE_GENERATOR_HPP
 
 #include <array>
 #include <random>
@@ -95,4 +95,4 @@ namespace edsp { namespace random {
     };
 
 }}     // namespace edsp::random
-#endif // EASYDSP_PERLIN_NOISE_GENERATOR_HPP
+#endif // EDSP_PERLIN_NOISE_GENERATOR_HPP

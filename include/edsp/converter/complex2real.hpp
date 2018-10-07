@@ -1,5 +1,5 @@
 /* 
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -19,13 +19,13 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
- * Filename: complex2real.hpp
- * Created at: 04/10/18
- * Created by: Mohammed Boujemaoui Boulaghmoudi
+ * File: complex2real.hpp
+ * Date: 04/10/18
+ * Author: Mohammed Boujemaoui Boulaghmoudi
  */
 
-#ifndef EASYDSP_COMPLEX2REAL_HPP
-#define EASYDSP_COMPLEX2REAL_HPP
+#ifndef EDSP_COMPLEX2REAL_HPP
+#define EDSP_COMPLEX2REAL_HPP
 
 #include <edsp/meta/iterator.hpp>
 #include <algorithm>
@@ -53,4 +53,4 @@ namespace edsp { inline namespace converter {
 
 }} // namespace edsp::converter
 
-#endif //EASYDSP_COMPLEX2REAL_HPP
+#endif //EDSP_COMPLEX2REAL_HPP

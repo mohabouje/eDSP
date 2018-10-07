@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: variance.hpp
+ * File: variance.hpp
  * Author: Mohammed Boujemaoui
  * Date: 2018-06-13
  */
-#ifndef EASYDSP_STATISTICAL_VARIANCE_H
-#define EASYDSP_STATISTICAL_VARIANCE_H
+#ifndef EDSP_STATISTICAL_VARIANCE_H
+#define EDSP_STATISTICAL_VARIANCE_H
 
 #include <edsp/statistics/moment.hpp>
 #include <edsp/meta/iterator.hpp>
@@ -64,4 +64,4 @@ namespace edsp { namespace statistics {
 
 }} // namespace edsp::statistics
 
-#endif // EASYDSP_STATISTICAL_VARIANCE_H
+#endif // EDSP_STATISTICAL_VARIANCE_H

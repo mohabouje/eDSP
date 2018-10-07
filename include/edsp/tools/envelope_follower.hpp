@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: envelope_follower.hpp
+ * File: envelope_follower.hpp
  * Author: Mohammed Boujemaoui
  * Date: 14/6/2018
  */
-#ifndef EASYDSP_FEATURE_TEMPORAL_EnvelopeFollower_HPP
-#define EASYDSP_FEATURE_TEMPORAL_EnvelopeFollower_HPP
+#ifndef EDSP_FEATURE_TEMPORAL_EnvelopeFollower_HPP
+#define EDSP_FEATURE_TEMPORAL_EnvelopeFollower_HPP
 
 #include <edsp/math/numeric.hpp>
 #include <numeric>
@@ -206,4 +206,4 @@ namespace edsp {
 
 } // namespace edsp
 
-#endif // EASYDSP_FEATURE_TEMPORAL_EnvelopeFollower_HPP
+#endif // EDSP_FEATURE_TEMPORAL_EnvelopeFollower_HPP

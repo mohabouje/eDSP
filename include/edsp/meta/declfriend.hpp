@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: make_friend.hpp
+ * File: make_friend.hpp
  * Author: Mohammed Boujemaoui
  * Date: 31/8/2018
  */
-#ifndef EASYMETA_MAKE_FRIEND_HPP
-#define EASYMETA_MAKE_FRIEND_HPP
+#ifndef EDSP_META_MAKE_FRIEND_HPP
+#define EDSP_META_MAKE_FRIEND_HPP
 
 namespace edsp { namespace meta {
 
@@ -31,4 +31,4 @@ namespace edsp { namespace meta {
 
 }} // namespace edsp::meta
 
-#endif // EASYMETA_MAKE_FRIEND_HPP
+#endif // EDSP_META_MAKE_FRIEND_HPP

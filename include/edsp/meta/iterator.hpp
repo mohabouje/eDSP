@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: iterator.hpp
+ * File: iterator.hpp
  * Author: Mohammed Boujemaoui
  * Date: 7/9/2018
  */
-#ifndef EASYDSP_ITERATOR_HPP
-#define EASYDSP_ITERATOR_HPP
+#ifndef EDSP_ITERATOR_HPP
+#define EDSP_ITERATOR_HPP
 
 #include <type_traits>
 #include <iterator>
@@ -34,4 +34,4 @@ namespace edsp { namespace meta {
     using diff_type_t = typename std::iterator_traits<Iterator>::difference_type;
 
 }}     // namespace edsp::meta
-#endif // EASYDSP_ITERATOR_HPP
+#endif // EDSP_ITERATOR_HPP

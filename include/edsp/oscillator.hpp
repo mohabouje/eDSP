@@ -1,5 +1,5 @@
 /* 
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -16,11 +16,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>
 
  * File: make_oscillator.hpp
- * Created by Mohammed Boujemaoui Boulaghmoudi on 03/10/18.
+ * Author Mohammed Boujemaoui Boulaghmoudi on 03/10/18.
  */
 
-#ifndef EASYDSP_MAKE_OSCILLATOR_HPP
-#define EASYDSP_MAKE_OSCILLATOR_HPP
+#ifndef EDSP_MAKE_OSCILLATOR_HPP
+#define EDSP_MAKE_OSCILLATOR_HPP
 
 #include <edsp/oscillators/sawtooth.hpp>
 #include <edsp/oscillators/square.hpp>
@@ -83,4 +83,4 @@ namespace edsp { namespace oscillators {
 
 }} // namespace edsp::oscillators
 
-#endif //EASYDSP_MAKE_OSCILLATOR_HPP
+#endif //EDSP_MAKE_OSCILLATOR_HPP

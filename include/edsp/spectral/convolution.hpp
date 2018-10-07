@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,13 +15,13 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: convolution.hpp
- * Created at: 10/06/18
- * Created by: Mohammed Boujemaoui
+ * File: convolution.hpp
+ * Date: 10/06/18
+ * Author: Mohammed Boujemaoui
  */
 
-#ifndef EASYDSP_CONVOLUTION_HPP
-#define EASYDSP_CONVOLUTION_HPP
+#ifndef EDSP_CONVOLUTION_HPP
+#define EDSP_CONVOLUTION_HPP
 
 #include <edsp/spectral/dft.hpp>
 #include <vector>
@@ -77,4 +77,4 @@ namespace edsp { inline namespace spectral {
 
 }} // namespace edsp::spectral
 
-#endif // EASYDSP_CONVOLUTION_HPP
+#endif // EDSP_CONVOLUTION_HPP

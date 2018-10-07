@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,16 +15,16 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: math/numeric.hpp
+ * File: math/numeric.hpp
  * Author: Mohammed Boujemaoui
  * Date: 2018-07-29
  */
 
-#ifndef EASYMETA_MATH_H
-#define EASYMETA_MATH_H
+#ifndef EDSP_META_MATH_H
+#define EDSP_META_MATH_H
 
 #include <edsp/math/complex.hpp>
 #include <edsp/math/constant.hpp>
 #include <edsp/math/numeric.hpp>
 
-#endif //EASYMETA_MATH_H
+#endif //EDSP_META_MATH_H

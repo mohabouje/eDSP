@@ -1,5 +1,5 @@
 /* 
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -20,11 +20,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
  * File: types.hpp
- * Created by Mohammed Boujemaoui Boulaghmoudi on 03/10/18.
+ * Author Mohammed Boujemaoui Boulaghmoudi on 03/10/18.
  */
 
-#ifndef EASYDSP_TYPES_HPP
-#define EASYDSP_TYPES_HPP
+#ifndef EDSP_TYPES_HPP
+#define EDSP_TYPES_HPP
 
 namespace edsp { inline namespace spectral {
 
@@ -52,4 +52,4 @@ namespace edsp { inline namespace spectral {
     enum class DCT_Type { Type_I, Type_II, Type_III, Type_IV };
 }} // namespace edsp::spectral
 
-#endif //EASYDSP_TYPES_HPP
+#endif //EDSP_TYPES_HPP

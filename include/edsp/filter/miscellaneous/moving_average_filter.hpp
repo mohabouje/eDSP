@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -16,11 +16,11 @@
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
  * File: moving_average_filter.hpp
- * Created at: 14/6/2018
+ * Date: 14/6/2018
  * Authors: Mohammed Boujemaoui
  */
-#ifndef EASYDSP_FILTER_MOVING_AVERAGE_FILTER_H
-#define EASYDSP_FILTER_MOVING_AVERAGE_FILTER_H
+#ifndef EDSP_FILTER_MOVING_AVERAGE_FILTER_H
+#define EDSP_FILTER_MOVING_AVERAGE_FILTER_H
 
 #include <edsp/core/ring_buffer.hpp>
 
@@ -128,4 +128,4 @@ namespace edsp { namespace filter {
 
 }} // namespace edsp::filter
 
-#endif // EASYDSP_FILTER_MOVING_AVERAGE_FILTER_H
+#endif // EDSP_FILTER_MOVING_AVERAGE_FILTER_H

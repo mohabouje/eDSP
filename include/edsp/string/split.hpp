@@ -1,5 +1,5 @@
 /*
- * EasyDSP, A cross-platform Digital Signal Processing library written in modern C++.
+ * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
  * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
  *
  * This program is free software: you can redistribute it and/or modify it
@@ -15,12 +15,12 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * Filename: split.hpp
+ * File: split.hpp
  * Author: Mohammed Boujemaoui
  * Date: 05/10/2018
  */
-#ifndef EASYDSP_SPLIT_HPP
-#define EASYDSP_SPLIT_HPP
+#ifndef EDSP_SPLIT_HPP
+#define EDSP_SPLIT_HPP
 
 #include <edsp/meta/iterator.hpp>
 #include <sstream>
@@ -46,4 +46,4 @@ namespace edsp { namespace string {
 
 }} // namespace edsp::string
 
-#endif //EASYDSP_SPLIT_HPP
+#endif //EDSP_SPLIT_HPP
