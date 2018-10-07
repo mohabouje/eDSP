@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['capacity',['capacity',['../d1/d1f/classedsp_1_1ring__buffer.html#af3212be6384de9cadd47026714522ead',1,'edsp::ring_buffer::capacity()'],['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a3546339ace1221cb21ed909b7a1db250',1,'edsp::filter::biquad_cascade::capacity()']]],
+  ['capacity',['capacity',['../d1/d1f/classedsp_1_1ring__buffer.html#ae4742d081e40d40cef6dc48bff154b5f',1,'edsp::ring_buffer::capacity()'],['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a3546339ace1221cb21ed909b7a1db250',1,'edsp::filter::biquad_cascade::capacity()']]],
   ['cbegin',['cbegin',['../d1/d1f/classedsp_1_1ring__buffer.html#af2aff658defc5e597088e0291d2a8119',1,'edsp::ring_buffer::cbegin()'],['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#ab7c3fcd84a9120fe5fdf0bea5a6adaa6',1,'edsp::filter::biquad_cascade::cbegin()']]],
   ['cdft',['cdft',['../d6/de9/namespaceedsp_1_1spectral.html#adb19a24670ac1277f58dc06175fe3020',1,'edsp::spectral']]],
   ['ceil',['ceil',['../d3/db4/namespaceedsp_1_1algorithm.html#ab798da472d705a2fd87e1866f4cc7b63',1,'edsp::algorithm']]],
