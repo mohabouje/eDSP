@@ -17,8 +17,8 @@ set(SOURCE_FILES
         oscillators/testing_oscillators.cpp
         filter/testing_filter.cpp
         statistics/testing_statistics.cpp
+        io/testing_io.cpp
         tools/testing_tools.cpp)
-
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME}
@@ -27,7 +27,9 @@ target_link_libraries(${PROJECT_NAME}
     pthread
     eDSP
     fftw3f
-    fftw3)
+    fftw3
+    audiofile
+    sndfile)
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${GTEST_INCLUDE_DIRS})
 target_compile_definitions(${PROJECT_NAME} PRIVATE CURRENT_TEST_PATH="${CMAKE_CURRENT_SOURCE_DIR}")

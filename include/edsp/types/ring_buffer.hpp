@@ -472,6 +472,6 @@ namespace edsp { inline namespace types {
         edsp::ring_span<T> ring_{std::begin(buffer_), std::end(buffer_)};
     };
 
-}} // namespace edsp::core
+}} // namespace edsp::types
 
 #endif //EDSP_RING_BUFFER_HPP

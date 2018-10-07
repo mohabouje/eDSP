@@ -116,12 +116,11 @@ namespace edsp { inline namespace core {
         inline logger& space();
 
     private:
-        logger::MessageType type_{MessageType::Info};
-        std::string msg_{""};
-
 #if USE_SPDLOG
         std::shared_ptr<spdlog::logger> logger_{nullptr};
 #endif
+        logger::MessageType type_{MessageType::Info};
+        std::string msg_{""};
     };
 
     logger::logger(const edsp::string_view& file, logger::MessageType message_type) :

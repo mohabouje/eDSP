@@ -137,7 +137,8 @@ namespace edsp { inline namespace core {
         * @param variable_name Variable name
         * @return If it fails, the associated error. If not, the value of the variable.
         */
-        static edsp::expected<std::string, SystemEnvironmentError> get_env(const edsp::string_view& variable_name) noexcept {
+        static edsp::expected<std::string, SystemEnvironmentError>
+            get_env(const edsp::string_view& variable_name) noexcept {
             std::lock_guard<std::mutex> lock(environment_mutex);
             const char* env_p = std::getenv(variable_name.data());
             if (meta::empty(variable_name)) {
