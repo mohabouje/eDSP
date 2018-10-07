@@ -53,7 +53,7 @@ namespace edsp { namespace windowing {
         const auto factor = constants<value_type>::two_pi / static_cast<value_type>(size - 1);
         for (size_type i = 0; i < size; ++i, ++first) {
             const value_type tmp = factor * i;
-            *first             = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp);
+            *first               = a0 - a1 * std::cos(tmp) + a2 * std::cos(2 * tmp) - a3 * std::cos(3 * tmp);
         }
     }
 

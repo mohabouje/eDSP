@@ -44,7 +44,7 @@ namespace edsp { namespace windowing {
     constexpr void triangular(OutputIt first, OutputIt last) {
         using value_type     = meta::value_type_t<OutputIt>;
         using size_type      = meta::diff_type_t<OutputIt>;
-        const auto size   = static_cast<size_type>(std::distance(first, last));
+        const auto size      = static_cast<size_type>(std::distance(first, last));
         const value_type rem = size + std::remainder(size, 2);
         value_type initial   = -(size - 1);
         for (size_type i = 0; i < size; ++i, ++first) {

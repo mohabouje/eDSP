@@ -24,7 +24,6 @@
 #include <edsp/windowing.hpp>
 #include <gtest/gtest.h>
 
-
 using namespace edsp::windowing;
 using namespace edsp::filter;
 
@@ -55,7 +54,6 @@ TEST(TestingBiquad, InitializeDefault) {
 
     hamming(std::begin(input), std::end(input));
     b.filter(std::cbegin(input), std::cend(input), std::begin(output));
-
 
     for (auto i = 0ul; i < N; ++i) {
         EXPECT_EQ(input[i], output[i]);

@@ -62,5 +62,4 @@ namespace edsp { namespace string {
 
 }} // namespace edsp::string
 
-
 #endif //EASYDSP_TRIM_HPP

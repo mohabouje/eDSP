@@ -43,7 +43,7 @@ namespace edsp { namespace windowing {
     constexpr void boxcar(OutputIt first, OutputIt last) {
         using value_type = meta::value_type_t<OutputIt>;
         using size_type  = meta::diff_type_t<OutputIt>;
-        const auto size   = static_cast<size_type>(std::distance(first, last));
+        const auto size  = static_cast<size_type>(std::distance(first, last));
         for (size_type i = 0; i < size; ++i, ++first) {
             *first = static_cast<value_type>(1);
         }
