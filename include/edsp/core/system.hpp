@@ -181,7 +181,6 @@ namespace edsp { inline namespace core {
         }
 
     private:
-
         /**
          * @brief Returns a reference to the global mutex used in all the instances of the system environment class.
          *

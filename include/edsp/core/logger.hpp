@@ -135,7 +135,6 @@ namespace edsp { inline namespace core {
          */
         inline logger& space();
 
-
     private:
         /**
          * @brief Returns a reference to the global level used in all spdlog-loggers
