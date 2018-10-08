@@ -1,0 +1,6 @@
+coverage:
+  ignore:
+    - include/edsp/thirdparty/.*
+    - examples/.*
+    - test/.*
+    - benchmark/.*
