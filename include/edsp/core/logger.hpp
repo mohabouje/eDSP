@@ -179,7 +179,7 @@ namespace edsp { inline namespace core {
          * @brief Returns the name of the logger
          * @return Name of the logger
          */
-        const std::string& name() const;
+        inline const std::string& name() const;
 
     private:
         /**
