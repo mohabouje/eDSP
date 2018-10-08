@@ -1,5 +1,6 @@
 coverage:
   ignore:
+    - include/edsp/meta/.*
     - include/edsp/thirdparty/.*
     - examples/.*
     - test/.*
