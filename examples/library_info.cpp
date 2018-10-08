@@ -24,21 +24,9 @@
 #include <edsp/core/system.hpp>
 
 int main() {
-    edsp::logger::set_default_level(edsp::logger::trace);
-    edsp::logger::set_default_path("./example.txt");
-    edsp::logger::set_default_name("example");
-
-    eTrace() << "Trace message!";
-    eWarning() << "Warning message!";
-    eCritical() << "Critical message!";
-    eInfo() << "Information message!";
-    eDebug() << "Debug message!";
-    eError() << "Error message!";
-    eInfo() << "This text should be in red!";
-
-
-    edsp::logger log = edsp::logger("example");
-    log << "Other example of what you can do" << 123123 << 839 << "oh!";
-
+    eInfo() << "Running on:" << edsp::system_info::os();
+    eInfo() << "Architecture:" << edsp::system_info::processor();
+    eInfo() << "Compiler:" << edsp::system_info::compiler();
+    eInfo() << "Build Date:" << edsp::system_info::build_date();
     return 0;
 }

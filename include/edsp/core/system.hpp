@@ -24,6 +24,7 @@
 #define EDSP_SYSTEM_HPP
 
 #include <edsp/core/internal/config.hpp>
+#include <edsp/core/enum.hpp>
 #include <edsp/types/string_view.hpp>
 #include <edsp/types/expected.hpp>
 #include <edsp/meta/expects.hpp>
@@ -31,91 +32,79 @@
 #include <edsp/meta/empty.hpp>
 #include <edsp/thirdparty/nonstd/string_view.hpp>
 #include <edsp/thirdparty/nonstd/expected.hpp>
+#include <edsp/thirdparty/better-enums/enum.h>
 #include <mutex>
 
 namespace edsp { inline namespace core {
 
     /**
-     * @brief Represents the type of Operative System running the library.
+     * @brief Represents the OS running the library.
      */
-    enum class OperativeSystemType {
-        Windows, /*!< Microsoft Windows OS */
-        Linux,   /*!< Linux distribution */
-        FreeBSD, /*!< Free BSD distribution */
-        MacOS,   /*!< Mac OS X system */
-        iOS,     /*!< iOS system */
-        Android, /*!< Android system */
-        Unknown  /*!< Unknown system */
-    };
+    EDSP_SMART_ENUM(systems, int, windows, linux, freeBSD, macOS, iOS, android, unknown)
 
     /**
      * @brief Represents the architecture of the processor running the library.
      */
-    enum class ProcessorType {
-        x86,    /*!< x86 architecture */
-        x64,    /*!< x64 architecture */
-        arm,    /*!< arm architecture */
-        Unknown /*!< unknown architecture */
-    };
+    EDSP_SMART_ENUM(processors, int, x86, x64, arm, unknown)
 
     /**
      * @brief Represents the compiler used to compile the library.
      */
-    enum class CompilerType {
-        gcc,    /*!< GCC compiler */
-        clang,  /*!< Clang compiler */
-        mvsc,   /*!< MVSC compiler */
-        Unknown /*!< Unknown compiler */
-    };
+    EDSP_SMART_ENUM(compilers, int, gcc, clang, mvsc, unknown)
 
     struct system_info {
         // clang-format off
-        static CompilerType compiler() noexcept {
+        static compilers compiler() noexcept {
             #if defined(COMPILER_GNU)
-                return CompilerType::gcc;
+                return compilers::gcc;
             #elif defined(COMPILER_CLANG)
-                return CompilerType::clang;
+                return compilers::clang;
             #elif defined(COMPILER_MVSC)
-                return CompilerType::mvsc;
+                return compilers::mvsc;
             #else
-                return CompilerType::Unknown;
+                return compilers::unknown;
             #endif
         }
         // clang-format on
 
         // clang-format off
-        static OperativeSystemType os() noexcept {
+        static systems os() noexcept {
             #if defined(OS_WINDOWS)
-               return OperativeSystemType::Windows;
+               return systems::windows;
             #elif defined(OS_LINUX)
-               return OperativeSystemType::Linux;
+               return systems::linux;
             #elif defined(OS_MACOS)
-               return OperativeSystemType::MacOS;
+               return systems::macOS;
             #elif defined(OS_IOS)
-               return OperativeSystemType::iOS;
+               return systems::iOS;
             #elif defined(OS_FREEBSD)
-               return OperativeSystemType::FreeBSD;
+               return systems::freeBSD;
             #elif defined(OS_ANDROID)
-               return OperativeSystemType::Android;
+               return systems::android;
             #else
-               return OperativeSystemType::Unknown;
+               return systems::unknown;
             #endif
         }
         // clang-format on
 
         // clang-format off
-        static ProcessorType architecture() noexcept {
+        static processors processor() noexcept {
             #if defined(PROCESSOR_X86_32)
-               return ProcessorType::x86;
+               return processors::x86;
             #elif defined(PROCESSOR_X86_64)
-               return ProcessorType::x64;
+               return processors::x64;
             #elif defined(PROCESSOR_ARM)
-               return ProcessorType::arm;
+               return processors::arm;
             #else
-               return ProcessorType::Unknown;
+               return processors::unknown;
             #endif
         }
         // clang-format on
+
+        static const char* build_date() noexcept {
+            return E_BUILD_DATE;
+        }
+
     };
 
     struct system_env {

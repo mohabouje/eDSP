@@ -96,7 +96,8 @@ namespace edsp { inline namespace core {
          * @param message_type Type of the message.
          * @see MessageLevelType
          */
-        inline logger(const edsp::string_view& name, const edsp::string_view& file, levels message_type = levels::trace);
+        inline logger(const edsp::string_view& name, const edsp::string_view& file,
+                      levels message_type = levels::trace);
 
         /**
          * @brief Constructs a logger to record log messages of @par message_type in a terminal.
@@ -220,8 +221,7 @@ namespace edsp { inline namespace core {
         std::string msg_{""};
     };
 
-    logger::logger(const edsp::string_view& name, const edsp::string_view& file,
-                   logger::levels message_type) :
+    logger::logger(const edsp::string_view& name, const edsp::string_view& file, logger::levels message_type) :
         type_(message_type),
         msg_() {
         logger_ = spdlog::get(name.data());
@@ -238,9 +238,8 @@ namespace edsp { inline namespace core {
     }
 
     logger::logger(logger::levels message_type) : type_(message_type), msg_() {
-
         const auto& name = global_name();
-        logger_ = spdlog::get(name);
+        logger_          = spdlog::get(name);
         if (!logger_) {
             const auto& path = global_path();
             if (path.empty()) {
