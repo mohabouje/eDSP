@@ -11,6 +11,7 @@
 #include <edsp/thirdparty/spdlog/details/registry.h>
 #include <edsp/thirdparty/spdlog/logger.h>
 #include <edsp/thirdparty/spdlog/version.h>
+#include <edsp/thirdparty/spdlog/tweakme.h>
 
 #include <chrono>
 #include <functional>

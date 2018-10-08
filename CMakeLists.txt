@@ -126,3 +126,6 @@ if (BUILD_DOCS)
 
 endif (BUILD_DOCS)
 
+if (BUILD_TESTS)
+    add_subdirectory(examples)
+endif(BUILD_TESTS)
