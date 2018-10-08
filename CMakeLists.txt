@@ -18,7 +18,6 @@ option(ENABLE_WARNINGS "Enable all warning during compilation" ON)
 option(ENABLE_DEBUG_INFORMATION "Enable debug information, useful for profiling and debugging tools" OFF)
 option(USE_SNDFILE "Use the library SndFile to encode/decode audio files" OFF)
 option(USE_AUDIOFILE "Use the library AudioFile to encode/decode audio files" ON)
-option(USE_SPDLOG "Use the library SPDLOG as default logger" ON)
 
 # Add the C++ Standard
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++14")

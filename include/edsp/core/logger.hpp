@@ -23,12 +23,7 @@
 #ifndef EDSP_LOGGER_HPP
 #define EDSP_LOGGER_HPP
 
-#if USE_SPDLOG
-#    include <spdlog/spdlog.h>
-#else
-#    include <iostream>
-#endif
-
+#include <edsp/thirdparty/spdlog/spdlog.h>
 #include <edsp/types/string_view.hpp>
 #include <type_traits>
 #include <sstream>
@@ -39,37 +34,62 @@ namespace edsp { inline namespace core {
     class logger {
     public:
         /**
-         * The MessageType enum describes the messages that can be sent
+         * The MessageLevelType enum describes the messages that can be sent
          * to a message handler
          */
-        enum class MessageType {
+        enum class MessageLevelType {
             Info = 0, /*!< Information Message */
             Debug,    /*!< Debug Message */
             Warning,  /*!< Warning Message */
             Critical, /*!< Critical Message */
-            Error     /*!< Error Message */
+            Error,    /*!< Error Message */
+            Off       /*!< Disable the logger */
         };
+
+        /**
+         * @brief Updates the minimum level to be logged.
+         * @param type Level that triggers the logger.
+         */
+        inline static void set_default_level(MessageLevelType type);
+
+        /**
+         * @brief Returns the default level
+         * @return Current level that triggers the logger.
+         */
+        inline static MessageLevelType default_level();
 
         /**
          * @brief Constructs a logger to record log messages of @par message_type
          * for the @par file.
          * @param file File-path to stores the message. Use "console" to output the messages in the terminal.
          * @param message_type Type of the message.
-         * @see MessageType
+         * @see MessageLevelType
          */
-        inline logger(const edsp::string_view& file, MessageType message_type);
+        inline logger(const edsp::string_view& file, MessageLevelType message_type);
 
         /**
          * @brief Constructs a logger to record log messages of @par message_type in a terminal.
          * @param message_type Type of the message.
-         * @see MessageType
+         * @see MessageLevelType
          */
-        inline explicit logger(MessageType message_type);
+        inline explicit logger(MessageLevelType message_type);
 
         /**
          * @brief Default destructor.
          */
         inline ~logger();
+
+        /**
+         * @brief Updates the minimum level to be logged.
+         * @param type Level that triggers the logger.
+         */
+        inline void set_level(MessageLevelType type);
+
+        /**
+         * @brief Returns the default level
+         * @return Current level that triggers the logger.
+         */
+        inline MessageLevelType level();
 
         /**
          * @brief Writes the character to the stream and returns a reference to the stream.
@@ -115,55 +135,60 @@ namespace edsp { inline namespace core {
          */
         inline logger& space();
 
+
     private:
-#if USE_SPDLOG
+        /**
+         * @brief Returns a reference to the global level used in all spdlog-loggers
+         *
+         * @note Avoids duplications of the initialization code in every place where the header is included.
+         * @return Reference to the global level used in all spdlog-loggers
+         */
+        static spdlog::level::level_enum& global_level() {
+            static spdlog::level::level_enum LEVEL = spdlog::level::trace;
+            return LEVEL;
+        }
+
+    private:
         std::shared_ptr<spdlog::logger> logger_{nullptr};
-#endif
-        logger::MessageType type_{MessageType::Info};
+        logger::MessageLevelType type_{MessageLevelType::Info};
         std::string msg_{""};
     };
 
-    logger::logger(const edsp::string_view& file, logger::MessageType message_type) :
-#if USE_SPDLOG
+    logger::logger(const edsp::string_view& file, logger::MessageLevelType message_type) :
         logger_(spdlog::get(file.data())),
-#endif
         type_(message_type),
         msg_() {
-        meta::unused(file);
+        set_level(default_level());
     }
 
-    logger::logger(logger::MessageType message_type) :
-#if USE_SPDLOG
+    logger::logger(logger::MessageLevelType message_type) :
         logger_(spdlog::get("console")),
-#endif
         type_(message_type),
         msg_() {
+        set_level(default_level());
     }
 
     logger::~logger() {
         msg_ += '\n';
-#if USE_SPDLOG
         switch (type_) {
-            case MessageType::Debug:
+            case MessageLevelType::Debug:
                 logger_->debug(msg_);
                 break;
-            case MessageType::Info:
+            case MessageLevelType::Info:
                 logger_->info(msg_);
                 break;
-            case MessageType::Warning:
+            case MessageLevelType::Warning:
                 logger_->warn(msg_);
                 break;
-            case MessageType::Critical:
+            case MessageLevelType::Critical:
                 logger_->critical(msg_);
                 break;
-            case MessageType::Error:
+            case MessageLevelType::Error:
                 logger_->error(msg_);
                 break;
+            default:
+                break;
         }
-#else
-        meta::unused(type_);
-        std::cout << msg_;
-#endif
     }
 
     logger& logger::operator<<(char character) {
@@ -205,12 +230,93 @@ namespace edsp { inline namespace core {
         return space();
     }
 
+    logger::MessageLevelType logger::default_level() {
+        switch (global_level()) {
+            case spdlog::level::debug:
+                return MessageLevelType::Debug;
+            case spdlog::level::info:
+                return MessageLevelType::Info;
+            case spdlog::level::warn:
+                return MessageLevelType::Warning;
+            case spdlog::level::critical:
+                return MessageLevelType::Critical;
+            case spdlog::level::err:
+                return MessageLevelType::Error;
+            default:
+                return MessageLevelType::Off;
+        }
+    }
+
+    void logger::set_default_level(logger::MessageLevelType type) {
+        auto& LEVEL = global_level();
+        switch (type) {
+            case MessageLevelType::Debug:
+                LEVEL = spdlog::level::debug;
+                break;
+            case MessageLevelType::Info:
+                LEVEL = spdlog::level::info;
+                break;
+            case MessageLevelType::Warning:
+                LEVEL = spdlog::level::warn;
+                break;
+            case MessageLevelType::Critical:
+                LEVEL = spdlog::level::critical;
+                break;
+            case MessageLevelType::Error:
+                LEVEL = spdlog::level::err;
+                break;
+            default:
+                LEVEL = spdlog::level::off;
+                break;
+        }
+    }
+
+    void logger::set_level(logger::MessageLevelType type) {
+        switch (type) {
+            case MessageLevelType::Debug:
+                logger_->set_level(spdlog::level::debug);
+                break;
+            case MessageLevelType::Info:
+                logger_->set_level(spdlog::level::info);
+                break;
+            case MessageLevelType::Warning:
+                logger_->set_level(spdlog::level::warn);
+                break;
+            case MessageLevelType::Critical:
+                logger_->set_level(spdlog::level::critical);
+                break;
+            case MessageLevelType::Error:
+                logger_->set_level(spdlog::level::err);
+                break;
+            default:
+                logger_->set_level(spdlog::level::off);
+                break;
+        }
+    }
+
+    logger::MessageLevelType logger::level() {
+        switch (logger_->level()) {
+            case spdlog::level::debug:
+                return MessageLevelType::Debug;
+            case spdlog::level::info:
+                return MessageLevelType::Info;
+            case spdlog::level::warn:
+                return MessageLevelType::Warning;
+            case spdlog::level::critical:
+                return MessageLevelType::Critical;
+            case spdlog::level::err:
+                return MessageLevelType::Error;
+            default:
+                return MessageLevelType::Off;
+        }
+    }
+
 }} // namespace edsp::core
 
-#define eInfo() edsp::logger("console", logger::MessageType::Info)
-#define eDebug() edsp::logger("console", logger::MessageType::Debug)
-#define eWarning() edsp::logger("console", logger::MessageType::Warning)
-#define eCritical() edsp::logger("console", logger::MessageType::Critical)
-#define eError() edsp::logger("console", logger::MessageType::Error)
+#define eInfo() edsp::logger("console", logger::MessageLevelType::Info)
+#define eDebug() edsp::logger("console", logger::MessageLevelType::Debug)
+#define eWarning() edsp::logger("console", logger::MessageLevelType::Warning)
+#define eCritical() edsp::logger("console", logger::MessageLevelType::Critical)
+#define eError() edsp::logger("console", logger::MessageLevelType::Error)
 
 #endif //EDSP_LOGGER_HPP

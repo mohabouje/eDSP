@@ -153,7 +153,6 @@ namespace edsp { namespace io {
         }
 
     private:
-
 #if defined(USE_AUDIOFILE)
         audiofile_decoder<T, N> impl_;
 #elif defined(USE_SNDFILE)

@@ -139,7 +139,7 @@ namespace edsp { inline namespace core {
         */
         static edsp::expected<std::string, SystemEnvironmentError>
             get_env(const edsp::string_view& variable_name) noexcept {
-            std::lock_guard<std::mutex> lock(environment_mutex);
+            std::lock_guard<std::mutex> lock(mutex());
             const char* env_p = std::getenv(variable_name.data());
             if (meta::empty(variable_name)) {
                 return edsp::make_unexpected(SystemEnvironmentError::Empty);
@@ -161,7 +161,7 @@ namespace edsp { inline namespace core {
         */
         static SystemEnvironmentError set_env(const edsp::string_view& variable_name,
                                               const edsp::string_view& variable_value, bool overwrite = true) noexcept {
-            std::lock_guard<std::mutex> lock(environment_mutex);
+            std::lock_guard<std::mutex> lock(mutex());
             if (meta::empty(variable_name)) {
                 return SystemEnvironmentError::Empty;
             } else {
@@ -176,12 +176,22 @@ namespace edsp { inline namespace core {
         * @return true if the variable exist in the system environment.
         */
         static bool exist(const edsp::string_view& variable_name) noexcept {
-            std::lock_guard<std::mutex> lock(environment_mutex);
+            std::lock_guard<std::mutex> lock(mutex());
             return !meta::is_null(std::getenv(meta::data(variable_name)));
         }
 
     private:
-        static std::mutex environment_mutex;
+
+        /**
+         * @brief Returns a reference to the global mutex used in all the instances of the system environment class.
+         *
+         * @note Avoids duplications of the initialization code in every place where the header is included.
+         * @return Reference to the global mutex.
+         */
+        static std::mutex& mutex() {
+            static std::mutex environment_mutex;
+            return environment_mutex;
+        }
     };
 
 }} // namespace edsp::core
