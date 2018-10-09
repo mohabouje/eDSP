@@ -86,7 +86,6 @@ namespace edsp { inline namespace core {
             default:
                 return stream << edsp::red << "unknown" << edsp::endc;
         }
-
     }
 
     /**
@@ -111,9 +110,7 @@ namespace edsp { inline namespace core {
             default:
                 return stream << edsp::red << "unknown" << edsp::endc;
         }
-
     }
-
 
     struct system_info {
         // clang-format off
@@ -163,7 +160,6 @@ namespace edsp { inline namespace core {
             #endif
         }
         // clang-format on
-
     };
 
     struct system_env {

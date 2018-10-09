@@ -22,7 +22,7 @@
 #ifndef EDSP_SPECTROGRAM_HPP
 #define EDSP_SPECTROGRAM_HPP
 
-#include <edsp/spectral/internal/fftw_impl.hpp>
+#include <edsp/spectral/internal/fft_impl.hpp>
 #include <edsp/converter/mag2db.hpp>
 #include <edsp/math/numeric.hpp>
 #include <vector>

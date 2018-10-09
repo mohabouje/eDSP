@@ -24,8 +24,7 @@
 #define EDSP_DECODER_HPP
 
 #include <edsp/types/string_view.hpp>
-#include <edsp/io/internal/audiofile_impl.hpp>
-#include <edsp/io/internal/sndfile_impl.hpp>
+#include <edsp/io/internal/decoder_impl.hpp>
 
 namespace edsp { namespace io {
 
@@ -153,11 +152,7 @@ namespace edsp { namespace io {
         }
 
     private:
-#if defined(USE_AUDIOFILE)
-        audiofile_decoder<T, N> impl_;
-#elif defined(USE_SNDFILE)
-        sndfile_decoder<T, N> impl_;
-#endif
+        decoder_impl<T, N> impl_;
     };
 }} // namespace edsp::io
 

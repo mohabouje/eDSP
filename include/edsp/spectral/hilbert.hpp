@@ -22,7 +22,7 @@
 #ifndef EDSP_HILBERT_HPP
 #define EDSP_HILBERT_HPP
 
-#include <edsp/spectral/internal/fftw_impl.hpp>
+#include <edsp/spectral/internal/fft_impl.hpp>
 #include <edsp/converter/real2complex.hpp>
 #include <vector>
 

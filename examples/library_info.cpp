@@ -31,7 +31,7 @@ int main() {
     eInfo() << "Version Number:" << edsp::library_info::version();
     eInfo() << "Build Date:" << edsp::library_info::build_date();
     eInfo() << "Build Time:" << edsp::library_info::build_time();
-    eInfo() << "Running On:" <<  edsp::system_info::os();
+    eInfo() << "Running On:" << edsp::system_info::os();
     eInfo() << "Architecture:" << edsp::system_info::processor();
     eInfo() << "Compiler:" << edsp::system_info::compiler();
     eInfo() << "FFT library: " << edsp::library_info::fft_library();

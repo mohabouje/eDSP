@@ -154,7 +154,6 @@ namespace edsp { inline namespace core {
          */
         inline std::string str() const;
 
-
         // clang-format off
         using logger_manipulator = std::function<edsp::core::logger&(edsp::core::logger&)>;
         inline logger& operator<<(logger_manipulator manipulator);
@@ -178,7 +177,6 @@ namespace edsp { inline namespace core {
         // clang-format on
 
     private:
-
         /**
          * @brief Returns a reference to the global level used in all spdlog-loggers
          *
@@ -216,7 +214,7 @@ namespace edsp { inline namespace core {
         friend struct logger_impl;
         std::shared_ptr<spdlog::logger> logger_{nullptr};
         logger::levels type_{levels::info};
-        std::stringstream  msg_;
+        std::stringstream msg_;
     };
 
     struct logger_impl {
@@ -294,7 +292,6 @@ namespace edsp { inline namespace core {
         }
     };
 
-
     inline logger& tab(logger& stream) {
         return logger_impl::tab(stream);
     }
@@ -348,8 +345,8 @@ namespace edsp { inline namespace core {
     }
 
     logger::logger(const edsp::string_view& name, const edsp::string_view& file, logger::levels message_type) :
-            type_(message_type),
-            msg_() {
+        type_(message_type),
+        msg_() {
         logger_ = spdlog::get(name.data());
         if (!logger_) {
             logger_ = spdlog::basic_logger_mt(name.data(), file.data());
@@ -403,12 +400,10 @@ namespace edsp { inline namespace core {
         }
     }
 
-
     logger& logger::space() {
         msg_ << ' ';
         return *this;
     }
-
 
     logger::levels logger::default_level() {
         switch (global_level()) {
@@ -521,7 +516,7 @@ namespace edsp { inline namespace core {
         global_name() = name;
     }
 
-    logger &logger::operator<<(logger::logger_manipulator manipulator) {
+    logger& logger::operator<<(logger::logger_manipulator manipulator) {
         return manipulator(*this);
     }
 
@@ -529,77 +524,76 @@ namespace edsp { inline namespace core {
         return msg_.str();
     }
 
-    template<typename Char>
-    logger &logger::operator<<(const std::basic_string<Char> &str) {
+    template <typename Char>
+    logger& logger::operator<<(const std::basic_string<Char>& str) {
         msg_ << str.data();
         return space();
     }
 
-    template<typename Char>
-    logger &logger::operator<<(const edsp::basic_string_view<Char> &str) {
+    template <typename Char>
+    logger& logger::operator<<(const edsp::basic_string_view<Char>& str) {
         msg_ << str.data();
         return space();
     }
 
-    logger &logger::operator<<(std::uint8_t value) {
+    logger& logger::operator<<(std::uint8_t value) {
         msg_ << value;
         return space();
     }
 
-    logger &logger::operator<<(std::uint16_t value) {
+    logger& logger::operator<<(std::uint16_t value) {
         msg_ << value;
         return space();
     }
 
-    logger &logger::operator<<(std::uint32_t value) {
+    logger& logger::operator<<(std::uint32_t value) {
         msg_ << value;
         return space();
     }
 
-    logger &logger::operator<<(std::uint64_t value) {
+    logger& logger::operator<<(std::uint64_t value) {
         msg_ << value;
         return space();
     }
 
-    logger &logger::operator<<(std::int8_t value) {
+    logger& logger::operator<<(std::int8_t value) {
         msg_ << value;
         return space();
     }
 
-    logger &logger::operator<<(std::int16_t value) {
+    logger& logger::operator<<(std::int16_t value) {
         msg_ << value;
         return space();
     }
 
-    logger &logger::operator<<(std::int32_t value) {
+    logger& logger::operator<<(std::int32_t value) {
         msg_ << value;
         return space();
     }
 
-    logger &logger::operator<<(std::int64_t value) {
+    logger& logger::operator<<(std::int64_t value) {
         msg_ << value;
         return space();
     }
 
-    logger &logger::operator<<(float value) {
+    logger& logger::operator<<(float value) {
         msg_ << value;
         return space();
     }
 
-    logger &logger::operator<<(double value) {
+    logger& logger::operator<<(double value) {
         msg_ << value;
         return space();
     }
 
-    logger &logger::operator<<(const char *str) {
+    logger& logger::operator<<(const char* str) {
         msg_ << str;
         return space();
     }
 
-    void logger::set_pattern(const std::string &pattern) {
+    void logger::set_pattern(const std::string& pattern) {
         spdlog::set_pattern(pattern);
     }
-
 
 }} // namespace edsp::core
 

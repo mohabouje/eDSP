@@ -15,19 +15,31 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* File: ring_span.hpp
+* Filename: fft_impl.hpp
 * Author: Mohammed Boujemaoui
-* Date: 07/10/18
+* Date: 09/10/18
 */
-#ifndef EDSP_TIMESTAMP_HPP
-#define EDSP_TIMESTAMP_HPP
 
-#include <cstdint>
+#ifndef EDSP_FFT_IMPL_HPP
+#define EDSP_FFT_IMPL_HPP
 
-namespace edsp { inline namespace types {
+#include <edsp/spectral/internal/fftw_impl.hpp>
 
-    using timestamp = std::int64_t;
+namespace edsp { inline namespace spectral {
 
-}} // namespace edsp::types
+#if defined(USE_FFTW)
+    template <typename T>
+    using fft_impl = spectral::fftw_impl<T>;
+#elif defined(USE_KISS)
+    template <typename T>
+    using fft_impl = spectral::kiss_plan<T>;
+#elif defined(USE_APPLE)
+    template <typename T>
+    using fft_impl = spectral::afft_plan<T>;
+#else
+#    error "Library not found"
+#endif
 
-#endif //EDSP_TIMESTAMP_HPP
+}} // namespace edsp::spectral
+
+#endif //EDSP_FFT_IMPL_HPP

@@ -34,7 +34,7 @@
 #include <fftw3.h>
 #include <algorithm>
 
-namespace edsp { inline namespace spectral { inline namespace internal {
+namespace edsp { inline namespace spectral {
     template <typename T>
     inline T* fftw_cast(const T* p) noexcept {
         return const_cast<T*>(p);
@@ -49,17 +49,17 @@ namespace edsp { inline namespace spectral { inline namespace internal {
     }
 
     template <typename T>
-    struct fft_impl {};
+    struct fftw_impl {};
 
     template <>
-    struct fft_impl<float> {
+    struct fftw_impl<float> {
         using value_type   = float;
         using complex_type = fftwf_complex;
         using size_type    = int;
 
         ::fftwf_plan plan_{nullptr};
-        fft_impl() = default;
-        ~fft_impl() {
+        fftw_impl() = default;
+        ~fftw_impl() {
             if (!meta::is_null(plan_)) {
                 fftwf_destroy_plan(plan_);
             }
@@ -163,14 +163,14 @@ namespace edsp { inline namespace spectral { inline namespace internal {
     };
 
     template <>
-    struct fft_impl<double> {
+    struct fftw_impl<double> {
         using value_type   = double;
         using complex_type = fftw_complex;
         using size_type    = int;
 
         ::fftw_plan plan_{nullptr};
-        fft_impl() = default;
-        ~fft_impl() {
+        fftw_impl() = default;
+        ~fftw_impl() {
             if (!meta::is_null(plan_)) {
                 fftw_destroy_plan(plan_);
             }
@@ -269,6 +269,6 @@ namespace edsp { inline namespace spectral { inline namespace internal {
             }
         }
     };
-}}} // namespace edsp::spectral::internal
+}} // namespace edsp::spectral
 
 #endif // EDSP_FFTW_IMPL_HPP

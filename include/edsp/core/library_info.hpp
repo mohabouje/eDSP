@@ -24,24 +24,14 @@
 #define EDSP_LIBRARY_INFO_HPP
 
 #include <edsp/core/internal/config.hpp>
+#include <edsp/core/logger.hpp>
 #include <cstdint>
 
 namespace edsp { inline namespace core {
 
+    enum class fft_lib { fftw, kiss, apple, unknown };
 
-    enum class fft_lib {
-        fftw,
-        kiss,
-        apple,
-        unknown
-    };
-
-    enum class codec_lib {
-        audiofile,
-        sndfile,
-        unknown
-    };
-
+    enum class codec_lib { audiofile, sndfile, unknown };
 
     inline logger& operator<<(logger& stream, fft_lib lib) {
         switch (lib) {
@@ -67,9 +57,7 @@ namespace edsp { inline namespace core {
         }
     }
 
-
     struct library_info {
-
         static constexpr std::int32_t minor_version() noexcept {
             return E_VERSION_MINOR;
         }
@@ -82,15 +70,15 @@ namespace edsp { inline namespace core {
             return E_VERSION_MINOR;
         }
 
-        static constexpr const char *version() noexcept {
+        static constexpr const char* version() noexcept {
             return E_VERSION_STR;
         }
 
-        static constexpr const char *build_date() noexcept {
+        static constexpr const char* build_date() noexcept {
             return E_BUILD_DATE;
         }
 
-        static constexpr const char *build_time() noexcept {
+        static constexpr const char* build_time() noexcept {
             return E_BUILD_TIME;
         }
 
@@ -111,9 +99,11 @@ namespace edsp { inline namespace core {
             return codec_lib::audiofile;
 #elif defined(USE_SNDFILE)
             return codec_lib::sndfile;
+#else
+            return codec_lib::unknown;
 #endif
         }
     };
-}}
+}} // namespace edsp::core
 
 #endif //EDSP_LIBRARY_INFO_HPP

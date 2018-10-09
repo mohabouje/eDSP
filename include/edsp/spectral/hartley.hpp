@@ -23,7 +23,7 @@
 #ifndef EDSP_HARTLEY_HPP
 #define EDSP_HARTLEY_HPP
 
-#include <edsp/spectral/internal/fftw_impl.hpp>
+#include <edsp/spectral/internal/fft_impl.hpp>
 
 namespace edsp { inline namespace spectral {
 

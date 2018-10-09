@@ -15,19 +15,28 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* File: ring_span.hpp
+* Filename: decoder_impl.hpp
 * Author: Mohammed Boujemaoui
-* Date: 07/10/18
+* Date: 09/10/18
 */
-#ifndef EDSP_TIMESTAMP_HPP
-#define EDSP_TIMESTAMP_HPP
+#ifndef EDSP_DECODER_IMPL_HPP
+#define EDSP_DECODER_IMPL_HPP
 
-#include <cstdint>
+#include <edsp/io/internal/audiofile_impl.hpp>
+#include <edsp/io/internal/sndfile_impl.hpp>
 
-namespace edsp { inline namespace types {
+namespace edsp { namespace io {
 
-    using timestamp = std::int64_t;
+#if defined(USE_AUDIOFILE)
+    template <typename T, std::size_t N>
+    using decoder_impl = audiofile_decoder<T, N>;
+#elif defined(USE_SNDFILE)
+    template <typename T, std::size_t N>
+    using decoder_impl = sndfile_decoder<T, N>;
+#else
+#    error "Compatible library not found!"
+#endif
 
-}} // namespace edsp::types
+}} // namespace edsp::io
 
-#endif //EDSP_TIMESTAMP_HPP
+#endif //EDSP_DECODER_IMPL_HPP
