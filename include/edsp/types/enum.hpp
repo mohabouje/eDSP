@@ -27,7 +27,7 @@
 #include <edsp/thirdparty/better-enums/enum.h>
 
 #define EDSP_SMART_ENUM(Enum, Underlying, ...)                                     \
-    BETTER_ENUM(Enum, Underlying, __VA_ARGS__)                                    \
+    BETTER_ENUM(Enum, Underlying, __VA_ARGS__)                                     \
     edsp::logger& operator<<(edsp::logger& os, const Enum c) {                     \
         return os << c._to_string();                                               \
     }

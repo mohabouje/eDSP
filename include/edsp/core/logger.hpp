@@ -156,8 +156,8 @@ namespace edsp { inline namespace core {
 
 
         // clang-format off
-        typedef logger& (*logger_manipulator)(logger&);
-        inline logger& operator<<(logger_manipulator& manipulator);
+        using logger_manipulator = std::function<edsp::core::logger&(edsp::core::logger&)>;
+        inline logger& operator<<(logger_manipulator manipulator);
         inline logger& operator<<(std::uint8_t);
         inline logger& operator<<(std::uint16_t);
         inline logger& operator<<(std::uint32_t);
@@ -166,7 +166,6 @@ namespace edsp { inline namespace core {
         inline logger& operator<<(std::int16_t);
         inline logger& operator<<(std::int32_t);
         inline logger& operator<<(std::int64_t);
-        inline logger& operator<<(bool);
         inline logger& operator<<(float);
         inline logger& operator<<(double);
         inline logger& operator<<(const char*);
@@ -522,7 +521,7 @@ namespace edsp { inline namespace core {
         global_name() = name;
     }
 
-    logger &logger::operator<<(logger::logger_manipulator& manipulator) {
+    logger &logger::operator<<(logger::logger_manipulator manipulator) {
         return manipulator(*this);
     }
 
@@ -594,11 +593,6 @@ namespace edsp { inline namespace core {
 
     logger &logger::operator<<(const char *str) {
         msg_ << str;
-        return space();
-    }
-
-    logger &logger::operator<<(bool value) {
-        msg_ << (value ? "true" : "false");
         return space();
     }
 

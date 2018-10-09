@@ -34,5 +34,7 @@ int main() {
     eInfo() << "Running On:" <<  edsp::system_info::os();
     eInfo() << "Architecture:" << edsp::system_info::processor();
     eInfo() << "Compiler:" << edsp::system_info::compiler();
+    eInfo() << "FFT library: " << edsp::library_info::fft_library();
+    eInfo() << "Codec library: " << edsp::library_info::codec_library();
     return 0;
 }

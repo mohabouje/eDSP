@@ -40,22 +40,89 @@ namespace edsp { inline namespace core {
     /**
      * @brief Represents the OS running the library.
      */
-    EDSP_SMART_ENUM(systems, int, windows, linux, freeBSD, macOS, iOS, android, unknown)
+    enum class systems {
+        windows, /*!< Microsoft Windows OS */
+        linux,   /*!< Linux distribution */
+        freeBSD, /*!< Free BSD distribution */
+        macOS,   /*!< Mac OS X system */
+        iOS,     /*!< iOS system */
+        android, /*!< Android system */
+        unknown  /*!< Unknown system */
+    };
+
+    inline logger& operator<<(logger& stream, systems sys) {
+        switch (sys) {
+            case systems::windows:
+                return stream << "Microsoft Windows OS";
+            case systems::linux:
+                return stream << "Linux distribution";
+            case systems::freeBSD:
+                return stream << "Free BSD distribution";
+            case systems::macOS:
+                return stream << "Mac OS X system";
+            case systems::iOS:
+                return stream << "iOS system";
+            case systems::android:
+                return stream << "Android system";
+            default:
+                return stream << edsp::red << "unknown" << edsp::endc;
+        }
+    }
 
     /**
      * @brief Represents the architecture of the processor running the library.
      */
-    EDSP_SMART_ENUM(processors, int, x86, x64, arm, unknown)
+    enum class processors {
+        x86,    /*!< x86 architecture */
+        x64,    /*!< x64 architecture */
+        arm,    /*!< arm architecture */
+        unknown /*!< unknown architecture */
+    };
+
+    inline logger& operator<<(logger& stream, processors proc) {
+        switch (proc) {
+            case processors::x86:
+                return stream << "x86 architecture";
+            case processors::x64:
+                return stream << "x64 architecture";
+            case processors::arm:
+                return stream << "arm architecture";
+            default:
+                return stream << edsp::red << "unknown" << edsp::endc;
+        }
+
+    }
 
     /**
-     * @brief Represents the compiler used to compile the library.
+     * @brief Represents the type of Operative System running the library.
+     * @brief Represents the OS running the library.
      */
-    EDSP_SMART_ENUM(compilers, int, gcc, clang, mvsc, unknown)
+    enum class compilers {
+        gcc,    /*!< GCC compiler */
+        clang,  /*!< Clang compiler */
+        mvsc,   /*!< MVSC compiler */
+        unknown /*!< Unknown compiler */
+    };
+
+    inline logger& operator<<(logger& stream, compilers comp) {
+        switch (comp) {
+            case compilers::gcc:
+                return stream << "gcc";
+            case compilers::clang:
+                return stream << "clang";
+            case compilers::mvsc:
+                return stream << "mvsc";
+            default:
+                return stream << edsp::red << "unknown" << edsp::endc;
+        }
+
+    }
+
 
     struct system_info {
         // clang-format off
-        static compilers compiler() noexcept {
-            #if defined(COMPILER_GNU)
+        static constexpr compilers compiler() noexcept {
+            #if defined(COMPILER_GNU) && !defined(COMPILER_CLANG)
                 return compilers::gcc;
             #elif defined(COMPILER_CLANG)
                 return compilers::clang;
@@ -68,7 +135,7 @@ namespace edsp { inline namespace core {
         // clang-format on
 
         // clang-format off
-        static systems os() noexcept {
+        static constexpr systems os() noexcept {
             #if defined(OS_WINDOWS)
                return systems::windows;
             #elif defined(OS_LINUX)
@@ -88,7 +155,7 @@ namespace edsp { inline namespace core {
         // clang-format on
 
         // clang-format off
-        static processors processor() noexcept {
+        static constexpr processors processor() noexcept {
             #if defined(PROCESSOR_X86_32)
                return processors::x86;
             #elif defined(PROCESSOR_X86_64)
