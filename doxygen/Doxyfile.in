@@ -15,7 +15,6 @@ INPUT                  = @PROJECT_SOURCE_DIR@/include/edsp \
 USE_MDFILE_AS_MAINPAGE = @PROJECT_SOURCE_DIR@/README.md
 FILE_PATTERNS          = *.hpp \
                          *.h
-HTML_OUTPUT	       = @PROJECT_SOURCE_DIR@/docs/
 HTML_HEADER            = @PROJECT_SOURCE_DIR@/doxygen/header.html
 HTML_FOOTER            = @PROJECT_SOURCE_DIR@/doxygen/footer.html
 HTML_STYLESHEET        =
