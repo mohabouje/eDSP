@@ -24,7 +24,6 @@
 #define EDSP_LIBRARY_INFO_HPP
 
 #include <edsp/core/internal/config.hpp>
-#include <edsp/types/enum.hpp>
 #include <cstdint>
 
 namespace edsp { inline namespace core {

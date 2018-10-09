@@ -24,15 +24,11 @@
 #define EDSP_SYSTEM_HPP
 
 #include <edsp/core/internal/config.hpp>
-#include <edsp/types/enum.hpp>
 #include <edsp/types/string_view.hpp>
 #include <edsp/types/expected.hpp>
 #include <edsp/meta/expects.hpp>
 #include <edsp/meta/is_null.hpp>
 #include <edsp/meta/empty.hpp>
-#include <edsp/thirdparty/nonstd/string_view.hpp>
-#include <edsp/thirdparty/nonstd/expected.hpp>
-#include <edsp/thirdparty/better-enums/enum.h>
 #include <mutex>
 
 namespace edsp { inline namespace core {
