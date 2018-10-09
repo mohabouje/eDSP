@@ -14,7 +14,7 @@ allert () { echo -e "${RED}$1${NC}"; }
 showinfo "Building the library..."
 mkdir -p build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON -DBUILD_DOCS=OFF -DENABLE_DEBUG_INFORMATION=ON -DBUILD_EXAMPLES=ON -DENABLE_COVERAGE=ON..
+cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON -DBUILD_DOCS=OFF -DENABLE_DEBUG_INFORMATION=ON -DBUILD_EXAMPLES=ON -DENABLE_COVERAGE=ON ..
 make -j8
 if [ $? -ne 0 ]; then
     error "Error: there are compile errors!"
