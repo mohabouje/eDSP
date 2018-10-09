@@ -23,11 +23,11 @@
 #ifndef EDSP_AUDIOFILE_IMPL_HPP
 #define EDSP_AUDIOFILE_IMPL_HPP
 
-#include <edsp/types/string_view.hpp>
 #include <edsp/core/logger.hpp>
 #include <edsp/meta/is_signed.hpp>
 #include <edsp/meta/advance.hpp>
 #include <edsp/meta/iterator.hpp>
+#include <edsp/meta/data.hpp>
 #include <audiofile.h>
 #include <cmath>
 

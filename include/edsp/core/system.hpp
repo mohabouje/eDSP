@@ -24,7 +24,7 @@
 #define EDSP_SYSTEM_HPP
 
 #include <edsp/core/internal/config.hpp>
-#include <edsp/core/enum.hpp>
+#include <edsp/types/enum.hpp>
 #include <edsp/types/string_view.hpp>
 #include <edsp/types/expected.hpp>
 #include <edsp/meta/expects.hpp>
@@ -100,10 +100,6 @@ namespace edsp { inline namespace core {
             #endif
         }
         // clang-format on
-
-        static const char* build_date() noexcept {
-            return E_BUILD_DATE;
-        }
 
     };
 

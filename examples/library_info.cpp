@@ -22,11 +22,17 @@
 
 #include <edsp/core/logger.hpp>
 #include <edsp/core/system.hpp>
+#include <edsp/core/library_info.hpp>
+
+#include <iostream>
 
 int main() {
-    eInfo() << "Running on:" << edsp::system_info::os();
+    eInfo() << "Welcome to eDSP";
+    eInfo() << "Version Number:" << edsp::library_info::version();
+    eInfo() << "Build Date:" << edsp::library_info::build_date();
+    eInfo() << "Build Time:" << edsp::library_info::build_time();
+    eInfo() << "Running On:" <<  edsp::system_info::os();
     eInfo() << "Architecture:" << edsp::system_info::processor();
     eInfo() << "Compiler:" << edsp::system_info::compiler();
-    eInfo() << "Build Date:" << edsp::system_info::build_date();
     return 0;
 }

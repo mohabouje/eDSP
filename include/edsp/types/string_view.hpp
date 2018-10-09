@@ -28,6 +28,10 @@
 namespace edsp { inline namespace types {
 
     using nonstd::string_view;
+
+    template <typename Char>
+    using basic_string_view = nonstd::basic_string_view<Char>;
+
 }} // namespace edsp::types
 
 #endif //EDSP_STRING_VIEW_HPP

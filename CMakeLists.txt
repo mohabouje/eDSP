@@ -13,6 +13,7 @@ option(BUILD_TESTS "Enable to build tests" ON)
 option(BUILD_DOCS "Enable to build docs" OFF)
 option(BUILD_EXAMPLES "Enable to build examples" OFF)
 option(BUILD_TOOLS "Enable to build tools" OFF)
+option(ENABLE_COVERAGE "Enable the code coverage" OFF)
 option(ENABLE_OPTIMIZATIONS "Enable all the optimizations, in release mode" ON)
 option(ENABLE_WARNINGS "Enable all warning during compilation" ON)
 option(ENABLE_DEBUG_INFORMATION "Enable debug information, useful for profiling and debugging tools" OFF)
@@ -102,16 +103,16 @@ install(TARGETS ${LIB_NAME}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 
-if (BUILD_TESTS)
-
+if (ENABLE_COVERAGE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -fprofile-arcs -coverage")
+endif(ENABLE_COVERAGE)
+
+if (BUILD_TESTS)
     enable_testing()
     add_subdirectory(test)
-
 endif (BUILD_TESTS)
 
 if (BUILD_DOCS)
-
     find_package(Doxygen REQUIRED dot mscgen dia)
     set(DOXYGEN_IN ${CMAKE_CURRENT_SOURCE_DIR}/doxygen/Doxyfile.in)
     set(DOXYGEN_OUT ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile)
@@ -121,9 +122,6 @@ if (BUILD_DOCS)
             WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
             COMMENT "Generating API documentation with Doxygen"
             VERBATIM )
-
-    #install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html DESTINATION share/doc)
-
 endif (BUILD_DOCS)
 
 if (BUILD_EXAMPLES)

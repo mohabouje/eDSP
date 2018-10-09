@@ -110,4 +110,9 @@
 #define E_BUILD_DATE __DATE__
 #define E_BUILD_TIME __TIME__
 
+#define E_VERSION_MAJOR 0
+#define E_VERSION_MINOR 0
+#define E_VERSION_PATCH 1
+#define E_VERSION_STR "0.0.1"
+
 #endif //EDSP_CONFIG_HPP

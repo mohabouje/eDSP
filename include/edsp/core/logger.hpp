@@ -26,11 +26,10 @@
 #include <edsp/thirdparty/spdlog/spdlog.h>
 #include <edsp/thirdparty/spdlog/sinks/stdout_color_sinks.h>
 #include <edsp/thirdparty/spdlog/sinks/basic_file_sink.h>
-
+#include <edsp/thirdparty/termcolor/termcolor.hpp>
 #include <edsp/types/string_view.hpp>
 #include <type_traits>
 #include <sstream>
-#include <edsp/meta/unused.hpp>
 
 namespace edsp { inline namespace core {
 
@@ -89,6 +88,12 @@ namespace edsp { inline namespace core {
         inline static const std::string& default_name();
 
         /**
+         * @brief Updates the pattern of the displayed messages
+         * @note Check the documentation of the fmt library.
+         */
+        inline static void set_pattern(const std::string& pattern);
+
+        /**
          * @brief Constructs a logger to record log messages of @par message_type
          * for the @par file.
          * @param name Name or key of the logger.
@@ -105,7 +110,7 @@ namespace edsp { inline namespace core {
          * @param message_type Type of the message.
          * @see MessageLevelType
          */
-        inline logger(const edsp::string_view& name, levels message_type = levels::trace);
+        inline explicit logger(const edsp::string_view& name, levels message_type = levels::trace);
 
         /**
          * @brief Created the default logger to record log messages of @par message_type.
@@ -132,44 +137,6 @@ namespace edsp { inline namespace core {
         inline levels level();
 
         /**
-         * @brief Writes the character to the stream and returns a reference to the stream.
-         * @return A reference to the stream.
-         */
-        inline logger& operator<<(char);
-
-        /**
-         * @brief Writes the boolean to the stream and returns a reference to the stream.
-         * @return A reference to the stream.
-         */
-        inline logger& operator<<(bool);
-
-        /**
-         * @brief Writes the numeric value to the stream and returns a reference to the stream.
-         * @return A reference to the stream.
-         */
-        template <typename T, typename = typename std::enable_if<std::is_arithmetic<T>::value>::type>
-        inline logger& operator<<(T);
-
-        /**
-         * @brief Serialize the object of type T to the stream and returns a reference to the stream.
-         * @return A reference to the stream.
-         */
-        template <typename T, typename = typename std::enable_if<!std::is_arithmetic<T>::value>::type>
-        inline logger& operator<<(const T&);
-
-        /**
-         * @brief Writes the string to the stream and returns a reference to the stream.
-         * @return A reference to the stream.
-         */
-        inline logger& operator<<(const edsp::string_view&);
-
-        /**
-         * @brief Writes the error message to the stream and returns a reference to the stream.
-         * @return A reference to the stream.
-         */
-        inline logger& operator<<(const std::error_code&);
-
-        /**
          * @brief Writes an space character to the stream and returns a reference to the stream.
          * @return A reference to the stream.
          */
@@ -181,7 +148,38 @@ namespace edsp { inline namespace core {
          */
         inline const std::string& name() const;
 
+        /**
+         * @brief Returns the current string buffer
+         * @return String buffer holding the message.
+         */
+        inline std::string str() const;
+
+
+        // clang-format off
+        typedef logger& (*logger_manipulator)(logger&);
+        inline logger& operator<<(logger_manipulator& manipulator);
+        inline logger& operator<<(std::uint8_t);
+        inline logger& operator<<(std::uint16_t);
+        inline logger& operator<<(std::uint32_t);
+        inline logger& operator<<(std::uint64_t);
+        inline logger& operator<<(std::int8_t);
+        inline logger& operator<<(std::int16_t);
+        inline logger& operator<<(std::int32_t);
+        inline logger& operator<<(std::int64_t);
+        inline logger& operator<<(bool);
+        inline logger& operator<<(float);
+        inline logger& operator<<(double);
+        inline logger& operator<<(const char*);
+
+        template <typename Char>
+        inline logger& operator<<(const std::basic_string<Char>& str);
+
+        template <typename Char>
+        inline logger& operator<<(const edsp::basic_string_view<Char>& str);
+        // clang-format on
+
     private:
+
         /**
          * @brief Returns a reference to the global level used in all spdlog-loggers
          *
@@ -200,7 +198,7 @@ namespace edsp { inline namespace core {
          * @return Reference to the global file path
          */
         static std::string& global_path() {
-            static std::string FILE = "";
+            static std::string FILE{};
             return FILE;
         }
 
@@ -216,14 +214,143 @@ namespace edsp { inline namespace core {
         }
 
     private:
+        friend struct logger_impl;
         std::shared_ptr<spdlog::logger> logger_{nullptr};
         logger::levels type_{levels::info};
-        std::string msg_{""};
+        std::stringstream  msg_;
     };
 
+    struct logger_impl {
+        inline static logger& tab(logger& stream) {
+            return stream << '\t';
+        }
+
+        inline static logger& endl(logger& stream) {
+            return stream << '\n';
+        }
+
+        inline static logger& red(logger& stream) {
+            stream.msg_ << termcolor::colorize;
+            stream.msg_ << termcolor::red;
+            return stream;
+        }
+
+        inline static logger& yellow(logger& stream) {
+            stream.msg_ << termcolor::colorize;
+            stream.msg_ << termcolor::yellow;
+            return stream;
+        }
+
+        inline static logger& blue(logger& stream) {
+            stream.msg_ << termcolor::colorize;
+            stream.msg_ << termcolor::blue;
+            return stream;
+        }
+
+        inline static logger& cyan(logger& stream) {
+            stream.msg_ << termcolor::colorize;
+            stream.msg_ << termcolor::cyan;
+            return stream;
+        }
+
+        inline static logger& white(logger& stream) {
+            stream.msg_ << termcolor::colorize;
+            stream.msg_ << termcolor::white;
+            return stream;
+        }
+
+        inline static logger& magenta(logger& stream) {
+            stream.msg_ << termcolor::colorize;
+            stream.msg_ << termcolor::magenta;
+            return stream;
+        }
+
+        inline static logger& green(logger& stream) {
+            stream.msg_ << termcolor::colorize;
+            stream.msg_ << termcolor::green;
+            return stream;
+        }
+
+        inline static logger& grey(logger& stream) {
+            stream.msg_ << termcolor::colorize;
+            stream.msg_ << termcolor::grey;
+            return stream;
+        }
+
+        inline static logger& bold(logger& stream) {
+            stream.msg_ << termcolor::colorize;
+            stream.msg_ << termcolor::bold;
+            return stream;
+        }
+
+        inline static logger& endc(logger& stream) {
+            stream.msg_ << termcolor::nocolorize;
+            stream.msg_ << termcolor::reset;
+            return stream;
+        }
+
+        inline static logger& reset(logger& stream) {
+            stream.msg_ << termcolor::reset;
+            return stream;
+        }
+    };
+
+
+    inline logger& tab(logger& stream) {
+        return logger_impl::tab(stream);
+    }
+
+    inline logger& endl(logger& stream) {
+        return logger_impl::endl(stream);
+    }
+
+    inline logger& red(logger& stream) {
+        return logger_impl::red(stream);
+    }
+
+    inline logger& yellow(logger& stream) {
+        return logger_impl::yellow(stream);
+    }
+
+    inline logger& blue(logger& stream) {
+        return logger_impl::blue(stream);
+    }
+
+    inline logger& cyan(logger& stream) {
+        return logger_impl::cyan(stream);
+    }
+
+    inline logger& white(logger& stream) {
+        return logger_impl::white(stream);
+    }
+
+    inline logger& magenta(logger& stream) {
+        return logger_impl::magenta(stream);
+    }
+
+    inline logger& green(logger& stream) {
+        return logger_impl::green(stream);
+    }
+
+    inline logger& grey(logger& stream) {
+        return logger_impl::grey(stream);
+    }
+
+    inline logger& bold(logger& stream) {
+        return logger_impl::bold(stream);
+    }
+
+    inline logger& endc(logger& stream) {
+        return logger_impl::endc(stream);
+    }
+
+    inline logger& reset(logger& stream) {
+        return logger_impl::reset(stream);
+    }
+
     logger::logger(const edsp::string_view& name, const edsp::string_view& file, logger::levels message_type) :
-        type_(message_type),
-        msg_() {
+            type_(message_type),
+            msg_() {
         logger_ = spdlog::get(name.data());
         if (!logger_) {
             logger_ = spdlog::basic_logger_mt(name.data(), file.data());
@@ -252,68 +379,37 @@ namespace edsp { inline namespace core {
     }
 
     logger::~logger() {
+        edsp::endc(*this);
         switch (type_) {
             case levels::trace:
-                logger_->debug(msg_);
+                logger_->trace(msg_.str());
                 break;
             case levels::debug:
-                logger_->debug(msg_);
+                logger_->debug(msg_.str());
                 break;
             case levels::info:
-                logger_->info(msg_);
+                logger_->info(msg_.str());
                 break;
             case levels::warning:
-                logger_->warn(msg_);
+                logger_->warn(msg_.str());
                 break;
             case levels::critical:
-                logger_->critical(msg_);
+                logger_->critical(msg_.str());
                 break;
             case levels::error:
-                logger_->error(msg_);
+                logger_->error(msg_.str());
                 break;
             default:
                 break;
         }
     }
 
-    logger& logger::operator<<(char character) {
-        msg_ += character;
-        return space();
-    }
-
-    logger& logger::operator<<(bool state) {
-        msg_ += (state ? "true" : "false");
-        return space();
-    }
-
-    logger& logger::operator<<(const edsp::string_view& text) {
-        msg_ += text.data();
-        return space();
-    }
-
-    logger& logger::operator<<(const std::error_code& code) {
-        msg_ += code.message();
-        return space();
-    }
 
     logger& logger::space() {
-        msg_ += ' ';
+        msg_ << ' ';
         return *this;
     }
 
-    template <typename T, typename>
-    logger& logger::operator<<(T number) {
-        msg_ += std::to_string(number);
-        return space();
-    }
-
-    template <typename T, typename>
-    logger& logger::operator<<(const T& object) {
-        std::stringstream serialized;
-        serialized << object;
-        msg_ += serialized.str();
-        return space();
-    }
 
     logger::levels logger::default_level() {
         switch (global_level()) {
@@ -425,6 +521,91 @@ namespace edsp { inline namespace core {
     void logger::set_default_name(const std::string& name) {
         global_name() = name;
     }
+
+    logger &logger::operator<<(logger::logger_manipulator& manipulator) {
+        return manipulator(*this);
+    }
+
+    std::string logger::str() const {
+        return msg_.str();
+    }
+
+    template<typename Char>
+    logger &logger::operator<<(const std::basic_string<Char> &str) {
+        msg_ << str.data();
+        return space();
+    }
+
+    template<typename Char>
+    logger &logger::operator<<(const edsp::basic_string_view<Char> &str) {
+        msg_ << str.data();
+        return space();
+    }
+
+    logger &logger::operator<<(std::uint8_t value) {
+        msg_ << value;
+        return space();
+    }
+
+    logger &logger::operator<<(std::uint16_t value) {
+        msg_ << value;
+        return space();
+    }
+
+    logger &logger::operator<<(std::uint32_t value) {
+        msg_ << value;
+        return space();
+    }
+
+    logger &logger::operator<<(std::uint64_t value) {
+        msg_ << value;
+        return space();
+    }
+
+    logger &logger::operator<<(std::int8_t value) {
+        msg_ << value;
+        return space();
+    }
+
+    logger &logger::operator<<(std::int16_t value) {
+        msg_ << value;
+        return space();
+    }
+
+    logger &logger::operator<<(std::int32_t value) {
+        msg_ << value;
+        return space();
+    }
+
+    logger &logger::operator<<(std::int64_t value) {
+        msg_ << value;
+        return space();
+    }
+
+    logger &logger::operator<<(float value) {
+        msg_ << value;
+        return space();
+    }
+
+    logger &logger::operator<<(double value) {
+        msg_ << value;
+        return space();
+    }
+
+    logger &logger::operator<<(const char *str) {
+        msg_ << str;
+        return space();
+    }
+
+    logger &logger::operator<<(bool value) {
+        msg_ << (value ? "true" : "false");
+        return space();
+    }
+
+    void logger::set_pattern(const std::string &pattern) {
+        spdlog::set_pattern(pattern);
+    }
+
 
 }} // namespace edsp::core
 
