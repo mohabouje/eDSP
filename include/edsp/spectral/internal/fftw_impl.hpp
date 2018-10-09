@@ -49,17 +49,17 @@ namespace edsp { inline namespace spectral { inline namespace internal {
     }
 
     template <typename T>
-    struct fftw_plan {};
+    struct fft_impl {};
 
     template <>
-    struct fftw_plan<float> {
+    struct fft_impl<float> {
         using value_type   = float;
         using complex_type = fftwf_complex;
         using size_type    = int;
 
         ::fftwf_plan plan_{nullptr};
-        fftw_plan() = default;
-        ~fftw_plan() {
+        fft_impl() = default;
+        ~fft_impl() {
             if (!meta::is_null(plan_)) {
                 fftwf_destroy_plan(plan_);
             }
@@ -163,14 +163,14 @@ namespace edsp { inline namespace spectral { inline namespace internal {
     };
 
     template <>
-    struct fftw_plan<double> {
+    struct fft_impl<double> {
         using value_type   = double;
         using complex_type = fftw_complex;
         using size_type    = int;
 
         ::fftw_plan plan_{nullptr};
-        fftw_plan() = default;
-        ~fftw_plan() {
+        fft_impl() = default;
+        ~fft_impl() {
             if (!meta::is_null(plan_)) {
                 fftw_destroy_plan(plan_);
             }

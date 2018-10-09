@@ -52,7 +52,7 @@ namespace edsp { inline namespace spectral {
     inline void periodogram(InputIt first, InputIt last, OutputIt d_first, SpectralScale scale) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
-        fftw_plan<value_type> fft_{};
+        fft_impl<value_type> fft_{};
         const auto size = std::distance(first, last);
         std::vector<std::complex<value_type>, Allocator> fft_data_(make_fft_size(size), std::complex<value_type>(0, 0));
         fft_.dft(fftw_cast(&(*first)), fftw_cast(meta::data(fft_data_)), size);

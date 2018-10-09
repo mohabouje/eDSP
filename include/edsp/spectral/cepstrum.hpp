@@ -45,8 +45,8 @@ namespace edsp { inline namespace spectral {
     inline void cepstrum(InputIt first, InputIt last, OutputIt d_first) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
-        fftw_plan<value_type> fft_{};
-        fftw_plan<value_type> ifft_{};
+        fft_impl<value_type> fft_{};
+        fft_impl<value_type> ifft_{};
         const auto size = std::distance(first, last);
         const auto nfft = 2 * size;
 

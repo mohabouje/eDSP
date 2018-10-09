@@ -50,13 +50,13 @@ namespace edsp { inline namespace spectral {
               typename Allocator = std::allocator<std::complex<meta::value_type_t<InputIt>>>>
     inline void hilbert(InputIt first, InputIt last, OutputIt d_first) {
         using value_type = meta::value_type_t<InputIt>;
-        const auto nfft  = static_cast<typename fftw_plan<value_type>::size_type>(std::distance(first, last));
+        const auto nfft  = static_cast<typename fft_impl<value_type>::size_type>(std::distance(first, last));
 
         std::vector<std::complex<value_type>, Allocator> input_data(nfft);
         std::vector<std::complex<value_type>, Allocator> complex_data(nfft);
         edsp::real2complex(first, last, std::begin(input_data));
 
-        fftw_plan<value_type> fft;
+        fft_impl<value_type> fft;
         fft.dft(fftw_cast(meta::data(input_data)), fftw_cast(meta::data(complex_data)), nfft);
 
         const auto limit_1 = math::is_even(nfft) ? nfft / 2 : (nfft + 1) / 2;
@@ -69,7 +69,7 @@ namespace edsp { inline namespace spectral {
             complex_data[i] = std::complex<value_type>(0, 0);
         }
 
-        fftw_plan<value_type> ifft;
+        fft_impl<value_type> ifft;
         ifft.idft(fftw_cast(meta::data(complex_data)), fftw_cast(&(*d_first)), nfft);
         ifft.idft_scale(fftw_cast(&(*d_first)), nfft);
     }
