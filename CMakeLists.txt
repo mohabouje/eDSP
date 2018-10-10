@@ -19,7 +19,8 @@ option(ENABLE_WARNINGS "Enable all warning during compilation" ON)
 option(ENABLE_DEBUG_INFORMATION "Enable debug information, useful for profiling and debugging tools" OFF)
 option(USE_SNDFILE "Use the library SndFile to encode/decode audio files" OFF)
 option(USE_AUDIOFILE "Use the library AudioFile to encode/decode audio files" ON)
-option(USE_FFTW "Use the library FFTW to encode/decode audio files" ON)
+option(USE_KISS "Use the library Kiss FFT to encode/decode audio files" ON)
+option(USE_FFTW "Use the library FFTW to encode/decode audio files" OFF)
 
 # Add the C++ Standard
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++14")
@@ -64,7 +65,9 @@ if (USE_FFTW)
     else()
         message(FATAL_ERROR "Library FFTW not found")
     endif(FFTW_LIB)
-endif(USE_FFTW)
+else()
+    add_definitions(-DUSE_KISS)
+endif()
 
 if (USE_AUDIOFILE)
     find_library(AUDIOFILE_LIB NAMES laudiofile libaudiofile audiofile)
@@ -84,10 +87,6 @@ if (USE_SNDFILE)
     else()
         message(FATAL_ERROR "Library SndFile not found")
     endif(SNDFILE_LIB)
-endif()
-
-if (USE_SPDLOG)
-    add_definitions(-DUSE_SPDLOG)
 endif()
 
 

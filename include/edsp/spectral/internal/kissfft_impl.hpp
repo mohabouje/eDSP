@@ -45,33 +45,33 @@ namespace edsp { inline namespace spectral {
 
         inline void dft(const complex_type *src, complex_type *dst, size_type nfft) {
             if (meta::is_null(plan_)) {
-                plan_ = std::make_unique<kissfft>(nfft, false);
+                plan_ = std::make_unique<kissfft<T, Allocator>>(nfft, false);
             }
             plan_->transform(src, dst);
         }
 
         inline void idft(const complex_type *src, complex_type *dst, size_type nfft) {
             if (meta::is_null(plan_)) {
-                plan_ = std::make_unique<kissfft>(nfft, true);
+                plan_ = std::make_unique<kissfft<T, Allocator>>(nfft, true);
             }
             plan_->transform(src, dst);
         }
 
         inline void dft(const value_type *src, complex_type *dst, size_type nfft) {
             if (meta::is_null(plan_)) {
-                plan_ = std::make_unique<kissfft>(nfft, false);
+                plan_ = std::make_unique<kissfft<T, Allocator>>(nfft, false);
             }
             plan_->transform_real(src, dst);
         }
 
         inline void idft(const complex_type *src, value_type *dst, size_type nfft) {
             if (meta::is_null(plan_)) {
-                plan_ = std::make_unique<kissfft>(nfft, true);
+                plan_ = std::make_unique<kissfft<T, Allocator>>(nfft, true);
             }
 
             std::vector<complex_type, Allocator> input_ifft(nfft), output_ifft(nfft);
             std::copy(src, src + nfft / 2, std::begin(input_ifft));
-            for (auto i = 0, N = nfft / 2; i < N; ++i) {
+            for (auto i = 0ul, N = nfft / 2; i < N; ++i) {
                 input_ifft[2 * N - i] = std::conj(input_ifft[i]);
             }
             plan_->transform(input_ifft.data(), output_ifft.data());
@@ -114,7 +114,7 @@ namespace edsp { inline namespace spectral {
         }
 
     private:
-        std::unique_ptr<kissfft> plan_{nullptr};
+        std::unique_ptr<kissfft<T>> plan_{nullptr};
     };
 
 }}

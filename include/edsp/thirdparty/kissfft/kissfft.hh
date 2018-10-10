@@ -15,7 +15,7 @@
 #include <algorithm>
 
 
-template <typename scalar_t, typename Allocator = std::allocator<std::complex<scalar_t>>>
+template <typename scalar_t>
 class kissfft
 {
     public:
@@ -353,7 +353,7 @@ class kissfft
 
         std::size_t _nfft;
         bool _inverse;
-        std::vector<cpx_t, Allocator> _twiddles;
+        std::vector<cpx_t> _twiddles;
         std::vector<std::size_t> _stageRadix;
         std::vector<std::size_t> _stageRemainder;
 };
