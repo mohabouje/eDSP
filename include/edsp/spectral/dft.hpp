@@ -67,7 +67,7 @@ namespace edsp { inline namespace spectral {
         using underlying_t = typename complex_t::value_type;
         const auto nfft    = static_cast<typename fft_impl<underlying_t>::size_type>(std::distance(first, last));
         fft_impl<underlying_t> plan;
-        plan.dft(fftw_cast(&(*first)), fftw_cast(&(*d_first)), nfft);
+        plan.dft(&(*first), &(*d_first), nfft);
     }
 
     /**
@@ -91,8 +91,8 @@ namespace edsp { inline namespace spectral {
         using underlying_t = typename complex_t::value_type;
         const auto nfft    = static_cast<typename fft_impl<underlying_t>::size_type>(std::distance(first, last));
         fft_impl<underlying_t> plan;
-        plan.idft(fftw_cast(&(*first)), fftw_cast(&(*d_first)), nfft);
-        plan.idft_scale(fftw_cast(&(*d_first)), nfft);
+        plan.idft(&(*first), &(*d_first), nfft);
+        plan.idft_scale(&(*d_first), nfft);
     }
 
     /**
@@ -112,8 +112,7 @@ namespace edsp { inline namespace spectral {
     void dft(InputIt first, InputIt last, OutputIt d_first) {
         using value_type = typename std::iterator_traits<InputIt>::value_type;
         fft_impl<value_type> plan;
-        plan.dft(fftw_cast(&(*first)), fftw_cast(&(*d_first)),
-                 static_cast<typename fft_impl<value_type>::size_type>(std::distance(first, last)));
+        plan.dft(&(*first), &(*d_first), static_cast<typename fft_impl<value_type>::size_type>(std::distance(first, last)));
     }
 
     /**
@@ -135,7 +134,7 @@ namespace edsp { inline namespace spectral {
         const auto nfft =
             static_cast<typename fft_impl<value_type>::size_type>(make_ifft_size(std::distance(first, last)));
         fft_impl<value_type> plan;
-        plan.idft(fftw_cast(&(*first)), fftw_cast(&(*d_first)), nfft);
+        plan.idft(&(*first), &(*d_first), nfft);
         plan.idft_scale(fftw_cast(&(*d_first)), nfft);
     }
 

@@ -59,13 +59,13 @@ namespace edsp { inline namespace spectral {
         std::copy(first, last, std::begin(temp_input));
 
         std::vector<std::complex<value_type>, CAllocator> fft_data_(make_fft_size(nfft));
-        fft_.dft(fftw_cast(meta::data(temp_input)), fftw_cast(meta::data(fft_data_)), nfft);
+        fft_.dft(meta::data(temp_input), meta::data(fft_data_), nfft);
 
         std::transform(
             std::cbegin(fft_data_), std::cend(fft_data_), std::begin(fft_data_),
             [](const std::complex<value_type>& val) -> std::complex<value_type> { return val * std::conj(val); });
 
-        ifft_.idft(fftw_cast(meta::data(fft_data_)), fftw_cast(meta::data(temp_output)), nfft);
+        ifft_.idft(meta::data(fft_data_), meta::data(temp_output), nfft);
         const auto factor = static_cast<value_type>(nfft * (scale == CorrelationScale::Biased ? nfft : 1));
         std::transform(std::cbegin(temp_output), std::cbegin(temp_output) + size, d_first,
                        [factor](value_type val) { return val / factor; });
@@ -109,14 +109,14 @@ namespace edsp { inline namespace spectral {
         std::vector<std::complex<value_type>, CAllocator> fft_data1(make_fft_size(nfft));
         std::vector<std::complex<value_type>, CAllocator> fft_data2(make_fft_size(nfft));
 
-        fft_.dft(fftw_cast(meta::data(temp_input1)), fftw_cast(meta::data(fft_data1)), nfft);
-        fft_.dft(fftw_cast(meta::data(temp_input2)), fftw_cast(meta::data(fft_data2)), nfft);
+        fft_.dft(meta::data(temp_input1), meta::data(fft_data1), nfft);
+        fft_.dft(meta::data(temp_input2), meta::data(fft_data2), nfft);
 
         std::transform(std::cbegin(fft_data1), std::cend(fft_data1), std::cbegin(fft_data2), std::begin(fft_data1),
                        [](const std::complex<value_type>& left, const std::complex<value_type>& right)
                            -> std::complex<value_type> { return left * std::conj(right); });
 
-        ifft_.idft(fftw_cast(meta::data(fft_data1)), fftw_cast(meta::data(temp_output)), nfft);
+        ifft_.idft(meta::data(fft_data1), meta::data(temp_output), nfft);
         const auto factor = static_cast<value_type>(nfft * (scale == CorrelationScale::Biased ? nfft : 1));
         std::transform(std::cbegin(temp_output), std::cbegin(temp_output) + size, d_first,
                        [factor](value_type val) { return val / factor; });

@@ -35,18 +35,22 @@
 #include <algorithm>
 
 namespace edsp { inline namespace spectral {
-    template <typename T>
-    inline T* fftw_cast(const T* p) noexcept {
-        return const_cast<T*>(p);
-    }
+    inline namespace internal {
+        template <typename T>
+        inline T* fftw_cast(const T* p) noexcept {
+            return const_cast<T*>(p);
+        }
 
-    inline fftwf_complex* fftw_cast(const std::complex<float>* p) {
-        return const_cast<fftwf_complex*>(reinterpret_cast<const fftwf_complex*>(p));
-    }
+        inline fftwf_complex* fftw_cast(const std::complex<float>* p) {
+            return const_cast<fftwf_complex*>(reinterpret_cast<const fftwf_complex*>(p));
+        }
 
-    inline fftw_complex* fftw_cast(const std::complex<double>* p) {
-        return const_cast<fftw_complex*>(reinterpret_cast<const fftw_complex*>(p));
+        inline fftw_complex* fftw_cast(const std::complex<double>* p) {
+            return const_cast<fftw_complex*>(reinterpret_cast<const fftw_complex*>(p));
+        }    
     }
+   
+
 
     template <typename T>
     struct fftw_impl {};
@@ -54,7 +58,7 @@ namespace edsp { inline namespace spectral {
     template <>
     struct fftw_impl<float> {
         using value_type   = float;
-        using complex_type = fftwf_complex;
+        using complex_type = std::complex<float>;
         using size_type    = int;
 
         ::fftwf_plan plan_{nullptr};
@@ -65,41 +69,41 @@ namespace edsp { inline namespace spectral {
             }
         }
 
-        inline void dft(complex_type* src, complex_type* dst, size_type nfft) {
+        inline void dft(const complex_type* src, complex_type* dst, size_type nfft) {
             if (meta::is_null(plan_))
-                plan_ = fftwf_plan_dft_1d(nfft, src, dst, FFTW_FORWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
-            fftwf_execute_dft(plan_, src, dst);
+                plan_ = fftwf_plan_dft_1d(nfft, fftw_cast(src), fftw_cast(dst), FFTW_FORWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+            fftwf_execute_dft(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
-        inline void idft(complex_type* src, complex_type* dst, size_type nfft) {
+        inline void idft(const complex_type* src, complex_type* dst, size_type nfft) {
             if (meta::is_null(plan_)) {
-                plan_ = fftwf_plan_dft_1d(nfft, src, dst, FFTW_BACKWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ = fftwf_plan_dft_1d(nfft, fftw_cast(src), fftw_cast(dst), FFTW_BACKWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
-            fftwf_execute_dft(plan_, src, dst);
+            fftwf_execute_dft(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
-        inline void dft(value_type* src, complex_type* dst, size_type nfft) {
+        inline void dft(const value_type* src, complex_type* dst, size_type nfft) {
             if (meta::is_null(plan_)) {
-                plan_ = fftwf_plan_dft_r2c_1d(nfft, src, dst, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ = fftwf_plan_dft_r2c_1d(nfft, fftw_cast(src), fftw_cast(dst), FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
-            fftwf_execute_dft_r2c(plan_, src, dst);
+            fftwf_execute_dft_r2c(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
-        inline void idft(complex_type* src, value_type* dst, size_type nfft) {
+        inline void idft(const complex_type* src, value_type* dst, size_type nfft) {
             if (meta::is_null(plan_)) {
-                plan_ = fftwf_plan_dft_c2r_1d(nfft, src, dst, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ = fftwf_plan_dft_c2r_1d(nfft, fftw_cast(src), fftw_cast(dst), FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
-            fftwf_execute_dft_c2r(plan_, src, dst);
+            fftwf_execute_dft_c2r(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
-        inline void dht(value_type* src, value_type* dst, size_type nfft) {
+        inline void dht(const value_type* src, value_type* dst, size_type nfft) {
             if (meta::is_null(plan_)) {
-                plan_ = fftwf_plan_r2r_1d(nfft, src, dst, FFTW_DHT, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ = fftwf_plan_r2r_1d(nfft, fftw_cast(src), fftw_cast(dst), FFTW_DHT, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
-            fftwf_execute_r2r(plan_, src, dst);
+            fftwf_execute_r2r(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
-        inline void dct(value_type* src, value_type* dst, size_type nfft, DCT_Type type) {
+        inline void dct(const value_type* src, value_type* dst, size_type nfft, DCT_Type type) {
             if (meta::is_null(plan_)) {
                 const auto plan_type = [type]() {
                     switch (type) {
@@ -112,14 +116,13 @@ namespace edsp { inline namespace spectral {
                         case DCT_Type::Type_IV:
                             return FFTW_REDFT11;
                     }
-                    return FFTW_REDFT00;
                 }();
-                plan_ = fftwf_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ = fftwf_plan_r2r_1d(nfft, fftw_cast(src), fftw_cast(dst), plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
-            fftwf_execute_r2r(plan_, src, dst);
+            fftwf_execute_r2r(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
-        inline void idct(value_type* src, value_type* dst, size_type nfft, DCT_Type type) {
+        inline void idct(const value_type* src, value_type* dst, size_type nfft, DCT_Type type) {
             if (meta::is_null(plan_)) {
                 const auto plan_type = [type]() {
                     switch (type) {
@@ -132,11 +135,10 @@ namespace edsp { inline namespace spectral {
                         case DCT_Type::Type_IV:
                             return FFTW_REDFT11;
                     }
-                    return FFTW_REDFT00;
                 }();
-                plan_ = fftwf_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ = fftwf_plan_r2r_1d(nfft, fftw_cast(src), fftw_cast(dst), plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
-            fftwf_execute_r2r(plan_, src, dst);
+            fftwf_execute_r2r(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
         inline void idft_scale(value_type* dst, size_type nfft) {
@@ -149,8 +151,7 @@ namespace edsp { inline namespace spectral {
         inline void idft_scale(complex_type* dst, size_type nfft) {
             const auto scaling = static_cast<value_type>(nfft);
             for (size_type i = 0; i < nfft; ++i) {
-                dst[i][0] /= scaling;
-                dst[i][1] /= scaling;
+                dst[i] /= scaling;
             }
         }
 
@@ -165,7 +166,7 @@ namespace edsp { inline namespace spectral {
     template <>
     struct fftw_impl<double> {
         using value_type   = double;
-        using complex_type = fftw_complex;
+        using complex_type = std::complex<double>;
         using size_type    = int;
 
         ::fftw_plan plan_{nullptr};
@@ -176,38 +177,38 @@ namespace edsp { inline namespace spectral {
             }
         }
 
-        inline void dft(complex_type* src, complex_type* dst, size_type nfft) {
+        inline void dft(const complex_type* src, complex_type* dst, size_type nfft) {
             if (meta::is_null(plan_))
-                plan_ = fftw_plan_dft_1d(nfft, src, dst, FFTW_FORWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
-            fftw_execute_dft(plan_, src, dst);
+                plan_ = fftw_plan_dft_1d(nfft, fftw_cast(src), fftw_cast(dst), FFTW_FORWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+            fftw_execute_dft(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
-        inline void idft(complex_type* src, complex_type* dst, size_type nfft) {
+        inline void idft(const complex_type* src, complex_type* dst, size_type nfft) {
             if (meta::is_null(plan_))
-                plan_ = fftw_plan_dft_1d(nfft, src, dst, FFTW_BACKWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
-            fftw_execute_dft(plan_, src, dst);
+                plan_ = fftw_plan_dft_1d(nfft, fftw_cast(src), fftw_cast(dst), FFTW_BACKWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+            fftw_execute_dft(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
-        inline void dft(value_type* src, complex_type* dst, size_type nfft) {
+        inline void dft(const value_type* src, complex_type* dst, size_type nfft) {
             if (meta::is_null(plan_))
-                plan_ = fftw_plan_dft_r2c_1d(nfft, src, dst, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
-            fftw_execute_dft_r2c(plan_, src, dst);
+                plan_ = fftw_plan_dft_r2c_1d(nfft, fftw_cast(src), fftw_cast(dst), FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+            fftw_execute_dft_r2c(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
-        inline void idft(complex_type* src, value_type* dst, size_type nfft) {
+        inline void idft(const complex_type* src, value_type* dst, size_type nfft) {
             if (meta::is_null(plan_))
-                plan_ = fftw_plan_dft_c2r_1d(nfft, src, dst, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
-            fftw_execute_dft_c2r(plan_, src, dst);
+                plan_ = fftw_plan_dft_c2r_1d(nfft, fftw_cast(src), fftw_cast(dst), FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+            fftw_execute_dft_c2r(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
-        inline void dht(value_type* src, value_type* dst, size_type nfft) {
+        inline void dht(const value_type* src, value_type* dst, size_type nfft) {
             if (meta::is_null(plan_)) {
-                plan_ = fftw_plan_r2r_1d(nfft, src, dst, FFTW_DHT, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ = fftw_plan_r2r_1d(nfft, fftw_cast(src), fftw_cast(dst), FFTW_DHT, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
-            fftw_execute_r2r(plan_, src, dst);
+            fftw_execute_r2r(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
-        inline void dct(value_type* src, value_type* dst, size_type nfft, DCT_Type type) {
+        inline void dct(const value_type* src, value_type* dst, size_type nfft, DCT_Type type) {
             if (meta::is_null(plan_)) {
                 const auto plan_type = [type]() {
                     switch (type) {
@@ -220,14 +221,13 @@ namespace edsp { inline namespace spectral {
                         case DCT_Type::Type_IV:
                             return FFTW_REDFT11;
                     }
-                    return FFTW_REDFT00;
                 }();
-                plan_ = fftw_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ = fftw_plan_r2r_1d(nfft, fftw_cast(src), fftw_cast(dst), plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
-            fftw_execute_r2r(plan_, src, dst);
+            fftw_execute_r2r(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
-        inline void idct(value_type* src, value_type* dst, size_type nfft, DCT_Type type) {
+        inline void idct(const value_type* src, value_type* dst, size_type nfft, DCT_Type type) {
             if (meta::is_null(plan_)) {
                 const auto plan_type = [type]() {
                     switch (type) {
@@ -240,11 +240,10 @@ namespace edsp { inline namespace spectral {
                         case DCT_Type::Type_IV:
                             return FFTW_REDFT11;
                     }
-                    return FFTW_REDFT00;
                 }();
-                plan_ = fftw_plan_r2r_1d(nfft, src, dst, plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ = fftw_plan_r2r_1d(nfft, fftw_cast(src), fftw_cast(dst), plan_type, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
-            fftw_execute_r2r(plan_, src, dst);
+            fftw_execute_r2r(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
         inline void idft_scale(value_type* dst, size_type nfft) {
@@ -257,8 +256,7 @@ namespace edsp { inline namespace spectral {
         inline void idft_scale(complex_type* dst, size_type nfft) {
             const auto scaling = static_cast<value_type>(nfft);
             for (size_type i = 0; i < nfft; ++i) {
-                dst[i][0] /= scaling;
-                dst[i][1] /= scaling;
+                dst[i] /= scaling;
             }
         }
 

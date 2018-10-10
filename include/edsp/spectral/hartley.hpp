@@ -47,7 +47,7 @@ namespace edsp { inline namespace spectral {
     inline void hartley(InputIt first, InputIt last, OutputIt d_first) {
         using value_type = meta::value_type_t<InputIt>;
         fft_impl<value_type> plan;
-        plan.dht(fftw_cast(&(*first)), fftw_cast(&(*d_first)),
+        plan.dht(&(*first), &(*d_first),
                  static_cast<typename fft_impl<value_type>::size_type>(std::distance(first, last)));
     }
 

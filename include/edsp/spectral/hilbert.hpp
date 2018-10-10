@@ -57,7 +57,7 @@ namespace edsp { inline namespace spectral {
         edsp::real2complex(first, last, std::begin(input_data));
 
         fft_impl<value_type> fft;
-        fft.dft(fftw_cast(meta::data(input_data)), fftw_cast(meta::data(complex_data)), nfft);
+        fft.dft(meta::data(input_data), meta::data(complex_data), nfft);
 
         const auto limit_1 = math::is_even(nfft) ? nfft / 2 : (nfft + 1) / 2;
         const auto limit_2 = math::is_even(nfft) ? limit_1 + 1 : limit_1;
@@ -70,8 +70,8 @@ namespace edsp { inline namespace spectral {
         }
 
         fft_impl<value_type> ifft;
-        ifft.idft(fftw_cast(meta::data(complex_data)), fftw_cast(&(*d_first)), nfft);
-        ifft.idft_scale(fftw_cast(&(*d_first)), nfft);
+        ifft.idft(meta::data(complex_data), &(*d_first), nfft);
+        ifft.idft_scale(&(*d_first), nfft);
     }
 
 }} // namespace edsp::spectral

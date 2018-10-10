@@ -64,13 +64,13 @@ namespace edsp { inline namespace spectral {
         std::vector<std::complex<value_type>, CAllocator> fft_data1(make_fft_size(nfft));
         std::vector<std::complex<value_type>, CAllocator> fft_data2(make_fft_size(nfft));
 
-        fft_.dft(fftw_cast(meta::data(temp_input1)), fftw_cast(meta::data(fft_data1)), nfft);
-        fft_.dft(fftw_cast(meta::data(temp_input2)), fftw_cast(meta::data(fft_data2)), nfft);
+        fft_.dft(meta::data(temp_input1), meta::data(fft_data1), nfft);
+        fft_.dft(meta::data(temp_input2), meta::data(fft_data2), nfft);
 
         std::transform(std::cbegin(fft_data1), std::cend(fft_data1), std::cbegin(fft_data2), std::begin(fft_data1),
                        std::multiplies<>());
 
-        ifft_.idft(fftw_cast(meta::data(fft_data1)), fftw_cast(meta::data(temp_output)), nfft);
+        ifft_.idft(meta::data(fft_data1), meta::data(temp_output), nfft);
         std::copy(std::cbegin(temp_output), std::cbegin(temp_output) + size, d_first);
         ifft_.idft_scale(fftw_cast(&(*d_first)), size);
     }
