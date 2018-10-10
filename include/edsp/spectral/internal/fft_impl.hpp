@@ -24,7 +24,6 @@
 #define EDSP_FFT_IMPL_HPP
 
 #include <edsp/spectral/internal/fftw_impl.hpp>
-#include <edsp/spectral/internal/kissfft_impl.hpp>
 
 namespace edsp { inline namespace spectral {
 
@@ -32,11 +31,9 @@ namespace edsp { inline namespace spectral {
     template <typename T>
     using fft_impl = spectral::fftw_impl<T>;
 #elif defined(USE_KISS)
-    template <typename T>
-    using fft_impl = spectral::kissfft_impl<T>;
+# error "Not implemented yet"
 #elif defined(USE_APPLE)
-    template <typename T>
-    using fft_impl = spectral::afft_impl<T>;
+#error  "Not implemented yet"
 #else
 #    error "Library not found"
 #endif
