@@ -61,7 +61,6 @@ namespace edsp { inline namespace spectral {
         using complex_type = std::complex<float>;
         using size_type    = int;
 
-        ::fftwf_plan plan_{nullptr};
         fftw_impl() = default;
         ~fftw_impl() {
             if (!meta::is_null(plan_)) {
@@ -161,6 +160,8 @@ namespace edsp { inline namespace spectral {
                 dst[i] /= scaling;
             }
         }
+    private:
+        ::fftwf_plan plan_{nullptr};
     };
 
     template <>
@@ -169,7 +170,6 @@ namespace edsp { inline namespace spectral {
         using complex_type = std::complex<double>;
         using size_type    = int;
 
-        ::fftw_plan plan_{nullptr};
         fftw_impl() = default;
         ~fftw_impl() {
             if (!meta::is_null(plan_)) {
@@ -266,6 +266,8 @@ namespace edsp { inline namespace spectral {
                 dst[i] /= scaling;
             }
         }
+    private:
+        ::fftw_plan plan_{nullptr};
     };
 }} // namespace edsp::spectral
 

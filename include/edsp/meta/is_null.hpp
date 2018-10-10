@@ -26,6 +26,7 @@
 #include <edsp/meta/data.hpp>
 #include <edsp/meta/unused.hpp>
 #include <cstring>
+#include <memory>
 
 namespace edsp { namespace meta {
 
@@ -48,6 +49,16 @@ namespace edsp { namespace meta {
 
     constexpr bool is_null(const char* str) noexcept {
         return str == nullptr || (strlen(str) == 0);
+    }
+
+    template <class T>
+    constexpr bool is_null(const std::unique_ptr<T>& smart) noexcept {
+        return is_null(smart.get());
+    }
+
+    template <class T>
+    constexpr bool is_null(const std::shared_ptr<T>& smart) noexcept {
+        return is_null(smart.get());
     }
 
 }} // namespace edsp::meta
