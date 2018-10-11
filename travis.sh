@@ -10,6 +10,14 @@ showinfo() { echo -e "${BG}$1${NC}"; }
 workingprocess() { echo -e "${BB}$1${NC}"; }
 allert () { echo -e "${RED}$1${NC}"; }
 
+showinfo "Building and installing extensions"
+cd extension
+mkdir build && cd build
+cmake .. && make -j8
+sudo make install
+cd .. && cd ..
+
+
 showinfo "Building the library..."
 mkdir -p build
 cd build
