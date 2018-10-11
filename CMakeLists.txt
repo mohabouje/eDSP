@@ -13,6 +13,7 @@ option(BUILD_TESTS "Enable to build tests" ON)
 option(BUILD_DOCS "Enable to build docs" OFF)
 option(BUILD_EXAMPLES "Enable to build examples" ON)
 option(BUILD_TOOLS "Enable to build tools" ON)
+option(BUILD_BENCHMARKS "Enable to build benchmarks" ON)
 option(BUILD_EXTENSIONS "Enable the option to build the extension libraries" ON)
 option(ENABLE_COVERAGE "Enable the code coverage" OFF)
 option(ENABLE_OPTIMIZATIONS "Enable all the optimizations, in release mode" ON)
@@ -25,8 +26,6 @@ option(USE_LIBFFTW "Use the library FFTW to encode/decode audio files" OFF)
 option(USE_LIBSAMPLERATE "Use the library libsamplerate to resample audio data" ON)
 option(USE_LIBRESAMPLE "Use the library libresample to resample audio data" ON)
 
-# Add the C++ Standard
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  -std=c++14")
 
 # Add some useful definitions
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
@@ -139,6 +138,10 @@ if (BUILD_EXTENSIONS)
     target_link_libraries (${LIB_NAME} INTERFACE ${EDSP_EXTENSION_LIBRARIES})
     target_include_directories (${LIB_NAME} INTERFACE ${EDSP_EXTENSION_INCLUDE_DIRS})
 endif(BUILD_EXTENSIONS)
+
+if (BUILD_BENCHMARKS)
+    add_subdirectory(benchmark)
+endif(BUILD_BENCHMARKS)
 
 if (BUILD_TESTS)
     enable_testing()

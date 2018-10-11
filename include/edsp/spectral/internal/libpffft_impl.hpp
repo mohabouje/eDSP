@@ -175,7 +175,7 @@ namespace edsp { inline namespace spectral {
         }
 
         inline void dft(const complex_type* src, complex_type* dst) {
-            if (!meta::is_null(plan_)) {
+            if (meta::is_null(plan_)) {
                 plan_ = pffft_new_setup(nfft_, PFFFT_COMPLEX);
             }
             pffft_transform_ordered(plan_, reinterpret_cast<const float*>(src),
@@ -183,7 +183,7 @@ namespace edsp { inline namespace spectral {
         }
 
         inline void idft(const complex_type* src, complex_type* dst) {
-            if (!meta::is_null(plan_)) {
+            if (meta::is_null(plan_)) {
                 plan_ = pffft_new_setup(nfft_, PFFFT_COMPLEX);
             }
             pffft_transform_ordered(plan_, reinterpret_cast<const float*>(src),
@@ -191,14 +191,14 @@ namespace edsp { inline namespace spectral {
         }
 
         inline void dft(const value_type* src, complex_type* dst) {
-            if (!meta::is_null(plan_)) {
+            if (meta::is_null(plan_)) {
                 plan_ = pffft_new_setup(nfft_, PFFFT_REAL);
             }
             pffft_transform_ordered(plan_, src, reinterpret_cast<float*>(dst), work_, PFFFT_FORWARD);
         }
 
         inline void idft(const complex_type* src, value_type* dst) {
-            if (!meta::is_null(plan_)) {
+            if (meta::is_null(plan_)) {
                 plan_ = pffft_new_setup(nfft_, PFFFT_REAL);
             }
             pffft_transform_ordered(plan_, reinterpret_cast<const float*>(src), dst, work_, PFFFT_BACKWARD);
