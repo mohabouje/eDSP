@@ -13,6 +13,7 @@ option(BUILD_TESTS "Enable to build tests" ON)
 option(BUILD_DOCS "Enable to build docs" OFF)
 option(BUILD_EXAMPLES "Enable to build examples" ON)
 option(BUILD_TOOLS "Enable to build tools" ON)
+option(BUILD_EXTENSIONS "Enable the compilation of third-party tools" ON)
 option(ENABLE_COVERAGE "Enable the code coverage" OFF)
 option(ENABLE_OPTIMIZATIONS "Enable all the optimizations, in release mode" ON)
 option(ENABLE_WARNINGS "Enable all warning during compilation" ON)
@@ -33,18 +34,22 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 
 # Add all the warnings, if it is enabled
 if (ENABLE_WARNINGS)
+    set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-show-option -pedantic -Wall -Wextra -Wunreachable-code")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-show-option -pedantic -Wall -Wextra -Wunreachable-code")
 endif (ENABLE_WARNINGS)
 
 # Add optimization, if enabled and release mode
 if (ENABLE_OPTIMIZATIONS)
+    set(CMAKE_C_FLAGS_RELEASE  "${CMAKE_C_FLAGS_RELEASE} -march=native -o3 -ofast -frename-registers -funroll-loops")
     set(CMAKE_CXX_FLAGS_RELEASE  "${CMAKE_CXX_FLAGS_RELEASE} -march=native -o3 -ofast -frename-registers -funroll-loops")
 endif(ENABLE_OPTIMIZATIONS)
 
 # Add the debug information, if it is enabled
 if (ENABLE_DEBUG_INFORMATION)
+    set(CMAKE_C_FLAGS "${CMAKE_CXX_FLAGS} -g")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 endif (ENABLE_DEBUG_INFORMATION)
+
 
 # Set the default build type
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/CMakeCache.txt)
@@ -90,6 +95,13 @@ if (USE_LIBSNDFILE)
         message(FATAL_ERROR "Library SndFile not found")
     endif(SNDFILE_LIB)
 endif()
+
+# Add the precompiled extension with third-party tools
+if (BUILD_EXTENSIONS)
+    add_subdirectory(extension)
+    list(APPEND ${EDSP_DEPENDENCIES} pffft edsp-extension)
+endif()
+
 
 
 if (USE_LIBSAMPLERATE)
