@@ -10,6 +10,13 @@ showinfo() { echo -e "${BG}$1${NC}"; }
 workingprocess() { echo -e "${BB}$1${NC}"; }
 allert () { echo -e "${RED}$1${NC}"; }
 
+showinfo "Download and install google benchmark"
+git clone https://github.com/google/benchmark.git
+cd benchmark
+cmake . && make -j8
+sudo make install
+cd ..
+
 showinfo "Building and installing extensions"
 cd extension
 mkdir build && cd build
