@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['triangular',['Triangular',['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6a241f88afa7becb8633ca074c48e0d77c',1,'edsp::oscillators::Triangular()'],['../d3/d0f/namespaceedsp_1_1windowing.html#a18fb11a4c3c068f95176d9938e662709a241f88afa7becb8633ca074c48e0d77c',1,'edsp::windowing::Triangular()']]],
-  ['type_5fi',['Type_I',['../d6/de9/namespaceedsp_1_1spectral.html#ab83d29951235344aee5cb0b40f17f91caacd20a348a5c2b33a193bd82b393b25c',1,'edsp::spectral']]],
-  ['type_5fii',['Type_II',['../d6/de9/namespaceedsp_1_1spectral.html#ab83d29951235344aee5cb0b40f17f91caa793df4b4894903a72f65752af01faf5',1,'edsp::spectral']]],
-  ['type_5fiii',['Type_III',['../d6/de9/namespaceedsp_1_1spectral.html#ab83d29951235344aee5cb0b40f17f91ca3e8f131c71174ddb2e24bdfb65d7bbee',1,'edsp::spectral']]],
-  ['type_5fiv',['Type_IV',['../d6/de9/namespaceedsp_1_1spectral.html#ab83d29951235344aee5cb0b40f17f91cacf521aabf089f2ec6999b6538dc199fc',1,'edsp::spectral']]]
+  ['samplerate',['samplerate',['../d7/d34/namespaceedsp_1_1core.html#ade7d31a5d577fd2f58a315897c469aeeab9049162eb413d3cae9cd3a086f4ee30',1,'edsp::core']]],
+  ['sawtooth',['Sawtooth',['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6ac9ddac7ef9ee84d6bd4691f6bece1d80',1,'edsp::oscillators']]],
+  ['sinc_5ffastest',['sinc_fastest',['../df/dd9/namespaceedsp_1_1io.html#a659bf064ee1990f2e5a2a1fa3078f9b3aeff4e54231e7ca8b4012ebd77b4582d2',1,'edsp::io']]],
+  ['sinusoidal',['Sinusoidal',['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6a50a9359a7fadec7eea863d788796861d',1,'edsp::oscillators']]],
+  ['sndfile',['sndfile',['../d7/d34/namespaceedsp_1_1core.html#a41406509172a530dc63f4a273000ad30afd56f897240a042ca41270ac2cd74362',1,'edsp::core']]],
+  ['square',['Square',['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6aceb46ca115d05c51aa5a16a8867c3304',1,'edsp::oscillators']]],
+  ['student',['Student',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159caf5c0a1c9384c2e25e79ba1abf5d9a037',1,'edsp::random']]]
 ];

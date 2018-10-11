@@ -46,7 +46,7 @@ namespace edsp { namespace statistics {
          * @param first1 Input iterator defining the beginning of the first input range.
          * @param last1 Input iterator defining the ending of the first input range.
          * @param first2 Input iterator defining the beginning of the second input range.
-         * @param SNR of the signals.
+         * @returns SNR of the signals.
          */
     template <typename InputIt, typename Allocator = std::allocator<meta::value_type_t<InputIt>>>
     constexpr meta::value_type_t<InputIt> snr(InputIt first1, InputIt last1, InputIt first2) {

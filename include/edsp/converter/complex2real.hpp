@@ -37,7 +37,6 @@ namespace edsp { inline namespace converter {
      * @brief Converts a range of complex numbers in two ranges storing the real and imaginary parts.
      * @param first Input iterator defining the beginning of the range.
      * @param last Input iterator defining the ending of the range.
-     * @param first2 Input iterator defining the beginning of the range representing the imaginary part.
      * @param d_first1 Output iterator defining the beginning of the real part.
      * @param d_first2 Output iterator defining the beginning of the imaginary part.
      */

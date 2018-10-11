@@ -150,8 +150,8 @@ namespace edsp { namespace windowing {
     /**
      * @brief Computes a window of the given type and length N and stores the result in the range, beginning at d_first.
      * @tparam Type Type of window to be computed
-     * @param N Number of elements to compute.
-     * @param d_first Output iterator defining the beginning of the destination range.
+     * @param first Input iterator defining the beginning of the output range.
+     * @param last Input iterator defining the ending of the output range.
      */
     template <WindowType Type, typename OutputIt>
     constexpr void make_window(OutputIt first, OutputIt last) {

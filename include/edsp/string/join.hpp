@@ -32,7 +32,7 @@ namespace edsp { namespace string {
      * beginning at d_first.
      * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
-     * @param d_first Output iterator defining the beginning of the destination range.
+     * @param d_str Output string.
      * @param delimiter The delimiting character.
      * @see split
      */

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['macos',['MacOS',['../d7/d34/namespaceedsp_1_1core.html#ae91e1b47ab5b7f795210a10491f0b985a0a5b7edb55b772c60bfa8af868b679cf',1,'edsp::core']]],
-  ['mvsc',['mvsc',['../d7/d34/namespaceedsp_1_1core.html#ac5613222ee260da92b782ffb8728a7bba7280b613c4597b4a4bbbae6f634bb886',1,'edsp::core']]]
+  ['macos',['macOS',['../d7/d34/namespaceedsp_1_1core.html#acebf701b6502bb9d0d8d5183fa93e02da8b06df0295926efcdcc1f9e13c49848e',1,'edsp::core']]],
+  ['medium_5fquality',['medium_quality',['../df/dd9/namespaceedsp_1_1io.html#a659bf064ee1990f2e5a2a1fa3078f9b3aac3276adcf586a9f24b749c596fcb29f',1,'edsp::io']]],
+  ['mvsc',['mvsc',['../d7/d34/namespaceedsp_1_1core.html#acd269ab32f32c05868eafba93a68a742a7280b613c4597b4a4bbbae6f634bb886',1,'edsp::core']]]
 ];

@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['sawtooth',['Sawtooth',['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6ac9ddac7ef9ee84d6bd4691f6bece1d80',1,'edsp::oscillators']]],
-  ['sinusoidal',['Sinusoidal',['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6a50a9359a7fadec7eea863d788796861d',1,'edsp::oscillators']]],
-  ['square',['Square',['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6aceb46ca115d05c51aa5a16a8867c3304',1,'edsp::oscillators']]],
-  ['student',['Student',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159caf5c0a1c9384c2e25e79ba1abf5d9a037',1,'edsp::random']]]
+  ['rbj',['RBJ',['../d7/d47/namespaceedsp_1_1filter.html#a7697522d00c54d9bef2c9f71cfa8d6bfa0d2b7e3ec48db84823c39148d9cc98cb',1,'edsp::filter']]],
+  ['rectangular',['Rectangular',['../d3/d0f/namespaceedsp_1_1windowing.html#a18fb11a4c3c068f95176d9938e662709a7545c5d3ad246a683a197a2903a4d5e6',1,'edsp::windowing']]],
+  ['resample',['resample',['../d7/d34/namespaceedsp_1_1core.html#ade7d31a5d577fd2f58a315897c469aeeaff8c32516924d7b42b74656c4847be05',1,'edsp::core']]]
 ];

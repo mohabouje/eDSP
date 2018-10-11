@@ -5,6 +5,7 @@ var searchData=
   ['core',['core',['../d7/d34/namespaceedsp_1_1core.html',1,'edsp']]],
   ['edsp',['edsp',['../d7/daa/namespaceedsp.html',1,'']]],
   ['filter',['filter',['../d7/d47/namespaceedsp_1_1filter.html',1,'edsp']]],
+  ['io',['io',['../df/dd9/namespaceedsp_1_1io.html',1,'edsp']]],
   ['math',['math',['../de/d95/namespaceedsp_1_1math.html',1,'edsp']]],
   ['oscillators',['oscillators',['../da/d8d/namespaceedsp_1_1oscillators.html',1,'edsp']]],
   ['quantizer',['quantizer',['../d5/d9b/namespaceedsp_1_1quantizer.html',1,'edsp']]],

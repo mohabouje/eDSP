@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['spectralscale',['SpectralScale',['../d6/de9/namespaceedsp_1_1spectral.html#ab261db3113cfe1ef44d41e74628baadc',1,'edsp::spectral']]],
-  ['systemenvironmenterror',['SystemEnvironmentError',['../dc/de4/structedsp_1_1core_1_1system__env.html#a084e19a01bbc8fb7027dda5a4d8b210f',1,'edsp::core::system_env']]]
+  ['resample_5flib',['resample_lib',['../d7/d34/namespaceedsp_1_1core.html#ade7d31a5d577fd2f58a315897c469aee',1,'edsp::core']]],
+  ['resample_5fquality',['resample_quality',['../df/dd9/namespaceedsp_1_1io.html#a659bf064ee1990f2e5a2a1fa3078f9b3',1,'edsp::io']]]
 ];

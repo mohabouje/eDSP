@@ -1,101 +1,56 @@
-<!-- HTML header for doxygen 1.8.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- For Mobile Devices -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-        <meta name="generator" content="Doxygen 1.8.11"/>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>eDSP: edsp::envelope_follower&lt; T &gt; Class Template Reference</title>
-        <!--<link href="../../tabs.css" rel="stylesheet" type="text/css"/>-->
-        <script type="text/javascript" src="../../dynsections.js"></script>
-        <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>eDSP: edsp::envelope_follower&lt; T &gt; Class Template Reference</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { init_search(); });
-</script>
-        <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     extensions: ["tex2jax.js"],
     jax: ["input/TeX","output/HTML-CSS"],
 });
 </script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
-        <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
-        <link href="../../customdoxygen.css" rel="stylesheet" type="text/css"/>
-        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <link href="../../jquery.smartmenus.bootstrap.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/regular.css" integrity="sha384-ZlNfXjxAqKFWCwMwQFGhmMh3i89dWDnaFU2/VZg9CvsMGA7hXHQsPIqS+JIAmgEq" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/brands.css" integrity="sha384-rf1bqOAj3+pw6NqYrtaE1/4Se2NBwkIfeYbsFdtiR6TQz0acWiwJbv1IM/Nt/ite" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">
-        <script type="text/javascript" src="../../jquery.smartmenus.js"></script>
-        <!-- SmartMenus jQuery Bootstrap Addon -->
-        <script type="text/javascript" src="../../jquery.smartmenus.bootstrap.js"></script>
-        <!-- SmartMenus jQuery plugin -->
-        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
-    </head>
-    <body>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <a href="https://github.com/mohabouje/eDSP" class="navbar-left"><img src="logo.svg" width="80" height="45"></a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="https://mohabouje.github.io/eDSP/"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="https://github.com/mohabouje/eDSP"><i class="fas fa-code-branch"></i> GitHub</a></li>
-                    <li><a href="https://github.com/mohabouje/eDSP/wiki"><i class="fas fa-book"></i> Wiki</a></li>
-                    <li><a href="https://github.com/mohabouje/eDSP/archive/master.zip"><i class="fas fa-download"></i> Download</a></li>
-                </ul>
-            </div>
-        </nav>
-        <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
-            <div class="content" id="content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 panel " style="padding-bottom: 15px;">
-                            <div style="margin-bottom: 15px;">
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../logo.svg"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">eDSP
+   &#160;<span id="projectnumber">0.0.1</span>
+   </div>
+   <div id="projectbrief">A cross-platform DSP library written in C++.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
 <!-- end header part -->
-<!-- Generated by Doxygen 1.8.11 -->
+<!-- Generated by Doxygen 1.8.13 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
-      <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
-      <li><a href="../../files.html"><span>Files</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="../../search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="../../search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="../../annotated.html"><span>Class&#160;List</span></a></li>
-      <li><a href="../../classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="../../hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
-      <li><a href="../../functions.html"><span>Class&#160;Members</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('../../',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -182,7 +137,9 @@ class edsp::envelope_follower&lt; T &gt;</h3>
 <p>The envelope follower takes an high-frequency signal as input and provides an output which is the envelope of the original signal. It is frequently used to detect the amplitude variations of an incoming signal to produce a control signal that resembles those variations.</p>
 <p>This class implements a basic Envelope Follower based in a non-symmetric lowpass filter. The output of a low-pass filter can be viewed as a moving average of its input. A minimal envelope generator has an attack period, in which the level of the envelope rises from an initial zero level to a maximum level, followed by a release phase,in which the level falls back to zero. * </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a class="anchor" id="a1d4fcb43c0608d9a86bad1868d7a8459"></a>
+<a id="a1d4fcb43c0608d9a86bad1868d7a8459"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d4fcb43c0608d9a86bad1868d7a8459">&#9670;&nbsp;</a></span>size_type</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -196,7 +153,9 @@ template&lt;typename T&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a11e8544fe27099585ff6d7fbdb90e220"></a>
+<a id="a11e8544fe27099585ff6d7fbdb90e220"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a11e8544fe27099585ff6d7fbdb90e220">&#9670;&nbsp;</a></span>value_type</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -211,7 +170,9 @@ template&lt;typename T&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a0515b5b35699f197fd45a096b5c51896"></a>
+<a id="a0515b5b35699f197fd45a096b5c51896"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0515b5b35699f197fd45a096b5c51896">&#9670;&nbsp;</a></span>envelope_follower()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -271,7 +232,9 @@ template&lt;typename T &gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a4dd737b3014b7d020b1940d99254808d"></a>
+<a id="a4dd737b3014b7d020b1940d99254808d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dd737b3014b7d020b1940d99254808d">&#9670;&nbsp;</a></span>apply()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -317,7 +280,9 @@ template&lt;typename InIterator , typename OutputIt &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="adb3f7cc45bcde09d93a77fc1a4107aab"></a>
+<a id="adb3f7cc45bcde09d93a77fc1a4107aab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb3f7cc45bcde09d93a77fc1a4107aab">&#9670;&nbsp;</a></span>attack_time()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -345,7 +310,9 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ad912eeb8489e00cd64a9a31d670b69ff"></a>
+<a id="ad912eeb8489e00cd64a9a31d670b69ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad912eeb8489e00cd64a9a31d670b69ff">&#9670;&nbsp;</a></span>rectification()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -373,7 +340,9 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a83a45d49ba85fed52d3c4e714bffdea2"></a>
+<a id="a83a45d49ba85fed52d3c4e714bffdea2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83a45d49ba85fed52d3c4e714bffdea2">&#9670;&nbsp;</a></span>release_time()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -401,7 +370,9 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aafff3e88b2fd368aaf840d9b9d330d56"></a>
+<a id="aafff3e88b2fd368aaf840d9b9d330d56"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafff3e88b2fd368aaf840d9b9d330d56">&#9670;&nbsp;</a></span>reset()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -428,7 +399,9 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a36a8aebb9d79759694dde3a6f7ab9927"></a>
+<a id="a36a8aebb9d79759694dde3a6f7ab9927"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36a8aebb9d79759694dde3a6f7ab9927">&#9670;&nbsp;</a></span>samplerate()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -456,7 +429,9 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="afe5fa42665daa47bcb81993ff51b635e"></a>
+<a id="afe5fa42665daa47bcb81993ff51b635e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe5fa42665daa47bcb81993ff51b635e">&#9670;&nbsp;</a></span>set_attack_time()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -490,7 +465,9 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="af371110c23473f245bda69d12592b7c3"></a>
+<a id="af371110c23473f245bda69d12592b7c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af371110c23473f245bda69d12592b7c3">&#9670;&nbsp;</a></span>set_rectification()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -524,7 +501,9 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a0f4d4adc43ff6668a3253b53c26a8995"></a>
+<a id="a0f4d4adc43ff6668a3253b53c26a8995"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f4d4adc43ff6668a3253b53c26a8995">&#9670;&nbsp;</a></span>set_release_time()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -558,7 +537,9 @@ template&lt;typename T &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a26d9d6900ce8240ff2e7d81a893f395f"></a>
+<a id="a26d9d6900ce8240ff2e7d81a893f395f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26d9d6900ce8240ff2e7d81a893f395f">&#9670;&nbsp;</a></span>set_samplerate()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -596,16 +577,11 @@ template&lt;typename T &gt; </div>
 <li>tools/<a class="el" href="../../d3/d7d/envelope__follower_8hpp_source.html">envelope_follower.hpp</a></li>
 </ul>
 </div><!-- contents -->
-<!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
-</div>
-</div>
-</div>
-</div>
-</div>
 <hr class="footer"/><address class="footer"><small>
-  easy DSP - A cross-platform Digital Signal Processing library written in modern C++.
-  Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.</small></address>
+Generated by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
 </body>
-        <script type="text/javascript" src="../../doxy-boot.js"></script>
 </html>

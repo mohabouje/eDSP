@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['welch',['welch',['../d3/d0f/namespaceedsp_1_1windowing.html#a470580cb1889cc95e7186259047ea67f',1,'edsp::windowing']]],
-  ['white_5fnoise_5fgenerator',['white_noise_generator',['../df/dcb/structedsp_1_1random_1_1white__noise__generator.html#a508816262bf69f8d1a7a99400bcb0a52',1,'edsp::random::white_noise_generator']]],
-  ['width',['width',['../d7/dbe/classedsp_1_1oscillators_1_1sawtooth__oscillator.html#a24ec0206f4a3f42758ce48d0ac2184ca',1,'edsp::oscillators::sawtooth_oscillator']]]
+  ['valid_5fratio',['valid_ratio',['../d5/dfb/structedsp_1_1io_1_1resampler.html#afc65d40f45ca90d90bad7f9dc6d4fe2d',1,'edsp::io::resampler']]],
+  ['variance',['variance',['../d1/db9/namespaceedsp_1_1statistics.html#a729764d30c6e29a8c591ced478857f34',1,'edsp::statistics']]],
+  ['version',['version',['../d4/dbe/structedsp_1_1core_1_1library__info.html#a4d857d0abbbc6ecae0aa526a14baa0b4',1,'edsp::core::library_info']]]
 ];

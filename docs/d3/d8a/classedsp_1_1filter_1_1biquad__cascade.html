@@ -1,101 +1,56 @@
-<!-- HTML header for doxygen 1.8.8-->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <!-- For Mobile Devices -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-        <meta name="generator" content="Doxygen 1.8.11"/>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-        <title>eDSP: edsp::filter::biquad_cascade&lt; T, N &gt; Class Template Reference</title>
-        <!--<link href="../../tabs.css" rel="stylesheet" type="text/css"/>-->
-        <script type="text/javascript" src="../../dynsections.js"></script>
-        <link href="../../search/search.css" rel="stylesheet" type="text/css"/>
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>eDSP: edsp::filter::biquad_cascade&lt; T, N &gt; Class Template Reference</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="../../jquery.js"></script>
+<script type="text/javascript" src="../../dynsections.js"></script>
+<link href="../../search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="../../search/searchdata.js"></script>
 <script type="text/javascript" src="../../search/search.js"></script>
-<script type="text/javascript">
-  $(document).ready(function() { init_search(); });
-</script>
-        <script type="text/x-mathjax-config">
+<script type="text/x-mathjax-config">
   MathJax.Hub.Config({
     extensions: ["tex2jax.js"],
     jax: ["input/TeX","output/HTML-CSS"],
 });
 </script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
-        <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
-        <link href="../../customdoxygen.css" rel="stylesheet" type="text/css"/>
-        <link href='https://fonts.googleapis.com/css?family=Roboto+Slab' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <link href="../../jquery.smartmenus.bootstrap.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/regular.css" integrity="sha384-ZlNfXjxAqKFWCwMwQFGhmMh3i89dWDnaFU2/VZg9CvsMGA7hXHQsPIqS+JIAmgEq" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/brands.css" integrity="sha384-rf1bqOAj3+pw6NqYrtaE1/4Se2NBwkIfeYbsFdtiR6TQz0acWiwJbv1IM/Nt/ite" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">
-        <script type="text/javascript" src="../../jquery.smartmenus.js"></script>
-        <!-- SmartMenus jQuery Bootstrap Addon -->
-        <script type="text/javascript" src="../../jquery.smartmenus.bootstrap.js"></script>
-        <!-- SmartMenus jQuery plugin -->
-        <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
-    </head>
-    <body>
-        <nav class="navbar navbar-default" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <a href="https://github.com/mohabouje/eDSP" class="navbar-left"><img src="logo.svg" width="80" height="45"></a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="https://mohabouje.github.io/eDSP/"><i class="fas fa-home"></i> Home</a></li>
-                    <li><a href="https://github.com/mohabouje/eDSP"><i class="fas fa-code-branch"></i> GitHub</a></li>
-                    <li><a href="https://github.com/mohabouje/eDSP/wiki"><i class="fas fa-book"></i> Wiki</a></li>
-                    <li><a href="https://github.com/mohabouje/eDSP/archive/master.zip"><i class="fas fa-download"></i> Download</a></li>
-                </ul>
-            </div>
-        </nav>
-        <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
-            <div class="content" id="content">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-12 panel " style="padding-bottom: 15px;">
-                            <div style="margin-bottom: 15px;">
+<link href="../../doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="../../logo.svg"/></td>
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">eDSP
+   &#160;<span id="projectnumber">0.0.1</span>
+   </div>
+   <div id="projectbrief">A cross-platform DSP library written in C++.</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
 <!-- end header part -->
-<!-- Generated by Doxygen 1.8.11 -->
+<!-- Generated by Doxygen 1.8.13 -->
 <script type="text/javascript">
 var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
 </script>
-  <div id="navrow1" class="tabs">
-    <ul class="tablist">
-      <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
-      <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
-      <li><a href="../../files.html"><span>Files</span></a></li>
-      <li>
-        <div id="MSearchBox" class="MSearchBoxInactive">
-        <span class="left">
-          <img id="MSearchSelect" src="../../search/mag_sel.png"
-               onmouseover="return searchBox.OnSearchSelectShow()"
-               onmouseout="return searchBox.OnSearchSelectHide()"
-               alt=""/>
-          <input type="text" id="MSearchField" value="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
-          </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="../../search/close.png" alt=""/></a>
-          </span>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div id="navrow2" class="tabs2">
-    <ul class="tablist">
-      <li><a href="../../annotated.html"><span>Class&#160;List</span></a></li>
-      <li><a href="../../classes.html"><span>Class&#160;Index</span></a></li>
-      <li><a href="../../hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
-      <li><a href="../../functions.html"><span>Class&#160;Members</span></a></li>
-    </ul>
-  </div>
+<script type="text/javascript" src="../../menudata.js"></script>
+<script type="text/javascript" src="../../menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('../../',true,false,'search.php','Search');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -148,7 +103,7 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac243655e699e9fe74826bb3c3fc8262f"><td class="memItemLeft" align="right" valign="top">constexpr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#ac243655e699e9fe74826bb3c3fc8262f">biquad_cascade</a> ()=default</td></tr>
-<tr class="memdesc:ac243655e699e9fe74826bb3c3fc8262f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty #BiquadCascade.  <a href="#ac243655e699e9fe74826bb3c3fc8262f">More...</a><br /></td></tr>
+<tr class="memdesc:ac243655e699e9fe74826bb3c3fc8262f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates an empty biquad_cascade.  <a href="#ac243655e699e9fe74826bb3c3fc8262f">More...</a><br /></td></tr>
 <tr class="separator:ac243655e699e9fe74826bb3c3fc8262f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a187b7595b4a2c06a9fbf7869caf4589a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a187b7595b4a2c06a9fbf7869caf4589a">~biquad_cascade</a> ()=default</td></tr>
 <tr class="memdesc:a187b7595b4a2c06a9fbf7869caf4589a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <a href="#a187b7595b4a2c06a9fbf7869caf4589a">More...</a><br /></td></tr>
@@ -202,10 +157,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a84064c68fbb69d51ebc27282c6fe3d3d"><td class="memItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a84064c68fbb69d51ebc27282c6fe3d3d">push_back</a> (const <a class="el" href="../../dc/d81/classedsp_1_1filter_1_1biquad.html">biquad</a>&lt; T &gt; &amp;<a class="el" href="../../dc/d81/classedsp_1_1filter_1_1biquad.html">biquad</a>)</td></tr>
 <tr class="memdesc:a84064c68fbb69d51ebc27282c6fe3d3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Appends the given Biquad at the end.  <a href="#a84064c68fbb69d51ebc27282c6fe3d3d">More...</a><br /></td></tr>
 <tr class="separator:a84064c68fbb69d51ebc27282c6fe3d3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a896031f1505392d926b00bc93ed5b2ad"><td class="memTemplParams" colspan="2">template&lt;typename... Arg&gt; </td></tr>
-<tr class="memitem:a896031f1505392d926b00bc93ed5b2ad"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a896031f1505392d926b00bc93ed5b2ad">emplace_back</a> (Arg...arg)</td></tr>
-<tr class="memdesc:a896031f1505392d926b00bc93ed5b2ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a Biquad in-place at the end.  <a href="#a896031f1505392d926b00bc93ed5b2ad">More...</a><br /></td></tr>
-<tr class="separator:a896031f1505392d926b00bc93ed5b2ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a092b058e9401e92d95306cc48c8ae6cf"><td class="memTemplParams" colspan="2">template&lt;typename... Arg&gt; </td></tr>
+<tr class="memitem:a092b058e9401e92d95306cc48c8ae6cf"><td class="memTemplItemLeft" align="right" valign="top">constexpr void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="../../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a092b058e9401e92d95306cc48c8ae6cf">emplace_back</a> (Arg... arg)</td></tr>
+<tr class="memdesc:a092b058e9401e92d95306cc48c8ae6cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a Biquad in-place at the end.  <a href="#a092b058e9401e92d95306cc48c8ae6cf">More...</a><br /></td></tr>
+<tr class="separator:a092b058e9401e92d95306cc48c8ae6cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;typename T, std::size_t N&gt;<br />
@@ -221,7 +176,9 @@ class edsp::filter::biquad_cascade&lt; T, N &gt;</h3>
   </dd>
 </dl>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
-<a class="anchor" id="abd6d67a88a1df51449e9ea0a33c9c4d2"></a>
+<a id="abd6d67a88a1df51449e9ea0a33c9c4d2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd6d67a88a1df51449e9ea0a33c9c4d2">&#9670;&nbsp;</a></span>const_iterator</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -235,7 +192,9 @@ template&lt;typename T , std::size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ada5594fcc58d9209836c8de71dee04de"></a>
+<a id="ada5594fcc58d9209836c8de71dee04de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada5594fcc58d9209836c8de71dee04de">&#9670;&nbsp;</a></span>const_reference</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -249,7 +208,9 @@ template&lt;typename T , std::size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a4cdce6cc72eb8128e9f0b97f6f230d34"></a>
+<a id="a4cdce6cc72eb8128e9f0b97f6f230d34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cdce6cc72eb8128e9f0b97f6f230d34">&#9670;&nbsp;</a></span>iterator</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -263,7 +224,9 @@ template&lt;typename T , std::size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a093d30e8334b5e20f4aae6befdff1ad6"></a>
+<a id="a093d30e8334b5e20f4aae6befdff1ad6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a093d30e8334b5e20f4aae6befdff1ad6">&#9670;&nbsp;</a></span>reference</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -277,7 +240,9 @@ template&lt;typename T , std::size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="aa7933cd2b979c231dfd2afdc0afd73ea"></a>
+<a id="aa7933cd2b979c231dfd2afdc0afd73ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7933cd2b979c231dfd2afdc0afd73ea">&#9670;&nbsp;</a></span>size_type</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -291,7 +256,9 @@ template&lt;typename T , std::size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a16baad78b67ebac9aa1fde59c68900b2"></a>
+<a id="a16baad78b67ebac9aa1fde59c68900b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16baad78b67ebac9aa1fde59c68900b2">&#9670;&nbsp;</a></span>value_type</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -306,7 +273,9 @@ template&lt;typename T , std::size_t N&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ac243655e699e9fe74826bb3c3fc8262f"></a>
+<a id="ac243655e699e9fe74826bb3c3fc8262f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac243655e699e9fe74826bb3c3fc8262f">&#9670;&nbsp;</a></span>biquad_cascade()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -329,11 +298,13 @@ template&lt;typename T , std::size_t N&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Creates an empty #BiquadCascade. </p>
+<p>Creates an empty biquad_cascade. </p>
 
 </div>
 </div>
-<a class="anchor" id="a187b7595b4a2c06a9fbf7869caf4589a"></a>
+<a id="a187b7595b4a2c06a9fbf7869caf4589a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a187b7595b4a2c06a9fbf7869caf4589a">&#9670;&nbsp;</a></span>~biquad_cascade()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -361,7 +332,9 @@ template&lt;typename T , std::size_t N&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="a264baac1ef38c8a821ce91c50d21cec5"></a>
+<a id="a264baac1ef38c8a821ce91c50d21cec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a264baac1ef38c8a821ce91c50d21cec5">&#9670;&nbsp;</a></span>begin() <span class="overload">[1/2]</span></h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -389,7 +362,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a0ef723f6efc81272bb4d1f83253a9180"></a>
+<a id="a0ef723f6efc81272bb4d1f83253a9180"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ef723f6efc81272bb4d1f83253a9180">&#9670;&nbsp;</a></span>begin() <span class="overload">[2/2]</span></h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -417,7 +392,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a3546339ace1221cb21ed909b7a1db250"></a>
+<a id="a3546339ace1221cb21ed909b7a1db250"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3546339ace1221cb21ed909b7a1db250">&#9670;&nbsp;</a></span>capacity()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -446,7 +423,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ab7c3fcd84a9120fe5fdf0bea5a6adaa6"></a>
+<a id="ab7c3fcd84a9120fe5fdf0bea5a6adaa6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7c3fcd84a9120fe5fdf0bea5a6adaa6">&#9670;&nbsp;</a></span>cbegin()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -474,7 +453,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="afff49188a90efd7669ebe357d1e4ca09"></a>
+<a id="afff49188a90efd7669ebe357d1e4ca09"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afff49188a90efd7669ebe357d1e4ca09">&#9670;&nbsp;</a></span>cend()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -502,7 +483,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="acd885fb202e3e512ff3d918f444a8652"></a>
+<a id="acd885fb202e3e512ff3d918f444a8652"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd885fb202e3e512ff3d918f444a8652">&#9670;&nbsp;</a></span>clear()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -522,7 +505,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a896031f1505392d926b00bc93ed5b2ad"></a>
+<a id="a092b058e9401e92d95306cc48c8ae6cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a092b058e9401e92d95306cc48c8ae6cf">&#9670;&nbsp;</a></span>emplace_back()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -550,7 +535,9 @@ template&lt;typename... Arg&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="adf04c807b42d545082fc40a37c1f816d"></a>
+<a id="adf04c807b42d545082fc40a37c1f816d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf04c807b42d545082fc40a37c1f816d">&#9670;&nbsp;</a></span>end() <span class="overload">[1/2]</span></h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -578,7 +565,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ad0be65186dda2e5fdcbfdc851140b65d"></a>
+<a id="ad0be65186dda2e5fdcbfdc851140b65d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad0be65186dda2e5fdcbfdc851140b65d">&#9670;&nbsp;</a></span>end() <span class="overload">[2/2]</span></h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -606,7 +595,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a6fff888dca6009f0030e14a9e55053af"></a>
+<a id="a6fff888dca6009f0030e14a9e55053af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fff888dca6009f0030e14a9e55053af">&#9670;&nbsp;</a></span>filter()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -660,7 +651,9 @@ template&lt;typename InputIt , typename OutputIt &gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a8bb4afd455a38652b9cf5fb8f981d7af"></a>
+<a id="a8bb4afd455a38652b9cf5fb8f981d7af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8bb4afd455a38652b9cf5fb8f981d7af">&#9670;&nbsp;</a></span>max_size()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -689,7 +682,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a0fc563ad168b383b857bb67ed8e671af"></a>
+<a id="a0fc563ad168b383b857bb67ed8e671af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0fc563ad168b383b857bb67ed8e671af">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -724,7 +719,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ad4e975fb29d12650d98539a7995524c3"></a>
+<a id="ad4e975fb29d12650d98539a7995524c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4e975fb29d12650d98539a7995524c3">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -759,7 +756,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a84064c68fbb69d51ebc27282c6fe3d3d"></a>
+<a id="a84064c68fbb69d51ebc27282c6fe3d3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84064c68fbb69d51ebc27282c6fe3d3d">&#9670;&nbsp;</a></span>push_back()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -785,7 +784,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="acb5f9393718288707dc25e7931435b27"></a>
+<a id="acb5f9393718288707dc25e7931435b27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acb5f9393718288707dc25e7931435b27">&#9670;&nbsp;</a></span>reset()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -804,7 +805,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="ac652e546988cbb2dba82e893843517e2"></a>
+<a id="ac652e546988cbb2dba82e893843517e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac652e546988cbb2dba82e893843517e2">&#9670;&nbsp;</a></span>size()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -832,7 +835,9 @@ template&lt;typename T , size_t N&gt; </div>
 
 </div>
 </div>
-<a class="anchor" id="a289696ffa2ea8293e7b4bc61c0aa560f"></a>
+<a id="a289696ffa2ea8293e7b4bc61c0aa560f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a289696ffa2ea8293e7b4bc61c0aa560f">&#9670;&nbsp;</a></span>tick()</h2>
+
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
@@ -871,16 +876,11 @@ template&lt;typename T , size_t N&gt; </div>
 <li>filter/<a class="el" href="../../d4/df5/biquad__cascade_8hpp_source.html">biquad_cascade.hpp</a></li>
 </ul>
 </div><!-- contents -->
-<!-- HTML footer for doxygen 1.8.8-->
 <!-- start footer part -->
-</div>
-</div>
-</div>
-</div>
-</div>
 <hr class="footer"/><address class="footer"><small>
-  easy DSP - A cross-platform Digital Signal Processing library written in modern C++.
-  Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.</small></address>
+Generated by &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/>
+</a> 1.8.13
+</small></address>
 </body>
-        <script type="text/javascript" src="../../doxy-boot.js"></script>
 </html>

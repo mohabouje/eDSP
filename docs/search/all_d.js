@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['name',['name',['../d6/dd0/classedsp_1_1core_1_1logger.html#a7fc21ef2add22daa6e22a35383da28c7',1,'edsp::core::logger']]],
   ['nats',['Nats',['../d1/db9/namespaceedsp_1_1statistics.html#a40dc27fc3a96ca20a6a496d7a6625d3ca93aec458199373246dd7e4e03e5d0c6f',1,'edsp::statistics']]],
   ['next_5fpower_5ftwo',['next_power_two',['../de/d95/namespaceedsp_1_1math.html#aca0d86c7dfe60eb13078b150914b6120',1,'edsp::math']]],
   ['noerror',['NoError',['../dc/de4/structedsp_1_1core_1_1system__env.html#a084e19a01bbc8fb7027dda5a4d8b210fab30e19812aceffc4b1533f4ec59e99d4',1,'edsp::core::system_env']]],

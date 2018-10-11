@@ -1,10 +1,13 @@
 var searchData=
 [
-  ['to_5flower_2ehpp',['to_lower.hpp',['../d2/dab/to__lower_8hpp.html',1,'']]],
-  ['to_5fupper_2ehpp',['to_upper.hpp',['../d8/d0e/to__upper_8hpp.html',1,'']]],
-  ['tools_2ehpp',['tools.hpp',['../de/d71/tools_8hpp.html',1,'']]],
-  ['triangular_2ehpp',['triangular.hpp',['../d8/d7b/oscillators_2triangular_8hpp.html',1,'']]],
-  ['triangular_2ehpp',['triangular.hpp',['../d0/df6/windowing_2triangular_8hpp.html',1,'']]],
-  ['trim_2ehpp',['trim.hpp',['../d7/d2f/trim_8hpp.html',1,'']]],
-  ['types_2ehpp',['types.hpp',['../dd/de3/types_8hpp.html',1,'']]]
+  ['sawtooth_2ehpp',['sawtooth.hpp',['../d6/d14/sawtooth_8hpp.html',1,'']]],
+  ['sinusoidal_2ehpp',['sinusoidal.hpp',['../df/d22/sinusoidal_8hpp.html',1,'']]],
+  ['skewness_2ehpp',['skewness.hpp',['../de/d53/skewness_8hpp.html',1,'']]],
+  ['snr_2ehpp',['snr.hpp',['../d7/d7d/snr_8hpp.html',1,'']]],
+  ['span_2ehpp',['span.hpp',['../da/de1/span_8hpp.html',1,'']]],
+  ['split_2ehpp',['split.hpp',['../d4/d24/split_8hpp.html',1,'']]],
+  ['square_2ehpp',['square.hpp',['../d7/dad/square_8hpp.html',1,'']]],
+  ['statistics_2ehpp',['statistics.hpp',['../dd/d37/statistics_8hpp.html',1,'']]],
+  ['string_5fview_2ehpp',['string_view.hpp',['../da/db5/string__view_8hpp.html',1,'']]],
+  ['system_2ehpp',['system.hpp',['../dd/d90/system_8hpp.html',1,'']]]
 ];

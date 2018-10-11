@@ -1,13 +1,15 @@
 var searchData=
 [
+  ['fft_5flib',['fft_lib',['../d7/d34/namespaceedsp_1_1core.html#a0aa90412eeea5206e797fd920f6aadd8',1,'edsp::core']]],
+  ['fft_5flibrary',['fft_library',['../d4/dbe/structedsp_1_1core_1_1library__info.html#aebeb2b16efe2810934f003c1c805ef1b',1,'edsp::core::library_info']]],
+  ['fftw',['fftw',['../d7/d34/namespaceedsp_1_1core.html#a0aa90412eeea5206e797fd920f6aadd8af75f5aff43d26d37c72053b7b9d367f5',1,'edsp::core']]],
   ['filter',['filter',['../dc/d81/classedsp_1_1filter_1_1biquad.html#af7b2c2607d343e57a27d43bca8d6f05c',1,'edsp::filter::biquad::filter()'],['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a6fff888dca6009f0030e14a9e55053af',1,'edsp::filter::biquad_cascade::filter()'],['../db/df2/classedsp_1_1filter_1_1moving__average.html#ae6deb9f25f39f4b75a9b2d7e515449e1',1,'edsp::filter::moving_average::filter()'],['../d9/d0c/classedsp_1_1filter_1_1moving__median.html#a91e14da9602fe41701bd61adfa72c409',1,'edsp::filter::moving_median::filter()'],['../d8/de4/classedsp_1_1filter_1_1moving__rms.html#a1d064c3126aaf1ee0bf1834e5eaf721b',1,'edsp::filter::moving_rms::filter()']]],
   ['filter_2ehpp',['filter.hpp',['../d1/dd2/filter_8hpp.html',1,'']]],
   ['filtertype',['FilterType',['../d7/d47/namespaceedsp_1_1filter.html#a8d892edc768c28dbf779f67b63a6456a',1,'edsp::filter']]],
   ['fisher',['Fisher',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159ca8601d226384026acd3b7cde321bc73a9',1,'edsp::random']]],
   ['fix',['fix',['../d3/db4/namespaceedsp_1_1algorithm.html#a9e8535b4a3afb5f36f77fd3da537f7a3',1,'edsp::algorithm']]],
   ['fix_2ehpp',['fix.hpp',['../d5/d54/fix_8hpp.html',1,'']]],
-  ['fixed_5fring_5fbuffer',['fixed_ring_buffer',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html',1,'edsp::types']]],
-  ['fixed_5fring_5fbuffer',['fixed_ring_buffer',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a40623887b49c7e7c17c5b16f5b175f6f',1,'edsp::types::fixed_ring_buffer::fixed_ring_buffer()=default'],['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a95686142ab1152ef79367335e071c421',1,'edsp::types::fixed_ring_buffer::fixed_ring_buffer(const fixed_ring_buffer &amp;)=default'],['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#ae891339860613b6cc68fd23e0960e2f7',1,'edsp::types::fixed_ring_buffer::fixed_ring_buffer(fixed_ring_buffer &amp;&amp;) noexcept=default']]],
+  ['fixed_5fring_5fbuffer',['fixed_ring_buffer',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html',1,'edsp::types::fixed_ring_buffer&lt; T, MaxSize &gt;'],['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a40623887b49c7e7c17c5b16f5b175f6f',1,'edsp::types::fixed_ring_buffer::fixed_ring_buffer()=default'],['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a95686142ab1152ef79367335e071c421',1,'edsp::types::fixed_ring_buffer::fixed_ring_buffer(const fixed_ring_buffer &amp;)=default'],['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#ae891339860613b6cc68fd23e0960e2f7',1,'edsp::types::fixed_ring_buffer::fixed_ring_buffer(fixed_ring_buffer &amp;&amp;) noexcept=default']]],
   ['fixed_5fring_5fbuffer_2ehpp',['fixed_ring_buffer.hpp',['../da/d15/fixed__ring__buffer_8hpp.html',1,'']]],
   ['flat_5ftop_2ehpp',['flat_top.hpp',['../dd/dd8/flat__top_8hpp.html',1,'']]],
   ['flatness',['flatness',['../d1/db9/namespaceedsp_1_1statistics.html#a827c80f7ba878a58d640b640a6081a5c',1,'edsp::statistics']]],
@@ -18,8 +20,9 @@ var searchData=
   ['four_5fminus_5fpi',['four_minus_pi',['../d8/df5/structedsp_1_1math_1_1constants.html#af01304c3dc89e7caccdfd380ade46edd',1,'edsp::math::constants']]],
   ['four_5fthirds_5fpi',['four_thirds_pi',['../d8/df5/structedsp_1_1math_1_1constants.html#a936ed1360697db6939796dfc04069e0d',1,'edsp::math::constants']]],
   ['fract',['fract',['../de/d95/namespaceedsp_1_1math.html#a289da63f9141eec113c1579cacc2e1ab',1,'edsp::math']]],
-  ['freebsd',['FreeBSD',['../d7/d34/namespaceedsp_1_1core.html#ae91e1b47ab5b7f795210a10491f0b985aa3dc630729e463135f4e608954fa6e19',1,'edsp::core']]],
+  ['frames',['frames',['../d8/d66/classedsp_1_1io_1_1decoder.html#adb9f0771ba4900be525ac7b457beb17b',1,'edsp::io::decoder']]],
+  ['freebsd',['freeBSD',['../d7/d34/namespaceedsp_1_1core.html#acebf701b6502bb9d0d8d5183fa93e02da4f0e1eb3c5357512f6a0b84ce7c64184',1,'edsp::core']]],
   ['frequency',['frequency',['../dc/d96/classedsp_1_1oscillators_1_1oscillator.html#aeb4d036608790680940dcc3dfe766c2c',1,'edsp::oscillators::oscillator']]],
-  ['front',['front',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#af5bafc057384cc90c534d1d3b79be1dd',1,'edsp::types::fixed_ring_buffer::front()'],['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a4e449a54e557e4fdf75e03dab85a005a',1,'edsp::types::fixed_ring_buffer::front() const '],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#a4aa5e913a10cd26a9c0aba072998fcc6',1,'edsp::types::ring_buffer::front()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#ae3988235ad7b7d1d6dd46a439033e4d6',1,'edsp::types::ring_buffer::front() const ']]],
-  ['full',['full',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a57375c071a4db83c6c9b65f1402c3bd2',1,'edsp::types::fixed_ring_buffer::full()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#a86a4805c5c0eccbd39978e469f07abd7',1,'edsp::types::ring_buffer::full()']]]
+  ['front',['front',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#af5bafc057384cc90c534d1d3b79be1dd',1,'edsp::types::fixed_ring_buffer::front()'],['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#ae3cbcd88506cf7751397284fea56fcb8',1,'edsp::types::fixed_ring_buffer::front() const'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#a4aa5e913a10cd26a9c0aba072998fcc6',1,'edsp::types::ring_buffer::front()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#a1d857f62fa2330cf81185ae8d4f4d92f',1,'edsp::types::ring_buffer::front() const']]],
+  ['full',['full',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a6e11c552b1635fd381dc44a23138a14a',1,'edsp::types::fixed_ring_buffer::full()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#a5571d06f4a1790c0500af82eb46ae5ff',1,'edsp::types::ring_buffer::full()']]]
 ];

@@ -1,5 +1,6 @@
 var searchData=
 [
+  ['decoder',['decoder',['../d8/d66/classedsp_1_1io_1_1decoder.html',1,'edsp::io']]],
   ['designer',['designer',['../d4/d9e/structedsp_1_1filter_1_1designer.html',1,'edsp::filter']]],
   ['designer_3c_20t_2c_20designertype_3a_3abutterworth_2c_20maxorder_20_3e',['designer&lt; T, DesignerType::Butterworth, MaxOrder &gt;',['../d9/da2/structedsp_1_1filter_1_1designer_3_01T_00_01DesignerType_1_1Butterworth_00_01MaxOrder_01_4.html',1,'edsp::filter']]],
   ['designer_3c_20t_2c_20designertype_3a_3achebyshevi_2c_20maxorder_20_3e',['designer&lt; T, DesignerType::ChebyshevI, MaxOrder &gt;',['../d6/db5/structedsp_1_1filter_1_1designer_3_01T_00_01DesignerType_1_1ChebyshevI_00_01MaxOrder_01_4.html',1,'edsp::filter']]],

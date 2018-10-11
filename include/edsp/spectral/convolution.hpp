@@ -47,8 +47,7 @@ namespace edsp { inline namespace spectral {
      */
     template <typename InputIt, typename OutputIt, typename RAllocator = std::allocator<meta::value_type_t<InputIt>>,
               typename CAllocator = std::allocator<std::complex<meta::value_type_t<OutputIt>>>>
-    inline void conv(InputIt first1, InputIt last1, InputIt first2, OutputIt d_first,
-                     CorrelationScale scale = CorrelationScale::None) {
+    inline void conv(InputIt first1, InputIt last1, InputIt first2, OutputIt d_first) {
         meta::expects(std::distance(first1, last1) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
         const auto size = std::distance(first1, last1);

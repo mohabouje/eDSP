@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['zolzer',['Zolzer',['../d7/d47/namespaceedsp_1_1filter.html#a7697522d00c54d9bef2c9f71cfa8d6bfab8d9eb32e322dccc13b229af9e03b08a',1,'edsp::filter']]]
+  ['x64',['x64',['../d7/d34/namespaceedsp_1_1core.html#aa6a16ef9b773eb04c5de0b830631fb82a9c16d991c79c6330e655aa29ea623492',1,'edsp::core']]],
+  ['x86',['x86',['../d7/d34/namespaceedsp_1_1core.html#aa6a16ef9b773eb04c5de0b830631fb82a8a9da7865483c5fd359f3acef178d26d',1,'edsp::core']]]
 ];

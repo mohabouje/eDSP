@@ -58,8 +58,8 @@ namespace edsp { namespace io { namespace internal {
             SRC_STATE* state_{nullptr};
             error_type error_{0};
             size_type channels_{0};
-            value_type factor_{1};
             int quality_{SRC_SINC_MEDIUM_QUALITY};
+            value_type factor_{1};
         };
 
         libsamplerate_implementation::libsamplerate_implementation(long channels, int quality, value_type factor) :

@@ -63,6 +63,18 @@ namespace edsp { namespace io {
         /**
          * @brief Resamples the input elements in the range [first, last) and stores the result in another range,
          * beginning at d_first.
+         *
+         * The output size is proportional to the input in a factor of \f$ \lambda \f$, where lambda is:
+         *
+         * \f[
+         *  \lambda = \frac{f_{si}}{f_{so}}
+         * \f]
+         *
+         * where \f$ f_{si} \f$  and \f$ f_{so} \f$ are the input size and the output size respectively.
+         *
+         * @note It is recommended to allocate at least \f$ \lambda N \f$ samples, where \f$ N \f$ is the input size.
+         * The user can use the returned counter to resize the output buffer after the processing.
+         *
          * @param first Input iterator defining the beginning of the input range.
          * @param last Input iterator defining the ending of the input range.
          * @param d_first Output iterator defining the beginning of the destination range.

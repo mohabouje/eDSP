@@ -50,7 +50,7 @@ namespace edsp { namespace filter {
         using size_type       = std::size_t;
 
         /**
-         * @brief Creates an empty #BiquadCascade
+         * @brief Creates an empty %biquad_cascade
          */
         constexpr biquad_cascade() = default;
 

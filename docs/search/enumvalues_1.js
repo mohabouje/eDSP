@@ -9,6 +9,7 @@ var searchData=
   ['bartlett',['Bartlett',['../d3/d0f/namespaceedsp_1_1windowing.html#a18fb11a4c3c068f95176d9938e662709a03b627d3493e3b2a15128dd1b5e950b3',1,'edsp::windowing']]],
   ['bernoulli',['Bernoulli',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159ca145aff85b8e64514b9125ee45d430e03',1,'edsp::random']]],
   ['bessel',['Bessel',['../d7/d47/namespaceedsp_1_1filter.html#a7697522d00c54d9bef2c9f71cfa8d6bfaa6e388bceed3ec0ecaea8f9daaa97f10',1,'edsp::filter']]],
+  ['best_5fquality',['best_quality',['../df/dd9/namespaceedsp_1_1io.html#a659bf064ee1990f2e5a2a1fa3078f9b3ab70b218b76caca1e69a821e51c2447b6',1,'edsp::io']]],
   ['biased',['Biased',['../d6/de9/namespaceedsp_1_1spectral.html#ae1d7638eeeea4114e77aef150c729b38a218fddd7a527a321c8a7ef68d25f1260',1,'edsp::spectral']]],
   ['binomial',['Binomial',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159caf0dc57106e362cb815789ed45ed989ad',1,'edsp::random']]],
   ['bits',['Bits',['../d1/db9/namespaceedsp_1_1statistics.html#a40dc27fc3a96ca20a6a496d7a6625d3cabdadcf47d9dd00a23601ffd28bdc69b2',1,'edsp::statistics']]],

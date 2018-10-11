@@ -13,6 +13,7 @@ var searchData=
   ['is_5fnegative',['is_negative',['../de/d95/namespaceedsp_1_1math.html#ad6c83dbfd6933fc10a94be9e85d5ccf7',1,'edsp::math']]],
   ['is_5fnormal',['is_normal',['../de/d95/namespaceedsp_1_1math.html#afee93d14c6e85a3832f0b7499aa06005',1,'edsp::math']]],
   ['is_5fodd',['is_odd',['../de/d95/namespaceedsp_1_1math.html#a1b1d88e78b0cd9e291fed0d4321f7c7a',1,'edsp::math']]],
+  ['is_5fopen',['is_open',['../d8/d66/classedsp_1_1io_1_1decoder.html#af90d60e35d1e50b69123ea8458bce963',1,'edsp::io::decoder']]],
   ['is_5fpower_5ftwo',['is_power_two',['../de/d95/namespaceedsp_1_1math.html#a3153a15465b6203e07c23382e25f58c5',1,'edsp::math']]],
   ['is_5fprime',['is_prime',['../de/d95/namespaceedsp_1_1math.html#a029f2f1d7ad3b85bf0a6b96017b84cde',1,'edsp::math']]],
   ['is_5fzero',['is_zero',['../de/d95/namespaceedsp_1_1math.html#aef208c9eb9cd718cdb3be2495a58073b',1,'edsp::math']]]

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['messagetype',['MessageType',['../d6/dd0/classedsp_1_1core_1_1logger.html#a99038d52ca69e7aba52fe7ddf6d67919',1,'edsp::core::logger']]]
+  ['levels',['levels',['../d6/dd0/classedsp_1_1core_1_1logger.html#a204b1f4d6d030a62889019743256d588',1,'edsp::core::logger']]]
 ];

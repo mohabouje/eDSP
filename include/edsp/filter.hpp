@@ -70,7 +70,7 @@ namespace edsp { namespace filter {
            @param gain_db Gain in dB, used only for peaking and shelving filters.
            @param Q Depending of the filter represents the Quality factor, the bandwidth in octaves (between -3 dB frequencies for BPF
                     and notch or between midpoint (gain_db/2) gain frequencies for peaking EQ) or the "shelf slope" parameter.
-         * @return #Biquad filter with the computed coefficients.
+         * @return %Biquad filter with the computed coefficients.
          * @see AudioEQ-CookBook:  \link http://www.musicdsp.org/showone.php?id=197 \endlink
          */
         template <FilterType Type, typename... Args>

@@ -28,6 +28,14 @@
 
 namespace edsp { namespace io {
 
+
+    /**
+     * @class decoder
+     * @brief This class implements a decoder object to read data from supported audio files.
+     *
+     * @tparam T Value Type
+     * @tparam N Size of the internal buffer.
+     */
     template <typename T, std::size_t N = 1024>
     class decoder {
     public:
