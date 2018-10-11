@@ -20,7 +20,6 @@ var searchData=
   ['logarithmic_5fdistance',['logarithmic_distance',['../de/d95/namespaceedsp_1_1math.html#ab4667f4ef5b60888ba9ca6a8c4beec47',1,'edsp::math']]],
   ['logger',['logger',['../d6/dd0/classedsp_1_1core_1_1logger.html',1,'edsp::core::logger'],['../d6/dd0/classedsp_1_1core_1_1logger.html#a29e46476d069e98f600b8b9529dbe567',1,'edsp::core::logger::logger(const edsp::string_view &amp;name, const edsp::string_view &amp;file, levels message_type=levels::trace)'],['../d6/dd0/classedsp_1_1core_1_1logger.html#a7e8d87d3ed1246c54082da876f1faa25',1,'edsp::core::logger::logger(const edsp::string_view &amp;name, levels message_type=levels::trace)'],['../d6/dd0/classedsp_1_1core_1_1logger.html#a7e3da2d7250f080330541dfd2a1abdc5',1,'edsp::core::logger::logger(levels message_type=levels::trace)']]],
   ['logger_2ehpp',['logger.hpp',['../d6/da3/logger_8hpp.html',1,'']]],
-  ['logger_5fimpl',['logger_impl',['../dc/d80/structedsp_1_1core_1_1logger__impl.html',1,'edsp::core::logger_impl'],['../d6/dd0/classedsp_1_1core_1_1logger.html#a059270af6239c35f8488fdf2e90fdc56',1,'edsp::core::logger::logger_impl()']]],
   ['logger_5fmanipulator',['logger_manipulator',['../d6/dd0/classedsp_1_1core_1_1logger.html#a1606ffa973320bc68b042b443b48e43c',1,'edsp::core::logger']]],
   ['lognormal',['LogNormal',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159ca4ddaab6002fbf299bbc4998dcbcdb671',1,'edsp::random']]],
   ['logspace',['logspace',['../d3/db4/namespaceedsp_1_1algorithm.html#a584ce40f7cdc773abc29bfe209dccb72',1,'edsp::algorithm']]],

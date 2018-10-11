@@ -1,7 +1,7 @@
 var searchData=
 [
   ['mag2db',['mag2db',['../dd/d22/namespaceedsp_1_1converter.html#a3e14631efdedae9120463c5f1cc3b2da',1,'edsp::converter']]],
-  ['magenta',['magenta',['../dc/d80/structedsp_1_1core_1_1logger__impl.html#a929f4530e1bda1ff2a0e5f509fd938cb',1,'edsp::core::logger_impl::magenta()'],['../d7/d34/namespaceedsp_1_1core.html#a07c73076453ff67d15f16414a4557a94',1,'edsp::core::magenta()']]],
+  ['magenta',['magenta',['../d7/d34/namespaceedsp_1_1core.html#a07c73076453ff67d15f16414a4557a94',1,'edsp::core']]],
   ['magnitude',['magnitude',['../de/d95/namespaceedsp_1_1math.html#a23d4de7babcca4f5833fd81b5a828f97',1,'edsp::math']]],
   ['major_5fversion',['major_version',['../d4/dbe/structedsp_1_1core_1_1library__info.html#aa561c6b85a5017b2a8a300645bdf9e28',1,'edsp::core::library_info']]],
   ['make_5ffft_5fsize',['make_fft_size',['../d6/de9/namespaceedsp_1_1spectral.html#a37f3bc6fc8b6b2cc06005b0eefc65b21',1,'edsp::spectral']]],

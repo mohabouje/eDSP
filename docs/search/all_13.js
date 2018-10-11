@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['tab',['tab',['../dc/d80/structedsp_1_1core_1_1logger__impl.html#ad5071aa0af66091f000bd3785bb12f4d',1,'edsp::core::logger_impl::tab()'],['../d7/d34/namespaceedsp_1_1core.html#a55f7bb60c17e7a0a0effc9e45ec602f6',1,'edsp::core::tab()']]],
+  ['tab',['tab',['../d7/d34/namespaceedsp_1_1core.html#a55f7bb60c17e7a0a0effc9e45ec602f6',1,'edsp::core']]],
   ['third',['third',['../d8/df5/structedsp_1_1math_1_1constants.html#a90fd0d5e6b19cc71334cf85c54fb5f91',1,'edsp::math::constants']]],
   ['third_5fpi',['third_pi',['../d8/df5/structedsp_1_1math_1_1constants.html#a792367b1017284f0cd8a3c2ce7c6ec17',1,'edsp::math::constants']]],
   ['three_5fquarters',['three_quarters',['../d8/df5/structedsp_1_1math_1_1constants.html#ac73d08c0f8b132b3f2d4d1f7115ab20c',1,'edsp::math::constants']]],

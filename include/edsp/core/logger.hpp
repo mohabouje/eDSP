@@ -33,6 +33,11 @@
 
 namespace edsp { inline namespace core {
 
+    inline namespace internal {
+        struct logger_impl;
+    }
+
+
     class logger {
     public:
         /**
@@ -211,86 +216,88 @@ namespace edsp { inline namespace core {
         }
 
     private:
-        friend struct logger_impl;
+        friend struct internal::logger_impl;
         std::shared_ptr<spdlog::logger> logger_{nullptr};
         logger::levels type_{levels::info};
         std::stringstream msg_;
     };
 
-    struct logger_impl {
-        inline static logger& tab(logger& stream) {
-            return stream << '\t';
-        }
+    inline namespace internal {
+        struct logger_impl {
+            inline static logger& tab(logger& stream) {
+                return stream << '\t';
+            }
 
-        inline static logger& endl(logger& stream) {
-            return stream << '\n';
-        }
+            inline static logger& endl(logger& stream) {
+                return stream << '\n';
+            }
 
-        inline static logger& red(logger& stream) {
-            stream.msg_ << termcolor::colorize;
-            stream.msg_ << termcolor::red;
-            return stream;
-        }
+            inline static logger& red(logger& stream) {
+                stream.msg_ << termcolor::colorize;
+                stream.msg_ << termcolor::red;
+                return stream;
+            }
 
-        inline static logger& yellow(logger& stream) {
-            stream.msg_ << termcolor::colorize;
-            stream.msg_ << termcolor::yellow;
-            return stream;
-        }
+            inline static logger& yellow(logger& stream) {
+                stream.msg_ << termcolor::colorize;
+                stream.msg_ << termcolor::yellow;
+                return stream;
+            }
 
-        inline static logger& blue(logger& stream) {
-            stream.msg_ << termcolor::colorize;
-            stream.msg_ << termcolor::blue;
-            return stream;
-        }
+            inline static logger& blue(logger& stream) {
+                stream.msg_ << termcolor::colorize;
+                stream.msg_ << termcolor::blue;
+                return stream;
+            }
 
-        inline static logger& cyan(logger& stream) {
-            stream.msg_ << termcolor::colorize;
-            stream.msg_ << termcolor::cyan;
-            return stream;
-        }
+            inline static logger& cyan(logger& stream) {
+                stream.msg_ << termcolor::colorize;
+                stream.msg_ << termcolor::cyan;
+                return stream;
+            }
 
-        inline static logger& white(logger& stream) {
-            stream.msg_ << termcolor::colorize;
-            stream.msg_ << termcolor::white;
-            return stream;
-        }
+            inline static logger& white(logger& stream) {
+                stream.msg_ << termcolor::colorize;
+                stream.msg_ << termcolor::white;
+                return stream;
+            }
 
-        inline static logger& magenta(logger& stream) {
-            stream.msg_ << termcolor::colorize;
-            stream.msg_ << termcolor::magenta;
-            return stream;
-        }
+            inline static logger& magenta(logger& stream) {
+                stream.msg_ << termcolor::colorize;
+                stream.msg_ << termcolor::magenta;
+                return stream;
+            }
 
-        inline static logger& green(logger& stream) {
-            stream.msg_ << termcolor::colorize;
-            stream.msg_ << termcolor::green;
-            return stream;
-        }
+            inline static logger& green(logger& stream) {
+                stream.msg_ << termcolor::colorize;
+                stream.msg_ << termcolor::green;
+                return stream;
+            }
 
-        inline static logger& grey(logger& stream) {
-            stream.msg_ << termcolor::colorize;
-            stream.msg_ << termcolor::grey;
-            return stream;
-        }
+            inline static logger& grey(logger& stream) {
+                stream.msg_ << termcolor::colorize;
+                stream.msg_ << termcolor::grey;
+                return stream;
+            }
 
-        inline static logger& bold(logger& stream) {
-            stream.msg_ << termcolor::colorize;
-            stream.msg_ << termcolor::bold;
-            return stream;
-        }
+            inline static logger& bold(logger& stream) {
+                stream.msg_ << termcolor::colorize;
+                stream.msg_ << termcolor::bold;
+                return stream;
+            }
 
-        inline static logger& endc(logger& stream) {
-            stream.msg_ << termcolor::nocolorize;
-            stream.msg_ << termcolor::reset;
-            return stream;
-        }
+            inline static logger& endc(logger& stream) {
+                stream.msg_ << termcolor::nocolorize;
+                stream.msg_ << termcolor::reset;
+                return stream;
+            }
 
-        inline static logger& reset(logger& stream) {
-            stream.msg_ << termcolor::reset;
-            return stream;
-        }
-    };
+            inline static logger& reset(logger& stream) {
+                stream.msg_ << termcolor::reset;
+                return stream;
+            }
+        };
+    }
 
     inline logger& tab(logger& stream) {
         return logger_impl::tab(stream);

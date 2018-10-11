@@ -56,5 +56,5 @@ var searchData=
   ['crest_2ehpp',['crest.hpp',['../d3/dcb/crest_8hpp.html',1,'']]],
   ['critical',['critical',['../d6/dd0/classedsp_1_1core_1_1logger.html#a204b1f4d6d030a62889019743256d588a40094fd568844f646914bc826fc999e1',1,'edsp::core::logger']]],
   ['current',['current',['../d8/d66/classedsp_1_1io_1_1decoder.html#aa57f443005a450783ee055acd67d2b40',1,'edsp::io::decoder']]],
-  ['cyan',['cyan',['../dc/d80/structedsp_1_1core_1_1logger__impl.html#abfebf12e1b9c8a9d712b9ac2cc27d63a',1,'edsp::core::logger_impl::cyan()'],['../d7/d34/namespaceedsp_1_1core.html#accfb4b1b7ccaeb05accc3dd2d175baaa',1,'edsp::core::cyan()']]]
+  ['cyan',['cyan',['../d7/d34/namespaceedsp_1_1core.html#accfb4b1b7ccaeb05accc3dd2d175baaa',1,'edsp::core']]]
 ];

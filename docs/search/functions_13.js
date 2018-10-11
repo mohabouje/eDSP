@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['tab',['tab',['../dc/d80/structedsp_1_1core_1_1logger__impl.html#ad5071aa0af66091f000bd3785bb12f4d',1,'edsp::core::logger_impl::tab()'],['../d7/d34/namespaceedsp_1_1core.html#a55f7bb60c17e7a0a0effc9e45ec602f6',1,'edsp::core::tab()']]],
+  ['tab',['tab',['../d7/d34/namespaceedsp_1_1core.html#a55f7bb60c17e7a0a0effc9e45ec602f6',1,'edsp::core']]],
   ['tick',['tick',['../dc/d81/classedsp_1_1filter_1_1biquad.html#a7a4c940b62de3964d0d6babb21c9abdf',1,'edsp::filter::biquad::tick()'],['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a289696ffa2ea8293e7b4bc61c0aa560f',1,'edsp::filter::biquad_cascade::tick()']]],
   ['timestamp',['timestamp',['../dc/d96/classedsp_1_1oscillators_1_1oscillator.html#a79f9c325c9effd803ef0f00401d5dd72',1,'edsp::oscillators::oscillator']]],
   ['tolower',['tolower',['../dd/d65/namespaceedsp_1_1string.html#a3a65874856c9a284f2c3ef1780b5c941',1,'edsp::string::tolower(Char character)'],['../dd/d65/namespaceedsp_1_1string.html#a71e2709bf0ae8815b6466ffabd3da323',1,'edsp::string::tolower(InputIt first, InputIt last, OutputIt d_first)']]],
