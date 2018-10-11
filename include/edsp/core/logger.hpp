@@ -99,8 +99,8 @@ namespace edsp { inline namespace core {
         inline static void set_pattern(const std::string& pattern);
 
         /**
-         * @brief Constructs a logger to record log messages of @par message_type
-         * for the @par file.
+         * @brief Constructs a logger to record log messages of message_type
+         * for the file.
          * @param name Name or key of the logger.
          * @param file File-path to stores the message. Use "console" to output the messages in the terminal.
          * @param message_type Type of the message.
@@ -110,7 +110,7 @@ namespace edsp { inline namespace core {
                       levels message_type = levels::trace);
 
         /**
-         * @brief Constructs a logger to record log messages of @par message_type in a terminal.
+         * @brief Constructs a logger to record log messages of message_type in a terminal.
          * @param name Name or key of the logger.
          * @param message_type Type of the message.
          * @see MessageLevelType
@@ -118,7 +118,7 @@ namespace edsp { inline namespace core {
         inline explicit logger(const edsp::string_view& name, levels message_type = levels::trace);
 
         /**
-         * @brief Created the default logger to record log messages of @par message_type.
+         * @brief Created the default logger to record log messages of message_type.
          * @param message_type Type of the message.
 -        * @see MessageLevelType
          */

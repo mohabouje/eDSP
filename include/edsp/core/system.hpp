@@ -177,7 +177,7 @@ namespace edsp { inline namespace core {
         };
 
         /**
-        * @brief Searches in the system environment for the value of the @par variable name.
+        * @brief Searches in the system environment for the value of the variable name.
         * @param variable_name Variable name
         * @return If it fails, the associated error. If not, the value of the variable.
         */

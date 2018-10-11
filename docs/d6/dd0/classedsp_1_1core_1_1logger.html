@@ -103,13 +103,13 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a29e46476d069e98f600b8b9529dbe567"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dd0/classedsp_1_1core_1_1logger.html#a29e46476d069e98f600b8b9529dbe567">logger</a> (const edsp::string_view &amp;<a class="el" href="../../d6/dd0/classedsp_1_1core_1_1logger.html#a7fc21ef2add22daa6e22a35383da28c7">name</a>, const edsp::string_view &amp;file, <a class="el" href="../../d6/dd0/classedsp_1_1core_1_1logger.html#a204b1f4d6d030a62889019743256d588">levels</a> message_type=levels::trace)</td></tr>
-<tr class="memdesc:a29e46476d069e98f600b8b9529dbe567"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a logger to record log messages of.  <a href="#a29e46476d069e98f600b8b9529dbe567">More...</a><br /></td></tr>
+<tr class="memdesc:a29e46476d069e98f600b8b9529dbe567"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a logger to record log messages of message_type for the file.  <a href="#a29e46476d069e98f600b8b9529dbe567">More...</a><br /></td></tr>
 <tr class="separator:a29e46476d069e98f600b8b9529dbe567"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e8d87d3ed1246c54082da876f1faa25"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dd0/classedsp_1_1core_1_1logger.html#a7e8d87d3ed1246c54082da876f1faa25">logger</a> (const edsp::string_view &amp;<a class="el" href="../../d6/dd0/classedsp_1_1core_1_1logger.html#a7fc21ef2add22daa6e22a35383da28c7">name</a>, <a class="el" href="../../d6/dd0/classedsp_1_1core_1_1logger.html#a204b1f4d6d030a62889019743256d588">levels</a> message_type=levels::trace)</td></tr>
-<tr class="memdesc:a7e8d87d3ed1246c54082da876f1faa25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a logger to record log messages of.  <a href="#a7e8d87d3ed1246c54082da876f1faa25">More...</a><br /></td></tr>
+<tr class="memdesc:a7e8d87d3ed1246c54082da876f1faa25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a logger to record log messages of message_type in a terminal.  <a href="#a7e8d87d3ed1246c54082da876f1faa25">More...</a><br /></td></tr>
 <tr class="separator:a7e8d87d3ed1246c54082da876f1faa25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e3da2d7250f080330541dfd2a1abdc5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dd0/classedsp_1_1core_1_1logger.html#a7e3da2d7250f080330541dfd2a1abdc5">logger</a> (<a class="el" href="../../d6/dd0/classedsp_1_1core_1_1logger.html#a204b1f4d6d030a62889019743256d588">levels</a> message_type=levels::trace)</td></tr>
-<tr class="memdesc:a7e3da2d7250f080330541dfd2a1abdc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Created the default logger to record log messages of.  <a href="#a7e3da2d7250f080330541dfd2a1abdc5">More...</a><br /></td></tr>
+<tr class="memdesc:a7e3da2d7250f080330541dfd2a1abdc5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Created the default logger to record log messages of message_type.  <a href="#a7e3da2d7250f080330541dfd2a1abdc5">More...</a><br /></td></tr>
 <tr class="separator:a7e3da2d7250f080330541dfd2a1abdc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b8d2611e6dca013b1d0f848e8b0db55"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d6/dd0/classedsp_1_1core_1_1logger.html#a3b8d2611e6dca013b1d0f848e8b0db55">~logger</a> ()</td></tr>
 <tr class="memdesc:a3b8d2611e6dca013b1d0f848e8b0db55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <a href="#a3b8d2611e6dca013b1d0f848e8b0db55">More...</a><br /></td></tr>
@@ -272,9 +272,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a logger to record log messages of. </p>
-<dl class="section user"><dt>message_type</dt><dd>for the </dd></dl>
-<dl class="section user"><dt>file.</dt><dd></dd></dl>
+<p>Constructs a logger to record log messages of message_type for the file. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>Name or key of the logger. </td></tr>
@@ -321,8 +319,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a logger to record log messages of. </p>
-<dl class="section user"><dt>message_type in a terminal.</dt><dd></dd></dl>
+<p>Constructs a logger to record log messages of message_type in a terminal. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">name</td><td>Name or key of the logger. </td></tr>
@@ -358,8 +355,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Created the default logger to record log messages of. </p>
-<dl class="section user"><dt>message_type.</dt><dd></dd></dl>
+<p>Created the default logger to record log messages of message_type. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">message_type</td><td>Type of the message.<ul>
