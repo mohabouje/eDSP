@@ -30,6 +30,9 @@
 
 using namespace edsp::windowing;
 
+#ifdef USE_LIBFFFTW
+
+
 TEST(TestingDCT, TransformHanningWindow) {
     const auto size = 128ul;
     std::vector<double> window(size);
@@ -107,3 +110,5 @@ TEST(TestingDCT, TransformBlackmanWindow) {
         EXPECT_NEAR(window[i], inverse[i], 0.001);
     }
 }
+
+#endif
