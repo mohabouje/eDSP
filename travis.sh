@@ -10,13 +10,6 @@ showinfo() { echo -e "${BG}$1${NC}"; }
 workingprocess() { echo -e "${BB}$1${NC}"; }
 allert () { echo -e "${RED}$1${NC}"; }
 
-showinfo "Download and install google benchmark"
-mkdir temporal && cd temporal
-git clone https://github.com/google/benchmark.git
-cd benchmark
-cmake . && make -j8
-sudo make install
-cd .. && cd ..
 
 showinfo "Building and installing extensions"
 cd extension
@@ -29,7 +22,7 @@ cd .. && cd ..
 showinfo "Building the library..."
 mkdir -p build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_BENCHMARKS=ON -DBUILD_TESTS=ON -DBUILD_EXTENSIONS=ON -DBUILD_DOCS=OFF -DENABLE_DEBUG_INFORMATION=ON -DBUILD_EXAMPLES=ON -DENABLE_COVERAGE=ON ..
+cmake -DCMAKE_BUILD_TYPE=Debug -DBUILD_TESTS=ON -DBUILD_EXTENSIONS=ON -DBUILD_DOCS=OFF -DENABLE_DEBUG_INFORMATION=ON -DBUILD_EXAMPLES=ON -DENABLE_COVERAGE=ON ..
 make -j8
 if [ $? -ne 0 ]; then
     error "Error: there are compile errors!"
