@@ -6,5 +6,5 @@ project(EasyDSP-Examples VERSION 0.0.0 LANGUAGES CXX)
 
 set(SOURCE_FILES library_info.cpp)
 
-add_executable(library-info ${SOURCE_FILES})
-target_link_libraries(library-info pthread eDSP)
+add_executable(edsp-library-info ${SOURCE_FILES})
+target_link_libraries(edsp-library-info pthread eDSP)
