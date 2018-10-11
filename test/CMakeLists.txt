@@ -28,6 +28,7 @@ target_link_libraries(${PROJECT_NAME}
     eDSP
     fftw3f
     fftw3
+    pffft
     audiofile
     sndfile)
 

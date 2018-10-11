@@ -51,10 +51,10 @@ namespace edsp { inline namespace spectral {
                      CorrelationScale scale = CorrelationScale::None) {
         meta::expects(std::distance(first1, last1) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
-        fft_impl<value_type> fft_{};
-        fft_impl<value_type> ifft_{};
         const auto size = std::distance(first1, last1);
         const auto nfft = 2 * size;
+        fft_impl<value_type> fft_(nfft);
+        fft_impl<value_type> ifft_(nfft);
 
         std::vector<value_type, RAllocator> temp_input1(nfft, static_cast<value_type>(0)),
             temp_input2(nfft, static_cast<value_type>(0)), temp_output(nfft);
@@ -64,15 +64,15 @@ namespace edsp { inline namespace spectral {
         std::vector<std::complex<value_type>, CAllocator> fft_data1(make_fft_size(nfft));
         std::vector<std::complex<value_type>, CAllocator> fft_data2(make_fft_size(nfft));
 
-        fft_.dft(meta::data(temp_input1), meta::data(fft_data1), nfft);
-        fft_.dft(meta::data(temp_input2), meta::data(fft_data2), nfft);
+        fft_.dft(meta::data(temp_input1), meta::data(fft_data1));
+        fft_.dft(meta::data(temp_input2), meta::data(fft_data2));
 
         std::transform(std::cbegin(fft_data1), std::cend(fft_data1), std::cbegin(fft_data2), std::begin(fft_data1),
                        std::multiplies<>());
 
-        ifft_.idft(meta::data(fft_data1), meta::data(temp_output), nfft);
+        ifft_.idft(meta::data(fft_data1), meta::data(temp_output));
+        ifft_.idft_scale(meta::data(temp_output));
         std::copy(std::cbegin(temp_output), std::cbegin(temp_output) + size, d_first);
-        ifft_.idft_scale(fftw_cast(&(*d_first)), size);
     }
 
 }} // namespace edsp::spectral

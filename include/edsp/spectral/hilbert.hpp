@@ -24,6 +24,7 @@
 
 #include <edsp/spectral/internal/fft_impl.hpp>
 #include <edsp/converter/real2complex.hpp>
+#include <edsp/math/numeric.hpp>
 #include <vector>
 
 namespace edsp { inline namespace spectral {
@@ -56,8 +57,8 @@ namespace edsp { inline namespace spectral {
         std::vector<std::complex<value_type>, Allocator> complex_data(nfft);
         edsp::real2complex(first, last, std::begin(input_data));
 
-        fft_impl<value_type> fft;
-        fft.dft(meta::data(input_data), meta::data(complex_data), nfft);
+        fft_impl<value_type> fft(nfft);
+        fft.dft(meta::data(input_data), meta::data(complex_data));
 
         const auto limit_1 = math::is_even(nfft) ? nfft / 2 : (nfft + 1) / 2;
         const auto limit_2 = math::is_even(nfft) ? limit_1 + 1 : limit_1;
@@ -69,9 +70,9 @@ namespace edsp { inline namespace spectral {
             complex_data[i] = std::complex<value_type>(0, 0);
         }
 
-        fft_impl<value_type> ifft;
-        ifft.idft(meta::data(complex_data), &(*d_first), nfft);
-        ifft.idft_scale(&(*d_first), nfft);
+        fft_impl<value_type> ifft(nfft);
+        ifft.idft(meta::data(complex_data), &(*d_first));
+        ifft.idft_scale(&(*d_first));
     }
 
 }} // namespace edsp::spectral

@@ -45,25 +45,26 @@ namespace edsp { inline namespace spectral {
     inline void cepstrum(InputIt first, InputIt last, OutputIt d_first) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
-        fft_impl<value_type> fft_{};
-        fft_impl<value_type> ifft_{};
         const auto size = std::distance(first, last);
         const auto nfft = 2 * size;
+        fft_impl<value_type> fft_(nfft);
+        fft_impl<value_type> ifft_(nfft);
+
 
         std::vector<value_type, RAllocator> temp_input(nfft, static_cast<value_type>(0)), temp_output(nfft);
         std::copy(first, last, std::begin(temp_input));
 
         std::vector<std::complex<value_type>, CAllocator> fft_data_(make_fft_size(nfft));
-        fft_.dft(meta::data(temp_input), meta::data(fft_data_), nfft);
+        fft_.dft(meta::data(temp_input), meta::data(fft_data_));
 
         std::transform(std::cbegin(fft_data_), std::cend(fft_data_), std::begin(fft_data_),
                        [](const std::complex<value_type>& val) -> std::complex<value_type> {
                            return std::complex<value_type>(std::log(std::abs(val)), 0);
                        });
 
-        ifft_.idft(meta::data(fft_data_), meta::data(temp_output), nfft);
+        ifft_.idft(meta::data(fft_data_), meta::data(temp_output));
+        ifft_.idft_scale(meta::data(temp_output));
         std::copy(std::cbegin(temp_output), std::cbegin(temp_output) + size, d_first);
-        ifft_.idft_scale(&(*d_first), size);
     }
 
 }} // namespace edsp::spectral

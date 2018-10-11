@@ -29,7 +29,7 @@
 
 namespace edsp { inline namespace core {
 
-    enum class fft_lib { fftw, kiss, apple, unknown };
+    enum class fft_lib { fftw, pffft, apple, unknown };
 
     enum class codec_lib { audiofile, sndfile, unknown };
 
@@ -39,8 +39,8 @@ namespace edsp { inline namespace core {
         switch (lib) {
             case fft_lib::fftw:
                 return stream << "FFTW";
-            case fft_lib::kiss:
-                return stream << "Kiss FFT";
+            case fft_lib::pffft:
+                return stream << "PFFFT";
             case fft_lib::apple:
                 return stream << "Apple FFT";
             default:
@@ -98,7 +98,7 @@ namespace edsp { inline namespace core {
         static constexpr fft_lib fft_library() noexcept {
 #if defined(USE_LIBFFTW)
             return fft_lib::fftw;
-#elif defined(USE_LIBKISS)
+#elif defined(USE_LIBPFFFT)
             return fft_lib::fftw;
 #elif defined(USE_LIBAPPLE)
             return fft_lib::fftw;

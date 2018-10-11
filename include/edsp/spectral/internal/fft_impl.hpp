@@ -25,6 +25,8 @@
 
 #if defined(USE_LIBFFTW)
 #    include <edsp/spectral/internal/libfftw_impl.hpp>
+#elif defined(USE_LIBPFFFT)
+#include <edsp/spectral/internal/libpffft_impl.hpp>
 #endif
 
 namespace edsp { inline namespace spectral {
@@ -32,8 +34,9 @@ namespace edsp { inline namespace spectral {
 #if defined(USE_LIBFFTW)
     template <typename T>
     using fft_impl = spectral::fftw_impl<T>;
-#elif defined(USE_LIBKISS)
-#    error "Not implemented yet"
+#elif defined(USE_LIBPFFFT)
+    template <typename T>
+    using fft_impl = spectral::pffft_impl<T>;
 #elif defined(USE_LIBAPPLE)
 #    error "Not implemented yet"
 #else

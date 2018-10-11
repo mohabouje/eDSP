@@ -13,15 +13,15 @@ option(BUILD_TESTS "Enable to build tests" ON)
 option(BUILD_DOCS "Enable to build docs" OFF)
 option(BUILD_EXAMPLES "Enable to build examples" ON)
 option(BUILD_TOOLS "Enable to build tools" ON)
-option(BUILD_EXTENSIONS "Enable the compilation of third-party tools" ON)
+option(BUILD_EXTENSIONS "Enable the option to build the extension libraries" ON)
 option(ENABLE_COVERAGE "Enable the code coverage" OFF)
 option(ENABLE_OPTIMIZATIONS "Enable all the optimizations, in release mode" ON)
 option(ENABLE_WARNINGS "Enable all warning during compilation" ON)
 option(ENABLE_DEBUG_INFORMATION "Enable debug information, useful for profiling and debugging tools" OFF)
 option(USE_LIBSNDFILE "Use the library SndFile to encode/decode audio files" OFF)
 option(USE_LIBAUDIOFILE "Use the library AudioFile to encode/decode audio files" ON)
-option(USE_LIBKISS "Use the library Kiss FFT to encode/decode audio files" OFF)
-option(USE_LIBFFTW "Use the library FFTW to encode/decode audio files" ON)
+option(USE_LIBPFFFT "Use the library PFFT to encode/decode audio files" ON)
+option(USE_LIBFFTW "Use the library FFTW to encode/decode audio files" OFF)
 option(USE_LIBSAMPLERATE "Use the library libsamplerate to resample audio data" ON)
 option(USE_LIBRESAMPLE "Use the library libresample to resample audio data" ON)
 
@@ -72,8 +72,17 @@ if (USE_LIBFFTW)
     else()
         message(FATAL_ERROR "Library FFTW not found")
     endif(FFTW_LIB)
-else()
-    add_definitions(-DUSE_KISS)
+endif()
+
+if (USE_LIBPFFFT)
+    set(EDSP_DEPENDENCIES)
+    find_library(PFFFT_LIB NAMES lpffft libpffft pffft)
+    if (PFFFT_LIB)
+        add_definitions(-DUSE_LIBPFFFT)
+        list(APPEND ${EDSP_DEPENDENCIES} ${PFFFT_LIB})
+    else()
+        message(FATAL_ERROR "Library PFFFT not found")
+    endif(PFFFT_LIB)
 endif()
 
 if (USE_LIBAUDIOFILE)
@@ -95,14 +104,6 @@ if (USE_LIBSNDFILE)
         message(FATAL_ERROR "Library SndFile not found")
     endif(SNDFILE_LIB)
 endif()
-
-# Add the precompiled extension with third-party tools
-if (BUILD_EXTENSIONS)
-    add_subdirectory(extension)
-    list(APPEND ${EDSP_DEPENDENCIES} pffft edsp-extension)
-endif()
-
-
 
 if (USE_LIBSAMPLERATE)
     add_definitions(-DUSE_LIBSAMPLERATE)
@@ -126,9 +127,18 @@ install(TARGETS ${LIB_NAME}
         ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 
+
+
 if (ENABLE_COVERAGE)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -fprofile-arcs -coverage")
 endif(ENABLE_COVERAGE)
+
+
+if (BUILD_EXTENSIONS)
+    add_subdirectory(extension)
+    target_link_libraries (${LIB_NAME} INTERFACE ${EDSP_EXTENSION_LIBRARIES})
+    target_include_directories (${LIB_NAME} INTERFACE ${EDSP_EXTENSION_INCLUDE_DIRS})
+endif(BUILD_EXTENSIONS)
 
 if (BUILD_TESTS)
     enable_testing()

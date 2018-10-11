@@ -41,8 +41,8 @@ namespace edsp { inline namespace spectral {
     inline void dct(InputIt first, InputIt last, OutputIt d_first, DCT_Type type = DCT_Type::Type_II) {
         const auto nfft =
             static_cast<typename fft_impl<meta::value_type_t<InputIt>>::size_type>(std::distance(first, last));
-        fft_impl<meta::value_type_t<InputIt>> plan;
-        plan.dct(&(*first), &(*d_first), nfft, type);
+        fft_impl<meta::value_type_t<InputIt>> plan(nfft);
+        plan.dct(&(*first), &(*d_first), type);
     }
 
     /**
@@ -59,9 +59,9 @@ namespace edsp { inline namespace spectral {
     inline void idct(InputIt first, InputIt last, OutputIt d_first, DCT_Type type = DCT_Type::Type_II) {
         const auto nfft =
             static_cast<typename fft_impl<meta::value_type_t<InputIt>>::size_type>(std::distance(first, last));
-        fft_impl<meta::value_type_t<InputIt>> plan;
-        plan.idct(&(*first), &(*d_first), nfft, type);
-        plan.idct_scale(&(*d_first), nfft, type);
+        fft_impl<meta::value_type_t<InputIt>> plan(nfft);
+        plan.idct(&(*first), &(*d_first), type);
+        plan.idct_scale(&(*d_first), type);
     }
 
 }} // namespace edsp::spectral

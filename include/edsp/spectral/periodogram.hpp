@@ -52,10 +52,10 @@ namespace edsp { inline namespace spectral {
     inline void periodogram(InputIt first, InputIt last, OutputIt d_first, SpectralScale scale) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
-        fft_impl<value_type> fft_{};
         const auto size = std::distance(first, last);
-        std::vector<std::complex<value_type>, Allocator> fft_data_(make_fft_size(size), std::complex<value_type>(0, 0));
-        fft_.dft(&(*first), meta::data(fft_data_), size);
+        fft_impl<value_type> fft_{size};
+        std::vector<std::complex<value_type>, Allocator> fft_data_(make_fft_size(size));
+        fft_.dft(&(*first), meta::data(fft_data_));
         if (scale == SpectralScale::Linear) {
             std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
                            [](const std::complex<value_type>& val) -> meta::value_type_t<OutputIt> {
