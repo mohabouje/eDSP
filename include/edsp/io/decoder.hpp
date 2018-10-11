@@ -24,7 +24,7 @@
 #define EDSP_DECODER_HPP
 
 #include <edsp/types/string_view.hpp>
-#include <edsp/io/internal/decoder_impl.hpp>
+#include <edsp/io/internal/codec/decoder_impl.hpp>
 
 namespace edsp { namespace io {
 

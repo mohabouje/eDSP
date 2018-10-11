@@ -15,31 +15,31 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* Filename: fft_impl.hpp
+* Filename: decoder_impl.hpp
 * Author: Mohammed Boujemaoui
 * Date: 09/10/18
 */
+#ifndef EDSP_DECODER_IMPL_HPP
+#define EDSP_DECODER_IMPL_HPP
 
-#ifndef EDSP_FFT_IMPL_HPP
-#define EDSP_FFT_IMPL_HPP
-
-#if defined(USE_LIBFFTW)
-#    include <edsp/spectral/internal/libfftw_impl.hpp>
+#if defined(USE_LIBAUDIOFILE)
+#    include <edsp/io/internal/codec/libaudiofile_impl.hpp>
+#elif defined(USE_LIBSNDFILE)
+#    include <edsp/io/internal/codec/libsndfile_impl.hpp>
 #endif
 
-namespace edsp { inline namespace spectral {
+namespace edsp { namespace io {
 
-#if defined(USE_LIBFFTW)
-    template <typename T>
-    using fft_impl = spectral::fftw_impl<T>;
-#elif defined(USE_LIBKISS)
-#    error "Not implemented yet"
-#elif defined(USE_LIBAPPLE)
-#    error "Not implemented yet"
+#if defined(USE_LIBAUDIOFILE)
+    template <typename T, std::size_t N>
+    using decoder_impl = libaudiofile_decoder<T, N>;
+#elif defined(USE_LIBSNDFILE)
+    template <typename T, std::size_t N>
+    using decoder_impl = libsndfile_decoder<T, N>;
 #else
-#    error "Library not found"
+#    error "Compatible library not found!"
 #endif
 
-}} // namespace edsp::spectral
+}} // namespace edsp::io
 
-#endif //EDSP_FFT_IMPL_HPP
+#endif //EDSP_DECODER_IMPL_HPP

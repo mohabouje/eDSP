@@ -94,14 +94,14 @@ namespace edsp { namespace io {
     } // namespace internal
 
     template <typename T, std::size_t N = 2048>
-    struct sndfile_decoder {
+    struct libsndfile_decoder {
         static_assert(std::is_arithmetic<T>::value, "Expected arithmetic types");
 
         using index_type = std::ptrdiff_t;
         using value_type = T;
 
-        sndfile_decoder() = default;
-        ~sndfile_decoder();
+        libsndfile_decoder() = default;
+        ~libsndfile_decoder();
 
         void close();
 
@@ -142,48 +142,48 @@ namespace edsp { namespace io {
     };
 
     template <typename T, size_t N>
-    typename sndfile_decoder<T, N>::index_type sndfile_decoder<T, N>::current() const noexcept {
+    typename libsndfile_decoder<T, N>::index_type libsndfile_decoder<T, N>::current() const noexcept {
         return sf_seek(file_, 0, SEEK_CUR);
     }
 
     template <typename T, size_t N>
-    typename sndfile_decoder<T, N>::index_type
-        sndfile_decoder<T, N>::seek(sndfile_decoder::index_type position) noexcept {
+    typename libsndfile_decoder<T, N>::index_type
+        libsndfile_decoder<T, N>::seek(libsndfile_decoder::index_type position) noexcept {
         return sf_seek(file_, position, SEEK_SET);
     }
 
     template <typename T, size_t N>
-    double sndfile_decoder<T, N>::samplerate() const noexcept {
+    double libsndfile_decoder<T, N>::samplerate() const noexcept {
         return info_.samplerate;
     }
 
     template <typename T, size_t N>
-    double sndfile_decoder<T, N>::duration() const noexcept {
+    double libsndfile_decoder<T, N>::duration() const noexcept {
         return static_cast<double>(info_.frames) / info_.samplerate;
     }
 
     template <typename T, size_t N>
-    typename sndfile_decoder<T, N>::index_type sndfile_decoder<T, N>::channels() const noexcept {
+    typename libsndfile_decoder<T, N>::index_type libsndfile_decoder<T, N>::channels() const noexcept {
         return info_.channels;
     }
 
     template <typename T, size_t N>
-    typename sndfile_decoder<T, N>::index_type sndfile_decoder<T, N>::frames() const noexcept {
+    typename libsndfile_decoder<T, N>::index_type libsndfile_decoder<T, N>::frames() const noexcept {
         return info_.frames;
     }
 
     template <typename T, size_t N>
-    typename sndfile_decoder<T, N>::index_type sndfile_decoder<T, N>::samples() const noexcept {
+    typename libsndfile_decoder<T, N>::index_type libsndfile_decoder<T, N>::samples() const noexcept {
         return info_.channels * info_.frames;
     }
 
     template <typename T, size_t N>
-    bool sndfile_decoder<T, N>::is_open() const noexcept {
+    bool libsndfile_decoder<T, N>::is_open() const noexcept {
         return file_ != nullptr;
     }
 
     template <typename T, size_t N>
-    bool sndfile_decoder<T, N>::open(const edsp::string_view& filepath) {
+    bool libsndfile_decoder<T, N>::open(const edsp::string_view& filepath) {
         close();
         file_ = sf_open(filepath.data(), SFM_READ, &info_);
         if (meta::is_null(file_)) {
@@ -194,7 +194,7 @@ namespace edsp { namespace io {
     }
 
     template <typename T, size_t N>
-    void sndfile_decoder<T, N>::close() {
+    void libsndfile_decoder<T, N>::close() {
         if (!is_open()) {
             return;
         }
@@ -204,7 +204,7 @@ namespace edsp { namespace io {
 
     template <typename T, size_t N>
     template <typename OutputIt>
-    typename sndfile_decoder<T, N>::index_type sndfile_decoder<T, N>::read(OutputIt first, OutputIt last) {
+    typename libsndfile_decoder<T, N>::index_type libsndfile_decoder<T, N>::read(OutputIt first, OutputIt last) {
         index_type total        = std::distance(first, last);
         index_type remaining    = total;
         index_type samples_read = 0;
@@ -222,12 +222,12 @@ namespace edsp { namespace io {
     }
 
     template <typename T, size_t N>
-    sndfile_decoder<T, N>::~sndfile_decoder() {
+    libsndfile_decoder<T, N>::~libsndfile_decoder() {
         close();
     }
 
     template <typename T, size_t N>
-    bool sndfile_decoder<T, N>::seekable() const noexcept {
+    bool libsndfile_decoder<T, N>::seekable() const noexcept {
         return static_cast<bool>(info_.seekable);
     }
 

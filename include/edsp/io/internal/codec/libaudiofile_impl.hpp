@@ -34,14 +34,14 @@
 namespace edsp { namespace io {
 
     template <typename T, std::size_t N = 2048>
-    struct audiofile_decoder {
+    struct libaudiofile_decoder {
         static_assert(std::is_arithmetic<T>::value, "Expected arithmetic types");
 
         using index_type = std::ptrdiff_t;
         using value_type = T;
 
-        audiofile_decoder() = default;
-        ~audiofile_decoder();
+        libaudiofile_decoder() = default;
+        ~libaudiofile_decoder();
 
         void close();
 
@@ -92,48 +92,48 @@ namespace edsp { namespace io {
     };
 
     template <typename T, size_t N>
-    typename audiofile_decoder<T, N>::index_type audiofile_decoder<T, N>::current() const noexcept {
+    typename libaudiofile_decoder<T, N>::index_type libaudiofile_decoder<T, N>::current() const noexcept {
         return static_cast<index_type>(afTellFrame(file_, AF_DEFAULT_TRACK));
     }
 
     template <typename T, size_t N>
-    typename audiofile_decoder<T, N>::index_type
-        audiofile_decoder<T, N>::seek(audiofile_decoder::index_type position) noexcept {
+    typename libaudiofile_decoder<T, N>::index_type
+        libaudiofile_decoder<T, N>::seek(libaudiofile_decoder::index_type position) noexcept {
         return afSeekFrame(file_, AF_DEFAULT_TRACK, position);
     }
 
     template <typename T, size_t N>
-    double audiofile_decoder<T, N>::samplerate() const noexcept {
+    double libaudiofile_decoder<T, N>::samplerate() const noexcept {
         return samplerate_;
     }
 
     template <typename T, size_t N>
-    double audiofile_decoder<T, N>::duration() const noexcept {
+    double libaudiofile_decoder<T, N>::duration() const noexcept {
         return static_cast<double>(frames_) / samplerate_;
     }
 
     template <typename T, size_t N>
-    typename audiofile_decoder<T, N>::index_type audiofile_decoder<T, N>::channels() const noexcept {
+    typename libaudiofile_decoder<T, N>::index_type libaudiofile_decoder<T, N>::channels() const noexcept {
         return channels_;
     }
 
     template <typename T, size_t N>
-    typename audiofile_decoder<T, N>::index_type audiofile_decoder<T, N>::frames() const noexcept {
+    typename libaudiofile_decoder<T, N>::index_type libaudiofile_decoder<T, N>::frames() const noexcept {
         return frames_;
     }
 
     template <typename T, size_t N>
-    typename audiofile_decoder<T, N>::index_type audiofile_decoder<T, N>::samples() const noexcept {
+    typename libaudiofile_decoder<T, N>::index_type libaudiofile_decoder<T, N>::samples() const noexcept {
         return channels_ * frames_;
     }
 
     template <typename T, size_t N>
-    bool audiofile_decoder<T, N>::is_open() const noexcept {
+    bool libaudiofile_decoder<T, N>::is_open() const noexcept {
         return file_ != AF_NULL_FILEHANDLE;
     }
 
     template <typename T, size_t N>
-    bool audiofile_decoder<T, N>::open(const edsp::string_view& filepath) {
+    bool libaudiofile_decoder<T, N>::open(const edsp::string_view& filepath) {
         close();
         file_ = afOpenFile(filepath.data(), "r", NULL);
         if (file_ == AF_NULL_FILEHANDLE) {
@@ -149,7 +149,7 @@ namespace edsp { namespace io {
     }
 
     template <typename T, size_t N>
-    void audiofile_decoder<T, N>::close() {
+    void libaudiofile_decoder<T, N>::close() {
         if (!is_open()) {
             return;
         }
@@ -163,7 +163,7 @@ namespace edsp { namespace io {
     }
 
     template <typename T, size_t N>
-    void audiofile_decoder<T, N>::update_format() {
+    void libaudiofile_decoder<T, N>::update_format() {
         if (std::is_floating_point<T>::value) {
             if (std::is_same<T, float>::value) {
                 afSetVirtualSampleFormat(file_, AF_DEFAULT_TRACK, AF_SAMPFMT_FLOAT, sizeof(T) * 8);
@@ -183,7 +183,7 @@ namespace edsp { namespace io {
 
     template <typename T, size_t N>
     template <typename OutputIt>
-    typename audiofile_decoder<T, N>::index_type audiofile_decoder<T, N>::read(OutputIt first, OutputIt last) {
+    typename libaudiofile_decoder<T, N>::index_type libaudiofile_decoder<T, N>::read(OutputIt first, OutputIt last) {
         index_type total        = std::distance(first, last);
         index_type remaining    = total;
         index_type samples_read = 0;
@@ -201,12 +201,12 @@ namespace edsp { namespace io {
     }
 
     template <typename T, size_t N>
-    audiofile_decoder<T, N>::~audiofile_decoder() {
+    libaudiofile_decoder<T, N>::~libaudiofile_decoder() {
         close();
     }
 
     template <typename T, size_t N>
-    bool audiofile_decoder<T, N>::seekable() const noexcept {
+    bool libaudiofile_decoder<T, N>::seekable() const noexcept {
         return true;
     }
 

@@ -112,7 +112,8 @@ namespace edsp { inline namespace spectral {
     void dft(InputIt first, InputIt last, OutputIt d_first) {
         using value_type = typename std::iterator_traits<InputIt>::value_type;
         fft_impl<value_type> plan;
-        plan.dft(&(*first), &(*d_first), static_cast<typename fft_impl<value_type>::size_type>(std::distance(first, last)));
+        plan.dft(&(*first), &(*d_first),
+                 static_cast<typename fft_impl<value_type>::size_type>(std::distance(first, last)));
     }
 
     /**

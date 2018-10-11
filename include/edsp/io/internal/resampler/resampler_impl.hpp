@@ -15,28 +15,32 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* Filename: decoder_impl.hpp
+* Filename: resampler_impl.hpp
 * Author: Mohammed Boujemaoui
-* Date: 09/10/18
+* Date: 11/10/18
 */
-#ifndef EDSP_DECODER_IMPL_HPP
-#define EDSP_DECODER_IMPL_HPP
 
-#include <edsp/io/internal/audiofile_impl.hpp>
-#include <edsp/io/internal/sndfile_impl.hpp>
+#ifndef EDSP_RESAMPLER_IMPL_HPP
+#define EDSP_RESAMPLER_IMPL_HPP
 
-namespace edsp { namespace io {
+#if defined(USE_LIBSAMPLERATE)
+#    include <edsp/io/internal/resampler/libsamplerate_implementation.hpp>
+#elif defined(USE_LIBRESAMPLE)
+#    include <edsp/io/internal/resampler/libresample_resampler.hpp>
+#endif
 
-#if defined(USE_AUDIOFILE)
-    template <typename T, std::size_t N>
-    using decoder_impl = audiofile_decoder<T, N>;
-#elif defined(USE_SNDFILE)
-    template <typename T, std::size_t N>
-    using decoder_impl = sndfile_decoder<T, N>;
+namespace edsp { namespace io { inline namespace internal {
+
+#if defined(USE_LIBSAMPLERATE)
+    template <typename T>
+    using resampler_impl = libsamplerate_resampler<T>;
+#elif defined(USE_LIBRESAMPLE)
+    template <typename T>
+    using resampler_impl = libresample_resampler<T>;
 #else
 #    error "Compatible library not found!"
 #endif
 
-}} // namespace edsp::io
+}}} // namespace edsp::io::internal
 
-#endif //EDSP_DECODER_IMPL_HPP
+#endif //EDSP_RESAMPLER_IMPL_HPP

@@ -33,6 +33,8 @@ namespace edsp { inline namespace core {
 
     enum class codec_lib { audiofile, sndfile, unknown };
 
+    enum class resample_lib { samplerate, resample, unknown };
+
     inline logger& operator<<(logger& stream, fft_lib lib) {
         switch (lib) {
             case fft_lib::fftw:
@@ -52,6 +54,17 @@ namespace edsp { inline namespace core {
                 return stream << "Audio File Library";
             case codec_lib::sndfile:
                 return stream << "Lib SndFile";
+            default:
+                return stream << edsp::red << "not found" << edsp::endc;
+        }
+    }
+
+    inline logger& operator<<(logger& stream, resample_lib lib) {
+        switch (lib) {
+            case resample_lib::samplerate:
+                return stream << "libsamplerate";
+            case resample_lib::resample:
+                return stream << "libresample";
             default:
                 return stream << edsp::red << "not found" << edsp::endc;
         }
@@ -83,11 +96,11 @@ namespace edsp { inline namespace core {
         }
 
         static constexpr fft_lib fft_library() noexcept {
-#if defined(USE_FFTW)
+#if defined(USE_LIBFFTW)
             return fft_lib::fftw;
-#elif defined(USE_KISS)
+#elif defined(USE_LIBKISS)
             return fft_lib::fftw;
-#elif defined(USE_APPLE)
+#elif defined(USE_LIBAPPLE)
             return fft_lib::fftw;
 #else
             return fft_lib::unknown;
@@ -95,12 +108,22 @@ namespace edsp { inline namespace core {
         }
 
         static constexpr codec_lib codec_library() noexcept {
-#if defined(USE_AUDIOFILE)
+#if defined(USE_LIBAUDIOFILE)
             return codec_lib::audiofile;
-#elif defined(USE_SNDFILE)
+#elif defined(USE_LIBSNDFILE)
             return codec_lib::sndfile;
 #else
             return codec_lib::unknown;
+#endif
+        }
+
+        static constexpr resample_lib resample_library() noexcept {
+#if defined(USE_LIBSAMPLERATE)
+            return resample_lib::samplerate;
+#elif defined(USE_LIBRESAMPLE)
+            return resample_lib::resample;
+#else
+            return resample_lib::unknown;
 #endif
         }
     };
