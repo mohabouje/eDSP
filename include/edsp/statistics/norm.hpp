@@ -45,7 +45,7 @@ namespace edsp { namespace statistics {
      * @returns L2-norm of the input signal.
      */
     template <typename InputIt>
-    constexpr meta::value_type_t<InputIt> snr(InputIt first, InputIt last) {
+    constexpr meta::value_type_t<InputIt> norm(InputIt first, InputIt last) {
         using value_type     = meta::value_type_t<InputIt>;
         const auto predicate = [](const value_type accumulated, const value_type comming) {
             return accumulated + math::square(std::abs(comming));

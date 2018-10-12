@@ -289,7 +289,7 @@ namespace edsp { inline namespace math {
         template <distances d>
         struct distance {};
 
-        typename <>
+        template <>
         struct distance<distances::manhattan> {
             template <typename T>
             constexpr T operator()(T x, T y) noexcept {
@@ -297,7 +297,7 @@ namespace edsp { inline namespace math {
             }
         };
 
-        typename <>
+        template <>
         struct distance<distances::euclidean> {
             template <typename T>
             constexpr T operator()(T x, T y) noexcept {
@@ -306,7 +306,7 @@ namespace edsp { inline namespace math {
         };
 
 
-        typename <>
+        template <>
         struct distance<distances::logarithmic> {
             template <typename T>
             constexpr T operator()(T x, T y) noexcept {
@@ -320,12 +320,13 @@ namespace edsp { inline namespace math {
      * @brief Computes the distance between x and y
      * @param x First element of the equation
      * @param y Second element of the equation
+     * @tparam d Distance implementation to be used.
      * @return The computed distance
      * @see distances
      */
-    template <distances distance, typename T>
+    template <distances d, typename T>
     constexpr T distance(T x, T y) noexcept {
-        return internal::distance<distance>{}(x, y);
+        return internal::distance<d>{}(x, y);
     }
 
 

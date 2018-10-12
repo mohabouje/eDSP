@@ -11,6 +11,7 @@ var searchData=
   ['ring_5fbuffer_2ehpp',['ring_buffer.hpp',['../d3/dcf/ring__buffer_8hpp.html',1,'']]],
   ['ring_5fspan_2ehpp',['ring_span.hpp',['../dd/d0e/ring__span_8hpp.html',1,'']]],
   ['rms_2ehpp',['rms.hpp',['../d4/d7e/rms_8hpp.html',1,'']]],
+  ['rolloff_2ehpp',['rolloff.hpp',['../d3/d5d/rolloff_8hpp.html',1,'']]],
   ['round_2ehpp',['round.hpp',['../d7/dbd/round_8hpp.html',1,'']]],
   ['rssq_2ehpp',['rssq.hpp',['../d9/d4a/rssq_8hpp.html',1,'']]]
 ];
