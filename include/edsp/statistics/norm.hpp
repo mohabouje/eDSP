@@ -35,7 +35,7 @@ namespace edsp { namespace statistics {
      * The \f$ l^2 \f$-norm is defined as:
      *
      * \f[
-     * |x|=sqrt(sum_(k=1)^n|x_k|^2),
+     * |x|=\sqrt(\sum_{n=0}^{N - 1}|x(n)|^2),
      * \f]
      *
      * where \f$ |x_k| \f$ denotes the complex modules.
