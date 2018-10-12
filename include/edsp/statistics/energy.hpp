@@ -41,7 +41,7 @@ namespace edsp { namespace statistics {
      * @returns The instant power of the elements in the range.
      */
     template<typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> power(ForwardIt first, ForwardIt last) {
+    constexpr meta::value_type_t<ForwardIt> energy(ForwardIt first, ForwardIt last) {
         using value_type = meta::value_type_t<ForwardIt>;
         const auto size = std::distance(first, last);
         return std::inner_product(first, last, first, static_cast<value_type>(0));

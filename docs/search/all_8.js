@@ -3,6 +3,7 @@ var searchData=
   ['idct',['idct',['../d6/de9/namespaceedsp_1_1spectral.html#a53ea7ac20c937dfa953944195b3978b6',1,'edsp::spectral']]],
   ['idft',['idft',['../d6/de9/namespaceedsp_1_1spectral.html#a0818d3a56c49dfa38023e96c905d93ea',1,'edsp::spectral']]],
   ['imag',['imag',['../de/d95/namespaceedsp_1_1math.html#a44581d207669b12832915e2f1cc9edf5',1,'edsp::math']]],
+  ['index_5fof_2ehpp',['index_of.hpp',['../da/dd8/index__of_8hpp.html',1,'']]],
   ['index_5ftype',['index_type',['../d8/d66/classedsp_1_1io_1_1decoder.html#a48e9b1439a3486fd15f2479957bb9822',1,'edsp::io::decoder']]],
   ['infinity',['infinity',['../de/d95/namespaceedsp_1_1math.html#a1c6017af51ee48a4427b8970076d9d17',1,'edsp::math']]],
   ['info',['info',['../d6/dd0/classedsp_1_1core_1_1logger.html#a204b1f4d6d030a62889019743256d588a79051f940d3ac694e7b16f00aa73509b',1,'edsp::core::logger']]],

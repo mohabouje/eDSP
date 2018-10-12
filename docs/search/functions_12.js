@@ -30,15 +30,16 @@ var searchData=
   ['set_5ftimestamp',['set_timestamp',['../dc/d96/classedsp_1_1oscillators_1_1oscillator.html#a49205ed4b1a0e64090fb20fdafa22034',1,'edsp::oscillators::oscillator']]],
   ['set_5fwidth',['set_width',['../d7/dbe/classedsp_1_1oscillators_1_1sawtooth__oscillator.html#a4a712b1d6275a9b692b474dc8238c623',1,'edsp::oscillators::sawtooth_oscillator']]],
   ['sign',['sign',['../de/d95/namespaceedsp_1_1math.html#a6da9f84bc2ef50613a509b3722b2b517',1,'edsp::math']]],
+  ['silence',['silence',['../d3/db4/namespaceedsp_1_1algorithm.html#a29296bda04d8674e299deff20a2bdd69',1,'edsp::algorithm']]],
   ['sin_5foscillator',['sin_oscillator',['../d8/d07/classedsp_1_1oscillators_1_1sin__oscillator.html#a5661ac9b54fa57c08f593d660afe5b2e',1,'edsp::oscillators::sin_oscillator']]],
-  ['size',['size',['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#ac652e546988cbb2dba82e893843517e2',1,'edsp::filter::biquad_cascade::size()'],['../db/df2/classedsp_1_1filter_1_1moving__average.html#af669503eb5bb23d1ebe415d31a7b5349',1,'edsp::filter::moving_average::size()'],['../d9/d0c/classedsp_1_1filter_1_1moving__median.html#a5d846df5da206d1e636733d80c03855b',1,'edsp::filter::moving_median::size()'],['../d8/de4/classedsp_1_1filter_1_1moving__rms.html#a2114ef38d34d79be587849ef580120ea',1,'edsp::filter::moving_rms::size()'],['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a33b1051cd31c3c2b5113230e1d98efa3',1,'edsp::types::fixed_ring_buffer::size()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#a17ee5ac05d1ae3d7e869f9c81f0b7d21',1,'edsp::types::ring_buffer::size()']]],
+  ['size',['size',['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#ac652e546988cbb2dba82e893843517e2',1,'edsp::filter::biquad_cascade::size()'],['../db/df2/classedsp_1_1filter_1_1moving__average.html#a98d1fed2add449791e0519a3982c8fc2',1,'edsp::filter::moving_average::size()'],['../d9/d0c/classedsp_1_1filter_1_1moving__median.html#a724364f2b3354c95f3e61fd0bbf40840',1,'edsp::filter::moving_median::size()'],['../d8/de4/classedsp_1_1filter_1_1moving__rms.html#ade7358d17522c2ef952dc1d2471779c2',1,'edsp::filter::moving_rms::size()'],['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a3a56fd53bbc5c902ab62f1ab0604061d',1,'edsp::types::fixed_ring_buffer::size()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#a4bad548f9eaed63ea4b094be70f5ecb9',1,'edsp::types::ring_buffer::size()']]],
   ['skewness',['skewness',['../d1/db9/namespaceedsp_1_1statistics.html#a9a9edf62b7c813b65cd1e7ea168c5858',1,'edsp::statistics']]],
-  ['snr',['snr',['../d1/db9/namespaceedsp_1_1statistics.html#a4e2505c1cf6fbc55b7b37177c29d634c',1,'edsp::statistics']]],
+  ['snr',['snr',['../d1/db9/namespaceedsp_1_1statistics.html#ac56a58a2e50a46efaf754ba9f46a20ad',1,'edsp::statistics::snr(InputIt first, InputIt last)'],['../d1/db9/namespaceedsp_1_1statistics.html#a4e2505c1cf6fbc55b7b37177c29d634c',1,'edsp::statistics::snr(InputIt first1, InputIt last1, InputIt first2)']]],
   ['space',['space',['../d6/dd0/classedsp_1_1core_1_1logger.html#a87418dc7f3e14c77b8ae1bcd8f052ff3',1,'edsp::core::logger']]],
-  ['split',['split',['../dd/d65/namespaceedsp_1_1string.html#a37242ffb38fcc0a999ecd567da92c9e4',1,'edsp::string']]],
+  ['split',['split',['../dd/d65/namespaceedsp_1_1string.html#aabd300d873c2f1df0dc76014e11d9b6f',1,'edsp::string']]],
   ['square',['square',['../de/d95/namespaceedsp_1_1math.html#ae878b9dae70aea5789c35022a54796df',1,'edsp::math']]],
   ['square_5foscillator',['square_oscillator',['../de/de0/classedsp_1_1oscillators_1_1square__oscillator.html#afe0dd398e9d4aa106d3f1815a2492f6c',1,'edsp::oscillators::square_oscillator']]],
   ['stability',['stability',['../dc/d81/classedsp_1_1filter_1_1biquad.html#a95cdc876ce49c4ee0c10919cc13ac78f',1,'edsp::filter::biquad']]],
   ['standard_5fdeviation',['standard_deviation',['../d1/db9/namespaceedsp_1_1statistics.html#a7a59158a0f7420e1683feed741e5ffbf',1,'edsp::statistics']]],
-  ['str',['str',['../d6/dd0/classedsp_1_1core_1_1logger.html#a235896134fa84121809cd842d667c5e2',1,'edsp::core::logger']]]
+  ['str',['str',['../d6/dd0/classedsp_1_1core_1_1logger.html#a94417406945149a8b57f274e896352b0',1,'edsp::core::logger']]]
 ];

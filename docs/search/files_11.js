@@ -1,6 +1,7 @@
 var searchData=
 [
   ['sawtooth_2ehpp',['sawtooth.hpp',['../d6/d14/sawtooth_8hpp.html',1,'']]],
+  ['silence_2ehpp',['silence.hpp',['../db/d2a/silence_8hpp.html',1,'']]],
   ['sinusoidal_2ehpp',['sinusoidal.hpp',['../df/d22/sinusoidal_8hpp.html',1,'']]],
   ['skewness_2ehpp',['skewness.hpp',['../de/d53/skewness_8hpp.html',1,'']]],
   ['snr_2ehpp',['snr.hpp',['../d7/d7d/snr_8hpp.html',1,'']]],

@@ -11,10 +11,14 @@ var searchData=
   ['harmonic_5fmean_2ehpp',['harmonic_mean.hpp',['../de/df5/harmonic__mean_8hpp.html',1,'']]],
   ['hartley',['hartley',['../d6/de9/namespaceedsp_1_1spectral.html#a9e1963c3a93e16871568c0c31ce92a17',1,'edsp::spectral']]],
   ['hartley_2ehpp',['hartley.hpp',['../d5/d27/hartley_8hpp.html',1,'']]],
+  ['hertz2bark_2ehpp',['hertz2bark.hpp',['../de/d71/hertz2bark_8hpp.html',1,'']]],
+  ['hertz2mel',['hertz2mel',['../dd/d22/namespaceedsp_1_1converter.html#a2c4cd70291196d3da06157bb1e302a15',1,'edsp::converter']]],
+  ['hertz2mel_2ehpp',['hertz2mel.hpp',['../d1/d04/hertz2mel_8hpp.html',1,'']]],
   ['highpass',['HighPass',['../d7/d47/namespaceedsp_1_1filter.html#a8d892edc768c28dbf779f67b63a6456aae9456dc865a19e434997ea20bb5373f6',1,'edsp::filter']]],
   ['highshelf',['HighShelf',['../d7/d47/namespaceedsp_1_1filter.html#a8d892edc768c28dbf779f67b63a6456aaaafe3de5c829706a2fda73dd43fd740e',1,'edsp::filter']]],
   ['hilbert',['hilbert',['../d6/de9/namespaceedsp_1_1spectral.html#aba5da854a1ab14643715e2a4b2bd7b9e',1,'edsp::spectral']]],
   ['hilbert_2ehpp',['hilbert.hpp',['../dd/d14/hilbert_8hpp.html',1,'']]],
-  ['histogram',['histogram',['../d8/d22/structedsp_1_1statistics_1_1histogram.html',1,'edsp::statistics::histogram&lt; T, Allocator &gt;'],['../d8/d22/structedsp_1_1statistics_1_1histogram.html#ad9b1257f62cc51c7653460a6c5df4afa',1,'edsp::statistics::histogram::histogram()']]],
+  ['histogram',['histogram',['../d8/d22/structedsp_1_1statistics_1_1histogram.html#ad9b1257f62cc51c7653460a6c5df4afa',1,'edsp::statistics::histogram']]],
+  ['histogram',['histogram',['../d8/d22/structedsp_1_1statistics_1_1histogram.html',1,'edsp::statistics']]],
   ['histogram_2ehpp',['histogram.hpp',['../d5/d6e/histogram_8hpp.html',1,'']]]
 ];

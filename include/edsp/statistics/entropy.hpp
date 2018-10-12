@@ -34,7 +34,7 @@ namespace edsp { namespace statistics {
      * Given a normalized probability mass function \f$ p(n) \f$, the entropy can explicitly be written as:
      *
      * \f[
-     *      H = - \sum_{n=0}^{N-1} p(n) \log2 \left( p(n) \right)
+     *      H = - \sum_{n=0}^{N-1} p(n) \log_2 \left( p(n) \right)
      * \f]
      *
      * Normalizing:
