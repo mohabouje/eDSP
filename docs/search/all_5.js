@@ -17,7 +17,7 @@ var searchData=
   ['flattop',['flattop',['../d3/d0f/namespaceedsp_1_1windowing.html#a42142950237b319aea3c144d9c19beca',1,'edsp::windowing::flattop(OutputIt first, OutputIt last)'],['../d3/d0f/namespaceedsp_1_1windowing.html#a18fb11a4c3c068f95176d9938e662709aec0d3a4b775b100efcc3a27ab389182a',1,'edsp::windowing::FlatTop()']]],
   ['floor',['floor',['../d3/db4/namespaceedsp_1_1algorithm.html#a9a1cdac2f97928debf45e3f08158ac88',1,'edsp::algorithm']]],
   ['floor_2ehpp',['floor.hpp',['../d3/d7b/floor_8hpp.html',1,'']]],
-  ['flux',['flux',['../d1/db9/namespaceedsp_1_1statistics.html#af0e1d42e40e193559365c50ca349e60e',1,'edsp::statistics']]],
+  ['flux',['flux',['../d1/db9/namespaceedsp_1_1statistics.html#a481db6c01ef30771163487bfe14e1c2f',1,'edsp::statistics']]],
   ['flux_2ehpp',['flux.hpp',['../d4/df1/flux_8hpp.html',1,'']]],
   ['four_5fminus_5fpi',['four_minus_pi',['../d8/df5/structedsp_1_1math_1_1constants.html#af01304c3dc89e7caccdfd380ade46edd',1,'edsp::math::constants']]],
   ['four_5fthirds_5fpi',['four_thirds_pi',['../d8/df5/structedsp_1_1math_1_1constants.html#a936ed1360697db6939796dfc04069e0d',1,'edsp::math::constants']]],

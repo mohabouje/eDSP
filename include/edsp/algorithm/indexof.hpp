@@ -32,11 +32,11 @@ namespace edsp { inline namespace algorithm {
      * @brief Searches for an element equivalent to value in the range [first, last) and returns its position.
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
-     * @param p Binary predicate which returns ​true for the required element. .
+     * @param value Element to be found.
      * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
      */
-    template <typename ForwardIt, class UnaryPredicate>
-    constexpr std::int32_t binary_search(ForwardIt first, ForwardIt last,
+    template <typename ForwardIt>
+    constexpr std::int32_t indexof(ForwardIt first, ForwardIt last,
                                       const typename std::iterator_traits<ForwardIt>::value_type & value) {
         const auto element = std::find(first, last, value);
         return static_cast<int32_t>((element != last) ? std::distance(first, element) : -1);

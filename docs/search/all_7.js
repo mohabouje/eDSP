@@ -3,7 +3,7 @@ var searchData=
   ['half',['half',['../d8/df5/structedsp_1_1math_1_1constants.html#ae3bddc60175376771dfc25a792adaf22',1,'edsp::math::constants::half()'],['../de/d95/namespaceedsp_1_1math.html#a0ce8f9f815cdd21132e08caf139e9fcd',1,'edsp::math::half()']]],
   ['half_5fpi',['half_pi',['../d8/df5/structedsp_1_1math_1_1constants.html#a493cbfca70c9b30b5d3574aa86a99ee5',1,'edsp::math::constants']]],
   ['half_5froot_5ftwo',['half_root_two',['../d8/df5/structedsp_1_1math_1_1constants.html#a35f91d5142a00454d52e575649387224',1,'edsp::math::constants']]],
-  ['hamming',['hamming',['../d3/d0f/namespaceedsp_1_1windowing.html#ae87bd3829b46c6f1525a041a6f6c118c',1,'edsp::windowing::hamming(OutputIt first, OutputIt last)'],['../d3/d0f/namespaceedsp_1_1windowing.html#a18fb11a4c3c068f95176d9938e662709a718179b3bcff69a9d3f010aca0e9901a',1,'edsp::windowing::Hamming()']]],
+  ['hamming',['Hamming',['../d3/d0f/namespaceedsp_1_1windowing.html#a18fb11a4c3c068f95176d9938e662709a718179b3bcff69a9d3f010aca0e9901a',1,'edsp::windowing::Hamming()'],['../d3/d0f/namespaceedsp_1_1windowing.html#ae87bd3829b46c6f1525a041a6f6c118c',1,'edsp::windowing::hamming(OutputIt first, OutputIt last)']]],
   ['hamming_2ehpp',['hamming.hpp',['../d8/dd8/hamming_8hpp.html',1,'']]],
   ['hanning',['Hanning',['../d3/d0f/namespaceedsp_1_1windowing.html#a18fb11a4c3c068f95176d9938e662709a46cd7c18d353a946c8263515a17662f2',1,'edsp::windowing::Hanning()'],['../d3/d0f/namespaceedsp_1_1windowing.html#af46ba83ea54dfa90d251d75280ed74e4',1,'edsp::windowing::hanning(OutputIt first, OutputIt last)']]],
   ['hanning_2ehpp',['hanning.hpp',['../de/da2/hanning_8hpp.html',1,'']]],

@@ -7,7 +7,7 @@ var searchData=
   ['flatness',['flatness',['../d1/db9/namespaceedsp_1_1statistics.html#a827c80f7ba878a58d640b640a6081a5c',1,'edsp::statistics']]],
   ['flattop',['flattop',['../d3/d0f/namespaceedsp_1_1windowing.html#a42142950237b319aea3c144d9c19beca',1,'edsp::windowing']]],
   ['floor',['floor',['../d3/db4/namespaceedsp_1_1algorithm.html#a9a1cdac2f97928debf45e3f08158ac88',1,'edsp::algorithm']]],
-  ['flux',['flux',['../d1/db9/namespaceedsp_1_1statistics.html#af0e1d42e40e193559365c50ca349e60e',1,'edsp::statistics']]],
+  ['flux',['flux',['../d1/db9/namespaceedsp_1_1statistics.html#a481db6c01ef30771163487bfe14e1c2f',1,'edsp::statistics']]],
   ['fract',['fract',['../de/d95/namespaceedsp_1_1math.html#a289da63f9141eec113c1579cacc2e1ab',1,'edsp::math']]],
   ['frames',['frames',['../d8/d66/classedsp_1_1io_1_1decoder.html#adb9f0771ba4900be525ac7b457beb17b',1,'edsp::io::decoder']]],
   ['frequency',['frequency',['../dc/d96/classedsp_1_1oscillators_1_1oscillator.html#aeb4d036608790680940dcc3dfe766c2c',1,'edsp::oscillators::oscillator']]],

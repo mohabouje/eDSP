@@ -54,7 +54,7 @@ var searchData=
   ['spectralscale',['SpectralScale',['../d6/de9/namespaceedsp_1_1spectral.html#ab261db3113cfe1ef44d41e74628baadc',1,'edsp::spectral']]],
   ['split',['split',['../dd/d65/namespaceedsp_1_1string.html#a37242ffb38fcc0a999ecd567da92c9e4',1,'edsp::string']]],
   ['split_2ehpp',['split.hpp',['../d4/d24/split_8hpp.html',1,'']]],
-  ['square',['Square',['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6aceb46ca115d05c51aa5a16a8867c3304',1,'edsp::oscillators::Square()'],['../de/d95/namespaceedsp_1_1math.html#ae878b9dae70aea5789c35022a54796df',1,'edsp::math::square()']]],
+  ['square',['square',['../de/d95/namespaceedsp_1_1math.html#ae878b9dae70aea5789c35022a54796df',1,'edsp::math::square()'],['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6aceb46ca115d05c51aa5a16a8867c3304',1,'edsp::oscillators::Square()']]],
   ['square_2ehpp',['square.hpp',['../d7/dad/square_8hpp.html',1,'']]],
   ['square_5foscillator',['square_oscillator',['../de/de0/classedsp_1_1oscillators_1_1square__oscillator.html',1,'edsp::oscillators::square_oscillator&lt; T &gt;'],['../de/de0/classedsp_1_1oscillators_1_1square__oscillator.html#afe0dd398e9d4aa106d3f1815a2492f6c',1,'edsp::oscillators::square_oscillator::square_oscillator()']]],
   ['stability',['stability',['../dc/d81/classedsp_1_1filter_1_1biquad.html#a95cdc876ce49c4ee0c10919cc13ac78f',1,'edsp::filter::biquad']]],

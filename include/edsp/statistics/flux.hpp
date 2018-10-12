@@ -44,11 +44,11 @@ namespace edsp { namespace statistics {
      * @see distances, distance
      */
     template <distances d, typename InputIt>
-    constexpr meta::value_type_t<InputIt> flux(InputIt first1, InputIt last2, InputIt first2) {
+    constexpr meta::value_type_t<InputIt> flux(InputIt first1, InputIt last1, InputIt first2) {
         using value_type = meta::value_type_t<InputIt>;
-        const auto size = std::distance(first1, last2);
+        const auto size = std::distance(first1, last1);
         auto accumulated = static_cast<value_type>(0);
-        for (; first1 != last2; ++first1, ++first2) {
+        for (; first1 != last1; ++first1, ++first2) {
             accumulated += distance<d>(*first1, *first2);
         }
         return accumulated / static_cast<value_type>(size);
