@@ -32,7 +32,6 @@ using namespace edsp::windowing;
 
 #ifdef USE_LIBFFFTW
 
-
 TEST(TestingDCT, TransformHanningWindow) {
     const auto size = 128ul;
     std::vector<double> window(size);

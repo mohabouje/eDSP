@@ -22,7 +22,6 @@
 #ifndef EDSP_LIBPFFFT_IMPL_HPP
 #define EDSP_LIBPFFFT_IMPL_HPP
 
-
 #include <edsp/meta/is_null.hpp>
 #include <edsp/meta/advance.hpp>
 #include <edsp/meta/iterator.hpp>
@@ -44,8 +43,9 @@ namespace edsp { inline namespace spectral {
 
         explicit pffft_impl(size_type nfft) : nfft_(nfft) {
             work_ = (float*) pffft_aligned_malloc(2 * nfft * sizeof(float));
-            meta::expects(nfft_ % 16 == 0,
-                    "Unfortunately, the fft size must be a multiple of 16 for complex FFTs  and 32 for real FFTs");
+            meta::expects(
+                nfft_ % 16 == 0,
+                "Unfortunately, the fft size must be a multiple of 16 for complex FFTs  and 32 for real FFTs");
         }
 
         ~pffft_impl() {
@@ -88,8 +88,8 @@ namespace edsp { inline namespace spectral {
             }
 
             std::copy(src, src + nfft_, std::begin(input_real));
-            pffft_transform_ordered(plan_, meta::data(input_real),
-                                    reinterpret_cast<float*>(meta::data(output_complex)), work_, PFFFT_FORWARD);
+            pffft_transform_ordered(plan_, meta::data(input_real), reinterpret_cast<float*>(meta::data(output_complex)),
+                                    work_, PFFFT_FORWARD);
             std::copy(std::cbegin(output_complex), std::cend(output_complex), dst);
         }
 
@@ -102,7 +102,7 @@ namespace edsp { inline namespace spectral {
             }
             std::copy(src, src + (int) c_size, std::begin(input_complex));
             pffft_transform_ordered(plan_, reinterpret_cast<const float*>(meta::data(input_complex)),
-                    meta::data(output_real), work_, PFFFT_BACKWARD);
+                                    meta::data(output_real), work_, PFFFT_BACKWARD);
             std::copy(std::cbegin(output_real), std::cend(output_real), dst);
         }
 
@@ -111,13 +111,13 @@ namespace edsp { inline namespace spectral {
             meta::unused(dst);
         }
 
-        inline void dct(const value_type* src, value_type* dst,  DCT_Type type) {
+        inline void dct(const value_type* src, value_type* dst, DCT_Type type) {
             meta::unused(src);
             meta::unused(dst);
             meta::unused(type);
         }
 
-        inline void idct(const value_type* src, value_type* dst,  DCT_Type type) {
+        inline void idct(const value_type* src, value_type* dst, DCT_Type type) {
             meta::unused(src);
             meta::unused(dst);
             meta::unused(type);
@@ -146,14 +146,13 @@ namespace edsp { inline namespace spectral {
 
     private:
         PFFFT_Setup* plan_{nullptr};
-        float*        work_{nullptr};
+        float* work_{nullptr};
         size_type nfft_;
         std::vector<std::complex<float>> input_complex;
         std::vector<std::complex<float>> output_complex;
         std::vector<float> input_real;
         std::vector<float> output_real;
     };
-
 
     template <>
     struct pffft_impl<float> {
@@ -163,8 +162,9 @@ namespace edsp { inline namespace spectral {
 
         explicit pffft_impl(size_type nfft) : nfft_(nfft) {
             work_ = (float*) pffft_aligned_malloc(2 * nfft * sizeof(float));
-            meta::expects(nfft_ % 16 == 0,
-                          "Unfortunately, the fft size must be a multiple of 16 for complex FFTs  and 32 for real FFTs");
+            meta::expects(
+                nfft_ % 16 == 0,
+                "Unfortunately, the fft size must be a multiple of 16 for complex FFTs  and 32 for real FFTs");
         }
 
         ~pffft_impl() {
@@ -178,16 +178,16 @@ namespace edsp { inline namespace spectral {
             if (meta::is_null(plan_)) {
                 plan_ = pffft_new_setup(nfft_, PFFFT_COMPLEX);
             }
-            pffft_transform_ordered(plan_, reinterpret_cast<const float*>(src),
-                                    reinterpret_cast<float*>(dst), work_, PFFFT_FORWARD);
+            pffft_transform_ordered(plan_, reinterpret_cast<const float*>(src), reinterpret_cast<float*>(dst), work_,
+                                    PFFFT_FORWARD);
         }
 
         inline void idft(const complex_type* src, complex_type* dst) {
             if (meta::is_null(plan_)) {
                 plan_ = pffft_new_setup(nfft_, PFFFT_COMPLEX);
             }
-            pffft_transform_ordered(plan_, reinterpret_cast<const float*>(src),
-                                    reinterpret_cast<float*>(dst), work_, PFFFT_BACKWARD);
+            pffft_transform_ordered(plan_, reinterpret_cast<const float*>(src), reinterpret_cast<float*>(dst), work_,
+                                    PFFFT_BACKWARD);
         }
 
         inline void dft(const value_type* src, complex_type* dst) {
@@ -209,13 +209,13 @@ namespace edsp { inline namespace spectral {
             meta::unused(dst);
         }
 
-        inline void dct(const value_type* src, value_type* dst,  DCT_Type type) {
+        inline void dct(const value_type* src, value_type* dst, DCT_Type type) {
             meta::unused(src);
             meta::unused(dst);
             meta::unused(type);
         }
 
-        inline void idct(const value_type* src, value_type* dst,  DCT_Type type) {
+        inline void idct(const value_type* src, value_type* dst, DCT_Type type) {
             meta::unused(src);
             meta::unused(dst);
             meta::unused(type);
@@ -244,9 +244,9 @@ namespace edsp { inline namespace spectral {
 
     private:
         PFFFT_Setup* plan_{nullptr};
-        float*        work_{nullptr};
+        float* work_{nullptr};
         size_type nfft_;
     };
 
-}} // namespace edsp::spectral
+}}     // namespace edsp::spectral
 #endif //EDSP_LIBPFFFT_IMPL_HPP

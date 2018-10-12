@@ -33,8 +33,8 @@
 #include <edsp/algorithm/linspace.hpp>
 #include <edsp/algorithm/linspace.hpp>
 #include <edsp/algorithm/logspace.hpp>
-#include <edsp/algorithm/normalizer.hpp>
 #include <edsp/algorithm/padder.hpp>
 #include <edsp/algorithm/round.hpp>
+#include <edsp/algorithm/normalize.hpp>
 
 #endif //EDSP_ALGORITHM_HPP

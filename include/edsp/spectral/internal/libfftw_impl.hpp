@@ -56,9 +56,7 @@ namespace edsp { inline namespace spectral {
         using complex_type = std::complex<T>;
         using size_type    = int;
 
-        explicit fftw_impl(size_type nfft) : nfft_(nfft) {
-
-        }
+        explicit fftw_impl(size_type nfft) : nfft_(nfft) {}
 
         ~fftw_impl() {
             if (!meta::is_null(plan_)) {
@@ -70,9 +68,9 @@ namespace edsp { inline namespace spectral {
             if (meta::is_null(plan_)) {
                 input_complex.resize(static_cast<unsigned long>(nfft_));
                 output_complex.resize(static_cast<unsigned long>(nfft_));
-                plan_ =
-                    fftwf_plan_dft_1d(nfft_, fftw_cast(meta::data(input_complex)), fftw_cast(meta::data(output_complex)),
-                                      FFTW_FORWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ = fftwf_plan_dft_1d(nfft_, fftw_cast(meta::data(input_complex)),
+                                          fftw_cast(meta::data(output_complex)), FFTW_FORWARD,
+                                          FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
 
             std::copy(src, src + nfft_, std::begin(input_complex));
@@ -84,9 +82,9 @@ namespace edsp { inline namespace spectral {
             if (meta::is_null(plan_)) {
                 input_complex.resize(static_cast<unsigned long>(nfft_));
                 output_complex.resize(static_cast<unsigned long>(nfft_));
-                plan_ =
-                    fftwf_plan_dft_1d(nfft_, fftw_cast(meta::data(input_complex)), fftw_cast(meta::data(output_complex)),
-                                      FFTW_BACKWARD, FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ = fftwf_plan_dft_1d(nfft_, fftw_cast(meta::data(input_complex)),
+                                          fftw_cast(meta::data(output_complex)), FFTW_BACKWARD,
+                                          FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             }
 
             std::copy(src, src + nfft_, std::begin(input_complex));
@@ -219,9 +217,7 @@ namespace edsp { inline namespace spectral {
         using complex_type = std::complex<float>;
         using size_type    = int;
 
-        explicit fftw_impl(size_type nfft) : nfft_(nfft) {
-
-        }
+        explicit fftw_impl(size_type nfft) : nfft_(nfft) {}
 
         ~fftw_impl() {
             if (!meta::is_null(plan_)) {
@@ -340,9 +336,7 @@ namespace edsp { inline namespace spectral {
         using complex_type = std::complex<double>;
         using size_type    = int;
 
-        explicit fftw_impl(size_type nfft) : nfft_(nfft) {
-
-        }
+        explicit fftw_impl(size_type nfft) : nfft_(nfft) {}
 
         ~fftw_impl() {
             if (!meta::is_null(plan_)) {
@@ -366,13 +360,15 @@ namespace edsp { inline namespace spectral {
 
         inline void dft(const value_type* src, complex_type* dst) {
             if (meta::is_null(plan_))
-                plan_ = fftw_plan_dft_r2c_1d(nfft_, fftw_cast(src), fftw_cast(dst), FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ =
+                    fftw_plan_dft_r2c_1d(nfft_, fftw_cast(src), fftw_cast(dst), FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             fftw_execute_dft_r2c(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
         inline void idft(const complex_type* src, value_type* dst) {
             if (meta::is_null(plan_))
-                plan_ = fftw_plan_dft_c2r_1d(nfft_, fftw_cast(src), fftw_cast(dst), FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
+                plan_ =
+                    fftw_plan_dft_c2r_1d(nfft_, fftw_cast(src), fftw_cast(dst), FFTW_ESTIMATE | FFTW_PRESERVE_INPUT);
             fftw_execute_dft_c2r(plan_, fftw_cast(src), fftw_cast(dst));
         }
 
@@ -448,7 +444,6 @@ namespace edsp { inline namespace spectral {
     private:
         ::fftw_plan plan_{nullptr};
         size_type nfft_;
-
     };
 }} // namespace edsp::spectral
 

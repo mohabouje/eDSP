@@ -23,6 +23,7 @@
 #define EDSP_FISHER_HISTOGRAM_HPP
 
 #include <edsp/meta/unused.hpp>
+#include <vector>
 
 namespace edsp { namespace statistics {
 
@@ -46,7 +47,10 @@ namespace edsp { namespace statistics {
          * @param num_bins Number of bins.
          * @param cache_size Number of cached samples to determine the positions and sizes of the bins.
          */
-        constexpr histogram(size_type num_bins, size_type cache_size) : num_bins_(num_bins), cache_size_(cache_size) {}
+        constexpr histogram(size_type num_bins, size_type cache_size) :
+                num_bins_(num_bins),
+                cache_size_(cache_size),
+                bins_(num_bins) {}
 
         /**
          * @brief Computes the histogram of the range [first, last).
@@ -68,6 +72,7 @@ namespace edsp { namespace statistics {
     private:
         size_type num_bins_;
         size_type cache_size_;
+        std::vector<std::pair<T, T>, Allocator> bins_;
     };
 
 }} // namespace edsp::statistics

@@ -27,10 +27,9 @@
 #include <edsp/converter/real2complex.hpp>
 #include <benchmark/benchmark.h>
 
-
 template <typename T>
-void FFTWComputingRealFFT(benchmark::State &state) {
-    const auto size = state.range(0);
+void FFTWComputingRealFFT(benchmark::State& state) {
+    const auto size     = state.range(0);
     const auto fft_size = edsp::spectral::make_fft_size(size);
 
     std::vector<T> input(size);
@@ -43,8 +42,8 @@ void FFTWComputingRealFFT(benchmark::State &state) {
 }
 
 template <typename T>
-void PFFFTComputingRealFFT(benchmark::State &state) {
-    const auto size = state.range(0);
+void PFFFTComputingRealFFT(benchmark::State& state) {
+    const auto size     = state.range(0);
     const auto fft_size = edsp::spectral::make_fft_size(size);
 
     std::vector<T> input(size);
@@ -57,7 +56,7 @@ void PFFFTComputingRealFFT(benchmark::State &state) {
 }
 
 template <typename T>
-void FFTWComputingComplexFFT(benchmark::State &state) {
+void FFTWComputingComplexFFT(benchmark::State& state) {
     const auto size = state.range(0);
 
     std::vector<T> window(size);
@@ -71,7 +70,7 @@ void FFTWComputingComplexFFT(benchmark::State &state) {
 }
 
 template <typename T>
-void PFFFTComputingComplexFFT(benchmark::State &state) {
+void PFFFTComputingComplexFFT(benchmark::State& state) {
     const auto size = state.range(0);
     std::vector<T> window(size);
     std::vector<std::complex<T>> input(size), output(size);

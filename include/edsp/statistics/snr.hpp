@@ -31,23 +31,23 @@
 namespace edsp { namespace statistics {
 
     /**
-         * @brief Compute the SNR of the signals in the range [first1, last1) and the signal starting in first2.
-         *
-         * Signal-to-noise ratio (abbreviated SNR or S/N) is a measure used in science and engineering that compares
-         * the level of a desired signal to the level of background noise. SNR is defined as the ratio of signal power
-         * to the noise power, often expressed in decibels. A ratio higher than 1:1 (greater than 0 dB) indicates more
-         * signal than noise.
-         *
-         * If the variance of the signal and noise are known, and the signal and noise are both zero-mean, SNR can be:
-         * \f[
-         * \mathrm{SNR} = \frac{\sigma^2_\mathrm{signal}}{\sigma^2_\mathrm{noise}}.
-         * \f]
-         *
-         * @param first1 Input iterator defining the beginning of the first input range.
-         * @param last1 Input iterator defining the ending of the first input range.
-         * @param first2 Input iterator defining the beginning of the second input range.
-         * @returns SNR of the signals.
-         */
+     * @brief Compute the SNR of the signals in the range [first1, last1) and the signal starting in first2.
+     *
+     * Signal-to-noise ratio (abbreviated SNR or S/N) is a measure used in science and engineering that compares
+     * the level of a desired signal to the level of background noise. SNR is defined as the ratio of signal power
+     * to the noise power, often expressed in decibels. A ratio higher than 1:1 (greater than 0 dB) indicates more
+     * signal than noise.
+     *
+     * If the variance of the signal and noise are known, and the signal and noise are both zero-mean, SNR can be:
+     * \f[
+     * \mathrm{SNR} = \frac{\sigma^2_\mathrm{signal}}{\sigma^2_\mathrm{noise}}.
+     * \f]
+     *
+     * @param first1 Input iterator defining the beginning of the first input range.
+     * @param last1 Input iterator defining the ending of the first input range.
+     * @param first2 Input iterator defining the beginning of the second input range.
+     * @returns SNR of the signals.
+     */
     template <typename InputIt, typename Allocator = std::allocator<meta::value_type_t<InputIt>>>
     constexpr meta::value_type_t<InputIt> snr(InputIt first1, InputIt last1, InputIt first2) {
         using value_type = meta::value_type_t<InputIt>;

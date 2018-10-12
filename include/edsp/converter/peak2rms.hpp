@@ -24,6 +24,7 @@
 
 #include <edsp/statistics/rms.hpp>
 #include <edsp/meta/iterator.hpp>
+#include <algorithm>
 #include <cmath>
 
 namespace edsp { inline namespace converter {

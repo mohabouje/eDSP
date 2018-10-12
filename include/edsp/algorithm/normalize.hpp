@@ -43,7 +43,7 @@ namespace edsp { inline namespace algorithm {
      * @see maxabs
      */
     template <typename InputIt, typename OutputIt>
-    constexpr void normalizer(InputIt first, InputIt last, OutputIt d_first) {
+    constexpr void normalize(InputIt first, InputIt last, OutputIt d_first) {
         const auto factor = statistics::maxabs(first, last);
         std::transform(first, last, d_first,
                        [factor](const meta::value_type_t<InputIt> value) -> meta::value_type_t<OutputIt> {
@@ -64,7 +64,7 @@ namespace edsp { inline namespace algorithm {
      * @see rms
      */
     template <typename InputIt, typename OutputIt>
-    constexpr void normalizer_rms(InputIt first, InputIt last, OutputIt d_first) {
+    constexpr void normalize_rms(InputIt first, InputIt last, OutputIt d_first) {
         const auto factor = statistics::rms(first, last);
         std::transform(first, last, d_first,
                        [factor](const meta::value_type_t<InputIt> value) -> meta::value_type_t<OutputIt> {
