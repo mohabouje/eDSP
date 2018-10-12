@@ -83,7 +83,7 @@ void PFFFTComputingComplexFFT(benchmark::State& state) {
 }
 
 template <typename T>
-void FFTWComputingComplexDCT(benchmark::State& state) {
+void FFTWComputingDCT(benchmark::State& state) {
     const auto size = state.range(0);
     std::vector<T> input(size), output(size);
     edsp::windowing::hamming(std::begin(input), std::end(input));
@@ -94,7 +94,7 @@ void FFTWComputingComplexDCT(benchmark::State& state) {
 }
 
 template <typename T>
-void PFFFTComputingComplexDCT(benchmark::State& state) {
+void PFFFTComputingDCT(benchmark::State& state) {
     const auto size = state.range(0);
     std::vector<T> input(size), output(size);
     edsp::windowing::hamming(std::begin(input), std::end(input));
@@ -105,7 +105,7 @@ void PFFFTComputingComplexDCT(benchmark::State& state) {
 }
 
 template <typename T>
-void FFTWComputingComplexDHT(benchmark::State& state) {
+void FFTWComputingDHT(benchmark::State& state) {
     const auto size = state.range(0);
     std::vector<T> input(size), output(size);
     edsp::windowing::hamming(std::begin(input), std::end(input));
@@ -116,7 +116,7 @@ void FFTWComputingComplexDHT(benchmark::State& state) {
 }
 
 template <typename T>
-void PFFFTComputingComplexDHT(benchmark::State& state) {
+void PFFFTComputingDHT(benchmark::State& state) {
     const auto size = state.range(0);
     std::vector<T> input(size), output(size);
     edsp::windowing::hamming(std::begin(input), std::end(input));
@@ -131,8 +131,8 @@ BENCHMARK_TEMPLATE(PFFFTComputingRealFFT, float)->Range(1 << 20, 1 << 20);
 BENCHMARK_TEMPLATE(FFTWComputingRealFFT, float)->Range(1 << 20, 1 << 20);
 BENCHMARK_TEMPLATE(PFFFTComputingComplexFFT, float)->Range(1 << 20, 1 << 20);
 BENCHMARK_TEMPLATE(FFTWComputingComplexFFT, float)->Range(1 << 20, 1 << 20);
-BENCHMARK_TEMPLATE(PFFFTComputingComplexDCT, float)->Range(1 << 10, 1 << 10);
-BENCHMARK_TEMPLATE(FFTWComputingComplexDCT, float)->Range(1 << 10, 1 << 10);
-BENCHMARK_TEMPLATE(PFFFTComputingComplexDHT, float)->Range(1 << 10, 1 << 10);
-BENCHMARK_TEMPLATE(FFTWComputingComplexDHT, float)->Range(1 << 10, 1 << 10);
+BENCHMARK_TEMPLATE(PFFFTComputingDCT, float)->Range(1 << 20, 1 << 20);
+BENCHMARK_TEMPLATE(FFTWComputingDCT, float)->Range(1 << 20, 1 << 20);
+BENCHMARK_TEMPLATE(PFFFTComputingDHT, float)->Range(1 << 10, 1 << 10);
+BENCHMARK_TEMPLATE(FFTWComputingDHT, float)->Range(1 << 10, 1 << 10);
 BENCHMARK_MAIN();
