@@ -39,6 +39,7 @@ void FFTWComputingRealFFT(benchmark::State& state) {
     for (auto _ : state) {
         impl.dft(edsp::meta::data(input), edsp::meta::data(output));
     }
+    state.SetComplexityN(state.range(0));
 }
 
 template <typename T>
@@ -53,6 +54,7 @@ void PFFFTComputingRealFFT(benchmark::State& state) {
     for (auto _ : state) {
         impl.dft(edsp::meta::data(input), edsp::meta::data(output));
     }
+    state.SetComplexityN(state.range(0));
 }
 
 template <typename T>
@@ -67,6 +69,7 @@ void FFTWComputingComplexFFT(benchmark::State& state) {
     for (auto _ : state) {
         impl.dft(edsp::meta::data(input), edsp::meta::data(output));
     }
+    state.SetComplexityN(state.range(0));
 }
 
 template <typename T>
@@ -80,6 +83,7 @@ void PFFFTComputingComplexFFT(benchmark::State& state) {
     for (auto _ : state) {
         impl.dft(edsp::meta::data(input), edsp::meta::data(output));
     }
+    state.SetComplexityN(state.range(0));
 }
 
 template <typename T>
@@ -91,6 +95,7 @@ void FFTWComputingDCT(benchmark::State& state) {
     for (auto _ : state) {
         impl.dct(edsp::meta::data(input), edsp::meta::data(output));
     }
+    state.SetComplexityN(state.range(0));
 }
 
 template <typename T>
@@ -102,6 +107,7 @@ void PFFFTComputingDCT(benchmark::State& state) {
     for (auto _ : state) {
         impl.dct(edsp::meta::data(input), edsp::meta::data(output));
     }
+    state.SetComplexityN(state.range(0));
 }
 
 template <typename T>
@@ -113,6 +119,7 @@ void FFTWComputingDHT(benchmark::State& state) {
     for (auto _ : state) {
         impl.dht(edsp::meta::data(input), edsp::meta::data(output));
     }
+    state.SetComplexityN(state.range(0));
 }
 
 template <typename T>
@@ -124,15 +131,16 @@ void PFFFTComputingDHT(benchmark::State& state) {
     for (auto _ : state) {
         impl.dht(edsp::meta::data(input), edsp::meta::data(output));
     }
+    
 }
 
 
-BENCHMARK_TEMPLATE(PFFFTComputingRealFFT, float)->Range(1 << 20, 1 << 20);
-BENCHMARK_TEMPLATE(FFTWComputingRealFFT, float)->Range(1 << 20, 1 << 20);
-BENCHMARK_TEMPLATE(PFFFTComputingComplexFFT, float)->Range(1 << 20, 1 << 20);
-BENCHMARK_TEMPLATE(FFTWComputingComplexFFT, float)->Range(1 << 20, 1 << 20);
-BENCHMARK_TEMPLATE(PFFFTComputingDCT, float)->Range(1 << 20, 1 << 20);
-BENCHMARK_TEMPLATE(FFTWComputingDCT, float)->Range(1 << 20, 1 << 20);
-BENCHMARK_TEMPLATE(PFFFTComputingDHT, float)->Range(1 << 10, 1 << 10);
-BENCHMARK_TEMPLATE(FFTWComputingDHT, float)->Range(1 << 10, 1 << 10);
+BENCHMARK_TEMPLATE(PFFFTComputingRealFFT, float)->Range(1 << 10, 1 << 20)->Complexity();
+BENCHMARK_TEMPLATE(FFTWComputingRealFFT, float)->Range(1 << 10, 1 << 20)->Complexity();
+BENCHMARK_TEMPLATE(PFFFTComputingComplexFFT, float)->Range(1 << 10, 1 << 20)->Complexity();
+BENCHMARK_TEMPLATE(FFTWComputingComplexFFT, float)->Range(1 << 10, 1 << 20)->Complexity();
+BENCHMARK_TEMPLATE(PFFFTComputingDCT, float)->Range(1 << 10, 1 << 20)->Complexity();
+BENCHMARK_TEMPLATE(FFTWComputingDCT, float)->Range(1 << 10, 1 << 20)->Complexity();
+BENCHMARK_TEMPLATE(PFFFTComputingDHT, float)->Range(1 << 5, 1 << 10)->Complexity();
+BENCHMARK_TEMPLATE(FFTWComputingDHT, float)->Range(1 << 5, 1 << 10)->Complexity();
 BENCHMARK_MAIN();
