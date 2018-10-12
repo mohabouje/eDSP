@@ -29,15 +29,6 @@
 namespace edsp { namespace statistics {
 
     /**
-     * @brief The EntropyBase enum defines the base of the logarithm used to compute the entropy.
-     */
-    enum EntropyBase {
-        Bits, /*!< Base 2 */
-        Nats, /*!< Base e */
-        Bans  /*!< Base 10 */
-    };
-
-    /**
      * @brief Computes the normalized entropy of the probability mass function given in the range [first, last).
      *
      * Given a normalized probability mass function \f$ p(n) \f$, the entropy can explicitly be written as:
