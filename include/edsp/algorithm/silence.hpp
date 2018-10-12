@@ -15,34 +15,32 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* Filename: fft_impl.hpp
+* Filename: silence.hpp
 * Author: Mohammed Boujemaoui
-* Date: 09/10/18
+* Date: 12/10/18
 */
 
-#ifndef EDSP_FFT_IMPL_HPP
-#define EDSP_FFT_IMPL_HPP
+#ifndef EDSP_SILENCER_HPP
+#define EDSP_SILENCER_HPP
 
-#if defined(USE_LIBFFTW)
-#    include <edsp/spectral/internal/libfftw_impl.hpp>
-#elif defined(USE_LIBPFFFT)
-#    include <edsp/spectral/internal/libpffft_impl.hpp>
-#endif
+#include <edsp/statistics/power.hpp>
 
-namespace edsp { inline namespace spectral {
+namespace edsp { inline namespace algorithm {
 
-#if defined(USE_LIBFFTW)
-    template <typename T>
-    using fft_impl = spectral::fftw_impl<T>;
-#elif defined(USE_LIBPFFFT)
-    template <typename T>
-    using fft_impl = spectral::pffft_impl<T>;
-#elif defined(USE_LIBACCELERATE)
-#    error "Not implemented yet"
-#else
-#    error "Library not found"
-#endif
+    /**
+     * @brief Checks if the elements in the range [first, last) are a silenced frame.
+     *
+     * A silenced frame is a frame with an instant power up to a threshold.
+     *
+     * @param first Input iterator defining the beginning of the input range.
+     * @param last Input iterator defining the ending of the input range.
+     * @param threshold Threshold .
+     */
+    template <typename InputIt, typename OutputIt, typename Numeric>
+    constexpr bool silence(InputIt first, InputIt last, Numeric threshold) {
+        return statistics::power(first, last) < threshold;
+    }
 
-}} // namespace edsp::spectral
+}}
 
-#endif //EDSP_FFT_IMPL_HPP
+#endif //EDSP_SILENCER_HPP

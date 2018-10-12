@@ -38,12 +38,18 @@ namespace edsp { namespace statistics {
     };
 
     /**
-     * @brief Computes the entropy of the probability mass function given in the range [first, last)
+     * @brief Computes the normalized entropy of the probability mass function given in the range [first, last).
      *
      * Given a normalized probability mass function \f$ p(n) \f$, the entropy can explicitly be written as:
      *
      * \f[
-     *      h =  \sum_{n=0}^{N-1} p(n) \log2 \left( p(n) \right)
+     *      H = - \sum_{n=0}^{N-1} p(n) \log2 \left( p(n) \right)
+     * \f]
+     *
+     * Normalizing:
+     *
+     * \f[
+     *      H_n = - \frac{H}{log2(N)}
      * \f]
      *
      * @param first Forward iterator defining the begin of the probability mass function.
@@ -56,7 +62,9 @@ namespace edsp { namespace statistics {
         const auto predicate = [](const input_t accumulated, const input_t current) {
             return (accumulated + std::log2(current) * current);
         };
-        return std::accumulate(first, last, static_cast<input_t>(0), predicate);
+        const auto size = static_cast<input_t>(std::distance(first, last));
+        const auto acc = std::accumulate(first, last, static_cast<input_t>(0), predicate);
+        return -acc / std::log2(size);
     }
 
 }} // namespace edsp::statistics
