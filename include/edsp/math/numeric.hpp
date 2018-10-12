@@ -277,20 +277,58 @@ namespace edsp { inline namespace math {
         return distribution(eng);
     }
 
-    template <typename T>
-    constexpr T manhattan_distance(T x, T y) noexcept {
-        return x - y;
+    enum distances {
+        manhattan,
+        euclidean,
+        logarithmic
+    };
+
+
+    namespace internal {
+
+        template <distances d>
+        struct distance {};
+
+        typename <>
+        struct distance<distances::manhattan> {
+            template <typename T>
+            constexpr T operator()(T x, T y) noexcept {
+                return x - y;
+            }
+        };
+
+        typename <>
+        struct distance<distances::euclidean> {
+            template <typename T>
+            constexpr T operator()(T x, T y) noexcept {
+                return math::square(x - y);
+            }
+        };
+
+
+        typename <>
+        struct distance<distances::logarithmic> {
+            template <typename T>
+            constexpr T operator()(T x, T y) noexcept {
+                return std::log(std::abs(x) / std::abs(y));
+            }
+        };
     }
 
-    template <typename T>
-    constexpr T euclidean_distance(T x, T y) noexcept {
-        return square(manhattan_distance(x, y));
+
+    /**
+     * @brief Computes the distance between x and y
+     * @param x First element of the equation
+     * @param y Second element of the equation
+     * @return The computed distance
+     * @see distances
+     */
+    template <distances distance, typename T>
+    constexpr T distance(T x, T y) noexcept {
+        return internal::distance<distance>{}(x, y);
     }
 
-    template <typename T>
-    constexpr T logarithmic_distance(T x, T y) noexcept {
-        return std::log(std::abs(x) / std::abs(y));
-    }
+
 
 }} // namespace edsp::math
 

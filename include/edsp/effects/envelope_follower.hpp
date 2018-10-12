@@ -29,7 +29,7 @@
 namespace edsp {
 
     /**
-     * @brief This class implements a basic Envelope Follower
+     * @brief This class implements a basic envelope-follower.
      *
      * The envelope follower takes an high-frequency signal as input and provides an output which is
      * the envelope of the original signal. It is frequently used  to detect the amplitude variations of an incoming signal to produce a

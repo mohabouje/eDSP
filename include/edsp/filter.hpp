@@ -31,9 +31,9 @@
 #include <edsp/filter/internal/chebyshev_I_designer.hpp>
 #include <edsp/filter/internal/chebyshev_II_designer.hpp>
 
-#include <edsp/filter/miscellaneous/moving_median_filter.hpp>
-#include <edsp/filter/miscellaneous/moving_average_filter.hpp>
-#include <edsp/filter/miscellaneous/moving_rms_filter.hpp>
+#include <edsp/filter/moving_median_filter.hpp>
+#include <edsp/filter/moving_average_filter.hpp>
+#include <edsp/filter/moving_rms_filter.hpp>
 
 namespace edsp { namespace filter {
 

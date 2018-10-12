@@ -11,7 +11,7 @@ var searchData=
   ['to_5flower_2ehpp',['to_lower.hpp',['../d2/dab/to__lower_8hpp.html',1,'']]],
   ['to_5fupper_2ehpp',['to_upper.hpp',['../d8/d0e/to__upper_8hpp.html',1,'']]],
   ['tolower',['tolower',['../dd/d65/namespaceedsp_1_1string.html#a3a65874856c9a284f2c3ef1780b5c941',1,'edsp::string::tolower(Char character)'],['../dd/d65/namespaceedsp_1_1string.html#a71e2709bf0ae8815b6466ffabd3da323',1,'edsp::string::tolower(InputIt first, InputIt last, OutputIt d_first)']]],
-  ['tools_2ehpp',['tools.hpp',['../de/d71/tools_8hpp.html',1,'']]],
+  ['tools_2ehpp',['effects.hpp',['../de/d71/tools_8hpp.html',1,'']]],
   ['toupper',['toupper',['../dd/d65/namespaceedsp_1_1string.html#af9d7e9c63619c0aa0395c51b5de9a28c',1,'edsp::string::toupper(Char character)'],['../dd/d65/namespaceedsp_1_1string.html#a5682f96b2104973d973335875ce31ef9',1,'edsp::string::toupper(InputIt first, InputIt last, OutputIt d_first)']]],
   ['trace',['trace',['../d6/dd0/classedsp_1_1core_1_1logger.html#a204b1f4d6d030a62889019743256d588a34c3c181444bdc072cb82ee016eebc81',1,'edsp::core::logger']]],
   ['triangular',['triangular',['../d3/d0f/namespaceedsp_1_1windowing.html#abf81f4e7d3d203765a88540cbd48c1d4',1,'edsp::windowing::triangular()'],['../da/d8d/namespaceedsp_1_1oscillators.html#a5c83d8122fb980c44fbdd085f98522a6a241f88afa7becb8633ca074c48e0d77c',1,'edsp::oscillators::Triangular()'],['../d3/d0f/namespaceedsp_1_1windowing.html#a18fb11a4c3c068f95176d9938e662709a241f88afa7becb8633ca074c48e0d77c',1,'edsp::windowing::Triangular()']]],

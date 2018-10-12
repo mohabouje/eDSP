@@ -1,6 +1,6 @@
-/* 
+/*
  * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
- * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
+ * Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi
  *
  * This program is free software: you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -12,16 +12,14 @@
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
  *
- * You should have received a copy of the GNU General Public License along withº
+ * You should have received a copy of the GNU General Public License along with
  * this program.  If not, see <http://www.gnu.org/licenses/>
-
- * File: statistics.hpp
- * Author Mohammed Boujemaoui Boulaghmoudi on 04/10/18.
+ *
+ * File: testing_tools.cpp
+ * Author: Mohammed Boujemaoui
+ * Date: 05/10/2018
  */
 
-#ifndef EDSP_TOOLS_HPP
-#define EDSP_TOOLS_HPP
+#include <edsp/effects/envelope_follower.hpp>
 
-#include <edsp/tools/envelope_follower.hpp>
-
-#endif //EDSP_TOOLS_HPP
+template class edsp::envelope_follower<float>;
