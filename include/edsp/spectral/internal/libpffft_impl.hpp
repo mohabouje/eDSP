@@ -35,6 +35,48 @@
 
 namespace edsp { inline namespace spectral {
 
+    namespace internal {
+
+        template <typename T, typename R>
+        void useless_dct(const T* input, T* dst,  R N) {
+            for (auto k = 0; k < N; ++k) {
+                dst[k] = 0;
+                for(auto j = 0; j < N; ++j) {
+                    dst[k] +=
+                            input[j] *
+                            std::cos(math::constants<T>::pi * (j + 0.5) * k / static_cast<T>(N));
+                }
+                dst[k] *=2;
+            }
+        };
+
+
+        template <typename T, typename R>
+        void useless_idct(const T* input, T* dst,  R N) {
+            for (auto k = 0; k < N; ++k) {
+                dst[k] = 0;
+                for(auto j = 1; j < N; ++j) {
+                    dst[k] +=
+                            input[j] *
+                            std::cos(math::constants<T>::pi * j * (k + 0.5) / static_cast<T>(N));
+                }
+                dst[k] = input[0] + 2 * dst[k];
+            }
+        };
+
+        template <typename T, typename R>
+        void useless_dht(const T* input, T* dst,  R N) {
+            for (auto k = 0; k < N; ++k) {
+                dst[k] = 0;
+                for(auto j = 1; j < N; ++j) {
+                    const auto factor = math::constants<T>::two_pi * j * k / static_cast<T>(N);
+                    dst[k] += input[j] * (std::cos(factor) + std::sin(factor));
+                }
+            }
+        };
+
+    }
+
     template <typename T>
     struct pffft_impl {
         using value_type   = T;
@@ -107,20 +149,15 @@ namespace edsp { inline namespace spectral {
         }
 
         inline void dht(const value_type* src, value_type* dst) {
-            meta::unused(src);
-            meta::unused(dst);
+            internal::useless_dht(src, dst, nfft_);
         }
 
-        inline void dct(const value_type* src, value_type* dst, DCT_Type type) {
-            meta::unused(src);
-            meta::unused(dst);
-            meta::unused(type);
+        inline void dct(const value_type* src, value_type* dst) {
+            internal::useless_dct(src, dst, nfft_);
         }
 
-        inline void idct(const value_type* src, value_type* dst, DCT_Type type) {
-            meta::unused(src);
-            meta::unused(dst);
-            meta::unused(type);
+        inline void idct(const value_type* src, value_type* dst) {
+            internal::useless_idct(src, dst, nfft_);
         }
 
         inline void idft_scale(value_type* dst) {
@@ -137,8 +174,8 @@ namespace edsp { inline namespace spectral {
             }
         }
 
-        inline void idct_scale(value_type* dst, DCT_Type type) {
-            const auto scaling = (type == DCT_Type::Type_I) ? 2 * (nfft_ - 1) : 2 * nfft_;
+        inline void idct_scale(value_type* dst) {
+            const auto scaling = 2 * nfft_;
             for (size_type i = 0; i < nfft_; ++i) {
                 dst[i] /= scaling;
             }
@@ -205,20 +242,15 @@ namespace edsp { inline namespace spectral {
         }
 
         inline void dht(const value_type* src, value_type* dst) {
-            meta::unused(src);
-            meta::unused(dst);
+            internal::useless_dht(src, dst, nfft_);
         }
 
-        inline void dct(const value_type* src, value_type* dst, DCT_Type type) {
-            meta::unused(src);
-            meta::unused(dst);
-            meta::unused(type);
+        inline void dct(const value_type* src, value_type* dst) {
+            internal::useless_dct(src, dst, nfft_);
         }
 
-        inline void idct(const value_type* src, value_type* dst, DCT_Type type) {
-            meta::unused(src);
-            meta::unused(dst);
-            meta::unused(type);
+        inline void idct(const value_type* src, value_type* dst) {
+            internal::useless_idct(src, dst, nfft_);
         }
 
         inline void idft_scale(value_type* dst) {
@@ -235,8 +267,8 @@ namespace edsp { inline namespace spectral {
             }
         }
 
-        inline void idct_scale(value_type* dst, DCT_Type type) {
-            const auto scaling = (type == DCT_Type::Type_I) ? 2 * (nfft_ - 1) : 2 * nfft_;
+        inline void idct_scale(value_type* dst) {
+            const auto scaling = 2 * nfft_;
             for (size_type i = 0; i < nfft_; ++i) {
                 dst[i] /= scaling;
             }

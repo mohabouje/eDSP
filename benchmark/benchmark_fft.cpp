@@ -82,14 +82,57 @@ void PFFFTComputingComplexFFT(benchmark::State& state) {
     }
 }
 
-BENCHMARK_TEMPLATE(PFFFTComputingRealFFT, float)->Range(1 << 15, 1 << 20);
-BENCHMARK_TEMPLATE(FFTWComputingRealFFT, float)->Range(1 << 15, 1 << 20);
-BENCHMARK_TEMPLATE(PFFFTComputingRealFFT, double)->Range(1 << 15, 1 << 20);
-BENCHMARK_TEMPLATE(FFTWComputingRealFFT, double)->Range(1 << 15, 1 << 20);
+template <typename T>
+void FFTWComputingComplexDCT(benchmark::State& state) {
+    const auto size = state.range(0);
+    std::vector<T> input(size), output(size);
+    edsp::windowing::hamming(std::begin(input), std::end(input));
+    edsp::spectral::fftw_impl<T> impl(size);
+    for (auto _ : state) {
+        impl.dct(edsp::meta::data(input), edsp::meta::data(output));
+    }
+}
 
-BENCHMARK_TEMPLATE(PFFFTComputingComplexFFT, float)->Range(1 << 15, 1 << 20);
-BENCHMARK_TEMPLATE(FFTWComputingComplexFFT, float)->Range(1 << 15, 1 << 20);
-BENCHMARK_TEMPLATE(PFFFTComputingComplexFFT, double)->Range(1 << 15, 1 << 20);
-BENCHMARK_TEMPLATE(FFTWComputingComplexFFT, double)->Range(1 << 15, 1 << 20);
+template <typename T>
+void PFFFTComputingComplexDCT(benchmark::State& state) {
+    const auto size = state.range(0);
+    std::vector<T> input(size), output(size);
+    edsp::windowing::hamming(std::begin(input), std::end(input));
+    edsp::spectral::pffft_impl<T> impl(size);
+    for (auto _ : state) {
+        impl.dct(edsp::meta::data(input), edsp::meta::data(output));
+    }
+}
 
+template <typename T>
+void FFTWComputingComplexDHT(benchmark::State& state) {
+    const auto size = state.range(0);
+    std::vector<T> input(size), output(size);
+    edsp::windowing::hamming(std::begin(input), std::end(input));
+    edsp::spectral::fftw_impl<T> impl(size);
+    for (auto _ : state) {
+        impl.dht(edsp::meta::data(input), edsp::meta::data(output));
+    }
+}
+
+template <typename T>
+void PFFFTComputingComplexDHT(benchmark::State& state) {
+    const auto size = state.range(0);
+    std::vector<T> input(size), output(size);
+    edsp::windowing::hamming(std::begin(input), std::end(input));
+    edsp::spectral::pffft_impl<T> impl(size);
+    for (auto _ : state) {
+        impl.dht(edsp::meta::data(input), edsp::meta::data(output));
+    }
+}
+
+
+BENCHMARK_TEMPLATE(PFFFTComputingRealFFT, float)->Range(1 << 20, 1 << 20);
+BENCHMARK_TEMPLATE(FFTWComputingRealFFT, float)->Range(1 << 20, 1 << 20);
+BENCHMARK_TEMPLATE(PFFFTComputingComplexFFT, float)->Range(1 << 20, 1 << 20);
+BENCHMARK_TEMPLATE(FFTWComputingComplexFFT, float)->Range(1 << 20, 1 << 20);
+BENCHMARK_TEMPLATE(PFFFTComputingComplexDCT, float)->Range(1 << 10, 1 << 10);
+BENCHMARK_TEMPLATE(FFTWComputingComplexDCT, float)->Range(1 << 10, 1 << 10);
+BENCHMARK_TEMPLATE(PFFFTComputingComplexDHT, float)->Range(1 << 10, 1 << 10);
+BENCHMARK_TEMPLATE(FFTWComputingComplexDHT, float)->Range(1 << 10, 1 << 10);
 BENCHMARK_MAIN();

@@ -60,7 +60,6 @@ namespace {
     };
 } // namespace
 
-#ifdef USE_LIBFFFTW
 
 TEST(TestingDHT, TransformHanningWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hanning]);
@@ -101,4 +100,3 @@ TEST(TestingDHT, TransformBlackmanWindow) {
     }
 }
 
-#endif

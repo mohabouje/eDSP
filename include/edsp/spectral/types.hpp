@@ -46,10 +46,7 @@ namespace edsp { inline namespace spectral {
         Unbiased /*!< Unbiased estimate of the cross-correlation. */
     };
 
-    /**
-    * @brief The DCT_Type enum represents the different implementations to compute the DCT
-    */
-    enum class DCT_Type { Type_I, Type_II, Type_III, Type_IV };
+
 }} // namespace edsp::spectral
 
 #endif //EDSP_TYPES_HPP
