@@ -30,6 +30,16 @@
 namespace edsp { inline namespace spectral {
 
     /**
+    * @brief The SpectralScale enum represent the scale used to
+    * represent the power spectral density
+    */
+    enum class SpectralScale {
+        Linear,     /*!< Linear scale */
+        Logarithmic /*!< Logarithmic scale */
+    };
+
+
+    /**
      * @brief Computes the periodogram of the range [first, last) and stores the result in another range, beginning at d_first.
      *
      * The periodogram is an estimate of the spectral density of a signal.

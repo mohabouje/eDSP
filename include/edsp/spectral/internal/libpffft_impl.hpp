@@ -27,7 +27,6 @@
 #include <edsp/meta/iterator.hpp>
 #include <edsp/meta/expects.hpp>
 #include <edsp/meta/data.hpp>
-#include <edsp/spectral/types.hpp>
 
 #include <complex>
 #include <pffft.h>
