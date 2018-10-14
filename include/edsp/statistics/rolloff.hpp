@@ -23,7 +23,7 @@
 #ifndef EDSP_ROLLOFF_HPP
 #define EDSP_ROLLOFF_HPP
 
-#include <edsp/statistics/energy.hpp>
+#include <edsp/feature/temporal/energy.hpp>
 
 namespace edsp { namespace statistics {
 

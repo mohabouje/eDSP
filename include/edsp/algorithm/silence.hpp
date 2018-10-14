@@ -23,7 +23,7 @@
 #ifndef EDSP_SILENCER_HPP
 #define EDSP_SILENCER_HPP
 
-#include <edsp/statistics/power.hpp>
+#include <edsp/feature/temporal/power.hpp>
 
 namespace edsp { inline namespace algorithm {
 

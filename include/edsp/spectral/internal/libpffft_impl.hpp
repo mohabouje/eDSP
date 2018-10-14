@@ -110,7 +110,7 @@ namespace edsp { inline namespace spectral {
                 }
                 dst[k] = input[0] + 2 * dst[k];
             }
-        };
+        }
 
         template <typename T, typename R>
         void useless_dht(const T* input, T* dst,  R N) {
@@ -121,7 +121,7 @@ namespace edsp { inline namespace spectral {
                     dst[k] += input[j] * (std::cos(factor) + std::sin(factor));
                 }
             }
-        };
+        }
 
     }
 

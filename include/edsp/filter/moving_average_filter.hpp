@@ -84,6 +84,12 @@ namespace edsp { namespace filter {
         template <typename InputIt, typename OutputIt>
         void filter(InputIt first, InputIt last, OutputIt d_first);
 
+        /**
+         * @brief Applies a moving average filter to the single element
+         * @return The output of the filter.
+         */
+        value_type tick(value_type tick);
+
     private:
         edsp::ring_buffer<T, Allocator> window_;
         T accumulated_{0};
@@ -126,6 +132,19 @@ namespace edsp { namespace filter {
         window_.resize(N);
     }
 
-}} // namespace edsp::filter
+    template<typename T, typename Allocator>
+    typename moving_average<T, Allocator>::value_type moving_average<T, Allocator>::tick(value_type tick) {
+        if (window_.full()) {
+            accumulated_ -= window_.front();
+            accumulated_ += tick;
+            window_.push_back(tick);
+        } else {
+            accumulated_ += tick;
+            window_.push_back(tick);
+        };
+        return accumulated_ / static_cast<T>(window_.size());
+    }
+
+    }} // namespace edsp::filter
 
 #endif // EDSP_FILTER_MOVING_AVERAGE_FILTER_H

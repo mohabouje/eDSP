@@ -15,38 +15,39 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* Filename: power.hpp
+* Filename: energy.hpp
 * Author: Mohammed Boujemaoui
 * Date: 12/10/18
 */
 
-#ifndef EDSP_POWER_HPP
-#define EDSP_POWER_HPP
+#ifndef EDSP_ENERGY_HPP
+#define EDSP_ENERGY_HPP
 
-#include <edsp/meta/iterator.hpp>
+#include <iterator>
 #include <numeric>
 
-namespace edsp { namespace statistics {
+namespace edsp { namespace feature { inline namespace temporal {
 
     /**
-     * @brief Computes the instant power of the elements in the range [first, last)
+     * @brief Computes the energy of the elements in the range [first, last)
      *
-     * The energy of signal can be computed as:
+     * The energy estimates the signal power at a given time, it is estimated directly
+     * from the signal frame around a given time:
+     *
      * \f[
-     * P_x = \frac{1}{N} \sum\limits_{n=0}^{N-1} x^2(n)
+     * e = \sum\limits_{n=0}^{N-1} x^2(n)
      * \f]
      *
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
-     * @returns The instant power of the elements in the range.
+     * @returns The energy of the elements in the range.
      */
     template<typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> power(ForwardIt first, ForwardIt last) {
-        using value_type = meta::value_type_t<ForwardIt>;
+    constexpr auto energy(ForwardIt first, ForwardIt last) {
+        using value_type = typename std::iterator_traits<ForwardIt>::value_type;
         const auto size = std::distance(first, last);
-        return std::inner_product(first, last, first, static_cast<value_type>(0))
-                           / static_cast<value_type>(size);
+        return std::inner_product(first, last, first, static_cast<value_type>(0));
     }
-}}
+}}}
 
-#endif //EDSP_POWER_HPP
+#endif //EDSP_ENERGY_HPP
