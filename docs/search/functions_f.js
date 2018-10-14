@@ -13,7 +13,7 @@ var searchData=
   ['pop_5fback',['pop_back',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#adacdb28f869e70e673541c69d14ea24e',1,'edsp::types::fixed_ring_buffer::pop_back()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#a3490ef7db70c3b6a467dc07c9d791d51',1,'edsp::types::ring_buffer::pop_back()']]],
   ['pop_5ffront',['pop_front',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a481bb9edbbc98156a452995b3776a766',1,'edsp::types::fixed_ring_buffer::pop_front()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#ab2b15ec615e28b559627496e2060372b',1,'edsp::types::ring_buffer::pop_front()']]],
   ['pow2db',['pow2db',['../dd/d22/namespaceedsp_1_1converter.html#a584c92ed672c22f01fd42276e71272b6',1,'edsp::converter']]],
-  ['power',['power',['../d1/db9/namespaceedsp_1_1statistics.html#adfdda6b91210c83cd5908c509fbab1ad',1,'edsp::statistics']]],
+  ['power',['power',['../d5/db9/namespaceedsp_1_1feature_1_1temporal.html#a953f2d8123ca4354c4a4221d2b7a8351',1,'edsp::feature::temporal']]],
   ['process',['process',['../d5/dfb/structedsp_1_1io_1_1resampler.html#a0f7e7e73d2b68b6f0fe1ccbac9799fe4',1,'edsp::io::resampler']]],
   ['processor',['processor',['../df/d9c/structedsp_1_1core_1_1system__info.html#adad2c12d64e0d6855674a31085fbd211',1,'edsp::core::system_info']]],
   ['push_5fback',['push_back',['../d3/d8a/classedsp_1_1filter_1_1biquad__cascade.html#a84064c68fbb69d51ebc27282c6fe3d3d',1,'edsp::filter::biquad_cascade::push_back()'],['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a5b8dcc42bd0629ec187d592953d2f149',1,'edsp::types::fixed_ring_buffer::push_back()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#a2bf87b31f49d87e3c981886074bba720',1,'edsp::types::ring_buffer::push_back()']]]

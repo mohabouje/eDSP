@@ -46,8 +46,8 @@ namespace edsp { namespace feature { inline namespace spectral {
      *
      * where sc is the spectral centroid.
      *
-     * @param first Forward iterator defining the begin of the magnitude spectrum.
-     * @param last Forward iterator defining the end of the magnitude spectrum.
+     * @param first1 Forward iterator defining the begin of the magnitude spectrum.
+     * @param last2 Forward iterator defining the end of the magnitude spectrum.
      * @param first2 Forward iterator defining the begin of the center frequencies range.
      * @brief The estimated spectral spread
      * @see http://www.nyu.edu/classes/bello/MIR_files/timbre.pdf

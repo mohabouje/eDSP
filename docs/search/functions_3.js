@@ -3,9 +3,8 @@ var searchData=
   ['data',['data',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a75753642a5007c736e4218f2c4ffdbdc',1,'edsp::types::fixed_ring_buffer::data()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#a8861a079b2c383d944afd22034ea7c84',1,'edsp::types::ring_buffer::data()']]],
   ['db2mag',['db2mag',['../dd/d22/namespaceedsp_1_1converter.html#aa83cce6c7c3f82c5ea3decf5a4c7c4d6',1,'edsp::converter']]],
   ['db2pow',['db2pow',['../dd/d22/namespaceedsp_1_1converter.html#a19583ee0ef09f01076e9e6b0ee491199',1,'edsp::converter']]],
-  ['dct',['dct',['../d6/de9/namespaceedsp_1_1spectral.html#a12d6d8f7deb75525c15db8f77f128ff3',1,'edsp::spectral']]],
+  ['dct',['dct',['../d6/de9/namespaceedsp_1_1spectral.html#adfda882b148d61e82cc67aaed82c9046',1,'edsp::spectral']]],
   ['decoder',['decoder',['../d8/d66/classedsp_1_1io_1_1decoder.html#afdb6a0c38682c93fbe71cfef00115460',1,'edsp::io::decoder']]],
-  ['decrease',['decrease',['../d1/db9/namespaceedsp_1_1statistics.html#a17c653746ef4b4a0b79971b372d91c18',1,'edsp::statistics']]],
   ['default_5flevel',['default_level',['../d6/dd0/classedsp_1_1core_1_1logger.html#a74c1e991beb70a37a3031eccc19e68db',1,'edsp::core::logger']]],
   ['default_5fname',['default_name',['../d6/dd0/classedsp_1_1core_1_1logger.html#a22fed1e53fb077e8f55e3b872b6b1d9a',1,'edsp::core::logger']]],
   ['default_5fpath',['default_path',['../d6/dd0/classedsp_1_1core_1_1logger.html#a50dd557d54f47e136fbaec5f3897bec7',1,'edsp::core::logger']]],
@@ -15,6 +14,6 @@ var searchData=
   ['design_3c_20type_20_3e',['design&lt; Type &gt;',['../d7/d47/namespaceedsp_1_1filter.html#a086f84903481d014c40333bddcd1c71d',1,'edsp::filter']]],
   ['dft',['dft',['../d6/de9/namespaceedsp_1_1spectral.html#a7e477447935b6782fd4fa1edd0a631c6',1,'edsp::spectral']]],
   ['distance',['distance',['../de/d95/namespaceedsp_1_1math.html#a2cd9a12119c6fefe37fa9d3377af0234',1,'edsp::math']]],
-  ['duration',['duration',['../d8/d66/classedsp_1_1io_1_1decoder.html#a18a5c2475789f13e06a399a70dd65333',1,'edsp::io::decoder']]],
+  ['duration',['duration',['../d8/d66/classedsp_1_1io_1_1decoder.html#a18a5c2475789f13e06a399a70dd65333',1,'edsp::io::decoder::duration()'],['../d5/db9/namespaceedsp_1_1feature_1_1temporal.html#a77a36cd87bffa21408e9ed1270b23ae0',1,'edsp::feature::temporal::duration()']]],
   ['duty',['duty',['../de/de0/classedsp_1_1oscillators_1_1square__oscillator.html#a4ebc3ba07ee7406dc00cd1924b796f15',1,'edsp::oscillators::square_oscillator']]]
 ];

@@ -40,7 +40,7 @@ var searchData=
   ['ring_5fspan_2ehpp',['ring_span.hpp',['../dd/d0e/ring__span_8hpp.html',1,'']]],
   ['rms',['rms',['../d1/db9/namespaceedsp_1_1statistics.html#aee0974bd8e305b255130261ccbca8a69',1,'edsp::statistics']]],
   ['rms_2ehpp',['rms.hpp',['../d4/d7e/rms_8hpp.html',1,'']]],
-  ['rolloff',['rolloff',['../d1/db9/namespaceedsp_1_1statistics.html#aa58b158d901beeed29af3303c45a8f5e',1,'edsp::statistics']]],
+  ['rolloff',['rolloff',['../d1/db9/namespaceedsp_1_1statistics.html#af720428f279a729a6b14ee94647711d7',1,'edsp::statistics']]],
   ['rolloff_2ehpp',['rolloff.hpp',['../d3/d5d/rolloff_8hpp.html',1,'']]],
   ['root_5fe',['root_e',['../d8/df5/structedsp_1_1math_1_1constants.html#a47f968b4642a4a6320917f08688d86f7',1,'edsp::math::constants']]],
   ['root_5fhalf_5fpi',['root_half_pi',['../d8/df5/structedsp_1_1math_1_1constants.html#acc2e80dcc7b68f016cf65395299b0a51',1,'edsp::math::constants']]],

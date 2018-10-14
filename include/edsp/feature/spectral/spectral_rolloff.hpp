@@ -44,7 +44,7 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @see rolloff
      */
     template <typename ForwardIt, typename Numeric>
-    constexpr auto spectral_crest(ForwardIt first, ForwardIt last, Numeric percentage = 0.95) {
+    constexpr auto spectral_rolloff(ForwardIt first, ForwardIt last, Numeric percentage = 0.95) {
         return statistics::rolloff(first, last, percentage);
     }
 

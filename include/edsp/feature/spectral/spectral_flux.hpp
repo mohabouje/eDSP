@@ -40,7 +40,7 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @see flux
      */
     template <typename ForwardIt>
-    constexpr auto spectral_crest(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
+    constexpr auto spectral_flux(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
         return statistics::flux(first1, last1, first2);
     }
 

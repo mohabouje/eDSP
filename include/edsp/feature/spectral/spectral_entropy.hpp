@@ -53,7 +53,7 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @see entropy
      */
     template <typename ForwardIt>
-    constexpr auto spectral_centroid(ForwardIt first, ForwardIt last) {
+    constexpr auto spectral_entropy(ForwardIt first, ForwardIt last) {
         using value_type = typename std::iterator_traits<ForwardIt>::value_type ;
         const auto acc = std::accumulate(first, last, static_cast<value_type >(0));
         std::for_each(first, last, std::bind(std::multiplies<value_type>(), std::placeholders::_1, acc));

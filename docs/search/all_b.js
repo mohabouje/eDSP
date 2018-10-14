@@ -1,11 +1,15 @@
 var searchData=
 [
+  ['lat',['lat',['../d5/db9/namespaceedsp_1_1feature_1_1temporal.html#a3126b0c888392be0ad529e6110095628',1,'edsp::feature::temporal']]],
+  ['lat_2ehpp',['lat.hpp',['../d8/dc2/lat_8hpp.html',1,'']]],
   ['legendre',['Legendre',['../d7/d47/namespaceedsp_1_1filter.html#a7697522d00c54d9bef2c9f71cfa8d6bfaf9d917a770fac9457858a6e6bfdd9d9c',1,'edsp::filter']]],
+  ['leq',['leq',['../de/dc7/structedsp_1_1feature_1_1temporal_1_1leq.html',1,'edsp::feature::temporal::leq&lt; T &gt;'],['../de/dc7/structedsp_1_1feature_1_1temporal_1_1leq.html#a6a904fcf11a3b07aa8396f4166cf73ce',1,'edsp::feature::temporal::leq::leq()']]],
+  ['leq_2ehpp',['leq.hpp',['../d4/d1b/leq_8hpp.html',1,'']]],
   ['level',['level',['../d6/dd0/classedsp_1_1core_1_1logger.html#a75cdac03813cb9787840a8c20793f15c',1,'edsp::core::logger']]],
   ['levels',['levels',['../d6/dd0/classedsp_1_1core_1_1logger.html#a204b1f4d6d030a62889019743256d588',1,'edsp::core::logger']]],
   ['library_5finfo',['library_info',['../d4/dbe/structedsp_1_1core_1_1library__info.html',1,'edsp::core']]],
   ['library_5finfo_2ehpp',['library_info.hpp',['../d6/dc3/library__info_8hpp.html',1,'']]],
-  ['linear',['linear',['../df/dd9/namespaceedsp_1_1io.html#a659bf064ee1990f2e5a2a1fa3078f9b3ac86a527142b27fdab5e1ac40b63f13bf',1,'edsp::io::linear()'],['../d6/de9/namespaceedsp_1_1spectral.html#ab261db3113cfe1ef44d41e74628baadca32a843da6ea40ab3b17a3421ccdf671b',1,'edsp::spectral::Linear()']]],
+  ['linear',['Linear',['../d6/de9/namespaceedsp_1_1spectral.html#ab261db3113cfe1ef44d41e74628baadca32a843da6ea40ab3b17a3421ccdf671b',1,'edsp::spectral::Linear()'],['../df/dd9/namespaceedsp_1_1io.html#a659bf064ee1990f2e5a2a1fa3078f9b3ac86a527142b27fdab5e1ac40b63f13bf',1,'edsp::io::linear()']]],
   ['linear_5fsearch_2ehpp',['linear_search.hpp',['../d6/d0a/linear__search_8hpp.html',1,'']]],
   ['linspace',['linspace',['../d3/db4/namespaceedsp_1_1algorithm.html#aa8f0f72002b3e9f88fd555717479a30b',1,'edsp::algorithm']]],
   ['linspace_2ehpp',['linspace.hpp',['../d1/dfa/linspace_8hpp.html',1,'']]],
@@ -23,6 +27,8 @@ var searchData=
   ['lognormal',['LogNormal',['../dd/d1f/namespaceedsp_1_1random.html#ac3c10dccbfb2d5da06386b01b684159ca4ddaab6002fbf299bbc4998dcbcdb671',1,'edsp::random']]],
   ['logspace',['logspace',['../d3/db4/namespaceedsp_1_1algorithm.html#a584ce40f7cdc773abc29bfe209dccb72',1,'edsp::algorithm']]],
   ['logspace_2ehpp',['logspace.hpp',['../d0/dd8/logspace_8hpp.html',1,'']]],
+  ['loudness',['loudness',['../dd/d4e/namespaceedsp_1_1feature_1_1perceptual.html#a8adf8baa78a3e6e54298ed9ea5eff9d8',1,'edsp::feature::perceptual']]],
+  ['loudness_2ehpp',['loudness.hpp',['../d4/d6b/loudness_8hpp.html',1,'']]],
   ['lowpass',['LowPass',['../d7/d47/namespaceedsp_1_1filter.html#a8d892edc768c28dbf779f67b63a6456aa835f2dc4fd545ddcd275198d9fbadf63',1,'edsp::filter']]],
   ['lowshelf',['LowShelf',['../d7/d47/namespaceedsp_1_1filter.html#a8d892edc768c28dbf779f67b63a6456aa04efcd6f392567e252822d1247d8c875',1,'edsp::filter']]],
   ['ltrim',['ltrim',['../dd/d65/namespaceedsp_1_1string.html#a766d01c97959445211eefc32122c25fc',1,'edsp::string']]]

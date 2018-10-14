@@ -14,7 +14,7 @@ var searchData=
   ['flat_5ftop_2ehpp',['flat_top.hpp',['../dd/dd8/flat__top_8hpp.html',1,'']]],
   ['flatness',['flatness',['../d1/db9/namespaceedsp_1_1statistics.html#a827c80f7ba878a58d640b640a6081a5c',1,'edsp::statistics']]],
   ['flatness_2ehpp',['flatness.hpp',['../d6/dcb/flatness_8hpp.html',1,'']]],
-  ['flattop',['flattop',['../d3/d0f/namespaceedsp_1_1windowing.html#a42142950237b319aea3c144d9c19beca',1,'edsp::windowing::flattop(OutputIt first, OutputIt last)'],['../d3/d0f/namespaceedsp_1_1windowing.html#a18fb11a4c3c068f95176d9938e662709aec0d3a4b775b100efcc3a27ab389182a',1,'edsp::windowing::FlatTop()']]],
+  ['flattop',['FlatTop',['../d3/d0f/namespaceedsp_1_1windowing.html#a18fb11a4c3c068f95176d9938e662709aec0d3a4b775b100efcc3a27ab389182a',1,'edsp::windowing::FlatTop()'],['../d3/d0f/namespaceedsp_1_1windowing.html#a42142950237b319aea3c144d9c19beca',1,'edsp::windowing::flattop(OutputIt first, OutputIt last)']]],
   ['floor',['floor',['../d3/db4/namespaceedsp_1_1algorithm.html#a9a1cdac2f97928debf45e3f08158ac88',1,'edsp::algorithm']]],
   ['floor_2ehpp',['floor.hpp',['../d3/d7b/floor_8hpp.html',1,'']]],
   ['flux',['flux',['../d1/db9/namespaceedsp_1_1statistics.html#a481db6c01ef30771163487bfe14e1c2f',1,'edsp::statistics']]],

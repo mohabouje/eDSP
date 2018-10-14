@@ -32,6 +32,7 @@ var searchData=
   ['moment',['moment',['../d1/db9/namespaceedsp_1_1statistics.html#a24671cd33994617895e110d248201d1c',1,'edsp::statistics::moment(ForwardIt first, ForwardIt last)'],['../d1/db9/namespaceedsp_1_1statistics.html#ab55434955f03dfb79cddcd512c715036',1,'edsp::statistics::moment(ForwardIt first, ForwardIt last, const meta::value_type_t&lt; ForwardIt &gt; mean)']]],
   ['moment_2ehpp',['moment.hpp',['../d8/d64/moment_8hpp.html',1,'']]],
   ['moving_5faverage',['moving_average',['../db/df2/classedsp_1_1filter_1_1moving__average.html',1,'edsp::filter::moving_average&lt; T, Allocator &gt;'],['../db/df2/classedsp_1_1filter_1_1moving__average.html#a76c0d559b9f4951d3933983e5087a5c9',1,'edsp::filter::moving_average::moving_average()']]],
+  ['moving_5faverage_3c_20t_20_3e',['moving_average&lt; T &gt;',['../db/df2/classedsp_1_1filter_1_1moving__average.html',1,'edsp::filter']]],
   ['moving_5faverage_5ffilter_2ehpp',['moving_average_filter.hpp',['../db/d97/moving__average__filter_8hpp.html',1,'']]],
   ['moving_5fmedian',['moving_median',['../d9/d0c/classedsp_1_1filter_1_1moving__median.html',1,'edsp::filter::moving_median&lt; T, Allocator &gt;'],['../d9/d0c/classedsp_1_1filter_1_1moving__median.html#aef5e43a0d36d46d8e98cdc70f91ccf7b',1,'edsp::filter::moving_median::moving_median()']]],
   ['moving_5fmedian_5ffilter_2ehpp',['moving_median_filter.hpp',['../d1/d4c/moving__median__filter_8hpp.html',1,'']]],

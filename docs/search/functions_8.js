@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['idct',['idct',['../d6/de9/namespaceedsp_1_1spectral.html#a53ea7ac20c937dfa953944195b3978b6',1,'edsp::spectral']]],
+  ['idct',['idct',['../d6/de9/namespaceedsp_1_1spectral.html#a635fee16c29917a101a26142cb346a42',1,'edsp::spectral']]],
   ['idft',['idft',['../d6/de9/namespaceedsp_1_1spectral.html#a0818d3a56c49dfa38023e96c905d93ea',1,'edsp::spectral']]],
   ['imag',['imag',['../de/d95/namespaceedsp_1_1math.html#a44581d207669b12832915e2f1cc9edf5',1,'edsp::math']]],
   ['indexof',['indexof',['../d3/db4/namespaceedsp_1_1algorithm.html#ac17c8981464f451ef2250f8539a64874',1,'edsp::algorithm']]],
