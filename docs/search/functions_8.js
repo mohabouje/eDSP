@@ -3,6 +3,7 @@ var searchData=
   ['idct',['idct',['../d6/de9/namespaceedsp_1_1spectral.html#a53ea7ac20c937dfa953944195b3978b6',1,'edsp::spectral']]],
   ['idft',['idft',['../d6/de9/namespaceedsp_1_1spectral.html#a0818d3a56c49dfa38023e96c905d93ea',1,'edsp::spectral']]],
   ['imag',['imag',['../de/d95/namespaceedsp_1_1math.html#a44581d207669b12832915e2f1cc9edf5',1,'edsp::math']]],
+  ['indexof',['indexof',['../d3/db4/namespaceedsp_1_1algorithm.html#ac17c8981464f451ef2250f8539a64874',1,'edsp::algorithm']]],
   ['infinity',['infinity',['../de/d95/namespaceedsp_1_1math.html#a1c6017af51ee48a4427b8970076d9d17',1,'edsp::math']]],
   ['inv',['inv',['../de/d95/namespaceedsp_1_1math.html#af8768b3f1e7889941d32260b0c2f47c5',1,'edsp::math']]],
   ['inverse_5fmu_5flaw_5fcompression',['inverse_mu_law_compression',['../d5/d9b/namespaceedsp_1_1quantizer.html#aa1c6d91671fbb8b4dd6f1aa36c909380',1,'edsp::quantizer']]],

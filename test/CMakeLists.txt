@@ -18,7 +18,7 @@ set(SOURCE_FILES
         filter/testing_filter.cpp
         statistics/testing_statistics.cpp
         io/testing_io.cpp
-        tools/testing_tools.cpp)
+        effects/testing_tools.cpp)
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME}

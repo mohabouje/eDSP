@@ -28,7 +28,6 @@
 
 namespace edsp { namespace io {
 
-
     /**
      * @class decoder
      * @brief This class implements a decoder object to read data from supported audio files.

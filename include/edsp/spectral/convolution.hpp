@@ -50,8 +50,8 @@ namespace edsp { inline namespace spectral {
     inline void conv(InputIt first1, InputIt last1, InputIt first2, OutputIt d_first) {
         meta::expects(std::distance(first1, last1) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
-        const auto size = std::distance(first1, last1);
-        const auto nfft = 2 * size;
+        const auto size  = std::distance(first1, last1);
+        const auto nfft  = 2 * size;
         fft_impl<value_type> fft_(nfft);
         fft_impl<value_type> ifft_(nfft);
 

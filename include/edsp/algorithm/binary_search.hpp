@@ -43,23 +43,6 @@ namespace edsp { inline namespace algorithm {
         return (it != last && (value == *it)) ? it : last;
     }
 
-    /**
-     * @brief Checks if an element equivalent to value appears within the range [first, last).
-     *
-     * For binary_search to succeed, the range [first, last) must be ordered.
-     *
-     * @param first Forward iterator defining the begin of the range to examine.
-     * @param last Forward iterator defining the end of the range to examine.
-     * @param value Value to compare the elements to.
-     * @param comp Binary predicate which returns ​true if the first argument is less than the second.
-     * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
-     */
-    template <typename ForwardIt, class Compare>
-    constexpr ForwardIt binary_search(ForwardIt first, ForwardIt last, const meta::value_type_t<ForwardIt>& value,
-                                      Compare comp) {
-        const auto it = std::lower_bound(first, last, value, comp);
-        return (it != last && (value == *it)) ? it : last;
-    }
 
 }} // namespace edsp::algorithm
 

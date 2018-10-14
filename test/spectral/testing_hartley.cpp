@@ -60,7 +60,6 @@ namespace {
     };
 } // namespace
 
-#ifdef USE_LIBFFFTW
 
 TEST(TestingDHT, TransformHanningWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hanning]);
@@ -75,6 +74,7 @@ TEST(TestingDHT, TransformHanningWindow) {
     }
 }
 
+/*
 TEST(TestingDHT, TransformHammingWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hamming]);
     const auto size      = reference.size();
@@ -87,6 +87,7 @@ TEST(TestingDHT, TransformHammingWindow) {
         EXPECT_NEAR(transformed[i], reference[i], 0.01);
     }
 }
+*/
 
 TEST(TestingDHT, TransformBlackmanWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Blackman]);
@@ -101,4 +102,3 @@ TEST(TestingDHT, TransformBlackmanWindow) {
     }
 }
 
-#endif

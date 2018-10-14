@@ -29,6 +29,16 @@
 namespace edsp { inline namespace spectral {
 
     /**
+    * @brief The ScaleOpt enum defines the normalization option of the correlation function.
+    */
+    enum class CorrelationScale {
+        None,    /*!< Raw, unscaled cross-correlation. */
+        Biased,  /*!< Biased estimate of the cross-correlation. */
+        Unbiased /*!< Unbiased estimate of the cross-correlation. */
+    };
+
+
+        /**
      * @brief Computes the autocorrelation of the range [first, last) and stores the result in another range, beginning at d_first.
      *
      * The result of xcorr can be interpreted as an estimate of the correlation between two random sequences or as the deterministic
@@ -50,8 +60,8 @@ namespace edsp { inline namespace spectral {
     inline void xcorr(InputIt first, InputIt last, OutputIt d_first, CorrelationScale scale = CorrelationScale::None) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
-        const auto size = std::distance(first, last);
-        const auto nfft = 2 * size;
+        const auto size  = std::distance(first, last);
+        const auto nfft  = 2 * size;
         fft_impl<value_type> fft_(nfft);
         fft_impl<value_type> ifft_(nfft);
 
@@ -96,11 +106,10 @@ namespace edsp { inline namespace spectral {
                       CorrelationScale scale = CorrelationScale::None) {
         meta::expects(std::distance(first1, last1) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
-        const auto size = std::distance(first1, last1);
-        const auto nfft = 2 * size;
+        const auto size  = std::distance(first1, last1);
+        const auto nfft  = 2 * size;
         fft_impl<value_type> fft_(nfft);
         fft_impl<value_type> ifft_(nfft);
-
 
         std::vector<value_type, RAllocator> temp_input1(nfft, static_cast<value_type>(0)),
             temp_input2(nfft, static_cast<value_type>(0)), temp_output(nfft);

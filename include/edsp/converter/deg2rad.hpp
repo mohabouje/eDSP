@@ -22,7 +22,9 @@
 #ifndef EDSP_DEG2RAD_HPP
 #define EDSP_DEG2RAD_HPP
 
+#include <edsp/math/constant.hpp>
 #include <cmath>
+
 namespace edsp { inline namespace converter {
 
     /**

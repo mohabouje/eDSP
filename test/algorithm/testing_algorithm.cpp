@@ -270,7 +270,7 @@ TEST(TestingNormalizer, PositiveValues) {
         element = math::rand<double>(1 << 2, 1 << 20);
     }
 
-    algorithm::normalizer(std::cbegin(input), std::cend(input), std::begin(output));
+    algorithm::normalize(std::cbegin(input), std::cend(input), std::begin(output));
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_LE(output[i], 1);
         EXPECT_GE(output[i], -1);
@@ -286,7 +286,7 @@ TEST(TestingNormalizer, NegativeValues) {
         element = math::rand<double>(-(1 << 20), -(1 << 2));
     }
 
-    algorithm::normalizer(std::cbegin(input), std::cend(input), std::begin(output));
+    algorithm::normalize(std::cbegin(input), std::cend(input), std::begin(output));
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_LE(output[i], 1);
         EXPECT_GE(output[i], -1);
@@ -302,7 +302,7 @@ TEST(TestingNormalizer, RandomValues) {
         element = math::rand<double>();
     }
 
-    algorithm::normalizer(std::cbegin(input), std::cend(input), std::begin(output));
+    algorithm::normalize(std::cbegin(input), std::cend(input), std::begin(output));
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_LE(output[i], 1);
         EXPECT_GE(output[i], -1);

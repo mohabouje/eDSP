@@ -29,7 +29,7 @@
 
 namespace edsp { inline namespace core {
 
-    enum class fft_lib { fftw, pffft, apple, unknown };
+    enum class fft_lib { fftw, pffft, accelerate, unknown };
 
     enum class codec_lib { audiofile, sndfile, unknown };
 
@@ -41,8 +41,8 @@ namespace edsp { inline namespace core {
                 return stream << "FFTW";
             case fft_lib::pffft:
                 return stream << "PFFFT";
-            case fft_lib::apple:
-                return stream << "Apple FFT";
+            case fft_lib::accelerate:
+                return stream << "Apple Accelerate Framework";
             default:
                 return stream << edsp::red << "not found" << edsp::endc;
         }
@@ -100,7 +100,7 @@ namespace edsp { inline namespace core {
             return fft_lib::fftw;
 #elif defined(USE_LIBPFFFT)
             return fft_lib::fftw;
-#elif defined(USE_LIBAPPLE)
+#elif defined(USE_LIBACCELERATE)
             return fft_lib::fftw;
 #else
             return fft_lib::unknown;

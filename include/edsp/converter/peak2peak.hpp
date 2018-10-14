@@ -23,6 +23,7 @@
 #define EDSP_PEAK2PEAK_HPP
 
 #include <edsp/meta/iterator.hpp>
+#include <algorithm>
 #include <cmath>
 
 namespace edsp { inline namespace converter {

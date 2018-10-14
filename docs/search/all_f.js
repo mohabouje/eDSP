@@ -34,6 +34,8 @@ var searchData=
   ['pop_5ffront',['pop_front',['../d2/d08/classedsp_1_1types_1_1fixed__ring__buffer.html#a481bb9edbbc98156a452995b3776a766',1,'edsp::types::fixed_ring_buffer::pop_front()'],['../d5/d74/classedsp_1_1types_1_1ring__buffer.html#ab2b15ec615e28b559627496e2060372b',1,'edsp::types::ring_buffer::pop_front()']]],
   ['pow2db',['pow2db',['../dd/d22/namespaceedsp_1_1converter.html#a584c92ed672c22f01fd42276e71272b6',1,'edsp::converter']]],
   ['pow2db_2ehpp',['pow2db.hpp',['../de/d84/pow2db_8hpp.html',1,'']]],
+  ['power',['power',['../d1/db9/namespaceedsp_1_1statistics.html#adfdda6b91210c83cd5908c509fbab1ad',1,'edsp::statistics']]],
+  ['power_2ehpp',['power.hpp',['../db/dfa/power_8hpp.html',1,'']]],
   ['process',['process',['../d5/dfb/structedsp_1_1io_1_1resampler.html#a0f7e7e73d2b68b6f0fe1ccbac9799fe4',1,'edsp::io::resampler']]],
   ['processor',['processor',['../df/d9c/structedsp_1_1core_1_1system__info.html#adad2c12d64e0d6855674a31085fbd211',1,'edsp::core::system_info']]],
   ['processors',['processors',['../d7/d34/namespaceedsp_1_1core.html#aa6a16ef9b773eb04c5de0b830631fb82',1,'edsp::core']]],

@@ -29,39 +29,47 @@ namespace edsp { inline namespace spectral {
 
     /**
      * @brief Computes the Discrete-Cosine-Transform of the range [first, last) and stores the result in another range,
-     *  beginning at d_first.
+     * beginning at d_first.
+     *
+     * The DCT-II is computed as follows:
+     * \f[
+     * {\displaystyle X_{k}=\sum _{n=0}^{N-1}{x_{n}\cos \left[{\frac {\pi }{N}}\left(n+{\frac {1}{2}}\right)k\right]}}
+     * \f]
      *
      * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
      * @param d_first Output iterator defining the beginning of the destination range.
-     * @param type  Discrete cosine transform type
-     * @see DCT_Type
      */
     template <typename InputIt, typename OutputIt>
-    inline void dct(InputIt first, InputIt last, OutputIt d_first, DCT_Type type = DCT_Type::Type_II) {
+    inline void dct(InputIt first, InputIt last, OutputIt d_first) {
         const auto nfft =
             static_cast<typename fft_impl<meta::value_type_t<InputIt>>::size_type>(std::distance(first, last));
         fft_impl<meta::value_type_t<InputIt>> plan(nfft);
-        plan.dct(&(*first), &(*d_first), type);
+        plan.dct(&(*first), &(*d_first));
     }
 
     /**
      * @brief Computes the Inverse-Discrete-Cosine-Transform of the range [first, last) and stores the result in another range,
-     *  beginning at d_first.
+     * beginning at d_first.
+     *
+     * The IDCT-II is computed as follows:
+     *
+     * \f[
+     * {\displaystyle X_{k}={\frac {1}{2}}x_{0}+\sum _{n=1}^{N-1}{x_{n}\cos \left[{\frac {\pi }{N}}n\left(k+{\frac {1}{2}}\right)\right]}}
+     * \f]
+     *
      *
      * @param first Input iterator defining the beginning of the input range.
      * @param last Input iterator defining the ending of the input range.
      * @param d_first Output iterator defining the beginning of the destination range.
-     * @param type  Discrete cosine transform type
-     * @see DCT_Type
      */
     template <typename InputIt, typename OutputIt>
-    inline void idct(InputIt first, InputIt last, OutputIt d_first, DCT_Type type = DCT_Type::Type_II) {
+    inline void idct(InputIt first, InputIt last, OutputIt d_first) {
         const auto nfft =
             static_cast<typename fft_impl<meta::value_type_t<InputIt>>::size_type>(std::distance(first, last));
         fft_impl<meta::value_type_t<InputIt>> plan(nfft);
-        plan.idct(&(*first), &(*d_first), type);
-        plan.idct_scale(&(*d_first), type);
+        plan.idct(&(*first), &(*d_first));
+        plan.idct_scale(&(*d_first));
     }
 
 }} // namespace edsp::spectral

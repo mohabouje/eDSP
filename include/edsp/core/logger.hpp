@@ -37,7 +37,6 @@ namespace edsp { inline namespace core {
         struct logger_impl;
     }
 
-
     class logger {
     public:
         /**
@@ -297,7 +296,7 @@ namespace edsp { inline namespace core {
                 return stream;
             }
         };
-    }
+    } // namespace internal
 
     /**
      * @brief Inserts the tabular character ('\t') to the current streaming.
