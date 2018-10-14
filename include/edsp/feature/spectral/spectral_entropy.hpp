@@ -40,7 +40,7 @@ namespace edsp { namespace feature { inline namespace spectral {
      * as the normalized version of the Power Spectral Density:
      *
      * \f[
-     *  p_i=\dfrac{P(\omega_i)}{\sum_iP(\omega_i)}
+     *  p_i=\frac{P(\omega_i)}{\sum_iP(\omega_i)}
      * \f]
      *
      * The Power Spectral entropy can be now calculated using a standard formula for an entropy calculation.

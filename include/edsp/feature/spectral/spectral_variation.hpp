@@ -40,7 +40,7 @@ namespace edsp { namespace feature { inline namespace spectral {
      *
      * \f[
      *
-     *  v = 1 - \frac{\sum_k X_1(k) X_2(K)  }{ \sqrt{ sum_k X_1(k)} \sqrt{sum_k X_2(k)}}
+     *  v = 1 - \frac{\sum_k X_1(k) X_2(K)  }{ \sqrt{ \sum_k X_1(k)} \sqrt{\sum_k X_2(k)}}
      *
      * \f]
      *

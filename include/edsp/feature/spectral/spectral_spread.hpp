@@ -42,7 +42,7 @@ namespace edsp { namespace feature { inline namespace spectral {
      *
      *  ss = \frac{\sum_{n = 0}^{N-1}((f(n) - sc)^2 X(n)}{\sum_{n = 0}^{N-1}X(n)}
      *
-     * \f}
+     * \f]
      *
      * where sc is the spectral centroid.
      *

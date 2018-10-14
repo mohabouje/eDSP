@@ -17,7 +17,7 @@
     extensions: ["tex2jax.js"],
     jax: ["input/TeX","output/HTML-CSS"],
 });
-</script><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
+</script><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="../../doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -246,7 +246,7 @@ template&lt;typename ForwardIt &gt; </div>
 <p>Computes the spectral entropy of the of the power spectral density represented by the elements in the range [first, last) </p>
 <p>Spectral Entropy describes the complexity of a system. The PSD of a audio signal can be computed as the normalized version of the Power Spectral Density:</p>
 <p class="formulaDsp">
-\[ p_i=\dfrac{P(\omega_i)}{\sum_iP(\omega_i)} \]
+\[ p_i=\frac{P(\omega_i)}{\sum_iP(\omega_i)} \]
 </p>
 <p>The Power Spectral entropy can be now calculated using a standard formula for an entropy calculation.</p>
 <dl class="section warning"><dt>Warning</dt><dd>This function normalize/modifies the input range. </dd></dl>
@@ -620,7 +620,7 @@ template&lt;typename ForwardIt &gt; </div>
 <p>Computes the spectral spread of the of the magnitude spectrum represented by the elements in the range [first, last) </p>
 <p>The spectral spread describes the average deviation of the rate-map around its centroid, which is commonly associated with the bandwidth of the signal</p>
 <p class="formulaDsp">
-\[ ss = \frac{\sum_{n = 0}^{N-1}((f(n) - sc)^2 X(n)}{\sum_{n = 0}^{N-1}X(n)} \end
+\[ ss = \frac{\sum_{n = 0}^{N-1}((f(n) - sc)^2 X(n)}{\sum_{n = 0}^{N-1}X(n)} \]
 </p>
 <p>where sc is the spectral centroid.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -672,7 +672,7 @@ template&lt;typename ForwardIt &gt; </div>
 <p>Computes the spectral variation of the of the magnitude spectrum represented by the elements in the range [first, last) </p>
 <p>The spectral variation is a representation of the similarity between two magnitude spectrums. It is a parameter similar to the spectral flux.</p>
 <p class="formulaDsp">
-\[ v = 1 - \frac{\sum_k X_1(k) X_2(K) }{ \sqrt{ sum_k X_1(k)} \sqrt{sum_k X_2(k)}} \]
+\[ v = 1 - \frac{\sum_k X_1(k) X_2(K) }{ \sqrt{ \sum_k X_1(k)} \sqrt{\sum_k X_2(k)}} \]
 </p>
 <p>If the variation is close to 0, the spectrum are really similar. Otherwise, if it is close to 1, the are highly dissimilar.</p>
 <dl class="params"><dt>Parameters</dt><dd>
