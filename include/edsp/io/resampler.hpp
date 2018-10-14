@@ -27,6 +27,10 @@
 
 namespace edsp { namespace io {
 
+    /**
+     * @brief The resample_quality enum represents the different configurations that modifies the ressampling process
+     * based in the output quality.
+     */
     enum resample_quality {
         best_quality    = 0,
         medium_quality  = 1,
@@ -123,11 +127,11 @@ namespace edsp { namespace io {
          * @return true if the ratio is valid, false otherwise.
          */
         static bool valid_ratio(value_type ratio) {
-            return internal::resampler_impl::valid_ratio(ratio);
+            return internal::resampler_impl<T>::valid_ratio(ratio);
         }
 
     private:
-        internal::resampler_impl impl;
+        internal::resampler_impl<T> impl;
     };
 
 }} // namespace edsp::io

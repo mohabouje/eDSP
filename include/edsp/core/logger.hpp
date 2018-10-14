@@ -299,54 +299,121 @@ namespace edsp { inline namespace core {
         };
     }
 
+    /**
+     * @brief Inserts the tabular character ('\t') to the current streaming.
+     * @param stream Streaming to be modified
+     * @return A reference to the stream.
+     */
     inline logger& tab(logger& stream) {
         return logger_impl::tab(stream);
     }
 
+    /**
+     * @brief Inserts the end line character ('\n') to the current streaming.
+     * @note This function does not flush the buffer.
+     * @param stream Streaming to be modified
+     * @return A reference to the modified stream.
+     */
     inline logger& endl(logger& stream) {
         return logger_impl::endl(stream);
     }
 
+    /**
+     * @brief Updates the logger output color to red.
+     * @param stream Streaming to be modified.
+     * @return A reference to the modified stream.
+     */
     inline logger& red(logger& stream) {
         return logger_impl::red(stream);
     }
 
+    /**
+     * @brief Updates the logger output color to yellow.
+     * @param stream Streaming to be modified.
+     * @return A reference to the modified stream.
+     */
     inline logger& yellow(logger& stream) {
         return logger_impl::yellow(stream);
     }
 
+    /**
+     * @brief Updates the logger output color to blue.
+     * @param stream Streaming to be modified.
+     * @return A reference to the modified stream.
+     */
     inline logger& blue(logger& stream) {
         return logger_impl::blue(stream);
     }
 
+
+    /**
+    * @brief Updates the logger output color to cyan.
+    * @param stream Streaming to be modified.
+    * @return A reference to the modified stream.
+    */
     inline logger& cyan(logger& stream) {
         return logger_impl::cyan(stream);
     }
 
+    /**
+    * @brief Updates the logger output color to white.
+    * @param stream Streaming to be modified.
+    * @return A reference to the modified stream.
+    */
     inline logger& white(logger& stream) {
         return logger_impl::white(stream);
     }
 
+    /**
+     * @brief Updates the logger output color to magenta.
+     * @param stream Streaming to be modified.
+     * @return A reference to the modified stream.
+     */
     inline logger& magenta(logger& stream) {
         return logger_impl::magenta(stream);
     }
 
+    /**
+     * @brief Updates the logger output color to green.
+     * @param stream Streaming to be modified.
+     * @return A reference to the modified stream.
+     */
     inline logger& green(logger& stream) {
         return logger_impl::green(stream);
     }
 
+    /**
+     * @brief Updates the logger output color to grey.
+     * @param stream Streaming to be modified.
+     * @return A reference to the modified stream.
+     */
     inline logger& grey(logger& stream) {
         return logger_impl::grey(stream);
     }
 
+    /**
+     * @brief Updates the logger output text style to bold style.
+     * @param stream Streaming to be modified.
+     * @return A reference to the modified stream.
+     */
     inline logger& bold(logger& stream) {
         return logger_impl::bold(stream);
     }
 
+    /**
+     * @brief End of color, styled streaming.
+     * @param stream Streaming to be modified.
+     * @return A reference to the modified stream.
+     */
     inline logger& endc(logger& stream) {
         return logger_impl::endc(stream);
     }
 
+    /**
+     * @brief Resets the logger to default configuration.
+     * @param stream Streaming to be modified.
+     * @return A reference to the modified stream.
+     */
     inline logger& reset(logger& stream) {
         return logger_impl::reset(stream);
     }
