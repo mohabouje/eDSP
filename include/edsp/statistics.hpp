@@ -24,7 +24,6 @@
 
 #include <edsp/statistics/centroid.hpp>
 #include <edsp/statistics/crest.hpp>
-#include <edsp/statistics/decrease.hpp>
 #include <edsp/statistics/entropy.hpp>
 #include <edsp/statistics/flatness.hpp>
 #include <edsp/statistics/generalized_mean.hpp>

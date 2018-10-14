@@ -39,9 +39,9 @@ namespace edsp { namespace statistics {
      * @returns The estimated roll-off index.
      */
     template <typename ForwardIt, typename Floating>
-    constexpr meta::value_type_t<ForwardIt> rolloff(ForwardIt first, ForwardIt last, Floating percentage) {
-        using input_t         = meta::value_type_t<ForwardIt>;
-        const auto energy = statistics::energy(first, last);
+    constexpr auto rolloff(ForwardIt first, ForwardIt last, Floating percentage) {
+        using input_t         = typename std::iterator_traits<ForwardIt>::value_type;
+        const auto energy = feature::energy(first, last);
         const auto limit = percentage * energy;
         for (input_t acc_energy = 0; first != last; ++first) {
             acc_energy += (*first) * (*first);

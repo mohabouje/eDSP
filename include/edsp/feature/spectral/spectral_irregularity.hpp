@@ -19,20 +19,20 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * File: irregularity.hpp
+ * File: spectral_irregularity.hpp
  * Created by: Mohammed Boujemaoui Boulaghmoudi
  * Created at: 14/10/18
  */
 
-#ifndef EDSP_IRREGULARITY_HPP
-#define EDSP_IRREGULARITY_HPP
+#ifndef EDSP_SPECTRAL_IRREGULARITY_HPP
+#define EDSP_SPECTRAL_IRREGULARITY_HPP
 
 #include <iterator>
-
-namespace edsp { namespace feature { inline namespace perceptual {
+namespace edsp { namespace feature { inline namespace spectral {
 
     /**
-     * @brief Computes the spectral irregularity of the spectrum represented by the elements in the range [first, last)
+     * @brief Computes the spectral irregularity of the of the magnitude spectrum
+     * represented by the elements in the range [first, last)
      *
      * The spectral irregularity quantifies the variations of the logarithmically-scaled rate-map across frequencies. This
      * implementation is based on [Jensen 1999] where the spectral irregularity is estimated as the sum of the square
@@ -42,12 +42,13 @@ namespace edsp { namespace feature { inline namespace perceptual {
      * @see [Jensen, 1999] K. Jensen, Timbre Models of Musical Sounds, Ph.D.
      *       dissertation, University of Copenhagen, Rapport Nr. 99/7.
      *
-     * @param first Forward iterator defining the begin of the range to examine.
-     * @param last Forward iterator defining the end of the range to examine.
-     * @returns The estimated loudness of the elements in the range.
+     * @param first Forward iterator defining the begin of the magnitude spectrum.
+     * @param last Forward iterator defining the end of the magnitude spectrum.
+     * @return Estimated spectral irregularity.
+     * @see irregularity
      */
     template <typename ForwardIt>
-    constexpr auto loudness(ForwardIt first, ForwardIt last) {
+    constexpr auto spectral_irregularity(ForwardIt first, ForwardIt last) {
         using value_type = typename std::iterator_traits<ForwardIt>::value_type;
         value_type square_diff = 0, square_ampl = 0;
         for (auto until = (last - 1); first != until; ++first) {
@@ -60,4 +61,5 @@ namespace edsp { namespace feature { inline namespace perceptual {
 
 }}}
 
-#endif //EDSP_IRREGULARITY_HPP
+
+#endif //EDSP_SPECTRAL_IRREGULARITY_HPP
