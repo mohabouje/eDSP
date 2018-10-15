@@ -27,7 +27,7 @@
 #ifndef EDSP_SPECTRAL_ROLLOFF_HPP
 #define EDSP_SPECTRAL_ROLLOFF_HPP
 
-#include <edsp/statistics/rolloff.hpp>
+#include <edsp/feature/statistics/rolloff.hpp>
 
 namespace edsp { namespace feature { inline namespace spectral {
 

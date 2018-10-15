@@ -24,7 +24,7 @@
 #define EDSP_NORMALIZER_HPP
 
 #include <algorithm>
-#include <edsp/statistics/rms.hpp>
+#include <edsp/feature/temporal/rms.hpp>
 #include <edsp/statistics/max.hpp>
 #include <edsp/meta/iterator.hpp>
 

@@ -25,7 +25,7 @@
 
 #include <edsp/feature/temporal/energy.hpp>
 
-namespace edsp { namespace statistics {
+namespace edsp { namespace feature { inline namespace statistics {
 
     /**
      * @brief Computes the roll-off index of the elements in the range [first, last)
@@ -51,6 +51,6 @@ namespace edsp { namespace statistics {
         return last;
     }
 
-}} // namespace edsp::statistics
+}}} // namespace edsp::feature::statistics
 
 #endif //EDSP_ROLLOFF_HPP

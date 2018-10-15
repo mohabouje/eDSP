@@ -28,7 +28,7 @@
 #include <edsp/converter/pow2db.hpp>
 #include <vector>
 
-namespace edsp { namespace statistics {
+namespace edsp { namespace feature { inline namespace temporal {
 
     /**
      * @brief Compute the SNR of the signals in the range [first1, last1) and the signal starting in first2.
@@ -61,5 +61,5 @@ namespace edsp { namespace statistics {
         return converter::pow2db(var_ref / var_noise);
     }
 
-}}     // namespace edsp::statistics
+}}}    // namespace edsp::feature::temporal
 #endif //EDSP_SNR_HPP

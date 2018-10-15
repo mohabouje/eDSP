@@ -15,37 +15,37 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * File: rms.hpp
+ * File: crest.hpp
  * Author: Mohammed Boujemaoui
  * Date: 14/6/2018
  */
-#ifndef EDSP_STATISTICAL_RMS_H
-#define EDSP_STATISTICAL_RMS_H
+#ifndef EDSP_STATISTICAL_CREST_HPP
+#define EDSP_STATISTICAL_CREST_HPP
 
-#include <edsp/meta/iterator.hpp>
-#include <numeric>
-#include <cmath>
+#include <edsp/statistics/mean.hpp>
 
-namespace edsp { namespace statistics {
+namespace edsp { namespace feature { inline namespace statistics {
 
     /**
-     * @brief Computes the root-mean-square (RMS) value of the range [first, last)
+     * @brief Computes the crest value of the range [first, last)
      *
-     * The RMS value is defined as:
+     * It is calculated as the division of mean of the the signal and the maximum value of the magnitudes.
      * \f[
-     *      x_{\mathrm {rms} }={\sqrt {{\frac {1}{n}}\left(x_{1}^{2}+x_{2}^{2}+\cdots +x_{n}^{2}\right)}}
+     *      y = \frac{ \frac{1}{N} \sum_{n=0}^{N-1}x(n)}{max \left( x \right)}
      * \f]
      *
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
-     * @returns The root mean square value of the input range.
+     * @returns The crest value of the input range.
+     * @see mean
      */
     template <typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> rms(ForwardIt first, ForwardIt last) {
-        using input_t          = meta::value_type_t<ForwardIt>;
-        const auto accumulated = std::inner_product(first, last, first, static_cast<input_t>(1));
-        return std::sqrt(accumulated / static_cast<input_t>(std::distance(first, last)));
+    constexpr meta::value_type_t<ForwardIt> crest(ForwardIt first, ForwardIt last) {
+        const auto computed_mean = edsp::statistics::mean(first, last);
+        const auto computed_max  = *std::max_element(first, last);
+        return computed_max / computed_mean;
     }
-}} // namespace edsp::statistics
 
-#endif // EDSP_STATISTICAL_RMS_H
+}}} // namespace edsp::feature::statistics
+
+#endif // EDSP_STATISTICAL_CREST_HPP

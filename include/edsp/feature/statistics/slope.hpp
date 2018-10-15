@@ -19,29 +19,29 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * File: spectral_slope.hpp
+ * File: slope.hpp
  * Created by: Mohammed Boujemaoui Boulaghmoudi
- * Created at: 14/10/18
+ * Created at: 15/10/18
  */
 
-#ifndef EDSP_SPECTRAL_SLOPE_HPP
-#define EDSP_SPECTRAL_SLOPE_HPP
+#ifndef EDSP_SLOPE_HPP
+#define EDSP_SLOPE_HPP
 
-#include <edsp/feature/statistics/slope.hpp>
+#include <iterator>
 
-namespace edsp { namespace feature { inline namespace spectral {
+namespace edsp { namespace feature { inline namespace statistics {
 
     /**
-     * @brief Computes the spectral slope of the of the magnitude spectrum represented by the elements in the range [first, last)
+     * @brief Computes the slope coefficient of the of the elements in the range [first, last)
      *
-     * The spectral slope represents the amount of decreasing of the spectral amplitude. It is computed by linear
-     * regression of the spectral amplitude:
+     * The slope coefficient represents the amount of decreasing of the signal amplitude. It is computed by linear
+     * regression:
      *
      * \f[
      *  G = a f + b
      * \f]
      *
-     * where a is the parameter of interest. In this case is computed as follows:
+     * where \f$ a \f$ is the parameter of interest. In this case is computed as follows:
      *
      * \f[
      *
@@ -56,13 +56,25 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @param first1 Forward iterator defining the begin of the magnitude spectrum.
      * @param last1 Forward iterator defining the end of the magnitude spectrum.
      * @param first2 Forward iterator defining the begin of the center frequencies range.
-     * @return Estimated spectral slope.
+     * @return Estimated slope coefficient.
      */
     template <typename ForwardIt>
-    constexpr auto spectral_slope(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
-        return statistics::slope(first1, last1, first2);
+    constexpr auto slope(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
+        using value_type = typename std::iterator_traits<ForwardIt>::value_type;
+        auto m_sum       = static_cast<value_type>(0);
+        auto f_sum       = static_cast<value_type>(0);
+        auto ff_sum      = static_cast<value_type>(0);
+        auto mf_sum      = static_cast<value_type>(0);
+        for (; first1 != last1; ++first1, ++first2) {
+            m_sum += *first1;
+            f_sum += *first2;
+            mf_sum += (*first1) * (*first2);
+            ff_sum += (*first2) * (*first2);
+        }
+        const auto N = static_cast<value_type>(std::distance(first1, last1));
+        return (1 / m_sum) * (N * mf_sum - f_sum * m_sum) / (N * ff_sum - (f_sum * f_sum));
     }
 
-}}} // namespace edsp::feature::spectral
+}}} // namespace edsp::feature::statistics
 
-#endif //EDSP_SPECTRAL_SLOPE_HPP
+#endif //EDSP_SLOPE_HPP

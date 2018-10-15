@@ -27,7 +27,7 @@
 #ifndef EDSP_SPECTRAL_CREST_HPP
 #define EDSP_SPECTRAL_CREST_HPP
 
-#include <edsp/statistics/crest.hpp>
+#include <edsp/feature/statistics/crest.hpp>
 
 namespace edsp { namespace feature { inline namespace spectral {
 

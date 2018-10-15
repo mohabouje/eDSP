@@ -26,7 +26,7 @@
 #include <edsp/math/numeric.hpp>
 #include <edsp/meta/iterator.hpp>
 
-namespace edsp { namespace statistics {
+namespace edsp { namespace feature { namespace statistics {
 
     /**
      * @brief Computes the flux between the elements in the range [first1, last1) and the
@@ -53,6 +53,6 @@ namespace edsp { namespace statistics {
         return accumulated / static_cast<value_type>(size);
     }
 
-}} // namespace edsp::statistics
+}}} // namespace edsp::feature::statistics
 
 #endif //EDSP_FLUX_HPP

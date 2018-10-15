@@ -22,7 +22,7 @@
 #ifndef EDSP_PEAK2RMS_HPP
 #define EDSP_PEAK2RMS_HPP
 
-#include <edsp/statistics/rms.hpp>
+#include <edsp/feature/temporal/rms.hpp>
 #include <edsp/meta/iterator.hpp>
 #include <algorithm>
 #include <cmath>

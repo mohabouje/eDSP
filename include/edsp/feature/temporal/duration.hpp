@@ -65,8 +65,8 @@ namespace edsp { namespace feature { inline namespace temporal {
         const value_type limit = threshold * std::max(std::abs(pair.first), std::abs(pair.second));
         const auto get_threshold =
             std::find_if(first, last, std::bind(std::greater_equal<value_type>(), std::placeholders::_1, limit));
-        const auto let_threshold = std::find_if(
-            get_threshold, last, std::bind(std::less_equal<value_type>(), std::placeholders::_1, limit));
+        const auto let_threshold =
+            std::find_if(get_threshold, last, std::bind(std::less_equal<value_type>(), std::placeholders::_1, limit));
         const auto samples = std::count_if(get_threshold, let_threshold);
         return static_cast<value_type>(samples) / static_cast<value_type>(samplerate);
     }

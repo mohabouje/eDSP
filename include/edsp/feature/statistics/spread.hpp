@@ -19,23 +19,23 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN 
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
- * File: spectral_spread.hpp
+ * File: spread.hpp
  * Created by: Mohammed Boujemaoui Boulaghmoudi
- * Created at: 14/10/18
+ * Created at: 15/10/18
  */
 
-#ifndef EDSP_SPECTRAL_SPREAD_HPP
-#define EDSP_SPECTRAL_SPREAD_HPP
+#ifndef EDSP_SPREAD_HPP
+#define EDSP_SPREAD_HPP
 
-#include <edsp/feature/statistics/spread.hpp>
+#include <edsp/statistics/centroid.hpp>
+#include <cmath>
 
-namespace edsp { namespace feature { inline namespace spectral {
+namespace edsp { namespace feature { inline namespace statistics {
 
     /**
-     * @brief Computes the spectral spread of the of the magnitude spectrum represented by the elements in the range [first, last)
+     * @brief Computes the spread coefficient of the of the the elements in the range [first, last)
      *
-     * The spectral spread describes the average deviation of the rate-map around its centroid,
-     * which is commonly associated with the bandwidth of the signal
+     * The spectral spread describes the average deviation of the rate-map around its centroid:
      *
      * \f[
      *
@@ -48,14 +48,22 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @param first1 Forward iterator defining the begin of the magnitude spectrum.
      * @param last2 Forward iterator defining the end of the magnitude spectrum.
      * @param first2 Forward iterator defining the begin of the center frequencies range.
-     * @brief The estimated spectral spread
-     * @see http://www.nyu.edu/classes/bello/MIR_files/timbre.pdf
+     * @brief The estimated spread coefficient
      */
     template <typename ForwardIt>
-    constexpr auto spectral_spread(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
-        return statistics::spread(first1, last1, first2);
+    constexpr auto spread(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
+        using value_type    = typename std::iterator_traits<ForwardIt>::value_type;
+        const auto centroid = edsp::statistics::centroid(first1, last1, first2);
+        auto weighted_sum   = static_cast<value_type>(0);
+        auto unweighted_sum = static_cast<value_type>(0);
+        for (value_type i = 0; first1 != last1; ++first1, ++i) {
+            const auto diff = i - centroid;
+            weighted_sum += (diff * diff) * (*first1);
+            unweighted_sum += *first1;
+        }
+        return static_cast<value_type>(std::sqrt(weighted_sum / unweighted_sum));
     }
 
-}}} // namespace edsp::feature::spectral
+}}} // namespace edsp::feature::statistics
 
-#endif //EDSP_SPECTRAL_SPREAD_HPP
+#endif //EDSP_SPREAD_HPP

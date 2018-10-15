@@ -17,36 +17,35 @@
  *
  * File: rms.hpp
  * Author: Mohammed Boujemaoui
- * Date: 01/08/2018
+ * Date: 14/6/2018
  */
-#ifndef EDSP_RSSQ_HPP
-#define EDSP_RSSQ_HPP
+#ifndef EDSP_STATISTICAL_RMS_H
+#define EDSP_STATISTICAL_RMS_H
 
 #include <edsp/meta/iterator.hpp>
-#include <edsp/statistics/rms.hpp>
 #include <numeric>
 #include <cmath>
 
-namespace edsp { namespace statistics {
+namespace edsp { namespace feature { inline namespace temporal {
 
     /**
-     * @brief Computes the root-sum-of-squares (RSSS) value of the range [first, last)
+     * @brief Computes the root-mean-square (RMS) value of the range [first, last)
      *
+     * The RMS value is defined as:
      * \f[
-     *      x_{\mathrm {rms} }={\sqrt {\left(x_{1}^{2}+x_{2}^{2}+\cdots +x_{n}^{2}\right)}}
+     *      x_{\mathrm {rms} }={\sqrt {{\frac {1}{n}}\left(x_{1}^{2}+x_{2}^{2}+\cdots +x_{n}^{2}\right)}}
      * \f]
      *
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
-     * @returns The root-sum-of-squares value of the input range.
+     * @returns The root mean square value of the input range.
      */
     template <typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> rssq(ForwardIt first, ForwardIt last) {
-        using input_t         = meta::value_type_t<ForwardIt>;
-        const auto sum_square = std::inner_product(first, last, first, static_cast<input_t>(1));
-        return std::sqrt(sum_square);
+    constexpr meta::value_type_t<ForwardIt> rms(ForwardIt first, ForwardIt last) {
+        using input_t          = meta::value_type_t<ForwardIt>;
+        const auto accumulated = std::inner_product(first, last, first, static_cast<input_t>(1));
+        return std::sqrt(accumulated / static_cast<input_t>(std::distance(first, last)));
     }
+}}} // namespace edsp::feature::temporal
 
-}} // namespace edsp::statistics
-
-#endif // EDSP_RSSQ_HPP
+#endif // EDSP_STATISTICAL_RMS_H

@@ -15,37 +15,38 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * File: crest.hpp
+ * File: rms.hpp
  * Author: Mohammed Boujemaoui
- * Date: 14/6/2018
+ * Date: 01/08/2018
  */
-#ifndef EDSP_STATISTICAL_CREST_HPP
-#define EDSP_STATISTICAL_CREST_HPP
+#ifndef EDSP_RSSQ_HPP
+#define EDSP_RSSQ_HPP
 
-#include <edsp/statistics/mean.hpp>
+#include <edsp/meta/iterator.hpp>
+#include <edsp/feature/temporal/rms.hpp>
+#include <numeric>
+#include <cmath>
 
-namespace edsp { namespace statistics {
+namespace edsp { namespace feature { inline namespace temporal {
 
     /**
-     * @brief Computes the crest value of the range [first, last)
+     * @brief Computes the root-sum-of-squares (RSSS) value of the range [first, last)
      *
-     * It is calculated as the division of mean of the the signal and the maximum value of the magnitudes.
      * \f[
-     *      y = \frac{ \frac{1}{N} \sum_{n=0}^{N-1}x(n)}{max \left( x \right)}
+     *      x_{\mathrm {rms} }={\sqrt {\left(x_{1}^{2}+x_{2}^{2}+\cdots +x_{n}^{2}\right)}}
      * \f]
      *
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
-     * @returns The crest value of the input range.
-     * @see mean
+     * @returns The root-sum-of-squares value of the input range.
      */
     template <typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> crest(ForwardIt first, ForwardIt last) {
-        const auto computed_mean = statistics::mean(first, last);
-        const auto computed_max  = *std::max_element(first, last);
-        return computed_max / computed_mean;
+    constexpr meta::value_type_t<ForwardIt> rssq(ForwardIt first, ForwardIt last) {
+        using input_t         = meta::value_type_t<ForwardIt>;
+        const auto sum_square = std::inner_product(first, last, first, static_cast<input_t>(1));
+        return std::sqrt(sum_square);
     }
 
-}} // namespace edsp::statistics
+}}} // namespace edsp::feature::temporal
 
-#endif // EDSP_STATISTICAL_CREST_HPP
+#endif // EDSP_RSSQ_HPP

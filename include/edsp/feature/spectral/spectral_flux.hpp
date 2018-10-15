@@ -27,7 +27,7 @@
 #ifndef EDSP_SPECTRAL_FLUX_HPP
 #define EDSP_SPECTRAL_FLUX_HPP
 
-#include <edsp/statistics/flux.hpp>
+#include <edsp/feature/statistics/flux.hpp>
 
 namespace edsp { namespace feature { inline namespace spectral {
 
@@ -41,7 +41,7 @@ namespace edsp { namespace feature { inline namespace spectral {
      */
     template <typename ForwardIt>
     constexpr auto spectral_flux(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
-        return statistics::flux(first1, last1, first2);
+        return statistics::flux<distances::euclidean>(first1, last1, first2);
     }
 
 }}} // namespace edsp::feature::spectral

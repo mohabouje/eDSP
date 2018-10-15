@@ -27,16 +27,16 @@
 #ifndef EDSP_SPECTRAL_VARIATION_HPP
 #define EDSP_SPECTRAL_VARIATION_HPP
 
-#include <iterator>
-#include <cmath>
+#include <edsp/feature/statistics/variation.hpp>
 
 namespace edsp { namespace feature { inline namespace spectral {
 
     /**
      * @brief Computes the spectral variation of the of the magnitude spectrum represented by the elements in the range [first, last)
+     * and the elements starting in d_first.
      *
      * The spectral variation is a representation of the similarity between two magnitude spectrums. It is a parameter
-     * similar to the spectral flux.
+     * similar to the spectral flux:
      *
      * \f[
      *
@@ -45,26 +45,17 @@ namespace edsp { namespace feature { inline namespace spectral {
      * \f]
      *
      * If the variation is close to 0, the spectrum are really similar. Otherwise,
-     * if it is close to 1, the are highly dissimilar.
+     * if it is close to 1, they are highly dissimilar.
      *
      * @param first1 Forward iterator defining the begin of the first magnitude spectrum.
      * @param last1 Forward iterator defining the end of the first magnitude spectrum.
      * @param first2 Input iterator defining the beginning of the second magnitude spectrum.
      * @return The estimated spectral variation.
-     * @see statistics::flux
+     * @see statistics::flux, statistics::variation
      */
     template <typename ForwardIt>
     constexpr auto spectral_variation(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
-        using value_type = typename std::iterator_traits<ForwardIt>::value_type;
-        auto sum_x1      = static_cast<value_type>(0);
-        auto sum_x2      = static_cast<value_type>(0);
-        auto sum_x12     = static_cast<value_type>(0);
-        for (; first1 != last1; ++first1, ++first2) {
-            sum_x1 += *first1;
-            sum_x2 += *first2;
-            sum_x12 += *first1 * *first2;
-        }
-        return 1 - sum_x2 / (std::sqrt(sum_x1) * std::sqrt(sum_x2));
+        return statistics::variation(first1, last1, first2);
     }
 
 }}} // namespace edsp::feature::spectral
