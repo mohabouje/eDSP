@@ -344,7 +344,6 @@ namespace edsp { inline namespace core {
         return logger_impl::blue(stream);
     }
 
-
     /**
     * @brief Updates the logger output color to cyan.
     * @param stream Streaming to be modified.

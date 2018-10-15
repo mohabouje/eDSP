@@ -46,7 +46,6 @@ namespace edsp { namespace feature { inline namespace temporal {
         return static_cast<value_type>(std::distance(first, last)) / samplerate;
     }
 
-
     /**
      * @brief Computes the effective duration of the elements in the range [first, last)
      *
@@ -61,16 +60,16 @@ namespace edsp { namespace feature { inline namespace temporal {
      */
     template <typename ForwardIt, typename Numeric>
     constexpr auto effective_duration(ForwardIt first, ForwardIt last, Numeric samplerate, Numeric threshold) {
-        using value_type = typename std::iterator_traits<ForwardIt>::value_type;
+        using value_type       = typename std::iterator_traits<ForwardIt>::value_type;
         const auto pair        = std::minmax_element(first, last);
         const value_type limit = threshold * std::max(std::abs(pair.first), std::abs(pair.second));
-        const auto get_threshold = std::find_if(first, last,
-                std::bind(std::greater_equal<value_type>(), std::placeholders::_1, limit));
-        const auto let_threshold = std::find_if(get_threshold, last,
-                                                std::bind(std::greater_equal<value_type>(), std::placeholders::_1, limit));
+        const auto get_threshold =
+            std::find_if(first, last, std::bind(std::greater_equal<value_type>(), std::placeholders::_1, limit));
+        const auto let_threshold = std::find_if(
+            get_threshold, last, std::bind(std::less_equal<value_type>(), std::placeholders::_1, limit));
         const auto samples = std::count_if(get_threshold, let_threshold);
         return static_cast<value_type>(samples) / static_cast<value_type>(samplerate);
     }
-}}}
+}}} // namespace edsp::feature::temporal
 
 #endif //EDSP_DURATION_HPP

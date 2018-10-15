@@ -36,13 +36,13 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @param first Forward iterator defining the begin of the magnitude spectrum.
      * @param last Forward iterator defining the end of the magnitude spectrum.
      * @return Estimated spectral skewness.
-     * @see skewness
+     * @see statistics::skewness
      */
     template <typename ForwardIt>
     constexpr auto spectral_skewness(ForwardIt first, ForwardIt last) {
         return statistics::skewness(first, last);
     }
 
-}}}
+}}} // namespace edsp::feature::spectral
 
 #endif //EDSP_SPECTRAL_SKWNESS_HPP

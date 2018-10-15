@@ -43,7 +43,6 @@ namespace edsp { inline namespace algorithm {
         return (it != last && (value == *it)) ? it : last;
     }
 
-
 }} // namespace edsp::algorithm
 
 #endif // EDSP_BINARY_SEARCH_HPP

@@ -39,22 +39,22 @@ namespace edsp { inline namespace converter {
         template <mel_base scale>
         struct converter {};
 
-        template<>
+        template <>
         struct converter<mel_base::base_e> {
-            template<typename T>
+            template <typename T>
             constexpr T operator()(T f) noexcept {
                 return 1127.01048 * std::log(f / 700.0 + 1.0);
             }
         };
 
-        template<>
+        template <>
         struct converter<mel_base::base_10> {
-            template<typename T>
+            template <typename T>
             constexpr T operator()(T f) noexcept {
                 return 2595.0 * std::log10(f / 700.0 + 1.0);
             }
         };
-    }
+    } // namespace internal
 
     /**
      * @brief Converts a frequency in Hertz into mels.

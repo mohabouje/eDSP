@@ -36,14 +36,14 @@ namespace edsp { inline namespace spectral {
 
     namespace internal {
 
-        inline void forward_transform(float *vec, float *temp, size_t len) {
+        inline void forward_transform(float* vec, float* temp, size_t len) {
             if (len == 1)
                 return;
             size_t halfLen = len / 2;
             for (size_t i = 0; i < halfLen; i++) {
-                float x = vec[i];
-                float y = vec[len - 1 - i];
-                temp[i] = x + y;
+                float x           = vec[i];
+                float y           = vec[len - 1 - i];
+                temp[i]           = x + y;
                 temp[i + halfLen] = (x - y) / (std::cos((i + 0.5f) * math::constants<float>::pi / len) * 2);
             }
             forward_transform(temp, vec, halfLen);
@@ -56,30 +56,29 @@ namespace edsp { inline namespace spectral {
             vec[len - 1] = temp[len - 1];
         }
 
-
-        inline void inverse_transform(float *vec, float *temp, size_t len) {
+        inline void inverse_transform(float* vec, float* temp, size_t len) {
             if (len == 1)
                 return;
             size_t halfLen = len / 2;
-            temp[0] = vec[0];
-            temp[halfLen] = vec[1];
+            temp[0]        = vec[0];
+            temp[halfLen]  = vec[1];
             for (size_t i = 1; i < halfLen; i++) {
-                temp[i] = vec[i * 2];
+                temp[i]           = vec[i * 2];
                 temp[i + halfLen] = vec[i * 2 - 1] + vec[i * 2 + 1];
             }
             inverse_transform(temp, vec, halfLen);
             inverse_transform(&temp[halfLen], vec, halfLen);
             for (size_t i = 0; i < halfLen; i++) {
-                float x = temp[i];
-                float y = temp[i + halfLen] / (std::cos((i + 0.5f) * math::constants<float>::pi / len) * 2);
-                vec[i] = x + y;
+                float x          = temp[i];
+                float y          = temp[i + halfLen] / (std::cos((i + 0.5f) * math::constants<float>::pi / len) * 2);
+                vec[i]           = x + y;
                 vec[len - 1 - i] = x - y;
             }
         }
-        
+
         // DCT type II, unscaled. Algorithm by Byeong Gi Lee, 1984.
         // See: http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.118.3056&rep=rep1&type=pdf#page=34
-        inline void dct(float *vec, size_t len) {
+        inline void dct(float* vec, size_t len) {
             std::vector<float> temp(len);
             forward_transform(vec, temp.data(), len);
             for (size_t i = 0; i < len; ++i) {
@@ -89,7 +88,7 @@ namespace edsp { inline namespace spectral {
 
         // DCT type III, unscaled. Algorithm by Byeong Gi Lee, 1984.
         // See: http://tsp7.snu.ac.kr/int_jour/IJ_2.pdf
-        inline void idct(float *vec, size_t len) {
+        inline void idct(float* vec, size_t len) {
             for (size_t i = 0; i < len; ++i) {
                 vec[i] *= 2;
             }
@@ -98,32 +97,29 @@ namespace edsp { inline namespace spectral {
             inverse_transform(vec, temp.data(), len);
         }
 
-
         template <typename T, typename R>
-        void useless_idct(const T* input, T* dst,  R N) {
+        void useless_idct(const T* input, T* dst, R N) {
             for (auto k = 0; k < N; ++k) {
                 dst[k] = 0;
-                for(auto j = 1; j < N; ++j) {
-                    dst[k] +=
-                            input[j] *
-                            std::cos(math::constants<T>::pi * j * (k + 0.5) / static_cast<T>(N));
+                for (auto j = 1; j < N; ++j) {
+                    dst[k] += input[j] * std::cos(math::constants<T>::pi * j * (k + 0.5) / static_cast<T>(N));
                 }
                 dst[k] = input[0] + 2 * dst[k];
             }
         }
 
         template <typename T, typename R>
-        void useless_dht(const T* input, T* dst,  R N) {
+        void useless_dht(const T* input, T* dst, R N) {
             for (auto k = 0; k < N; ++k) {
                 dst[k] = 0;
-                for(auto j = 1; j < N; ++j) {
+                for (auto j = 1; j < N; ++j) {
                     const auto factor = math::constants<T>::two_pi * j * k / static_cast<T>(N);
                     dst[k] += input[j] * (std::cos(factor) + std::sin(factor));
                 }
             }
         }
 
-    }
+    } // namespace internal
 
     template <typename T>
     struct pffft_impl {

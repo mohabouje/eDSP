@@ -32,7 +32,6 @@
 
 namespace edsp { namespace feature { inline namespace temporal {
 
-
     /**
      * @brief Computes the AZCR (Average Zero Crossing Rate) of the contiguous elements in the range [first, last)
      * and stores the result in another range, beginning at d_first.
@@ -47,11 +46,11 @@ namespace edsp { namespace feature { inline namespace temporal {
      *
      * @param first Input iterator defining the begin of the range to examine.
      * @param last Input iterator defining the end of the range to examine.
-     * @param d_first Output iterator defining the begin of the output range.
+     * @returns The average zero crossing rate.
      */
     template <typename InputIt, typename OutputIt>
-    constexpr void amdf(InputIt first, InputIt last, OutputIt d_first) {
-        using value_type = typename std::iterator_traits<OutputIt>::value_type;
+    constexpr auto azcr(InputIt first, InputIt last) {
+        using value_type       = typename std::iterator_traits<OutputIt>::value_type;
         value_type accumulated = 0;
         for (++first; first != last;) {
             accumulated += math::sign(*first) != math::sign(*(first - 1));
@@ -59,7 +58,6 @@ namespace edsp { namespace feature { inline namespace temporal {
         return accumulated / static_cast<value_type>(std::distance(first, last));
     }
 
-
-}}}
+}}} // namespace edsp::feature::temporal
 
 #endif //EDSP_AZCR_HPP

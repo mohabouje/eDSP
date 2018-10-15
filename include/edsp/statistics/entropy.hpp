@@ -54,7 +54,7 @@ namespace edsp { namespace statistics {
             return (accumulated + std::log2(current) * current);
         };
         const auto size = static_cast<input_t>(std::distance(first, last));
-        const auto acc = std::accumulate(first, last, static_cast<input_t>(0), predicate);
+        const auto acc  = std::accumulate(first, last, static_cast<input_t>(0), predicate);
         return -acc / std::log2(size);
     }
 

@@ -37,13 +37,13 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @param last1 Forward iterator defining the end of the first magnitude spectrum.
      * @param first2 Input iterator defining the beginning of the second magnitude spectrum.
      * @return The estimated flux.
-     * @see flux
+     * @see statistics::flux
      */
     template <typename ForwardIt>
     constexpr auto spectral_flux(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
         return statistics::flux(first1, last1, first2);
     }
 
-}}}
+}}} // namespace edsp::feature::spectral
 
 #endif //EDSP_SPECTRAL_FLUX_HPP

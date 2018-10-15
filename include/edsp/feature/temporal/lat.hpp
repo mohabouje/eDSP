@@ -34,7 +34,7 @@
 namespace edsp { namespace feature { inline namespace temporal {
 
     /**
-     * @brief The laq class estimates the logarithmic attack time of an envelope signal.
+     * @brief Estimates the logarithmic attack time of an envelope signal.
      *
      * The log-attack time is the logarithmic (decimal base) of the time duration between the time
      * the signal to the time it reaches its stable part:
@@ -55,23 +55,23 @@ namespace edsp { namespace feature { inline namespace temporal {
      * @return Estimated attack time in seconds.
      */
     template <typename ForwardIt, typename Numeric>
-    constexpr auto lat(ForwardIt first, ForwardIt last, Numeric samplerate,
-            Numeric start_threshold, Numeric stop_threshold) {
-        using value_type = typename std::iterator_traits<ForwardIt>::value_type;
+    constexpr auto lat(ForwardIt first, ForwardIt last, Numeric samplerate, Numeric start_threshold,
+                       Numeric stop_threshold) {
+        using value_type               = typename std::iterator_traits<ForwardIt>::value_type;
         const auto max_value           = *std::max_element(first, last);
         const auto cutoff_start_attack = max_value * start_threshold;
         const auto cutoff_stop_attack  = max_value * stop_threshold;
-        const auto start_iter = std::find_if(first, last,
-                     std::bind(std::greater_equal<value_type>(), std::placeholders::_1, cutoff_start_attack));
-        const auto stop_iter = std::find_if(first, last,
-                     std::bind(std::greater_equal<value_type >(), std::placeholders::_1, cutoff_stop_attack));
+        const auto start_iter          = std::find_if(
+            first, last, std::bind(std::greater_equal<value_type>(), std::placeholders::_1, cutoff_start_attack));
+        const auto stop_iter = std::find_if(
+            first, last, std::bind(std::less_equal<value_type>(), std::placeholders::_1, cutoff_stop_attack));
         const auto start_attack = std::distance(first, start_iter);
-        const auto stop_attack = std::distance(first, stop_iter);
-        const auto attack_time = static_cast<value_type>(stop_attack - start_attack)
-                / static_cast<value_type>(samplerate);
-        constexpr auto threshold = static_cast<value_type >(10e-5);
+        const auto stop_attack  = std::distance(first, stop_iter);
+        const auto attack_time =
+            static_cast<value_type>(stop_attack - start_attack) / static_cast<value_type>(samplerate);
+        constexpr auto threshold = static_cast<value_type>(10e-5);
         return (attack_time > threshold) ? static_cast<T>(std::log10(attack_time)) : -5;
     }
-}}}
+}}} // namespace edsp::feature::temporal
 
 #endif //EDSP_LAT_HPP

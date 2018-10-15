@@ -50,8 +50,8 @@ namespace edsp { namespace feature { inline namespace temporal {
     template <typename InputIt, typename OutputIt>
     constexpr void amdf(InputIt first, InputIt last, OutputIt d_first) {
         using value_type = typename std::iterator_traits<OutputIt>::value_type;
-        const auto N      = std::distance(first, last);
-        auto * array = &(*first);
+        const auto N     = std::distance(first, last);
+        auto* array      = &(*first);
         for (auto i = 0; i < N; ++i, ++d_first) {
             for (auto j = 0; j < (N - i); ++j) {
                 *d_first += std::abs(array[j] - array[j + i]);
@@ -59,5 +59,5 @@ namespace edsp { namespace feature { inline namespace temporal {
             *d_first /= static_cast<value_type>(N);
         }
     }
-}}}
+}}}    // namespace edsp::feature::temporal
 #endif //EDSP_AMDF_HPP

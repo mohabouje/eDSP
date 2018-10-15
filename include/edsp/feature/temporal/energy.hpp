@@ -42,12 +42,11 @@ namespace edsp { namespace feature { inline namespace temporal {
      * @param last Forward iterator defining the end of the range to examine.
      * @returns The energy of the elements in the range.
      */
-    template<typename ForwardIt>
+    template <typename ForwardIt>
     constexpr auto energy(ForwardIt first, ForwardIt last) {
         using value_type = typename std::iterator_traits<ForwardIt>::value_type;
-        const auto size = std::distance(first, last);
         return std::inner_product(first, last, first, static_cast<value_type>(0));
     }
-}}}
+}}} // namespace edsp::feature::temporal
 
 #endif //EDSP_ENERGY_HPP

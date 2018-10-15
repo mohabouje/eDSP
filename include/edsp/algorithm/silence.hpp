@@ -41,6 +41,6 @@ namespace edsp { inline namespace algorithm {
         return statistics::power(first, last) < threshold;
     }
 
-}}
+}} // namespace edsp::algorithm
 
 #endif //EDSP_SILENCER_HPP

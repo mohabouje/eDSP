@@ -31,14 +31,13 @@
 
 namespace edsp { namespace feature { inline namespace spectral {
 
-
     /**
      * @brief Computes the spectral decrease of the of the magnitude spectrum represented by the elements in the range [first, last)
      *
      * The spectral decrease represents the amount of decreasing of the spectral amplitude. It is defined as:
      * \f[
      *
-     *  d = \frac{1}{ \sum_{n=2}^{N-1} x(n)} \sum_{n=2}^{N-1} \frac{x(n) - x(n-1)}{n - 1}
+     *  d = \frac{1}{ \sum_{n=1}^{N-1} x(n)} \sum_{n=1}^{N-1} \frac{x(n) - x(n-1)}{n}
      *
      * \f]
      *
@@ -56,10 +55,8 @@ namespace edsp { namespace feature { inline namespace spectral {
             unweighted_sum += *first;
         }
         return weighted_sum / unweighted_sum;
-
     }
 
-}}}
-
+}}} // namespace edsp::feature::spectral
 
 #endif //EDSP_SPECTRAL_DECREASE_HPP

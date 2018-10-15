@@ -131,9 +131,7 @@ void PFFFTComputingDHT(benchmark::State& state) {
     for (auto _ : state) {
         impl.dht(edsp::meta::data(input), edsp::meta::data(output));
     }
-    
 }
-
 
 BENCHMARK_TEMPLATE(PFFFTComputingRealFFT, float)->Range(1 << 10, 1 << 20)->Complexity();
 BENCHMARK_TEMPLATE(FFTWComputingRealFFT, float)->Range(1 << 10, 1 << 20)->Complexity();

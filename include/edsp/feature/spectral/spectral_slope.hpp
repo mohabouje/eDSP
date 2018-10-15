@@ -31,7 +31,6 @@
 
 namespace edsp { namespace feature { inline namespace spectral {
 
-
     /**
      * @brief Computes the spectral slope of the of the magnitude spectrum represented by the elements in the range [first, last)
      *
@@ -61,21 +60,21 @@ namespace edsp { namespace feature { inline namespace spectral {
      */
     template <typename ForwardIt>
     constexpr auto spectral_slope(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
-        using value_type = typename std::iterator_traits<ForwardIt>::value_type ;
-        auto m_sum  = static_cast<value_type>(0);
-        auto f_sum  = static_cast<value_type>(0);
-        auto ff_sum = static_cast<value_type>(0);
-        auto mf_sum = static_cast<value_type >(0);
+        using value_type = typename std::iterator_traits<ForwardIt>::value_type;
+        auto m_sum       = static_cast<value_type>(0);
+        auto f_sum       = static_cast<value_type>(0);
+        auto ff_sum      = static_cast<value_type>(0);
+        auto mf_sum      = static_cast<value_type>(0);
         for (; first1 != last1; ++first1, ++first2) {
             m_sum += *first1;
             f_sum += *first2;
             mf_sum += (*first1) * (*first2);
             ff_sum += (*first2) * (*first2);
         }
-        const auto N = static_cast<value_type >(std::distance(first1, last1));
+        const auto N = static_cast<value_type>(std::distance(first1, last1));
         return (1 / m_sum) * (N * mf_sum - f_sum * m_sum) / (N * ff_sum - (f_sum * f_sum));
     }
 
-}}}
+}}} // namespace edsp::feature::spectral
 
 #endif //EDSP_SPECTRAL_SLOPE_HPP

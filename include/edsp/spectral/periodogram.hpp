@@ -38,7 +38,6 @@ namespace edsp { inline namespace spectral {
         Logarithmic /*!< Logarithmic scale */
     };
 
-
     /**
      * @brief Computes the periodogram of the range [first, last) and stores the result in another range, beginning at d_first.
      *

@@ -61,6 +61,6 @@ namespace edsp { namespace feature { inline namespace perceptual {
         return std::pow(e, 0.67);
     }
 
-}}}
+}}} // namespace edsp::feature::perceptual
 
 #endif //EDSP_LOUDNESS_HPP

@@ -54,7 +54,7 @@ namespace edsp { namespace feature { inline namespace spectral {
      */
     template <typename ForwardIt>
     constexpr auto spectral_spread(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
-        using value_type = typename std::iterator_traits<ForwardIt>::value_type ;
+        using value_type    = typename std::iterator_traits<ForwardIt>::value_type;
         const auto centroid = feature::spectral_centroid(first1, last1, first2);
         auto weighted_sum   = static_cast<value_type>(0);
         auto unweighted_sum = static_cast<value_type>(0);
@@ -66,7 +66,6 @@ namespace edsp { namespace feature { inline namespace spectral {
         return static_cast<value_type>(std::sqrt(weighted_sum / unweighted_sum));
     }
 
-}}}
-
+}}} // namespace edsp::feature::spectral
 
 #endif //EDSP_SPECTRAL_SPREAD_HPP

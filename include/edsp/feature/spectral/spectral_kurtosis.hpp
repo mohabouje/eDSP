@@ -36,14 +36,13 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @param first Forward iterator defining the begin of the magnitude spectrum.
      * @param last Forward iterator defining the end of the magnitude spectrum.
      * @return Estimated spectral kurtosis.
-     * @see kurtosis
+     * @see statistics::kurtosis
      */
     template <typename ForwardIt>
     constexpr auto spectral_kurtosis(ForwardIt first, ForwardIt last) {
         return statistics::kurtosis(first, last);
     }
 
-}}}
-
+}}} // namespace edsp::feature::spectral
 
 #endif //EDSP_SPECTRAL_KURTOSIS_HPP

@@ -37,8 +37,7 @@ namespace edsp { inline namespace spectral {
         Unbiased /*!< Unbiased estimate of the cross-correlation. */
     };
 
-
-        /**
+    /**
      * @brief Computes the autocorrelation of the range [first, last) and stores the result in another range, beginning at d_first.
      *
      * The result of xcorr can be interpreted as an estimate of the correlation between two random sequences or as the deterministic

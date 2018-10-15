@@ -31,7 +31,6 @@
 
 namespace edsp { namespace feature { inline namespace spectral {
 
-
     /**
      * @brief Computes the spectral flatness of the of the magnitude spectrum represented by the elements in the range [first, last)
      *
@@ -40,13 +39,13 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @param first Forward iterator defining the begin of the magnitude spectrum.
      * @param last Forward iterator defining the end of the magnitude spectrum.
      * @return Estimated spectral flatness.
-     * @see spectral_crest, flatness
+     * @see spectral_crest, statistics::flatness
      */
     template <typename ForwardIt>
     constexpr auto spectral_flatness(ForwardIt first, ForwardIt last) {
         return statistics::flatness(first, last);
     }
 
-}}}
+}}} // namespace edsp::feature::spectral
 
 #endif //EDSP_SPECTRAL_FLATNESS_HPP

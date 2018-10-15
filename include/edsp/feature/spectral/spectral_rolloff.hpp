@@ -41,13 +41,13 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @param last Forward iterator defining the end of the magnitude spectrum.
      * @param percentage Number between [0, 1] representing the percentage of the total energy of the roll-off frequency.
      * @return Estimated roll-off index.
-     * @see rolloff
+     * @see statistics::rolloff
      */
     template <typename ForwardIt, typename Numeric>
     constexpr auto spectral_rolloff(ForwardIt first, ForwardIt last, Numeric percentage = 0.95) {
         return statistics::rolloff(first, last, percentage);
     }
 
-}}}
+}}} // namespace edsp::feature::spectral
 
 #endif //EDSP_SPECTRAL_ROLLOFF_HPP

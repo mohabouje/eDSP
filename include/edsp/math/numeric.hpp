@@ -277,12 +277,7 @@ namespace edsp { inline namespace math {
         return distribution(eng);
     }
 
-    enum distances {
-        manhattan,
-        euclidean,
-        logarithmic
-    };
-
+    enum distances { manhattan, euclidean, logarithmic };
 
     namespace internal {
 
@@ -305,7 +300,6 @@ namespace edsp { inline namespace math {
             }
         };
 
-
         template <>
         struct distance<distances::logarithmic> {
             template <typename T>
@@ -313,8 +307,7 @@ namespace edsp { inline namespace math {
                 return std::log(std::abs(x) / std::abs(y));
             }
         };
-    }
-
+    } // namespace internal
 
     /**
      * @brief Computes the distance between x and y
@@ -328,8 +321,6 @@ namespace edsp { inline namespace math {
     constexpr T distance(T x, T y) noexcept {
         return internal::distance<d>{}(x, y);
     }
-
-
 
 }} // namespace edsp::math
 

@@ -28,7 +28,6 @@
 
 namespace edsp { namespace statistics {
 
-
     /**
      * @brief Computes the flux between the elements in the range [first1, last1) and the
      * elements starting at first2.
@@ -46,7 +45,7 @@ namespace edsp { namespace statistics {
     template <distances d, typename InputIt>
     constexpr meta::value_type_t<InputIt> flux(InputIt first1, InputIt last1, InputIt first2) {
         using value_type = meta::value_type_t<InputIt>;
-        const auto size = std::distance(first1, last1);
+        const auto size  = std::distance(first1, last1);
         auto accumulated = static_cast<value_type>(0);
         for (; first1 != last1; ++first1, ++first2) {
             accumulated += distance<d>(*first1, *first2);
@@ -54,8 +53,6 @@ namespace edsp { namespace statistics {
         return accumulated / static_cast<value_type>(size);
     }
 
-
-}}
-
+}} // namespace edsp::statistics
 
 #endif //EDSP_FLUX_HPP

@@ -42,7 +42,7 @@ namespace edsp { namespace feature { inline namespace temporal {
      */
     template <typename T>
     struct leq {
-        using size_type = std::size_t;
+        using size_type  = std::size_t;
         using value_type = T;
 
         /**
@@ -55,9 +55,9 @@ namespace edsp { namespace feature { inline namespace temporal {
          * @brief Default destructor.
          */
         ~leq() = default;
-        
+
         /**
-         * Estimates the equivalent sound level over time of the frame represented by the elements in the
+         * @brief Estimates the equivalent sound level over time of the frame represented by the elements in the
          * range [first, last).
          *
          * @note Frames can have different lengths but it is preferable to keep consistency between consecutive frames.
@@ -72,20 +72,17 @@ namespace edsp { namespace feature { inline namespace temporal {
         filter::moving_average<T> filter;
     };
 
-    template<typename T>
-    inline leq<T>::leq(leq::size_type number_frames) :
-        filter(number_frames) {
+    template <typename T>
+    inline leq<T>::leq(leq::size_type number_frames) : filter(number_frames) {}
 
-    }
-
-    template<typename T>
-    template<typename ForwardIt>
+    template <typename T>
+    template <typename ForwardIt>
     inline typename leq<T>::value_type leq<T>::extract(ForwardIt first, ForwardIt last) {
-        const auto e      = energy(first, last);
+        const auto e           = energy(first, last);
         const auto energy_mean = filter.tick(e);
         return converter::pow2db(energy_mean);
     }
 
-}}}
+}}} // namespace edsp::feature::temporal
 
 #endif //EDSP_LEQ_HPP

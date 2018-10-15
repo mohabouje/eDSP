@@ -30,7 +30,7 @@ namespace edsp { namespace feature { inline namespace temporal {
     /**
      * @brief Computes the instant power of the elements in the range [first, last)
      *
-     * The energy of signal can be computed as:
+     * The instant power can be computed as follows:
      * \f[
      * P_x = \frac{1}{N} \sum\limits_{n=0}^{N-1} x^2(n)
      * \f]
@@ -40,12 +40,12 @@ namespace edsp { namespace feature { inline namespace temporal {
      * @returns The instant power of the elements in the range.
      * @see energy
      */
-    template<typename ForwardIt>
+    template <typename ForwardIt>
     constexpr auto power(ForwardIt first, ForwardIt last) {
         using value_type = typename std::iterator_traits<ForwardIt>::value_type;
-        const auto size = std::distance(first, last);
+        const auto size  = std::distance(first, last);
         return energy(first, last) / static_cast<value_type>(size);
     }
-}}}
+}}} // namespace edsp::feature::temporal
 
 #endif //EDSP_POWER_HPP

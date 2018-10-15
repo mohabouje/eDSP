@@ -23,7 +23,6 @@
 #ifndef EDSP_INDEX_OF_HPP
 #define EDSP_INDEX_OF_HPP
 
-
 #include <iterator>
 
 namespace edsp { inline namespace algorithm {
@@ -37,10 +36,10 @@ namespace edsp { inline namespace algorithm {
      */
     template <typename ForwardIt>
     constexpr std::int32_t indexof(ForwardIt first, ForwardIt last,
-                                      const typename std::iterator_traits<ForwardIt>::value_type & value) {
+                                   const typename std::iterator_traits<ForwardIt>::value_type& value) {
         const auto element = std::find(first, last, value);
         return static_cast<int32_t>((element != last) ? std::distance(first, element) : -1);
     }
-}}
+}} // namespace edsp::algorithm
 
 #endif //EDSP_INDEX_OF_HPP

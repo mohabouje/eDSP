@@ -48,9 +48,9 @@ namespace edsp { namespace statistics {
          * @param cache_size Number of cached samples to determine the positions and sizes of the bins.
          */
         constexpr histogram(size_type num_bins, size_type cache_size) :
-                num_bins_(num_bins),
-                cache_size_(cache_size),
-                bins_(num_bins) {}
+            num_bins_(num_bins),
+            cache_size_(cache_size),
+            bins_(num_bins) {}
 
         /**
          * @brief Computes the histogram of the range [first, last).

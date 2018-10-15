@@ -40,9 +40,9 @@ namespace edsp { namespace statistics {
      */
     template <typename ForwardIt, typename Floating>
     constexpr auto rolloff(ForwardIt first, ForwardIt last, Floating percentage) {
-        using input_t         = typename std::iterator_traits<ForwardIt>::value_type;
+        using input_t     = typename std::iterator_traits<ForwardIt>::value_type;
         const auto energy = feature::energy(first, last);
-        const auto limit = percentage * energy;
+        const auto limit  = percentage * energy;
         for (input_t acc_energy = 0; first != last; ++first) {
             acc_energy += (*first) * (*first);
             if (acc_energy >= limit)
@@ -52,6 +52,5 @@ namespace edsp { namespace statistics {
     }
 
 }} // namespace edsp::statistics
-
 
 #endif //EDSP_ROLLOFF_HPP

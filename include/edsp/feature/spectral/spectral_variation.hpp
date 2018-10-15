@@ -51,14 +51,14 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @param last1 Forward iterator defining the end of the first magnitude spectrum.
      * @param first2 Input iterator defining the beginning of the second magnitude spectrum.
      * @return The estimated spectral variation.
-     * @see flux
+     * @see statistics::flux
      */
     template <typename ForwardIt>
     constexpr auto spectral_variation(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
-        using value_type = typename std::iterator_traits<ForwardIt>::value_type ;
-        auto sum_x1 = static_cast<value_type >(0);
-        auto sum_x2 = static_cast<value_type >(0);
-        auto sum_x12 = static_cast<value_type >(0);
+        using value_type = typename std::iterator_traits<ForwardIt>::value_type;
+        auto sum_x1      = static_cast<value_type>(0);
+        auto sum_x2      = static_cast<value_type>(0);
+        auto sum_x12     = static_cast<value_type>(0);
         for (; first1 != last1; ++first1, ++first2) {
             sum_x1 += *first1;
             sum_x2 += *first2;
@@ -67,6 +67,6 @@ namespace edsp { namespace feature { inline namespace spectral {
         return 1 - sum_x2 / (std::sqrt(sum_x1) * std::sqrt(sum_x2));
     }
 
-}}}
+}}} // namespace edsp::feature::spectral
 
 #endif //EDSP_SPECTRAL_VARIATION_HPP

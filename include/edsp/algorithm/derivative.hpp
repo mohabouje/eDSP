@@ -28,7 +28,7 @@
 
 namespace edsp { inline namespace algorithm {
 
-        /**
+    /**
          * @brief Computes the first order derivative of the elements in the range [first, last),
          * and stores the result in another range, beginning at d_first.
          *
@@ -42,11 +42,11 @@ namespace edsp { inline namespace algorithm {
          * @param last Forward iterator defining the end of the range to examine.
          * @param d_first Output iterator defining the beginning of the destination range.
          */
-        template <typename InputItr, typename OutputIt, typename Numeric>
-        constexpr void derivative(InputItr first, InputItr last, OutputIt d_first) {
-            std::adjacent_difference(first, last, d_first);
-        }
+    template <typename InputItr, typename OutputIt, typename Numeric>
+    constexpr void derivative(InputItr first, InputItr last, OutputIt d_first) {
+        std::adjacent_difference(first, last, d_first);
+    }
 
-    }} // namespace edsp::algorithm
+}} // namespace edsp::algorithm
 
 #endif //EDSP_DERIVATIVE_HPP

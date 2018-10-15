@@ -31,7 +31,6 @@
 
 namespace edsp { namespace feature { inline namespace spectral {
 
-
     /**
      * @brief Computes the spectral crest of the of the magnitude spectrum represented by the elements in the range [first, last)
      *
@@ -40,13 +39,13 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @param first Forward iterator defining the begin of the magnitude spectrum.
      * @param last Forward iterator defining the end of the magnitude spectrum.
      * @return Estimated spectral crest.
-     * @see spectral_flatness, crest
+     * @see spectral_flatness, statistics::crest
      */
     template <typename ForwardIt>
     constexpr auto spectral_crest(ForwardIt first, ForwardIt last) {
         return statistics::crest(first, last);
     }
 
-}}}
+}}} // namespace edsp::feature::spectral
 
 #endif //EDSP_SPECTRAL_CREST_HPP

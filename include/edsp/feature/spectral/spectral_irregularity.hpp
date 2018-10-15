@@ -45,21 +45,19 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @param first Forward iterator defining the begin of the magnitude spectrum.
      * @param last Forward iterator defining the end of the magnitude spectrum.
      * @return Estimated spectral irregularity.
-     * @see irregularity
      */
     template <typename ForwardIt>
     constexpr auto spectral_irregularity(ForwardIt first, ForwardIt last) {
-        using value_type = typename std::iterator_traits<ForwardIt>::value_type;
+        using value_type       = typename std::iterator_traits<ForwardIt>::value_type;
         value_type square_diff = 0, square_ampl = 0;
         for (auto until = (last - 1); first != until; ++first) {
             const value_type diff = (*first + 1) - (*first);
-            square_diff           += diff * diff;
-            square_ampl           += (*first) * (*first);
+            square_diff += diff * diff;
+            square_ampl += (*first) * (*first);
         }
         return square_diff / square_ampl;
     }
 
-}}}
-
+}}} // namespace edsp::feature::spectral
 
 #endif //EDSP_SPECTRAL_IRREGULARITY_HPP

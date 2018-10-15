@@ -31,7 +31,7 @@
 
 namespace edsp { namespace feature { inline namespace temporal {
 
-        /**
+    /**
         * @brief Computes the ASDF (Average Square Difference Function) of the contiguous elements in the range [first, last)
         * and stores the result in another range, beginning at d_first.
         *
@@ -60,17 +60,17 @@ namespace edsp { namespace feature { inline namespace temporal {
         * @param d_first Output iterator defining the begin of the output range.
         * @see acf, amdf
         */
-        template <typename InputIt, typename OutputIt>
-        constexpr void amdf(InputIt first, InputIt last, OutputIt d_first) {
-            using value_type = typename std::iterator_traits<OutputIt>::value_type;
-            const auto N      = std::distance(first, last);
-            auto * array = &(*first);
-            for (auto i = 0; i < N; ++i, ++d_first) {
-                for (auto j = 0; j < (N - i); ++j) {
-                    *d_first += std::abs(array[j] - array[j + i]);
-                }
-                *d_first /= static_cast<value_type>(N);
+    template <typename InputIt, typename OutputIt>
+    constexpr void asdf(InputIt first, InputIt last, OutputIt d_first) {
+        using value_type = typename std::iterator_traits<OutputIt>::value_type;
+        const auto N     = std::distance(first, last);
+        auto* array      = &(*first);
+        for (auto i = 0; i < N; ++i, ++d_first) {
+            for (auto j = 0; j < (N - i); ++j) {
+                *d_first += std::abs(array[j] - array[j + i]);
             }
+            *d_first /= static_cast<value_type>(N);
         }
-}}}
+    }
+}}}    // namespace edsp::feature::temporal
 #endif //EDSP_ASDF_HPP

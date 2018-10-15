@@ -60,7 +60,6 @@ namespace {
     };
 } // namespace
 
-
 TEST(TestingDHT, TransformHanningWindow) {
     const auto reference = read_vector<double>(AssociatedFile[WindowType::Hanning]);
     const auto size      = reference.size();
@@ -101,4 +100,3 @@ TEST(TestingDHT, TransformBlackmanWindow) {
         EXPECT_NEAR(transformed[i], reference[i], 0.01);
     }
 }
-

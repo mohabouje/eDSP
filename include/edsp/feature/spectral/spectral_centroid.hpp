@@ -44,12 +44,13 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @param last Forward iterator defining the end of the magnitude spectrum.
      * @param first2 Forward iterator defining the begin of the center frequencies range.
      * @return Estimated spectral centroid.
+     * @see statistics::centroid
      */
     template <typename ForwardIt>
     constexpr auto spectral_centroid(ForwardIt first, ForwardIt last, ForwardIt first2) {
         return statistics::centroid(first, last, first2);
     }
 
-}}}
+}}} // namespace edsp::feature::spectral
 
 #endif //EDSP_SPECTRAL_CENTROID_HPP
