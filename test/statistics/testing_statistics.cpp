@@ -167,16 +167,6 @@ TEST(TestingStatistics, ComputeHammingWindowKurtosis) {
                 1e-4);
 }
 
-TEST(TestingStatistics, ComputeHammingWindowRMS) {
-    constexpr auto hamming_reference_solution = 0.627969197094890;
-    EXPECT_NEAR(::rms(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution, 1e-1);
-}
-
-TEST(TestingStatistics, ComputeHammingWindowRSSQ) {
-    constexpr auto hamming_reference_solution = 7.10466044227309;
-    EXPECT_NEAR(::rssq(std::cbegin(hamming_reference), std::cend(hamming_reference)), hamming_reference_solution, 1e-1);
-}
-
 TEST(TestingStatistics, ComputeHammingWindowHarmonicMean) {
     constexpr auto hamming_reference_solution = 0.277348750286192;
     EXPECT_NEAR(::harmonic_mean(std::cbegin(hamming_reference), std::cend(hamming_reference)),
