@@ -20,6 +20,8 @@
  * Date: 05/10/2018
  */
 
-#include <edsp/effects/envelope_follower.hpp>
+#include <edsp/envelope/ar.hpp>
+#include <edsp/envelope/adsr.hpp>
 
-template class edsp::envelope_follower<float>;
+template class edsp::envelope::ar<float>;
+template class edsp::envelope::adsr<float>;

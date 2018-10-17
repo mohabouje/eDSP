@@ -79,7 +79,7 @@ namespace edsp { namespace feature { inline namespace temporal {
     template <typename ForwardIt>
     inline typename leq<T>::value_type leq<T>::extract(ForwardIt first, ForwardIt last) {
         const auto e           = energy(first, last);
-        const auto energy_mean = filter.tick(e);
+        const auto energy_mean = filter(e);
         return converter::pow2db(energy_mean);
     }
 

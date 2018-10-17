@@ -88,7 +88,7 @@ namespace edsp { namespace filter {
          * @brief Applies a moving average filter to the single element
          * @return The output of the filter.
          */
-        value_type tick(value_type tick);
+        value_type operator()(value_type tick);
 
     private:
         edsp::ring_buffer<T, Allocator> window_;
@@ -111,20 +111,7 @@ namespace edsp { namespace filter {
     template <typename T, typename Allocator>
     template <typename InputIt, typename OutputIt>
     void moving_average<T, Allocator>::filter(InputIt first, InputIt last, OutputIt d_first) {
-        if (window_.full()) {
-            for (; first != last; ++d_first, ++first) {
-                accumulated_ -= window_.front();
-                accumulated_ += *first;
-                window_.push_back(*first);
-                *d_first = accumulated_ / static_cast<T>(window_.size());
-            }
-        } else {
-            for (; first != last; ++d_first, ++first) {
-                accumulated_ += *first;
-                window_.push_back(*first);
-                *d_first = accumulated_ / static_cast<T>(window_.size());
-            }
-        };
+        std::transform(first, last, d_first, std::ref(*this));
     }
 
     template <typename T, typename Allocator>
@@ -133,15 +120,12 @@ namespace edsp { namespace filter {
     }
 
     template <typename T, typename Allocator>
-    typename moving_average<T, Allocator>::value_type moving_average<T, Allocator>::tick(value_type tick) {
+    typename moving_average<T, Allocator>::value_type moving_average<T, Allocator>::operator()(value_type tick) {
         if (window_.full()) {
             accumulated_ -= window_.front();
-            accumulated_ += tick;
-            window_.push_back(tick);
-        } else {
-            accumulated_ += tick;
-            window_.push_back(tick);
-        };
+        }
+        accumulated_ += tick;
+        window_.push_back(tick);
         return accumulated_ / static_cast<T>(window_.size());
     }
 

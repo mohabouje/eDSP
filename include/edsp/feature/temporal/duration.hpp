@@ -34,7 +34,7 @@
 namespace edsp { namespace feature { inline namespace temporal {
 
     /**
-     * @brief Computes the duration of the elements in the range [first, last)
+     * @brief Computes the duration of the envelop elements in the range [first, last)
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
      * @param samplerate Sampling frequency in Hz.
@@ -47,7 +47,7 @@ namespace edsp { namespace feature { inline namespace temporal {
     }
 
     /**
-     * @brief Computes the effective duration of the elements in the range [first, last)
+     * @brief Computes the effective duration of the envelop elements in the range [first, last)
      *
      * The effective duration is a measure of the time the signal is perceptually meaningful.
      * It is approximated by the time the energy envelope is above a given threshold.
@@ -67,7 +67,7 @@ namespace edsp { namespace feature { inline namespace temporal {
             std::find_if(first, last, std::bind(std::greater_equal<value_type>(), std::placeholders::_1, limit));
         const auto let_threshold =
             std::find_if(get_threshold, last, std::bind(std::less_equal<value_type>(), std::placeholders::_1, limit));
-        const auto samples = std::count_if(get_threshold, let_threshold);
+        const auto samples = std::distance(get_threshold, let_threshold);
         return static_cast<value_type>(samples) / static_cast<value_type>(samplerate);
     }
 }}} // namespace edsp::feature::temporal

@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License along withº
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * File: envelope_follower.hpp
+ * File: ar.hpp
  * Author: Mohammed Boujemaoui
  * Date: 14/6/2018
  */
@@ -25,23 +25,26 @@
 #include <edsp/math/numeric.hpp>
 #include <numeric>
 #include <cmath>
+#include <functional>
+#include <algorithm>
 
-namespace edsp {
+namespace edsp { namespace envelope {
 
     /**
-     * @brief This class implements a basic envelope-follower.
+     * @brief This class implements a traditional AR (Attack, Release) envelope.
      *
      * The envelope follower takes an high-frequency signal as input and provides an output which is
      * the envelope of the original signal. It is frequently used  to detect the amplitude variations of an incoming signal to produce a
      * control signal that resembles those variations.
      *
-     * This class implements a basic Envelope Follower based in a non-symmetric lowpass filter.
-     * The output of a low-pass filter can be viewed as a moving average of its input.  A minimal envelope generator has an attack period,
-     * in which the level of the envelope rises from an initial zero level to a maximum level, followed by a release phase,in which the level
-     * falls back to zero.     *
+     * This class implements a basic Envelope Follower based in a non-symmetric low pass filter.
+     * The output of a low-pass filter can be viewed as a moving average of its input.
+     *
+     * This minimal envelope generator has an attack period, in which the level of the envelope rises from an initial zero level to a maximum
+     * level, followed by a release phase,in which the level falls back to zero.
      */
     template <typename T>
-    class envelope_follower {
+    class ar {
     public:
         using value_type = T;
         using size_type  = std::size_t;
@@ -53,7 +56,7 @@ namespace edsp {
          * @param releaseTime The release time of the first order lowpass in the attack phase in msecs.
          * @param rectify If true, enables the rectification of the output signal.
          */
-        constexpr envelope_follower(value_type samplerate, value_type attackTime, value_type releaseTime,
+        constexpr ar(value_type samplerate, value_type attackTime, value_type releaseTime,
                                     bool rectify = false) noexcept;
 
         /**
@@ -122,6 +125,13 @@ namespace edsp {
         template <typename InIterator, typename OutputIt>
         constexpr void apply(InIterator first, InIterator last, OutputIt d_first);
 
+        /**
+         * @brief Computes the envelope of the element
+         * @param value Input element.
+         * @return Compute envelope value.
+         */
+        constexpr value_type operator()(value_type value);
+
     private:
         value_type samplerate_{44100};
         value_type attack_time_{10};
@@ -133,7 +143,7 @@ namespace edsp {
     };
 
     template <typename T>
-    constexpr envelope_follower<T>::envelope_follower(value_type samplerate, value_type attack_time,
+    constexpr ar<T>::ar(value_type samplerate, value_type attack_time,
                                                       value_type release_time, bool rectify) noexcept :
         samplerate_(samplerate),
         attack_time_(attack_time),
@@ -143,50 +153,50 @@ namespace edsp {
     }
 
     template <typename T>
-    constexpr typename envelope_follower<T>::value_type envelope_follower<T>::samplerate() const noexcept {
+    constexpr typename ar<T>::value_type ar<T>::samplerate() const noexcept {
         return samplerate_;
     }
 
     template <typename T>
-    constexpr void envelope_follower<T>::set_samplerate(value_type samplerate) noexcept {
+    constexpr void ar<T>::set_samplerate(value_type samplerate) noexcept {
         samplerate_ = samplerate;
         reset();
     }
 
     template <typename T>
-    constexpr typename envelope_follower<T>::value_type envelope_follower<T>::attack_time() const noexcept {
+    constexpr typename ar<T>::value_type ar<T>::attack_time() const noexcept {
         return attack_time_;
     }
 
     template <typename T>
-    constexpr void envelope_follower<T>::set_attack_time(value_type attack_time) noexcept {
+    constexpr void ar<T>::set_attack_time(value_type attack_time) noexcept {
         attack_time_ = attack_time;
         reset();
     }
 
     template <typename T>
-    constexpr typename envelope_follower<T>::value_type envelope_follower<T>::release_time() const noexcept {
+    constexpr typename ar<T>::value_type ar<T>::release_time() const noexcept {
         return release_time_;
     }
 
     template <typename T>
-    constexpr void envelope_follower<T>::set_release_time(value_type release_time) noexcept {
+    constexpr void ar<T>::set_release_time(value_type release_time) noexcept {
         release_time_ = release_time;
         reset();
     }
 
     template <typename T>
-    constexpr bool envelope_follower<T>::rectification() const noexcept {
+    constexpr bool ar<T>::rectification() const noexcept {
         return rectification_;
     }
 
     template <typename T>
-    constexpr void envelope_follower<T>::set_rectification(bool enabled) noexcept {
+    constexpr void ar<T>::set_rectification(bool enabled) noexcept {
         rectification_ = enabled;
     }
 
     template <typename T>
-    constexpr void envelope_follower<T>::reset() noexcept {
+    constexpr void ar<T>::reset() noexcept {
         attack_gain_  = (attack_gain_ > 0) ? static_cast<value_type>(std::exp(-1 / (attack_time_ * samplerate_))) : 0;
         release_gain_ = (release_gain_ > 0) ? static_cast<value_type>(std::exp(-1 / (release_time_ * samplerate_))) : 0;
         last_         = 0;
@@ -194,16 +204,19 @@ namespace edsp {
 
     template <typename T>
     template <typename InIterator, typename OutputIt>
-    constexpr void envelope_follower<T>::apply(InIterator first, InIterator last, OutputIt d_first) {
-        for (; first != last; ++first, ++d_first) {
-            const auto rectified = rectification_ ? std::abs(*first) : *first;
-            const auto current   = (last_ < rectified) ? (1 - attack_gain_) * rectified + attack_gain_ * last_
-                                                     : (1 - release_gain_) * rectified + release_gain_ * last_;
-            last_    = math::is_denormal(current) ? 0 : current;
-            *d_first = last_;
-        }
+    constexpr void ar<T>::apply(InIterator first, InIterator last, OutputIt d_first) {
+        std::transform(first, last, d_first, std::ref(*this));
     }
 
-} // namespace edsp
+    template<typename T>
+    constexpr typename ar<T>::value_type ar<T>::operator()(value_type value) {
+        const auto rectified = rectification_ ? std::abs(value) : value;
+        const auto current   = (last_ < rectified) ? (1 - attack_gain_) * rectified + attack_gain_ * last_
+                                                   : (1 - release_gain_) * rectified + release_gain_ * last_;
+        last_    = math::is_denormal(current) ? 0 : current;
+        return last_;
+    }
+
+}} // namespace edsp
 
 #endif // EDSP_FEATURE_TEMPORAL_EnvelopeFollower_HPP
