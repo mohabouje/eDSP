@@ -368,7 +368,7 @@ TEST(TestingLinspace, IncreasingOrder) {
 
     EXPECT_EQ(expected.size(), size);
     std::vector<double> computed(size);
-    algorithm::linspace(std::begin(computed), size, min, max);
+    algorithm::linspace(std::begin(computed), min, max, size);
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(computed[i], expected[i], 0.001);
     }
@@ -387,7 +387,7 @@ TEST(TestingLinspace, DecreaseOrder) {
     EXPECT_EQ(expected.size(), size);
 
     std::vector<double> computed(size);
-    algorithm::linspace(std::begin(computed), size, max, min);
+    algorithm::linspace(std::begin(computed), max, min, size);
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(computed[i], expected[i], 0.001);
     }
@@ -405,7 +405,7 @@ TEST(TestingLinspace, NegativeRangeIncrease) {
     EXPECT_EQ(expected.size(), size);
 
     std::vector<double> computed(size);
-    algorithm::linspace(std::begin(computed), size, min, max);
+    algorithm::linspace(std::begin(computed), min, max, size);
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(computed[i], expected[i], 0.001);
     }
@@ -424,7 +424,7 @@ TEST(TestingLinspace, NegativeRangeDecrease) {
     EXPECT_EQ(expected.size(), size);
 
     std::vector<double> computed(size);
-    algorithm::linspace(std::begin(computed), size, max, min);
+    algorithm::linspace(std::begin(computed), max, min, size);
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(computed[i], expected[i], 0.001);
     }
@@ -442,7 +442,7 @@ TEST(TestingLinspace, MixedIncrease) {
     EXPECT_EQ(expected.size(), size);
 
     std::vector<double> computed(size);
-    algorithm::linspace(std::begin(computed), size, min, max);
+    algorithm::linspace(std::begin(computed), min, max, size);
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(computed[i], expected[i], 0.001);
     }
@@ -461,7 +461,7 @@ TEST(TestingLinspace, MixedDecrease) {
     EXPECT_EQ(expected.size(), size);
 
     std::vector<double> computed(size);
-    algorithm::linspace(std::begin(computed), size, max, min);
+    algorithm::linspace(std::begin(computed), max, min, size);
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(computed[i], expected[i], 0.001);
     }
@@ -483,7 +483,7 @@ TEST(TestingLogspace, IncreaseOrder) {
     EXPECT_EQ(expected.size(), size);
 
     std::vector<double> computed(size);
-    algorithm::logspace(std::begin(computed), size, min, max);
+    algorithm::logspace(std::begin(computed), min, max, size);
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(computed[i], expected[i], 0.001);
     }
@@ -506,7 +506,7 @@ TEST(TestingLogspace, DecreaseOrder) {
     EXPECT_EQ(expected.size(), size);
 
     std::vector<double> computed(size);
-    algorithm::logspace(std::begin(computed), size, max, min);
+    algorithm::logspace(std::begin(computed), max, min, size);
     for (auto i = 0ul; i < size; ++i) {
         EXPECT_NEAR(computed[i], expected[i], 0.001);
     }

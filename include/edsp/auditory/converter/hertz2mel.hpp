@@ -24,7 +24,7 @@
 #define EDSP_HERTZ2MEL_HPP
 
 #include <cmath>
-namespace edsp { inline namespace converter {
+namespace edsp {  namespace auditory { inline namespace converter {
 
     /*
      * @brief Represent the logarithmic base used in the O'Shaugnessy's book formulas.
@@ -70,9 +70,9 @@ namespace edsp { inline namespace converter {
      */
     template <mel_base scale, typename T>
     constexpr T hertz2mel(T f) noexcept {
-        return internal::converter<scale, T>{}(f);
+        return internal::converter<scale>{}(f);
     }
 
-}} // namespace edsp::converter
+}}} // namespace edsp::converter
 
 #endif //EDSP_HERTZ2MEL_HPP

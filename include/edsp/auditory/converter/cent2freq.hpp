@@ -15,44 +15,33 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* Filename: bark2herz.hpp
+* Filename: cent2freq.hpp
 * Author: Mohammed Boujemaoui
-* Date: 12/10/18
+* Date: 18/10/18
 */
 
-#ifndef EDSP_BARK2HERZ_HPP
-#define EDSP_BARK2HERZ_HPP
+#ifndef EDSP_CENT2FREQ_HPP
+#define EDSP_CENT2FREQ_HPP
 
-namespace edsp { inline namespace converter {
+#include <edsp/math/numeric.hpp>
+
+namespace edsp { namespace auditory { inline namespace converter {
 
     /**
-     * @brief Converts a critical band rate in Bark scale to Hertz.
+     * @brief Converts a frequency in Cent scale into Hertz.
      *
-     * The conversion of a critical band rate z into Hertz is as follows:
-     * \f[
-     * f = 52548/ (z^{2}-52.56z+690.39)\, with z in bark.
-     * \f]
-     * or
-     * \f[
-     * {\displaystyle f=600\sinh(z/6)} {\displaystyle f=600\sinh(z/6)}
-     * \f]
-     *
-     * @param z The critical band rate, in Bark
+     * Example: 100 cents corresponds to one semitone and 440Hz corresponds to 5700 cents.
+     * @param c The frequency in Cent scale.
      * @returns Frequency in Hz.
      * @see hertz2bark
      */
     template <typename T>
-    constexpr T bark2hertz(T z) noexcept {
-        if (z < 2) {
-            z = (z - 0.3) / 0.85;
-        }
-
-        if (z > 20.1) {
-            z = (z - 4.422) / 1.22;
-        }
-        return 1960.0 * (z + 0.53) / (26.28 - z);
+    constexpr T cent2hertz(T c) noexcept {
+        constexpr T p = 1200 / std::log(2);
+        constexpr T q = 5700 - p * std::log(440);
+        return math::sign(c) * (std:: exp((std::abs(c)-q)/p));
     }
 
-}} // namespace edsp::converter
+}}} // namespace edsp::converter
 
-#endif //EDSP_BARK2HERZ_HPP
+#endif //EDSP_CENT2FREQ_HPP

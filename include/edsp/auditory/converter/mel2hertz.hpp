@@ -23,8 +23,8 @@
 #ifndef EDSP_MEL2HERTZ_HPP
 #define EDSP_MEL2HERTZ_HPP
 
-#include <edsp/converter/hertz2mel.hpp>
-namespace edsp { inline namespace converter {
+#include <edsp/auditory/converter/hertz2mel.hpp>
+namespace edsp { namespace auditory { inline namespace converter {
 
     namespace internal {
 
@@ -65,6 +65,6 @@ namespace edsp { inline namespace converter {
         return internal::inverter<scale>{}(mel);
     }
 
-}} // namespace edsp::converter
+}}} // namespace edsp::converter
 
 #endif //EDSP_MEL2HERTZ_HPP

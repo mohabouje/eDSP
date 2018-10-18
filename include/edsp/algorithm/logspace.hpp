@@ -22,10 +22,7 @@
 #ifndef EDSP_ALGORITHM_LOGSPACE_H
 #define EDSP_ALGORITHM_LOGSPACE_H
 
-#include <edsp/meta/iterator.hpp>
-#include <edsp/meta/advance.hpp>
-#include <numeric>
-#include <cmath>
+#include <iterator>
 
 namespace edsp { inline namespace algorithm {
 
@@ -37,14 +34,16 @@ namespace edsp { inline namespace algorithm {
      * @param N Number of points to generate.
      * @param d_first The beginning of the destination range
      */
-    template <typename OutputIt, typename Numeric>
-    constexpr void logspace(OutputIt d_first, Numeric N, meta::value_type_t<OutputIt> x1,
-                            meta::value_type_t<OutputIt> x2) {
-        const auto size      = static_cast<meta::diff_type_t<OutputIt>>(std::trunc(N));
-        const auto increment = (x2 - x1) / static_cast<meta::value_type_t<OutputIt>>(size - 1);
-        for (auto i = 0; i < size; ++i, ++d_first) {
-            *d_first = std::pow(static_cast<meta::value_type_t<OutputIt>>(10), x1);
-            x1 += increment;
+    template <typename OutputIt, typename Numeric, typename Integer>
+    constexpr void logspace(OutputIt d_first, Numeric x1, Numeric x2, Integer N) {
+        using value_type = typename std::iterator_traits<OutputIt>::value_type;
+        const auto size      = static_cast<value_type>(std::trunc(N));
+
+        auto _x1 = static_cast<value_type>(x1);
+        auto _x2 = static_cast<value_type>(x2);
+        const auto increment = (_x2 - _x1) / static_cast<value_type>(size - 1);
+        for (auto i = 0; i < size; ++i, ++d_first, _x1 += increment) {
+            *d_first = std::pow(static_cast<value_type >(10), _x1);
         }
     }
 

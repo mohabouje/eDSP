@@ -25,7 +25,7 @@
 
 #include <cmath>
 
-namespace edsp { inline namespace converter {
+namespace edsp {  namespace auditory { inline namespace converter {
 
     /**
      * @brief Converts a frequency in Hertz into its equivalent Bark scale value.
@@ -74,6 +74,6 @@ namespace edsp { inline namespace converter {
         return 52548.0 / (z * z - 52.56 * z + 690.39);
     }
 
-}} // namespace edsp::converter
+}}} // namespace edsp::converter
 
 #endif //EDSP_HZ2BARK_HPP
