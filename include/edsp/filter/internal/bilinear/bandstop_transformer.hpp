@@ -61,7 +61,7 @@ namespace edsp { namespace filter {
             for (auto i = 0ul; i < num_pairs; ++i) {
                 const auto& pair = analog[i];
                 const auto p     = transform(pair.poles().first);
-                const auto z     = transform(pair.zeros().first);
+                auto z           = transform(pair.zeros().first);
 
                 if (z.second == z.first)
                     z.second = std::conj(z.first);
@@ -100,8 +100,8 @@ namespace edsp { namespace filter {
             u += a;
             u = addmul(u, -a, c);
 
-            auto d(b + 1);
-            d = addmul(d, b - 1, c);
+            auto d = std::complex<T>(b + 1);
+            d      = addmul(d, b - 1, c);
 
             return {u / d, v / d};
         }

@@ -26,6 +26,7 @@
 #include <edsp/chart/plt.hpp>
 #include <edsp/filter.hpp>
 #include <edsp/algorithm/linspace.hpp>
+#include <edsp/converter/mag2db.hpp>
 #include <edsp/converter/rad2deg.hpp>
 
 namespace edsp { namespace chart {
@@ -45,27 +46,27 @@ namespace edsp { namespace chart {
 
         std::array<T, 3> a = {{biquad.a0(), biquad.a1(), biquad.a2()}}, b = {{biquad.b0(), biquad.b1(), biquad.b2()}};
         filter::freq(std::cbegin(b), std::cend(b), std::cbegin(a), std::cend(a), std::begin(spectrum), N);
-        algorithm::linspace(std::begin(frequencies), 0, samplerate / 2, N);
-        std::transform(std::cbegin(spectrum), std::cend(spectrum), std::begin(magnitude), [](const auto& element) -> T  {
-            return std::abs(element);
-        });
-        std::transform(std::cbegin(spectrum), std::cend(spectrum), std::begin(phase), [](const auto& element) -> T {
-            return converter::rad2deg(std::arg(element));
-        });
-
+        algorithm::linspace(std::begin(frequencies), (Float)0, samplerate / 2, N);
+        std::transform(std::cbegin(spectrum), std::cend(spectrum), std::begin(magnitude),
+                       [](const auto& element) -> T { return converter::mag2db(std::abs(element)); });
+        std::transform(std::cbegin(spectrum), std::cend(spectrum), std::begin(phase),
+                       [](const auto& element) -> T { return std::arg(element); });
 
         plt::figure_size(640, 480);
-        plt::figure();
+        plt::title("Magnitude Response (dB) and Phase Response");
         plt::subplot(2, 1, 1);
         plt::ylabel("Magnitude (dB)");
-        plt::ylabel("Frequency (Hz)");
+        plt::xlabel("Frequency (Hz)");
+        plt::xlim((Float)0, samplerate / 2);
         plt::plot(frequencies, magnitude);
+        plt::grid(true);
         plt::subplot(2, 1, 2);
         plt::ylabel("Phase (degrees)");
-        plt::ylabel("Frequency (Hz)");
+        plt::xlabel("Frequency (Hz)");
         plt::plot(frequencies, phase);
-        plt::draw();
-
+        plt::xlim((Float)0, samplerate / 2);
+        plt::grid(true);
+        plt::pause(100);
 #endif
     };
 
@@ -79,41 +80,41 @@ namespace edsp { namespace chart {
     inline void freqz(const filter::biquad_cascade<T, Order>& cascade, Numeric N, Float samplerate) {
 #if defined(USE_MATPLOTLIB)
 
-        std::vector<std::complex<T>> spectrum(N), global(N, std::complex<T>(1,1));
+        std::vector<std::complex<T>> spectrum(N), global(N, std::complex<T>(1, 1));
         std::vector<T> frequencies(N), magnitude(N), phase(N);
 
         for (const auto& biquad : cascade) {
-            std::array<T, 3> a = {{biquad.a0(), biquad.a1(), biquad.a2()}}, b = {{biquad.b0(), biquad.b1(), biquad.b2()}};
+            std::array<T, 3> a = {{biquad.a0(), biquad.a1(), biquad.a2()}},
+                             b = {{biquad.b0(), biquad.b1(), biquad.b2()}};
             filter::freq(std::cbegin(b), std::cend(b), std::cbegin(a), std::cend(a), std::begin(spectrum), N);
-            std::transform(std::cbegin(spectrum), std::cend(spectrum),
-                           std::cbegin(global), std::begin(global), std::multiplies<std::complex<T>>());
+            std::transform(std::cbegin(spectrum), std::cend(spectrum), std::cbegin(global), std::begin(global),
+                           std::multiplies<std::complex<T>>());
         }
 
-        algorithm::linspace(std::begin(frequencies), 0, samplerate / 2, N);
-        std::transform(std::cbegin(global), std::cend(global), std::begin(magnitude), [](const auto& element) -> T  {
-            return std::abs(element);
-        });
-        std::transform(std::cbegin(global), std::cend(global), std::begin(phase), [](const auto& element) -> T {
-            return converter::rad2deg(std::arg(element));
-        });
-
+        algorithm::linspace(std::begin(frequencies), (Float)0, samplerate / 2, N);
+        std::transform(std::cbegin(global), std::cend(global), std::begin(magnitude),
+                       [](const auto& element) -> T { return converter::mag2db(std::abs(element)); });
+        std::transform(std::cbegin(global), std::cend(global), std::begin(phase),
+                       [](const auto& element) -> T { return std::arg(element); });
 
         plt::figure_size(640, 480);
-        plt::figure();
+        plt::title("Magnitude Response (dB) and Phase Response");
         plt::subplot(2, 1, 1);
         plt::ylabel("Magnitude (dB)");
-        plt::ylabel("Frequency (Hz)");
+        plt::xlabel("Frequency (Hz)");
+        plt::xlim((Float)0, samplerate / 2);
         plt::plot(frequencies, magnitude);
+        plt::grid(true);
         plt::subplot(2, 1, 2);
         plt::ylabel("Phase (degrees)");
-        plt::ylabel("Frequency (Hz)");
+        plt::xlabel("Frequency (Hz)");
         plt::plot(frequencies, phase);
-        plt::draw();
-
+        plt::xlim((Float)0, samplerate / 2);
+        plt::grid(true);
+        plt::pause(100);
 #endif
     };
 
-
-}}
+}} // namespace edsp::chart
 
 #endif //EDSP_FREQZ_HPP

@@ -25,10 +25,10 @@
 
 #if defined(USE_MATPLOTLIB)
 
-#include <edsp/thirdparty/matplotlib/matplotlibcpp.h>
+#    include <edsp/thirdparty/matplotlib/matplotlibcpp.h>
 namespace edsp { namespace chart {
     namespace plt = matplotlibcpp;
-}}
+}} // namespace edsp::chart
 
 #endif
 

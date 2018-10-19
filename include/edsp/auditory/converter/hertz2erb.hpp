@@ -25,7 +25,7 @@
 
 #include <cmath>
 
-namespace edsp {  namespace auditory { inline namespace converter {
+namespace edsp { namespace auditory { inline namespace converter {
 
     /**
      * @brief Converts a frequency in Hz into an equivalent rectangular band rate (ERB).
@@ -39,11 +39,11 @@ namespace edsp {  namespace auditory { inline namespace converter {
      */
     template <typename T>
     constexpr T hertz2erb(T f) noexcept {
-        constexpr auto GFB_L = 24.7;   //see equation (17) in [Hohmann 2002]
-        constexpr auto GFB_Q = 9.26449;  //see equation (17) in [Hohmann 2002]
+        constexpr auto GFB_L = 24.7;    //see equation (17) in [Hohmann 2002]
+        constexpr auto GFB_Q = 9.26449; //see equation (17) in [Hohmann 2002]
         return GFB_Q * std::log(1. + f / (GFB_L * GFB_Q));
     }
 
-}}} // namespace edsp::converter
+}}} // namespace edsp::auditory::converter
 
 #endif

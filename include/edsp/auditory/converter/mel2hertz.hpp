@@ -65,6 +65,6 @@ namespace edsp { namespace auditory { inline namespace converter {
         return internal::inverter<scale>{}(mel);
     }
 
-}}} // namespace edsp::converter
+}}} // namespace edsp::auditory::converter
 
 #endif //EDSP_MEL2HERTZ_HPP

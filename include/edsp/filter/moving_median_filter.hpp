@@ -114,7 +114,7 @@ namespace edsp { namespace filter {
         window_.resize(N);
     }
 
-    template<typename T, typename Allocator>
+    template <typename T, typename Allocator>
     typename moving_median<T, Allocator>::value_type moving_median<T, Allocator>::operator()(value_type tick) {
         window_.push_back(tick);
         return statistics::median(window_.cbegin(), window_.cend());

@@ -37,10 +37,10 @@ namespace edsp { inline namespace algorithm {
     template <typename OutputIt, typename Numeric, typename Integer>
     constexpr void linspace(OutputIt d_first, Numeric x1, Numeric x2, Integer N) {
         using value_type = typename std::iterator_traits<OutputIt>::value_type;
-        const auto size      = static_cast<value_type>(std::trunc(N));
+        const auto size  = static_cast<value_type>(std::trunc(N));
 
-        auto _x1 = static_cast<value_type>(x1);
-        auto _x2 = static_cast<value_type>(x2);
+        auto _x1             = static_cast<value_type>(x1);
+        auto _x2             = static_cast<value_type>(x2);
         const auto increment = (_x2 - _x1) / static_cast<value_type>(size - 1);
         for (auto i = 0; i < size; ++i, ++d_first, _x1 += increment) {
             *d_first = _x1;

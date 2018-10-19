@@ -42,6 +42,6 @@ namespace edsp { namespace auditory { inline namespace converter {
         return math::sign(z) * (p * std::log(std::abs(z)) + q);
     }
 
-}}} // namespace edsp::converter
+}}} // namespace edsp::auditory::converter
 
 #endif //EDSP_CENT2HERTZ_HPP

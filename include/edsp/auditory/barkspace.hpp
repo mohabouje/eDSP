@@ -44,7 +44,6 @@ namespace edsp { namespace auditory {
         std::transform(d_first, d_first + N, converter::hertz2bark);
     }
 
-}} // namespace edsp::algorithm
-
+}} // namespace edsp::auditory
 
 #endif //EDSP_BARKSPACE_HPP

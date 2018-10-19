@@ -35,12 +35,11 @@ namespace edsp { namespace auditory {
      * The auditory_scale enum represents the different scales used to convert frequencies to auditory units.
      */
     enum auditory_scale {
-        mel, /*<! Frequencies will be represent on a Mel scale */
-        erb, /*<! Frequencies will be represent on a ERB scale */
+        mel,  /*<! Frequencies will be represent on a Mel scale */
+        erb,  /*<! Frequencies will be represent on a ERB scale */
         bark, /*<! Frequencies will be represent on a Bark scale */
         cent  /*<! Frequencies will be represent on a Cent scale */
     };
-
 
     /**
      * @brief This function computes an array of N frequencies uniformly spaced between [x1,x2] on a Bark
@@ -55,22 +54,21 @@ namespace edsp { namespace auditory {
     template <typename OutputIt, typename Numeric, typename Integer>
     constexpr void audspace(OutputIt d_first, Numeric min, Numeric max, Integer N, auditory_scale scale) {
         switch (scale) {
-        case auditory_scale::mel:
-            melspace<mel_base::base_10>(d_first, min, max, N);
-            break;
-        case auditory_scale::erb:
-            erbspace(d_first, min, max, N);
-            break;
-        case auditory_scale::bark:
-            barkspace(d_first, min, max, N);
-            break;
-        case auditory_scale::cent:
-            centspace(d_first, min, max, N);
-            break;
+            case auditory_scale::mel:
+                melspace<mel_base::base_10>(d_first, min, max, N);
+                break;
+            case auditory_scale::erb:
+                erbspace(d_first, min, max, N);
+                break;
+            case auditory_scale::bark:
+                barkspace(d_first, min, max, N);
+                break;
+            case auditory_scale::cent:
+                centspace(d_first, min, max, N);
+                break;
         }
     }
 
-}} // namespace edsp::algorithm
-
+}} // namespace edsp::auditory
 
 #endif //EDSP_AUDSPACE_HPP

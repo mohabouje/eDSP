@@ -57,7 +57,7 @@ namespace edsp { namespace envelope {
          * @param rectify If true, enables the rectification of the output signal.
          */
         constexpr ar(value_type samplerate, value_type attackTime, value_type releaseTime,
-                                    bool rectify = false) noexcept;
+                     bool rectify = false) noexcept;
 
         /**
          * @brief Returns the sample rate in Hz.
@@ -143,8 +143,7 @@ namespace edsp { namespace envelope {
     };
 
     template <typename T>
-    constexpr ar<T>::ar(value_type samplerate, value_type attack_time,
-                                                      value_type release_time, bool rectify) noexcept :
+    constexpr ar<T>::ar(value_type samplerate, value_type attack_time, value_type release_time, bool rectify) noexcept :
         samplerate_(samplerate),
         attack_time_(attack_time),
         release_time_(release_time),
@@ -208,15 +207,15 @@ namespace edsp { namespace envelope {
         std::transform(first, last, d_first, std::ref(*this));
     }
 
-    template<typename T>
+    template <typename T>
     constexpr typename ar<T>::value_type ar<T>::operator()(value_type value) {
         const auto rectified = rectification_ ? std::abs(value) : value;
         const auto current   = (last_ < rectified) ? (1 - attack_gain_) * rectified + attack_gain_ * last_
-                                                   : (1 - release_gain_) * rectified + release_gain_ * last_;
-        last_    = math::is_denormal(current) ? 0 : current;
+                                                 : (1 - release_gain_) * rectified + release_gain_ * last_;
+        last_ = math::is_denormal(current) ? 0 : current;
         return last_;
     }
 
-}} // namespace edsp
+}} // namespace edsp::envelope
 
 #endif // EDSP_FEATURE_TEMPORAL_EnvelopeFollower_HPP
