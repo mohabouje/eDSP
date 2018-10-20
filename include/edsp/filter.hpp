@@ -24,16 +24,15 @@
 
 #include <edsp/filter/biquad.hpp>
 #include <edsp/filter/biquad_cascade.hpp>
+#include <edsp/filter/moving_median_filter.hpp>
+#include <edsp/filter/moving_average_filter.hpp>
+#include <edsp/filter/moving_rms_filter.hpp>
 
 #include <edsp/filter/internal/rbj_designer.hpp>
 #include <edsp/filter/internal/zoelzer_designer.hpp>
 #include <edsp/filter/internal/butterworth_designer.hpp>
 #include <edsp/filter/internal/chebyshev_I_designer.hpp>
 #include <edsp/filter/internal/chebyshev_II_designer.hpp>
-
-#include <edsp/filter/moving_median_filter.hpp>
-#include <edsp/filter/moving_average_filter.hpp>
-#include <edsp/filter/moving_rms_filter.hpp>
 
 namespace edsp { namespace filter {
 
@@ -157,6 +156,42 @@ namespace edsp { namespace filter {
         const auto creator = designer<T, Designer, MaxOrder>{};
         return creator.template design<Type>(arg...);
     }
+
+    /**
+     * @brief Computes the frequency response of a digital filter.
+     * @param b_first Beginning of the range elements representing the FIR/MA filter coefficients.
+     * @param b_last End of the range elements representing the FIR/MA filter coefficients.
+     * @param a_first Beginning of the range elements representing the IIR/AR filter coefficients.
+     * @param a_last End of the range elements representing the IIR/AR filter coefficients.
+     * @param d_first Output iterator defining the beginning of the destination range.
+     * @param N Number of evaluation points.
+     */
+    template <typename InputIt, typename OutputIt, typename Numeric>
+    constexpr void freq(InputIt b_first, InputIt b_last, InputIt a_first, InputIt a_last, OutputIt d_first, Numeric K) {
+        using value_type  = typename std::iterator_traits<InputIt>::value_type;
+        using output_type = typename std::iterator_traits<OutputIt>::value_type;
+        const auto M      = std::distance(b_first, b_last);
+        const auto N      = std::distance(a_first, a_last);
+
+        constexpr auto i = output_type(0, 1);
+        for (auto k = 0; k < K; ++k, ++d_first) {
+            auto b_tmp = output_type(*b_first, 0);
+            auto b     = b_first + 1;
+            for (auto m = 1; m < M; ++m, ++b) {
+                const auto rad = m * math::constants<value_type>::pi * k / K;
+                b_tmp += *b * (std::cos(rad) - i * std::sin(rad));
+            }
+
+            auto a_tmp = output_type(*a_first, 0);
+            auto a     = a_first + 1;
+            for (auto n = 1; n < N; ++n, ++a) {
+                const auto rad = n * math::constants<value_type>::pi * k / K;
+                a_tmp += *a * (std::cos(rad) - i * std::sin(rad));
+            }
+
+            *d_first = b_tmp / a_tmp;
+        }
+    };
 
 }} // namespace edsp::filter
 

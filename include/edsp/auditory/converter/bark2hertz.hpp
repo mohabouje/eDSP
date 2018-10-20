@@ -53,6 +53,6 @@ namespace edsp { namespace auditory { inline namespace converter {
         return 1960.0 * (z + 0.53) / (26.28 - z);
     }
 
-}}} // namespace edsp::converter
+}}} // namespace edsp::auditory::converter
 
 #endif //EDSP_BARK2HERZ_HPP

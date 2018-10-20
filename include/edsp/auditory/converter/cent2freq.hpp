@@ -39,9 +39,9 @@ namespace edsp { namespace auditory { inline namespace converter {
     constexpr T cent2hertz(T c) noexcept {
         constexpr T p = 1200 / std::log(2);
         constexpr T q = 5700 - p * std::log(440);
-        return math::sign(c) * (std:: exp((std::abs(c)-q)/p));
+        return math::sign(c) * (std::exp((std::abs(c) - q) / p));
     }
 
-}}} // namespace edsp::converter
+}}} // namespace edsp::auditory::converter
 
 #endif //EDSP_CENT2FREQ_HPP

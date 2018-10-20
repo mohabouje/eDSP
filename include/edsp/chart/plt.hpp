@@ -15,33 +15,21 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* Filename: cent2hertz.hpp
+* Filename: plt.hpp
 * Author: Mohammed Boujemaoui
-* Date: 18/10/18
+* Date: 19/10/18
 */
 
-#ifndef EDSP_CENT2HERTZ_HPP
-#define EDSP_CENT2HERTZ_HPP
+#ifndef EDSP_PLT_HPP
+#define EDSP_PLT_HPP
 
-#include <edsp/math/numeric.hpp>
+#if defined(USE_MATPLOTLIB)
 
-namespace edsp { namespace auditory { inline namespace converter {
+#    include <edsp/thirdparty/matplotlib/matplotlibcpp.h>
+namespace edsp { namespace chart {
+    namespace plt = matplotlibcpp;
+}} // namespace edsp::chart
 
-    /**
-     * @brief Converts a frequency in Hertz into its equivalent Cent scale value.
-     *
-     * Example: 100 cents corresponds to one semitone and 440Hz corresponds to 5700 cents.
-     * @param z The frequency in Hertz.
-     * @returns Equivalent frequency in Cent scale.
-     * @see hertz2bark
-     */
-    template <typename T>
-    constexpr T hertz2cent(T z) noexcept {
-        constexpr T p = 1200 / std::log(2);
-        constexpr T q = 5700 - p * std::log(440);
-        return math::sign(z) * (p * std::log(std::abs(z)) + q);
-    }
+#endif
 
-}}} // namespace edsp::auditory::converter
-
-#endif //EDSP_CENT2HERTZ_HPP
+#endif //EDSP_PLT_HPP

@@ -133,7 +133,7 @@ namespace edsp { namespace filter {
         window_.resize(N);
     }
 
-    template<typename T, typename Allocator>
+    template <typename T, typename Allocator>
     typename moving_rms<T, Allocator>::value_type moving_rms<T, Allocator>::operator()(value_type tick) {
         if (window_.full()) {
             accumulated_ -= window_.front();
@@ -142,7 +142,6 @@ namespace edsp { namespace filter {
         accumulated_ += sqr;
         window_.push_back(sqr);
         return std::sqrt(accumulated_ / static_cast<T>(window_.size()));
-
     }
 
 }} // namespace edsp::filter

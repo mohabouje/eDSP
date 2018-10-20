@@ -39,12 +39,12 @@ namespace edsp { namespace auditory {
      * @param d_first The beginning of the destination range
      */
     template <typename OutputIt, typename Numeric, typename Integer>
-    constexpr void centspace(OutputIt d_first, Numeric min, Numeric max,  Integer N) {
+    constexpr void centspace(OutputIt d_first, Numeric min, Numeric max, Integer N) {
         using output_type = typename std::iterator_traits<OutputIt>::value_type;
         algorithm::linspace(d_first, min, max, N);
         std::transform(d_first, d_first + N, converter::hertz2cent);
     }
 
-}} // namespace edsp::algorithm
+}} // namespace edsp::auditory
 
 #endif //EDSP_CENTSPACE_HPP
