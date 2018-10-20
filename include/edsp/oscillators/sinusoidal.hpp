@@ -22,7 +22,6 @@
 #ifndef EDSP_OSCILLATOR_SIN_HPP
 #define EDSP_OSCILLATOR_SIN_HPP
 
-#include <edsp/oscillator.hpp>
 #include <edsp/math/constant.hpp>
 #include <edsp/math/numeric.hpp>
 #include <cmath>
