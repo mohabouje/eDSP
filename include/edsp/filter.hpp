@@ -191,7 +191,7 @@ namespace edsp { namespace filter {
 
             *d_first = b_tmp / a_tmp;
         }
-    };
+    }
 
 }} // namespace edsp::filter
 

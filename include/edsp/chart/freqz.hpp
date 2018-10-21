@@ -68,7 +68,7 @@ namespace edsp { namespace chart {
         plt::grid(true);
         plt::pause(100);
 #endif
-    };
+    }
 
     /**
      * @brief Plots the frequency response of a cascade of biquad digital filters.
@@ -113,7 +113,7 @@ namespace edsp { namespace chart {
         plt::grid(true);
         plt::pause(100);
 #endif
-    };
+    }
 
 }} // namespace edsp::chart
 
