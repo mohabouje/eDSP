@@ -163,11 +163,11 @@ namespace edsp { namespace filter {
 
     } // namespace butterworth
 
-    template <typename T, FilterType Type, std::size_t MaxOrder>
-    struct ButterworthDesigner {};
+    template <typename T, filter_type Type, std::size_t MaxOrder>
+    struct butterworth_designer {};
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<T, FilterType::LowPass, MaxOrder> {
+    struct butterworth_designer<T, filter_type::LowPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(butterworth::LowPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
@@ -176,7 +176,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<T, FilterType::HighPass, MaxOrder> {
+    struct butterworth_designer<T, filter_type::HighPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(butterworth::HighPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
@@ -185,7 +185,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<T, FilterType::BandPass, MaxOrder> {
+    struct butterworth_designer<T, filter_type::BandPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(butterworth::BandPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
@@ -194,7 +194,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<T, FilterType::BandStop, MaxOrder> {
+    struct butterworth_designer<T, filter_type::BandStop, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(butterworth::BandStopPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
@@ -203,7 +203,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<T, FilterType::LowShelf, MaxOrder> {
+    struct butterworth_designer<T, filter_type::LowShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(butterworth::LowShelfPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
@@ -212,7 +212,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<T, FilterType::HighShelf, MaxOrder> {
+    struct butterworth_designer<T, filter_type::HighShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(butterworth::HighShelfPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
@@ -221,7 +221,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ButterworthDesigner<T, FilterType::BandShelf, MaxOrder> {
+    struct butterworth_designer<T, filter_type::BandShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(butterworth::BandShelfPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {

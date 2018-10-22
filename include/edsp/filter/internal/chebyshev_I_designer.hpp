@@ -189,11 +189,11 @@ namespace edsp { namespace filter {
         };
     } // namespace chebyshevI
 
-    template <typename T, FilterType Type, std::size_t MaxOrder>
-    struct ChebyshevIDesigner {};
+    template <typename T, filter_type Type, std::size_t MaxOrder>
+    struct chebyshevI_designer {};
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<T, FilterType::LowPass, MaxOrder> {
+    struct chebyshevI_designer<T, filter_type::LowPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(chebyshevI::LowPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
@@ -202,7 +202,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<T, FilterType::HighPass, MaxOrder> {
+    struct chebyshevI_designer<T, filter_type::HighPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(chebyshevI::HighPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
@@ -211,7 +211,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<T, FilterType::BandPass, MaxOrder> {
+    struct chebyshevI_designer<T, filter_type::BandPass, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(chebyshevI::BandPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
@@ -220,7 +220,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<T, FilterType::BandStop, MaxOrder> {
+    struct chebyshevI_designer<T, filter_type::BandStop, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(chebyshevI::BandStopPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
@@ -229,7 +229,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<T, FilterType::LowShelf, MaxOrder> {
+    struct chebyshevI_designer<T, filter_type::LowShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(chebyshevI::LowShelfPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
@@ -238,7 +238,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<T, FilterType::HighShelf, MaxOrder> {
+    struct chebyshevI_designer<T, filter_type::HighShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(chebyshevI::HighShelfPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {
@@ -247,7 +247,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T, std::size_t MaxOrder>
-    struct ChebyshevIDesigner<T, FilterType::BandShelf, MaxOrder> {
+    struct chebyshevI_designer<T, filter_type::BandShelf, MaxOrder> {
         template <typename... Arg>
         constexpr auto operator()(Arg... arg)
             -> decltype(chebyshevI::BandShelfPass<T, MaxOrder>{}.design(std::declval<Arg&&>()...)) {

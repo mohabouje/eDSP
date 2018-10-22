@@ -30,11 +30,11 @@
 #include <cmath>
 
 namespace edsp { namespace filter {
-    template <typename T, FilterType Type>
+    template <typename T, filter_type Type>
     struct ZoelzerFilterDesigner {};
 
     template <typename T>
-    struct ZoelzerFilterDesigner<T, FilterType::LowPass> {
+    struct ZoelzerFilterDesigner<T, filter_type::LowPass> {
         constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto K    = std::tan(constants<T>::pi * fc / sample_rate);
@@ -49,7 +49,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T>
-    struct ZoelzerFilterDesigner<T, FilterType::HighPass> {
+    struct ZoelzerFilterDesigner<T, filter_type::HighPass> {
         constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto K    = std::tan(constants<T>::pi * fc / sample_rate);
@@ -64,7 +64,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T>
-    struct ZoelzerFilterDesigner<T, FilterType::BandPassSkirtGain> {
+    struct ZoelzerFilterDesigner<T, filter_type::BandPass> {
         constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(gain_db);
             const auto K    = std::tan(constants<T>::pi * fc / sample_rate);
@@ -78,48 +78,9 @@ namespace edsp { namespace filter {
         }
     };
 
-    template <typename T>
-    struct ZoelzerFilterDesigner<T, FilterType::Notch> {
-        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
-            meta::unused(gain_db);
-            const auto K    = std::tan(constants<T>::pi * fc / sample_rate);
-            const auto norm = 1 / (1 + K / Q + K * K);
-            const auto b0   = (1 + K * K) * norm;
-            const auto b1   = 2 * (K * K - 1) * norm;
-            const auto b2   = b0;
-            const auto a1   = b1;
-            const auto a2   = (1 - K / Q + K * K) * norm;
-            return biquad<T>(1, a1, a2, b0, b1, b2);
-        }
-    };
 
     template <typename T>
-    struct ZoelzerFilterDesigner<T, FilterType::PeakingEQ> {
-        constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
-            const auto V = db2mag(gain_db);
-            const auto K = std::tan(constants<T>::pi * fc / sample_rate);
-            if (gain_db >= 0) { // boost
-                const auto norm = 1 / (1 + 1 / Q * K + K * K);
-                const auto b0   = (1 + V / Q * K + K * K) * norm;
-                const auto b1   = 2 * (K * K - 1) * norm;
-                const auto b2   = (1 - V / Q * K + K * K) * norm;
-                const auto a1   = b1;
-                const auto a2   = (1 - 1 / Q * K + K * K) * norm;
-                return biquad<T>(1, a1, a2, b0, b1, b2);
-            } else { // cut
-                const auto norm = 1 / (1 + V / Q * K + K * K);
-                const auto b0   = (1 + 1 / Q * K + K * K) * norm;
-                const auto b1   = 2 * (K * K - 1) * norm;
-                const auto b2   = (1 - 1 / Q * K + K * K) * norm;
-                const auto a1   = b1;
-                const auto a2   = (1 - V / Q * K + K * K) * norm;
-                return biquad<T>(1, a1, a2, b0, b1, b2);
-            }
-        }
-    };
-
-    template <typename T>
-    struct ZoelzerFilterDesigner<T, FilterType::LowShelf> {
+    struct ZoelzerFilterDesigner<T, filter_type::LowShelf> {
         constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(Q);
             const auto V = db2mag(gain_db);
@@ -145,7 +106,7 @@ namespace edsp { namespace filter {
     };
 
     template <typename T>
-    struct ZoelzerFilterDesigner<T, FilterType::HighShelf> {
+    struct ZoelzerFilterDesigner<T, filter_type::HighShelf> {
         constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
             meta::unused(Q);
             const auto V = db2mag(gain_db);

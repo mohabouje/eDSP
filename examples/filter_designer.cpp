@@ -28,76 +28,74 @@ using namespace edsp;
 using namespace edsp::filter;
 
 struct parameter {
-    double ripple;
-    double cutoff;
-    double lower_edge;
-    double upper_edge;
-    double sample_rate;
-    int order;
-    bool display = true;
+    double ripple{};
+    double cutoff{};
+    double lower_edge{};
+    double upper_edge{};
+    double sample_rate{};
+    std::size_t order{};
+    std::size_t points{42000};
+    bool display{true};
 };
 
+template <typename T, std::size_t N>
+void display(const biquad_cascade<T, N>& filter, const parameter& param) {
+    if (param.display) {
+        chart::freqz(filter, param.points,  param.sample_rate);
+    }
+}
 
 void compute_butterworth(const parameter& param, const std::string& type) {
     const auto diff = param.upper_edge - param.lower_edge;
+    auto d = designer<double, designer_type::Butterworth, 100>();
     if (type == "low") {
-        auto designer = ButterworthDesigner<double, FilterType::LowPass, 100>();
-        const auto cascade = designer(param.order, param.sample_rate, param.cutoff);
-        chart::freqz(cascade, 42000,  param.sample_rate);
+        const auto cascade = d.design<filter_type::LowPass>(param.order, param.sample_rate, param.cutoff);
+        display(cascade, param);
     } else if (type == "high") {
-        auto designer = ButterworthDesigner<double, FilterType::HighPass, 100>();
-        const auto cascade = designer(param.order, param.sample_rate, param.cutoff);
-        chart::freqz(cascade, 42000,  param.sample_rate);
+        const auto cascade = d.design<filter_type::HighPass>(param.order, param.sample_rate, param.cutoff);
+        display(cascade, param);
     } else if (type == "bandstop") {
-        auto designer = ButterworthDesigner<double, FilterType::BandStop, 100>();
-        const auto cascade = designer(param.order, param.sample_rate, param.lower_edge + diff / 2, diff);
-        chart::freqz(cascade, 42000,  param.sample_rate);
+        const auto cascade = d.design<filter_type::BandStop>(param.order, param.sample_rate, param.lower_edge + diff / 2, diff);
+        display(cascade, param);
     } else if (type == "bandpass") {
-        auto designer = ButterworthDesigner<double, FilterType::BandPass, 100>();
-        const auto cascade = designer(param.order, param.sample_rate, param.lower_edge + diff / 2, diff);
-        chart::freqz(cascade, 42000,  param.sample_rate);
+        const auto cascade = d.design<filter_type::BandPass>(param.order, param.sample_rate, param.lower_edge + diff / 2, diff);
+        display(cascade, param);
     }
 }
 
 void compute_chebyshevI(const parameter& param, const std::string& type) {
     const auto diff = param.upper_edge - param.lower_edge;
+    auto d = designer<double, designer_type::ChebyshevI, 100>();
     if (type == "low") {
-        auto designer = ChebyshevIDesigner<double, FilterType::LowPass, 100>();
-        const auto cascade = designer(param.order, param.sample_rate, param.cutoff, param.ripple);
-        chart::freqz(cascade, 42000,  param.sample_rate);
+        const auto cascade = d.design<filter_type::LowPass>(param.order, param.sample_rate, param.cutoff, param.ripple);
+        display(cascade, param);
     } else if (type == "high") {
-        auto designer = ChebyshevIDesigner<double, FilterType::HighPass, 100>();
-        const auto cascade = designer(param.order, param.sample_rate, param.cutoff, param.ripple);
-        chart::freqz(cascade, 42000,  param.sample_rate);
+        const auto cascade = d.design<filter_type::HighPass>(param.order, param.sample_rate, param.cutoff, param.ripple);
+        display(cascade, param);
     } else if (type == "bandstop") {
-        auto designer = ChebyshevIDesigner<double, FilterType::BandStop, 100>();
-        const auto cascade = designer(param.order, param.sample_rate, param.lower_edge + diff / 2, diff, param.ripple);
-        chart::freqz(cascade, 42000,  param.sample_rate);
+        const auto cascade = d.design<filter_type::BandStop>(param.order, param.sample_rate, param.lower_edge + diff / 2, diff, param.ripple);
+        display(cascade, param);
     } else if (type == "bandpass") {
-        auto designer = ChebyshevIDesigner<double, FilterType::BandPass, 100>();
-        const auto cascade = designer(param.order, param.sample_rate, param.lower_edge + diff / 2, diff, param.ripple);
-        chart::freqz(cascade, 42000,  param.sample_rate);
+        const auto cascade = d.design<filter_type::BandPass>(param.order, param.sample_rate, param.lower_edge + diff / 2, diff, param.ripple);
+        display(cascade, param);
     }
 }
 
 void compute_chebyshevII(const parameter& param, const std::string& type) {
     const auto diff = param.upper_edge - param.lower_edge;
+    auto d = designer<double, designer_type::ChebyshevII, 100>();
     if (type == "low") {
-        auto designer = ChebyshevIIDesigner<double, FilterType::LowPass, 100>();
-        const auto cascade = designer(param.order, param.sample_rate, param.cutoff, param.ripple);
-        chart::freqz(cascade, 42000,  param.sample_rate);
+        const auto cascade = d.design<filter_type::LowPass>(param.order, param.sample_rate, param.cutoff, param.ripple);
+        display(cascade, param);
     } else if (type == "high") {
-        auto designer = ChebyshevIIDesigner<double, FilterType::HighPass, 100>();
-        const auto cascade = designer(param.order, param.sample_rate, param.cutoff, param.ripple);
-        chart::freqz(cascade, 42000,  param.sample_rate);
+        const auto cascade = d.design<filter_type::HighPass>(param.order, param.sample_rate, param.cutoff, param.ripple);
+        display(cascade, param);
     } else if (type == "bandstop") {
-        auto designer = ChebyshevIIDesigner<double, FilterType::BandStop, 100>();
-        const auto cascade = designer(param.order, param.sample_rate, param.lower_edge + diff / 2, diff, param.ripple);
-        chart::freqz(cascade, 42000,  param.sample_rate);
+        const auto cascade = d.design<filter_type::BandStop>(param.order, param.sample_rate, param.lower_edge + diff / 2, diff, param.ripple);
+        display(cascade, param);
     } else if (type == "bandpass") {
-        auto designer = ChebyshevIIDesigner<double, FilterType::BandPass, 100>();
-        const auto cascade = designer(param.order, param.sample_rate, param.lower_edge + diff / 2, diff, param.ripple);
-        chart::freqz(cascade, 42000,  param.sample_rate);
+        const auto cascade = d.design<filter_type::BandPass>(param.order, param.sample_rate, param.lower_edge + diff / 2, diff, param.ripple);
+        display(cascade, param);
     }
 }
 
@@ -114,6 +112,7 @@ int main(int argc, char** argv) {
     app.add_option("--order", param.order, "Filter order")->required(true);
     app.add_option("--sample-rate", param.sample_rate, "Sampling frequency in Hz")->required(true);
     app.add_option("--display", param.display, "Display the magnitude/phase of the computed filter-", true);
+    app.add_option("--display-samples", param.points, "Number of points to display", true);
 
 
     auto* leo = app.add_option("--lower", param.lower_edge, "Lower edge frequency in Hz");

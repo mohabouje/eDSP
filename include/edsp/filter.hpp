@@ -39,9 +39,9 @@ namespace edsp { namespace filter {
     /**
      * @brief The DesignerType enum defines the different filter's implementation
      * from different authors.
-     * @see FilterType
+     * @see filter_type
      */
-    enum class DesignerType {
+    enum class designer_type {
         RBJ,         /*!< Robert Bristow-Johnson formulas from the Audio-EQ-Cookbook */
         Zolzer,      /*!< Udo Zölzer formulas from his book: Digital Audio Signal Processing */
         Butterworth, /*!< Digital implementation of the classic Butterworth filter by using the bilinear transform */
@@ -52,7 +52,7 @@ namespace edsp { namespace filter {
         Legendre  /*!< Legendre filters design */
     };
 
-    template <typename T, DesignerType Designer, std::size_t MaxOrder>
+    template <typename T, designer_type Designer, std::size_t MaxOrder>
     struct designer {};
 
     /**
@@ -61,7 +61,7 @@ namespace edsp { namespace filter {
      * @tparam MaxOrder Maximum order.
      */
     template <typename T, std::size_t MaxOrder>
-    struct designer<T, DesignerType::RBJ, MaxOrder> {
+    struct designer<T, designer_type::RBJ, MaxOrder> {
         /**
          * @brief Returns a filter which parameters represents the designed frequency response by using the RBJ formulas.
            @param sample_rate The sampling frequency in Hz.
@@ -72,7 +72,7 @@ namespace edsp { namespace filter {
          * @return %Biquad filter with the computed coefficients.
          * @see AudioEQ-CookBook:  \link http://www.musicdsp.org/showone.php?id=197 \endlink
          */
-        template <FilterType Type, typename... Args>
+        template <filter_type Type, typename... Args>
         constexpr biquad<T> design(T fc, T sample_rate, T Q, T gain_db = 1) const {
             return RBJFilterDesigner<T, Type>{}(fc, sample_rate, Q, gain_db);
         }
@@ -84,7 +84,7 @@ namespace edsp { namespace filter {
      * @tparam MaxOrder Maximum order.
      */
     template <typename T, std::size_t MaxOrder>
-    struct designer<T, DesignerType::Zolzer, MaxOrder> {
+    struct designer<T, designer_type::Zolzer, MaxOrder> {
         /**
          * @brief Returns a filter which parameters represents the designed frequency response by using the Zoelzer formulas.
            @param sample_rate The sampling frequency in Hz.
@@ -96,7 +96,7 @@ namespace edsp { namespace filter {
          * @see DAFX: Digital Audio Effects, Udo Zölzer:
          * \link https://www.wiley.com/en-us/DAFX%3A+Digital+Audio+Effects%2C+2nd+Edition-p-9780470979679 \endlink
          */
-        template <FilterType Type, typename... Args>
+        template <filter_type Type, typename... Args>
         constexpr biquad<T> design(T fc, T sample_rate, T Q, T gain_db = 1) const {
             return ZoelzerFilterDesigner<T, Type>{}(fc, sample_rate, Q, gain_db);
         }
@@ -108,10 +108,10 @@ namespace edsp { namespace filter {
      * @tparam MaxOrder Maximum order.
      */
     template <typename T, std::size_t MaxOrder>
-    struct designer<T, DesignerType::Butterworth, MaxOrder> {
-        template <FilterType Type, typename... Args>
-        constexpr auto design(Args... arg) const -> decltype(ButterworthDesigner<T, Type, MaxOrder>{}(arg...)) {
-            return ButterworthDesigner<T, Type, MaxOrder>{}.operator()(arg...);
+    struct designer<T, designer_type::Butterworth, MaxOrder> {
+        template <filter_type Type, typename... Args>
+        constexpr auto design( Args... arg) const -> decltype(butterworth_designer<T, Type, MaxOrder>{}(arg...)) {
+            return butterworth_designer<T, Type, MaxOrder>{}.operator()(arg...);
         }
     };
 
@@ -121,11 +121,11 @@ namespace edsp { namespace filter {
      * @tparam MaxOrder Maximum order.
      */
     template <typename T, std::size_t MaxOrder>
-    struct designer<T, DesignerType::ChebyshevI, MaxOrder> {
-        template <FilterType Type, typename... Args>
+    struct designer<T, designer_type::ChebyshevI, MaxOrder> {
+        template <filter_type Type, typename... Args>
         constexpr auto design(Args... arg) const
-            -> decltype(ChebyshevIDesigner<T, Type, MaxOrder>{}(std::declval<Args&&>()...)) {
-            return ChebyshevIDesigner<T, Type, MaxOrder>{}(arg...);
+            -> decltype(chebyshevI_designer<T, Type, MaxOrder>{}(std::declval<Args&&>()...)) {
+            return chebyshevI_designer<T, Type, MaxOrder>{}(arg...);
         }
     };
 
@@ -135,11 +135,11 @@ namespace edsp { namespace filter {
      * @tparam MaxOrder Maximum order.
      */
     template <typename T, std::size_t MaxOrder>
-    struct designer<T, DesignerType::ChebyshevII, MaxOrder> {
-        template <FilterType Type, typename... Args>
+    struct designer<T, designer_type::ChebyshevII, MaxOrder> {
+        template <filter_type Type, typename... Args>
         constexpr auto design(Args... arg) const
-            -> decltype(ChebyshevIIDesigner<T, Type, MaxOrder>{}(std::declval<Args&&>()...)) {
-            return ChebyshevIIDesigner<T, Type, MaxOrder>{}(arg...);
+            -> decltype(chebyshevII_designer<T, Type, MaxOrder>{}(std::declval<Args&&>()...)) {
+            return chebyshevII_designer<T, Type, MaxOrder>{}(arg...);
         }
     };
 
@@ -150,7 +150,7 @@ namespace edsp { namespace filter {
      * @param arg Arguments parameters to constructs the filter.
      * @return A filter with the given configuration.
      */
-    template <typename T, DesignerType Designer, FilterType Type, std::size_t MaxOrder, typename... Args>
+    template <typename T, designer_type Designer, filter_type Type, std::size_t MaxOrder, typename... Args>
     constexpr auto make_filter(Args... arg)
         -> decltype(designer<T, Designer, MaxOrder>{}.template design<Type>(std::declval<Args&&>()...)) {
         const auto creator = designer<T, Designer, MaxOrder>{};

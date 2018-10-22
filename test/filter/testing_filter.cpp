@@ -27,11 +27,11 @@
 using namespace edsp::windowing;
 using namespace edsp::filter;
 
-template struct edsp::filter::designer<float, edsp::filter::DesignerType::RBJ, 10>;
-template struct edsp::filter::designer<float, edsp::filter::DesignerType::Zolzer, 10>;
-template struct edsp::filter::designer<float, edsp::filter::DesignerType::Butterworth, 10>;
-template struct edsp::filter::designer<float, edsp::filter::DesignerType::ChebyshevI, 10>;
-template struct edsp::filter::designer<float, edsp::filter::DesignerType::ChebyshevII, 10>;
+template struct edsp::filter::designer<float, edsp::filter::designer_type::RBJ, 10>;
+template struct edsp::filter::designer<float, edsp::filter::designer_type::Zolzer, 10>;
+template struct edsp::filter::designer<float, edsp::filter::designer_type::Butterworth, 10>;
+template struct edsp::filter::designer<float, edsp::filter::designer_type::ChebyshevI, 10>;
+template struct edsp::filter::designer<float, edsp::filter::designer_type::ChebyshevII, 10>;
 template class edsp::filter::moving_median<float>;
 template class edsp::filter::moving_average<float>;
 template class edsp::filter::moving_rms<float>;
