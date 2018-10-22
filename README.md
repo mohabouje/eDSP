@@ -95,6 +95,10 @@ Check the [Kanban](https://github.com/mohabouje/eDSP/projects/1) of this project
 
 ### License
 
+![GPLv3](https://www.gnu.org/graphics/gplv3-127x51.png)
+
+This program is licensed under GNU General Public License, Version 3. 
+
 Copyright (c) 2018, [Mohammed Boujemaoui Boulaghmoudi](mohabouje@gmail.com), All rights reserved.
 
 Distributed under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.html).
