@@ -2,9 +2,7 @@ cmake_minimum_required(VERSION 3.4)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-project(eDSP VERSION 0.0.1 LANGUAGES CXX)
-
-
+project(edsp VERSION 0.0.1 LANGUAGES CXX)
 
 option(BUILD_TESTS "Enable to build tests" ON)
 option(BUILD_DOCS "Enable to build docs" OFF)

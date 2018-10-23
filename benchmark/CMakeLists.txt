@@ -17,6 +17,6 @@ else()
 endif(BENCHMARK)
 
 add_executable(edsp-fft-benchmark benchmark_fft.cpp)
-target_link_libraries(edsp-fft-benchmark eDSP fftw3 fftw3f pffft ${BENCHMARK_LIBS})
+target_link_libraries(edsp-fft-benchmark edsp fftw3 fftw3f pffft ${BENCHMARK_LIBS})
 
 find_library(BENCHMARK NAMES lbenchmark libbenchmark benchmark)

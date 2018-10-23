@@ -231,7 +231,7 @@ FMT_CONSTEXPR size_t length(const Char *s) {
   return s - start;
 }
 #if FMT_GCC_VERSION
-size_t length(const char *s) { return std::strlen(s); }
+inline size_t length(const char *s) { return std::strlen(s); }
 #endif
 }  // namespace internal
 
