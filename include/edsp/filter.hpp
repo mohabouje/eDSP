@@ -174,7 +174,7 @@ namespace edsp { namespace filter {
         const auto N      = std::distance(a_first, a_last);
 
         constexpr auto i = output_type(0, 1);
-        for (auto k = 0; k < K; ++k, ++d_first) {
+        for (auto k = 0ul; k < K; ++k, ++d_first) {
             auto b_tmp = output_type(*b_first, 0);
             auto b     = b_first + 1;
             for (auto m = 1; m < M; ++m, ++b) {

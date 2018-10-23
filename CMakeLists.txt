@@ -19,8 +19,8 @@ option(ENABLE_DEBUG_INFORMATION "Enable debug information, useful for profiling 
 option(USE_MATPLOTLIB "Use the python Matplotlib for charts support" ON)
 option(USE_LIBSNDFILE "Use the library SndFile to encode/decode audio files" OFF)
 option(USE_LIBAUDIOFILE "Use the library AudioFile to encode/decode audio files" ON)
-option(USE_LIBPFFFT "Use the library PFFT to encode/decode audio files" ON)
-option(USE_LIBFFTW "Use the library FFTW to encode/decode audio files" OFF)
+option(USE_LIBPFFFT "Use the library PFFT to encode/decode audio files" OFF)
+option(USE_LIBFFTW "Use the library FFTW to encode/decode audio files" ON)
 option(USE_LIBSAMPLERATE "Use the library libsamplerate to resample audio data" ON)
 option(USE_LIBRESAMPLE "Use the library libresample to resample audio data" ON)
 
