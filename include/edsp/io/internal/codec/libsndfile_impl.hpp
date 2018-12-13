@@ -28,7 +28,6 @@
 #include <edsp/meta/is_signed.hpp>
 #include <edsp/meta/advance.hpp>
 #include <edsp/meta/iterator.hpp>
-#include <audiofile.h>
 #include <sndfile.h>
 #include <cmath>
 #include <edsp/meta/is_null.hpp>
