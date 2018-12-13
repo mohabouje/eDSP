@@ -29,7 +29,7 @@
 #    include <edsp/io/internal/resampler/libresample_resampler.hpp>
 #endif
 
-namespace edsp { namespace io { inline namespace internal {
+namespace edsp { namespace io { namespace internal {
 
 #if defined(USE_LIBSAMPLERATE)
     template <typename T>

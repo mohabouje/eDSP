@@ -66,8 +66,7 @@ namespace edsp { namespace io { namespace internal {
             channels_(channels),
             quality_(quality),
             factor_(factor) {
-            const auto quality_value = static_cast<std::underlying_type<int>::type>(quality);
-            state_                   = src_new(quality_value, static_cast<int>(channels), &error_);
+            state_                   = src_new(quality, static_cast<int>(channels), &error_);
             report_error(__PRETTY_FUNCTION__);
         }
 
