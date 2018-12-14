@@ -38,7 +38,7 @@ namespace edsp { inline namespace algorithm {
      */
     template <typename InputIt, typename OutputIt, typename Numeric>
     constexpr bool silence(InputIt first, InputIt last, Numeric threshold) {
-        return statistics::power(first, last) < threshold;
+        return feature::temporal::power(first, last) < threshold;
     }
 
 }} // namespace edsp::algorithm
