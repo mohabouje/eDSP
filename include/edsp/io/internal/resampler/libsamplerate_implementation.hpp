@@ -79,7 +79,7 @@ namespace edsp { namespace io { namespace internal {
             const auto size         = std::distance(first, last);
             data_.input_frames      = size / channels_;
             data_.output_frames     = size / channels_;
-            data_.data_in           = &(*first);
+            data_.data_in           = const_cast<value_type *>(&(*first));
             data_.data_out          = &(*d_first);
             data_.src_ratio         = factor_;
             data_.input_frames_used = 0;

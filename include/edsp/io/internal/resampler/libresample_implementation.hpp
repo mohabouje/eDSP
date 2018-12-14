@@ -112,14 +112,14 @@ namespace edsp { namespace io { namespace internal {
     } // namespace implementation
 
     template <typename T>
-    struct libresample_resampler {
+    struct libresample_implementation {
         using value_type = float;
         using size_type  = long;
         using error_type = int;
 
-        libresample_resampler(size_type channels, int quality, value_type factor) : impl(channels, quality, factor) {}
+        libresample_implementation(size_type channels, int quality, value_type factor) : impl(channels, quality, factor) {}
 
-        ~libresample_resampler() = default;
+        ~libresample_implementation() = default;
 
         template <typename InputIt, typename OutputIt>
         inline size_type process(InputIt first, InputIt last, OutputIt d_first) {
@@ -160,14 +160,14 @@ namespace edsp { namespace io { namespace internal {
     };
 
     template <>
-    struct libresample_resampler<typename implementation::libresample_implementation::value_type> {
+    struct libresample_implementation<typename implementation::libresample_implementation::value_type> {
         using value_type = float;
         using size_type  = long;
         using error_type = int;
 
-        libresample_resampler(size_type channels, int quality, value_type factor) : impl(channels, quality, factor) {}
+        libresample_implementation(size_type channels, int quality, value_type factor) : impl(channels, quality, factor) {}
 
-        ~libresample_resampler() = default;
+        ~libresample_implementation() = default;
 
         template <typename InputIt, typename OutputIt>
         inline size_type process(InputIt first, InputIt last, OutputIt d_first) {
