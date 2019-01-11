@@ -21,7 +21,6 @@
 */
 
 #include <edsp/filter.hpp>
-#include <edsp/chart/freqz.hpp>
 #include <edsp/thirdparty/CLI/CLI.hpp>
 
 using namespace edsp;
@@ -41,7 +40,6 @@ struct parameter {
 template <typename T, std::size_t N>
 void display(const biquad_cascade<T, N>& filter, const parameter& param) {
     if (param.display) {
-        chart::freqz(filter, param.points,  param.sample_rate);
     }
 }
 
