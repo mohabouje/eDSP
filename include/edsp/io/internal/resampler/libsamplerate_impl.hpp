@@ -29,14 +29,14 @@
 namespace edsp { namespace io { namespace internal {
 
     inline namespace implementation {
-        struct libsamplerate_implementation {
+        struct libsamplerate_impl {
             using value_type = float;
             using size_type  = long;
             using error_type = int;
 
-            libsamplerate_implementation(size_type channels, int quality, value_type factor);
+            libsamplerate_impl(size_type channels, int quality, value_type factor);
 
-            ~libsamplerate_implementation();
+            ~libsamplerate_impl();
 
             template <typename InputIt, typename OutputIt>
             inline size_type process(InputIt first, InputIt last, OutputIt d_first);
@@ -62,7 +62,7 @@ namespace edsp { namespace io { namespace internal {
             value_type factor_{1};
         };
 
-        libsamplerate_implementation::libsamplerate_implementation(long channels, int quality, value_type factor) :
+        libsamplerate_impl::libsamplerate_impl(long channels, int quality, value_type factor) :
             channels_(channels),
             quality_(quality),
             factor_(factor) {
@@ -70,12 +70,12 @@ namespace edsp { namespace io { namespace internal {
             report_error(__PRETTY_FUNCTION__);
         }
 
-        libsamplerate_implementation::~libsamplerate_implementation() {
+        libsamplerate_impl::~libsamplerate_impl() {
             src_delete(state_);
         }
 
         template <typename InputIt, typename OutputIt>
-        long libsamplerate_implementation::process(InputIt first, InputIt last, OutputIt d_first) {
+        long libsamplerate_impl::process(InputIt first, InputIt last, OutputIt d_first) {
             const auto size         = std::distance(first, last);
             data_.input_frames      = size / channels_;
             data_.output_frames     = size / channels_;
@@ -90,29 +90,29 @@ namespace edsp { namespace io { namespace internal {
             return data_.output_frames_gen * channels_;
         }
 
-        int libsamplerate_implementation::quality() const {
+        int libsamplerate_impl::quality() const {
             return quality_;
         }
 
-        int libsamplerate_implementation::reset() {
+        int libsamplerate_impl::reset() {
             error_ = src_reset(state_);
             report_error(__PRETTY_FUNCTION__);
             return error_;
         }
 
-        int libsamplerate_implementation::error() const {
+        int libsamplerate_impl::error() const {
             return error_;
         }
 
-        const char* libsamplerate_implementation::error_string() const {
+        const char* libsamplerate_impl::error_string() const {
             return src_strerror(error_);
         }
 
-        bool libsamplerate_implementation::valid_ratio(float ratio) {
+        bool libsamplerate_impl::valid_ratio(float ratio) {
             return static_cast<bool>(src_is_valid_ratio(ratio));
         }
 
-        void libsamplerate_implementation::report_error(const char* function_name) {
+        void libsamplerate_impl::report_error(const char* function_name) {
             if (error_ != 0) {
                 eError() << "Error while running" << __PRETTY_FUNCTION__ << ":" << error_string();
             }
@@ -158,17 +158,17 @@ namespace edsp { namespace io { namespace internal {
         }
 
         static bool valid_ratio(value_type ratio) {
-            return implementation::libsamplerate_implementation::valid_ratio(ratio);
+            return implementation::libsamplerate_impl::valid_ratio(ratio);
         }
 
     private:
-        implementation::libsamplerate_implementation impl;
-        std::vector<typename libsamplerate_implementation::value_type> input;
-        std::vector<typename libsamplerate_implementation::value_type> output;
+        implementation::libsamplerate_impl impl;
+        std::vector<typename libsamplerate_impl::value_type> input;
+        std::vector<typename libsamplerate_impl::value_type> output;
     };
 
     template <>
-    struct libsamplerate_resampler<typename implementation::libsamplerate_implementation::value_type> {
+    struct libsamplerate_resampler<typename implementation::libsamplerate_impl::value_type> {
         using value_type = float;
         using size_type  = long;
         using error_type = int;
@@ -199,11 +199,11 @@ namespace edsp { namespace io { namespace internal {
         }
 
         static bool valid_ratio(value_type ratio) {
-            return implementation::libsamplerate_implementation::valid_ratio(ratio);
+            return implementation::libsamplerate_impl::valid_ratio(ratio);
         }
 
     private:
-        implementation::libsamplerate_implementation impl;
+        implementation::libsamplerate_impl impl;
     };
 
 }}} // namespace edsp::io::internal

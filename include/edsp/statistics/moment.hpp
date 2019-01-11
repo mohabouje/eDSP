@@ -31,6 +31,7 @@ namespace edsp { namespace statistics {
     namespace internal {
 
         // TODO: update this internal
+        // From: https://gist.github.com/ofZach/4014022
         template <int N, class T>
         constexpr T nthPower(T x) {
             T ret = x;

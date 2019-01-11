@@ -24,7 +24,7 @@
 #define EDSP_RESAMPLER_IMPL_HPP
 
 #if defined(USE_LIBSAMPLERATE)
-#    include <edsp/io/internal/resampler/libsamplerate_implementation.hpp>
+#    include <edsp/io/internal/resampler/libsamplerate_impl.hpp>
 #elif defined(USE_LIBRESAMPLE)
 #    include <edsp/io/internal/resampler/libresample_resampler.hpp>
 #endif

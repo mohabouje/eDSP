@@ -29,14 +29,14 @@
 namespace edsp { namespace io { namespace internal {
 
     namespace implementation {
-        struct libresample_implementation {
+        struct libresample_impl {
             using value_type = float;
             using size_type  = long;
             using error_type = int;
 
-            libresample_implementation(size_type channels, int quality, value_type factor);
+            libresample_impl(size_type channels, int quality, value_type factor);
 
-            ~libresample_implementation();
+            ~libresample_impl();
 
             template <typename InputIt, typename OutputIt>
             inline size_type process(InputIt first, InputIt last, OutputIt d_first);
@@ -61,7 +61,7 @@ namespace edsp { namespace io { namespace internal {
             int quality_{0};
         };
 
-        libresample_implementation::libresample_implementation(long channels, int quality, value_type factor) :
+        libresample_impl::libresample_impl(long channels, int quality, value_type factor) :
             channels_(channels),
             quality_(quality),
             factor_(factor) {
@@ -69,12 +69,12 @@ namespace edsp { namespace io { namespace internal {
             report_error(__PRETTY_FUNCTION__);
         }
 
-        libresample_implementation::~libresample_implementation() {
+        libresample_impl::~libresample_impl() {
             resample_close(handle_);
         }
 
         template <typename InputIt, typename OutputIt>
-        long libresample_implementation::process(InputIt first, InputIt last, OutputIt d_first) {
+        long libresample_impl::process(InputIt first, InputIt last, OutputIt d_first) {
             const auto size = std::distance(first, last);
             int sr_used     = 0;
             const auto output_size =
@@ -83,28 +83,28 @@ namespace edsp { namespace io { namespace internal {
             return output_size;
         }
 
-        int libresample_implementation::quality() const {
+        int libresample_impl::quality() const {
             return quality_;
         }
 
-        int libresample_implementation::reset() {
+        int libresample_impl::reset() {
             report_error(__PRETTY_FUNCTION__);
             return error_;
         }
 
-        int libresample_implementation::error() const {
+        int libresample_impl::error() const {
             return error_;
         }
 
-        const char* libresample_implementation::error_string() const {
+        const char* libresample_impl::error_string() const {
             return "";
         }
 
-        bool libresample_implementation::valid_ratio(float ratio) {
+        bool libresample_impl::valid_ratio(float ratio) {
             return static_cast<bool>(src_is_valid_ratio(ratio));
         }
 
-        void libresample_implementation::report_error(const char* function_name) {
+        void libresample_impl::report_error(const char* function_name) {
             if (error_ != 0) {
                 eError() << "Error while running" << __PRETTY_FUNCTION__ << ":" << error_string();
             }
@@ -150,17 +150,17 @@ namespace edsp { namespace io { namespace internal {
         }
 
         static bool valid_ratio(value_type ratio) {
-            return implementation::libresample_implementation::valid_ratio(ratio);
+            return implementation::libresample_impl::valid_ratio(ratio);
         }
 
     private:
-        implementation::libresample_implementation impl;
-        std::vector<typename implementation::libresample_implementation::value_type> input;
-        std::vector<typename implementation::libresample_implementation::value_type> output;
+        implementation::libresample_impl impl;
+        std::vector<typename implementation::libresample_impl::value_type> input;
+        std::vector<typename implementation::libresample_impl::value_type> output;
     };
 
     template <>
-    struct libresample_implementation<typename implementation::libresample_implementation::value_type> {
+    struct libresample_implementation<typename implementation::libresample_impl::value_type> {
         using value_type = float;
         using size_type  = long;
         using error_type = int;
@@ -191,11 +191,11 @@ namespace edsp { namespace io { namespace internal {
         }
 
         static bool valid_ratio(value_type ratio) {
-            return implementation::libresample_implementation::valid_ratio(ratio);
+            return implementation::libresample_impl::valid_ratio(ratio);
         }
 
     private:
-        implementation::libresample_implementation impl;
+        implementation::libresample_impl impl;
     };
 
 }}} // namespace edsp::io::internal
