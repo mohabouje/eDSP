@@ -122,130 +122,7 @@ namespace edsp { inline namespace spectral {
     } // namespace internal
 
     template <typename T>
-    struct pffft_impl {
-        using value_type   = T;
-        using complex_type = std::complex<T>;
-        using size_type    = int;
-
-        explicit pffft_impl(size_type nfft) : nfft_(nfft) {
-            work_ = (float*) pffft_aligned_malloc(2 * nfft * sizeof(float));
-            meta::expects(
-                nfft_ % 16 == 0,
-                "Unfortunately, the fft size must be a multiple of 16 for complex FFTs  and 32 for real FFTs");
-        }
-
-        ~pffft_impl() {
-            if (!meta::is_null(plan_)) {
-                pffft_destroy_setup(plan_);
-            }
-            pffft_aligned_free(work_);
-        }
-
-        inline void dft(const complex_type* src, complex_type* dst) {
-            if (meta::is_null(plan_)) {
-                input_complex.resize(static_cast<unsigned long>(nfft_));
-                output_complex.resize(static_cast<unsigned long>(nfft_));
-                plan_ = pffft_new_setup(nfft_, PFFFT_COMPLEX);
-            }
-            std::copy(src, src + nfft_, std::begin(input_complex));
-            pffft_transform_ordered(plan_, reinterpret_cast<const float*>(meta::data(input_complex)),
-                                    reinterpret_cast<float*>(meta::data(output_complex)), work_, PFFFT_FORWARD);
-            std::copy(std::cbegin(output_complex), std::cend(output_complex), dst);
-        }
-
-        inline void idft(const complex_type* src, complex_type* dst) {
-            if (meta::is_null(plan_)) {
-                input_complex.resize(static_cast<unsigned long>(nfft_));
-                output_complex.resize(static_cast<unsigned long>(nfft_));
-                plan_ = pffft_new_setup(nfft_, PFFFT_COMPLEX);
-            }
-            std::copy(src, src + nfft_, std::begin(input_complex));
-            pffft_transform_ordered(plan_, reinterpret_cast<const float*>(meta::data(input_complex)),
-                                    reinterpret_cast<float*>(meta::data(output_complex)), work_, PFFFT_BACKWARD);
-            std::copy(std::cbegin(output_complex), std::cend(output_complex), dst);
-        }
-
-        inline void dft(const value_type* src, complex_type* dst) {
-            const auto c_size = std::floor(nfft_ / 2) + 1;
-            if (meta::is_null(plan_)) {
-                input_real.resize(static_cast<unsigned long>(nfft_));
-                output_complex.resize((unsigned long) c_size);
-                plan_ = pffft_new_setup(nfft_, PFFFT_REAL);
-            }
-
-            std::copy(src, src + nfft_, std::begin(input_real));
-            pffft_transform_ordered(plan_, meta::data(input_real), reinterpret_cast<float*>(meta::data(output_complex)),
-                                    work_, PFFFT_FORWARD);
-            std::copy(std::cbegin(output_complex), std::cend(output_complex), dst);
-        }
-
-        inline void idft(const complex_type* src, value_type* dst) {
-            const auto c_size = std::floor(nfft_ / 2) + 1;
-            if (meta::is_null(plan_)) {
-                input_complex.resize(static_cast<unsigned long>(c_size));
-                output_real.resize((unsigned long) nfft_);
-                plan_ = pffft_new_setup(nfft_, PFFFT_REAL);
-            }
-            std::copy(src, src + (int) c_size, std::begin(input_complex));
-            pffft_transform_ordered(plan_, reinterpret_cast<const float*>(meta::data(input_complex)),
-                                    meta::data(output_real), work_, PFFFT_BACKWARD);
-            std::copy(std::cbegin(output_real), std::cend(output_real), dst);
-        }
-
-        inline void dht(const value_type* src, value_type* dst) {
-            internal::useless_dht(src, dst, nfft_);
-        }
-
-        inline void dct(const value_type* src, value_type* dst) {
-            if (meta::is_null(plan_)) {
-                input_real.resize(static_cast<unsigned long>(nfft_));
-                plan_ = pffft_new_setup(nfft_, PFFFT_REAL);
-            }
-            std::copy(src, src + nfft_, std::begin(input_real));
-            internal::dct(meta::data(input_real), nfft_);
-            std::copy(std::cbegin(input_real), std::cend(input_real), dst);
-        }
-
-        inline void idct(const value_type* src, value_type* dst) {
-            if (meta::is_null(plan_)) {
-                input_real.resize(static_cast<unsigned long>(nfft_));
-                plan_ = pffft_new_setup(nfft_, PFFFT_REAL);
-            }
-            std::copy(src, src + nfft_, std::begin(input_real));
-            internal::idct(meta::data(input_real), nfft_);
-            std::copy(std::cbegin(input_real), std::cend(input_real), dst);
-        }
-
-        inline void idft_scale(value_type* dst) {
-            const auto scaling = static_cast<value_type>(nfft_);
-            for (size_type i = 0; i < nfft_; ++i) {
-                dst[i] /= scaling;
-            }
-        }
-
-        inline void idft_scale(complex_type* dst) {
-            const auto scaling = static_cast<value_type>(nfft_);
-            for (size_type i = 0; i < nfft_; ++i) {
-                dst[i] /= scaling;
-            }
-        }
-
-        inline void idct_scale(value_type* dst) {
-            const auto scaling = 2 * nfft_;
-            for (size_type i = 0; i < nfft_; ++i) {
-                dst[i] /= scaling;
-            }
-        }
-
-    private:
-        PFFFT_Setup* plan_{nullptr};
-        float* work_{nullptr};
-        size_type nfft_;
-        std::vector<std::complex<float>> input_complex;
-        std::vector<std::complex<float>> output_complex;
-        std::vector<float> input_real;
-        std::vector<float> output_real;
-    };
+    struct pfftw_impl {};
 
     template <>
     struct pffft_impl<float> {
@@ -257,7 +134,7 @@ namespace edsp { inline namespace spectral {
             work_ = (float*) pffft_aligned_malloc(2 * nfft * sizeof(float));
             meta::expects(
                 nfft_ % 16 == 0,
-                "Unfortunately, the fft size must be a multiple of 16 for complex FFTs  and 32 for real FFTs");
+                "Unfortunately, the fft_engine size must be a multiple of 16 for complex FFTs  and 32 for real FFTs");
         }
 
         ~pffft_impl() {
@@ -314,21 +191,21 @@ namespace edsp { inline namespace spectral {
             internal::idct(dst, nfft_);
         }
 
-        inline void idft_scale(value_type* dst) {
+        inline void idft_scale(value_type* dst) const {
             const auto scaling = static_cast<value_type>(nfft_);
             for (size_type i = 0; i < nfft_; ++i) {
                 dst[i] /= scaling;
             }
         }
 
-        inline void idft_scale(complex_type* dst) {
+        inline void idft_scale(complex_type* dst) const {
             const auto scaling = static_cast<value_type>(nfft_);
             for (size_type i = 0; i < nfft_; ++i) {
                 dst[i] /= scaling;
             }
         }
 
-        inline void idct_scale(value_type* dst) {
+        inline void idct_scale(value_type* dst) const {
             const auto scaling = 2 * nfft_;
             for (size_type i = 0; i < nfft_; ++i) {
                 dst[i] /= scaling;

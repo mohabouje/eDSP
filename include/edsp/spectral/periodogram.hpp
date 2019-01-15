@@ -22,7 +22,7 @@
 #ifndef EDSP_SPECTROGRAM_HPP
 #define EDSP_SPECTROGRAM_HPP
 
-#include <edsp/spectral/dft.hpp>
+#include <edsp/spectral/fft_engine.hpp
 #include <edsp/converter/mag2db.hpp>
 #include <edsp/math/numeric.hpp>
 #include <vector>
@@ -62,7 +62,7 @@ namespace edsp { inline namespace spectral {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
         const auto size  = std::distance(first, last);
-        fft_impl<value_type> fft_{size};
+        fft_engine<value_type> fft_{size};
         std::vector<std::complex<value_type>, Allocator> fft_data_(make_fft_size(size));
         fft_.dft(&(*first), meta::data(fft_data_));
         if (scale == SpectralScale::Linear) {

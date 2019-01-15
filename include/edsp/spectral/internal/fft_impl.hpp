@@ -29,7 +29,7 @@
 #    include <edsp/spectral/internal/libpffft_impl.hpp>
 #endif
 
-namespace edsp { inline namespace spectral {
+namespace edsp { inline namespace spectral { namespace internal {
 
 #if defined(USE_LIBFFTW)
     template <typename T>
@@ -43,6 +43,6 @@ namespace edsp { inline namespace spectral {
 #    error "Library not found"
 #endif
 
-}} // namespace edsp::spectral
+}}} // namespace edsp::spectral
 
 #endif //EDSP_FFT_IMPL_HPP
