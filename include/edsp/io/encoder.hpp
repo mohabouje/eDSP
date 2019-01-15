@@ -24,7 +24,7 @@
 #define EDSP_ENCODER_HPP
 
 #include <edsp/types/string_view.hpp>
-#include <edsp/io/internal/codec/encoder/encoder_impl.hpp>
+#include <edsp/io/internal/encoder/encoder_impl.hpp>
 
 namespace edsp { namespace io {
 
@@ -93,8 +93,8 @@ namespace edsp { namespace io {
          * @return Number of samples read with success.
          */
         template <typename InputIt>
-        index_type write(InputIt first, InputIt last) {
-            return impl_.write(first, last);
+        void write(InputIt first, InputIt last) {
+            impl_.write(first, last);
         }
 
     private:

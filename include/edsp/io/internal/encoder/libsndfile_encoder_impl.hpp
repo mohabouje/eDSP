@@ -46,8 +46,7 @@ namespace edsp { namespace io {
         template<>
         struct writer<float> {
             using value_type = float;
-            static constexpr auto FORMAT = SF_FORMAT_FLOAT;
-
+            static constexpr int FORMAT = SF_FORMAT_FLOAT;
 
             std::ptrdiff_t write(SNDFILE *file, float *buffer, int length) {
                 return sf_write_float(file, buffer, length);
@@ -57,7 +56,7 @@ namespace edsp { namespace io {
         template<>
         struct writer<double> {
             using value_type = double;
-            static constexpr auto FORMAT = SF_FORMAT_DOUBLE;
+            static constexpr int FORMAT = SF_FORMAT_DOUBLE;
 
             std::ptrdiff_t write(SNDFILE *file, double *buffer, int length) {
                 return sf_write_double(file, buffer, length);
@@ -67,7 +66,7 @@ namespace edsp { namespace io {
         template<>
         struct writer<std::int32_t> {
             using value_type = int;
-            static constexpr auto FORMAT = SF_FORMAT_PCM_32;
+            static constexpr int FORMAT = SF_FORMAT_PCM_32;
 
             std::ptrdiff_t write(SNDFILE *file, int *buffer, int length) {
                 return sf_write_int(file, buffer, length);
@@ -77,7 +76,7 @@ namespace edsp { namespace io {
         template<>
         struct writer<std::int16_t> {
             using value_type = short;
-            static constexpr auto FORMAT = SF_FORMAT_PCM_16;
+            static constexpr int FORMAT = SF_FORMAT_PCM_16;
 
             std::ptrdiff_t write(SNDFILE *file, short *buffer, int length) {
                 return sf_write_short(file, buffer, length);
@@ -98,7 +97,7 @@ namespace edsp { namespace io {
         libsndfile_encoder(size_t sample_rate, size_t channels)  {
             info_.samplerate = static_cast<int>(sample_rate);
             info_.channels = static_cast<int>(channels);
-            info_.format = SF_FORMAT_WAV | internal::writer<T>::FORMAT
+            info_.format = SF_FORMAT_WAV | internal::writer<T>::FORMAT;
         }
 
         ~libsndfile_encoder() {
@@ -140,13 +139,13 @@ namespace edsp { namespace io {
         }
 
         template<typename OutputIt>
-        index_type write(OutputIt first, OutputIt last) {
+        void write(OutputIt first, OutputIt last) {
             using value_type = meta::value_type_t <OutputIt>;
             static_assert(std::is_same<value_type, T>::value, "Expecting iterator of the same type");
 
             const auto length = std::distance(first, last);
             const auto* data = &(*first);
-            internal::writer{}.(file_, data, length);
+            internal::writer<T>{}.write(file_, data, length);
         }
 
     private:

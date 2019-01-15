@@ -33,10 +33,10 @@ namespace edsp { namespace io { namespace internal {
 
 #if defined(USE_LIBSAMPLERATE)
     template <typename T>
-    using resampler_impl = libsamplerate_resampler<T>;
+    using resampler_impl = libsamplerate_impl<T>;
 #elif defined(USE_LIBRESAMPLE)
     template <typename T>
-    using resampler_impl = libresample_resampler<T>;
+    using resampler_impl = libresample_impl<T>;
 #else
 #    error "Compatible library not found!"
 #endif

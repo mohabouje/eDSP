@@ -23,13 +23,10 @@
 #ifndef EDSP_ENCODER_IMPL_HPP
 #define EDSP_ENCODER_IMPL_HPP
 
-#undef USE_LIBAUDIOFILE
-#define USE_LIBSNDFILE
-
 #if defined(USE_LIBAUDIOFILE)
-#    include <edsp/io/internal/codec/encoder/libaudiofile_encoder_impl.hpp>
+#    include <edsp/io/internal/encoder/libaudiofile_encoder_impl.hpp>
 #elif defined(USE_LIBSNDFILE)
-#    include <edsp/io/internal/codec/encoder/libsndfile_encoder_impl.hpp
+#    include <edsp/io/internal/encoder/libsndfile_encoder_impl.hpp>
 #endif
 
 namespace edsp { namespace io {

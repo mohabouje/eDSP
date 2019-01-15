@@ -23,9 +23,9 @@
 #define EDSP_DECODER_IMPL_HPP
 
 #if defined(USE_LIBAUDIOFILE)
-#    include <edsp/io/internal/codec/decoder/libaudiofile_decoder_impl.hpp>
+#    include <edsp/io/internal/decoder/libaudiofile_decoder_impl.hpp>
 #elif defined(USE_LIBSNDFILE)
-#    include <edsp/io/internal/codec/decoder/libsndfile_decoder_impl.hpp>
+#    include <edsp/io/internal/decoder/libsndfile_decoder_impl.hpp>
 #endif
 
 namespace edsp { namespace io {

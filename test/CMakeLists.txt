@@ -29,6 +29,7 @@ target_link_libraries(${PROJECT_NAME}
     fftw3f
     fftw3
     pffft
+    samplerate
     audiofile
     sndfile)
 

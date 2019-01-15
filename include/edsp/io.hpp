@@ -24,5 +24,7 @@
 #define EDSP_IO_HPP
 
 #include <edsp/io/decoder.hpp>
+#include <edsp/io/encoder.hpp>
+#include <edsp/io/resampler.hpp>
 
 #endif //EDSP_IO_HPP

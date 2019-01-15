@@ -23,3 +23,4 @@
 #include <edsp/io.hpp>
 
 template class edsp::io::decoder<float>;
+template class edsp::io::encoder<float>;

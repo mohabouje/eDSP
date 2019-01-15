@@ -28,40 +28,16 @@
 
 namespace edsp { namespace io { namespace internal {
 
-    namespace implementation {
-        struct libresample_impl {
-            using value_type = float;
-            using size_type  = long;
-            using error_type = int;
+    template <typename T>
+    struct libresample_impl {};
 
-            libresample_impl(size_type channels, int quality, value_type factor);
+    template <>
+    struct libresample_impl<float> {
+        using value_type = float;
+        using size_type  = long;
+        using error_type = int;
 
-            ~libresample_impl();
-
-            template <typename InputIt, typename OutputIt>
-            inline size_type process(InputIt first, InputIt last, OutputIt d_first);
-
-            int quality() const;
-
-            error_type reset();
-
-            error_type error() const;
-
-            const char* error_string() const;
-
-            static bool valid_ratio(value_type ratio);
-
-        private:
-            void report_error(const char* function_name);
-
-            void* handle_;
-            error_type error_{0};
-            size_type channels_{0};
-            value_type factor_{1.0};
-            int quality_{0};
-        };
-
-        libresample_impl::libresample_impl(long channels, int quality, value_type factor) :
+        libresample_impl(long channels, int quality, value_type factor) :
             channels_(channels),
             quality_(quality),
             factor_(factor) {
@@ -69,12 +45,12 @@ namespace edsp { namespace io { namespace internal {
             report_error(__PRETTY_FUNCTION__);
         }
 
-        libresample_impl::~libresample_impl() {
+        ~libresample_impl() {
             resample_close(handle_);
         }
 
         template <typename InputIt, typename OutputIt>
-        long libresample_impl::process(InputIt first, InputIt last, OutputIt d_first) {
+        long process(InputIt first, InputIt last, OutputIt d_first) {
             const auto size = std::distance(first, last);
             int sr_used     = 0;
             const auto output_size =
@@ -83,72 +59,43 @@ namespace edsp { namespace io { namespace internal {
             return output_size;
         }
 
-        int libresample_impl::quality() const {
+        int quality() const {
             return quality_;
         }
 
-        int libresample_impl::reset() {
+        int reset() {
             report_error(__PRETTY_FUNCTION__);
             return error_;
         }
 
-        int libresample_impl::error() const {
+        int error() const {
             return error_;
         }
 
-        const char* libresample_impl::error_string() const {
-            return "";
+        const edsp::string_view& error_string() const {
+            static const char* error_message = "Not implemented yet";
+            return error_message;
         }
 
-        bool libresample_impl::valid_ratio(float ratio) {
+        bool valid_ratio(float ratio) {
             return true;
         }
 
-        void libresample_impl::report_error(const char* function_name) {
+    private:
+        void report_error(const char* function_name) {
             if (error_ != 0) {
-                eError() << "Error while running" << __PRETTY_FUNCTION__ << ":" << error_string();
+                eError() << "Error while running" << function_name << ":" << error_string();
             }
         }
-    } // namespace implementation
 
-    template <>
-    struct libresample_implementation<typename implementation::libresample_impl::value_type> {
-        using value_type = float;
-        using size_type  = long;
-        using error_type = int;
-
-        libresample_implementation(size_type channels, int quality, value_type factor) : impl(channels, quality, factor) {}
-
-        ~libresample_implementation() = default;
-
-        template <typename InputIt, typename OutputIt>
-        inline size_type process(InputIt first, InputIt last, OutputIt d_first) {
-            return impl.process(first, last, d_first);
-        };
-
-        int quality() const {
-            return impl.quality();
-        }
-
-        error_type reset() {
-            return impl.reset();
-        }
-
-        error_type error() const {
-            return impl.error();
-        }
-
-        const edsp::string_view error_string() const {
-            return impl.error_string();
-        }
-
-        static bool valid_ratio(value_type ratio) {
-            return implementation::libresample_impl::valid_ratio(ratio);
-        }
-
-    private:
-        implementation::libresample_impl impl;
+        void* handle_;
+        error_type error_{0};
+        size_type channels_{0};
+        value_type factor_{1.0};
+        int quality_{0};
     };
+
+
 
 }}} // namespace edsp::io::internal
 
