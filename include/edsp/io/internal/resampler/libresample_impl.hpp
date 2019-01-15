@@ -101,7 +101,7 @@ namespace edsp { namespace io { namespace internal {
         }
 
         bool libresample_impl::valid_ratio(float ratio) {
-            return static_cast<bool>(src_is_valid_ratio(ratio));
+            return true;
         }
 
         void libresample_impl::report_error(const char* function_name) {
@@ -110,54 +110,6 @@ namespace edsp { namespace io { namespace internal {
             }
         }
     } // namespace implementation
-
-    template <typename T>
-    struct libresample_implementation {
-        using value_type = float;
-        using size_type  = long;
-        using error_type = int;
-
-        libresample_implementation(size_type channels, int quality, value_type factor) : impl(channels, quality, factor) {}
-
-        ~libresample_implementation() = default;
-
-        template <typename InputIt, typename OutputIt>
-        inline size_type process(InputIt first, InputIt last, OutputIt d_first) {
-            const auto size = static_cast<std::size_t>(std::distance(first, last));
-            input.resize(size);
-            output.resize(size);
-
-            std::copy(first, last, std::begin(input));
-            const auto result = impl.process(std::cbegin(input), std::cend(input), std::begin(output));
-            std::copy(std::cbegin(output), std::cend(output), d_first);
-            return result;
-        };
-
-        int quality() const {
-            return impl.quality();
-        }
-
-        error_type reset() {
-            return impl.reset();
-        }
-
-        error_type error() const {
-            return impl.error();
-        }
-
-        const edsp::string_view error_string() const {
-            return impl.error_string();
-        }
-
-        static bool valid_ratio(value_type ratio) {
-            return implementation::libresample_impl::valid_ratio(ratio);
-        }
-
-    private:
-        implementation::libresample_impl impl;
-        std::vector<typename implementation::libresample_impl::value_type> input;
-        std::vector<typename implementation::libresample_impl::value_type> output;
-    };
 
     template <>
     struct libresample_implementation<typename implementation::libresample_impl::value_type> {
