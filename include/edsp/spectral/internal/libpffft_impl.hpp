@@ -122,7 +122,7 @@ namespace edsp { inline namespace spectral {
     } // namespace internal
 
     template <typename T>
-    struct pfftw_impl {};
+    struct pffft_impl {};
 
     template <>
     struct pffft_impl<float> {
