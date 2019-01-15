@@ -1,6 +1,6 @@
 /*
 * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
-* Copyright (C) 2018 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
+* Copyright (C) 2019 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
 *
 * This program is free software: you can redistribute it and/or modify it
 * under the terms of the GNU General Public License as published by the Free
@@ -15,31 +15,35 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* Filename: decoder_impl.hpp
+* Filename: encoder_impl.hpp
 * Author: Mohammed Boujemaoui
-* Date: 09/10/18
+* Date: 15/01/19
 */
-#ifndef EDSP_DECODER_IMPL_HPP
-#define EDSP_DECODER_IMPL_HPP
+
+#ifndef EDSP_ENCODER_IMPL_HPP
+#define EDSP_ENCODER_IMPL_HPP
+
+#undef USE_LIBAUDIOFILE
+#define USE_LIBSNDFILE
 
 #if defined(USE_LIBAUDIOFILE)
-#    include <edsp/io/internal/codec/libaudiofile_impl.hpp>
+#    include <edsp/io/internal/codec/encoder/libaudiofile_encoder_impl.hpp>
 #elif defined(USE_LIBSNDFILE)
-#    include <edsp/io/internal/codec/libsndfile_impl.hpp>
+#    include <edsp/io/internal/codec/encoder/libsndfile_encoder_impl.hpp
 #endif
 
 namespace edsp { namespace io {
 
 #if defined(USE_LIBAUDIOFILE)
     template <typename T, std::size_t N>
-    using decoder_impl = libaudiofile_decoder<T, N>;
+    using encoder_impl = libaudiofile_encoder<T, N>;
 #elif defined(USE_LIBSNDFILE)
-    template <typename T, std::size_t N>
-    using decoder_impl = libsndfile_decoder<T, N>;
+    template <typename T>
+    using encoder_impl = libsndfile_encoder<T>;
 #else
 #    error "Compatible library not found!"
 #endif
 
-}} // namespace edsp::io
+    }} // namespace edsp::io
 
-#endif //EDSP_DECODER_IMPL_HPP
+#endif //EDSP_ENCODER_IMPL_HPP
