@@ -40,8 +40,8 @@ namespace edsp { namespace io {
         using index_type = std::ptrdiff_t;
         using value_type = T;
 
-        encoder(size_t sample_rate, size_t channels)  : impl_(sample_rate, channels) {}
-        ~encoder()         = default;
+        encoder(size_t sample_rate, size_t channels) : impl_(sample_rate, channels) {}
+        ~encoder() = default;
 
         /**
          * @brief Opens an audio file.
@@ -82,8 +82,8 @@ namespace edsp { namespace io {
          * @brief Returns the sampling rate of the audio file in Hz.
          * @return Sampling rate of the audio file in Hz.
          */
-        double samplerate() const noexcept {
-            return impl_.samplerate();
+        double sample_rate() const noexcept {
+            return impl_.sample_rate();
         }
 
         /**
@@ -101,6 +101,5 @@ namespace edsp { namespace io {
         encoder_impl<T> impl_;
     };
 }} // namespace edsp::io
-
 
 #endif //EDSP_ENCODER_HPP

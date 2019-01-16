@@ -95,8 +95,6 @@ namespace edsp { namespace io { namespace internal {
         int quality_{0};
     };
 
-
-
 }}} // namespace edsp::io::internal
 
 #endif //EDSP_LIBRESAMPLE_IMPL_HPP

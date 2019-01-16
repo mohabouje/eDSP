@@ -23,7 +23,7 @@
 #ifndef EDSP_CENTSPACE_HPP
 #define EDSP_CENTSPACE_HPP
 
-#include <edsp/auditory/converter/hertz2cent.hpp
+#include <edsp/auditory/converter/hertz2cent.hpp>
 #include <edsp/algorithm/linspace.hpp>
 #include <algorithm>
 

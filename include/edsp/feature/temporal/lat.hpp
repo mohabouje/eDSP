@@ -47,7 +47,7 @@ namespace edsp { namespace feature { inline namespace temporal {
      *
      * @param first Forward iterator defining the begin of the range to examine.
      * @param last Forward iterator defining the end of the range to examine.
-     * @param samplerate Sampling frequency in Hz.
+     * @param sample_rate Sampling frequency in Hz.
      * @param start_threshold Numeric value between [0, 1] representing the percentage of the amplitude signal representing
      * the start of the attack time.
      * @param stop_threshold Numeric value between [0, 1] representing the percentage of the amplitude signal representing
@@ -55,7 +55,7 @@ namespace edsp { namespace feature { inline namespace temporal {
      * @return Estimated attack time in seconds.
      */
     template <typename ForwardIt, typename Numeric>
-    constexpr auto lat(ForwardIt first, ForwardIt last, Numeric samplerate, Numeric start_threshold,
+    constexpr auto lat(ForwardIt first, ForwardIt last, Numeric sample_rate, Numeric start_threshold,
                        Numeric stop_threshold) {
         using value_type               = typename std::iterator_traits<ForwardIt>::value_type;
         const auto max_value           = *std::max_element(first, last);
@@ -68,7 +68,7 @@ namespace edsp { namespace feature { inline namespace temporal {
         const auto start_attack = std::distance(first, start_iter);
         const auto stop_attack  = std::distance(first, stop_iter);
         const auto attack_time =
-            static_cast<value_type>(stop_attack - start_attack) / static_cast<value_type>(samplerate);
+            static_cast<value_type>(stop_attack - start_attack) / static_cast<value_type>(sample_rate);
         constexpr auto threshold = static_cast<value_type>(10e-5);
         return (attack_time > threshold) ? static_cast<T>(std::log10(attack_time)) : -5;
     }

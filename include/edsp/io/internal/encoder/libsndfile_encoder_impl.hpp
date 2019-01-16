@@ -23,7 +23,6 @@
 #ifndef EDSP_LIBSNDFILE_ENCODER_IMPL_HPP
 #define EDSP_LIBSNDFILE_ENCODER_IMPL_HPP
 
-
 #include <edsp/types/string_view.hpp>
 #include <edsp/core/logger.hpp>
 #include <edsp/meta/is_signed.hpp>
@@ -31,80 +30,78 @@
 #include <edsp/meta/iterator.hpp>
 #include <edsp/meta/is_null.hpp>
 
-
 #include <sndfile.h>
 #include <cmath>
 
 namespace edsp { namespace io {
 
-    inline namespace internal {
-        template<typename T>
+    namespace internal {
+        template <typename T>
         struct writer {
             using value_type = T;
         };
 
-        template<>
+        template <>
         struct writer<float> {
-            using value_type = float;
+            using value_type            = float;
             static constexpr int FORMAT = SF_FORMAT_FLOAT;
 
-            std::ptrdiff_t write(SNDFILE *file, float *buffer, int length) {
+            std::ptrdiff_t write(SNDFILE* file, float* buffer, int length) {
                 return sf_write_float(file, buffer, length);
             }
         };
 
-        template<>
+        template <>
         struct writer<double> {
-            using value_type = double;
+            using value_type            = double;
             static constexpr int FORMAT = SF_FORMAT_DOUBLE;
 
-            std::ptrdiff_t write(SNDFILE *file, double *buffer, int length) {
+            std::ptrdiff_t write(SNDFILE* file, double* buffer, int length) {
                 return sf_write_double(file, buffer, length);
             }
         };
 
-        template<>
+        template <>
         struct writer<std::int32_t> {
-            using value_type = int;
+            using value_type            = int;
             static constexpr int FORMAT = SF_FORMAT_PCM_32;
 
-            std::ptrdiff_t write(SNDFILE *file, int *buffer, int length) {
+            std::ptrdiff_t write(SNDFILE* file, int* buffer, int length) {
                 return sf_write_int(file, buffer, length);
             }
         };
 
-        template<>
+        template <>
         struct writer<std::int16_t> {
-            using value_type = short;
+            using value_type            = short;
             static constexpr int FORMAT = SF_FORMAT_PCM_16;
 
-            std::ptrdiff_t write(SNDFILE *file, short *buffer, int length) {
+            std::ptrdiff_t write(SNDFILE* file, short* buffer, int length) {
                 return sf_write_short(file, buffer, length);
             }
         };
 
-
     } // namespace internal
 
-    template<typename T>
+    template <typename T>
     struct libsndfile_encoder {
         static_assert(std::is_arithmetic<T>::value, "Expected arithmetic types");
 
-        using size_type = std::size_t;
+        using size_type  = std::size_t;
         using index_type = std::ptrdiff_t;
         using value_type = T;
 
-        libsndfile_encoder(size_t sample_rate, size_t channels)  {
+        libsndfile_encoder(size_t sample_rate, size_t channels) {
             info_.samplerate = static_cast<int>(sample_rate);
-            info_.channels = static_cast<int>(channels);
-            info_.format = SF_FORMAT_WAV | internal::writer<T>::FORMAT;
+            info_.channels   = static_cast<int>(channels);
+            info_.format     = SF_FORMAT_WAV | internal::writer<T>::FORMAT;
         }
 
         ~libsndfile_encoder() {
             close();
         }
 
-        bool open(const edsp::string_view &file_path) {
+        bool open(const edsp::string_view& file_path) {
             close();
 
             file_ = sf_open(file_path.data(), SFM_WRITE, &info_);
@@ -134,29 +131,29 @@ namespace edsp { namespace io {
             return info_.channels;
         }
 
-        double samplerate() const noexcept {
+        double sample_rate() const noexcept {
             return info_.samplerate;
         }
 
-        template<typename OutputIt>
+        template <typename OutputIt>
         void write(OutputIt first, OutputIt last) {
-            using value_type = meta::value_type_t <OutputIt>;
+            using value_type = meta::value_type_t<OutputIt>;
             static_assert(std::is_same<value_type, T>::value, "Expecting iterator of the same type");
 
             const auto length = std::distance(first, last);
-            const auto* data = &(*first);
+            const auto* data  = &(*first);
             internal::writer<T>{}.write(file_, data, length);
         }
 
     private:
-        using underlying_t = typename writer<T>::value_type;
+        using underlying_t = typename internal::writer<T>::value_type;
 
         /* File descriptor */
-        SNDFILE *file_{nullptr};
+        SNDFILE* file_{nullptr};
 
         /* Information about the file */
         SF_INFO info_{};
     };
-}}
+}} // namespace edsp::io
 
 #endif //EDSP_LIBSNDFILE_ENCODER_IMPL_HPP

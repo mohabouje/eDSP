@@ -113,8 +113,8 @@ namespace edsp { namespace io {
          * @brief Returns the sampling rate of the audio file in Hz.
          * @return Sampling rate of the audio file in Hz.
          */
-        double samplerate() const noexcept {
-            return impl_.samplerate();
+        double sample_rate() const noexcept {
+            return impl_.sample_rate();
         }
 
         /**

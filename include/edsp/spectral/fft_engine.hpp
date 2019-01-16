@@ -162,6 +162,6 @@ namespace edsp { inline namespace spectral {
         internal::fft_impl<T> impl_;
     };
 
-}}
+}} // namespace edsp::spectral
 
 #endif //EDSP_FFT_HPP

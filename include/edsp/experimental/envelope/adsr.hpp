@@ -56,11 +56,11 @@ namespace edsp { namespace envelope {
             state_  = adsr_state::release;
 
             if (release_time_ > 0.0)
-                release_rate_ = value_ / (release_time_ * samplerate_);
+                release_rate_ = value_ / (release_time_ * sample_rate_);
         }
 
-        constexpr value_type samplerate() const {
-            return samplerate_;
+        constexpr value_type sample_rate() const {
+            return sample_rate_;
         }
 
         constexpr value_type attack_rate() const {
@@ -84,11 +84,11 @@ namespace edsp { namespace envelope {
         }
 
         constexpr value_type attack_time() const {
-            return 1.0 / (attack_rate_ * samplerate_);
+            return 1.0 / (attack_rate_ * sample_rate_);
         }
 
         constexpr value_type decay_time() const {
-            return (1.0 - sustain_level_) / (decay_rate_ * samplerate_);
+            return (1.0 - sustain_level_) / (decay_rate_ * sample_rate_);
         }
 
         constexpr value_type release_time() const {
@@ -123,17 +123,17 @@ namespace edsp { namespace envelope {
 
         constexpr void set_attack_time(value_type attack_time) {
             meta::expects(attack_time > 0, "Requires strictly positive integer");
-            attack_rate_ = 1.0 / (attack_time * samplerate_);
+            attack_rate_ = 1.0 / (attack_time * sample_rate_);
         }
 
         constexpr void set_decay_time(value_type decay_time) {
             meta::expects(decay_time > 0, "Requires strictly positive integer");
-            decay_rate_ = (1.0 - sustain_level_) / (decay_time * samplerate_);
+            decay_rate_ = (1.0 - sustain_level_) / (decay_time * sample_rate_);
         }
 
         constexpr void set_release_time(value_type release_time) {
             meta::expects(release_time > 0, "Requires strictly positive integer");
-            release_rate_ = sustain_level_ / (release_time * samplerate_);
+            release_rate_ = sustain_level_ / (release_time * sample_rate_);
             release_time_ = release_time;
         }
 
@@ -146,12 +146,12 @@ namespace edsp { namespace envelope {
                 state_ = adsr_state ::decay;
         }
 
-        constexpr void set_samplerate(value_type samplerate) {
-            auto old_rate = samplerate_;
-            samplerate_   = samplerate;
-            attack_rate_  = old_rate * attack_rate_ / samplerate;
-            decay_rate_   = old_rate * decay_rate_ / samplerate;
-            release_rate_ = old_rate * release_rate_ / samplerate;
+        constexpr void set_sample_rate(value_type sample_rate) {
+            auto old_rate = sample_rate_;
+            sample_rate_  = sample_rate;
+            attack_rate_  = old_rate * attack_rate_ / sample_rate;
+            decay_rate_   = old_rate * decay_rate_ / sample_rate;
+            release_rate_ = old_rate * release_rate_ / sample_rate;
         }
 
         constexpr value_type operator()(value_type input) {
@@ -199,7 +199,7 @@ namespace edsp { namespace envelope {
 
     private:
         adsr_state state_{adsr_state::idle};
-        value_type samplerate_{44100};
+        value_type sample_rate_{44100};
         value_type target_{0.0};
         value_type value_{0.0};
         value_type attack_rate_{0.001};

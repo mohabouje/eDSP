@@ -51,25 +51,25 @@ namespace edsp { namespace envelope {
 
         /**
          * @brief Creates an EnvelopeFollower object class
-         * @param samplerate The sample rate in Hz.
+         * @param sample_rate The sample rate in Hz.
          * @param attackTime The attack time of the first order lowpass in the attack phase in msecs.
          * @param releaseTime The release time of the first order lowpass in the attack phase in msecs.
          * @param rectify If true, enables the rectification of the output signal.
          */
-        constexpr ar(value_type samplerate, value_type attackTime, value_type releaseTime,
+        constexpr ar(value_type sample_rate, value_type attackTime, value_type releaseTime,
                      bool rectify = false) noexcept;
 
         /**
          * @brief Returns the sample rate in Hz.
          * @return Sample rate in Hz.
          */
-        constexpr value_type samplerate() const noexcept;
+        constexpr value_type sample_rate() const noexcept;
 
         /**
          * @brief Sets the sample rate in Hz and resets the internal parameters.
-         * @param samplerate Sample rate in Hz.
+         * @param sample_rate Sample rate in Hz.
          */
-        constexpr void set_samplerate(value_type samplerate) noexcept;
+        constexpr void set_sample_rate(value_type sample_rate) noexcept;
 
         /**
          * @brief Returns the attack time of the first order lowpass in the attack phase.
@@ -133,7 +133,7 @@ namespace edsp { namespace envelope {
         constexpr value_type operator()(value_type value);
 
     private:
-        value_type samplerate_{44100};
+        value_type sample_rate_{44100};
         value_type attack_time_{10};
         value_type attack_gain_{0};
         value_type release_time_{1500};
@@ -143,8 +143,9 @@ namespace edsp { namespace envelope {
     };
 
     template <typename T>
-    constexpr ar<T>::ar(value_type samplerate, value_type attack_time, value_type release_time, bool rectify) noexcept :
-        samplerate_(samplerate),
+    constexpr ar<T>::ar(value_type sample_rate, value_type attack_time, value_type release_time,
+                        bool rectify) noexcept :
+        sample_rate_(sample_rate),
         attack_time_(attack_time),
         release_time_(release_time),
         rectification_(rectify) {
@@ -152,13 +153,13 @@ namespace edsp { namespace envelope {
     }
 
     template <typename T>
-    constexpr typename ar<T>::value_type ar<T>::samplerate() const noexcept {
-        return samplerate_;
+    constexpr typename ar<T>::value_type ar<T>::sample_rate() const noexcept {
+        return sample_rate_;
     }
 
     template <typename T>
-    constexpr void ar<T>::set_samplerate(value_type samplerate) noexcept {
-        samplerate_ = samplerate;
+    constexpr void ar<T>::set_sample_rate(value_type sample_rate) noexcept {
+        sample_rate_ = sample_rate;
         reset();
     }
 
@@ -196,9 +197,10 @@ namespace edsp { namespace envelope {
 
     template <typename T>
     constexpr void ar<T>::reset() noexcept {
-        attack_gain_  = (attack_gain_ > 0) ? static_cast<value_type>(std::exp(-1 / (attack_time_ * samplerate_))) : 0;
-        release_gain_ = (release_gain_ > 0) ? static_cast<value_type>(std::exp(-1 / (release_time_ * samplerate_))) : 0;
-        last_         = 0;
+        attack_gain_ = (attack_gain_ > 0) ? static_cast<value_type>(std::exp(-1 / (attack_time_ * sample_rate_))) : 0;
+        release_gain_ =
+            (release_gain_ > 0) ? static_cast<value_type>(std::exp(-1 / (release_time_ * sample_rate_))) : 0;
+        last_ = 0;
     }
 
     template <typename T>

@@ -45,7 +45,7 @@ namespace edsp { inline namespace types {
      * @tparam T  Type of element.
      * @tparam Allocator  Allocator type, defaults to std::allocator<T>.
      */
-     // TODO: Check why the default copy constructor is disabled!
+    // TODO: Check why the default copy constructor is disabled!
     template <typename T, typename Allocator = std::allocator<T>>
     class ring_buffer {
     public:

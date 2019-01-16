@@ -72,7 +72,6 @@ namespace edsp { namespace io {
             }
         };
 
-
     } // namespace internal
 
     template <typename T, std::size_t N = 2048>
@@ -125,11 +124,11 @@ namespace edsp { namespace io {
         }
 
         double duration() const noexcept {
-            return static_cast<double>(info_.frames) / info_.samplerate;
+            return static_cast<double>(info_.frames) / info_.sample_rate;
         }
 
-        double samplerate() const noexcept {
-            return info_.samplerate;
+        double sample_rate() const noexcept {
+            return info_.sample_rate;
         }
 
         index_type seek(libsndfile_decoder::index_type position) noexcept {
@@ -146,7 +145,7 @@ namespace edsp { namespace io {
 
         template <typename OutputIt>
         index_type read(OutputIt first, OutputIt last) {
-            using value_type = meta::value_type_t <OutputIt>;
+            using value_type = meta::value_type_t<OutputIt>;
             static_assert(std::is_same<value_type, T>::value, "Expecting iterator of the same type");
 
             index_type total        = std::distance(first, last);
@@ -155,8 +154,8 @@ namespace edsp { namespace io {
             do {
                 const auto expected_samples = (remaining >= N) ? N : remaining;
                 const auto expected_frames  = std::trunc(expected_samples / info_.channels);
-                const auto frames_read      = internal::reader<T>{}.read(file_, meta::data(buffer_), (int) expected_frames);
-                samples_read                = frames_read * info_.channels;
+                const auto frames_read = internal::reader<T>{}.read(file_, meta::data(buffer_), (int) expected_frames);
+                samples_read           = frames_read * info_.channels;
                 remaining -= samples_read;
                 for (auto i = 0; i < samples_read; ++i, ++first) {
                     *first = static_cast<meta::value_type_t<OutputIt>>(buffer_[i]);

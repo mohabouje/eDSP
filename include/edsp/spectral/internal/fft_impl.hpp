@@ -43,6 +43,6 @@ namespace edsp { inline namespace spectral { namespace internal {
 #    error "Library not found"
 #endif
 
-}}} // namespace edsp::spectral
+}}} // namespace edsp::spectral::internal
 
 #endif //EDSP_FFT_IMPL_HPP

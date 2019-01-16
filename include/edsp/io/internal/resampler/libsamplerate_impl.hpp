@@ -41,7 +41,7 @@ namespace edsp { namespace io { namespace internal {
             channels_(channels),
             quality_(quality),
             ratio_(factor) {
-            state_                   = src_new(quality, static_cast<int>(channels), &error_);
+            state_ = src_new(quality, static_cast<int>(channels), &error_);
             report_error(__PRETTY_FUNCTION__);
         }
 
@@ -54,7 +54,7 @@ namespace edsp { namespace io { namespace internal {
             const auto size         = std::distance(first, last);
             data_.input_frames      = size / channels_;
             data_.output_frames     = size / channels_;
-            data_.data_in           = const_cast<value_type *>(&(*first));
+            data_.data_in           = const_cast<value_type*>(&(*first));
             data_.data_out          = &(*d_first);
             data_.src_ratio         = ratio_;
             data_.input_frames_used = 0;
@@ -101,7 +101,6 @@ namespace edsp { namespace io { namespace internal {
         int quality_{SRC_SINC_MEDIUM_QUALITY};
         double ratio_{1};
     };
-
 
 }}} // namespace edsp::io::internal
 

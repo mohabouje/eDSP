@@ -54,12 +54,12 @@ namespace edsp { namespace io {
             return afSeekFrame(file_, AF_DEFAULT_TRACK, position);
         }
 
-        double samplerate() const noexcept {
-            return samplerate_;
+        double sample_rate() const noexcept {
+            return sample_rate_;
         }
 
         double duration() const noexcept {
-            return static_cast<double>(frames_) / samplerate_;
+            return static_cast<double>(frames_) / sample_rate_;
         }
 
         index_type channels() const noexcept {
@@ -86,9 +86,9 @@ namespace edsp { namespace io {
                 return false;
             }
 
-            frames_     = static_cast<index_type>(afGetFrameCount(file_, AF_DEFAULT_TRACK));
-            channels_   = static_cast<index_type>(afGetVirtualChannels(file_, AF_DEFAULT_TRACK));
-            samplerate_ = afGetRate(file_, AF_DEFAULT_TRACK);
+            frames_      = static_cast<index_type>(afGetFrameCount(file_, AF_DEFAULT_TRACK));
+            channels_    = static_cast<index_type>(afGetVirtualChannels(file_, AF_DEFAULT_TRACK));
+            sample_rate_ = afGetRate(file_, AF_DEFAULT_TRACK);
             update_format();
             return true;
         }
@@ -99,11 +99,11 @@ namespace edsp { namespace io {
             }
 
             afCloseFile(file_);
-            file_       = AF_NULL_FILEHANDLE;
-            channels_   = 0;
-            frames_     = 0;
-            samplerate_ = 0;
-            frame_size_ = 0;
+            file_        = AF_NULL_FILEHANDLE;
+            channels_    = 0;
+            frames_      = 0;
+            sample_rate_ = 0;
+            frame_size_  = 0;
         }
 
         template <typename OutputIt>
@@ -114,8 +114,9 @@ namespace edsp { namespace io {
             do {
                 const auto expected_samples = (remaining >= N) ? N : remaining;
                 const auto expected_frames  = std::trunc(expected_samples / channels_);
-                const auto frames_read = afReadFrames(file_, AF_DEFAULT_TRACK, meta::data(buffer_), (int) expected_frames);
-                samples_read           = frames_read * channels_;
+                const auto frames_read =
+                    afReadFrames(file_, AF_DEFAULT_TRACK, meta::data(buffer_), (int) expected_frames);
+                samples_read = frames_read * channels_;
                 remaining -= samples_read;
                 for (auto i = 0; i < samples_read; ++i, ++first) {
                     *first = buffer_[i];
@@ -129,7 +130,6 @@ namespace edsp { namespace io {
         }
 
     private:
-
         void update_format() {
             if (std::is_floating_point<T>::value) {
                 if (std::is_same<T, float>::value) {
@@ -165,7 +165,7 @@ namespace edsp { namespace io {
         float frame_size_{0};
 
         /* Sample rate of the streaming */
-        double samplerate_{0};
+        double sample_rate_{0};
     };
 
 }} // namespace edsp::io

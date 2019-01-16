@@ -110,7 +110,7 @@ namespace edsp { namespace filter {
     template <typename T, std::size_t MaxOrder>
     struct designer<T, designer_type::Butterworth, MaxOrder> {
         template <filter_type Type, typename... Args>
-        constexpr auto design( Args... arg) const -> decltype(butterworth_designer<T, Type, MaxOrder>{}(arg...)) {
+        constexpr auto design(Args... arg) const -> decltype(butterworth_designer<T, Type, MaxOrder>{}(arg...)) {
             return butterworth_designer<T, Type, MaxOrder>{}.operator()(arg...);
         }
     };

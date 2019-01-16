@@ -54,11 +54,11 @@ namespace edsp { namespace oscillators {
          * @brief Creates a square oscillator that generates a waveform with the configuration.
          *
          * @param amplitude Amplitude of the waveform.
-         * @param samplerate The sampling frequency in Hz.
+         * @param sample_rate The sampling frequency in Hz.
          * @param frequency The fundamental frequency of the signal (also known as pitch).
          * @param duty Duty factor, numeric value from [0,1]
          */
-        constexpr square_oscillator(value_type amplitude, value_type samplerate, value_type frequency,
+        constexpr square_oscillator(value_type amplitude, value_type sample_rate, value_type frequency,
                                     value_type duty) noexcept;
 
         /**
@@ -88,9 +88,9 @@ namespace edsp { namespace oscillators {
     };
 
     template <typename T>
-    constexpr square_oscillator<T>::square_oscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                                      value_type duty) noexcept :
-        oscillator<T>(amplitude, samplerate, frequency, 0),
+    constexpr square_oscillator<T>::square_oscillator(value_type amplitude, value_type sample_rate,
+                                                      value_type frequency, value_type duty) noexcept :
+        oscillator<T>(amplitude, sample_rate, frequency, 0),
         duty_(duty) {}
 
     template <typename T>
@@ -105,11 +105,11 @@ namespace edsp { namespace oscillators {
 
     template <typename T>
     constexpr typename square_oscillator<T>::value_type square_oscillator<T>::operator()() {
-        const auto t               = oscillator<T>::timestamp();
+        const auto t               = oscillator<T>::timestamp_;
         const value_type result    = (t >= duty_) ? -1 : 1;
-        const value_type increased = t + oscillator<T>::sampling_period();
-        this->set_timestamp((increased > math::inv(oscillator<T>::frequency())) ? 0 : increased);
-        return result * oscillator<T>::amplitude();
+        const value_type increased = t + oscillator<T>::sampling_period_;
+        oscillator<T>::set_timestamp((increased > oscillator<T>::inverse_frequency_) ? 0 : increased);
+        return result * oscillator<T>::amplitude_;
     }
 
 }} // namespace edsp::oscillators

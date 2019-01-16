@@ -24,7 +24,7 @@
 #define EDSP_ENCODER_IMPL_HPP
 
 #if defined(USE_LIBAUDIOFILE)
-#    include <edsp/io/internal/encoder/libaudiofile_encoder_impl.hpp>
+#    include <edsp/io/internal/encoder/libsndfile_encoder_impl.hpp>
 #elif defined(USE_LIBSNDFILE)
 #    include <edsp/io/internal/encoder/libsndfile_encoder_impl.hpp>
 #endif
@@ -32,8 +32,8 @@
 namespace edsp { namespace io {
 
 #if defined(USE_LIBAUDIOFILE)
-    template <typename T, std::size_t N>
-    using encoder_impl = libaudiofile_encoder<T, N>;
+    template <typename T>
+    using encoder_impl = libsndfile_encoder<T>;
 #elif defined(USE_LIBSNDFILE)
     template <typename T>
     using encoder_impl = libsndfile_encoder<T>;
@@ -41,6 +41,6 @@ namespace edsp { namespace io {
 #    error "Compatible library not found!"
 #endif
 
-    }} // namespace edsp::io
+}} // namespace edsp::io
 
 #endif //EDSP_ENCODER_IMPL_HPP
