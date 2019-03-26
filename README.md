@@ -32,7 +32,8 @@ Got it! Excellent question! There are plenty of established DSP frameworks for C
 - Provides **fast** implementations: check the available [benchmarks](https://github.com/mohabouje/eDSP/wiki/Benchmark).
 - Aims to be **cross-platform**
 - Supports modern **C++11/14/17 features**
-- Integrates bindings for different languages: **Python and JavaScript**
+- Implements a simple interface compatible with C
+- Integrates bind for different languages: **Python, Go and JavaScript**
 
 ### What platforms are supported?
 

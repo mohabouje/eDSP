@@ -35,7 +35,7 @@ namespace edsp { inline namespace algorithm {
      * @returns Iterator pointing to the first element that is equal than value, or last if no such element is found.
      */
     template <typename ForwardIt>
-    constexpr std::int32_t indexof(ForwardIt first, ForwardIt last,
+    constexpr std::int32_t index_of(ForwardIt first, ForwardIt last,
                                    const typename std::iterator_traits<ForwardIt>::value_type& value) {
         const auto element = std::find(first, last, value);
         return static_cast<int32_t>((element != last) ? std::distance(first, element) : -1);
