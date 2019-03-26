@@ -23,7 +23,7 @@
 #ifndef EDSP_CONVOLUTION_HPP
 #define EDSP_CONVOLUTION_HPP
 
-#include <edsp/spectral/fft_engine.hpp
+#include <edsp/spectral/fft_engine.hpp>
 #include <vector>
 
 namespace edsp { inline namespace spectral {

@@ -32,7 +32,6 @@
 */
 
 #include "statistics.h"
-
 #include <iostream>
 #include <edsp/statistics.hpp>
 

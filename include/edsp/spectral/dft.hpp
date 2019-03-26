@@ -47,8 +47,8 @@ namespace edsp { inline namespace spectral {
     inline void cdft(InputIt first, InputIt last, OutputIt d_first) {
         using complex_t    = meta::value_type_t<InputIt>;
         using underlying_t = typename complex_t::value_type;
-        const auto nfft    = static_cast<typename fft_engine<underlying_t>::size_type>(std::distance(first, last));
-        fft_engine<underlying_t> plan(nfft);
+        const auto nfft    = std::distance(first, last);
+        fft_engine<underlying_t> plan((typename fft_engine<underlying_t >::size_type) nfft);
         plan.dft(&(*first), &(*d_first));
     }
 
@@ -71,8 +71,8 @@ namespace edsp { inline namespace spectral {
     inline void cidft(InputIt first, InputIt last, OutputIt d_first) {
         using complex_t    = meta::value_type_t<InputIt>;
         using underlying_t = typename complex_t::value_type;
-        const auto nfft    = static_cast<typename fft_engine<underlying_t>::size_type>(std::distance(first, last));
-        fft_engine<underlying_t> plan(nfft);
+        const auto nfft    = std::distance(first, last);
+        fft_engine<underlying_t> plan((typename fft_engine<underlying_t >::size_type) nfft);
         plan.idft(&(*first), &(*d_first));
         plan.idft_scale(&(*d_first));
     }
@@ -93,7 +93,8 @@ namespace edsp { inline namespace spectral {
     template <typename InputIt, typename OutputIt>
     void dft(InputIt first, InputIt last, OutputIt d_first) {
         using value_type = typename std::iterator_traits<InputIt>::value_type;
-        fft_engine<value_type> plan(std::distance(first, last));
+        const auto nfft    = std::distance(first, last);
+        fft_engine<value_type> plan((typename fft_engine<value_type>::size_type) nfft);
         plan.dft(&(*first), &(*d_first));
     }
 
@@ -113,9 +114,8 @@ namespace edsp { inline namespace spectral {
     template <typename InputIt, typename OutputIt>
     void idft(InputIt first, InputIt last, OutputIt d_first) {
         using value_type = typename std::iterator_traits<OutputIt>::value_type;
-        const auto nfft =
-            static_cast<typename fft_engine<value_type>::size_type>(make_ifft_size(std::distance(first, last)));
-        fft_engine<value_type> plan(nfft);
+        const auto nfft = make_ifft_size(std::distance(first, last));
+        fft_engine<value_type> plan((typename fft_engine<value_type>::size_type) nfft);
         plan.idft(&(*first), &(*d_first));
         plan.idft_scale(&(*d_first));
     }

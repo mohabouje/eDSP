@@ -34,12 +34,11 @@
 #ifndef EDSP_BINDING_C_ALGORITHM_H
 #define EDSP_BINDING_C_ALGORITHM_H
 
-#include "types.h"
-
-#pragma once
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include "types.h"
 
 /**
  * @brief Amplifies or attenuates the elements in the input array and stores the result in the output array.

@@ -36,10 +36,6 @@
 #include "windowing.h"
 #include <edsp/windowing.hpp>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 void bartlett(real_t *window, int N) {
     edsp::windowing::bartlett(window, window + N);
 }
@@ -79,9 +75,3 @@ void triangular(real_t *window, int N) {
 void welch(real_t *window, int N) {
     edsp::windowing::welch(window, window + N);
 }
-
-#ifdef __cplusplus
-}
-
-
-#endif

@@ -34,12 +34,11 @@
 #ifndef EDSP_BINDING_C_STATISTICS_H
 #define EDSP_BINDING_C_STATISTICS_H
 
-#include "types.h"
-
-#pragma once
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include "types.h"
 
 
 struct Peak {
@@ -150,7 +149,7 @@ real_t min(const real_t* data, int size);
  * @param size Length of the array
  * @return Peak value of the input array
  */
-Peak peak(const real_t* data, int size);
+struct Peak peak(const real_t* data, int size);
 
 /**
  * @brief Computes the maximum absolute value of the input data
@@ -174,7 +173,7 @@ real_t min_abs(const real_t* data, int size);
  * @param size Length of the array
  * @return Peak absolute value of the input array
  */
-Peak peak_abs(const real_t* data, int size);
+struct Peak peak_abs(const real_t* data, int size);
 
 /**
  * @brief Computes the average value of the input data

@@ -32,12 +32,8 @@
 */
 
 #include "algorithm.h"
-
 #include <edsp/algorithm.hpp>
 
-#ifdef __cplusplus
-extern "C" {
-#endif
 
 void array_amplify(const real_t *input, int size, real_t *output, real_t factor) {
     edsp::amplifier(input, input + size, output, factor);
@@ -125,7 +121,3 @@ int contains(const real_t *input, int size, real_t value) {
     const auto iter = edsp::linear_search(input, end, value);
     return iter != end;
 }
-
-#ifdef __cplusplus
-}
-#endif

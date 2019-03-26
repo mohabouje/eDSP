@@ -22,7 +22,7 @@
 #ifndef EDSP_CEPSTRUM_HPP
 #define EDSP_CEPSTRUM_HPP
 
-#include <edsp/spectral/fft_engine.hpp
+#include <edsp/spectral/fft_engine.hpp>
 #include <vector>
 
 namespace edsp { inline namespace spectral {

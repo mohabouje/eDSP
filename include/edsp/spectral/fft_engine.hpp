@@ -54,7 +54,7 @@ namespace edsp { inline namespace spectral {
     template <typename T>
     class fft_engine {
     public:
-        static_assert(std::is_floating_point<T>::value, "Expecting floating point numbers");
+        //static_assert(std::is_floating_point<T>::value, "Expecting floating point numbers");
 
         using value_type   = T;
         using complex_type = std::complex<T>;

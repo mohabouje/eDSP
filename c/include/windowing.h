@@ -34,12 +34,11 @@
 #ifndef EDSP_BINDING_C_WINDOWING_H
 #define EDSP_BINDING_C_WINDOWING_H
 
-#include "types.h"
-
-#pragma once
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+#include "types.h"
 
 /**
  * @brief Computes a Bartlett window of length N and stores the result in the array.

@@ -26,20 +26,23 @@
 * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 * OF THE POSSIBILITY OF SUCH DAMAGE.
 *
-* Filename: types.hpp
+* Filename: main.cpp
 * Author: Mohammed Boujemaoui
 * Date: 26/03/19
 */
 
-#ifndef EDSP_BINDING_C_TYPES_HPP
-#define EDSP_BINDING_C_TYPES_HPP
+#include <stdio.h>
+#include <stdlib.h>
+#include "windowing.h"
+#include "spectral.h"
 
-#ifdef ENABLE_SINGLE
-    typedef float real_t;
-#else
-    typedef double real_t;
-#endif
+int main(int argc, char **argv) {
+    const int size = 100;
+    const int fft_size = get_fft_size(size);
 
-typedef real_t complex_t[2];
-
-#endif //EDSP_BINDING_C_TYPES_HPP
+    real_t input_data[size];
+    complex_t output_data[fft_size];
+    hamming(input_data, size);
+    fft(input_data, size, output_data);
+    return 0;
+}
