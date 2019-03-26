@@ -6,11 +6,13 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(HEADER
         include/types.h
         include/algorithm.h
-        include/windowing.h)
+        include/windowing.h
+        include/statistics.h)
 
 set(SRC
         src/algorithm.c
-        src/windowing.c)
+        src/windowing.c
+        src/statistics.c)
 
 SET_SOURCE_FILES_PROPERTIES(${SRC} PROPERTIES LANGUAGE CXX)
 
