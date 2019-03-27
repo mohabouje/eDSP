@@ -12,8 +12,8 @@ set(HEADER
 
 set(SRC
         src/algorithm_python.c
-        src/windowing_python.c
-        src/statistics_python.c
+        src/windowing.c
+        src/statistics.c
         src/spectral.c)
 
 set_source_files_properties(${SRC} PROPERTIES LANGUAGE CXX)

@@ -190,7 +190,7 @@ endif(BUILD_EXAMPLES)
 
 if (BUILD_TESTS)
     enable_testing()
-    add_subdirectory(test)
+    add_subdirectory(test/gte)
 endif (BUILD_TESTS)
 
 

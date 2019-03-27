@@ -31,7 +31,7 @@
 * Date: 27/03/19
 */
 
-#include "statistics_python.hpp"
+#include "statistics.hpp"
 #include <statistics.h>
 #include <boost/python.hpp>
 #include <boost/python/numpy.hpp>
@@ -149,15 +149,15 @@ void add_statistics_package() {
     bp::def("geometric_mean", geometric_mean_python);
     bp::def("generalized_mean", generalized_mean_python);
     bp::def("harmonic_mean", harmonic_mean_python);
-    bp::def("max", max);
-    bp::def("max_abs", max_abs);
-    bp::def("min", min);
-    bp::def("min_abs", min_abs);
-    bp::def("peak", peak);
-    bp::def("peak_abs", peak_abs);
-    bp::def("mean", mean);
-    bp::def("median", median);
-    bp::def("variance", variance);
-    bp::def("standard_deviation", standard_deviation);
-    bp::def("norm", norm);
+    bp::def("max", max_python);
+    bp::def("max_abs", max_abs_python);
+    bp::def("min", min_python);
+    bp::def("min_abs", min_abs_python);
+    bp::def("peak", peak_python);
+    bp::def("peak_abs", peak_abs_python);
+    bp::def("mean", mean_python);
+    bp::def("median", median_python);
+    bp::def("variance", variance_python);
+    bp::def("standard_deviation", standard_deviation_python);
+    bp::def("norm", norm_python);
 }

@@ -32,8 +32,8 @@
 */
 
 #include "algorithm_python.hpp"
-#include "windowing_python.hpp"
-#include "statistics_python.hpp"
+#include "windowing.hpp"
+#include "statistics.hpp"
 
 #include <boost/python/numpy.hpp>
 #include <boost/python.hpp>

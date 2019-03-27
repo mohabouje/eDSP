@@ -31,7 +31,7 @@
 * Date: 27/03/19
 */
 
-#include "windowing_python.hpp"
+#include "windowing.hpp"
 #include <windowing.h>
 #include <boost/python/numpy.hpp>
 #include <boost/python.hpp>
@@ -88,6 +88,11 @@ bn::ndarray generate_triangular(long size) {
     return generate_window(size, triangular);
 }
 
+bn::ndarray generate_rectangular(long size) {
+    return generate_window(size, rectangular);
+}
+
+
 void add_windowing_package() {
 
     std::string nested_name = bp::extract<std::string>(bp::scope().attr("__name__") + ".windowing");
@@ -106,4 +111,5 @@ void add_windowing_package() {
     bp::def("hanning", generate_hanning);
     bp::def("triangular", generate_triangular);
     bp::def("welch", generate_welch);
+    bp::def("rectangular", generate_rectangular);
 }

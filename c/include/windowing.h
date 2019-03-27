@@ -110,6 +110,13 @@ void triangular(real_t* window, int N);
  */
 void welch(real_t* window, int N);
 
+/**
+ * @brief Computes a rectangular window of length N and stores the result in the array.
+ * @param window Array storing the window data
+ * @param N Length of the array
+ */
+void rectangular(real_t* window, int N);
+
 #ifdef __cplusplus
 }
 #endif

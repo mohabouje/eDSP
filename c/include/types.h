@@ -34,9 +34,6 @@
 #ifndef EDSP_BINDING_C_TYPES_HPP
 #define EDSP_BINDING_C_TYPES_HPP
 
-// TODO: modify!
-#define ENABLE_SINGLE 1
-
 #ifdef ENABLE_SINGLE
     typedef float real_t;
 #else

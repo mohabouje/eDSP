@@ -36,8 +36,8 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 
 set(HEADER
         include/algorithm_python.hpp
-        include/windowing_python.hpp
-        include/statistics_python.hpp)
+        include/windowing.hpp
+        include/statistics.hpp)
 
 set(SRC
         src/package.cpp

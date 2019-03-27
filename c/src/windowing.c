@@ -35,6 +35,8 @@
 
 #include "windowing.h"
 #include <edsp/windowing.hpp>
+#include <windowing.h>
+
 
 void bartlett(real_t *window, int N) {
     edsp::windowing::bartlett(window, window + N);
@@ -74,4 +76,8 @@ void triangular(real_t *window, int N) {
 
 void welch(real_t *window, int N) {
     edsp::windowing::welch(window, window + N);
+}
+
+void rectangular(real_t *window, int N) {
+    edsp::windowing::rectangular(window, window + N);
 }

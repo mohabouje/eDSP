@@ -97,19 +97,19 @@ real_t moment(const real_t *data, int size, int n) {
     case 1:
         return edsp::statistics::moment<1>(data, data + size);
     case 2:
-        return edsp::statistics::moment<1>(data, data + size);
+        return edsp::statistics::moment<2>(data, data + size);
     case 3:
-        return edsp::statistics::moment<1>(data, data + size);
+        return edsp::statistics::moment<3>(data, data + size);
     case 4:
-        return edsp::statistics::moment<1>(data, data + size);
+        return edsp::statistics::moment<4>(data, data + size);
     case 5:
-        return edsp::statistics::moment<1>(data, data + size);
+        return edsp::statistics::moment<5>(data, data + size);
     case 6:
-        return edsp::statistics::moment<1>(data, data + size);
+        return edsp::statistics::moment<6>(data, data + size);
     case 7:
-        return edsp::statistics::moment<1>(data, data + size);
+        return edsp::statistics::moment<7>(data, data + size);
     case 8:
-        return edsp::statistics::moment<1>(data, data + size);
+        return edsp::statistics::moment<8>(data, data + size);
     default:
         std::cerr << "Maximum moment: " << 8 << std::endl;
         return 0;
