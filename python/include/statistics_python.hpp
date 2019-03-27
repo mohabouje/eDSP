@@ -26,23 +26,15 @@
 * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 * OF THE POSSIBILITY OF SUCH DAMAGE.
 *
-* Filename: main.cpp
+* Filename: statistics.hpp
 * Author: Mohammed Boujemaoui
-* Date: 26/03/19
+* Date: 27/03/19
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "windowing.h"
-#include "spectral.h"
+#ifndef EDSP_PYTHON_BINDING_STATISTICS_HPP
+#define EDSP_PYTHON_BINDING_STATISTICS_HPP
 
-int main(int argc, char **argv) {
-    const int size = 100;
-    const int fft_size = get_fft_size(size);
+void add_statistics_package();
 
-    real_t input_data[size];
-    complex_t output_data[fft_size];
-    hamming(input_data, size);
-    fft(input_data, size, output_data);
-    return 0;
-}
+
+#endif //EDSP_PYTHON_BINDING_STATISTICS_HPP

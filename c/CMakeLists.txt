@@ -11,15 +11,15 @@ set(HEADER
         include/spectral.h)
 
 set(SRC
-        src/algorithm.c
-        src/windowing.c
-        src/statistics.c
+        src/algorithm_python.c
+        src/windowing_python.c
+        src/statistics_python.c
         src/spectral.c)
 
 set_source_files_properties(${SRC} PROPERTIES LANGUAGE CXX)
 
 set(CEDSP_LIBRARY cedsp)
-add_library(${CEDSP_LIBRARY} SHARED ${HEADER} ${SRC})
+add_library(${CEDSP_LIBRARY} STATIC ${HEADER} ${SRC})
 target_include_directories(${CEDSP_LIBRARY} PUBLIC include/)
 target_link_libraries(${CEDSP_LIBRARY} PRIVATE ${EDSP_LIBRARIES})
 set(CEDSP_LIBRARIES "${EDSP_LIBRARIES};${CEDSP_LIBRARY}" PARENT_SCOPE)
@@ -27,5 +27,6 @@ set(CEDSP_LIBRARIES "${EDSP_LIBRARIES};${CEDSP_LIBRARY}" PARENT_SCOPE)
 get_target_property(OUT ${CEDSP_LIBRARY} LINK_LIBRARIES)
 message(STATUS "${CEDSP_LIBRARY}-dependencies = ${OUT}")
 
-add_executable("${PROJECT_NAME}-example" example/main.c)
-target_link_libraries("${PROJECT_NAME}-example" PUBLIC ${CEDSP_LIBRARIES})
+
+install(TARGETS ${CEDSP_LIBRARY} EXPORT "${CEDSP_LIBRARY}-targets" DESTINATION lib)
+install(DIRECTORY include/ DESTINATION include/cedsp)

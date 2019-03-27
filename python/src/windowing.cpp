@@ -31,12 +31,10 @@
 * Date: 27/03/19
 */
 
+#include "windowing_python.hpp"
 #include <windowing.h>
 #include <boost/python/numpy.hpp>
 #include <boost/python.hpp>
-
-#define BOOST_EDSP_LIBRARY "boost_numpy"
-#include <boost/config/auto_link.hpp>
 
 namespace bp = boost::python;
 namespace bn = boost::python::numpy;

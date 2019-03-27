@@ -31,18 +31,13 @@
 * Date: 27/03/19
 */
 
+#include "algorithm_python.hpp"
 #include <algorithm.h>
-#include <edsp/algorithm.hpp>
-
 #include <boost/python.hpp>
 #include <boost/python/numpy.hpp>
 
-#define BOOST_EDSP_LIBRARY "boost_numpy"
-#include <boost/config/auto_link.hpp>
-
 namespace bp = boost::python;
 namespace bn = boost::python::numpy;
-using namespace edsp::algorithm;
 
 
 template <typename Functor, typename... Args>

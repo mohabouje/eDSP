@@ -31,8 +31,9 @@
 * Date: 27/03/19
 */
 
-#include "algorithm.hpp"
-#include "windowing.hpp"
+#include "algorithm_python.hpp"
+#include "windowing_python.hpp"
+#include "statistics_python.hpp"
 
 #include <boost/python/numpy.hpp>
 #include <boost/python.hpp>
@@ -44,4 +45,5 @@ BOOST_PYTHON_MODULE(MODULE_NAME) {
     bn::initialize();
     add_algorithm_package();
     add_windowing_package();
+    add_statistics_package();
 }
