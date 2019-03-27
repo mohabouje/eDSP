@@ -35,7 +35,7 @@
 
 namespace edsp { namespace io {
 
-    namespace internal {
+    inline namespace internal {
         template <typename T>
         struct writer {
             using value_type = T;

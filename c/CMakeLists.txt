@@ -16,12 +16,16 @@ set(SRC
         src/statistics.c
         src/spectral.c)
 
-SET_SOURCE_FILES_PROPERTIES(${SRC} PROPERTIES LANGUAGE CXX)
+set_source_files_properties(${SRC} PROPERTIES LANGUAGE CXX)
 
-add_library(${PROJECT_NAME} SHARED ${HEADER} ${SRC})
-target_include_directories(${PROJECT_NAME} PUBLIC include)
-target_link_libraries(${PROJECT_NAME} PRIVATE ${LIB_NAME})
+set(CEDSP_LIBRARY cedsp)
+add_library(${CEDSP_LIBRARY} SHARED ${HEADER} ${SRC})
+target_include_directories(${CEDSP_LIBRARY} PUBLIC include/)
+target_link_libraries(${CEDSP_LIBRARY} PRIVATE ${EDSP_LIBRARIES})
+set(CEDSP_LIBRARIES "${EDSP_LIBRARIES};${CEDSP_LIBRARY}" PARENT_SCOPE)
 
+get_target_property(OUT ${CEDSP_LIBRARY} LINK_LIBRARIES)
+message(STATUS "${CEDSP_LIBRARY}-dependencies = ${OUT}")
 
 add_executable("${PROJECT_NAME}-example" example/main.c)
-target_link_libraries("${PROJECT_NAME}-example" PUBLIC ${PROJECT_NAME} -lfftw3)
+target_link_libraries("${PROJECT_NAME}-example" PUBLIC ${CEDSP_LIBRARIES})

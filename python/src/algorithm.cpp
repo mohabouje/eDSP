@@ -35,13 +35,13 @@
 #include <edsp/algorithm.hpp>
 
 #include <boost/python.hpp>
-#include <boost/numpy.hpp>
+#include <boost/python/numpy.hpp>
 
-#define BOOST_LIB_NAME "boost_numpy"
+#define BOOST_EDSP_LIBRARY "boost_numpy"
 #include <boost/config/auto_link.hpp>
 
 namespace bp = boost::python;
-namespace bn = boost::numpy;
+namespace bn = boost::python::numpy;
 using namespace edsp::algorithm;
 
 

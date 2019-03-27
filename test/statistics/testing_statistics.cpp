@@ -22,6 +22,7 @@
 
 #include <edsp/statistics.hpp>
 #include <gtest/gtest.h>
+#include <array>
 
 using namespace edsp::statistics;
 

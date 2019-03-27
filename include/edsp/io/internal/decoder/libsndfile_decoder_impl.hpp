@@ -124,11 +124,11 @@ namespace edsp { namespace io {
         }
 
         double duration() const noexcept {
-            return static_cast<double>(info_.frames) / info_.sample_rate;
+            return static_cast<double>(info_.frames) / info_.samplerate;
         }
 
         double sample_rate() const noexcept {
-            return info_.sample_rate;
+            return info_.samplerate;
         }
 
         index_type seek(libsndfile_decoder::index_type position) noexcept {

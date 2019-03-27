@@ -34,11 +34,11 @@
 #include "algorithm.hpp"
 #include "windowing.hpp"
 
-#include <boost/numpy.hpp>
+#include <boost/python/numpy.hpp>
 #include <boost/python.hpp>
 
 namespace bp = boost::python;
-namespace bn = boost::numpy;
+namespace bn = boost::python::numpy;
 
 BOOST_PYTHON_MODULE(MODULE_NAME) {
     bn::initialize();
