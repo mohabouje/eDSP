@@ -5,6 +5,9 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 project(edsp VERSION 0.0.1 LANGUAGES CXX)
 
 option(BUILD_C_BINDINGS "Enable the compilation of the bindings for C" ON)
+option(BUILD_PYTHON_BINDINGS "Enable the compilation of the bindings for Python" ON)
+
+
 option(BUILD_TESTS "Enable to build tests" ON)
 option(BUILD_DOCS "Enable to build docs" OFF)
 option(BUILD_EXAMPLES "Enable to build examples" ON)
@@ -193,3 +196,7 @@ endif (BUILD_DOCS)
 if (BUILD_C_BINDINGS)
     add_subdirectory(c)
 endif(BUILD_C_BINDINGS)
+
+if (BUILD_PYTHON_BINDINGS)
+    add_subdirectory(python)
+endif(BUILD_PYTHON_BINDINGS)

@@ -24,4 +24,4 @@ target_link_libraries(${PROJECT_NAME} PRIVATE ${LIB_NAME})
 
 
 add_executable("${PROJECT_NAME}-example" example/main.c)
-target_link_libraries("${PROJECT_NAME}-example" PRIVATE ${PROJECT_NAME} -lfftw3)
+target_link_libraries("${PROJECT_NAME}-example" PUBLIC ${PROJECT_NAME} -lfftw3)
