@@ -44,6 +44,7 @@ if [ $? -ne 0 ]; then
 fi
 
 showinfo "Running the tests..."
+cd ${TRAVIS_BUILD_DIR}
 python test
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
