@@ -17,6 +17,11 @@ matrix:
           - libaudiofile-dev
           - libsndfile1-dev
           - libgtest-dev
+          - libboost-all-dev
+          - python
+          - python-numpy
+          - python-scipy
+
           sources:
           - ubuntu-toolchain-r-test
           - llvm-toolchain-trusty-5.0
@@ -34,11 +39,6 @@ env:
 before_install:
   - eval "${MATRIX_EVAL}"
   - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
-  - cd /usr/src/gtest
-  - sudo cmake CMakeLists.txt
-  - sudo make
-  - sudo cp *.a /usr/lib
-  - cd -
 
 notifications:
   email: false
