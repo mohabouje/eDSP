@@ -45,6 +45,9 @@ fi
 
 showinfo "Running the tests..."
 cd ${TRAVIS_BUILD_DIR}
+pip install --upgrade pip
+pip install -U numpy
+pip install -U scipy
 python test
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
