@@ -72,7 +72,7 @@ namespace edsp { namespace io { namespace internal {
             return error_;
         }
 
-        const edsp::string_view& error_string() const {
+        const char* error_string() const {
             static const char* error_message = "Not implemented yet";
             return error_message;
         }

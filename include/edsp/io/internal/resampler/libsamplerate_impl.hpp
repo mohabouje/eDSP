@@ -79,7 +79,7 @@ namespace edsp { namespace io { namespace internal {
             return error_;
         }
 
-        const edsp::string_view& error_string() const {
+        const char* error_string() const {
             return src_strerror(error_);
         }
 

@@ -5,19 +5,18 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 project(edsp VERSION 0.0.1 LANGUAGES CXX)
 
 
-
-option(BUILD_C_BINDINGS "Enable the compilation of the bindings for C" ON)
-option(BUILD_PYTHON_BINDINGS "Enable the compilation of the bindings for Python" ON)
-option(BUILD_TESTS "Enable to build tests" ON)
-option(BUILD_DOCS "Enable to build docs" OFF)
-option(BUILD_EXAMPLES "Enable to build examples" OFF)
-option(BUILD_TOOLS "Enable to build tools" ON)
-option(BUILD_BENCHMARKS "Enable to build benchmarks" OFF)
-option(BUILD_EXTENSIONS "Enable the option to build the extension libraries" ON)
 option(ENABLE_COVERAGE "Enable the code coverage" OFF)
 option(ENABLE_OPTIMIZATIONS "Enable all the optimizations, in release mode" ON)
 option(ENABLE_WARNINGS "Enable all warning during compilation" ON)
 option(ENABLE_DEBUG_INFORMATION "Enable debug information, useful for profiling and debugging tools" OFF)
+
+option(BUILD_C_BINDINGS "Enable the compilation of the bindings for C" ON)
+option(BUILD_PYTHON_BINDINGS "Enable the compilation of the bindings for Python" ON)
+option(BUILD_DOCS "Enable to build docs" OFF)
+option(BUILD_EXTENSIONS "Enable the option to build the extension libraries" ON)
+option(BUILD_EXAMPLES "Enable the option to build the examples" ON)
+option(BUILD_BENCHMARK "Enable the option to build the benchmarks" OFF)
+
 option(USE_LIBSNDFILE "Use the library SndFile to encodedecode audio files" ON)
 option(USE_LIBAUDIOFILE "Use the library AudioFile to encode/decode audio files" OFF)
 option(USE_LIBPFFFT "Use the library PFFT to encode/decode audio files" OFF)
@@ -25,12 +24,8 @@ option(USE_LIBFFTW "Use the library FFTW to encode/decode audio files" ON)
 option(USE_LIBSAMPLERATE "Use the library libsamplerate to resample audio data" ON)
 option(USE_LIBRESAMPLE "Use the library libresample to resample audio data" OFF)
 
+# TODO add an option to check if single or double precision
 
-if (APPLE)
-    set(CMAKE_EXE_LINKER_FLAGS "-I/usr/local/include")
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -I/usr/local/include")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/usr/local/include")
-endif(APPLE)
 
 # Add some useful definitions
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -DNDEBUG")
@@ -38,8 +33,8 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -DDEBUG")
 
 # Add all the warnings, if it is enabled
 if (ENABLE_WARNINGS)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fdiagnostics-show-option -pedantic -Wall -Wextra -Wunreachable-code -Wno-deprecated-register -Wno-register")
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-show-option -pedantic -Wall -Wextra -Wunreachable-code -Wno-deprecated-register -Wno-register")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fdiagnostics-show-option -pedantic -Wall -Wextra -Wunreachable-code")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fdiagnostics-show-option -pedantic -Wall -Wextra -Wunreachable-code -Wno-register")
 endif (ENABLE_WARNINGS)
 
 # Add optimization, if enabled and release mode
@@ -54,6 +49,9 @@ if (ENABLE_DEBUG_INFORMATION)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 endif (ENABLE_DEBUG_INFORMATION)
 
+if (ENABLE_COVERAGE)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -fprofile-arcs -coverage")
+endif(ENABLE_COVERAGE)
 
 # Set the default build type
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/CMakeCache.txt)
@@ -64,6 +62,9 @@ endif()
 
 # Make a .so output!
 if(APPLE)
+    set(CMAKE_EXE_LINKER_FLAGS "-I/usr/local/include")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -I/usr/local/include")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -I/usr/local/include")
     set(CMAKE_SHARED_LIBRARY_SUFFIX ".so")
 endif(APPLE)
 
@@ -72,9 +73,19 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/bin)
 
+# Starting the library configuration
+set(VERSION_MAJOR  0)
+set(VERSION_MINOR  0)
+set(VERSION_PATCH  1)
+
+set(EDSP_LIBRARY edsp)
+set(LIB_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
+
+# Starting the dependencies list
 set(EDSP_DEPENDENCIES)
 if (USE_LIBFFTW)
-    find_library(FFTW_LIB NAMES lfftw3f libfftw3f fftw3f)
+    set(USE_LIBPFFFT OFF)
+    find_library(FFTW_LIB NAMES lfftw3 libfftw3 fftw3)
     if (FFTW_LIB)
         add_definitions(-DUSE_LIBFFTW)
         set(EDSP_DEPENDENCIES "${EDSP_DEPENDENCIES};${FFTW_LIB}")
@@ -93,17 +104,8 @@ if (USE_LIBPFFFT)
     endif(PFFFT_LIB)
 endif()
 
-if (USE_LIBAUDIOFILE)
-    find_library(AUDIOFILE_LIB NAMES laudiofile libaudiofile audiofile)
-    if (AUDIOFILE_LIB)
-        set(EDSP_DEPENDENCIES "${EDSP_DEPENDENCIES};${AUDIOFILE_LIB}")
-        add_definitions(-DUSE_LIBAUDIOFILE)
-    else()
-        message(FATAL_ERROR "Library AudioFile not found")
-    endif(AUDIOFILE_LIB)
-endif()
-
 if (USE_LIBSNDFILE)
+    set(USE_LIBAUDIOFILE OFF)
     find_library(SNDFILE_LIB NAMES lsndfile libsndfile sndfile)
     if (SNDFILE_LIB)
         set(EDSP_DEPENDENCIES "${EDSP_DEPENDENCIES};${SNDFILE_LIB}")
@@ -113,7 +115,19 @@ if (USE_LIBSNDFILE)
     endif(SNDFILE_LIB)
 endif()
 
+if (USE_LIBAUDIOFILE)
+    set(USE_LIBPFFFT OFF)
+    find_library(AUDIOFILE_LIB NAMES laudiofile libaudiofile audiofile)
+    if (AUDIOFILE_LIB)
+        set(EDSP_DEPENDENCIES "${EDSP_DEPENDENCIES};${AUDIOFILE_LIB}")
+        add_definitions(-DUSE_LIBAUDIOFILE)
+    else()
+        message(FATAL_ERROR "Library AudioFile not found")
+    endif(AUDIOFILE_LIB)
+endif()
+
 if (USE_LIBSAMPLERATE)
+    set(USE_LIBRESAMPLE OFF)
     find_library(LIBSAMPLERATE_LIB NAMES lsamplerate libsamplerate samplerate)
     if (LIBSAMPLERATE_LIB)
         set(EDSP_DEPENDENCIES "${EDSP_DEPENDENCIES};${LIBSAMPLERATE_LIB}")
@@ -133,13 +147,6 @@ if (USE_LIBRESAMPLE)
     endif(LIBRESAMPLE_LIB)
 endif(USE_LIBRESAMPLE)
 
-
-set(VERSION_MAJOR  0)
-set(VERSION_MINOR  0)
-set(VERSION_PATCH  1)
-
-set(EDSP_LIBRARY edsp)
-set(LIB_VERSION ${VERSION_MAJOR}.${VERSION_MINOR}.${VERSION_PATCH})
 
 add_library(${EDSP_LIBRARY} INTERFACE)
 target_sources(${EDSP_LIBRARY} INTERFACE
@@ -167,31 +174,11 @@ install(FILES
         DESTINATION "lib/cmake/${EDSP_LIBRARY}")
 install(DIRECTORY include/ DESTINATION include)
 
-
-if (ENABLE_COVERAGE)
-    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fprofile-arcs -fprofile-arcs -coverage")
-endif(ENABLE_COVERAGE)
-
-
 if (BUILD_EXTENSIONS)
     add_subdirectory(extension)
     target_link_libraries (${EDSP_LIBRARY} INTERFACE ${EDSP_EXTENSION_LIBRARIES})
     target_include_directories (${EDSP_LIBRARY} INTERFACE ${EDSP_EXTENSION_INCLUDE_DIRS})
 endif(BUILD_EXTENSIONS)
-
-if (BUILD_BENCHMARKS)
-    add_subdirectory(benchmark)
-endif(BUILD_BENCHMARKS)
-
-
-if (BUILD_EXAMPLES)
-    add_subdirectory(examples)
-endif(BUILD_EXAMPLES)
-
-if (BUILD_TESTS)
-    enable_testing()
-    add_subdirectory(test/gte)
-endif (BUILD_TESTS)
 
 
 if (BUILD_DOCS)
@@ -216,3 +203,11 @@ if (BUILD_PYTHON_BINDINGS)
     set(PYTHON_SITE_PACKAGES ${PYTHON_SITE_PACKAGES_GUESS} CACHE PATH "Where to install the python bindings")
     add_subdirectory(python)
 endif(BUILD_PYTHON_BINDINGS)
+
+if (BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif(BUILD_EXAMPLES)
+
+if (BUILD_BENCHMARK)
+    add_subdirectory(benchmark)
+endif(BUILD_BENCHMARK)
