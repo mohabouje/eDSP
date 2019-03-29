@@ -44,7 +44,8 @@ fi
 
 showinfo "Running the tests..."
 cd ${TRAVIS_BUILD_DIR}
-export PYTHONPATH=${PYTHONPATH}:${TRAVIS_BUILD_DIR}/build/lib
+export PYTHONPATH="${PYTHONPATH:}${TRAVIS_BUILD_DIR}/build/lib"
+echo ${PYTHONPATH}
 pip install --upgrade pip
 pip install -U numpy
 pip install -U scipy
