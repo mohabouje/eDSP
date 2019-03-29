@@ -1,32 +1,23 @@
 language: cpp
 matrix:
   include:
-    - os: linux
-      dist: xenial
+    - os: osx
+      osx_image: xcode10.1
       sudo: true
-      compiler: gcc
+      compiler: clang
       addons:
-        apt:
+        homebrew:
           packages:
-          - gcc-7
-          - g++-7
           - cmake
-          - lcov
-          - libfftw3-dev
-          - libsamplerate0-dev
-          - libaudiofile-dev
-          - libsndfile1-dev
-          - libgtest-dev
-          - libboost-all-dev
+          - fftw
+          - libsamplerate
+          - libsndfile
+          - boost
+          - boost-python
           - python
-          - python-numpy
-          - python-scipy
-
-          sources:
-          - ubuntu-toolchain-r-test
-          - llvm-toolchain-trusty-5.0
-      env:
-          - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+          - numpy
+          - scipy
+          - lcov
 
 branches:
   only:
@@ -35,15 +26,6 @@ branches:
 env:
   global:
     - CODECOV_TOKEN =: "69069f21-5a1a-4d45-a6c2-e7a5af9bd63d"
-
-before_install:
-  - eval "${MATRIX_EVAL}"
-  - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
-  - cd /usr/src/gtest
-  - sudo cmake CMakeLists.txt
-  - sudo make
-  - sudo cp *.a /usr/lib
-  - cd -
 
 notifications:
   email: false
