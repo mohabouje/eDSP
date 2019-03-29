@@ -26,26 +26,14 @@
 * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 * OF THE POSSIBILITY OF SUCH DAMAGE.
 *
-* Filename: package.cpp
+* Filename: spectral.hpp
 * Author: Mohammed Boujemaoui
-* Date: 27/03/19
+* Date: 29/03/19
 */
 
-#include "algorithm.hpp"
-#include "windowing.hpp"
-#include "statistics.hpp"
-#include "spectral.hpp"
+#ifndef EDSP_PYTHON_BINDING_SPECTRAL_HPP
+#define EDSP_PYTHON_BINDING_SPECTRAL_HPP
 
-#include <boost/python/numpy.hpp>
-#include <boost/python.hpp>
+void add_spectral_package();
 
-namespace bp = boost::python;
-namespace bn = boost::python::numpy;
-
-BOOST_PYTHON_MODULE(MODULE_NAME) {
-    bn::initialize();
-    add_algorithm_package();
-    add_windowing_package();
-    add_statistics_package();
-    add_spectral_package();
-}
+#endif //EDSP_PYTHON_BINDING_SPECTRAL_HPP

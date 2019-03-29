@@ -250,7 +250,7 @@ void benchmark_ffts(int N, int cplx) {
     X[k] = 0; //sqrtf(k+1);
   }
 
-  // FFTPack benchmark
+  // FFTPack benchmarks
   {
     float *wrk = malloc(2*Nbytes + 15*sizeof(float));
     int max_iter_ = max_iter/pffft_simd_size(); if (max_iter_ == 0) max_iter_ = 1;
@@ -335,7 +335,7 @@ void benchmark_ffts(int N, int cplx) {
   }
 #endif  
 
-  // PFFFT benchmark
+  // PFFFT benchmarks
   {
     PFFFT_Setup *s = pffft_new_setup(N, cplx ? PFFFT_COMPLEX : PFFFT_REAL);
     if (s) {

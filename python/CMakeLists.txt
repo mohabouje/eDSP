@@ -37,13 +37,13 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 set(HEADER
         include/algorithm.hpp
         include/windowing.hpp
-        include/statistics.hpp)
+        include/statistics.hpp include/spectral.hpp)
 
 set(SRC
         src/package.cpp
         src/algorithm.cpp
         src/windowing.cpp
-        src/statistics.cpp)
+        src/statistics.cpp src/spectral.cpp)
 
 set(PEDSP_LIBRARY pedsp)
 add_library(${PEDSP_LIBRARY} SHARED ${HEADER} ${SRC})

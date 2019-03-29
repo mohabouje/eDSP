@@ -26,26 +26,53 @@
 * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 * OF THE POSSIBILITY OF SUCH DAMAGE.
 *
-* Filename: package.cpp
+* Filename: spectral.cpp
 * Author: Mohammed Boujemaoui
-* Date: 27/03/19
+* Date: 29/03/19
 */
 
-#include "algorithm.hpp"
-#include "windowing.hpp"
-#include "statistics.hpp"
 #include "spectral.hpp"
-
-#include <boost/python/numpy.hpp>
+#include <spectral.h>
 #include <boost/python.hpp>
+#include <boost/python/numpy.hpp>
 
 namespace bp = boost::python;
 namespace bn = boost::python::numpy;
 
-BOOST_PYTHON_MODULE(MODULE_NAME) {
-    bn::initialize();
-    add_algorithm_package();
-    add_windowing_package();
-    add_statistics_package();
-    add_spectral_package();
+
+template <typename Functor, typename... Args>
+bn::ndarray execute(Functor&& f, bn::ndarray& left, bn::ndarray& right, Args... arg) {
+    if (left.get_nd() != 1 || right.get_nd() != 1) {
+        throw std::invalid_argument("Expected one-dimensional arrays");
+    }
+
+    const auto size = left.shape(0);
+    Py_intptr_t shape[1] = {size};
+    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+
+    auto* left_data = reinterpret_cast<real_t*>(left.get_data());
+    auto* right_data = reinterpret_cast<real_t*>(right.get_data());
+    auto result_data = reinterpret_cast<real_t*>(result.get_data());
+    f(left_data, right_data, size, result_data);
+    return result;
+}
+
+bn::ndarray conv_python(bn::ndarray &left, bn::ndarray &right) {
+    return execute(conv, left, right);
+}
+
+bn::ndarray correlation_python(bn::ndarray &left, bn::ndarray &right) {
+    return execute(xcorr, left, right);
+}
+
+void add_spectral_package() {
+
+    std::string nested_name = bp::extract<std::string>(bp::scope().attr("__name__") + ".spectral");
+    bp::object nested_module(bp::handle<>(bp::borrowed(PyImport_AddModule(nested_name.c_str()))));
+    bp::scope().attr("spectral") = nested_module;
+    bp::scope parent = nested_module;
+
+    bp::def("conv", conv_python);
+    bp::def("xcorr", correlation_python);
+
 }
