@@ -11,7 +11,7 @@ set(HEADER
         include/spectral.h)
 
 set(SRC
-        src/algorithm_python.c
+        src/algorithm.c
         src/windowing.c
         src/statistics.c
         src/spectral.c)

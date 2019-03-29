@@ -35,12 +35,12 @@
 #include <edsp/algorithm.hpp>
 
 
-void array_amplify(const real_t *input, int size, real_t *output, real_t factor) {
+void array_scale(const real_t *input, int size, real_t *output, real_t factor) {
     edsp::amplifier(input, input + size, output, factor);
 }
 
 
-void array_amplify_clip(const real_t *input, int size, real_t *output, real_t factor, real_t min, real_t max) {
+void array_scale_clip(const real_t *input, int size, real_t *output, real_t factor, real_t min, real_t max) {
     edsp::amplifier(input, input + size, output, factor, min, max);
 }
 
@@ -76,7 +76,7 @@ void array_logspace(real_t *output, int size, real_t x1, real_t x2) {
     edsp::logspace(output, x1, x2, size);
 }
 
-void array_rectify(const real_t *input, int size, real_t *output) {
+void array_abs(const real_t *input, int size, real_t *output) {
     edsp::rectify(input, input + size, output);
 }
 

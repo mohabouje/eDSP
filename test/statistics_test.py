@@ -12,10 +12,6 @@ class TestStatisticsMethods(unittest.TestCase):
     # TODO: test median
     # TODO: implement this list https://www.programcreek.com/python/example/66766/scipy.stats.kurtosis
 
-    @staticmethod
-    def relative_error(relative, original):
-        return abs(relative - original) / original * 100
-
     def test_hmean(self):
         size = randint(0, 1000)
         data = np.random.uniform(low=0.5, high=20, size=(size,))

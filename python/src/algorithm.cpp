@@ -31,7 +31,7 @@
 * Date: 27/03/19
 */
 
-#include "algorithm_python.hpp"
+#include "algorithm.hpp"
 #include <algorithm.h>
 #include <boost/python.hpp>
 #include <boost/python/numpy.hpp>
@@ -41,79 +41,71 @@ namespace bn = boost::python::numpy;
 
 
 template <typename Functor, typename... Args>
-void execute_inplace(Functor&& f, bn::ndarray& input, Args... arg) {
+bn::ndarray execute_inplace(Functor&& f, bn::ndarray& input, Args... arg) {
 
     if (input.get_nd() != 1) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
 
-    const auto size = input.shape(0);
-    auto in = reinterpret_cast<real_t*>(input.get_data());
+    auto result = input.astype(bn::dtype::get_builtin<real_t>());
+    const auto size = result.shape(0);
+    auto in = reinterpret_cast<real_t*>(result.get_data());
     f(in, size, in, arg...);
+    return result;
 }
 
 template <typename Functor, typename... Args>
-void execute(Functor&& f, bn::ndarray& input, Args... arg) {
-
-    if (input.get_nd() != 1) {
-        throw std::invalid_argument("Expected one-dimensional arrays");
-    }
-
-    const auto size = input.shape(0);
-    auto in = reinterpret_cast<real_t*>(input.get_data());
-    f(in, size, arg...);
-}
-
-void amplifier_python(bn::ndarray& input, real_t factor) {
-    execute_inplace(array_amplify, input, factor);
-}
-
-void amplifier_clip_python(bn::ndarray& input, real_t factor, real_t min, real_t max) {
-    execute_inplace(array_amplify_clip, input, factor, min, max);
-}
-
-void ceil_python(bn::ndarray& input) {
-    execute_inplace(array_ceil, input);
-}
-
-void floor_python(bn::ndarray& input) {
-    execute_inplace(array_floor, input);
-}
-
-void round_python(bn::ndarray& input) {
-    execute_inplace(array_round, input);
-}
-
-void clip_python(bn::ndarray& input) {
-    execute_inplace(array_ceil, input);
-}
-
-void trunc_python(bn::ndarray& input) {
-    execute_inplace(array_trunc, input);
-}
-
-void rectify_python(bn::ndarray& input) {
-    execute_inplace(array_rectify, input);
-}
-
-void normalize_python(bn::ndarray& input) {
-    execute_inplace(array_normalize, input);
-}
-
-bn::ndarray linspace_python(long size, real_t x1, real_t x2) {
+bn::ndarray execute(Functor&& f, long size, Args... arg) {
     Py_intptr_t shape[1] = {size};
     auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
-    execute(array_linspace, result, x1, x2);
+    auto* data = reinterpret_cast<real_t*>(result.get_data());
+    f(data, size, arg...);
     return result;
 }
 
-bn::ndarray logspace_python(long size, real_t x1, real_t x2) {
-    Py_intptr_t shape[1] = {size};
-    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
-    execute(array_logspace, result, x1, x2);
-    return result;
+bn::ndarray scale_python(bn::ndarray &input, real_t factor) {
+    return execute_inplace(array_scale, input, factor);
 }
 
+bn::ndarray scale_clip_python(bn::ndarray &input, real_t factor, real_t min, real_t max) {
+    return execute_inplace(array_scale_clip, input, factor, min, max);
+}
+
+bn::ndarray clip_python(bn::ndarray& input, real_t min, real_t max) {
+    return execute_inplace(array_clip, input, min, max);
+}
+
+bn::ndarray ceil_python(bn::ndarray& input) {
+    return execute_inplace(array_ceil, input);
+}
+
+bn::ndarray floor_python(bn::ndarray& input) {
+    return execute_inplace(array_floor, input);
+}
+
+bn::ndarray round_python(bn::ndarray& input) {
+    return execute_inplace(array_round, input);
+}
+
+bn::ndarray trunc_python(bn::ndarray& input) {
+    return execute_inplace(array_trunc, input);
+}
+
+bn::ndarray abs_python(bn::ndarray &input) {
+    return execute_inplace(array_abs, input);
+}
+
+bn::ndarray normalize_python(bn::ndarray& input) {
+    return execute_inplace(array_normalize, input);
+}
+
+bn::ndarray linspace_python(real_t x1, real_t x2, long size) {
+    return execute(array_linspace, size, x1, x2);
+}
+
+bn::ndarray logspace_python(real_t x1, real_t x2, long size) {
+    return execute(array_logspace, size, x1, x2);
+}
 
 void add_algorithm_package() {
 
@@ -122,14 +114,14 @@ void add_algorithm_package() {
     bp::scope().attr("algorithm") = nested_module;
     bp::scope parent = nested_module;
 
-    bp::def("amplifier", amplifier_python);
-    bp::def("amplifier_clip", amplifier_clip_python);
+    bp::def("scale", scale_python);
+    bp::def("scale_clip", scale_clip_python);
     bp::def("ceil", ceil_python);
     bp::def("floor", floor_python);
     bp::def("round", round_python);
     bp::def("clip", clip_python);
     bp::def("trunc", trunc_python);
-    bp::def("rectify", rectify_python);
+    bp::def("abs", abs_python);
     bp::def("logspace", logspace_python);
     bp::def("linspace", linspace_python);
     bp::def("normalize", normalize_python);

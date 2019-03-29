@@ -54,7 +54,7 @@ extern "C" {
  * @param output Output array
  * @param factor Scale factor (\f$ \alpha \f$).
  */
-void array_amplify(const real_t *input, int size, real_t *output, real_t factor);
+void array_scale(const real_t *input, int size, real_t *output, real_t factor);
 
 
 /**
@@ -67,7 +67,7 @@ void array_amplify(const real_t *input, int size, real_t *output, real_t factor)
  * @param min Minimum threshold value.
  * @param max Maximum threshold value.
  */
-void array_amplify_clip(const real_t *input, int size, real_t *output, real_t factor, real_t min, real_t max);
+void array_scale_clip(const real_t *input, int size, real_t *output, real_t factor, real_t min, real_t max);
 
 /**
  * @brief Limits the values of the elements in the input array once it exceeds a threshold [min, max],
@@ -136,7 +136,7 @@ void array_trunc(const real_t* input, int size, real_t* output);
  * @param size Length of the input array
  * @param output Output array
  */
-void array_rectify(const real_t* input, int size, real_t* output);
+void array_abs(const real_t *input, int size, real_t *output);
 
 /**
  * @brief Generate N linearly spaced values between the range [x1,x2] and stores the result in the output array

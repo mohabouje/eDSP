@@ -31,7 +31,7 @@
 * Date: 27/03/19
 */
 
-#include "algorithm_python.hpp"
+#include "algorithm.hpp"
 #include "windowing.hpp"
 #include "statistics.hpp"
 

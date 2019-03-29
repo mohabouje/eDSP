@@ -35,7 +35,7 @@ include_directories(${Boost_INCLUDE_DIR})
 include_directories(${PYTHON_INCLUDE_DIRS})
 
 set(HEADER
-        include/algorithm_python.hpp
+        include/algorithm.hpp
         include/windowing.hpp
         include/statistics.hpp)
 
