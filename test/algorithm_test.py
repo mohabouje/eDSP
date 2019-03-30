@@ -3,17 +3,17 @@ import pedsp.algorithm as algorithm
 import numpy as np
 from random import randint
 
+from utiltity import generate_inputs
+
 
 class TestAlgorithmMethods(unittest.TestCase):
 
-    __iterations = 10
-    __minimum = 0
-    __maximum = 1000
+    __number_inputs = 10
+    __minimum_size = 0
+    __maximum_size = 1000
 
     def test_scale(self):
-        for i in range(0, self.__iterations):
-            size = randint(self.__minimum, self.__maximum)
-            data = np.random.uniform(low=1, high=20, size=(size,))
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             factor = randint(0, 5)
             generated = algorithm.scale(data, factor)
             reference = data * factor
@@ -21,89 +21,75 @@ class TestAlgorithmMethods(unittest.TestCase):
                 self.assertAlmostEqual(g, r)
 
     def test_scale_clip(self):
-        for i in range(0, self.__iterations):
-            size = randint(self.__minimum, self.__maximum)
-            data = np.random.uniform(low=1, high=20, size=(size,))
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             factor = randint(0, 5)
-            min = randint(self.__minimum, self.__maximum)
-            max = randint(min, self.__maximum)
-            generated = algorithm.scale_clip(data, factor, min, max)
-            reference = np.clip(data * factor, min, max)
+            minimum = randint(self.__minimum_size, self.__maximum_size)
+            maximum = randint(minimum, self.__maximum_size)
+            generated = algorithm.scale_clip(data, factor, minimum, maximum)
+            reference = np.clip(data * factor, minimum, maximum)
             for g, r in zip(generated, reference):
                 self.assertAlmostEqual(g, r)
 
     def test_clip(self):
-        for i in range(0, self.__iterations):
-            size = randint(self.__minimum, self.__maximum)
-            data = np.random.uniform(low=1, high=20, size=(size,))
-            min = randint(self.__minimum, self.__maximum)
-            max = randint(min, self.__maximum)
-            generated = algorithm.clip(data,  min, max)
-            reference = np.clip(data, min, max)
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            minimum = randint(self.__minimum_size, self.__maximum_size)
+            maximum = randint(minimum, self.__maximum_size)
+            generated = algorithm.clip(data,  minimum, maximum)
+            reference = np.clip(data, minimum, maximum)
             for g, r in zip(generated, reference):
                 self.assertAlmostEqual(g, r)
 
     def test_round(self):
-        for i in range(0, self.__iterations):
-            size = randint(self.__minimum, self.__maximum)
-            data = np.random.uniform(low=1, high=20, size=(size,))
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             generated = algorithm.round(data)
             reference = np.round(data)
             for g, r in zip(generated, reference):
                 self.assertAlmostEqual(g, r)
 
     def test_floor(self):
-        for i in range(0, self.__iterations):
-            size = randint(self.__minimum, self.__maximum)
-            data = np.random.uniform(low=1, high=20, size=(size,))
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             generated = algorithm.floor(data)
             reference = np.floor(data)
             for g, r in zip(generated, reference):
                 self.assertAlmostEqual(g, r)
 
     def test_trunc(self):
-        for i in range(0, self.__iterations):
-            size = randint(self.__minimum, self.__maximum)
-            data = np.random.uniform(low=1, high=20, size=(size,))
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             generated = algorithm.trunc(data)
             reference = np.trunc(data)
             for g, r in zip(generated, reference):
                 self.assertAlmostEqual(g, r)
 
     def test_abs(self):
-        for i in range(0, self.__iterations):
-            size = randint(-self.__minimum, self.__maximum)
-            data = np.random.uniform(low=-20, high=20, size=(size,))
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             generated = algorithm.abs(data)
             reference = np.abs(data)
             for g, r in zip(generated, reference):
                 self.assertAlmostEqual(g, r)
 
     def test_normalize(self):
-        for i in range(0, self.__iterations):
-            size = randint(-self.__minimum, self.__maximum)
-            data = np.random.uniform(low=-20, high=20, size=(size,))
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             generated = algorithm.normalize(data)
             reference = data / np.max(np.abs(data)).item()
             for g, r in zip(generated, reference):
                 self.assertAlmostEqual(g, r)
 
-    def test_logspace(self):
-        for i in range(1, self.__iterations):
-            size = randint(-self.__minimum, self.__maximum)
-            min = randint(0, 5)
-            max = randint(min, 5)
-            generated = algorithm.logspace(min, max, size)
-            reference = np.logspace(min, max, size)
+    def test_logarithmic_space(self):
+        for i in range(1, self.__number_inputs):
+            size = randint(-self.__minimum_size, self.__maximum_size)
+            minimum = randint(0, 5)
+            maximum = randint(minimum, 5)
+            generated = algorithm.logspace(minimum, maximum, size)
+            reference = np.logspace(minimum, maximum, size)
             for g, r in zip(generated, reference):
-                self.assertAlmostEqual(g, r)
+                self.assertAlmostEqual(g, r, 5)
 
-    def test_linspace(self):
-        for i in range(0, self.__iterations):
-            size = randint(-self.__minimum, self.__maximum)
-            min = randint(self.__minimum, self.__maximum / 1000)
-            max = randint(min, self.__maximum)
-            generated = algorithm.linspace(min, max, size)
-            reference = np.linspace(min, max, size)
+    def test_linear_space(self):
+        for i in range(0, self.__number_inputs):
+            size = randint(-self.__minimum_size, self.__maximum_size)
+            minimum = randint(self.__minimum_size, self.__maximum_size / 1000)
+            maximum = randint(minimum, self.__maximum_size)
+            generated = algorithm.linspace(minimum, maximum, size)
+            reference = np.linspace(minimum, maximum, size)
             for g, r in zip(generated, reference):
                 self.assertAlmostEqual(g, r)

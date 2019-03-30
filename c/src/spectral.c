@@ -62,12 +62,8 @@ void idct(const real_t *input, int size, real_t *output) {
     edsp::idct(input, input + size, output);
 }
 
-void hartley(const real_t *data, int size, real_t *hart) {
-    edsp::hartley(data, data + size, hart);
-}
-
-void hilbert(const real_t *data, int size, real_t *hilb) {
-    edsp::hilbert(data, data + size, hilb);
+void hartley(const real_t *data, int size, real_t *output) {
+    edsp::hartley(data, data + size, output);
 }
 
 void periodogram(const real_t *data, int size, real_t *period) {
@@ -80,6 +76,11 @@ int get_fft_size(int real_data_size) {
 
 int get_ifft_size(int complex_data_size) {
     return edsp::make_ifft_size(complex_data_size);
+}
+
+void hilbert(const real_t *data, int size, complex_t *output) {
+    auto* out = reinterpret_cast<std::complex<real_t>*>(output);
+    edsp::hilbert(data, data + size, out);
 }
 
 void fft(const real_t *input, int size, complex_t *output) {
@@ -95,7 +96,7 @@ void ifft(const complex_t *input, int size, real_t *output) {
 void complex_fft(const complex_t *input, int size, complex_t *output) {
     const auto* in = reinterpret_cast<const std::complex<real_t>*>(input);
     auto* out = reinterpret_cast<std::complex<real_t>*>(output);
-    edsp::cidft(in, in + size, out);
+    edsp::cdft(in, in + size, out);
 }
 
 void complex_ifft(const complex_t *input, int size, complex_t *output) {

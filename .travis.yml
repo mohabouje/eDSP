@@ -13,8 +13,8 @@ matrix:
           - libsamplerate
           - libsndfile
           - boost
-          - boost-python
-          - python
+          - boost-python3
+          - python3
           - numpy
           - scipy
           - lcov

@@ -40,8 +40,8 @@ namespace bp = boost::python;
 namespace bn = boost::python::numpy;
 
 
-template <typename Functor, typename... Args>
-bn::ndarray execute(Functor&& f, bn::ndarray& left, bn::ndarray& right, Args... arg) {
+template <typename Functor>
+bn::ndarray execute(Functor&& f, bn::ndarray& left, bn::ndarray& right) {
     if (left.get_nd() != 1 || right.get_nd() != 1) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
@@ -57,12 +57,128 @@ bn::ndarray execute(Functor&& f, bn::ndarray& left, bn::ndarray& right, Args... 
     return result;
 }
 
+template <typename Functor>
+bn::ndarray execute(Functor&& f, bn::ndarray& input) {
+    if (input.get_nd() != 1) {
+        throw std::invalid_argument("Expected one-dimensional arrays");
+    }
+
+    const auto size = input.shape(0);
+    Py_intptr_t shape[1] = {size};
+    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+
+    auto* input_data = reinterpret_cast<real_t*>(input.get_data());
+    auto result_data = reinterpret_cast<real_t*>(result.get_data());
+    f(input_data, size, result_data);
+    return result;
+}
+
+template <typename Functor>
+bn::ndarray execute_r2c_full(Functor &&f, bn::ndarray &input) {
+    if (input.get_nd() != 1) {
+        throw std::invalid_argument("Expected one-dimensional arrays");
+    }
+
+    const auto size = input.shape(0);
+    Py_intptr_t shape[1] = {size};
+    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<std::complex<real_t>>());
+
+    auto* input_data = reinterpret_cast<real_t *>(input.get_data());
+    auto result_data = reinterpret_cast<complex_t *>(result.get_data());
+    f(input_data, size, result_data);
+    return result;
+}
+
+template <typename Functor>
+bn::ndarray execute_r2c_half(Functor &&f, bn::ndarray &input) {
+    if (input.get_nd() != 1) {
+        throw std::invalid_argument("Expected one-dimensional arrays");
+    }
+
+    const auto size = input.shape(0);
+    Py_intptr_t shape[1] = {get_fft_size(size)};
+    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<std::complex<real_t>>());
+
+    auto* input_data = reinterpret_cast<real_t *>(input.get_data());
+    auto result_data = reinterpret_cast<complex_t *>(result.get_data());
+    f(input_data, size, result_data);
+    return result;
+}
+
+template <typename Functor>
+bn::ndarray execute_c2r(Functor &&f, bn::ndarray &input) {
+    if (input.get_nd() != 1) {
+        throw std::invalid_argument("Expected one-dimensional arrays");
+    }
+
+    const auto size = input.shape(0);
+    Py_intptr_t shape[1] = {get_ifft_size(size)};
+    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+
+    auto* input_data = reinterpret_cast<complex_t *>(input.get_data());
+    auto result_data = reinterpret_cast<real_t *>(result.get_data());
+    f(input_data, size, result_data);
+    return result;
+}
+
+template <typename Functor>
+bn::ndarray execute_c2c(Functor &&f, bn::ndarray &input) {
+    if (input.get_nd() != 1) {
+        throw std::invalid_argument("Expected one-dimensional arrays");
+    }
+
+    const auto size = input.shape(0);
+    Py_intptr_t shape[1] = {size};
+    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<std::complex<real_t>>());
+
+    auto* input_data = reinterpret_cast<complex_t *>(input.get_data());
+    auto* result_data = reinterpret_cast<complex_t *>(result.get_data());
+    f(input_data, size, result_data);
+    return result;
+}
+
 bn::ndarray conv_python(bn::ndarray &left, bn::ndarray &right) {
     return execute(conv, left, right);
 }
 
 bn::ndarray correlation_python(bn::ndarray &left, bn::ndarray &right) {
     return execute(xcorr, left, right);
+}
+
+bn::ndarray cepstrum_python(bn::ndarray &ceps) {
+    return execute(cepstrum, ceps);
+}
+
+bn::ndarray dct_python(bn::ndarray &data) {
+    return execute(dct, data);
+}
+
+bn::ndarray idct_python(bn::ndarray &data) {
+    return execute(idct, data);
+}
+
+bn::ndarray hartley_python(bn::ndarray &data) {
+    return execute(hartley, data);
+}
+
+bn::ndarray hilbert_python(bn::ndarray &data) {
+    return execute_r2c_full(hilbert, data);
+}
+
+bn::ndarray fft_python(bn::ndarray &data) {
+    return execute_r2c_half(fft, data);
+}
+
+bn::ndarray ifft_python(bn::ndarray &data) {
+    return execute_c2r(ifft, data);
+}
+
+bn::ndarray cfft_python(bn::ndarray &data) {
+    return execute_c2c(complex_fft, data);
+}
+
+bn::ndarray cifft_python(bn::ndarray &data) {
+    return execute_c2c(complex_ifft, data);
 }
 
 void add_spectral_package() {
@@ -74,5 +190,13 @@ void add_spectral_package() {
 
     bp::def("conv", conv_python);
     bp::def("xcorr", correlation_python);
-
+    bp::def("cepstrum", cepstrum_python);
+    bp::def("dct", dct_python);
+    bp::def("idct", idct_python);
+    bp::def("hilbert", hilbert_python);
+    bp::def("hartley", hartley_python);
+    bp::def("rfft", fft_python);
+    bp::def("irfft", ifft_python);
+    bp::def("fft", cfft_python);
+    bp::def("ifft", cifft_python);
 }

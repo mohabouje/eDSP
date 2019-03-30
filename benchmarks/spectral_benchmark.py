@@ -1,6 +1,5 @@
 from pyperform import BenchmarkedFunction
 
-
 @BenchmarkedFunction(largs=(1 << 12,), timeit_number=3, timeit_repeat=100)
 def ConvolveNumpy(size):
     import numpy
@@ -28,3 +27,13 @@ def CorrelationPedsp(size):
     left = pedsp.windowing.hamming(size)
     right = pedsp.windowing.hanning(size)
     return pedsp.spectral.xcorr(left, right)
+
+@BenchmarkedFunction(largs=(1 << 12,), timeit_number=3, timeit_repeat=100)
+def Real2ComplexNumpy(size):
+    import numpy
+    return numpy.fft.rfft(numpy.hamming(size))
+
+@BenchmarkedFunction(largs=(1 << 12,), timeit_number=3, timeit_repeat=100)
+def Real2ComplexPedsp(size):
+    import pedsp
+    return pedsp.spectral.rfft(pedsp.windowing.hamming(size))

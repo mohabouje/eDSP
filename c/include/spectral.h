@@ -92,7 +92,7 @@ void hartley(const real_t* data, int size, real_t* hart);
  * @param size Length of the input array
  * @param hilb Output array storing the Hilbert transform
  */
-void hilbert(const real_t* data, int size, real_t* hilb);
+void hilbert(const real_t* data, int size, complex_t * hilb);
 
 /**
  * @brief Computes the spectrogram of the input buffer

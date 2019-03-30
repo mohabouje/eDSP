@@ -50,6 +50,7 @@ namespace edsp { inline namespace spectral {
     template <typename InputIt, typename OutputIt,
               typename Allocator = std::allocator<std::complex<meta::value_type_t<InputIt>>>>
     inline void hilbert(InputIt first, InputIt last, OutputIt d_first) {
+        // TODO: add the static assertion, the input should be a complex array
         using value_type = meta::value_type_t<InputIt>;
         const auto nfft  = static_cast<typename fft_engine<value_type>::size_type>(std::distance(first, last));
 

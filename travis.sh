@@ -44,10 +44,11 @@ if [ $? -ne 0 ]; then
 fi
 
 showinfo "Running the tests..."
-pip install --upgrade pip
-pip install -U numpy
-pip install -U scipy
-python test
+cd ${TRAVIS_BUILD_DIR}
+pip3 install --upgrade pip
+pip3 install -U numpy
+pip3 install -U scipy
+python3 test/
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
     exit 4

@@ -199,8 +199,6 @@ if (BUILD_C_BINDINGS)
 endif(BUILD_C_BINDINGS)
 
 if (BUILD_PYTHON_BINDINGS)
-    execute_process ( COMMAND python -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())" OUTPUT_VARIABLE PYTHON_SITE_PACKAGES_GUESS OUTPUT_STRIP_TRAILING_WHITESPACE)
-    set(PYTHON_SITE_PACKAGES ${PYTHON_SITE_PACKAGES_GUESS} CACHE PATH "Where to install the python bindings")
     add_subdirectory(python)
 endif(BUILD_PYTHON_BINDINGS)
 
