@@ -32,6 +32,9 @@ matrix:
       dist: xenial
       sudo: true
       compiler: gcc
+      python:
+        - "2.6"
+        - "2.7"
       addons:
         apt:
           packages:
