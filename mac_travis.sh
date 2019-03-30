@@ -32,10 +32,10 @@ fi
 
 showinfo "Running the tests..."
 cd ${TRAVIS_BUILD_DIR}
-pip3 install --upgrade pip
-pip3 install -U numpy
-pip3 install -U scipy
-python3 test/
+sudo pip3 install --upgrade pip
+sudo pip3 install -U numpy
+sudo pip3 install -U scipy
+sudo python3 test/
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
     exit 4

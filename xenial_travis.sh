@@ -42,10 +42,12 @@ fi
 
 showinfo "Running the tests..."
 cd ${TRAVIS_BUILD_DIR}
-pip install --upgrade pip
-pip install -U numpy
-pip install -U scipy
-python test/
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
+sudo ldconfig
+sudo pip install --upgrade pip
+sudo pip install -U numpy
+sudo pip install -U scipy
+sudo python test/
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
     exit 4
