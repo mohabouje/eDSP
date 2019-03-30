@@ -44,7 +44,7 @@ namespace edsp { namespace filter {
         using base = std::pair<std::complex<T>, std::complex<T>>;
         explicit constexpr complex_pair(const std::complex<T>& c1) : base(c1, std::complex<T>(0, 0)) {
             meta::expects(c1.imag() == 0, "Expected a real number");
-            meta::ensure(this->isReal(), "Expected a real initialization");
+            meta::ensure(this->is_real(), "Expected a real initialization");
         }
 
         constexpr complex_pair() : base(std::complex<T>(0, 0), std::complex<T>(0, 0)) {}
@@ -53,11 +53,11 @@ namespace edsp { namespace filter {
             return this->second == std::conj(this->first);
         }
 
-        constexpr bool isReal() const noexcept {
+        constexpr bool is_real() const noexcept {
             return this->first.imag() == 0 && this->second.imag() == 0;
         }
 
-        constexpr bool isMatchedPair() const noexcept {
+        constexpr bool is_matched_pair() const noexcept {
             if (this->first.imag() != 0) {
                 return this->second == std::conj(this->first);
             } else {
@@ -65,7 +65,7 @@ namespace edsp { namespace filter {
             }
         }
 
-        constexpr bool isNaN() const noexcept {
+        constexpr bool NaN() const noexcept {
             return std::isnan(this->first) || std::isnan(this->second);
         }
     };
@@ -79,12 +79,12 @@ namespace edsp { namespace filter {
                           const std::complex<T>& z2) :
             base(complex_pair<T>(p1, p2), complex_pair<T>(z1, z2)) {}
 
-        constexpr bool isSinglePole() const noexcept {
+        constexpr bool single_pole() const noexcept {
             return poles().second == std::complex<T>(0, 0) && zeros().second == std::complex<T>(0, 0);
         }
 
-        constexpr bool isNaN() const noexcept {
-            return this->first.isNaN() || this->second.isNaN();
+        constexpr bool NaN() const noexcept {
+            return this->first.NaN() || this->second.NaN();
         }
 
         constexpr const complex_pair<T>& poles() const noexcept {
@@ -115,23 +115,23 @@ namespace edsp { namespace filter {
 
         constexpr LayoutBase() = default;
 
-        constexpr T normalW() const noexcept {
+        constexpr T w() const noexcept {
             return normal_W_;
         }
 
-        constexpr T normalGain() const noexcept {
+        constexpr T gain() const noexcept {
             return normal_gain_;
         }
 
-        constexpr size_type numberPoles() const noexcept {
+        constexpr size_type poles() const noexcept {
             return num_poles_;
         }
 
-        constexpr void setNormalW(T normal_W) noexcept {
+        constexpr void set_w(T normal_W) noexcept {
             normal_W_ = normal_W;
         }
 
-        constexpr void setNormalGain(T normal_gain) noexcept {
+        constexpr void set_gain(T normal_gain) noexcept {
             normal_gain_ = normal_gain;
         }
 
@@ -152,8 +152,8 @@ namespace edsp { namespace filter {
 
         constexpr void insert(const complex_pair<T>& poles, const complex_pair<T>& zeros) {
             meta::ensure(math::is_even(num_poles_));
-            meta::expects(poles.isMatchedPair(), "Expected conjugate pairs");
-            meta::expects(zeros.isMatchedPair(), "Expected conjugate pairs");
+            meta::expects(poles.is_matched_pair(), "Expected conjugate pairs");
+            meta::expects(zeros.is_matched_pair(), "Expected conjugate pairs");
             pairs_[num_poles_ / 2] = pz_pair<T>(poles.first, zeros.first, poles.second, zeros.second);
             num_poles_ += 2;
         }
@@ -163,7 +163,7 @@ namespace edsp { namespace filter {
         }
 
         constexpr size_type size() const noexcept {
-            return std::ceil(num_poles_ / 2) + 1;
+            return static_cast<size_type>(std::ceil(num_poles_ / 2) + 1);
         }
 
         constexpr const_iterator cbegin() const noexcept {

@@ -56,11 +56,11 @@ namespace edsp { namespace filter {
 
                 if (math::is_odd(num_poles)) {
                     analog.insert(std::complex<T>(sinh_v0, 0), math::infinity<T>());
-                    analog.setNormalW(0);
-                    analog.setNormalGain(1);
+                    analog.set_w(0);
+                    analog.set_gain(1);
                 } else {
-                    analog.setNormalW(0);
-                    analog.setNormalGain(converter::db2mag(-ripple_db));
+                    analog.set_w(0);
+                    analog.set_gain(converter::db2mag(-ripple_db));
                 }
             }
         };
@@ -70,8 +70,8 @@ namespace edsp { namespace filter {
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles, T gain_db, T ripple_db) const {
                 meta::expects(num_poles <= MaxSize, "Index out of bounds");
 
-                analog.setNormalW(constants<T>::pi);
-                analog.setNormalGain(1);
+                analog.set_w(constants<T>::pi);
+                analog.set_gain(1);
                 analog.reset();
 
                 gain_db = -gain_db;
@@ -183,8 +183,8 @@ namespace edsp { namespace filter {
                 BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
 
                 // HACK!
-                this->digital_.setNormalW(normalized_center < 0.25 ? constants<T>::pi : 0);
-                this->digital_.setNormalGain(1);
+                this->digital_.set_w(normalized_center < 0.25 ? constants<T>::pi : 0);
+                this->digital_.set_gain(1);
             }
         };
     } // namespace chebyshevI

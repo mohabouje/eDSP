@@ -56,7 +56,7 @@ namespace edsp { namespace filter {
         void operator()(const LayoutBase<T, AnalogMaxSize>& analog, LayoutBase<T, DigitalMaxSize>& digital) {
             digital.reset();
 
-            const auto num_poles = analog.numberPoles();
+            const auto num_poles = analog.poles();
             const auto num_pairs = num_poles / 2;
             for (auto i = 0ul; i < num_pairs; ++i) {
                 const auto& pair = analog[i];
@@ -77,8 +77,8 @@ namespace edsp { namespace filter {
                 digital.insert(poles, zeros);
             }
 
-            digital.setNormalW(fc < 0.25 ? constants<T>::pi : analog.normalW());
-            digital.setNormalGain(analog.normalGain());
+            digital.set_w(fc < 0.25 ? constants<T>::pi : analog.w());
+            digital.set_gain(analog.gain());
         }
 
         complex_pair<T> transform(const std::complex<T>& initial) {

@@ -153,8 +153,7 @@ namespace edsp { namespace filter {
     template <typename T, designer_type Designer, filter_type Type, std::size_t MaxOrder, typename... Args>
     constexpr auto make_filter(Args... arg)
         -> decltype(designer<T, Designer, MaxOrder>{}.template design<Type>(std::declval<Args&&>()...)) {
-        const auto creator = designer<T, Designer, MaxOrder>{};
-        return creator.template design<Type>(arg...);
+        return designer<T, Designer, MaxOrder>{}.template design<Type>(arg...);
     }
 
     /**
@@ -162,7 +161,8 @@ namespace edsp { namespace filter {
      * @param b_first Beginning of the range elements representing the FIR/MA filter coefficients.
      * @param b_last End of the range elements representing the FIR/MA filter coefficients.
      * @param a_first Beginning of the range elements representing the IIR/AR filter coefficients.
-     * @param a_last End of the range elements representing the IIR/AR filter coefficients.
+     * @param a_last End of the range elements re
+     * presenting the IIR/AR filter coefficients.
      * @param d_first Output iterator defining the beginning of the destination range.
      * @param N Number of evaluation points.
      */

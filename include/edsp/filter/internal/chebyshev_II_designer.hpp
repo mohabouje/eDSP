@@ -39,8 +39,8 @@ namespace edsp { namespace filter {
             template <typename T, std::size_t MaxSize>
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles, T stopband_db) const {
                 meta::expects(num_poles <= MaxSize, "Index out of bounds");
-                analog.setNormalW(0);
-                analog.setNormalGain(1);
+                analog.set_w(0);
+                analog.set_gain(1);
                 analog.reset();
 
                 const auto eps     = std::sqrt(math::inv(std::exp(stopband_db * 0.1 * constants<T>::ln_ten) - 1));
@@ -67,8 +67,8 @@ namespace edsp { namespace filter {
             void design(LayoutBase<T, MaxSize>& analog, std::size_t num_poles, T gain_db, T stopband_db) const {
                 meta::expects(num_poles <= MaxSize, "Index out of bounds");
 
-                analog.setNormalW(constants<T>::pi);
-                analog.setNormalGain(1);
+                analog.set_w(constants<T>::pi);
+                analog.set_gain(1);
                 analog.reset();
 
                 gain_db = -gain_db;
@@ -182,8 +182,8 @@ namespace edsp { namespace filter {
                 BandPassTransformer<T>{normalized_center, normalized_bandwidth}(this->analog_, this->digital_);
 
                 // HACK!
-                this->digital_.setNormalW(normalized_center < 0.25 ? constants<T>::pi : 0);
-                this->digital_.setNormalGain(1);
+                this->digital_.set_w(normalized_center < 0.25 ? constants<T>::pi : 0);
+                this->digital_.set_gain(1);
             }
         };
 
