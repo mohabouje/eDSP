@@ -11,7 +11,7 @@ def generate_inputs(number_inputs, minimum_size, maximum_size):
     data = []
     for i in range(0, number_inputs):
         size = randint(minimum_size, maximum_size)
-        data.append(signals[randint(0, len(signals) - 1)](size))
+        data.append(signals[randint(0, len(signals) - 1)](size) + 0.1)
     return data
 
 
@@ -21,6 +21,6 @@ def generate_pair_inputs(number_inputs, minimum_size, maximum_size):
     second = []
     for j in range(0, number_inputs):
         size = randint(minimum_size, maximum_size)
-        first.append(signals[randint(0, len(signals) - 1)](size))
-        second.append(signals[randint(0, len(signals) - 1)](size))
+        first.append(signals[randint(0, len(signals) - 1)](size) + 0.1)
+        second.append(signals[randint(0, len(signals) - 1)](size) + 0.1)
     return first, second

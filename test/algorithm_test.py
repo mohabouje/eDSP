@@ -38,7 +38,6 @@ class TestAlgorithmMethods(unittest.TestCase):
 
     def test_round(self):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
-            data = data + 0.1
             generated = algorithm.round(data)
             reference = np.round(data)
             np.testing.assert_array_almost_equal(generated, reference)

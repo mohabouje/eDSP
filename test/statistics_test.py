@@ -18,14 +18,12 @@ class TestStatisticsMethods(unittest.TestCase):
 
     def test_harmonic_mean(self):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
-            data = data + 0.1
             generated = statistics.harmonic_mean(data)
             reference = scipy.stats.mstats.hmean(data)
             self.assertAlmostEqual(generated, reference)
 
     def test_generalized_mean(self):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
-            data = data + 0.1
             generated = statistics.geometric_mean(data)
             reference = scipy.stats.mstats.gmean(data)
             self.assertAlmostEqual(generated, reference)
