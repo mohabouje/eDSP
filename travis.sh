@@ -10,6 +10,15 @@ showinfo() { echo -e "${BG}$1${NC}"; }
 workingprocess() { echo -e "${BB}$1${NC}"; }
 allert () { echo -e "${RED}$1${NC}"; }
 
+showinfo "Installing the deprecated package of boost numpy boost numpy"
+cd ${TRAVIS_BUILD_DIR} && cd ..
+git clone https://github.com/ndarray/Boost.NumPy.git
+cd Boost.NumPy
+mkdir -p build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=RELEASE
+make -j6 && sudo make install
+
 showinfo "Installing google benmchmark"
 cd ${TRAVIS_BUILD_DIR} && cd ..
 rm -rf benchmark
@@ -20,8 +29,6 @@ mkdir -p build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=RELEASE
 make -j6 && sudo make install
-cd .. & cd ..
-cd eDSP
 
 showinfo "Building and installing extensions"
 cd ${TRAVIS_BUILD_DIR} && cd extension

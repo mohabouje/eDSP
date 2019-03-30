@@ -26,22 +26,26 @@
 * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 * OF THE POSSIBILITY OF SUCH DAMAGE.
 *
-* Filename: package.cpp
+* Filename: algorithm.hpp
 * Author: Mohammed Boujemaoui
-* Date: 27/03/19
+* Date: 30/03/19
 */
 
-#include "algorithm.hpp"
-#include "windowing.hpp"
-#include "statistics.hpp"
-#include "spectral.hpp"
-#include "boost_numpy_dependencies.hpp"
+#ifndef EDSP_BOOST_NUMPY_DEPENDENCIES_HPP
+#define EDSP_BOOST_NUMPY_DEPENDENCIES_HPP
 
+#ifdef USE_BOOST_NUMPY_DEPRECATED
+    #include <boost/python.hpp>
+    #include <boost/numpy.hpp>
 
-BOOST_PYTHON_MODULE(MODULE_NAME) {
-    bn::initialize();
-    add_algorithm_package();
-    add_windowing_package();
-    add_statistics_package();
-    add_spectral_package();
-}
+    namespace bp = boost::python;
+    namespace bn = boost::numpy;
+#else
+    #include <boost/python.hpp>
+    #include <boost/python/numpy.hpp>
+
+    namespace bp = boost::python;
+    namespace bn = boost::python::numpy;
+#endif
+
+#endif //EDSP_BOOST_NUMPY_DEPENDENCIES_HPP

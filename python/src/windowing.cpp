@@ -32,12 +32,8 @@
 */
 
 #include "windowing.hpp"
+#include "boost_numpy_dependencies.hpp"
 #include <windowing.h>
-#include <boost/python/numpy.hpp>
-#include <boost/python.hpp>
-
-namespace bp = boost::python;
-namespace bn = boost::python::numpy;
 
 template <typename Functor>
 bn::ndarray generate_window(long size, Functor&& f) {

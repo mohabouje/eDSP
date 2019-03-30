@@ -32,13 +32,8 @@
 */
 
 #include "spectral.hpp"
+#include "boost_numpy_dependencies.hpp"
 #include <spectral.h>
-#include <boost/python.hpp>
-#include <boost/python/numpy.hpp>
-
-namespace bp = boost::python;
-namespace bn = boost::python::numpy;
-
 
 template <typename Functor>
 bn::ndarray execute(Functor&& f, bn::ndarray& left, bn::ndarray& right) {

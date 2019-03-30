@@ -52,7 +52,9 @@ include_directories(${PYTHON_INCLUDE_DIRS})
 set(HEADER
         include/algorithm.hpp
         include/windowing.hpp
-        include/statistics.hpp include/spectral.hpp)
+        include/statistics.hpp
+        include/spectral.hpp
+        include/boost_numpy_dependencies.hpp)
 
 set(SRC
         src/package.cpp

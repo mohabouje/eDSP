@@ -32,12 +32,9 @@
 */
 
 #include "algorithm.hpp"
+#include "boost_numpy_dependencies.hpp"
 #include <algorithm.h>
-#include <boost/python.hpp>
-#include <boost/python/numpy.hpp>
 
-namespace bp = boost::python;
-namespace bn = boost::python::numpy;
 
 
 template <typename Functor, typename... Args>
