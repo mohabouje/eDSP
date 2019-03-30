@@ -2,6 +2,7 @@ import unittest
 import pedsp.spectral as spectral
 import numpy as np
 import scipy.fftpack as fftpack
+import scipy.signal as signal
 from utiltity import generate_pair_inputs, generate_inputs
 
 
@@ -56,3 +57,10 @@ class TestSpectralMethods(unittest.TestCase):
             forward = spectral.fft(complex_data)
             backward = spectral.ifft(forward)
             np.testing.assert_array_almost_equal(backward, complex_data)
+
+    def test_periodogram(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            data = 10 * data
+            generated = spectral.periodogram(data)
+            reference = np.abs(np.fft.rfft(data)) ** 2
+            np.testing.assert_array_almost_equal(generated, reference, 3)

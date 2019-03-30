@@ -100,7 +100,7 @@ void hilbert(const real_t* data, int size, complex_t * hilb);
  * @param size Length of the input array
  * @param period Output array storing the spectrogram transform
  */
-void periodogram(const real_t* data, int size, real_t* period);
+void periodogram(const real_t* data, int size, real_t* period, const char* type);
 
 /**
  * @brief Computes the DCT transform of the input buffer

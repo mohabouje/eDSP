@@ -66,8 +66,14 @@ void hartley(const real_t *data, int size, real_t *output) {
     edsp::hartley(data, data + size, output);
 }
 
-void periodogram(const real_t *data, int size, real_t *period) {
-    edsp::periodogram(data, data + size, period, edsp::spectral_scale::linear);
+void periodogram(const real_t *data, int size, real_t *period, const char* type) {
+    edsp::spectral_scale t;
+    if (strcmp("spectrum", type) == 0) {
+        t = edsp::spectral_scale::spectrum;
+    } else {
+        t = edsp::spectral_scale::density;
+    }
+    edsp::periodogram(data, data + size, period, t);
 }
 
 int get_fft_size(int real_data_size) {

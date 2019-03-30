@@ -22,7 +22,7 @@
 #ifndef EDSP_SPECTROGRAM_HPP
 #define EDSP_SPECTROGRAM_HPP
 
-#include <edsp/spectral/fft_engine.hpp>
+#include <edsp/spectral/dft.hpp>
 #include <edsp/converter/mag2db.hpp>
 #include <edsp/math/numeric.hpp>
 #include <vector>
@@ -34,8 +34,8 @@ namespace edsp { inline namespace spectral {
     * represent the power spectral density
     */
     enum class spectral_scale {
-        linear = 0,     /*!< Linear scale */
-        logarithmic /*!< Logarithmic scale */
+        density = 0,
+        spectrum
     };
 
     /**
@@ -62,18 +62,18 @@ namespace edsp { inline namespace spectral {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
         const auto size  = std::distance(first, last);
-        fft_engine<value_type> fft_(size);
         std::vector<std::complex<value_type>, Allocator> fft_data_(make_fft_size(size));
-        fft_.dft(&(*first), meta::data(fft_data_));
-        if (scale == spectral_scale::linear) {
+        dft(first, last, std::begin(fft_data_));
+        if (scale == spectral_scale::density) {
+            // TODO: it should divide each frequency bin by the frequency in Hz
             std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
-                           [](const std::complex<value_type>& val) -> meta::value_type_t<OutputIt> {
+                           [](const auto val) {
                                return math::square(std::abs(val));
                            });
         } else {
             std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
-                           [](const std::complex<value_type>& val) -> meta::value_type_t<OutputIt> {
-                               return converter::mag2db(std::abs(val));
+                           [](const auto val)  {
+                               return math::square(std::abs(val));
                            });
         }
     }
