@@ -19,7 +19,9 @@ cd build
 cmake .. -DCMAKE_BUILD_TYPE=RELEASE
 make -j6 && sudo make install
 sudo mv /usr/local/lib64/libboost_numpy.so /usr/local/lib/
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64
+
+showinfo "Exporting libraries path..."
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib64:/usr/local/lib
 
 showinfo "Building and installing extensions"
 cd ${TRAVIS_BUILD_DIR} && cd extension
@@ -35,20 +37,19 @@ cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DUSE_BOOST_NUMPY_DEPRECATED=ON -DUSE_PYTHON3=OFF -DUSE_LIBFFTW=ON  -DBUILD_EXTENSIONS=ON -DBUILD_DOCS=OFF -DENABLE_DEBUG_INFORMATION=ON -DBUILD_EXAMPLES=ON ..
 make -j8
 sudo make install
-if [ $? -ne 0 ]; then
+if [[ $? -ne 0 ]]; then
     error "Error: there are compile errors!"
     exit 3
 fi
 
 showinfo "Running the tests..."
 cd ${TRAVIS_BUILD_DIR}
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
 sudo ldconfig
 sudo pip install --upgrade pip
 sudo pip install -U numpy
 sudo pip install -U scipy
 sudo python test/
-if [ $? -ne 0 ]; then
+if [[ $? -ne 0 ]]; then
     error "Error: there are some tests that failed!"
     exit 4
 fi

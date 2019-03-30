@@ -77,7 +77,7 @@ if (APPLE)
 endif(APPLE)
 
 if (USE_BOOST_NUMPY_DEPRECATED)
-    target_link_libraries(${PEDSP_LIBRARY} PUBLIC -Lboost_numpy)
+    target_link_libraries(${PEDSP_LIBRARY} PUBLIC -lboost_numpy)
 endif(USE_BOOST_NUMPY_DEPRECATED)
 
 get_target_property(OUT ${PEDSP_LIBRARY} LINK_LIBRARIES)
