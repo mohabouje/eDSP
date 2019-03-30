@@ -19,7 +19,7 @@ cd build
 cmake .. -DCMAKE_BUILD_TYPE=RELEASE
 make -j6 && sudo make install
 sudo mv /usr/local/lib64/libboost_numpy.so /usr/local/lib/
-
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib64
 
 showinfo "Building and installing extensions"
 cd ${TRAVIS_BUILD_DIR} && cd extension
@@ -32,7 +32,7 @@ showinfo "Building the library..."
 cd ${TRAVIS_BUILD_DIR}
 mkdir -p build
 cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DUSE_BOOST_NUMPY_DEPRECATED=1 -DUSE_PYTHON3=OFF -DUSE_LIBFFTW=ON  -DBUILD_EXTENSIONS=ON -DBUILD_DOCS=OFF -DENABLE_DEBUG_INFORMATION=ON -DBUILD_EXAMPLES=ON ..
+cmake -DCMAKE_BUILD_TYPE=Release -DUSE_BOOST_NUMPY_DEPRECATED=ON -DUSE_PYTHON3=OFF -DUSE_LIBFFTW=ON  -DBUILD_EXTENSIONS=ON -DBUILD_DOCS=OFF -DENABLE_DEBUG_INFORMATION=ON -DBUILD_EXAMPLES=ON ..
 make -j8
 sudo make install
 if [ $? -ne 0 ]; then

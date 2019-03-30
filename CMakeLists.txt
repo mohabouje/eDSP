@@ -18,6 +18,7 @@ option(BUILD_EXAMPLES "Enable the option to build the examples" ON)
 option(BUILD_BENCHMARK "Enable the option to build the benchmarks" OFF)
 
 option(USE_PYTHON3 "Forces the usage of Python3" ON)
+option(USE_BOOST_NUMPY_DEPRECATED "Uses the original boost-numpy package" OFF)
 option(USE_LIBSNDFILE "Use the library SndFile to encodedecode audio files" ON)
 option(USE_LIBAUDIOFILE "Use the library AudioFile to encode/decode audio files" OFF)
 option(USE_LIBPFFFT "Use the library PFFT to encode/decode audio files" OFF)
@@ -194,6 +195,9 @@ if (BUILD_C_BINDINGS)
 endif(BUILD_C_BINDINGS)
 
 if (BUILD_PYTHON_BINDINGS)
+    if (USE_BOOST_NUMPY_DEPRECATED)
+        add_definitions(-DUSE_BOOST_NUMPY_DEPRECATED)
+    endif()
     add_subdirectory(python)
 endif(BUILD_PYTHON_BINDINGS)
 
