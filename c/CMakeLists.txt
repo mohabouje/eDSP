@@ -19,7 +19,7 @@ set(SRC
 set_source_files_properties(${SRC} PROPERTIES LANGUAGE CXX)
 
 set(CEDSP_LIBRARY cedsp)
-add_library(${CEDSP_LIBRARY} STATIC ${HEADER} ${SRC})
+add_library(${CEDSP_LIBRARY} SHARED ${HEADER} ${SRC})
 target_include_directories(${CEDSP_LIBRARY} PUBLIC include/)
 target_link_libraries(${CEDSP_LIBRARY} PRIVATE ${EDSP_LIBRARIES})
 set(CEDSP_LIBRARIES "${EDSP_LIBRARIES};${CEDSP_LIBRARY}" PARENT_SCOPE)
