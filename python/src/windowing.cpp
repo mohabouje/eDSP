@@ -38,8 +38,8 @@
 template <typename Functor>
 bn::ndarray generate_window(long size, Functor&& f) {
     Py_intptr_t shape[1] = {size};
-    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
-    auto data = reinterpret_cast<real_t*>(result.get_data());
+    auto result          = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto data            = reinterpret_cast<real_t*>(result.get_data());
     f(data, size);
     return result;
 }
@@ -88,14 +88,11 @@ bn::ndarray generate_rectangular(long size) {
     return generate_window(size, rectangular);
 }
 
-
 void add_windowing_package() {
-
     std::string nested_name = bp::extract<std::string>(bp::scope().attr("__name__") + ".windowing");
     bp::object nested_module(bp::handle<>(bp::borrowed(PyImport_AddModule(nested_name.c_str()))));
     bp::scope().attr("windowing") = nested_module;
-    bp::scope parent = nested_module;
-
+    bp::scope parent              = nested_module;
 
     bp::def("bartlett", generate_bartlett);
     bp::def("blackman", generate_blackman);

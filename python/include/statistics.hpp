@@ -36,5 +36,4 @@
 
 void add_statistics_package();
 
-
 #endif //EDSP_PYTHON_BINDING_STATISTICS_HPP

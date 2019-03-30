@@ -42,19 +42,19 @@ inline auto execute(Functor&& f, bn::ndarray& input, Arg... arg) {
     }
 
     const auto size = input.shape(0);
-    auto in = reinterpret_cast<real_t*>(input.get_data());
+    auto in         = reinterpret_cast<real_t*>(input.get_data());
     return f(in, size, arg...);
-} 
+}
 
 real_t centroid_python(bn::ndarray& input) {
     return execute(centroid, input);
 }
 
-real_t entropy_python(bn::ndarray& input)  {
+real_t entropy_python(bn::ndarray& input) {
     return execute(entropy, input);
 }
 
-real_t flatness_python(bn::ndarray& input)  {
+real_t flatness_python(bn::ndarray& input) {
     return execute(flatness, input);
 }
 
@@ -120,21 +120,19 @@ real_t variance_python(bn::ndarray& input) {
     return execute(variance, input);
 }
 
-real_t standard_deviation_python(bn::ndarray& input)  {
+real_t standard_deviation_python(bn::ndarray& input) {
     return execute(standard_deviation, input);
 }
 
-real_t norm_python(bn::ndarray& input)  {
+real_t norm_python(bn::ndarray& input) {
     return execute(norm, input);
 }
-
-
 
 void add_statistics_package() {
     std::string nested_name = bp::extract<std::string>(bp::scope().attr("__name__") + ".statistics");
     bp::object nested_module(bp::handle<>(bp::borrowed(PyImport_AddModule(nested_name.c_str()))));
     bp::scope().attr("statistics") = nested_module;
-    bp::scope parent = nested_module;
+    bp::scope parent               = nested_module;
 
     bp::def("centroid", centroid_python);
     bp::def("entropy", entropy_python);

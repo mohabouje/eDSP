@@ -46,22 +46,6 @@ struct Peak {
     real_t value;
 };
 
-/**
- * @brief Computes the centroid value of the input data
- * @param data Input array
- * @param size Length of the array
- * @return Centroid of the input array
- */
-real_t centroid(const real_t* data, int size);
-
-/**
- * @brief Computes the centroid value of the input data with the given weights
- * @param data Input array
- * @param weights Array representing the weights
- * @param size Length of the array
- * @return Centroid of the input array
- */
-real_t centroid_weighted(const real_t* data, int size, const real_t* weights);
 
 /**
  * @brief Computes the normalized entropy of the probability mass function given in the input array.
@@ -70,14 +54,6 @@ real_t centroid_weighted(const real_t* data, int size, const real_t* weights);
  * @return The entropy of the probability mass function.
  */
 real_t entropy(const real_t* data, int size);
-
-/**
- * @brief Computes the flatness value of the input data
- * @param data Input array
- * @param size Length of the array
- * @return Flatness of the input array
- */
-real_t flatness(const real_t* data, int size);
 
 /**
  * @brief Computes the kurtosis value of the input data

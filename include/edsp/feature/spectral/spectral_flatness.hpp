@@ -27,7 +27,7 @@
 #ifndef EDSP_SPECTRAL_FLATNESS_HPP
 #define EDSP_SPECTRAL_FLATNESS_HPP
 
-#include <edsp/statistics/flatness.hpp>
+#include <edsp/feature/statistics/flatness.hpp>
 
 namespace edsp { namespace feature { inline namespace spectral {
 

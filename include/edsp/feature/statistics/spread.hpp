@@ -27,7 +27,7 @@
 #ifndef EDSP_SPREAD_HPP
 #define EDSP_SPREAD_HPP
 
-#include <edsp/statistics/centroid.hpp>
+#include <edsp/feature/statistics/centroid.hpp>
 #include <cmath>
 
 namespace edsp { namespace feature { inline namespace statistics {

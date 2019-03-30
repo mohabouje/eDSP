@@ -37,7 +37,6 @@
 #include "spectral.hpp"
 #include "boost_numpy_dependencies.hpp"
 
-
 BOOST_PYTHON_MODULE(MODULE_NAME) {
     bn::initialize();
     add_algorithm_package();

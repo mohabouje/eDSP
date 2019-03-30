@@ -24,7 +24,7 @@
 
 #include <edsp/meta/iterator.hpp>
 
-namespace edsp { namespace statistics {
+namespace edsp { namespace feature { inline namespace statistics {
 
     /**
      * @brief Computes the centroid value of the range [first, last)
@@ -77,6 +77,6 @@ namespace edsp { namespace statistics {
         return weighted_sum / unweighted_sum;
     }
 
-}} // namespace edsp::statistics
+}}} // namespace edsp::feature::statistics
 
 #endif // EDSP_STATISTICAL_CENTROID_HPP

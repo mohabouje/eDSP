@@ -35,20 +35,17 @@
 #include "boost_numpy_dependencies.hpp"
 #include <algorithm.h>
 
-
-
 template <typename Functor, typename... Args>
 bn::ndarray execute_inplace(Functor&& f, bn::ndarray& input, Args... arg) {
-
     if (input.get_nd() != 1) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
 
-    const auto size = input.shape(0);
+    const auto size      = input.shape(0);
     Py_intptr_t shape[1] = {size};
-    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
-    auto in = reinterpret_cast<real_t*>(input.get_data());
-    auto out = reinterpret_cast<real_t*>(result.get_data());
+    auto result          = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto in              = reinterpret_cast<real_t*>(input.get_data());
+    auto out             = reinterpret_cast<real_t*>(result.get_data());
     f(in, size, out, arg...);
     return result;
 }
@@ -56,17 +53,17 @@ bn::ndarray execute_inplace(Functor&& f, bn::ndarray& input, Args... arg) {
 template <typename Functor, typename... Args>
 bn::ndarray execute(Functor&& f, long size, Args... arg) {
     Py_intptr_t shape[1] = {size};
-    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
-    auto* data = reinterpret_cast<real_t*>(result.get_data());
+    auto result          = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto* data           = reinterpret_cast<real_t*>(result.get_data());
     f(data, size, arg...);
     return result;
 }
 
-bn::ndarray scale_python(bn::ndarray &input, real_t factor) {
+bn::ndarray scale_python(bn::ndarray& input, real_t factor) {
     return execute_inplace(array_scale, input, factor);
 }
 
-bn::ndarray scale_clip_python(bn::ndarray &input, real_t factor, real_t min, real_t max) {
+bn::ndarray scale_clip_python(bn::ndarray& input, real_t factor, real_t min, real_t max) {
     return execute_inplace(array_scale_clip, input, factor, min, max);
 }
 
@@ -90,7 +87,7 @@ bn::ndarray trunc_python(bn::ndarray& input) {
     return execute_inplace(array_trunc, input);
 }
 
-bn::ndarray abs_python(bn::ndarray &input) {
+bn::ndarray abs_python(bn::ndarray& input) {
     return execute_inplace(array_abs, input);
 }
 
@@ -111,39 +108,38 @@ bn::ndarray concatenate_python(bn::ndarray& first, bn::ndarray& second) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
 
-    const auto first_size = first.shape(0);
+    const auto first_size  = first.shape(0);
     const auto second_size = second.shape(0);
-    Py_intptr_t shape[1] = {first_size + second_size};
-    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
-    auto* first_in = reinterpret_cast<real_t*>(first.get_data());
-    auto* second_in = reinterpret_cast<real_t*>(second.get_data());
-    auto* result_data = reinterpret_cast<real_t*>(result.get_data());
+    Py_intptr_t shape[1]   = {first_size + second_size};
+    auto result            = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto* first_in         = reinterpret_cast<real_t*>(first.get_data());
+    auto* second_in        = reinterpret_cast<real_t*>(second.get_data());
+    auto* result_data      = reinterpret_cast<real_t*>(result.get_data());
 
     array_concatenate(first_in, first_size, second_in, second_size, result_data);
     return result;
 }
 
 bn::ndarray padder_python(bn::ndarray& input, long size) {
-    if (input.get_nd() != 1 ) {
+    if (input.get_nd() != 1) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
 
     const auto input_size = input.shape(0);
-    Py_intptr_t shape[1] = {size};
-    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
-    auto* in = reinterpret_cast<real_t*>(input.get_data());
-    auto* result_data = reinterpret_cast<real_t*>(result.get_data());
+    Py_intptr_t shape[1]  = {size};
+    auto result           = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto* in              = reinterpret_cast<real_t*>(input.get_data());
+    auto* result_data     = reinterpret_cast<real_t*>(result.get_data());
 
     array_padder(in, input_size, result_data, size);
     return result;
 }
 
 void add_algorithm_package() {
-
     std::string nested_name = bp::extract<std::string>(bp::scope().attr("__name__") + ".algorithm");
     bp::object nested_module(bp::handle<>(bp::borrowed(PyImport_AddModule(nested_name.c_str()))));
     bp::scope().attr("algorithm") = nested_module;
-    bp::scope parent = nested_module;
+    bp::scope parent              = nested_module;
 
     bp::def("scale", scale_python);
     bp::def("scale_clip", scale_clip_python);

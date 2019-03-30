@@ -37,47 +37,46 @@
 #include <edsp/windowing.hpp>
 #include <windowing.h>
 
-
-void bartlett(real_t *window, int N) {
+void bartlett(real_t* window, int N) {
     edsp::windowing::bartlett(window, window + N);
 }
 
-void blackman(real_t *window, int N) {
+void blackman(real_t* window, int N) {
     edsp::windowing::blackman(window, window + N);
 }
 
-void blackman_harris(real_t *window, int N) {
+void blackman_harris(real_t* window, int N) {
     edsp::windowing::blackman_harris(window, window + N);
 }
 
-void blackman_nutall(real_t *window, int N) {
+void blackman_nutall(real_t* window, int N) {
     edsp::windowing::blackman_nutall(window, window + N);
 }
 
-void boxcar(real_t *window, int N) {
+void boxcar(real_t* window, int N) {
     edsp::windowing::boxcar(window, window + N);
 }
 
-void flattop(real_t *window, int N) {
+void flattop(real_t* window, int N) {
     edsp::windowing::flattop(window, window + N);
 }
 
-void hamming(real_t *window, int N) {
+void hamming(real_t* window, int N) {
     edsp::windowing::hamming(window, window + N);
 }
 
-void hanning(real_t *window, int N) {
+void hanning(real_t* window, int N) {
     edsp::windowing::hanning(window, window + N);
 }
 
-void triangular(real_t *window, int N) {
+void triangular(real_t* window, int N) {
     edsp::windowing::triangular(window, window + N);
 }
 
-void welch(real_t *window, int N) {
+void welch(real_t* window, int N) {
     edsp::windowing::welch(window, window + N);
 }
 
-void rectangular(real_t *window, int N) {
+void rectangular(real_t* window, int N) {
     edsp::windowing::rectangular(window, window + N);
 }

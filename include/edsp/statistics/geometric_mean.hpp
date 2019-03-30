@@ -42,12 +42,10 @@ namespace edsp { namespace statistics {
      */
     template <typename ForwardIt>
     constexpr auto geometric_mean(ForwardIt first, ForwardIt last) {
-        using value_type  = meta::value_type_t<ForwardIt>;
-        const auto predicate = [](const auto prev, const auto current) {
-            return prev + std::log(current);
-        };
-        const auto acc = std::accumulate(first, last, static_cast<value_type>(0), predicate);
-        const auto sz  = static_cast<value_type>(std::distance(first, last));
+        using value_type     = meta::value_type_t<ForwardIt>;
+        const auto predicate = [](const auto prev, const auto current) { return prev + std::log(current); };
+        const auto acc       = std::accumulate(first, last, static_cast<value_type>(0), predicate);
+        const auto sz        = static_cast<value_type>(std::distance(first, last));
         return std::exp(acc / sz);
     }
 }} // namespace edsp::statistics

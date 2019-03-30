@@ -33,10 +33,7 @@ namespace edsp { inline namespace spectral {
     * @brief The SpectralScale enum represent the scale used to
     * represent the power spectral density
     */
-    enum class spectral_scale {
-        density = 0,
-        spectrum
-    };
+    enum class spectral_scale { density = 0, spectrum };
 
     /**
      * @brief Computes the periodogram of the range [first, last) and stores the result in another range, beginning at d_first.
@@ -67,14 +64,10 @@ namespace edsp { inline namespace spectral {
         if (scale == spectral_scale::density) {
             // TODO: it should divide each frequency bin by the frequency in Hz
             std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
-                           [](const auto val) {
-                               return math::square(std::abs(val));
-                           });
+                           [](const auto val) { return math::square(std::abs(val)); });
         } else {
             std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
-                           [](const auto val)  {
-                               return math::square(std::abs(val));
-                           });
+                           [](const auto val) { return math::square(std::abs(val)); });
         }
     }
 

@@ -42,31 +42,31 @@
 #include <edsp/spectral/hilbert.hpp>
 #include <edsp/spectral/hartley.hpp>
 
-void cepstrum(const real_t *data, int size, real_t *ceps) {
+void cepstrum(const real_t* data, int size, real_t* ceps) {
     edsp::cepstrum(data, data + size, ceps);
 }
 
-void conv(const real_t *first, const real_t *second, int size, real_t *conv) {
+void conv(const real_t* first, const real_t* second, int size, real_t* conv) {
     edsp::conv(first, first + size, second, conv);
 }
 
-void xcorr(const real_t *first, const real_t *second, int size, real_t *corr) {
+void xcorr(const real_t* first, const real_t* second, int size, real_t* corr) {
     edsp::xcorr(first, first + size, second, corr);
 }
 
-void dct(const real_t *input, int size, real_t *output) {
+void dct(const real_t* input, int size, real_t* output) {
     edsp::dct(input, input + size, output);
 }
 
-void idct(const real_t *input, int size, real_t *output) {
+void idct(const real_t* input, int size, real_t* output) {
     edsp::idct(input, input + size, output);
 }
 
-void hartley(const real_t *data, int size, real_t *output) {
+void hartley(const real_t* data, int size, real_t* output) {
     edsp::hartley(data, data + size, output);
 }
 
-void periodogram(const real_t *data, int size, real_t *period, const char* type) {
+void periodogram(const real_t* data, int size, real_t* period, const char* type) {
     edsp::spectral_scale t;
     if (strcmp("spectrum", type) == 0) {
         t = edsp::spectral_scale::spectrum;
@@ -84,29 +84,29 @@ int get_ifft_size(int complex_data_size) {
     return edsp::make_ifft_size(complex_data_size);
 }
 
-void hilbert(const real_t *data, int size, complex_t *output) {
+void hilbert(const real_t* data, int size, complex_t* output) {
     auto* out = reinterpret_cast<std::complex<real_t>*>(output);
     edsp::hilbert(data, data + size, out);
 }
 
-void fft(const real_t *input, int size, complex_t *output) {
+void fft(const real_t* input, int size, complex_t* output) {
     auto* out = reinterpret_cast<std::complex<real_t>*>(output);
     edsp::dft(input, input + size, out);
 }
 
-void ifft(const complex_t *input, int size, real_t *output) {
+void ifft(const complex_t* input, int size, real_t* output) {
     const auto* in = reinterpret_cast<const std::complex<real_t>*>(input);
     edsp::idft(in, in + size, output);
 }
 
-void complex_fft(const complex_t *input, int size, complex_t *output) {
+void complex_fft(const complex_t* input, int size, complex_t* output) {
     const auto* in = reinterpret_cast<const std::complex<real_t>*>(input);
-    auto* out = reinterpret_cast<std::complex<real_t>*>(output);
+    auto* out      = reinterpret_cast<std::complex<real_t>*>(output);
     edsp::cdft(in, in + size, out);
 }
 
-void complex_ifft(const complex_t *input, int size, complex_t *output) {
+void complex_ifft(const complex_t* input, int size, complex_t* output) {
     const auto* in = reinterpret_cast<const std::complex<real_t>*>(input);
-    auto* out = reinterpret_cast<std::complex<real_t>*>(output);
+    auto* out      = reinterpret_cast<std::complex<real_t>*>(output);
     edsp::cidft(in, in + size, out);
 }

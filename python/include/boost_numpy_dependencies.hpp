@@ -35,17 +35,17 @@
 #define EDSP_BOOST_NUMPY_DEPENDENCIES_HPP
 
 #ifdef USE_BOOST_NUMPY_DEPRECATED
-    #include <boost/python.hpp>
-    #include <boost/numpy.hpp>
+#    include <boost/python.hpp>
+#    include <boost/numpy.hpp>
 
-    namespace bp = boost::python;
-    namespace bn = boost::numpy;
+namespace bp = boost::python;
+namespace bn = boost::numpy;
 #else
-    #include <boost/python.hpp>
-    #include <boost/python/numpy.hpp>
+#    include <boost/python.hpp>
+#    include <boost/python/numpy.hpp>
 
-    namespace bp = boost::python;
-    namespace bn = boost::python::numpy;
+namespace bp = boost::python;
+namespace bn = boost::python::numpy;
 #endif
 
 #endif //EDSP_BOOST_NUMPY_DEPENDENCIES_HPP

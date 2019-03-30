@@ -22,10 +22,7 @@
 #ifndef EDSP_STATISTICS_HPP
 #define EDSP_STATISTICS_HPP
 
-#include <edsp/statistics/centroid.hpp>
-#include <edsp/feature/statistics/crest.hpp>
 #include <edsp/statistics/entropy.hpp>
-#include <edsp/statistics/flatness.hpp>
 #include <edsp/statistics/generalized_mean.hpp>
 #include <edsp/statistics/geometric_mean.hpp>
 #include <edsp/statistics/harmonic_mean.hpp>
@@ -37,8 +34,6 @@
 #include <edsp/statistics/min.hpp>
 #include <edsp/statistics/moment.hpp>
 #include <edsp/statistics/peak.hpp>
-#include <edsp/feature/temporal/rms.hpp>
-#include <edsp/feature/temporal/rssq.hpp>
 #include <edsp/statistics/skewness.hpp>
 #include <edsp/statistics/variance.hpp>
 #include <edsp/statistics/norm.hpp>

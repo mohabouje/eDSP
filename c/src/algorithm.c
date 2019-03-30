@@ -34,66 +34,64 @@
 #include "algorithm.h"
 #include <edsp/algorithm.hpp>
 
-
-void array_scale(const real_t *input, int size, real_t *output, real_t factor) {
+void array_scale(const real_t* input, int size, real_t* output, real_t factor) {
     edsp::amplifier(input, input + size, output, factor);
 }
 
-
-void array_scale_clip(const real_t *input, int size, real_t *output, real_t factor, real_t min, real_t max) {
+void array_scale_clip(const real_t* input, int size, real_t* output, real_t factor, real_t min, real_t max) {
     edsp::amplifier(input, input + size, output, factor, min, max);
 }
 
-void array_ceil(const real_t *input, int size, real_t *output) {
+void array_ceil(const real_t* input, int size, real_t* output) {
     edsp::ceil(input, input + size, output);
 }
 
-void array_floor(const real_t *input, int size, real_t *output) {
+void array_floor(const real_t* input, int size, real_t* output) {
     edsp::floor(input, input + size, output);
 }
 
-void array_round(const real_t *input, int size, real_t *output) {
+void array_round(const real_t* input, int size, real_t* output) {
     edsp::round(input, input + size, output);
 }
 
-void array_clip(const real_t *input, int size, real_t *output, real_t min, real_t max) {
-    edsp::clipper(input, input+size, output, min, max);
+void array_clip(const real_t* input, int size, real_t* output, real_t min, real_t max) {
+    edsp::clipper(input, input + size, output, min, max);
 }
 
-void array_concatenate(const real_t *left, int size_left, const real_t *right, int size_right, real_t *output) {
+void array_concatenate(const real_t* left, int size_left, const real_t* right, int size_right, real_t* output) {
     edsp::concatenate(left, left + size_left, right, right + size_right, output);
 }
 
-void array_trunc(const real_t *input, int size, real_t *output) {
+void array_trunc(const real_t* input, int size, real_t* output) {
     edsp::fix(input, input + size, output);
 }
 
-void array_linspace(real_t *output, int size, real_t x1, real_t x2) {
+void array_linspace(real_t* output, int size, real_t x1, real_t x2) {
     edsp::linspace(output, x1, x2, size);
 }
 
-void array_logspace(real_t *output, int size, real_t x1, real_t x2) {
+void array_logspace(real_t* output, int size, real_t x1, real_t x2) {
     edsp::logspace(output, x1, x2, size);
 }
 
-void array_abs(const real_t *input, int size, real_t *output) {
+void array_abs(const real_t* input, int size, real_t* output) {
     edsp::rectify(input, input + size, output);
 }
 
-void array_normalize(const real_t *input, int size, real_t *output) {
+void array_normalize(const real_t* input, int size, real_t* output) {
     edsp::normalize(input, input + size, output);
 }
 
-void array_padder(const real_t *input, int input_size, real_t *output, int output_size) {
+void array_padder(const real_t* input, int input_size, real_t* output, int output_size) {
     edsp::padder(input, input + input_size, output, output + output_size);
 }
 
-int equal(const real_t *left, int size, const real_t *right) {
+int equal(const real_t* left, int size, const real_t* right) {
     return edsp::equal(left, left + size, right, right + size);
 }
 
-int binary_search(const real_t *input, int size, real_t value) {
-    const auto end = input + size;
+int binary_search(const real_t* input, int size, real_t value) {
+    const auto end  = input + size;
     const auto iter = edsp::binary_search(input, end, value);
     if (iter != end) {
         return static_cast<int>(std::distance(input, iter));
@@ -102,12 +100,12 @@ int binary_search(const real_t *input, int size, real_t value) {
     }
 }
 
-int index_of(const real_t *input, int size, real_t value) {
+int index_of(const real_t* input, int size, real_t value) {
     return edsp::index_of(input, input + size, value);
 }
 
-int linear_search(const real_t *input, int size, real_t value) {
-    const auto end = input + size;
+int linear_search(const real_t* input, int size, real_t value) {
+    const auto end  = input + size;
     const auto iter = edsp::linear_search(input, end, value);
     if (iter != end) {
         return static_cast<int>(std::distance(input, iter));
@@ -116,8 +114,8 @@ int linear_search(const real_t *input, int size, real_t value) {
     }
 }
 
-int contains(const real_t *input, int size, real_t value) {
-    const auto end = input + size;
+int contains(const real_t* input, int size, real_t value) {
+    const auto end  = input + size;
     const auto iter = edsp::linear_search(input, end, value);
     return iter != end;
 }

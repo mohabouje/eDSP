@@ -25,7 +25,7 @@
 #include <edsp/statistics/mean.hpp>
 #include <edsp/statistics/geometric_mean.hpp>
 
-namespace edsp { namespace statistics {
+namespace edsp { namespace feature { inline namespace statistics {
 
     /**
      * @brief Computes the flatness value of the range [first, last)
@@ -47,6 +47,6 @@ namespace edsp { namespace statistics {
         return computed_gmean / computed_mean;
     }
 
-}} // namespace edsp::statistics
+}}} // namespace edsp::feature::statistics
 
 #endif // EDSP_STATISTICAL_FLATNESS_H
