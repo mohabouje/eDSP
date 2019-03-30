@@ -16,7 +16,10 @@ mkdir -p build && cd build
 cmake .. && make -j8
 sudo make install
 cd .. && cd ..
-
+if [ $? -ne 0 ]; then
+    error "Error: there are some tests that failed!"
+    exit 4
+fi
 
 showinfo "Building the library..."
 cd ${TRAVIS_BUILD_DIR}
