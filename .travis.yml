@@ -44,6 +44,7 @@ matrix:
             - libaudiofile-dev
             - libsndfile1-dev
             - libgtest-dev
+            - libboost-all-dev
             - python
             - python-numpy
             - python-scipy
