@@ -35,9 +35,9 @@ matrix:
             - libaudiofile-dev
             - libsndfile1-dev
             - libgtest-dev
-            - python3
-            - python3-numpy
-            - python3-scipy
+          sources:
+            - ubuntu-toolchain-r-test
+            - llvm-toolchain-trusty-5.0
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
         - USE_BOOST_NUMPY_DEPRECATED=1
