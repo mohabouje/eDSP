@@ -26,7 +26,7 @@
 #include <numeric>
 #include <cmath>
 
-namespace edsp { namespace statistics {
+namespace edsp { namespace feature { namespace statistics {
 
     /**
      * @brief Computes the normalized entropy of the probability mass function given in the range [first, last).
@@ -58,6 +58,6 @@ namespace edsp { namespace statistics {
         return -acc / std::log2(size);
     }
 
-}} // namespace edsp::statistics
+}}} // namespace edsp::feature::statistics
 
 #endif // EDSP_STATISTICAL_ENTROPY_HPP

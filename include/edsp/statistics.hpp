@@ -22,7 +22,6 @@
 #ifndef EDSP_STATISTICS_HPP
 #define EDSP_STATISTICS_HPP
 
-#include <edsp/statistics/entropy.hpp>
 #include <edsp/statistics/generalized_mean.hpp>
 #include <edsp/statistics/geometric_mean.hpp>
 #include <edsp/statistics/harmonic_mean.hpp>

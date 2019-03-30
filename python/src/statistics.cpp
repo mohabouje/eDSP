@@ -46,18 +46,6 @@ inline auto execute(Functor&& f, bn::ndarray& input, Arg... arg) {
     return f(in, size, arg...);
 }
 
-real_t centroid_python(bn::ndarray& input) {
-    return execute(centroid, input);
-}
-
-real_t entropy_python(bn::ndarray& input) {
-    return execute(entropy, input);
-}
-
-real_t flatness_python(bn::ndarray& input) {
-    return execute(flatness, input);
-}
-
 real_t kurtosis_python(bn::ndarray& input) {
     return execute(kurtosis, input);
 }
@@ -134,9 +122,6 @@ void add_statistics_package() {
     bp::scope().attr("statistics") = nested_module;
     bp::scope parent               = nested_module;
 
-    bp::def("centroid", centroid_python);
-    bp::def("entropy", entropy_python);
-    bp::def("flatness", flatness_python);
     bp::def("kurtosis", kurtosis_python);
     bp::def("skewness", skewness_python);
     bp::def("moment", moment_python);

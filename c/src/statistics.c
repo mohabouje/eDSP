@@ -36,9 +36,6 @@
 #include <iostream>
 #include <edsp/statistics.hpp>
 
-real_t entropy(const real_t* data, int size) {
-    return edsp::statistics::entropy(data, data + size);
-}
 
 real_t harmonic_mean(const real_t* data, int size) {
     return edsp::statistics::harmonic_mean(data, data + size);

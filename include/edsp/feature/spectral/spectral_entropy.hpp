@@ -27,7 +27,7 @@
 #ifndef EDSP_SPECTRAL_ENTROPY_HPP
 #define EDSP_SPECTRAL_ENTROPY_HPP
 
-#include <edsp/statistics/entropy.hpp>
+#include <edsp/feature/statistics/entropy.hpp>
 #include <functional>
 #include <algorithm>
 

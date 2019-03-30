@@ -40,20 +40,10 @@ extern "C" {
 
 #include "types.h"
 
-
 struct Peak {
     int index;
     real_t value;
 };
-
-
-/**
- * @brief Computes the normalized entropy of the probability mass function given in the input array.
- * @param data Input array
- * @param size Length of the array
- * @return The entropy of the probability mass function.
- */
-real_t entropy(const real_t* data, int size);
 
 /**
  * @brief Computes the kurtosis value of the input data

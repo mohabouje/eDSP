@@ -12,7 +12,6 @@ class TestStatisticsMethods(unittest.TestCase):
     __maximum_size = 1 << 14
     __minimum_size = 1 << 6
 
-    # TODO: test entropy
     # TODO: test median
     # TODO: implement this list https://www.programcreek.com/python/example/66766/scipy.stats.kurtosis
 
