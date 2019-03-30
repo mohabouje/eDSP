@@ -18,13 +18,14 @@ mkdir -p build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=RELEASE
 make -j6 && sudo make install
+sudo mv /usr/local/lib64/libboost_numpy.so /usr/local/lib/
+
 
 showinfo "Building and installing extensions"
 cd ${TRAVIS_BUILD_DIR} && cd extension
 mkdir -p build && cd build
 cmake .. && make -j8
 sudo make install
-cd .. && cd ..
 
 
 showinfo "Building the library..."
