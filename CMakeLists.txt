@@ -68,11 +68,6 @@ if(APPLE)
     set(CMAKE_SHARED_LIBRARY_SUFFIX ".so")
 endif(APPLE)
 
-# Set the default install folders
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build/bin)
-
 # Starting the library configuration
 set(VERSION_MAJOR  0)
 set(VERSION_MINOR  0)
@@ -116,7 +111,6 @@ if (USE_LIBSNDFILE)
 endif()
 
 if (USE_LIBAUDIOFILE)
-    set(USE_LIBPFFFT OFF)
     find_library(AUDIOFILE_LIB NAMES laudiofile libaudiofile audiofile)
     if (AUDIOFILE_LIB)
         set(EDSP_DEPENDENCIES "${EDSP_DEPENDENCIES};${AUDIOFILE_LIB}")

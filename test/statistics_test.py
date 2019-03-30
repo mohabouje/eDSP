@@ -16,17 +16,17 @@ class TestStatisticsMethods(unittest.TestCase):
     # TODO: test median
     # TODO: implement this list https://www.programcreek.com/python/example/66766/scipy.stats.kurtosis
 
-    def test_harmonic_mean(self):
-        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
-            generated = statistics.harmonic_mean(data)
-            reference = scipy.stats.mstats.hmean(data)
-            self.assertAlmostEqual(generated, reference)
-
-    def test_generalized_mean(self):
-        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
-            generated = statistics.geometric_mean(data)
-            reference = scipy.stats.mstats.gmean(data)
-            self.assertAlmostEqual(generated, reference)
+    # def test_harmonic_mean(self):
+    #     for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+    #         generated = statistics.harmonic_mean(data)
+    #         reference = scipy.stats.mstats.hmean(data)
+    #         self.assertAlmostEqual(generated, reference)
+    #
+    # def test_generalized_mean(self):
+    #     for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+    #         generated = statistics.geometric_mean(data)
+    #         reference = scipy.stats.mstats.gmean(data)
+    #         self.assertAlmostEqual(generated, reference)
 
     def test_mean(self):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
@@ -46,17 +46,17 @@ class TestStatisticsMethods(unittest.TestCase):
             reference = np.std(data)
             self.assertAlmostEqual(generated, reference.item())
 
-    def test_skewness(self):
-        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
-            generated = statistics.skewness(data)
-            reference = scipy.stats.mstats.skew(data)
-            self.assertAlmostEqual(generated, reference.item())
-
-    def test_kurtosis(self):
-        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
-            generated = statistics.kurtosis(data)
-            reference = scipy.stats.mstats.kurtosis(data, fisher=False)
-            self.assertAlmostEqual(generated, reference.item())
+    # def test_skewness(self):
+    #     for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+    #         generated = statistics.skewness(data)
+    #         reference = scipy.stats.mstats.skew(data)
+    #         self.assertAlmostEqual(generated, reference.item())
+    #
+    # def test_kurtosis(self):
+    #     for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+    #         generated = statistics.kurtosis(data)
+    #         reference = scipy.stats.mstats.kurtosis(data, fisher=False)
+    #         self.assertAlmostEqual(generated, reference.item())
 
     def test_moment(self):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
