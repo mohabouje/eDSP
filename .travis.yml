@@ -19,6 +19,15 @@ matrix:
           - numpy
           - scipy
           - lcov
+      script:
+        - cd ${TRAVIS_BUILD_DIR}
+        - sh mac_travis.sh
+      after_success:
+        - cd ${TRAVIS_BUILD_DIR}
+        - lcov --directory . --capture --output-file coverage.info
+        - lcov --remove coverage.info '/usr/*' --output-file coverage.info
+        - lcov --list coverage.info
+        - bash <(curl -s https://codecov.io/bash)
     - os: linux
       dist: xenial
       sudo: true
@@ -35,6 +44,9 @@ matrix:
             - libaudiofile-dev
             - libsndfile1-dev
             - libgtest-dev
+            - python
+            - python-numpy
+            - python-scipy
           sources:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-5.0
@@ -44,6 +56,9 @@ matrix:
       before_install:
         - eval "${MATRIX_EVAL}"
         - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+      script:
+        - cd ${TRAVIS_BUILD_DIR}
+        - sh xenial_travis.sh
 
 branches:
   only:
@@ -55,14 +70,3 @@ env:
 
 notifications:
   email: false
-
-script:
-  - cd ${TRAVIS_BUILD_DIR}
-  - sh travis.sh
-
-after_success:
-  - cd ${TRAVIS_BUILD_DIR}
-  - lcov --directory . --capture --output-file coverage.info
-  - lcov --remove coverage.info '/usr/*' --output-file coverage.info
-  - lcov --list coverage.info
-  - bash <(curl -s https://codecov.io/bash)
