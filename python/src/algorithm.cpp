@@ -47,10 +47,12 @@ bn::ndarray execute_inplace(Functor&& f, bn::ndarray& input, Args... arg) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
 
-    auto result = input.astype(bn::dtype::get_builtin<real_t>());
-    const auto size = result.shape(0);
-    auto in = reinterpret_cast<real_t*>(result.get_data());
-    f(in, size, in, arg...);
+    const auto size = input.shape(0);
+    Py_intptr_t shape[1] = {size};
+    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto in = reinterpret_cast<real_t*>(input.get_data());
+    auto out = reinterpret_cast<real_t*>(result.get_data());
+    f(in, size, out, arg...);
     return result;
 }
 
@@ -107,6 +109,38 @@ bn::ndarray logspace_python(real_t x1, real_t x2, long size) {
     return execute(array_logspace, size, x1, x2);
 }
 
+bn::ndarray concatenate_python(bn::ndarray& first, bn::ndarray& second) {
+    if (first.get_nd() != 1 || second.get_nd() != 1) {
+        throw std::invalid_argument("Expected one-dimensional arrays");
+    }
+
+    const auto first_size = first.shape(0);
+    const auto second_size = second.shape(0);
+    Py_intptr_t shape[1] = {first_size + second_size};
+    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto* first_in = reinterpret_cast<real_t*>(first.get_data());
+    auto* second_in = reinterpret_cast<real_t*>(second.get_data());
+    auto* result_data = reinterpret_cast<real_t*>(result.get_data());
+
+    array_concatenate(first_in, first_size, second_in, second_size, result_data);
+    return result;
+}
+
+bn::ndarray padder_python(bn::ndarray& input, long size) {
+    if (input.get_nd() != 1 ) {
+        throw std::invalid_argument("Expected one-dimensional arrays");
+    }
+
+    const auto input_size = input.shape(0);
+    Py_intptr_t shape[1] = {size};
+    auto result = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto* in = reinterpret_cast<real_t*>(input.get_data());
+    auto* result_data = reinterpret_cast<real_t*>(result.get_data());
+
+    array_padder(in, input_size, result_data, size);
+    return result;
+}
+
 void add_algorithm_package() {
 
     std::string nested_name = bp::extract<std::string>(bp::scope().attr("__name__") + ".algorithm");
@@ -125,4 +159,6 @@ void add_algorithm_package() {
     bp::def("logspace", logspace_python);
     bp::def("linspace", linspace_python);
     bp::def("normalize", normalize_python);
+    bp::def("concatenate", concatenate_python);
+    bp::def("pad", padder_python);
 }

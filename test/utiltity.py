@@ -3,7 +3,7 @@ from random import randint
 
 
 def get_generators():
-    return [sp.hanning, sp.hann, sp.flattop, sp.nuttall, sp.blackman, sp.parzen]
+    return [sp.hamming, sp.hann, sp.flattop, sp.nuttall, sp.blackman, sp.parzen]
 
 
 def generate_inputs(number_inputs, minimum_size, maximum_size):
