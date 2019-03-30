@@ -55,7 +55,7 @@ namespace edsp { namespace io {
          * @brief Creates a resampler with the given configuration
          * @param channels Number of channels.
          * @param quality  Quality of the resampling process.
-         * @param factor   Resampling factor (output samplerate / input samplerate)
+         * @param factor   Resampling factor (output sample_rate / input sample_rate)
          */
         resampler(size_type channels, resample_quality quality, value_type factor) : impl(channels, quality, factor) {}
 

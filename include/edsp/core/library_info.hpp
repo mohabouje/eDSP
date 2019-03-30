@@ -33,7 +33,7 @@ namespace edsp { inline namespace core {
 
     enum class codec_lib { audiofile, sndfile, unknown };
 
-    enum class resample_lib { samplerate, resample, unknown };
+    enum class resample_lib { sample_rate, resample, unknown };
 
     inline logger& operator<<(logger& stream, fft_lib lib) {
         switch (lib) {
@@ -61,8 +61,8 @@ namespace edsp { inline namespace core {
 
     inline logger& operator<<(logger& stream, resample_lib lib) {
         switch (lib) {
-            case resample_lib::samplerate:
-                return stream << "libsamplerate";
+            case resample_lib::sample_rate:
+                return stream << "libsample_rate";
             case resample_lib::resample:
                 return stream << "libresample";
             default:
@@ -119,7 +119,7 @@ namespace edsp { inline namespace core {
 
         static constexpr resample_lib resample_library() noexcept {
 #if defined(USE_LIBSAMPLERATE)
-            return resample_lib::samplerate;
+            return resample_lib::sample_rate;
 #elif defined(USE_LIBRESAMPLE)
             return resample_lib::resample;
 #else

@@ -24,6 +24,7 @@
 #define EDSP_MEL2HERTZ_HPP
 
 #include <edsp/auditory/converter/hertz2mel.hpp>
+
 namespace edsp { namespace auditory { inline namespace converter {
 
     namespace internal {

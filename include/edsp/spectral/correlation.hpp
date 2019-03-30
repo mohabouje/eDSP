@@ -23,7 +23,7 @@
 #ifndef EDSP_AUTOCORRELATION_HPP
 #define EDSP_AUTOCORRELATION_HPP
 
-#include <edsp/spectral/dft.hpp>
+#include <edsp/spectral/fft_engine.hpp>
 #include <vector>
 
 namespace edsp { inline namespace spectral {
@@ -61,8 +61,8 @@ namespace edsp { inline namespace spectral {
         using value_type = meta::value_type_t<InputIt>;
         const auto size  = std::distance(first, last);
         const auto nfft  = 2 * size;
-        fft_impl<value_type> fft_(nfft);
-        fft_impl<value_type> ifft_(nfft);
+        fft_engine<value_type> fft_(nfft);
+        fft_engine<value_type> ifft_(nfft);
 
         std::vector<value_type, RAllocator> temp_input(nfft, static_cast<value_type>(0)), temp_output(nfft);
         std::copy(first, last, std::begin(temp_input));
@@ -107,8 +107,8 @@ namespace edsp { inline namespace spectral {
         using value_type = meta::value_type_t<InputIt>;
         const auto size  = std::distance(first1, last1);
         const auto nfft  = 2 * size;
-        fft_impl<value_type> fft_(nfft);
-        fft_impl<value_type> ifft_(nfft);
+        fft_engine<value_type> fft_(nfft);
+        fft_engine<value_type> ifft_(nfft);
 
         std::vector<value_type, RAllocator> temp_input1(nfft, static_cast<value_type>(0)),
             temp_input2(nfft, static_cast<value_type>(0)), temp_output(nfft);

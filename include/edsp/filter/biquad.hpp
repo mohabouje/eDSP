@@ -36,14 +36,14 @@ namespace edsp { namespace filter {
     * @brief The filter_type enum defines the different available filters.
     */
     enum class filter_type {
-        LowPass,           /*!< Low pass filter */
-        HighPass,          /*!< High pass filter */
-        BandPass,          /*!< Band pass filter */
-        BandStop,          /*!< Band stop filter */
-        AllPass,           /*!< All pass filter */
-        LowShelf,          /*!< Low shelf (shelving) filter */
-        HighShelf,         /*!< High shelf (shelving) filter */
-        BandShelf,         /*!< Band shelf (shelving) filter */
+        LowPass,   /*!< Low pass filter */
+        HighPass,  /*!< High pass filter */
+        BandPass,  /*!< Band pass filter */
+        BandStop,  /*!< Band stop filter */
+        AllPass,   /*!< All pass filter */
+        LowShelf,  /*!< Low shelf (shelving) filter */
+        HighShelf, /*!< High shelf (shelving) filter */
+        BandShelf, /*!< Band shelf (shelving) filter */
     };
 
     /**

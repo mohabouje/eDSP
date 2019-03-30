@@ -27,7 +27,7 @@
 #include <edsp/windowing/blackman_harris.hpp>
 #include <edsp/windowing/blackman_nuttall.hpp>
 #include <edsp/windowing/boxcar.hpp>
-#include <edsp/windowing/flat_top.hpp>
+#include <edsp/windowing/flattop.hpp>
 #include <edsp/windowing/hamming.hpp>
 #include <edsp/windowing/hanning.hpp>
 #include <edsp/windowing/rectangular.hpp>

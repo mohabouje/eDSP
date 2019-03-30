@@ -23,27 +23,9 @@
 #ifndef EDSP_DFT_HPP
 #define EDSP_DFT_HPP
 
-#include <edsp/spectral/internal/fft_impl.hpp>
+#include <edsp/spectral/fft_engine.hpp>
 
 namespace edsp { inline namespace spectral {
-
-    /**
-    * @brief Computes the expected DFT size for a real-to-complex DFT transform
-    * @returns Size of the DFT
-    */
-    template <typename Integer>
-    constexpr Integer make_fft_size(Integer real_size) noexcept {
-        return std::floor(real_size / 2) + 1;
-    }
-
-    /**
-     * @brief Computes the expected IDFT size for a complex-to-real IDFT transform
-     * @returns Size of the IDFT
-     */
-    template <typename Integer>
-    constexpr Integer make_ifft_size(Integer complex_size) noexcept {
-        return 2 * (complex_size - 1);
-    }
 
     /**
      * @brief Computes the complex-to-complex Discrete-Fourier-Transform of the range [first, last)
@@ -65,8 +47,8 @@ namespace edsp { inline namespace spectral {
     inline void cdft(InputIt first, InputIt last, OutputIt d_first) {
         using complex_t    = meta::value_type_t<InputIt>;
         using underlying_t = typename complex_t::value_type;
-        const auto nfft    = static_cast<typename fft_impl<underlying_t>::size_type>(std::distance(first, last));
-        fft_impl<underlying_t> plan(nfft);
+        const auto nfft    = std::distance(first, last);
+        fft_engine<underlying_t> plan((typename fft_engine<underlying_t >::size_type) nfft);
         plan.dft(&(*first), &(*d_first));
     }
 
@@ -89,8 +71,8 @@ namespace edsp { inline namespace spectral {
     inline void cidft(InputIt first, InputIt last, OutputIt d_first) {
         using complex_t    = meta::value_type_t<InputIt>;
         using underlying_t = typename complex_t::value_type;
-        const auto nfft    = static_cast<typename fft_impl<underlying_t>::size_type>(std::distance(first, last));
-        fft_impl<underlying_t> plan(nfft);
+        const auto nfft    = std::distance(first, last);
+        fft_engine<underlying_t> plan((typename fft_engine<underlying_t >::size_type) nfft);
         plan.idft(&(*first), &(*d_first));
         plan.idft_scale(&(*d_first));
     }
@@ -111,7 +93,8 @@ namespace edsp { inline namespace spectral {
     template <typename InputIt, typename OutputIt>
     void dft(InputIt first, InputIt last, OutputIt d_first) {
         using value_type = typename std::iterator_traits<InputIt>::value_type;
-        fft_impl<value_type> plan(std::distance(first, last));
+        const auto nfft    = std::distance(first, last);
+        fft_engine<value_type> plan((typename fft_engine<value_type>::size_type) nfft);
         plan.dft(&(*first), &(*d_first));
     }
 
@@ -131,9 +114,8 @@ namespace edsp { inline namespace spectral {
     template <typename InputIt, typename OutputIt>
     void idft(InputIt first, InputIt last, OutputIt d_first) {
         using value_type = typename std::iterator_traits<OutputIt>::value_type;
-        const auto nfft =
-            static_cast<typename fft_impl<value_type>::size_type>(make_ifft_size(std::distance(first, last)));
-        fft_impl<value_type> plan(nfft);
+        const auto nfft = make_ifft_size(std::distance(first, last));
+        fft_engine<value_type> plan((typename fft_engine<value_type>::size_type) nfft);
         plan.idft(&(*first), &(*d_first));
         plan.idft_scale(&(*d_first));
     }

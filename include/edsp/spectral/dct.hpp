@@ -23,7 +23,7 @@
 #ifndef EDSP_DCT_HPP
 #define EDSP_DCT_HPP
 
-#include <edsp/spectral/internal/fft_impl.hpp>
+#include <edsp/spectral/fft_engine.hpp>
 
 namespace edsp { inline namespace spectral {
 
@@ -43,8 +43,8 @@ namespace edsp { inline namespace spectral {
     template <typename InputIt, typename OutputIt>
     inline void dct(InputIt first, InputIt last, OutputIt d_first) {
         const auto nfft =
-            static_cast<typename fft_impl<meta::value_type_t<InputIt>>::size_type>(std::distance(first, last));
-        fft_impl<meta::value_type_t<InputIt>> plan(nfft);
+            static_cast<typename fft_engine<meta::value_type_t<InputIt>>::size_type>(std::distance(first, last));
+        fft_engine<meta::value_type_t<InputIt>> plan(nfft);
         plan.dct(&(*first), &(*d_first));
     }
 
@@ -66,8 +66,8 @@ namespace edsp { inline namespace spectral {
     template <typename InputIt, typename OutputIt>
     inline void idct(InputIt first, InputIt last, OutputIt d_first) {
         const auto nfft =
-            static_cast<typename fft_impl<meta::value_type_t<InputIt>>::size_type>(std::distance(first, last));
-        fft_impl<meta::value_type_t<InputIt>> plan(nfft);
+            static_cast<typename fft_engine<meta::value_type_t<InputIt>>::size_type>(std::distance(first, last));
+        fft_engine<meta::value_type_t<InputIt>> plan(nfft);
         plan.idct(&(*first), &(*d_first));
         plan.idct_scale(&(*d_first));
     }

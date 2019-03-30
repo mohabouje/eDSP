@@ -24,6 +24,7 @@
 #define EDSP_HERTZ2MEL_HPP
 
 #include <cmath>
+
 namespace edsp { namespace auditory { inline namespace converter {
 
     /*

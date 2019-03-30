@@ -37,13 +37,18 @@ mkdir -p build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_LIBFFTW=ON -DBUILD_BENCHMARKS=ON -DBUILD_TESTS=ON -DBUILD_EXTENSIONS=ON -DBUILD_DOCS=OFF -DENABLE_DEBUG_INFORMATION=ON -DBUILD_EXAMPLES=ON -DENABLE_COVERAGE=ON ..
 make -j8
+sudo make install
 if [ $? -ne 0 ]; then
     error "Error: there are compile errors!"
     exit 3
 fi
 
 showinfo "Running the tests..."
-make test
+cd ${TRAVIS_BUILD_DIR}
+pip3 install --upgrade pip
+pip3 install -U numpy
+pip3 install -U scipy
+python3 test/
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
     exit 4

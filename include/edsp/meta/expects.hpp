@@ -40,7 +40,7 @@ namespace edsp { namespace meta {
         if (!condition) {
             eCritical() << msg;
         }
-        assert(condition && data(msg));
+        assert(condition && msg.data());
     }
 
 }} // namespace edsp::meta

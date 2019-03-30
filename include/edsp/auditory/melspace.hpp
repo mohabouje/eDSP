@@ -23,7 +23,7 @@
 #ifndef EDSP_MELSPACE_HPP
 #define EDSP_MELSPACE_HPP
 
-#include <edsp/auditory/converter/hertz2mel.hpp
+#include <edsp/auditory/converter/hertz2mel.hpp>
 #include <edsp/algorithm/linspace.hpp>
 #include <algorithm>
 

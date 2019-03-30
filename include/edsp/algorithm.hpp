@@ -24,12 +24,15 @@
 
 #include <edsp/algorithm/amplifier.hpp>
 #include <edsp/algorithm/binary_search.hpp>
+#include <edsp/algorithm/linear_search.hpp>
+#include <edsp/algorithm/rectify.hpp>
 #include <edsp/algorithm/ceil.hpp>
 #include <edsp/algorithm/clipper.hpp>
 #include <edsp/algorithm/concatenate.hpp>
 #include <edsp/algorithm/equal.hpp>
 #include <edsp/algorithm/fix.hpp>
 #include <edsp/algorithm/floor.hpp>
+#include <edsp/algorithm/indexof.hpp>
 #include <edsp/algorithm/linspace.hpp>
 #include <edsp/algorithm/linspace.hpp>
 #include <edsp/algorithm/logspace.hpp>

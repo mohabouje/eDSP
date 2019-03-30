@@ -22,7 +22,7 @@
 #ifndef EDSP_HILBERT_HPP
 #define EDSP_HILBERT_HPP
 
-#include <edsp/spectral/internal/fft_impl.hpp>
+#include <edsp/spectral/fft_engine.hpp>
 #include <edsp/converter/real2complex.hpp>
 #include <edsp/math/numeric.hpp>
 #include <vector>
@@ -50,19 +50,20 @@ namespace edsp { inline namespace spectral {
     template <typename InputIt, typename OutputIt,
               typename Allocator = std::allocator<std::complex<meta::value_type_t<InputIt>>>>
     inline void hilbert(InputIt first, InputIt last, OutputIt d_first) {
+        // TODO: add the static assertion, the input should be a complex array
         using value_type = meta::value_type_t<InputIt>;
-        const auto nfft  = static_cast<typename fft_impl<value_type>::size_type>(std::distance(first, last));
+        const auto nfft  = static_cast<typename fft_engine<value_type>::size_type>(std::distance(first, last));
 
         std::vector<std::complex<value_type>, Allocator> input_data(nfft);
         std::vector<std::complex<value_type>, Allocator> complex_data(nfft);
         edsp::real2complex(first, last, std::begin(input_data));
 
-        fft_impl<value_type> fft(nfft);
+        fft_engine<value_type> fft(nfft);
         fft.dft(meta::data(input_data), meta::data(complex_data));
 
         const auto limit_1 = math::is_even(nfft) ? nfft / 2 : (nfft + 1) / 2;
         const auto limit_2 = math::is_even(nfft) ? limit_1 + 1 : limit_1;
-        for (auto i = 1; i < limit_1; ++i) {
+        for (auto i = 1ul; i < limit_1; ++i) {
             complex_data[i] *= 2;
         }
 
@@ -70,7 +71,7 @@ namespace edsp { inline namespace spectral {
             complex_data[i] = std::complex<value_type>(0, 0);
         }
 
-        fft_impl<value_type> ifft(nfft);
+        fft_engine<value_type> ifft(nfft);
         ifft.idft(meta::data(complex_data), &(*d_first));
         ifft.idft_scale(&(*d_first));
     }

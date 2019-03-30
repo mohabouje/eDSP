@@ -41,5 +41,6 @@
 #include <edsp/feature/temporal/rssq.hpp>
 #include <edsp/statistics/skewness.hpp>
 #include <edsp/statistics/variance.hpp>
+#include <edsp/statistics/norm.hpp>
 
 #endif //EDSP_STATISTICS_HPP

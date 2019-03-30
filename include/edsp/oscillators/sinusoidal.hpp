@@ -52,11 +52,11 @@ namespace edsp { namespace oscillators {
          * @brief Creates an oscillator that generates a waveform with the configuration.
          *
          * @param amplitude Amplitude of the waveform.
-         * @param samplerate The sampling frequency in Hz.
+         * @param sample_rate The sampling frequency in Hz.
          * @param frequency The fundamental frequency of the signal (also known as pitch).
          * @param phase Phase shift in radians.
          */
-        constexpr oscillator(value_type amplitude, value_type samplerate, value_type frequency,
+        constexpr oscillator(value_type amplitude, value_type sample_rate, value_type frequency,
                              value_type phase) noexcept;
         /**
          * @brief Returns the fundamental frequency in Hz.
@@ -98,13 +98,13 @@ namespace edsp { namespace oscillators {
          * @brief Returns the sampling frequency in Hz.
          * @return Sampling frequency in Hz.
          */
-        constexpr value_type samplerate() const noexcept;
+        constexpr value_type sample_rate() const noexcept;
 
         /**
          * @brief Sets the sampling frequency
-         * @param samplerate Sampling frequency in Hz.
+         * @param sample_rate Sampling frequency in Hz.
          */
-        constexpr void set_samplerate(value_type samplerate) noexcept;
+        constexpr void set_sample_rate(value_type sample_rate) noexcept;
 
         /**
          * @brief Returns the sampling period in secs.
@@ -130,82 +130,24 @@ namespace edsp { namespace oscillators {
          */
         constexpr void reset() noexcept;
 
-    private:
+    protected:
         value_type amplitude_{0.};
         value_type timestamp_{0.};
-        value_type samplerate_{0.};
+        value_type sample_rate_{0.};
         value_type sampling_period_{0.};
         value_type frequency_{1.};
+        value_type inverse_frequency_{1.};
         value_type phase_{0.};
     };
 
-    /**
-     * @class sin_oscillator
-     * @brief The class %sin_oscillator generates a sinusoidal signal.
-     *
-     * The sine wave can be considered the most fundamental building block of sound. A cycle of a sine wave is \f$ \displaystyle 2 \pi \f$
-     *  radians long and has a peak amplitude of \f$ \displaystyle +/-1  \f$.
-     *
-     * With a sample rate of 44100 cycles per second, and a required cycle length of 1 second, it will take 44100 samples to get from
-     * 0 to \f$ \displaystyle 2\pi \f$ . In other words, we can determine the steps per cycle \f$ \displaystyle S \f$ from cycle length
-     * \f$ \displaystyle T \f$:
-     *
-     * \f[
-     *     {\displaystyle S=T\cdot F_{s}\,}
-     * \f]
-     *
-     * Where \f$ {\displaystyle F_{s}} \f$ is the sample rate. Each step will therefore take the following amount in radians:
-     *
-     * \f[
-     *     {\displaystyle \delta \phi ={\frac {2\pi }{T\cdot F_{s}}}}  or {\displaystyle {\frac {2\pi f}{F_{s}}}}
-     * \f]
-     *
-     * Where \f$ {\displaystyle f} \f$, in the second result, is the same result in terms of frequency.
-     */
     template <typename T>
-    class sin_oscillator : public oscillator<T> {
-    public:
-        using value_type = T;
-
-        /**
-         * @brief Creates a sinusoidal oscillator that generates a waveform with the configuration.
-         *
-         * @param amplitude Amplitude of the waveform.
-         * @param samplerate The sampling frequency in Hz.
-         * @param frequency The fundamental frequency of the signal (also known as pitch).
-         * @param phase Phase shift in radians.
-         */
-        constexpr sin_oscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                 value_type phase) noexcept;
-
-        /**
-         * @brief Generates one step.
-         * @return Returns the value of the current step.
-         */
-        constexpr value_type operator()();
-    };
-
-    template <typename T>
-    constexpr sin_oscillator<T>::sin_oscillator(value_type amplitude, value_type samplerate, value_type frequency,
-                                                value_type phase) noexcept :
-        oscillator<T>(amplitude, samplerate, frequency, phase) {}
-
-    template <typename T>
-    constexpr typename sin_oscillator<T>::value_type sin_oscillator<T>::operator()() {
-        const value_type result =
-            std::sin(constants<value_type>::two_pi * oscillator<T>::frequency() * oscillator<T>::timestamp() +
-                     oscillator<T>::phase());
-        this->set_timestamp(oscillator<T>::timestamp() + oscillator<T>::sampling_period());
-        return result * oscillator<T>::amplitude();
-    }
-
-    template <typename T>
-    constexpr oscillator<T>::oscillator(value_type amplitude, value_type samplerate, value_type frequency,
+    constexpr oscillator<T>::oscillator(value_type amplitude, value_type sample_rate, value_type frequency,
                                         value_type phase) noexcept :
         amplitude_(amplitude),
-        samplerate_(samplerate),
-        sampling_period_(math::inv(samplerate)),
+        sample_rate_(sample_rate),
+        sampling_period_(math::inv(sample_rate)),
         frequency_(frequency),
+        inverse_frequency_(math::inv(frequency)),
         phase_(phase) {}
 
     template <typename T>
@@ -224,14 +166,14 @@ namespace edsp { namespace oscillators {
     }
 
     template <typename T>
-    constexpr typename oscillator<T>::value_type oscillator<T>::samplerate() const noexcept {
-        return samplerate_;
+    constexpr typename oscillator<T>::value_type oscillator<T>::sample_rate() const noexcept {
+        return sample_rate_;
     }
 
     template <typename T>
-    constexpr void oscillator<T>::set_samplerate(value_type samplerate) noexcept {
-        samplerate_      = samplerate;
-        sampling_period_ = math::inv(samplerate_);
+    constexpr void oscillator<T>::set_sample_rate(value_type sample_rate) noexcept {
+        sample_rate_     = sample_rate;
+        sampling_period_ = math::inv(sample_rate_);
     }
 
     template <typename T>
@@ -267,6 +209,66 @@ namespace edsp { namespace oscillators {
     template <typename T>
     constexpr typename oscillator<T>::value_type oscillator<T>::sampling_period() const noexcept {
         return sampling_period_;
+    }
+
+    /**
+     * @class sin_oscillator
+     * @brief The class %sin_oscillator generates a sinusoidal signal.
+     *
+     * The sine wave can be considered the most fundamental building block of sound. A cycle of a sine wave is \f$ \displaystyle 2 \pi \f$
+     *  radians long and has a peak amplitude of \f$ \displaystyle +/-1  \f$.
+     *
+     * With a sample rate of 44100 cycles per second, and a required cycle length of 1 second, it will take 44100 samples to get from
+     * 0 to \f$ \displaystyle 2\pi \f$ . In other words, we can determine the steps per cycle \f$ \displaystyle S \f$ from cycle length
+     * \f$ \displaystyle T \f$:
+     *
+     * \f[
+     *     {\displaystyle S=T\cdot F_{s}\,}
+     * \f]
+     *
+     * Where \f$ {\displaystyle F_{s}} \f$ is the sample rate. Each step will therefore take the following amount in radians:
+     *
+     * \f[
+     *     {\displaystyle \delta \phi ={\frac {2\pi }{T\cdot F_{s}}}}  or {\displaystyle {\frac {2\pi f}{F_{s}}}}
+     * \f]
+     *
+     * Where \f$ {\displaystyle f} \f$, in the second result, is the same result in terms of frequency.
+     */
+    template <typename T>
+    class sin_oscillator : public oscillator<T> {
+    public:
+        using value_type = T;
+
+        /**
+         * @brief Creates a sinusoidal oscillator that generates a waveform with the configuration.
+         *
+         * @param amplitude Amplitude of the waveform.
+         * @param sample_rate The sampling frequency in Hz.
+         * @param frequency The fundamental frequency of the signal (also known as pitch).
+         * @param phase Phase shift in radians.
+         */
+        constexpr sin_oscillator(value_type amplitude, value_type sample_rate, value_type frequency,
+                                 value_type phase) noexcept;
+
+        /**
+         * @brief Generates one step.
+         * @return Returns the value of the current step.
+         */
+        constexpr value_type operator()();
+    };
+
+    template <typename T>
+    constexpr sin_oscillator<T>::sin_oscillator(value_type amplitude, value_type sample_rate, value_type frequency,
+                                                value_type phase) noexcept :
+        oscillator<T>(amplitude, sample_rate, frequency, phase) {}
+
+    template <typename T>
+    constexpr typename sin_oscillator<T>::value_type sin_oscillator<T>::operator()() {
+        const value_type result =
+            std::sin(constants<value_type>::two_pi * oscillator<T>::frequency_ * oscillator<T>::timestamp_ +
+                     oscillator<T>::phase_);
+        oscillator<T>::set_timestamp(oscillator<T>::timestamp_ + oscillator<T>::sampling_period_);
+        return result * oscillator<T>::amplitude_;
     }
 
 }} // namespace edsp::oscillators

@@ -41,13 +41,12 @@ namespace edsp { namespace statistics {
      * @returns The geometric mean of the input range.
      */
     template <typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> geometric_mean(ForwardIt first, ForwardIt last) {
-        using input_t  = meta::value_type_t<ForwardIt>;
-        const auto acc = std::accumulate(first, last, static_cast<input_t>(1), std::multiplies<input_t>());
-        const auto sz  = static_cast<input_t>(std::distance(first, last));
+    constexpr auto geometric_mean(ForwardIt first, ForwardIt last) {
+        using value_type  = meta::value_type_t<ForwardIt>;
+        const auto acc = std::accumulate(first, last, static_cast<value_type>(1), std::multiplies<>());
+        const auto sz  = static_cast<value_type>(std::distance(first, last));
         return std::pow(acc, math::inv(sz));
     }
-
 }} // namespace edsp::statistics
 
 #endif // EDSP_STATISTICAL_GEOMETRIC_MEAN_H

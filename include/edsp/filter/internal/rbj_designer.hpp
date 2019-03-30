@@ -92,7 +92,6 @@ namespace edsp { namespace filter {
         }
     };
 
-
     template <typename T>
     struct RBJFilterDesigner<T, filter_type::AllPass> {
         constexpr biquad<T> operator()(T fc, T sample_rate, T Q, T gain_db = 1) const {
