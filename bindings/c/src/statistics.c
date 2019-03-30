@@ -31,10 +31,9 @@
 * Date: 26/03/19
 */
 
-#include "statistics.h"
-
-#include <iostream>
+#include "cedsp/statistics.h"
 #include <edsp/statistics.hpp>
+#include <iostream>
 
 
 real_t harmonic_mean(const real_t* data, int size) {

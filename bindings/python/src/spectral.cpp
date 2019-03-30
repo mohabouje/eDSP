@@ -33,7 +33,7 @@
 
 #include "spectral.hpp"
 #include "boost_numpy_dependencies.hpp"
-#include <spectral.h>
+#include <cedsp/spectral.h>
 
 template <typename Functor>
 bn::ndarray execute(Functor&& f, bn::ndarray& left, bn::ndarray& right) {

@@ -32,7 +32,7 @@
 * Date: 26/03/19
 */
 
-#include "spectral.h"
+#include "cedsp/spectral.h"
 #include <edsp/spectral/cepstrum.hpp>
 #include <edsp/spectral/convolution.hpp>
 #include <edsp/spectral/correlation.hpp>

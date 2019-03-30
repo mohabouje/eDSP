@@ -191,14 +191,14 @@ if (BUILD_DOCS)
 endif (BUILD_DOCS)
 
 if (BUILD_C_BINDINGS)
-    add_subdirectory(c)
+    add_subdirectory(bindings/c)
 endif(BUILD_C_BINDINGS)
 
 if (BUILD_PYTHON_BINDINGS)
     if (USE_BOOST_NUMPY_DEPRECATED)
         add_definitions(-DUSE_BOOST_NUMPY_DEPRECATED)
     endif()
-    add_subdirectory(python)
+    add_subdirectory(bindings/python)
 endif(BUILD_PYTHON_BINDINGS)
 
 if (BUILD_EXAMPLES)

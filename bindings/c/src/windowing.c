@@ -1,5 +1,3 @@
-#include <types.h>
-
 /*
 * edsp, Yet another framework for building deep RNN networks written in modern C++.
 *
@@ -33,9 +31,8 @@
 * Date: 26/03/19
 */
 
-#include "windowing.h"
+#include "cedsp/windowing.h"
 #include <edsp/windowing.hpp>
-#include <windowing.h>
 
 void bartlett(real_t* window, int N) {
     edsp::windowing::bartlett(window, window + N);

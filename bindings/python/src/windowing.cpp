@@ -33,7 +33,7 @@
 
 #include "windowing.hpp"
 #include "boost_numpy_dependencies.hpp"
-#include <windowing.h>
+#include <cedsp/windowing.h>
 
 template <typename Functor>
 bn::ndarray generate_window(long size, Functor&& f) {

@@ -33,7 +33,7 @@
 
 #include "statistics.hpp"
 #include "boost_numpy_dependencies.hpp"
-#include <statistics.h>
+#include <cedsp/statistics.h>
 
 template <class Functor, typename... Arg>
 inline auto execute(Functor&& f, bn::ndarray& input, Arg... arg) {

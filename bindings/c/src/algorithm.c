@@ -31,7 +31,7 @@
 * Date: 26/03/19
 */
 
-#include "algorithm.h"
+#include "cedsp/algorithm.h"
 #include <edsp/algorithm.hpp>
 
 void array_scale(const real_t* input, int size, real_t* output, real_t factor) {

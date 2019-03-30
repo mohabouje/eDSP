@@ -33,7 +33,7 @@
 
 #include "algorithm.hpp"
 #include "boost_numpy_dependencies.hpp"
-#include <algorithm.h>
+#include <cedsp/algorithm.h>
 
 template <typename Functor, typename... Args>
 bn::ndarray execute_inplace(Functor&& f, bn::ndarray& input, Args... arg) {

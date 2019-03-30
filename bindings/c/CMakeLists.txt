@@ -4,11 +4,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 set(HEADER
-        include/types.h
-        include/algorithm.h
-        include/windowing.h
-        include/statistics.h
-        include/spectral.h)
+        include/cedsp/types.h
+        include/cedsp/algorithm.h
+        include/cedsp/windowing.h
+        include/cedsp/statistics.h
+        include/cedsp/spectral.h)
 
 set(SRC
         src/algorithm.c
@@ -20,7 +20,7 @@ set_source_files_properties(${SRC} PROPERTIES LANGUAGE CXX)
 
 set(CEDSP_LIBRARY cedsp)
 add_library(${CEDSP_LIBRARY} SHARED ${HEADER} ${SRC})
-target_include_directories(${CEDSP_LIBRARY} PUBLIC include/)
+target_include_directories(${CEDSP_LIBRARY} PUBLIC include)
 target_link_libraries(${CEDSP_LIBRARY} PRIVATE ${EDSP_LIBRARIES})
 set(CEDSP_LIBRARIES "${EDSP_LIBRARIES};${CEDSP_LIBRARY}" PARENT_SCOPE)
 
@@ -29,4 +29,4 @@ message(STATUS "${CEDSP_LIBRARY}-dependencies = ${OUT}")
 
 
 install(TARGETS ${CEDSP_LIBRARY} EXPORT "${CEDSP_LIBRARY}-targets" DESTINATION lib)
-install(DIRECTORY include/ DESTINATION include/cedsp)
+install(DIRECTORY include DESTINATION include)
