@@ -65,7 +65,7 @@ void complex2real(const complex_t *complex, long size, real_t *real, real_t *ima
     edsp::complex2real(iter, iter + size, real, imag);
 }
 
-void realimag2complex(const real_t *real, const real_t *imag, long size, complex_t *complex) {
+void ri2complex(const real_t *real, const real_t *imag, long size, complex_t *complex) {
     auto* iter = reinterpret_cast<std::complex<real_t>*>(complex);
     edsp::real2complex(real, real + size, imag, iter);
 }

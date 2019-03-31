@@ -59,7 +59,7 @@ bn::ndarray real2complex_python(bn::ndarray& input) {
     return result;
 }
 
-bn::ndarray realimag2complex_python(bn::ndarray& real, bn::ndarray& imag) {
+bn::ndarray ri2complex_python(bn::ndarray &real, bn::ndarray &imag) {
     if (real.get_nd() != 1 || imag.get_nd() != 1) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
@@ -71,7 +71,7 @@ bn::ndarray realimag2complex_python(bn::ndarray& real, bn::ndarray& imag) {
     auto* real_data = reinterpret_cast<real_t*>(real.get_data());
     auto* imag_data = reinterpret_cast<real_t*>(imag.get_data());
     auto* result_data = reinterpret_cast<complex_t*>(result.get_data());
-    realimag2complex(real_data, imag_data, size, result_data);
+    ri2complex(real_data, imag_data, size, result_data);
     return result;
 }
 
@@ -92,8 +92,6 @@ bp::tuple complex2real_python(bn::ndarray& input) {
     return bp::make_tuple(real, imag);
 }
 
-
-
 void add_converter_package() {
     std::string nested_name = bp::extract<std::string>(bp::scope().attr("__name__") + ".converter");
     bp::object nested_module(bp::handle<>(bp::borrowed(PyImport_AddModule(nested_name.c_str()))));
@@ -110,5 +108,5 @@ void add_converter_package() {
     bp::def("peak2rms", peak2rms_python);
     bp::def("complex2real", complex2real_python);
     bp::def("real2complex", real2complex_python);
-    bp::def("realimag2complex", realimag2complex_python);
+    bp::def("ri2complex", ri2complex_python);
 }

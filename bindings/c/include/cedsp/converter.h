@@ -39,7 +39,7 @@ void complex2real(const complex_t* complex, long size, real_t* real, real_t* ima
  * @brief Converts a range of scalar numbers in to an equivalent complex number
  * and stores the result in another range.
  */
-void realimag2complex(const real_t* real, const real_t* imag, long size, complex_t* complex);
+void ri2complex(const real_t *real, const real_t *imag, long size, complex_t *complex);
 
 /**
  * @brief Converts a range of scalar numbers in to an equivalent complex number

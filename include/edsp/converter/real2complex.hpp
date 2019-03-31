@@ -39,9 +39,8 @@ namespace edsp { inline namespace converter {
      */
     template <typename InputIt, typename OutputIt>
     constexpr void real2complex(InputIt first, InputIt last, OutputIt d_first) {
-        using input_t  = meta::value_type_t<InputIt>;
         using output_t = meta::value_type_t<OutputIt>;
-        std::transform(first, last, d_first, [](const input_t value) -> output_t { return value; });
+        std::transform(first, last, d_first, [](const auto real) -> output_t { return {real, 0}; });
     }
 
     /**
@@ -55,9 +54,8 @@ namespace edsp { inline namespace converter {
      */
     template <typename InputIt, typename OutputIt>
     constexpr void real2complex(InputIt first1, InputIt last1, InputIt first2, OutputIt d_first) {
-        using input_t  = meta::value_type_t<InputIt>;
         using output_t = meta::value_type_t<OutputIt>;
-        std::transform(first1, last1, first2, d_first, [](const input_t real, const input_t imag) -> output_t {
+        std::transform(first1, last1, first2, d_first, [](const auto real, const auto imag) -> output_t {
             return {real, imag};
         });
     }
