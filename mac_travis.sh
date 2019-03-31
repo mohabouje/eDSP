@@ -38,6 +38,7 @@ cd ${TRAVIS_BUILD_DIR}
 sudo pip3 install --upgrade pip
 sudo pip3 install -U numpy
 sudo pip3 install -U scipy
+sudo pip3 install -U spectrum
 sudo python3 test/
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
