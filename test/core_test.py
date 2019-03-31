@@ -6,7 +6,7 @@ from dateutil.parser import parse
 from pkg_resources import parse_version
 
 
-class TestAlgorithmMethods(unittest.TestCase):
+class TestCoreMethods(unittest.TestCase):
 
     @staticmethod
     def __random_string():
