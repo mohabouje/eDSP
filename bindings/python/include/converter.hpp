@@ -1,4 +1,4 @@
-/*
+/**
 * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
 * Copyright (C) 2019 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
 *
@@ -15,23 +15,14 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* Filename: package.cpp
+* Filename: converter.hpp
 * Author: Mohammed Boujemaoui
-* Date: 27/03/19
+* Date: 2019-03-31
 */
 
-#include "algorithm.hpp"
-#include "windowing.hpp"
-#include "statistics.hpp"
-#include "spectral.hpp"
-#include "converter.hpp"
-#include "boost_numpy_dependencies.hpp"
+#ifndef EDSP_PYTHON_BINDING_CONVERTER_HPP
+#define EDSP_PYTHON_BINDING_CONVERTER_HPP
 
-BOOST_PYTHON_MODULE(MODULE_NAME) {
-    bn::initialize();
-    add_algorithm_package();
-    add_windowing_package();
-    add_statistics_package();
-    add_spectral_package();
-    add_converter_package();
-}
+void add_converter_package();
+
+#endif //EDSP_PYTHON_BINDING_CONVERTER_HPP

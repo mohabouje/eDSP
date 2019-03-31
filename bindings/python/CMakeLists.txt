@@ -58,13 +58,13 @@ set(HEADER
         include/windowing.hpp
         include/statistics.hpp
         include/spectral.hpp
-        include/boost_numpy_dependencies.hpp)
+        include/boost_numpy_dependencies.hpp include/converter.hpp)
 
 set(SRC
         src/package.cpp
         src/algorithm.cpp
         src/windowing.cpp
-        src/statistics.cpp src/spectral.cpp)
+        src/statistics.cpp src/spectral.cpp src/converter.cpp)
 
 set(PEDSP_LIBRARY pedsp)
 add_library(${PEDSP_LIBRARY} SHARED ${HEADER} ${SRC})
