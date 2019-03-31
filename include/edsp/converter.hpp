@@ -32,5 +32,6 @@
 #include <edsp/converter/pow2db.hpp>
 #include <edsp/converter/rad2deg.hpp>
 #include <edsp/converter/real2complex.hpp>
+#include <edsp/converter/complex2real.hpp>
 
 #endif //EDSP_CONVERTER_HPP

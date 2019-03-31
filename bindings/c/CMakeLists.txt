@@ -8,13 +8,14 @@ set(HEADER
         include/cedsp/algorithm.h
         include/cedsp/windowing.h
         include/cedsp/statistics.h
-        include/cedsp/spectral.h)
+        include/cedsp/spectral.h
+        include/cedsp/converter.h)
 
 set(SRC
         src/algorithm.c
         src/windowing.c
         src/statistics.c
-        src/spectral.c)
+        src/spectral.c src/converter.cpp)
 
 set_source_files_properties(${SRC} PROPERTIES LANGUAGE CXX)
 

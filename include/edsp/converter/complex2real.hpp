@@ -42,8 +42,6 @@ namespace edsp { inline namespace converter {
      */
     template <typename InputIt, typename OutputIt>
     constexpr void complex2real(InputIt first, InputIt last, OutputIt d_first1, OutputIt d_first2) {
-        using input_t  = meta::value_type_t<InputIt>;
-        using output_t = meta::value_type_t<OutputIt>;
         for (; first != last; ++first, ++d_first1, ++d_first2) {
             *d_first1 = std::real(*first);
             *d_first2 = std::imag(*first);

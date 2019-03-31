@@ -29,17 +29,6 @@
 namespace edsp { inline namespace converter {
 
     /**
-     * @brief Converts a real scalar to an equivalent complex number.
-     * @param real Scalar number representing the real part of the complex number.
-     * @param imag Scalar number representing the imaginary part of the complex number.
-     * @returns Returns the complex-valued.
-     */
-    template <typename T>
-    constexpr std::complex<T> real2complex(T real, T imag = static_cast<T>(0)) noexcept {
-        return std::complex<T>(real, imag);
-    }
-
-    /**
      * @brief Converts a range of scalar numbers in to an equivalent complex number
      * and stores the result in another range.
      *
