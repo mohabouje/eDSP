@@ -167,13 +167,13 @@ namespace edsp { inline namespace core {
         * The SystemEnvironmentError describes the possible error while reading/writting
         * variables in the system environment.
         */
-        enum SystemEnvironmentError {
-            NoError = 0,              /*!< No error */
-            Empty,                    /*!< Variable name is empty */
-            NotFound,                 /*!< Variable not found */
-            InvalidArgument = EINVAL, /*!< Invalid argument */
-            NoMemory        = ENOMEM, /*!< Out of memory */
-            Unknown         = -1      /*!< Unknown error */
+        enum class error {
+            no_error = 0,              /*!< No error */
+            empty,                    /*!< Variable name is empty */
+            not_found,                 /*!< Variable not found */
+            invalid_argument = EINVAL, /*!< Invalid argument */
+            no_memory        = ENOMEM, /*!< Out of memory */
+            unknown         = -1      /*!< Unknown error */
         };
 
         /**
@@ -181,17 +181,17 @@ namespace edsp { inline namespace core {
         * @param variable_name Variable name
         * @return If it fails, the associated error. If not, the value of the variable.
         */
-        static edsp::expected<std::string, SystemEnvironmentError>
+        static edsp::expected<std::string, error>
             get_env(const edsp::string_view& variable_name) noexcept {
             std::lock_guard<std::mutex> lock(mutex());
             const char* env_p = std::getenv(variable_name.data());
             if (meta::empty(variable_name)) {
-                return edsp::make_unexpected(SystemEnvironmentError::Empty);
+                return edsp::make_unexpected(error::empty);
             } else {
                 if (!meta::is_null(env_p)) {
                     return env_p;
                 } else {
-                    return edsp::make_unexpected(SystemEnvironmentError::NotFound);
+                    return edsp::make_unexpected(error::not_found);
                 }
             }
         }
@@ -203,14 +203,14 @@ namespace edsp { inline namespace core {
         * @param overwrite If true, overwrites the existing value.
         * @return If it fails, the error associated with the operation.
         */
-        static SystemEnvironmentError set_env(const edsp::string_view& variable_name,
+        static error set_env(const edsp::string_view& variable_name,
                                               const edsp::string_view& variable_value, bool overwrite = true) noexcept {
             std::lock_guard<std::mutex> lock(mutex());
             if (meta::empty(variable_name)) {
-                return SystemEnvironmentError::Empty;
+                return error::empty;
             } else {
                 const auto result = setenv(meta::data(variable_name), meta::data(variable_value), overwrite);
-                return static_cast<SystemEnvironmentError>(result);
+                return static_cast<error>(result);
             }
         }
 

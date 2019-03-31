@@ -1,4 +1,4 @@
-/*
+/**
 * eDSP, A cross-platform Digital Signal Processing library written in modern C++.
 * Copyright (C) 2019 Mohammed Boujemaoui Boulaghmoudi, All rights reserved.
 *
@@ -15,25 +15,34 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* Filename: package.cpp
+* Filename: version.h
 * Author: Mohammed Boujemaoui
-* Date: 27/03/19
+* Date: 2019-03-31
 */
 
-#include "algorithm.hpp"
-#include "windowing.hpp"
-#include "statistics.hpp"
-#include "spectral.hpp"
-#include "converter.hpp"
-#include "core.hpp"
-#include "boost_numpy_dependencies.hpp"
+#ifndef EDSP_BINDING_C_VERSION_H
+#define EDSP_BINDING_C_VERSION_H
 
-BOOST_PYTHON_MODULE(MODULE_NAME) {
-    bn::initialize();
-    add_core_package();
-    add_algorithm_package();
-    add_windowing_package();
-    add_statistics_package();
-    add_spectral_package();
-    add_converter_package();
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+int get_minor_version();
+int get_major_version();
+int get_patch_version();
+const char* get_version();
+const char* get_build_date();
+const char* get_build_time();
+const char* get_fft_library();
+const char* get_codec_library();
+const char* get_resample_library();
+
+const char* get_environment(const char* tag, int* error);
+int set_environment(const char* tag, const char* data);
+int exist_environment(const char* tag);
+
+#ifdef __cplusplus
 }
+#endif
+
+#endif //EDSP_BINDING_C_VERSION_H

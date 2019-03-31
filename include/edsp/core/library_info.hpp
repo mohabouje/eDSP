@@ -80,7 +80,7 @@ namespace edsp { inline namespace core {
         }
 
         static constexpr std::int32_t patch_version() noexcept {
-            return E_VERSION_MINOR;
+            return E_VERSION_PATCH;
         }
 
         static constexpr const char* version() noexcept {
