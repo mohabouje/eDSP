@@ -22,7 +22,6 @@
 #ifndef EDSP_JOIN_HPP
 #define EDSP_JOIN_HPP
 
-#include <edsp/meta/iterator.hpp>
 #include <sstream>
 
 namespace edsp { namespace string {
@@ -38,13 +37,17 @@ namespace edsp { namespace string {
      */
 
     template <typename InputIt, typename Char>
-    inline void join(InputIt first, InputIt last, std::basic_string<Char>& d_str, Char delimiter = '') {
+    inline void join(InputIt first, InputIt last, std::basic_string<Char>& d_str, Char delimiter = ' ') {
         std::stringstream ss;
-        for (; first != last; ++first) {
-            ss << *first << delimiter;
+        const auto size = std::distance(first, last);
+        if (size) {
+            for (auto i = 0; i < size - 1; ++i, ++first) {
+                ss << *first << delimiter;
+            }
+            ss << *first;
         }
-        d_str = ss.str();
-    };
+        d_str = ss.str().c_str();
+    }
 
 }} // namespace edsp::string
 

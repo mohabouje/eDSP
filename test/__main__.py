@@ -5,6 +5,7 @@ from algorithm_test import TestAlgorithmMethods
 from spectral_test import TestSpectralMethods
 from converter_test import TestConverterMethods
 from core_test import TestCoreMethods
+from string_test import TestStringMethods
 
 from sys import exit
 
@@ -13,7 +14,8 @@ if __name__ == "__main__":
     loader = TestLoader()
     tests = [
         loader.loadTestsFromTestCase(test)
-        for test in (TestWindowingMethods, TestCoreMethods, TestConverterMethods, TestStatisticsMethods, TestAlgorithmMethods, TestSpectralMethods)
+        for test in (TestWindowingMethods, TestCoreMethods, TestConverterMethods,
+                     TestStatisticsMethods, TestAlgorithmMethods, TestSpectralMethods, TestStringMethods)
     ]
     suite = TestSuite(tests)
 

@@ -32,33 +32,34 @@ namespace edsp { namespace string {
     * @brief Filters the leading whitespace of the input string.
     * @param str Input string.
     */
-    template <typename Char>
-    inline void ltrim(std::basic_string<Char>& str) {
-        str.erase(std::begin(str), std::find_if(std::begin(str), std::end(str),
-                                                [](Char character) { return !std::isspace(character); }));
+    template <typename String>
+    inline void ltrim(String& str) {
+        str.erase(
+            std::begin(str), std::find_if(std::begin(str), std::end(str),
+                                [](auto character) { return !std::isspace(character); }));
     }
 
     /**
     * @brief Filters the trailing whitespace of the last position of the input string.
     * @param str Input string.
     */
-    template <typename Char>
-    inline void rtrim(std::basic_string<Char>& str) {
+    template <typename String>
+    inline void rtrim(String& str) {
         str.erase(
-            std::find_if(std::rbegin(str), std::rend(str), [](Char character) { return !std::isspace(character); })
-                .base(),
-            std::end(str));
+            std::find_if(std::rbegin(str), std::rend(str),
+                         [](auto character) { return !std::isspace(character); })
+                .base(), std::end(str));
     }
 
     /**
      * @brief Filters the leading and trailing whitespace of the input string.
      * @param str Input string.
      */
-    template <typename Char>
-    inline void trim(std::basic_string<Char>& str) {
+    template <typename String>
+    inline void trim(String& str) {
         ltrim(str);
         rtrim(str);
-    };
+    }
 
 }} // namespace edsp::string
 

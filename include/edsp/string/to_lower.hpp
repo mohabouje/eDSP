@@ -28,17 +28,6 @@
 namespace edsp { namespace string {
 
     /**
-     * Converts the given character to lowercase according to the character conversion rules defined by the currently
-     * installed C locale.
-     * @param character character to be converted.
-     * @return Lowercase version of the input character.
-     */
-    template <typename Char>
-    constexpr Char tolower(Char character) {
-        return std::tolower(character);
-    }
-
-    /**
      * @brief Converts the characters in the range [first, last) to lowercase according to the character conversion rules
      * defined by the currently installed C locale and stores the result in another range, beginning at d_first.
      * @param first Input iterator defining the beginning of the input range.
@@ -47,7 +36,7 @@ namespace edsp { namespace string {
      */
     template <typename InputIt, typename OutputIt>
     constexpr void tolower(InputIt first, InputIt last, OutputIt d_first) {
-        std::transform(first, last, first, tolower);
+        std::transform(first, last, d_first, [](const auto element) { return std::tolower(element); });
     }
 
 }} // namespace edsp::string

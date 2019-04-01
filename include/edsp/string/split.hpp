@@ -39,8 +39,10 @@ namespace edsp { namespace string {
         std::stringstream test(str);
         std::basic_string<Char> segment;
         while (std::getline(test, segment, character)) {
-            *d_first = segment;
-            ++d_first;
+            if (!segment.empty()) {
+                *d_first = segment;
+                ++d_first;
+            }
         }
     }
 

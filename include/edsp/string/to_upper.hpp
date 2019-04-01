@@ -28,16 +28,6 @@
 
 namespace edsp { namespace string {
 
-    /**
-     * Converts the given character to uppercase according to the character conversion rules defined by the currently
-     * installed C locale.
-     * @param character character to be converted.
-     * @return Uppercase version of the input character.
-     */
-    template <typename Char>
-    constexpr Char toupper(Char character) {
-        return std::toupper(character);
-    }
 
     /**
      * @brief Converts the characters in the range [first, last) to uppercase according to the character conversion rules
@@ -48,7 +38,7 @@ namespace edsp { namespace string {
      */
     template <typename InputIt, typename OutputIt>
     constexpr void toupper(InputIt first, InputIt last, OutputIt d_first) {
-        std::transform(first, last, first, toupper);
+        std::transform(first, last, d_first, [](const auto element) { return std::toupper(element); });
     }
 
 }} // namespace edsp::string

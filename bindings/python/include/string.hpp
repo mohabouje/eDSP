@@ -15,27 +15,14 @@
 * You should have received a copy of the GNU General Public License along withº
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* Filename: package.cpp
+* Filename: string.hpp
 * Author: Mohammed Boujemaoui
-* Date: 27/03/19
+* Date: 01/04/19
 */
 
-#include "algorithm.hpp"
-#include "windowing.hpp"
-#include "statistics.hpp"
-#include "spectral.hpp"
-#include "converter.hpp"
-#include "core.hpp"
-#include "string.hpp"
-#include "boost_numpy_dependencies.hpp"
+#ifndef EDSP_PYTHON_BINDING_STRING_HPP
+#define EDSP_PYTHON_BINDING_STRING_HPP
 
-BOOST_PYTHON_MODULE(MODULE_NAME) {
-    bn::initialize();
-    add_core_package();
-    add_algorithm_package();
-    add_windowing_package();
-    add_statistics_package();
-    add_spectral_package();
-    add_converter_package();
-    add_string_package();
-}
+void add_string_package();
+
+#endif //EDSP_PYTHON_BINDING_STRING_HPP

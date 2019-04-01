@@ -58,19 +58,20 @@ set(HEADER
         include/windowing.hpp
         include/statistics.hpp
         include/spectral.hpp
-        include/boost_numpy_dependencies.hpp include/converter.hpp include/core.hpp)
+        include/boost_numpy_dependencies.hpp include/converter.hpp include/core.hpp include/string.hpp)
 
 set(SRC
         src/package.cpp
         src/algorithm.cpp
         src/windowing.cpp
-        src/statistics.cpp src/spectral.cpp src/converter.cpp src/core.cpp)
+        src/statistics.cpp src/spectral.cpp src/converter.cpp src/core.cpp src/string.cpp)
 
 set(PEDSP_LIBRARY pedsp)
 add_library(${PEDSP_LIBRARY} SHARED ${HEADER} ${SRC})
 target_compile_definitions(${PEDSP_LIBRARY} PRIVATE "MODULE_NAME=${PEDSP_LIBRARY}")
 target_include_directories(${PEDSP_LIBRARY} PUBLIC include)
 target_link_libraries(${PEDSP_LIBRARY} PUBLIC ${CEDSP_LIBRARIES} ${Boost_LIBRARIES} ${PYTHON_LIBRARIES})
+target_link_libraries(${PEDSP_LIBRARY} PRIVATE ${EDSP_LIBRARIES})
 set_target_properties(${PEDSP_LIBRARY} PROPERTIES PREFIX "")
 if (APPLE)
     set_target_properties(${PEDSP_LIBRARY} PROPERTIES SUFFIX ".so")  # must be .so (not .dylib)
