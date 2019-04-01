@@ -58,6 +58,7 @@ const char *get_fft_library() {
         case edsp::core::fft_lib::accelerate: return "accelerate";
         case edsp::core::fft_lib::unknown: return "unknown";
     }
+    return "";
 }
 
 const char *get_codec_library() {
@@ -67,6 +68,7 @@ const char *get_codec_library() {
         case edsp::core::codec_lib::sndfile:  return "sndfile";
         case edsp::core::codec_lib::unknown:  return "unknown";
     }
+    return "";
 }
 const char *get_resample_library() {
     const auto resample = edsp::library_info::resample_library();
@@ -75,6 +77,7 @@ const char *get_resample_library() {
         case edsp::core::resample_lib::resample:  return "resample";;
         case edsp::core::resample_lib::unknown:  return "unknown";;
     }
+    return "";
 }
 
 const char *get_environment(const char *tag, int *error) {
