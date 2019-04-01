@@ -10,7 +10,7 @@ set(HEADER
         include/cedsp/statistics.h
         include/cedsp/spectral.h
         include/cedsp/converter.h
-        include/cedsp/core.h )
+        include/cedsp/core.h)
 
 set(SRC
         src/algorithm.c
@@ -24,8 +24,8 @@ set_source_files_properties(${SRC} PROPERTIES LANGUAGE CXX)
 
 set(CEDSP_LIBRARY cedsp)
 add_library(${CEDSP_LIBRARY} SHARED ${HEADER} ${SRC})
-target_include_directories(${CEDSP_LIBRARY} PUBLIC include)
-target_link_libraries(${CEDSP_LIBRARY} PRIVATE ${EDSP_LIBRARIES})
+target_include_directories(${CEDSP_LIBRARY} PUBLIC include/)
+target_link_libraries(${CEDSP_LIBRARY} PUBLIC ${EDSP_LIBRARIES})
 set(CEDSP_LIBRARIES "${EDSP_LIBRARIES};${CEDSP_LIBRARY}" PARENT_SCOPE)
 
 get_target_property(OUT ${CEDSP_LIBRARY} LINK_LIBRARIES)
@@ -39,7 +39,7 @@ write_basic_package_version_file(
 )
 
 install(TARGETS ${CEDSP_LIBRARY} EXPORT "${CEDSP_LIBRARY}-targets" DESTINATION lib)
-install(EXPORT "${CEDSP_LIBRARY}-targets" FILE "${CEDSP_LIBRARY}-config.cmake" DESTINATION "lib/cmake/${CEDSP_LIBRARY}")
+#install(EXPORT "${CEDSP_LIBRARY}-targets" FILE "${CEDSP_LIBRARY}-config.cmake" DESTINATION "lib/cmake/${CEDSP_LIBRARY}")
 install(FILES
         "${CMAKE_CURRENT_BINARY_DIR}/${CEDSP_LIBRARY}-config-version.cmake"
         DESTINATION "lib/cmake/${CEDSP_LIBRARY}")

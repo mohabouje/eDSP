@@ -58,13 +58,13 @@ set(HEADER
         include/windowing.hpp
         include/statistics.hpp
         include/spectral.hpp
-        include/boost_numpy_dependencies.hpp include/converter.hpp include/core.hpp include/string.hpp)
+        include/boost_numpy_dependencies.hpp include/converter.hpp include/core.hpp include/string.hpp include/oscillator.hpp)
 
 set(SRC
         src/package.cpp
         src/algorithm.cpp
         src/windowing.cpp
-        src/statistics.cpp src/spectral.cpp src/converter.cpp src/core.cpp src/string.cpp)
+        src/statistics.cpp src/spectral.cpp src/converter.cpp src/core.cpp src/string.cpp src/oscillator.cpp)
 
 set(PEDSP_LIBRARY pedsp)
 add_library(${PEDSP_LIBRARY} SHARED ${HEADER} ${SRC})
