@@ -17,7 +17,7 @@ option(BUILD_EXTENSIONS "Enable the option to build the extension libraries" ON)
 option(BUILD_EXAMPLES "Enable the option to build the examples" ON)
 option(BUILD_BENCHMARK "Enable the option to build the benchmarks" OFF)
 
-option(USE_PYTHON3 "Forces the usage of Python3" ON)
+option(USE_PYTHON3 "Forces the usage of Python3" OFF)
 option(USE_BOOST_NUMPY_DEPRECATED "Uses the original boost-numpy package" OFF)
 option(USE_LIBSNDFILE "Use the library SndFile to encodedecode audio files" ON)
 option(USE_LIBAUDIOFILE "Use the library AudioFile to encode/decode audio files" OFF)

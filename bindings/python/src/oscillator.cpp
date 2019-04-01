@@ -20,7 +20,7 @@
 * Date: 2019-04-01
 */
 
-#include "core.hpp"
+#include "oscillator.hpp"
 #include "boost_numpy_dependencies.hpp"
 #include <cedsp/types.h>
 #include <edsp/oscillator.hpp>
@@ -65,13 +65,13 @@ void add_oscillator_package() {
             .def("generate", generate_python<edsp::oscillators::square_oscillator<real_t>>);
 
     bp::class_<edsp::oscillators::sawtooth_oscillator<real_t>, bp::bases<base_class>>
-            ("Sinusoidal", bp::init<real_t, real_t, real_t, real_t>())
+            ("Sawtooth", bp::init<real_t, real_t, real_t, real_t>())
             .def("set_width", &edsp::oscillators::sawtooth_oscillator<real_t>::set_width)
             .def("width", &edsp::oscillators::sawtooth_oscillator<real_t>::width)
             .def("generate", generate_python<edsp::oscillators::sawtooth_oscillator<real_t>>);
 
     bp::class_<edsp::oscillators::triangular_oscillator<real_t>,
-            bp::bases<base_class, edsp::oscillators::sawtooth_oscillator<real_t>>>
+            bp::bases<edsp::oscillators::sawtooth_oscillator<real_t>>>
             ("Triangular", bp::init<real_t, real_t, real_t>())
             .def("generate", generate_python<edsp::oscillators::triangular_oscillator<real_t>>);
 }

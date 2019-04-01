@@ -24,7 +24,7 @@
 
 #include <edsp/oscillators/sinusoidal.hpp>
 #include <edsp/math/constant.hpp>
-
+#include <iostream>
 namespace edsp { namespace oscillators {
 
     /**
@@ -91,11 +91,11 @@ namespace edsp { namespace oscillators {
     constexpr square_oscillator<T>::square_oscillator(value_type amplitude, value_type sample_rate,
                                                       value_type frequency, value_type duty) noexcept :
         oscillator<T>(amplitude, sample_rate, frequency, 0),
-        duty_(duty) {}
+        duty_(duty * oscillator<T>::inverse_frequency_) {}
 
     template <typename T>
     constexpr void square_oscillator<T>::set_duty(value_type duty) noexcept {
-        duty_ = duty / oscillator<T>::frequency();
+        duty_ = duty * oscillator<T>::inverse_frequency_;
     }
 
     template <typename T>
@@ -106,6 +106,7 @@ namespace edsp { namespace oscillators {
     template <typename T>
     constexpr typename square_oscillator<T>::value_type square_oscillator<T>::operator()() {
         const auto t               = oscillator<T>::timestamp_;
+        std::cout << t << " " << duty_ << std::endl;
         const value_type result    = (t >= duty_) ? -1 : 1;
         const value_type increased = t + oscillator<T>::sampling_period_;
         oscillator<T>::set_timestamp((increased > oscillator<T>::inverse_frequency_) ? 0 : increased);

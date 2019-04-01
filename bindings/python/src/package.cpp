@@ -27,6 +27,7 @@
 #include "converter.hpp"
 #include "core.hpp"
 #include "string.hpp"
+#include "oscillator.hpp"
 #include "boost_numpy_dependencies.hpp"
 
 BOOST_PYTHON_MODULE(MODULE_NAME) {
@@ -38,4 +39,5 @@ BOOST_PYTHON_MODULE(MODULE_NAME) {
     add_spectral_package();
     add_converter_package();
     add_string_package();
+    add_oscillator_package();
 }
