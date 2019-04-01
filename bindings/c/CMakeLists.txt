@@ -31,6 +31,16 @@ set(CEDSP_LIBRARIES "${EDSP_LIBRARIES};${CEDSP_LIBRARY}" PARENT_SCOPE)
 get_target_property(OUT ${CEDSP_LIBRARY} LINK_LIBRARIES)
 message(STATUS "${CEDSP_LIBRARY}-dependencies = ${OUT}")
 
+include(CMakePackageConfigHelpers)
+write_basic_package_version_file(
+        "${CMAKE_CURRENT_BINARY_DIR}/${CEDSP_LIBRARY}-config-version.cmake"
+        VERSION ${LIB_VERSION}
+        COMPATIBILITY ExactVersion
+)
 
 install(TARGETS ${CEDSP_LIBRARY} EXPORT "${CEDSP_LIBRARY}-targets" DESTINATION lib)
-install(DIRECTORY include DESTINATION include)
+install(EXPORT "${CEDSP_LIBRARY}-targets" FILE "${CEDSP_LIBRARY}-config.cmake" DESTINATION "lib/cmake/${CEDSP_LIBRARY}")
+install(FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/${CEDSP_LIBRARY}-config-version.cmake"
+        DESTINATION "lib/cmake/${CEDSP_LIBRARY}")
+install(DIRECTORY include/ DESTINATION include)

@@ -33,7 +33,7 @@ class TestStringMethods(unittest.TestCase):
                 str = str + delimiter + self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size))
 
             generated = pedsp.string.split(str, delimiter)
-            reference = filter(None, str.split(delimiter))
+            reference = list(filter(None, str.split(delimiter)))
             self.assertEqual(generated, reference)
 
     def test_to_lower(self):
