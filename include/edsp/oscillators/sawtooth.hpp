@@ -24,6 +24,7 @@
 
 #include <edsp/oscillators/sinusoidal.hpp>
 #include <edsp/math/constant.hpp>
+#include <edsp/meta/expects.hpp>
 
 namespace edsp { namespace oscillators {
 
@@ -87,6 +88,7 @@ namespace edsp { namespace oscillators {
 
     template <typename T>
     constexpr void sawtooth_oscillator<T>::set_width(value_type width) noexcept {
+        meta::expects(width >= 0 && width <= 1, "width must be a real number between 0 and 1.");
         width_ = width * oscillator<T>::inverse_frequency_;
     }
 
@@ -97,10 +99,10 @@ namespace edsp { namespace oscillators {
 
     template <typename T>
     constexpr typename sawtooth_oscillator<T>::value_type sawtooth_oscillator<T>::operator()() {
-        const auto t               = oscillator<T>::timestamp_;
-        const value_type result    = (t >= width_) ? (-2 * (t - width_) / (1.0 - width_) + 1) : (2 * t / width_ - 1);
-        const value_type increased = t + oscillator<T>::sampling_period_;
-        oscillator<T>::set_timestamp((increased > oscillator<T>::inverse_frequency_) ? 0 : increased);
+        const auto t = std::fmod(oscillator<T>::timestamp_, oscillator<T>::inverse_frequency_);
+        const auto result = (t >= width_) ? (-2 * (t - width_) / (1.0 - width_) + 1)
+                                        : (2 * t / width_ - 1);
+        oscillator<T>::set_timestamp(oscillator<T>::timestamp_ + oscillator<T>::sampling_period_);
         return result * oscillator<T>::amplitude();
     }
 

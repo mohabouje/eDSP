@@ -22,7 +22,7 @@
 #ifndef EDSP_OSCILLATOR_TRIANGLE_HPP
 #define EDSP_OSCILLATOR_TRIANGLE_HPP
 
-#include <edsp/oscillators/sinusoidal.hpp>
+#include <edsp/oscillators/sawtooth.hpp>
 #include <edsp/math/constant.hpp>
 
 namespace edsp { namespace oscillators {
