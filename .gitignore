@@ -35,8 +35,10 @@
 *.user
 *.kdev4
 .idea/
-.vscode/
 .kdev4/
+
+.vscode/*
+!.vscode/settings.json
 
 # Exclude build folder
 .output/

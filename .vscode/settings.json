@@ -1,0 +1,18 @@
+{
+    "python.unitTest.unittestArgs": [
+        "-v",
+        "-s",
+        "./test",
+        "-p",
+        "*_test.py"
+    ],
+    "python.unitTest.pyTestEnabled": false,
+    "python.unitTest.nosetestsEnabled": false,
+    "python.unitTest.unittestEnabled": true,
+    "python.linting.pylintEnabled": false,
+    "licenser.author": "Mohammed Boujemaoui Boulaghmoudi",
+    "licenser.license": "GPLv3",
+    "licenser.projectName": "eDSP",
+    "licenser.customTermsAndConditions": "eDSP, A cross-platform Digital Signal Processing library written in modern C++. \n Copyright @YEAR@ @AUTHOR@, All rights reserverd.",
+    "licenser.useSingleLineStyle": false,
+}
