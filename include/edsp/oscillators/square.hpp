@@ -110,7 +110,7 @@ namespace edsp { namespace oscillators {
     constexpr typename square_oscillator<T>::value_type square_oscillator<T>::operator()() {
         const auto current_t = std::fmod(oscillator<T>::timestamp_, oscillator<T>::inverse_frequency_);
         oscillator<T>::set_timestamp(oscillator<T>::timestamp_ + oscillator<T>::sampling_period_);
-        return (current_t >= duty_) * oscillator<T>::amplitude_;
+        return (current_t >= duty_ ? 1 : -1) * oscillator<T>::amplitude_;
     }
 
 }} // namespace edsp::oscillators

@@ -26,12 +26,14 @@
 #ifdef USE_BOOST_NUMPY_DEPRECATED
 #    include <boost/python.hpp>
 #    include <boost/numpy.hpp>
+#include <boost/python/def.hpp>
 
 namespace bp = boost::python;
 namespace bn = boost::numpy;
 #else
 #    include <boost/python.hpp>
 #    include <boost/python/numpy.hpp>
+#include <boost/python/def.hpp>
 
 
 namespace bp = boost::python;
