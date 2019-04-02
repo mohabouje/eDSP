@@ -7,7 +7,7 @@ import scipy.signal as sp
 
 class TestOscillatorMethods(unittest.TestCase):
 
-    __number_iterations = 100
+    __number_iterations = 10
     __minimum_frequency = 1
     __maximum_frequency = int(1e6)
     __maximum_amplitude = 100.0
@@ -18,13 +18,13 @@ class TestOscillatorMethods(unittest.TestCase):
         samples = np.zeros(shape=(n,), dtype=np.float64)
         period = 1.0 / sr
         temporal = init_t
-        for i in range(0, n):
+        for i in range(n):
             samples[i] = temporal
             temporal = temporal + period
         return samples
 
     def test_oscillator_constructor(self):
-        for _ in range(0, self.__number_iterations):
+        for _ in range(self.__number_iterations):
             amplitude = random.uniform(1.0, self.__maximum_amplitude)
             phase = random.uniform(0, 2 * np.pi)
             frequency = random.randint(self.__minimum_frequency, self.__maximum_frequency / 2)
@@ -36,7 +36,7 @@ class TestOscillatorMethods(unittest.TestCase):
             self.assertEqual(phase, sinusoidal.phase())
 
     def test_oscillator_setter_and_getter(self):
-        for _ in range(0, self.__number_iterations):
+        for _ in range(self.__number_iterations):
             sinusoidal = oscillator.Sinusoidal(amp=0, sr=0, f=0, p=0)
 
             timestamp = random.uniform(0.0, 10.0)
@@ -60,7 +60,7 @@ class TestOscillatorMethods(unittest.TestCase):
             self.assertEqual(sr, sinusoidal.sample_rate())
 
     def test_reset(self):
-        for i in range(0, self.__number_iterations):
+        for _ in range(self.__number_iterations):
             sinusoidal = oscillator.Sinusoidal(amp=0, sr=0, f=0, p=0)
             timestamp = random.uniform(0.0, 10.0)
             sinusoidal.set_timestamp(timestamp)
@@ -69,7 +69,7 @@ class TestOscillatorMethods(unittest.TestCase):
             self.assertEqual(0, sinusoidal.timestamp())
 
     def test_sinusoidal_generate_data(self):
-        for _ in range(0, self.__number_iterations):
+        for _ in range(self.__number_iterations):
             amplitude = random.uniform(1.0, self.__maximum_amplitude)
             phase = random.uniform(0, 2 * np.pi)
             frequency = random.randint(self.__minimum_frequency, self.__maximum_frequency / 2)
@@ -90,7 +90,7 @@ class TestOscillatorMethods(unittest.TestCase):
             np.testing.assert_array_almost_equal(generated, reference)
 
     def test_square_generate_data(self):
-        for _ in range(0, self.__number_iterations):
+        for _ in range(self.__number_iterations):
             amplitude = random.uniform(1.0, self.__maximum_amplitude)
             frequency = random.randint(self.__minimum_frequency, self.__maximum_frequency / 2)
             sr = random.uniform(2 * frequency, self.__maximum_frequency)

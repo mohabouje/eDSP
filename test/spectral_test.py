@@ -3,7 +3,7 @@ import pedsp.spectral as spectral
 import numpy as np
 import scipy.fftpack as fftpack
 import scipy.signal as signal
-from utiltity import generate_pair_inputs, generate_inputs
+from utility import generate_pair_inputs, generate_inputs
 
 
 class TestSpectralMethods(unittest.TestCase):
@@ -13,18 +13,22 @@ class TestSpectralMethods(unittest.TestCase):
     __minimum_size = 1 << 6
 
     def test_convolution(self):
-        first, second = generate_pair_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size)
+        first, second = generate_pair_inputs(
+            self.__number_inputs, self.__minimum_size, self.__maximum_size)
         for l, r in zip(first, second):
             generated = spectral.conv(l, r)
             reference = np.convolve(l, r)
-            np.testing.assert_array_almost_equal(generated, reference[:len(generated)])
+            np.testing.assert_array_almost_equal(
+                generated, reference[:len(generated)])
 
     def test_correlation(self):
-        first, second = generate_pair_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size)
+        first, second = generate_pair_inputs(
+            self.__number_inputs, self.__minimum_size, self.__maximum_size)
         for l, r in zip(first, second):
             generated = spectral.xcorr(l, r)
             reference = np.correlate(l, r, "full")
-            np.testing.assert_array_almost_equal(generated, reference[len(generated) - 1:])
+            np.testing.assert_array_almost_equal(
+                generated, reference[len(generated) - 1:])
 
     def test_dct(self):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):

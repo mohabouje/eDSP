@@ -3,7 +3,7 @@ import pedsp.algorithm as algorithm
 import numpy as np
 from random import randint
 
-from utiltity import generate_inputs
+from utility import generate_inputs
 
 
 class TestAlgorithmMethods(unittest.TestCase):
@@ -67,8 +67,9 @@ class TestAlgorithmMethods(unittest.TestCase):
             np.testing.assert_array_almost_equal(generated, reference)
 
     def test_concatenate(self):
-        data = generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size)
-        for i in range(0, len(data)):
+        data = generate_inputs(self.__number_inputs,
+                               self.__minimum_size, self.__maximum_size)
+        for _ in range(0, len(data)):
             first = data[randint(0, len(data) - 1)]
             second = data[randint(0, len(data) - 1)]
             generated = algorithm.concatenate(first, second)
@@ -83,7 +84,7 @@ class TestAlgorithmMethods(unittest.TestCase):
     #         np.testing.assert_array_almost_equal(generated, reference)
 
     def test_logarithmic_space(self):
-        for i in range(1, self.__number_inputs):
+        for _ in range(1, self.__number_inputs):
             size = randint(-self.__minimum_size, self.__maximum_size)
             minimum = randint(0, 5)
             maximum = randint(minimum, 5)
@@ -92,7 +93,7 @@ class TestAlgorithmMethods(unittest.TestCase):
             np.testing.assert_array_almost_equal(generated, reference)
 
     def test_linear_space(self):
-        for i in range(0, self.__number_inputs):
+        for _ in range(0, self.__number_inputs):
             size = randint(-self.__minimum_size, self.__maximum_size)
             minimum = randint(self.__minimum_size, self.__maximum_size / 1000)
             maximum = randint(minimum, self.__maximum_size)

@@ -3,7 +3,7 @@ import random
 import spectrum.tools as tools
 import pedsp.converter as converter
 import numpy as np
-from utiltity import generate_inputs
+from utility import generate_inputs
 
 
 class TestConverterMethods(unittest.TestCase):
@@ -13,42 +13,42 @@ class TestConverterMethods(unittest.TestCase):
     __minimum_size = 1 << 6
 
     def test_deg2rad(self):
-        for i in range(0, self.__number_inputs):
+        for _ in range(self.__number_inputs):
             degree = random.uniform(0.0, 360.0)
             generated = converter.deg2rad(degree)
             reference = np.deg2rad(degree)
             self.assertAlmostEqual(generated, reference)
 
     def test_rad2deg(self):
-        for i in range(0, self.__number_inputs):
+        for _ in range(0, self.__number_inputs):
             degree = random.uniform(0.0, 2.0 * np.pi)
             generated = converter.rad2deg(degree)
             reference = np.rad2deg(degree)
             self.assertAlmostEqual(generated, reference)
 
     def test_pow2db(self):
-        for i in range(0, self.__number_inputs):
+        for _ in range(0, self.__number_inputs):
             degree = random.uniform(0.0, 20.0)
             generated = converter.pow2db(degree)
             reference = tools.pow2db(degree)
             self.assertAlmostEqual(generated, reference)
 
     def test_db2pow(self):
-        for i in range(0, self.__number_inputs):
+        for _ in range(self.__number_inputs):
             degree = random.uniform(0.0, 20.0)
             generated = converter.db2pow(degree)
             reference = tools.db2pow(degree)
             self.assertAlmostEqual(generated, reference)
 
     def test_mag2db(self):
-        for i in range(0, self.__number_inputs):
+        for _ in range(self.__number_inputs):
             degree = random.uniform(0.0, 20.0)
             generated = converter.mag2db(degree)
             reference = tools.mag2db(degree)
             self.assertAlmostEqual(generated, reference)
 
     def test_db2mag(self):
-        for i in range(0, self.__number_inputs):
+        for _ in range(self.__number_inputs):
             degree = random.uniform(0.0, 20.0)
             generated = converter.db2mag(degree)
             reference = tools.db2mag(degree)
@@ -69,8 +69,9 @@ class TestConverterMethods(unittest.TestCase):
             self.assertAlmostEqual(generated, reference)
 
     def test_complex2real(self):
-        for i in range(0, self.__number_inputs):
-            data = np.random.rand(random.randint(self.__minimum_size, self.__maximum_size), 2)
+        for _ in range(self.__number_inputs):
+            data = np.random.rand(random.randint(
+                self.__minimum_size, self.__maximum_size), 2)
             data = data.view(dtype=np.complex128)
             data = data.reshape(data.shape[0],)
             real_generated, imag_generated = converter.complex2real(data)

@@ -3,7 +3,7 @@ import pedsp.statistics as statistics
 import numpy as np
 import scipy.stats
 import scipy.stats.mstats
-from utiltity import generate_inputs
+from utility import generate_inputs
 
 
 class TestStatisticsMethods(unittest.TestCase):
@@ -63,4 +63,3 @@ class TestStatisticsMethods(unittest.TestCase):
                 generated = statistics.moment(data, i)
                 reference = scipy.stats.mstats.moment(data, i)
                 self.assertAlmostEqual(generated, reference)
-
