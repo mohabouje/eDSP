@@ -15,4 +15,5 @@
     "licenser.projectName": "eDSP",
     "licenser.customTermsAndConditions": "eDSP, A cross-platform Digital Signal Processing library written in modern C++. \n Copyright @YEAR@ @AUTHOR@, All rights reserverd.",
     "licenser.useSingleLineStyle": false,
+    "C_Cpp.configurationWarnings": "Disabled",
 }
