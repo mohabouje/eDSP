@@ -32,7 +32,7 @@ bn::ndarray execute_inplace(Functor&& f, bn::ndarray& input, Args... arg) {
 
     const auto size      = input.shape(0);
     Py_intptr_t shape[1] = {size};
-    auto result          = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto result          = bn::empty(1, shape, bn::dtype::get_builtin<real_t>());
     auto in              = reinterpret_cast<real_t*>(input.get_data());
     auto out             = reinterpret_cast<real_t*>(result.get_data());
     f(in, size, out, arg...);
@@ -42,7 +42,7 @@ bn::ndarray execute_inplace(Functor&& f, bn::ndarray& input, Args... arg) {
 template <typename Functor, typename... Args>
 bn::ndarray execute(Functor&& f, long size, Args... arg) {
     Py_intptr_t shape[1] = {size};
-    auto result          = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto result          = bn::empty(1, shape, bn::dtype::get_builtin<real_t>());
     auto* data           = reinterpret_cast<real_t*>(result.get_data());
     f(data, size, arg...);
     return result;
@@ -100,7 +100,7 @@ bn::ndarray concatenate_python(bn::ndarray& first, bn::ndarray& second) {
     const auto first_size  = first.shape(0);
     const auto second_size = second.shape(0);
     Py_intptr_t shape[1]   = {first_size + second_size};
-    auto result            = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto result            = bn::empty(1, shape, bn::dtype::get_builtin<real_t>());
     auto* first_in         = reinterpret_cast<real_t*>(first.get_data());
     auto* second_in        = reinterpret_cast<real_t*>(second.get_data());
     auto* result_data      = reinterpret_cast<real_t*>(result.get_data());
@@ -116,7 +116,7 @@ bn::ndarray padder_python(bn::ndarray& input, long size) {
 
     const auto input_size = input.shape(0);
     Py_intptr_t shape[1]  = {size};
-    auto result           = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto result           = bn::empty(1, shape, bn::dtype::get_builtin<real_t>());
     auto* in              = reinterpret_cast<real_t*>(input.get_data());
     auto* result_data     = reinterpret_cast<real_t*>(result.get_data());
 

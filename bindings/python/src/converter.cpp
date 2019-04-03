@@ -28,8 +28,8 @@ real_t peak2rms_python(bn::ndarray& input) {
     if (input.get_nd() != 1) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
-    const auto size      = input.shape(0);
-    auto* data = reinterpret_cast<real_t*>(input.get_data());
+    const auto size = input.shape(0);
+    auto* data      = reinterpret_cast<real_t*>(input.get_data());
 
     return peak2rms(data, size);
 }
@@ -38,8 +38,8 @@ real_t peak2peak_python(bn::ndarray& input) {
     if (input.get_nd() != 1) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
-    const auto size      = input.shape(0);
-    auto* data = reinterpret_cast<real_t*>(input.get_data());
+    const auto size = input.shape(0);
+    auto* data      = reinterpret_cast<real_t*>(input.get_data());
 
     return peak2peak(data, size);
 }
@@ -51,25 +51,25 @@ bn::ndarray real2complex_python(bn::ndarray& input) {
 
     const auto size      = input.shape(0);
     Py_intptr_t shape[1] = {size};
-    auto result          = bn::zeros(1, shape, bn::dtype::get_builtin<std::complex<real_t>>());
+    auto result          = bn::empty(1, shape, bn::dtype::get_builtin<std::complex<real_t>>());
 
-    auto* real = reinterpret_cast<real_t*>(result.get_data());
+    auto* real        = reinterpret_cast<real_t*>(result.get_data());
     auto* result_data = reinterpret_cast<complex_t*>(result.get_data());
     real2complex(real, size, result_data);
     return result;
 }
 
-bn::ndarray ri2complex_python(bn::ndarray &real, bn::ndarray &imag) {
+bn::ndarray ri2complex_python(bn::ndarray& real, bn::ndarray& imag) {
     if (real.get_nd() != 1 || imag.get_nd() != 1) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
 
     const auto size      = real.shape(0);
     Py_intptr_t shape[1] = {size};
-    auto result          = bn::zeros(1, shape, bn::dtype::get_builtin<std::complex<real_t>>());
+    auto result          = bn::empty(1, shape, bn::dtype::get_builtin<std::complex<real_t>>());
 
-    auto* real_data = reinterpret_cast<real_t*>(real.get_data());
-    auto* imag_data = reinterpret_cast<real_t*>(imag.get_data());
+    auto* real_data   = reinterpret_cast<real_t*>(real.get_data());
+    auto* imag_data   = reinterpret_cast<real_t*>(imag.get_data());
     auto* result_data = reinterpret_cast<complex_t*>(result.get_data());
     ri2complex(real_data, imag_data, size, result_data);
     return result;
@@ -80,14 +80,14 @@ bp::tuple complex2real_python(bn::ndarray& input) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
 
-    const auto size = input.shape(0);
+    const auto size      = input.shape(0);
     Py_intptr_t shape[1] = {size};
-    auto real = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
-    auto imag = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto real            = bn::empty(1, shape, bn::dtype::get_builtin<real_t>());
+    auto imag            = bn::empty(1, shape, bn::dtype::get_builtin<real_t>());
 
-    auto *complex_data = reinterpret_cast<complex_t *>(input.get_data());
-    auto *real_data = reinterpret_cast<real_t *>(real.get_data());
-    auto *imag_data = reinterpret_cast<real_t *>(imag.get_data());
+    auto* complex_data = reinterpret_cast<complex_t*>(input.get_data());
+    auto* real_data    = reinterpret_cast<real_t*>(real.get_data());
+    auto* imag_data    = reinterpret_cast<real_t*>(imag.get_data());
     complex2real(complex_data, size, real_data, imag_data);
     return bp::make_tuple(real, imag);
 }
@@ -96,7 +96,7 @@ void add_converter_package() {
     std::string nested_name = bp::extract<std::string>(bp::scope().attr("__name__") + ".converter");
     bp::object nested_module(bp::handle<>(bp::borrowed(PyImport_AddModule(nested_name.c_str()))));
     bp::scope().attr("converter") = nested_module;
-    bp::scope parent             = nested_module;
+    bp::scope parent              = nested_module;
 
     bp::def("db2mag", db2mag);
     bp::def("db2pow", db2pow);

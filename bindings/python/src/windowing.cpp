@@ -27,7 +27,7 @@
 template <typename Functor>
 bn::ndarray generate_window(long size, Functor&& f) {
     Py_intptr_t shape[1] = {size};
-    auto result          = bn::zeros(1, shape, bn::dtype::get_builtin<real_t>());
+    auto result          = bn::empty(1, shape, bn::dtype::get_builtin<real_t>());
     auto data            = reinterpret_cast<real_t*>(result.get_data());
     f(data, size);
     return result;
