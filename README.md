@@ -10,6 +10,7 @@
 ![GitHub contributors](https://img.shields.io/github/contributors/mohabouje/eDSP.svg)
 [![Build Status][travis-badge]][travis-link]
 [![codecov][codecov-badge]][codecov-link]
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bbea9e1e8efd4610b71071b275948d83)](https://www.codacy.com/app/mohabouje/eDSP?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mohabouje/eDSP&amp;utm_campaign=Badge_Grade)
 
 ![GitHub forks](https://img.shields.io/github/forks/mohabouje/eDSP.svg?style=social&label=Fork)
 ![GitHub stars](https://img.shields.io/github/stars/mohabouje/eDSP.svg?style=social&label=Star)
