@@ -89,21 +89,24 @@ namespace edsp { namespace oscillators {
     template <typename T>
     constexpr void sawtooth_oscillator<T>::set_width(value_type width) noexcept {
         meta::expects(width >= 0 && width <= 1, "width must be a real number between 0 and 1.");
-        width_ = width * oscillator<T>::inverse_frequency_;
+        width_ = width;
     }
 
     template <typename T>
     constexpr typename sawtooth_oscillator<T>::value_type sawtooth_oscillator<T>::width() const noexcept {
-        return width_ * oscillator<T>::frequency_;
+        return width_;
     }
 
     template <typename T>
     constexpr typename sawtooth_oscillator<T>::value_type sawtooth_oscillator<T>::operator()() {
-        const auto t = std::fmod(oscillator<T>::timestamp_, oscillator<T>::inverse_frequency_);
-        const auto result = (t >= width_) ? (-2 * (t - width_) / (1.0 - width_) + 1)
-                                        : (2 * t / width_ - 1);
+        const auto t = std::fmod(oscillator<T>::frequency_ * oscillator<T>::timestamp_, 1);
         oscillator<T>::set_timestamp(oscillator<T>::timestamp_ + oscillator<T>::sampling_period_);
-        return result * oscillator<T>::amplitude();
+        if (width_ != 0 and t < width_) {
+            return oscillator<T>::amplitude_ * (2 * t / width_ - 1);
+        } else if (width_ != 1 and t >= width_) {
+            return oscillator<T>::amplitude_ * (-2 * (t - width_) / (1 - width_) + 1);
+        }
+        return 0;
     }
 
 }} // namespace edsp::oscillators

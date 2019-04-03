@@ -3,7 +3,7 @@ import random
 import pedsp.oscillator as oscillator
 import numpy as np
 import scipy.signal as sp
-
+from utility import generate_timestamps
 
 class TestOscillatorMethods(unittest.TestCase):
 
@@ -13,21 +13,12 @@ class TestOscillatorMethods(unittest.TestCase):
     __maximum_amplitude = 100.0
     __maximum_samples = 1000000
 
-    @staticmethod
-    def __generate_timestamps(init_t, n, sr):
-        samples = np.zeros(shape=(n,), dtype=np.float64)
-        period = 1.0 / sr
-        temporal = init_t
-        for i in range(n):
-            samples[i] = temporal
-            temporal = temporal + period
-        return samples
-
     def test_oscillator_constructor(self):
         for _ in range(self.__number_iterations):
             amplitude = random.uniform(1.0, self.__maximum_amplitude)
             phase = random.uniform(0, 2 * np.pi)
-            frequency = random.randint(self.__minimum_frequency, self.__maximum_frequency / 2)
+            frequency = random.randint(
+                self.__minimum_frequency, self.__maximum_frequency / 2)
             sr = random.uniform(2 * frequency, self.__maximum_frequency)
             sinusoidal = oscillator.Sinusoidal(amp=amplitude, sr=sr, f=frequency, p=phase)
             self.assertEqual(sr, sinusoidal.sample_rate())
@@ -43,7 +34,8 @@ class TestOscillatorMethods(unittest.TestCase):
             sinusoidal.set_timestamp(timestamp)
             self.assertEqual(timestamp, sinusoidal.timestamp())
 
-            frequency = random.randint(self.__minimum_frequency, self.__maximum_frequency / 2)
+            frequency = random.randint(
+                self.__minimum_frequency, self.__maximum_frequency / 2)
             sinusoidal.set_frequency(frequency)
             self.assertEqual(frequency, sinusoidal.frequency())
 
@@ -78,7 +70,7 @@ class TestOscillatorMethods(unittest.TestCase):
             init_t = random.uniform(0.0, 10.0)
 
             # Generate data from numpy
-            samples = self.__generate_timestamps(init_t, n, sr)
+            samples = generate_timestamps(init_t, n, sr)
             reference = amplitude * np.sin(2 * np.pi * frequency * samples + phase)
 
             sinusoidal = oscillator.Sinusoidal(amp=amplitude, sr=sr, f=frequency, p=phase)
@@ -86,7 +78,8 @@ class TestOscillatorMethods(unittest.TestCase):
             generated = sinusoidal.generate(n)
 
             self.assertEqual(len(generated), n)
-            self.assertAlmostEqual(samples[n - 1] + 1.0 / sr, sinusoidal.timestamp())
+            self.assertAlmostEqual(
+                samples[n - 1] + 1.0 / sr, sinusoidal.timestamp())
             np.testing.assert_array_almost_equal(generated, reference)
 
     def test_square_generate_data(self):
@@ -99,7 +92,7 @@ class TestOscillatorMethods(unittest.TestCase):
             init_t = random.uniform(0.0, 10.0)
 
             # Generate data from numpy
-            samples = self.__generate_timestamps(init_t, n, sr)
+            samples = generate_timestamps(init_t, n, sr)
             reference = amplitude * sp.square(2 * np.pi * frequency * samples, duty=duty)
 
             square = oscillator.Square(amp=amplitude, sr=sr, f=frequency, duty=duty)
@@ -108,4 +101,48 @@ class TestOscillatorMethods(unittest.TestCase):
 
             self.assertEqual(len(generated), n)
             self.assertAlmostEqual(samples[n - 1] + 1.0 / sr, square.timestamp())
-            np.testing.assert_array_almost_equal(np.abs(generated), np.abs(reference))
+            np.testing.assert_array_almost_equal(
+                np.abs(generated), np.abs(reference))
+
+    def test_sawtooth_generate_data(self):
+        for _ in range(self.__number_iterations):
+            amplitude = random.uniform(1.0, self.__maximum_amplitude)
+            frequency = random.randint(
+                self.__minimum_frequency, self.__maximum_frequency / 2)
+            sr = random.uniform(2 * frequency, self.__maximum_frequency)
+            width = random.uniform(0.0, 1.0)
+            n = int(random.uniform(1.0, 3.0) * sr)
+            init_t = random.uniform(0.0, 10.0)
+
+            # Generate data from numpy
+            samples = generate_timestamps(init_t, n, sr)
+            reference = amplitude * sp.sawtooth(2 * np.pi * frequency * samples, width=width)
+
+            sawtooth = oscillator.Sawtooth(amp=amplitude, sr=sr, f=frequency, width=width)
+            sawtooth.set_timestamp(init_t)
+            generated = sawtooth.generate(n)
+
+            self.assertEqual(len(generated), n)
+            self.assertAlmostEqual(samples[n - 1] + 1.0 / sr, sawtooth.timestamp())
+            np.testing.assert_array_almost_equal(generated, reference, 4)
+
+    def test_triangular_generate_data(self):
+        for _ in range(self.__number_iterations):
+            amplitude = random.uniform(1.0, self.__maximum_amplitude)
+            frequency = random.randint(
+                self.__minimum_frequency, self.__maximum_frequency / 2)
+            sr = random.uniform(2 * frequency, self.__maximum_frequency)
+            n = int(random.uniform(1.0, 3.0) * sr)
+            init_t = random.uniform(0.0, 10.0)
+
+            # Generate data from numpy
+            samples = generate_timestamps(init_t, n, sr)
+            reference = amplitude * sp.sawtooth(2 * np.pi * frequency * samples, width=0.5)
+
+            sawtooth = oscillator.Triangular(amp=amplitude, sr=sr, f=frequency)
+            sawtooth.set_timestamp(init_t)
+            generated = sawtooth.generate(n)
+
+            self.assertEqual(len(generated), n)
+            self.assertAlmostEqual(samples[n - 1] + 1.0 / sr, sawtooth.timestamp())
+            np.testing.assert_array_almost_equal(generated, reference)
