@@ -2,7 +2,6 @@ import unittest
 import pedsp.spectral as spectral
 import numpy as np
 import scipy.fftpack as fftpack
-import scipy.signal as signal
 from utility import generate_pair_inputs, generate_inputs
 
 

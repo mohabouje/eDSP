@@ -27,52 +27,52 @@ class TestStringMethods(unittest.TestCase):
 
     def test_split(self):
         for _ in range(self.__number_inputs):
-            str = ""
+            s = ""
             delimiter = random.choice(string.ascii_letters)
             for _ in range(10):
-                str = str + delimiter + self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size))
+                s = s + delimiter + self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size))
 
-            generated = pedsp.string.split(str, delimiter)
-            reference = list(filter(None, str.split(delimiter)))
+            generated = pedsp.string.split(s, delimiter)
+            reference = list(filter(None, s.split(delimiter)))
             self.assertEqual(generated, reference)
 
     def test_to_lower(self):
         for _ in range(self.__number_inputs):
-            str = self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size))
-            generated = pedsp.string.to_lower(str)
-            reference = str.lower()
+            s = self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size))
+            generated = pedsp.string.to_lower(s)
+            reference = s.lower()
             self.assertEqual(generated, reference)
 
     def test_to_upper(self):
         for _ in range(self.__number_inputs):
-            str = self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size))
-            generated = pedsp.string.to_upper(str)
-            reference = str.upper()
+            s = self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size))
+            generated = pedsp.string.to_upper(s)
+            reference = s.upper()
             self.assertEqual(generated, reference)
 
     def test_trim(self):
         for _ in range(self.__number_inputs):
             left_trim = " " * random.randint(0, 10)
             right_trim = " " * random.randint(0, 10)
-            str = left_trim + self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size)) + right_trim
-            generated = pedsp.string.trim(str)
-            reference = str.strip()
+            s = left_trim + self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size)) + right_trim
+            generated = pedsp.string.trim(s)
+            reference = s.strip()
             self.assertEqual(generated, reference)
 
     def test_rtrim(self):
         for _ in range(self.__number_inputs):
             left_trim = " " * random.randint(0, 10)
             right_trim = " " * random.randint(0, 10)
-            str = left_trim + self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size)) + right_trim
-            generated = pedsp.string.rtrim(str)
-            reference = str.rstrip()
+            s = left_trim + self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size)) + right_trim
+            generated = pedsp.string.rtrim(s)
+            reference = s.rstrip()
             self.assertEqual(generated, reference)
 
     def test_ltrim(self):
         for _ in range(self.__number_inputs):
             left_trim = " " * random.randint(0, 10)
             right_trim = " " * random.randint(0, 10)
-            str = left_trim + self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size)) + right_trim
-            generated = pedsp.string.ltrim(str)
-            reference = str.lstrip()
+            s = left_trim + self.__generate_string(random.randint(self.__minimum_size, self.__maximum_size)) + right_trim
+            generated = pedsp.string.ltrim(s)
+            reference = s.lstrip()
             self.assertEqual(generated, reference)

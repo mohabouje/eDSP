@@ -31,7 +31,7 @@ namespace edsp { namespace filter {
     struct LowPassTransformer {
         using value_type = T;
 
-        LowPassTransformer(value_type fc) : f(std::tan(constants<value_type>::pi * fc)) {}
+        explicit LowPassTransformer(value_type fc) : f(std::tan(constants<value_type>::pi * fc)) {}
 
         template <std::size_t AnalogMaxSize, std::size_t DigitalMaxSize>
         void operator()(const LayoutBase<T, AnalogMaxSize>& analog, LayoutBase<T, DigitalMaxSize>& digital) {

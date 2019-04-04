@@ -216,9 +216,9 @@ namespace edsp { inline namespace core {
 
     private:
         friend struct internal::logger_impl;
-        std::shared_ptr<spdlog::logger> logger_{nullptr};
         logger::levels type_{levels::info};
         std::stringstream msg_;
+        std::shared_ptr<spdlog::logger> logger_{nullptr};
     };
 
     inline namespace internal {
@@ -418,15 +418,18 @@ namespace edsp { inline namespace core {
 
     logger::logger(const edsp::string_view& name, const edsp::string_view& file, logger::levels message_type) :
         type_(message_type),
-        msg_() {
-        logger_ = spdlog::get(name.data());
+        msg_(),
+        logger_(spdlog::get(name.data())) {
         if (!logger_) {
             logger_ = spdlog::basic_logger_mt(name.data(), file.data());
         }
     }
 
-    logger::logger(const edsp::string_view& name, logger::levels message_type) : type_(message_type), msg_() {
-        logger_ = spdlog::get(name.data());
+    logger::logger(const edsp::string_view& name, logger::levels message_type) :
+        type_(message_type),
+        msg_(),
+        logger_(spdlog::get(name.data())) {
+        ;
         if (!logger_) {
             logger_ = spdlog::stdout_color_mt(name.data());
         }

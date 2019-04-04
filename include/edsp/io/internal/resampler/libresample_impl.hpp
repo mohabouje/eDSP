@@ -88,7 +88,7 @@ namespace edsp { namespace io { namespace internal {
             }
         }
 
-        void* handle_;
+        void* handle_{nullptr};
         error_type error_{0};
         size_type channels_{0};
         value_type factor_{1.0};

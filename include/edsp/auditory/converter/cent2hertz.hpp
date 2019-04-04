@@ -37,8 +37,8 @@ namespace edsp { namespace auditory { inline namespace converter {
      */
     template <typename T>
     constexpr T cent2hertz(T c) noexcept {
-        constexpr T p = 1200 / std::log(2);
-        constexpr T q = 5700 - p * std::log(440);
+        const T p = 1200 / std::log(2);
+        const T q = 5700 - p * std::log(440);
         return math::sign(c) * (std::exp((std::abs(c) - q) / p));
     }
 

@@ -41,7 +41,7 @@ namespace edsp { namespace auditory { inline namespace converter {
      */
     template <typename T>
     constexpr T hertz2mel(T f) noexcept {
-        return 1127.01048 * std::log(f / 700.0 + 1.0);
+        return 1127.01048 * std::log1p(f / 700.0);
     }
 
 }}} // namespace edsp::auditory::converter

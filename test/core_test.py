@@ -37,7 +37,7 @@ class TestCoreMethods(unittest.TestCase):
         self.assertEqual(core.get_resample_library(), "samplerate")
 
     def test_set_environment(self):
-        for i in range(0, random.randint(0, 1000)):
+        for _ in range(0, random.randint(0, 1000)):
             tag = self.__random_string()
             data = self.__random_string()
             error = core.set_environment(tag, data)
@@ -45,7 +45,7 @@ class TestCoreMethods(unittest.TestCase):
             self.assertTrue(core.exist_environment(tag))
 
     def test_get_environment(self):
-        for i in range(0, random.randint(0, 1000)):
+        for _ in range(0, random.randint(0, 1000)):
             tag = self.__random_string()
             data = self.__random_string()
             error = core.set_environment(tag, data)
@@ -55,4 +55,3 @@ class TestCoreMethods(unittest.TestCase):
             self.assertEqual(error, 0)
             self.assertEqual(data, recovered)
             self.assertTrue(core.exist_environment(tag))
-

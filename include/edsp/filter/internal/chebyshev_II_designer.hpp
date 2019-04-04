@@ -43,7 +43,7 @@ namespace edsp { namespace filter {
                 analog.set_gain(1);
                 analog.reset();
 
-                const auto eps     = std::sqrt(math::inv(std::exp(stopband_db * 0.1 * constants<T>::ln_ten) - 1));
+                const auto eps     = std::sqrt(math::inv(std::expm1(stopband_db * 0.1 * constants<T>::ln_ten)));
                 const auto v0      = std::asinh(math::inv(eps)) / static_cast<T>(num_poles);
                 const auto sinh_v0 = -std::sinh(v0);
                 const auto cosh_v0 = std::cosh(v0);

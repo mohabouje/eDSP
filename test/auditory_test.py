@@ -38,7 +38,7 @@ class TestAuditoryMethods(unittest.TestCase):
             f = random.uniform(self.__minimum_frequency, self.__maximum_frequency)
             generated = auditory.hertz2mel(f)
             reference = maf.hz2mel(f)
-            self.assertEqual(generated, reference)
+            self.assertAlmostEqual(generated, reference)
 
             restored = auditory.mel2hertz(generated)
             self.assertAlmostEqual(f, restored)
@@ -49,7 +49,7 @@ class TestAuditoryMethods(unittest.TestCase):
             f = random.uniform(self.__minimum_frequency, self.__maximum_frequency)
             generated = auditory.hertz2bark(f)
             reference = scale.hertz_to_scale(f)
-            self.assertEqual(generated, reference)
+            self.assertAlmostEqual(generated, reference)
 
             restored = auditory.bark2hertz(generated)
             self.assertAlmostEqual(f, restored)
@@ -59,7 +59,7 @@ class TestAuditoryMethods(unittest.TestCase):
             f = random.uniform(self.__minimum_frequency, self.__maximum_frequency)
             generated = auditory.hertz2erb(f)
             reference = maf.hz2erb(f)
-            self.assertEqual(generated, reference)
+            self.assertAlmostEqual(generated, reference)
 
             restored = auditory.erb2hertz(generated)
             self.assertAlmostEqual(f, restored)
@@ -69,7 +69,7 @@ class TestAuditoryMethods(unittest.TestCase):
             mel = random.uniform(maf.hz2mel(self.__minimum_frequency), maf.hz2mel(self.__maximum_frequency))
             generated = auditory.mel2hertz(mel)
             reference = maf.mel2hz(mel)
-            self.assertEqual(generated, reference)
+            self.assertAlmostEqual(generated, reference)
 
             restored = auditory.hertz2mel(generated)
             self.assertAlmostEqual(mel, restored)
@@ -80,7 +80,7 @@ class TestAuditoryMethods(unittest.TestCase):
             bark = random.uniform(scale.scale_to_hertz(self.__minimum_frequency), scale.scale_to_hertz(self.__maximum_frequency))
             generated = auditory.bark2hertz(bark)
             reference = scale.scale_to_hertz(bark)
-            self.assertEqual(generated, reference)
+            self.assertAlmostEqual(generated, reference)
 
             restored = auditory.hertz2bark(generated)
             self.assertAlmostEqual(bark, restored)
@@ -90,7 +90,7 @@ class TestAuditoryMethods(unittest.TestCase):
             erb = random.uniform(maf.hz2erb(self.__minimum_frequency), maf.hz2erb(self.__maximum_frequency))
             generated = auditory.erb2hertz(erb)
             reference = maf.erb2hz(erb)
-            self.assertEqual(generated, reference)
+            self.assertAlmostEqual(generated, reference)
 
             restored = auditory.hertz2erb(generated)
             self.assertAlmostEqual(erb, restored)

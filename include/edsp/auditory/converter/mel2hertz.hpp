@@ -23,7 +23,7 @@
 #ifndef EDSP_MEL2HERTZ_HPP
 #define EDSP_MEL2HERTZ_HPP
 
-#include <edsp/auditory/converter/hertz2mel.hpp>
+#include <cmath>
 
 namespace edsp { namespace auditory { inline namespace converter {
     /**
@@ -40,7 +40,7 @@ namespace edsp { namespace auditory { inline namespace converter {
      */
     template <typename T>
     constexpr T mel2hertz(T mel) noexcept {
-        return 700.0 * (std::exp(mel / 1127.01048) - 1.0);
+        return 700.0 * std::expm1(mel / 1127.01048);
     }
 
 }}} // namespace edsp::auditory::converter
