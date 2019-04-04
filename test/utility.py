@@ -1,7 +1,6 @@
 import scipy.signal as sp
 import numpy as np
 from random import randint
-from pedsp.algorithm import linspace
 
 def get_generators():
     return [sp.hamming, sp.hann, sp.flattop, sp.nuttall, sp.blackman, sp.parzen]
