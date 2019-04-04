@@ -26,29 +26,6 @@
 #include <edsp/auditory/converter/hertz2mel.hpp>
 
 namespace edsp { namespace auditory { inline namespace converter {
-
-    namespace internal {
-
-        template <mel_base scale>
-        struct inverter {};
-
-        template <>
-        struct inverter<mel_base::base_e> {
-            template <typename T>
-            constexpr T operator()(T mel) noexcept {
-                return 700.0 * (std::exp(mel / 1127.01048) - 1.0);
-            }
-        };
-
-        template <>
-        struct inverter<mel_base::base_10> {
-            template <typename T>
-            constexpr T operator()(T mel) noexcept {
-                return 700.0 * (std::pow(10.0, mel / 2595.0) - 1.0);
-            }
-        };
-    } // namespace internal
-
     /**
      * @brief Converts a frequency in mels to Hertz.
      *
@@ -61,9 +38,9 @@ namespace edsp { namespace auditory { inline namespace converter {
      * @returns Frequency in Hz.
      * @see hertz2mel
      */
-    template <mel_base scale, typename T>
+    template <typename T>
     constexpr T mel2hertz(T mel) noexcept {
-        return internal::inverter<scale>{}(mel);
+        return 700.0 * (std::exp(mel / 1127.01048) - 1.0);
     }
 
 }}} // namespace edsp::auditory::converter

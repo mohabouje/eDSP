@@ -55,7 +55,7 @@ namespace edsp { namespace auditory {
     constexpr void audspace(OutputIt d_first, Numeric min, Numeric max, Integer N, auditory_scale scale) {
         switch (scale) {
             case auditory_scale::mel:
-                melspace<mel_base::base_10>(d_first, min, max, N);
+                melspace(d_first, min, max, N);
                 break;
             case auditory_scale::erb:
                 erbspace(d_first, min, max, N);

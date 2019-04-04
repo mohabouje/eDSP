@@ -163,12 +163,13 @@ write_basic_package_version_file(
         COMPATIBILITY ExactVersion
 )
 
-install(TARGETS ${EDSP_LIBRARY} EXPORT "${EDSP_LIBRARY}-targets" DESTINATION lib)
-install(EXPORT "${EDSP_LIBRARY}-targets" FILE "${EDSP_LIBRARY}-config.cmake" DESTINATION "lib/cmake/${EDSP_LIBRARY}")
-install(FILES
-        "${CMAKE_CURRENT_BINARY_DIR}/${EDSP_LIBRARY}-config-version.cmake"
-        DESTINATION "lib/cmake/${EDSP_LIBRARY}")
-install(DIRECTORY include/ DESTINATION include)
+# TODO: restore when everything is ready to release
+# install(TARGETS ${EDSP_LIBRARY} EXPORT "${EDSP_LIBRARY}-targets" DESTINATION lib)
+# install(EXPORT "${EDSP_LIBRARY}-targets" FILE "${EDSP_LIBRARY}-config.cmake" DESTINATION "lib/cmake/${EDSP_LIBRARY}")
+# install(FILES
+#         "${CMAKE_CURRENT_BINARY_DIR}/${EDSP_LIBRARY}-config-version.cmake"
+#         DESTINATION "lib/cmake/${EDSP_LIBRARY}")
+# install(DIRECTORY include/ DESTINATION include)
 
 if (BUILD_EXTENSIONS)
     add_subdirectory(extension)

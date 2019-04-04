@@ -23,6 +23,8 @@
 #ifndef EDSP_BARK2HERZ_HPP
 #define EDSP_BARK2HERZ_HPP
 
+#include <cmath>
+
 namespace edsp { namespace auditory { inline namespace converter {
 
     /**
@@ -43,14 +45,13 @@ namespace edsp { namespace auditory { inline namespace converter {
      */
     template <typename T>
     constexpr T bark2hertz(T z) noexcept {
+        auto bark = z;
         if (z < 2) {
-            z = (z - 0.3) / 0.85;
+            bark = (20. * z - 6.0) / 17.0;
+        } else if (z > 20.1) {
+            bark = (50. * z + 221.1) / 61.0;
         }
-
-        if (z > 20.1) {
-            z = (z - 4.422) / 1.22;
-        }
-        return 1960.0 * (z + 0.53) / (26.28 - z);
+        return 1960. * (bark + 0.53) / (26.28 - bark);
     }
 
 }}} // namespace edsp::auditory::converter

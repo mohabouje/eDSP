@@ -35,13 +35,11 @@ namespace edsp { namespace auditory { inline namespace converter {
      * @see [1] B.C.J.Moore & B.R.Glasberg "Suggested formula for
      *          calculating auditory-filter bandwidth and excitation
      *          patterns", J Acoust Soc America V74, pp 750-753, 1983
-     * @see http://www.ee.ic.ac.uk/hp/staff/dmb/voicebox/doc/voicebox/frq2erb.html
+     * @see https://ccrma.stanford.edu/~jos/bbt/Equivalent_Rectangular_Bandwidth.html
      */
     template <typename T>
     constexpr T hertz2erb(T f) noexcept {
-        constexpr auto GFB_L = 24.7;    //see equation (17) in [Hohmann 2002]
-        constexpr auto GFB_Q = 9.26449; //see equation (17) in [Hohmann 2002]
-        return GFB_Q * std::log(1. + f / (GFB_L * GFB_Q));
+        return 21.4 * std::log10(1.0 + 4.37 * f / 1000.0);
     }
 
 }}} // namespace edsp::auditory::converter

@@ -23,6 +23,7 @@
 #define EDSP_ALGORITHM_LINSPACE_H
 
 #include <iterator>
+#include <cmath>
 
 namespace edsp { inline namespace algorithm {
 

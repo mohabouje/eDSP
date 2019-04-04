@@ -44,34 +44,13 @@ namespace edsp { namespace auditory { inline namespace converter {
      */
     template <typename T>
     constexpr T hertz2bark(T f) noexcept {
-        const auto b = (26.81 * f) / (1960 + f) - 0.53;
-        if (b < 2) {
-            b += 0.15 * (2 - b);
+        const auto bark = 26.81 * f / (1960. + f) - 0.53;
+        if (bark < 2) {
+            return bark + 0.15 * (2. - bark);
+        } else if (bark > 20.1) {
+            return bark + 0.22 * (bark - 20.1);
         }
-        if (b > 20.1) {
-            b += 0.22 * (b - 20.1);
-        }
-        return b;
-    }
-
-    /**
-     * @brief Converts a critical band rate in Bark into a critical bandwidth in Hz.
-     *
-     * The conversion of a critical band rate z into a critical bandwidth in Hz is implemented as follows:
-     * \f[
-     * f = 52548/ (z^{2}-52.56z+690.39)\, with z in bark.
-     * \f]
-     * or
-     * \f[
-     * {\displaystyle f=600\sinh(z/6)} {\displaystyle f=600\sinh(z/6)}
-     * \f]
-     *
-     * @param z The critical band rate, in Bark
-     * @returns The critical bandwidth in Hz.
-     */
-    template <typename T>
-    constexpr T bark2band(T z) noexcept {
-        return 52548.0 / (z * z - 52.56 * z + 690.39);
+        return bark;
     }
 
 }}} // namespace edsp::auditory::converter

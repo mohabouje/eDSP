@@ -7,6 +7,7 @@ from converter_test import TestConverterMethods
 from core_test import TestCoreMethods
 from string_test import TestStringMethods
 from oscillator_test import TestOscillatorMethods
+from auditory_test import TestAuditoryMethods
 
 from sys import exit
 
@@ -17,7 +18,7 @@ if __name__ == "__main__":
         loader.loadTestsFromTestCase(test)
         for test in (TestWindowingMethods, TestCoreMethods, TestConverterMethods,
                      TestStatisticsMethods, TestAlgorithmMethods, TestSpectralMethods,
-                     TestStringMethods, TestOscillatorMethods)
+                     TestStringMethods, TestOscillatorMethods, TestAuditoryMethods)
     ]
     suite = TestSuite(tests)
 

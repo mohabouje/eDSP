@@ -38,11 +38,11 @@ namespace edsp { namespace auditory {
      * @param N Number of frequencies to generate.
      * @param d_first The beginning of the destination range
      */
-    template <mel_base scale, typename OutputIt, typename Numeric, typename Integer>
-    constexpr void melspace(OutputIt d_first, Numeric min, Numeric max, Integer N) {
-        using output_type = typename std::iterator_traits<OutputIt>::value_type;
-        algorithm::linspace(d_first, min, max, N);
-        std::transform(d_first, d_first + N, converter::hertz2mel<scale>);
+    template <typename OutputIt, typename Numeric>
+    constexpr void melspace(OutputIt first, OutputIt last, Numeric min, Numeric max) {
+        const auto N = std::distance(first, last);
+        algorithm::linspace(first, min, max, N);
+        std::transform(first, last, first, [](const auto data) { return converter::hertz2mel(data); });
     }
 
 }} // namespace edsp::auditory

@@ -37,11 +37,11 @@ namespace edsp { namespace auditory {
      * @param N Number of frequencies to generate.
      * @param d_first The beginning of the destination range
      */
-    template <typename OutputIt, typename Numeric, typename Integer>
-    constexpr void barkspace(OutputIt d_first, Numeric min, Numeric max, Integer N) {
-        using output_type = typename std::iterator_traits<OutputIt>::value_type;
-        algorithm::linspace(d_first, min, max, N);
-        std::transform(d_first, d_first + N, converter::hertz2bark);
+    template <typename OutputIt, typename Numeric>
+    constexpr void barkspace(OutputIt first, OutputIt last, Numeric min, Numeric max) {
+        const auto N = std::distance(first, last);
+        algorithm::linspace(first, min, max, N);
+        std::transform(first, last, first, [](const auto data) { return converter::hertz2bark(data); });
     }
 
 }} // namespace edsp::auditory

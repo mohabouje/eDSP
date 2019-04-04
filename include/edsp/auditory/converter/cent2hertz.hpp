@@ -15,7 +15,7 @@
 * You should have received a copy of the GNU General Public License along width
 * this program.  If not, see <http://www.gnu.org/licenses/>
 *
-* Filename: cent2freq.hpp
+* Filename: cent2hertz.hpp
 * Author: Mohammed Boujemaoui
 * Date: 18/10/18
 */
