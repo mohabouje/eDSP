@@ -53,3 +53,18 @@ class TestTemporalFeatureMethods(unittest.TestCase):
             reference = algo.compute(data.astype(np.float32))
             error = utility.get_change(generated, reference)
             self.assertTrue(error < 1)
+
+    def test_power(self):
+        for _, data in self.__database:
+            algo = essentia.standard.InstantPower()
+            generated = temporal.power(data)
+            reference = algo.compute(data.astype(np.float32))
+            error = utility.get_change(generated, reference)
+            self.assertTrue(error < 1)
+
+    def test_azcr(self):
+        for _, data in self.__database:
+            algo = essentia.standard.ZeroCrossingRate()
+            generated = temporal.azcr(data)
+            reference = algo.compute(data.astype(np.float32))
+            self.assertAlmostEqual(generated, reference)

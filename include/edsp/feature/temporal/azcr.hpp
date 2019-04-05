@@ -50,12 +50,17 @@ namespace edsp { namespace feature { inline namespace temporal {
      */
     template <typename InputIt>
     constexpr auto azcr(InputIt first, InputIt last) {
-        using value_type       = typename std::iterator_traits<InputIt>::value_type;
-        value_type accumulated = 0;
-        for (++first; first != last;) {
-            accumulated += math::sign(*first) != math::sign(*(first - 1));
+        using value_type = typename std::iterator_traits<InputIt>::value_type;
+        const auto N     = std::distance(first, last);
+        if (!N) {
+            return static_cast<value_type>(0);
         }
-        return accumulated / static_cast<value_type>(std::distance(first, last));
+
+        auto accumulated = static_cast<value_type>(0);
+        for (first = std::next(first); first != last; ++first) {
+            accumulated += static_cast<value_type>(math::sign(*first) != math::sign(*std::prev(first)));
+        }
+        return accumulated / static_cast<value_type>(N);
     }
 
 }}} // namespace edsp::feature::temporal

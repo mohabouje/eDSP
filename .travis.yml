@@ -19,6 +19,9 @@ matrix:
           - numpy
           - scipy
           - lcov
+          - libyaml
+          - ffmpeg
+          - taglib
       script:
         - cd ${TRAVIS_BUILD_DIR}
         - sh mac_travis.sh
@@ -50,6 +53,10 @@ matrix:
             - python
             - python-numpy
             - python-scipy
+            - libtag1-dev
+            - libavcodec-dev 
+            - libavformat-dev
+            - libyaml-dev
           sources:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-5.0

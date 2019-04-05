@@ -28,6 +28,7 @@
 #define EDSP_ASDF_HPP
 
 #include <iterator>
+#include <edsp/math/numeric.hpp>
 
 namespace edsp { namespace feature { inline namespace temporal {
 
@@ -66,8 +67,9 @@ namespace edsp { namespace feature { inline namespace temporal {
         const auto N     = std::distance(first, last);
         auto* array      = &(*first);
         for (auto i = 0; i < N; ++i, ++d_first) {
+            *d_first = static_cast<value_type>(0);
             for (auto j = 0; j < (N - i); ++j) {
-                *d_first += std::abs(array[j] - array[j + i]);
+                *d_first += math::square(array[j] - array[j + i]);
             }
             *d_first /= static_cast<value_type>(N);
         }
