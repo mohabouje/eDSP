@@ -17,8 +17,9 @@ matrix:
           - boost
           - boost-python3
           - python3
-          - numpy
-          - scipy
+          - numpy --with-python3
+          - matplotlib --with-python3
+          - scipy --with-python3
           - lcov
           - libyaml
           - ffmpeg
@@ -28,6 +29,7 @@ matrix:
           - gdbm
           - freetype
           - libpng
+          - chromaprint
       script:
         - cd ${TRAVIS_BUILD_DIR}
         - sh mac_travis.sh
@@ -67,6 +69,7 @@ matrix:
             - libavformat-dev
             - libyaml-dev
             - libchromaprint-dev 
+            - ffmpeg
           sources:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-5.0
