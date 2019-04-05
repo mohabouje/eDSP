@@ -42,6 +42,9 @@ sudo pip3 install -U spectrum
 sudo pip3 install -U cython
 sudo pip3 install -U madmom
 sudo pip3 install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
+sudo pip3 install -U essentia
+sudo pip3 install -U librosa
+
 sudo python3 test/
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"

@@ -48,9 +48,9 @@ namespace edsp { namespace feature { inline namespace temporal {
      * @param last Input iterator defining the end of the range to examine.
      * @returns The average zero crossing rate.
      */
-    template <typename InputIt, typename OutputIt>
+    template <typename InputIt>
     constexpr auto azcr(InputIt first, InputIt last) {
-        using value_type       = typename std::iterator_traits<OutputIt>::value_type;
+        using value_type       = typename std::iterator_traits<InputIt>::value_type;
         value_type accumulated = 0;
         for (++first; first != last;) {
             accumulated += math::sign(*first) != math::sign(*(first - 1));

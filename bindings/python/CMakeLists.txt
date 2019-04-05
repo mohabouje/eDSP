@@ -63,7 +63,8 @@ set(HEADER
         include/core.hpp
         include/string.hpp 
         include/oscillator.hpp
-        include/auditory.hpp)
+        include/auditory.hpp
+        include/feature.hpp)
 
 set(SRC
         src/package.cpp
@@ -75,7 +76,8 @@ set(SRC
         src/core.cpp
         src/string.cpp
         src/oscillator.cpp
-        src/auditory.cpp)
+        src/auditory.cpp
+        src/feature_temporal.cpp)
 
 set(PEDSP_LIBRARY pedsp)
 add_library(${PEDSP_LIBRARY} SHARED ${HEADER} ${SRC})

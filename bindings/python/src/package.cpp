@@ -29,6 +29,7 @@
 #include "string.hpp"
 #include "oscillator.hpp"
 #include "auditory.hpp"
+#include "feature.hpp"
 #include "boost_numpy_dependencies.hpp"
 
 BOOST_PYTHON_MODULE(MODULE_NAME) {
@@ -42,4 +43,5 @@ BOOST_PYTHON_MODULE(MODULE_NAME) {
     add_string_package();
     add_oscillator_package();
     add_auditory_package();
+    add_feature_temporal_package();
 }

@@ -70,7 +70,7 @@ namespace edsp { namespace feature { inline namespace temporal {
         const auto attack_time =
             static_cast<value_type>(stop_attack - start_attack) / static_cast<value_type>(sample_rate);
         constexpr auto threshold = static_cast<value_type>(10e-5);
-        return (attack_time > threshold) ? static_cast<T>(std::log10(attack_time)) : -5;
+        return (attack_time > threshold) ? static_cast<value_type>(std::log10(attack_time)) : -5;
     }
 }}} // namespace edsp::feature::temporal
 

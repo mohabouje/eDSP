@@ -27,9 +27,7 @@
 #ifndef EDSP_DURATION_HPP
 #define EDSP_DURATION_HPP
 
-#include <iterator>
-#include <algorithm>
-#include <functional>
+#include <edsp/statistics/max.hpp>
 
 namespace edsp { namespace feature { inline namespace temporal {
 
@@ -60,14 +58,10 @@ namespace edsp { namespace feature { inline namespace temporal {
      */
     template <typename ForwardIt, typename Numeric>
     constexpr auto effective_duration(ForwardIt first, ForwardIt last, Numeric sample_rate, Numeric threshold) {
-        using value_type       = typename std::iterator_traits<ForwardIt>::value_type;
-        const auto pair        = std::minmax_element(first, last);
-        const value_type limit = threshold * std::max(std::abs(pair.first), std::abs(pair.second));
-        const auto get_threshold =
-            std::find_if(first, last, std::bind(std::greater_equal<value_type>(), std::placeholders::_1, limit));
-        const auto let_threshold =
-            std::find_if(get_threshold, last, std::bind(std::less_equal<value_type>(), std::placeholders::_1, limit));
-        const auto samples = std::distance(get_threshold, let_threshold);
+        using value_type   = typename std::iterator_traits<ForwardIt>::value_type;
+        const auto limit   = threshold * edsp::statistics::maxabs(first, last);
+        const auto functor = [limit](const auto sample) { return std::abs(sample) > limit; };
+        const auto samples = std::count_if(first, last, functor);
         return static_cast<value_type>(samples) / static_cast<value_type>(sample_rate);
     }
 }}} // namespace edsp::feature::temporal

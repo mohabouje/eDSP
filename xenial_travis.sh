@@ -56,6 +56,9 @@ sudo pip install -U spectrum
 sudo pip install -U cython
 sudo pip install -U madmom
 sudo pip install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
+sudo pip install -U essentia
+sudo pip install -U librosa
+
 sudo python test/
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
