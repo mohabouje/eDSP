@@ -1,4 +1,13 @@
 {
+    "files.eol": "\n",
+    "[cpp]": {
+        "editor.quickSuggestions": true
+    },
+    "[c]": {
+        "editor.quickSuggestions": true
+    },
+    "debug.inlineValues": true,
+    "editor.formatOnSave": true,
     "python.unitTest.unittestArgs": [
         "-v",
         "-s",
@@ -96,4 +105,20 @@
         "fstream": "cpp"
     },
     "C_Cpp.configurationWarnings": "Disabled",
+    "clang.cxxflags": [
+        "-std=c++14"
+    ],
+    "clangTidy.lintLanguages": [
+        "c",
+        "cpp"
+    ],
+    "clangTidy.extraCompilerArgs": [
+        "-Weverything",
+        "-Wno-c++98-compat",
+        "-Wno-unused-macros"
+    ],
+    "clangTidy.systemIncludePath": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/include/"
+    ]
 }
