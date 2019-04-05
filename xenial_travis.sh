@@ -34,6 +34,7 @@ if [ $? -ne 0 ]; then
 fi
 
 showinfo "Installing third-party tools"
+pip install -U ipython numpy matplotlib pyyaml
 cd ${TRAVIS_BUILD_DIR}
 git clone https://github.com/MTG/essentia.git
 cd essentia

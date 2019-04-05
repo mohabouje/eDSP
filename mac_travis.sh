@@ -10,11 +10,13 @@ showinfo() { echo -e "${BG}$1${NC}"; }
 workingprocess() { echo -e "${BB}$1${NC}"; }
 allert () { echo -e "${RED}$1${NC}"; }
 
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
+
 showinfo "Building and installing extensions"
 cd ${TRAVIS_BUILD_DIR} && cd extension
 mkdir -p build && cd build
 cmake .. && make -j8
-sudo make install
+make install
 cd .. && cd ..
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
@@ -22,13 +24,13 @@ if [ $? -ne 0 ]; then
 fi
 
 showinfo "Installing third-party tools"
-sudo pip3 install ipython numpy matplotlib pyyaml
+pip3 install -U ipython numpy matplotlib pyyaml
 cd ${TRAVIS_BUILD_DIR}
 git clone https://github.com/MTG/essentia.git
 cd essentia
-CC=clang CXX=clang++ sudo python3 ./waf configure --mode=release --with-python
-CC=clang CXX=clang++ sudo python3 ./waf
-CC=clang CXX=clang++ sudo python3 ./waf install
+python3 ./waf configure --mode=release --with-python
+python3 ./waf
+python3 ./waf install
 
 
 showinfo "Building the library..."
@@ -37,7 +39,7 @@ mkdir -p build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug -DUSE_PYTHON3=ON -DUSE_LIBFFTW=ON -DBUILD_BENCHMARKS=ON -DBUILD_TESTS=ON -DBUILD_EXTENSIONS=ON -DBUILD_DOCS=OFF -DENABLE_DEBUG_INFORMATION=ON -DBUILD_EXAMPLES=ON -DENABLE_COVERAGE=ON ..
 make -j8
-sudo make install
+make install
 if [ $? -ne 0 ]; then
     error "Error: there are compile errors!"
     exit 3
@@ -45,16 +47,16 @@ fi
 
 showinfo "Running the tests..."
 cd ${TRAVIS_BUILD_DIR}
-sudo pip3 install --upgrade pip
-sudo pip3 install -U numpy
-sudo pip3 install -U scipy
-sudo pip3 install -U librosa
-sudo pip3 install -U spectrum
-sudo pip3 install -U cython
-sudo pip3 install -U madmom
-sudo pip3 install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
+pip3 install --upgrade pip
+pip3 install -U numpy
+pip3 install -U scipy
+pip3 install -U librosa
+pip3 install -U spectrum
+pip3 install -U cython
+pip3 install -U madmom
+pip3 install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
 
-sudo python3 test/
+python3 test/
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
     exit 4
