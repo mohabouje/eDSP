@@ -54,19 +54,20 @@ if [ $? -ne 0 ]; then
     exit 4
 fi
 
+sudo ldconfig
+
 showinfo "Running the tests..."
 cd ${TRAVIS_BUILD_DIR}
-sudo ldconfig
-sudo pip install --upgrade pip
-sudo pip install -U numpy
-sudo pip install -U scipy
-sudo pip install -U librosa
-sudo pip install -U spectrum
-sudo pip install -U cython
-sudo pip install -U madmom
-sudo pip install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
-
-sudo python test/
+chmod -R ugo+rX /lib/python2.7/site-packages/
+pip install --upgrade pip
+pip install -U numpy
+pip install -U scipy
+pip install -U spectrum
+pip install -U cython
+pip install -U madmom
+pip install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
+pip install librosa
+python test/
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
     exit 4
