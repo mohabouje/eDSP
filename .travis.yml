@@ -40,49 +40,49 @@ matrix:
         - lcov --remove coverage.info '/usr/*' --output-file coverage.info
         - lcov --list coverage.info
         - bash <(curl -s https://codecov.io/bash)
-    - os: linux
-      dist: xenial
-      sudo: true
-      compiler: gcc
-      python:
-        - "2.7"
-      addons:
-        apt:
-          packages:
-            - gcc-7
-            - g++-7
-            - cmake
-            - lcov
-            - libfftw3-dev
-            - libsamplerate0-dev
-            - libaudiofile-dev
-            - libsndfile1-dev
-            - libgtest-dev
-            - libboost-all-dev
-            - python
-            - python-numpy
-            - python-numpy-dev
-            - python-scipy
-            - python-six
-            - python-yaml
-            - libtag1-dev
-            - libavcodec-dev 
-            - libavformat-dev
-            - libyaml-dev
-            - libchromaprint-dev 
-            - ffmpeg
-          sources:
-            - ubuntu-toolchain-r-test
-            - llvm-toolchain-trusty-5.0
-      env:
-        - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
-        - USE_BOOST_NUMPY_DEPRECATED=1
-      before_install:
-        - eval "${MATRIX_EVAL}"
-        - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
-      script:
-        - cd ${TRAVIS_BUILD_DIR}
-        - sh xenial_travis.sh
+    # - os: linux
+    #   dist: xenial
+    #   sudo: true
+    #   compiler: gcc
+    #   python:
+    #     - "2.7"
+    #   addons:
+    #     apt:
+    #       packages:
+    #         - gcc-7
+    #         - g++-7
+    #         - cmake
+    #         - lcov
+    #         - libfftw3-dev
+    #         - libsamplerate0-dev
+    #         - libaudiofile-dev
+    #         - libsndfile1-dev
+    #         - libgtest-dev
+    #         - libboost-all-dev
+    #         - python
+    #         - python-numpy
+    #         - python-numpy-dev
+    #         - python-scipy
+    #         - python-six
+    #         - python-yaml
+    #         - libtag1-dev
+    #         - libavcodec-dev 
+    #         - libavformat-dev
+    #         - libyaml-dev
+    #         - libchromaprint-dev 
+    #         - ffmpeg
+    #       sources:
+    #         - ubuntu-toolchain-r-test
+    #         - llvm-toolchain-trusty-5.0
+    #   env:
+    #     - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
+    #     - USE_BOOST_NUMPY_DEPRECATED=1
+    #   before_install:
+    #     - eval "${MATRIX_EVAL}"
+    #     - sudo update-alternatives --install /usr/bin/gcov gcov /usr/bin/gcov-5 90
+    #   script:
+    #     - cd ${TRAVIS_BUILD_DIR}
+    #     - sh xenial_travis.sh
 
 branches:
   only:

@@ -25,7 +25,6 @@
 #include <edsp/feature/temporal/rms.hpp>
 #include <edsp/feature/temporal/power.hpp>
 #include <edsp/feature/temporal/leq.hpp>
-#include <edsp/feature/temporal/lat.hpp>
 #include <edsp/feature/temporal/energy.hpp>
 #include <edsp/feature/temporal/duration.hpp>
 #include <edsp/feature/temporal/azcr.hpp>
@@ -74,12 +73,6 @@ real_t power_python(bn::ndarray& input) {
     return execute<callback_type>(edsp::feature::temporal::power<real_t*>, input);
 }
 
-real_t lat_python(bn::ndarray& input, real_t sample_rate, real_t start_threshold, real_t stop_threshold) {
-    using callback_type = decltype(edsp::feature::temporal::lat<real_t*, real_t>);
-    return execute<callback_type>(edsp::feature::temporal::lat<real_t*, real_t>, input, sample_rate, start_threshold,
-                                  stop_threshold);
-}
-
 real_t energy_python(bn::ndarray& input) {
     using callback_type = decltype(edsp::feature::temporal::energy<real_t*>);
     return execute<callback_type>(edsp::feature::temporal::energy<real_t*>, input);
@@ -94,6 +87,11 @@ real_t effective_duration_python(bn::ndarray& input, real_t sample_rate, real_t 
     using callback_type = decltype(edsp::feature::temporal::effective_duration<real_t*, real_t>);
     return execute<callback_type>(edsp::feature::temporal::effective_duration<real_t*, real_t>, input, sample_rate,
                                   threshold);
+}
+
+real_t leq_python(bn::ndarray& input) {
+    using callback_type = decltype(edsp::feature::temporal::leq<real_t*>);
+    return execute<callback_type>(edsp::feature::temporal::leq<real_t*>, input);
 }
 
 real_t azcr_python(bn::ndarray& input) {
@@ -124,7 +122,7 @@ void add_feature_temporal_package() {
     bp::def("azcr", azcr_python);
     bp::def("energy", energy_python);
     bp::def("power", power_python);
-    bp::def("lat", lat_python);
     bp::def("rms", rms_python);
     bp::def("rssq", rssq_python);
+    bp::def("leq", leq_python);
 }

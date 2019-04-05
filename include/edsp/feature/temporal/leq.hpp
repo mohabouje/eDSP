@@ -34,6 +34,18 @@
 namespace edsp { namespace feature { inline namespace temporal {
 
     /**
+     * @brief This algorithms computes the Equivalent sound level (Leq)  of the range [first, last)
+     * @param first Forward iterator defining the begin of the range to examine.
+     * @param last Forward iterator defining the end of the range to examine.
+     * @returns The Equivalent sound level (Leq)  of the input range.
+     */
+    template <typename ForwardIt>
+    constexpr auto leq(ForwardIt first, ForwardIt last) {
+        const auto e = power(first, last);
+        return converter::pow2db(e);
+    }
+
+    /**
      * @class leq
      * @brief This class estimates the Equivalent Continuous Sound Level over consecutive frames
      *
@@ -41,7 +53,7 @@ namespace edsp { namespace feature { inline namespace temporal {
      * value which takes into account the total sound energy over the period of time of interest
      */
     template <typename T>
-    struct leq {
+    struct continuous_leq {
         using size_type  = std::size_t;
         using value_type = T;
 
@@ -49,12 +61,12 @@ namespace edsp { namespace feature { inline namespace temporal {
          * @brief Creates a leq estimator.
          * @param number_frames Number of frames over time of interest to compute the equivalent sound level.
          */
-        inline explicit leq(size_type number_frames);
+        explicit continuous_leq(size_type number_frames) : filter(number_frames) {}
 
         /**
          * @brief Default destructor.
          */
-        ~leq() = default;
+        ~continuous_leq() = default;
 
         /**
          * @brief Estimates the equivalent sound level over time of the frame represented by the elements in the
@@ -66,22 +78,13 @@ namespace edsp { namespace feature { inline namespace temporal {
          * @return The estimated equivalent sound level in dB.
          */
         template <typename ForwardIt>
-        inline value_type extract(ForwardIt first, ForwardIt last);
+        value_type extract(ForwardIt first, ForwardIt last) {
+            return filter(leq(first, last));
+        }
 
     private:
         filter::moving_average<T> filter;
     };
-
-    template <typename T>
-    inline leq<T>::leq(leq::size_type number_frames) : filter(number_frames) {}
-
-    template <typename T>
-    template <typename ForwardIt>
-    inline typename leq<T>::value_type leq<T>::extract(ForwardIt first, ForwardIt last) {
-        const auto e           = energy(first, last);
-        const auto energy_mean = filter(e);
-        return converter::pow2db(energy_mean);
-    }
 
 }}} // namespace edsp::feature::temporal
 

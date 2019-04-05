@@ -68,3 +68,11 @@ class TestTemporalFeatureMethods(unittest.TestCase):
             generated = temporal.azcr(data)
             reference = algo.compute(data.astype(np.float32))
             self.assertAlmostEqual(generated, reference)
+
+    def test_leq(self):
+        for _, data in self.__database:
+            algo = essentia.standard.Leq()
+            generated = temporal.leq(data)
+            reference = algo.compute(data.astype(np.float32))
+            error = utility.get_change(generated, reference)
+            self.assertTrue(error < 1)
