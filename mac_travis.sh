@@ -21,6 +21,17 @@ if [ $? -ne 0 ]; then
     exit 4
 fi
 
+showinfo "Installing third-party tools"
+brew install python --framework
+pip install ipython numpy matplotlib pyyaml
+cd ${TRAVIS_BUILD_DIR}
+git clone https://github.com/MTG/essentia.git
+cd essentia
+CC=clang CXX=clang++ sudo python3 ./waf configure --mode=release --with-python
+CC=clang CXX=clang++ sudo python3 ./waf
+CC=clang CXX=clang++ sudo python3 ./waf install
+
+
 showinfo "Building the library..."
 cd ${TRAVIS_BUILD_DIR}
 mkdir -p build
@@ -36,13 +47,10 @@ fi
 showinfo "Running the tests..."
 cd ${TRAVIS_BUILD_DIR}
 sudo pip3 install --upgrade pip
-sudo pip3 install -U numpy
-sudo pip3 install -U scipy
 sudo pip3 install -U spectrum
 sudo pip3 install -U cython
 sudo pip3 install -U madmom
 sudo pip3 install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
-sudo pip3 install -U essentia
 sudo pip3 install -U librosa
 
 sudo python3 test/

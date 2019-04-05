@@ -13,6 +13,7 @@ matrix:
           - fftw
           - libsamplerate
           - libsndfile
+          - libtag
           - boost
           - boost-python3
           - python3
@@ -22,6 +23,11 @@ matrix:
           - libyaml
           - ffmpeg
           - taglib
+          - readline
+          - sqlite
+          - gdbm
+          - freetype
+          - libpng
       script:
         - cd ${TRAVIS_BUILD_DIR}
         - sh mac_travis.sh
@@ -52,11 +58,15 @@ matrix:
             - libboost-all-dev
             - python
             - python-numpy
+            - python-numpy-dev
             - python-scipy
+            - python-six
+            - python-yaml
             - libtag1-dev
             - libavcodec-dev 
             - libavformat-dev
             - libyaml-dev
+            - libchromaprint-dev 
           sources:
             - ubuntu-toolchain-r-test
             - llvm-toolchain-trusty-5.0

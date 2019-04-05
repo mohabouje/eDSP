@@ -33,6 +33,13 @@ if [ $? -ne 0 ]; then
     exit 4
 fi
 
+showinfo "Installing third-party tools"
+cd ${TRAVIS_BUILD_DIR}
+git clone https://github.com/MTG/essentia.git
+cd essentia
+sudo ./waf configure --mode=release --with-python
+sudo ./waf
+sudo ./waf install
 
 showinfo "Building the library..."
 cd ${TRAVIS_BUILD_DIR}
@@ -50,13 +57,10 @@ showinfo "Running the tests..."
 cd ${TRAVIS_BUILD_DIR}
 sudo ldconfig
 sudo pip install --upgrade pip
-sudo pip install -U numpy
-sudo pip install -U scipy
 sudo pip install -U spectrum
 sudo pip install -U cython
 sudo pip install -U madmom
 sudo pip install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
-sudo pip install -U essentia
 sudo pip install -U librosa
 
 sudo python test/
