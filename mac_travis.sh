@@ -22,8 +22,7 @@ if [ $? -ne 0 ]; then
 fi
 
 showinfo "Installing third-party tools"
-brew install python --framework
-pip install ipython numpy matplotlib pyyaml
+sudo pip3 install ipython numpy matplotlib pyyaml
 cd ${TRAVIS_BUILD_DIR}
 git clone https://github.com/MTG/essentia.git
 cd essentia
@@ -47,11 +46,13 @@ fi
 showinfo "Running the tests..."
 cd ${TRAVIS_BUILD_DIR}
 sudo pip3 install --upgrade pip
+sudo pip3 install -U numpy
+sudo pip3 install -U scipy
+sudo pip3 install -U librosa
 sudo pip3 install -U spectrum
 sudo pip3 install -U cython
 sudo pip3 install -U madmom
 sudo pip3 install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
-sudo pip3 install -U librosa
 
 sudo python3 test/
 if [ $? -ne 0 ]; then
