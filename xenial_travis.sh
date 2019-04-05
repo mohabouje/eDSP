@@ -17,8 +17,8 @@ cd Boost.NumPy
 mkdir -p build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=RELEASE
-make -j6 && make install
-mv /usr/local/lib64/libboost_numpy.so /usr/local/lib/
+make -j6 && sudo make install
+sudo mv /usr/local/lib64/libboost_numpy.so /usr/local/lib/
 
 showinfo "Exporting libraries path..."
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib64:/usr/local/lib
@@ -27,7 +27,7 @@ showinfo "Building and installing extensions"
 cd ${TRAVIS_BUILD_DIR} && cd extension
 mkdir -p build && cd build
 cmake .. && make -j8
-make install
+sudo make install
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
     exit 4
@@ -38,9 +38,9 @@ pip install -U ipython numpy matplotlib pyyaml
 cd ${TRAVIS_BUILD_DIR}
 git clone https://github.com/MTG/essentia.git
 cd essentia
-./waf configure --mode=release --with-python
-./waf
-./waf install
+sudo ./waf configure --mode=release --with-python
+sudo ./waf
+sudo ./waf install
 
 showinfo "Building the library..."
 cd ${TRAVIS_BUILD_DIR}
@@ -48,7 +48,7 @@ mkdir -p build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DUSE_BOOST_NUMPY_DEPRECATED=ON -DUSE_PYTHON3=OFF -DUSE_LIBFFTW=ON  -DBUILD_EXTENSIONS=ON -DBUILD_DOCS=OFF -DENABLE_DEBUG_INFORMATION=ON -DBUILD_EXAMPLES=ON ..
 make -j8
-make install
+sudo make install
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
     exit 4
@@ -56,17 +56,17 @@ fi
 
 showinfo "Running the tests..."
 cd ${TRAVIS_BUILD_DIR}
-ldconfig
-pip install --upgrade pip
-pip install -U numpy
-pip install -U scipy
-pip install -U librosa
-pip install -U spectrum
-pip install -U cython
-pip install -U madmom
-pip install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
+sudo ldconfig
+sudo pip install --upgrade pip
+sudo pip install -U numpy
+sudo pip install -U scipy
+sudo pip install -U librosa
+sudo pip install -U spectrum
+sudo pip install -U cython
+sudo pip install -U madmom
+sudo pip install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
 
-python test/
+sudo python test/
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"
     exit 4
