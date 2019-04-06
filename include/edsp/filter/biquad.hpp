@@ -145,36 +145,30 @@ namespace edsp { namespace filter {
 
         /**
          * @brief Updates the value of the coefficient \f$ a_0 \f$.
-         * @return value Value of the coefficient \f$ a_0 \f$.
          */
         constexpr void set_a0(T value) noexcept;
         /**
          * @brief Updates the value of the coefficient \f$ a_1 \f$.
-         * @return value Value of the coefficient \f$ a_1 \f$.
          */
         constexpr void set_a1(T value) noexcept;
 
         /**
          * @brief Updates the value of the coefficient \f$ a_2 \f$.
-         * @return value Value of the coefficient \f$ a_2 \f$.
          */
         constexpr void set_a2(T value) noexcept;
 
         /**
          * @brief Updates the value of the coefficient \f$ b_0 \f$.
-         * @return value Value of the coefficient \f$ b_0 \f$.
          */
         constexpr void set_b0(T value) noexcept;
 
         /**
          * @brief Updates the value of the coefficient \f$ b_1 \f$.
-         * @return value Value of the coefficient \f$ b_1 \f$.
          */
         constexpr void set_b1(T value) noexcept;
 
         /**
          * @brief Updates the value of the coefficient \f$ b_2 \f$.
-         * @return value Value of the coefficient \f$ b_2 \f$.
          */
         constexpr void set_b2(T value) noexcept;
 

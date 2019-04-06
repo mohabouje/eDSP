@@ -404,7 +404,6 @@ namespace edsp { inline namespace types {
         /**
         *  @brief Inserts an object at the end of the %ring_buffer.
         *  @param arg  Arguments.
-        *  @return  An iterator that points to the inserted data.
         *
         *  This function will insert an object of type T constructed
         *  with T(std::forward<Args>(args)...) before the specified location.

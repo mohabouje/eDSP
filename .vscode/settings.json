@@ -106,11 +106,16 @@
     "c-cpp-flylint.cppcheck.enable": false,
     "c-cpp-flylint.flexelint.enable": false,
     "c-cpp-flylint.clang.enable": true,
+    "c-cpp-flylint.clang.warnings": [
+        "all",
+        "extra",
+    ],
     "c-cpp-flylint.clang.standard": [
         "c++14",
         "c++17"
     ],
     "c-cpp-flylint.clang.extraArgs": [
+        "-Wno-unused-macros",
         "-Wno-c++98-compat",
     ],
     "c-cpp-flylint.clang.includePaths": [

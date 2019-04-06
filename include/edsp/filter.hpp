@@ -164,7 +164,7 @@ namespace edsp { namespace filter {
      * @param a_last End of the range elements re
      * presenting the IIR/AR filter coefficients.
      * @param d_first Output iterator defining the beginning of the destination range.
-     * @param N Number of evaluation points.
+     * @param K Number of evaluation points.
      */
     template <typename InputIt, typename OutputIt, typename Numeric>
     constexpr void freq(InputIt b_first, InputIt b_last, InputIt a_first, InputIt a_last, OutputIt d_first, Numeric K) {

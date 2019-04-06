@@ -23,9 +23,9 @@
 #ifndef EDSP_META_ENSURE_H
 #define EDSP_META_ENSURE_H
 
-#include <edsp/core/logger.hpp>
 #include <edsp/meta/data.hpp>
 #include <edsp/meta/unused.hpp>
+#include <edsp/core/logger.hpp>
 #include <cassert>
 #include <string>
 
@@ -36,11 +36,11 @@ namespace edsp { namespace meta {
         assert(condition);
     }
 
-    constexpr void ensure(bool condition, const edsp::string_view msg) {
+    constexpr void ensure(bool condition, const edsp::string_view& msg) {
         if (!condition) {
             eCritical() << msg;
         }
-        assert(condition && data(msg));
+        assert(condition && data(msg.data()));
     }
 
 }} // namespace edsp::meta

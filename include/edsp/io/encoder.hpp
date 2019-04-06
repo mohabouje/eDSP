@@ -90,7 +90,6 @@ namespace edsp { namespace io {
          * @brief Attempts to write data in the audio file from the elements in the range [first, last)
          * @param first Input iterator defining the beginning of the input range.
          * @param last Input iterator defining the ending of the input range.
-         * @return Number of samples read with success.
          */
         template <typename InputIt>
         void write(InputIt first, InputIt last) {

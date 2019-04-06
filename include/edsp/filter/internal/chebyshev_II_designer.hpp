@@ -48,7 +48,7 @@ namespace edsp { namespace filter {
                 const auto sinh_v0 = -std::sinh(v0);
                 const auto cosh_v0 = std::cosh(v0);
                 const auto fn      = constants<T>::pi / static_cast<T>(2 * num_poles);
-                for (std::int32_t k = 1, i = num_poles / 2; --i >= 0; k += 2) {
+                for (std::int64_t k = 1, i = static_cast<std::int64_t>(num_poles / 2); --i >= 0; k += 2) {
                     const auto a  = sinh_v0 * std::cos((k - static_cast<std::int32_t>(num_poles)) * fn);
                     const auto b  = cosh_v0 * std::sin((k - static_cast<std::int32_t>(num_poles)) * fn);
                     const auto d2 = math::square(a) + math::square(b);

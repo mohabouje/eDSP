@@ -151,7 +151,6 @@ namespace edsp { namespace filter {
          * @param first Input iterator defining the beginning of the input range.
          * @param last Input iterator defining the ending of the input range.
          * @param d_first Output iterator defining the beginning of the destination range.
-         * @return
          */
         template <typename InputIt, typename OutputIt>
         constexpr void filter(InputIt first, InputIt last, OutputIt d_first);

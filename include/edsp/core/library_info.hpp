@@ -43,6 +43,7 @@ namespace edsp { inline namespace core {
                 return stream << "PFFFT";
             case fft_lib::accelerate:
                 return stream << "Apple Accelerate Framework";
+            case fft_lib::unknown:
             default:
                 return stream << edsp::red << "not found" << edsp::endc;
         }
@@ -54,6 +55,7 @@ namespace edsp { inline namespace core {
                 return stream << "Audio File Library";
             case codec_lib::sndfile:
                 return stream << "Lib SndFile";
+            case codec_lib::unknown:
             default:
                 return stream << edsp::red << "not found" << edsp::endc;
         }
@@ -65,6 +67,7 @@ namespace edsp { inline namespace core {
                 return stream << "libsample_rate";
             case resample_lib::resample:
                 return stream << "libresample";
+            case resample_lib::unknown:
             default:
                 return stream << edsp::red << "not found" << edsp::endc;
         }
