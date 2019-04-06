@@ -2,7 +2,7 @@ coverage:
   ignore:
     - include/edsp/meta/.*
     - include/edsp/thirdparty/.*
-    - include/bindings/*
+    - bindings/*
     - examples/.*
     - test/.*
     - benchmark/.*
