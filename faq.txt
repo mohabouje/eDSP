@@ -1,0 +1,7 @@
+Several python installation in MAC OS X while installing essentia?
+
+https://stackoverflow.com/questions/7901373/configuring-python-to-use-additional-locations-for-site-packages
+
+Link the site-packages of the user installation with the system one:
+echo "/usr/local/lib/python3.7/site-packages/" >  /Library/Frameworks/Python.framework/Versions/3.7/lib/python3.7/site-packages/usrlocal.pth
+echo "/usr/local/lib/python2.7/site-packages/" >  /Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/site-packages/usrlocal.pth

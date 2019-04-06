@@ -14,12 +14,8 @@ export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 showinfo "Installing third-party tools"
 pip3 install -U ipython numpy matplotlib pyyaml
-cd ${TRAVIS_BUILD_DIR}
-git clone https://github.com/MTG/essentia.git
-cd essentia
-python3 ./waf configure --mode=release --with-python
-python3 ./waf
-python3 ./waf install
+brew tap MTG/essentia
+brew install essentia --HEAD
 
 
 showinfo "Building the library..."
