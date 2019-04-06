@@ -13,7 +13,6 @@ option(ENABLE_DEBUG_INFORMATION "Enable debug information, useful for profiling 
 option(BUILD_C_BINDINGS "Enable the compilation of the bindings for C" ON)
 option(BUILD_PYTHON_BINDINGS "Enable the compilation of the bindings for Python" ON)
 option(BUILD_DOCS "Enable to build docs" OFF)
-option(BUILD_EXTENSIONS "Enable the option to build the extension libraries" ON)
 option(BUILD_EXAMPLES "Enable the option to build the examples" ON)
 option(BUILD_BENCHMARK "Enable the option to build the benchmarks" OFF)
 
@@ -169,13 +168,6 @@ write_basic_package_version_file(
 #         "${CMAKE_CURRENT_BINARY_DIR}/${EDSP_LIBRARY}-config-version.cmake"
 #         DESTINATION "lib/cmake/${EDSP_LIBRARY}")
 # install(DIRECTORY include/ DESTINATION include)
-
-if (BUILD_EXTENSIONS)
-    add_subdirectory(extension)
-    target_link_libraries (${EDSP_LIBRARY} INTERFACE ${EDSP_EXTENSION_LIBRARIES})
-    target_include_directories (${EDSP_LIBRARY} INTERFACE ${EDSP_EXTENSION_INCLUDE_DIRS})
-endif(BUILD_EXTENSIONS)
-
 
 if (BUILD_DOCS)
     find_package(Doxygen REQUIRED dot mscgen dia)
