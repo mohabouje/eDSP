@@ -13,9 +13,14 @@ allert () { echo -e "${RED}$1${NC}"; }
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 showinfo "Installing third-party tools"
+# TODO: replace by brew install
 pip3 install -U ipython numpy matplotlib pyyaml
-brew tap MTG/essentia
-brew install essentia --HEAD
+cd ${TRAVIS_BUILD_DIR}
+git clone https://github.com/MTG/essentia.git
+cd essentia
+python3 ./waf configure --mode=release --with-python
+python3 ./waf
+python3 ./waf install
 
 
 showinfo "Building the library..."
