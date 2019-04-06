@@ -3,6 +3,8 @@
         {
             "name": "Mac",
             "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/include",
                 "${workspaceFolder}/**",
                 "/usr/local/include"
             ],
@@ -20,6 +22,8 @@
         {
             "name": "Linux",
             "includePath": [
+                "${workspaceFolder}",
+                "${workspaceFolder}/include",
                 "${workspaceFolder}/**",
                 "/usr/local/include"
             ],
