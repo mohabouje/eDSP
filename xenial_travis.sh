@@ -23,16 +23,6 @@ sudo mv /usr/local/lib64/libboost_numpy.so /usr/local/lib/
 showinfo "Exporting libraries path..."
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib64:/usr/local/lib
 
-showinfo "Building and installing extensions"
-cd ${TRAVIS_BUILD_DIR} && cd extension
-mkdir -p build && cd build
-cmake .. && make -j8
-sudo make install
-if [ $? -ne 0 ]; then
-    error "Error: there are some tests that failed!"
-    exit 4
-fi
-
 showinfo "Installing third-party tools"
 pip install -U ipython numpy matplotlib pyyaml
 cd ${TRAVIS_BUILD_DIR}

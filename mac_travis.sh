@@ -12,17 +12,6 @@ allert () { echo -e "${RED}$1${NC}"; }
 
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
-showinfo "Building and installing extensions"
-cd ${TRAVIS_BUILD_DIR} && cd extension
-mkdir -p build && cd build
-cmake .. && make -j8
-make install
-cd .. && cd ..
-if [ $? -ne 0 ]; then
-    error "Error: there are some tests that failed!"
-    exit 4
-fi
-
 showinfo "Installing third-party tools"
 pip3 install -U ipython numpy matplotlib pyyaml
 cd ${TRAVIS_BUILD_DIR}

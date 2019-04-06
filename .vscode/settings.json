@@ -1,13 +1,11 @@
 {
     "files.eol": "\n",
-    "[cpp]": {
-        "editor.quickSuggestions": true
-    },
-    "[c]": {
-        "editor.quickSuggestions": true
-    },
     "debug.inlineValues": true,
     "editor.formatOnSave": true,
+    "editor.quickSuggestions": true,
+    "editor.acceptSuggestionOnEnter": "on",
+    "editor.suggest.localityBonus": true,
+    "editor.wordBasedSuggestions": true,
     "python.unitTest.unittestArgs": [
         "-v",
         "-s",
@@ -105,20 +103,17 @@
         "fstream": "cpp"
     },
     "C_Cpp.configurationWarnings": "Disabled",
-    "clang.cxxflags": [
-        "-std=c++14"
+    "c-cpp-flylint.cppcheck.enable": false,
+    "c-cpp-flylint.flexelint.enable": false,
+    "c-cpp-flylint.clang.enable": true,
+    "c-cpp-flylint.clang.standard": [
+        "c++14",
+        "c++17"
     ],
-    "clangTidy.lintLanguages": [
-        "c",
-        "cpp"
-    ],
-    "clangTidy.extraCompilerArgs": [
-        "-Weverything",
+    "c-cpp-flylint.clang.extraArgs": [
         "-Wno-c++98-compat",
-        "-Wno-unused-macros"
     ],
-    "clangTidy.systemIncludePath": [
-        "${workspaceFolder}/**",
-        "${workspaceFolder}/include/"
+    "c-cpp-flylint.clang.includePaths": [
+        "${workspaceFolder}/include/",
     ]
 }

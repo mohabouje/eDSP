@@ -91,14 +91,6 @@
 #    error "eDSP does not support this standard"
 #endif
 
-#ifdef __cplusplus
-#    define EXTERN_C_START extern "C" {
-#    define EXTERN_C_END }
-#else
-#    define EXTERN_C_START
-#    define EXTERN_C_END
-#endif
-
 #if defined(__clang__) || defined(__GNUC__)
 #    define E_LIKELY(x) __builtin_expect(!!(x), 1)
 #    define E_UNLIKELY(x) __builtin_expect(!!(x), 0)

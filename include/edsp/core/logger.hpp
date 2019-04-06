@@ -23,13 +23,12 @@
 #ifndef EDSP_LOGGER_HPP
 #define EDSP_LOGGER_HPP
 
-#include <edsp/thirdparty/spdlog/spdlog.h>
-#include <edsp/thirdparty/spdlog/sinks/stdout_color_sinks.h>
-#include <edsp/thirdparty/spdlog/sinks/basic_file_sink.h>
 #include <edsp/thirdparty/termcolor/termcolor.hpp>
 #include <edsp/types/string_view.hpp>
+#include <edsp/meta/unused.hpp>
 #include <type_traits>
 #include <sstream>
+#include <functional>
 
 namespace edsp { inline namespace core {
 
@@ -187,8 +186,8 @@ namespace edsp { inline namespace core {
          * @note Avoids duplications of the initialization code in every place where the header is included.
          * @return Reference to the global level used in all spdlog-loggers
          */
-        static spdlog::level::level_enum& global_level() {
-            static spdlog::level::level_enum LEVEL = spdlog::level::trace;
+        static levels& global_level() {
+            static levels LEVEL = levels::trace;
             return LEVEL;
         }
 
@@ -218,7 +217,8 @@ namespace edsp { inline namespace core {
         friend struct internal::logger_impl;
         logger::levels type_{levels::info};
         std::stringstream msg_;
-        std::shared_ptr<spdlog::logger> logger_{nullptr};
+        std::string name_;
+        std::string file_;
     };
 
     inline namespace internal {
@@ -419,60 +419,16 @@ namespace edsp { inline namespace core {
     logger::logger(const edsp::string_view& name, const edsp::string_view& file, logger::levels message_type) :
         type_(message_type),
         msg_(),
-        logger_(spdlog::get(name.data())) {
-        if (!logger_) {
-            logger_ = spdlog::basic_logger_mt(name.data(), file.data());
-        }
-    }
+        name_(name),
+        file_(file) {}
 
-    logger::logger(const edsp::string_view& name, logger::levels message_type) :
-        type_(message_type),
-        msg_(),
-        logger_(spdlog::get(name.data())) {
-        ;
-        if (!logger_) {
-            logger_ = spdlog::stdout_color_mt(name.data());
-        }
-    }
+    logger::logger(const edsp::string_view& name, logger::levels message_type) : logger(name, "", message_type) {}
 
-    logger::logger(logger::levels message_type) : type_(message_type), msg_() {
-        const auto& name = global_name();
-        logger_          = spdlog::get(name);
-        if (!logger_) {
-            const auto& path = global_path();
-            if (path.empty()) {
-                logger_ = spdlog::stdout_color_mt(name);
-            } else {
-                logger_ = spdlog::basic_logger_mt(name, path);
-            }
-        }
-        set_level(default_level());
-    }
+    logger::logger(logger::levels message_type) : logger(global_name(), "", message_type) {}
 
     logger::~logger() {
         edsp::endc(*this);
-        switch (type_) {
-            case levels::trace:
-                logger_->trace(msg_.str());
-                break;
-            case levels::debug:
-                logger_->debug(msg_.str());
-                break;
-            case levels::info:
-                logger_->info(msg_.str());
-                break;
-            case levels::warning:
-                logger_->warn(msg_.str());
-                break;
-            case levels::critical:
-                logger_->critical(msg_.str());
-                break;
-            case levels::error:
-                logger_->error(msg_.str());
-                break;
-            default:
-                break;
-        }
+        std::cout << msg_.str();
     }
 
     logger& logger::space() {
@@ -481,98 +437,24 @@ namespace edsp { inline namespace core {
     }
 
     logger::levels logger::default_level() {
-        switch (global_level()) {
-            case spdlog::level::trace:
-                return levels::trace;
-            case spdlog::level::debug:
-                return levels::debug;
-            case spdlog::level::info:
-                return levels::info;
-            case spdlog::level::warn:
-                return levels::warning;
-            case spdlog::level::critical:
-                return levels::critical;
-            case spdlog::level::err:
-                return levels::error;
-            default:
-                return levels::off;
-        }
+        return global_level();
     }
 
     void logger::set_default_level(logger::levels type) {
         auto& LEVEL = global_level();
-        switch (type) {
-            case levels::trace:
-                LEVEL = spdlog::level::trace;
-                break;
-            case levels::debug:
-                LEVEL = spdlog::level::debug;
-                break;
-            case levels::info:
-                LEVEL = spdlog::level::info;
-                break;
-            case levels::warning:
-                LEVEL = spdlog::level::warn;
-                break;
-            case levels::critical:
-                LEVEL = spdlog::level::critical;
-                break;
-            case levels::error:
-                LEVEL = spdlog::level::err;
-                break;
-            default:
-                LEVEL = spdlog::level::off;
-                break;
-        }
+        LEVEL       = type;
     }
 
     void logger::set_level(logger::levels type) {
-        switch (type) {
-            case levels::trace:
-                logger_->set_level(spdlog::level::trace);
-                break;
-            case levels::debug:
-                logger_->set_level(spdlog::level::debug);
-                break;
-            case levels::info:
-                logger_->set_level(spdlog::level::info);
-                break;
-            case levels::warning:
-                logger_->set_level(spdlog::level::warn);
-                break;
-            case levels::critical:
-                logger_->set_level(spdlog::level::critical);
-                break;
-            case levels::error:
-                logger_->set_level(spdlog::level::err);
-                break;
-            default:
-                logger_->set_level(spdlog::level::off);
-                break;
-        }
+        type_ = type;
     }
 
     logger::levels logger::level() {
-        switch (logger_->level()) {
-            case spdlog::level::trace:
-                return levels::trace;
-            case spdlog::level::debug:
-                return levels::debug;
-            case spdlog::level::info:
-                return levels::info;
-            case spdlog::level::warn:
-                return levels::warning;
-            case spdlog::level::critical:
-                return levels::critical;
-            case spdlog::level::err:
-                return levels::error;
-            default:
-                return levels::off;
-        }
+        return type_;
     }
 
     const std::string& logger::name() const {
-        return logger_->name();
+        return name_;
     }
 
     void logger::set_default_path(const std::string& path) {
@@ -667,7 +549,7 @@ namespace edsp { inline namespace core {
     }
 
     void logger::set_pattern(const std::string& pattern) {
-        spdlog::set_pattern(pattern);
+        meta::unused(pattern, "to be implemented");
     }
 
 }} // namespace edsp::core
