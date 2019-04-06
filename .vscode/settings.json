@@ -119,6 +119,7 @@
         "-Wno-c++98-compat",
     ],
     "c-cpp-flylint.clang.includePaths": [
-        "${workspaceFolder}/include/",
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/include/**",
     ]
 }
