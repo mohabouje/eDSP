@@ -13,6 +13,7 @@ allert () { echo -e "${RED}$1${NC}"; }
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 showinfo "Installing third-party tools"
+# TODO: replace by brew install
 pip3 install -U ipython numpy matplotlib pyyaml
 cd ${TRAVIS_BUILD_DIR}
 git clone https://github.com/MTG/essentia.git
