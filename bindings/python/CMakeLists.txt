@@ -77,7 +77,9 @@ set(SRC
         src/string.cpp
         src/oscillator.cpp
         src/auditory.cpp
-        src/feature_temporal.cpp)
+        src/feature_temporal.cpp
+        src/feature_spectral.cpp
+        src/feature_statistics.cpp)
 
 set(PEDSP_LIBRARY pedsp)
 add_library(${PEDSP_LIBRARY} SHARED ${HEADER} ${SRC})

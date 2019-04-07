@@ -48,6 +48,7 @@ namespace edsp { namespace feature { inline namespace spectral {
      */
     template <typename ForwardIt>
     constexpr auto spectral_irregularity(ForwardIt first, ForwardIt last) {
+        // TODO: implement the irregularity function outside this.
         using value_type       = typename std::iterator_traits<ForwardIt>::value_type;
         value_type square_diff = 0, square_ampl = 0;
         for (auto until = (last - 1); first != until; ++first) {

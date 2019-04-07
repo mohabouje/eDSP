@@ -47,8 +47,8 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @see statistics::centroid
      */
     template <typename ForwardIt>
-    constexpr auto spectral_centroid(ForwardIt first, ForwardIt last, ForwardIt first2) {
-        return statistics::centroid(first, last, first2);
+    constexpr auto spectral_centroid(ForwardIt first, ForwardIt last) {
+        return statistics::centroid(first, last);
     }
 
 }}} // namespace edsp::feature::spectral

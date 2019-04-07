@@ -66,7 +66,7 @@ namespace edsp { namespace feature { inline namespace statistics {
      * @see mean
      */
     template <typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> centroid(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
+    constexpr meta::value_type_t<ForwardIt> weighted_centroid(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
         using input_t       = meta::value_type_t<ForwardIt>;
         auto weighted_sum   = static_cast<input_t>(0);
         auto unweighted_sum = static_cast<input_t>(0);

@@ -40,7 +40,7 @@ namespace edsp { namespace feature { inline namespace spectral {
      */
     template <typename ForwardIt>
     constexpr auto spectral_kurtosis(ForwardIt first, ForwardIt last) {
-        return statistics::kurtosis(first, last);
+        return edsp::statistics::kurtosis(first, last);
     }
 
 }}} // namespace edsp::feature::spectral

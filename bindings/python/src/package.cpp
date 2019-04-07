@@ -44,4 +44,6 @@ BOOST_PYTHON_MODULE(MODULE_NAME) {
     add_oscillator_package();
     add_auditory_package();
     add_feature_temporal_package();
+    add_feature_spectral_package();
+    add_feature_statistics_package();
 }

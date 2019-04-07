@@ -21,5 +21,7 @@
 #define EDSP_PYTHON_BINDINGS_FEATURE_HPP
 
 void add_feature_temporal_package();
+void add_feature_spectral_package();
+void add_feature_statistics_package();
 
 #endif /* EDSP_PYTHON_BINDINGS_FEATURE_HPP */

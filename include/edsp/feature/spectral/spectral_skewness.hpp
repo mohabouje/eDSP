@@ -40,7 +40,7 @@ namespace edsp { namespace feature { inline namespace spectral {
      */
     template <typename ForwardIt>
     constexpr auto spectral_skewness(ForwardIt first, ForwardIt last) {
-        return statistics::skewness(first, last);
+        return edsp::statistics::skewness(first, last);
     }
 
 }}} // namespace edsp::feature::spectral

@@ -47,13 +47,12 @@ namespace edsp { namespace feature { inline namespace spectral {
      *
      * @param first1 Forward iterator defining the begin of the magnitude spectrum.
      * @param last2 Forward iterator defining the end of the magnitude spectrum.
-     * @param first2 Forward iterator defining the begin of the center frequencies range.
      * @brief The estimated spectral spread
      * @see http://www.nyu.edu/classes/bello/MIR_files/timbre.pdf
      */
     template <typename ForwardIt>
-    constexpr auto spectral_spread(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
-        return statistics::spread(first1, last1, first2);
+    constexpr auto spectral_spread(ForwardIt first1, ForwardIt last1) {
+        return statistics::spread(first1, last1);
     }
 
 }}} // namespace edsp::feature::spectral
