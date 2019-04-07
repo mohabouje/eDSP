@@ -24,6 +24,8 @@
 #define EDSP_ROLLOFF_HPP
 
 #include <edsp/feature/temporal/energy.hpp>
+#include <iostream>
+#include <edsp/math/numeric.hpp>
 
 namespace edsp { namespace feature { inline namespace statistics {
 
@@ -40,15 +42,16 @@ namespace edsp { namespace feature { inline namespace statistics {
      */
     template <typename ForwardIt, typename Floating>
     constexpr auto rolloff(ForwardIt first, ForwardIt last, Floating percentage) {
-        using input_t     = typename std::iterator_traits<ForwardIt>::value_type;
+        using value_type  = typename std::iterator_traits<ForwardIt>::value_type;
         const auto energy = feature::energy(first, last);
+        const auto size   = static_cast<value_type>(std::distance(first, last));
         const auto limit  = percentage * energy;
-        for (input_t acc_energy = 0; first != last; ++first) {
-            acc_energy += (*first) * (*first);
-            if (acc_energy >= limit)
-                return first;
+
+        auto position = first;
+        for (value_type acc_energy = 0; position != last and acc_energy <= limit; ++position) {
+            acc_energy += math::square(*position);
         }
-        return last;
+        return static_cast<value_type>(std::distance(first, position) - 1) / size;
     }
 
 }}} // namespace edsp::feature::statistics

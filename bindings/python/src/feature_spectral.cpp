@@ -78,10 +78,7 @@ auto spectral_entropy_python(bn::ndarray& spectrum) {
 
 auto spectral_rolloff_python(bn::ndarray& spectrum, real_t percentage) {
     using callback = decltype(edsp::feature::spectral::spectral_rolloff<real_t*, real_t>);
-    const auto last =
-        execute<callback>(edsp::feature::spectral::spectral_rolloff<real_t*, real_t>, spectrum, percentage);
-    const auto first = reinterpret_cast<real_t*>(spectrum.get_data());
-    return std::distance(first, last);
+    return execute<callback>(edsp::feature::spectral::spectral_rolloff<real_t*, real_t>, spectrum, percentage);
 }
 
 auto spectral_flatness_python(bn::ndarray& spectrum) {
@@ -99,19 +96,19 @@ auto spectral_decrease_python(bn::ndarray& spectrum) {
     return execute<callback>(edsp::feature::spectral::spectral_decrease<real_t*>, spectrum);
 }
 
-auto spectral_centroid_python(bn::ndarray& first) {
+auto spectral_centroid_python(bn::ndarray& spectrum, bn::ndarray& weights) {
     using callback = decltype(edsp::feature::spectral::spectral_centroid<real_t*>);
-    return execute<callback>(edsp::feature::spectral::spectral_centroid<real_t*>, first);
+    return execute<callback>(edsp::feature::spectral::spectral_centroid<real_t*>, spectrum, weights);
+}
+
+auto spectral_spread_python(bn::ndarray& spectrum, bn::ndarray& weights) {
+    using callback = decltype(edsp::feature::spectral::spectral_spread<real_t*>);
+    return execute<callback>(edsp::feature::spectral::spectral_spread<real_t*>, spectrum, weights);
 }
 
 auto spectral_variation_python(bn::ndarray& first, bn::ndarray& second) {
     using callback = decltype(edsp::feature::spectral::spectral_variation<real_t*>);
     return execute<callback>(edsp::feature::spectral::spectral_variation<real_t*>, first, second);
-}
-
-auto spectral_spread_python(bn::ndarray& first) {
-    using callback = decltype(edsp::feature::spectral::spectral_spread<real_t*>);
-    return execute<callback>(edsp::feature::spectral::spectral_spread<real_t*>, first);
 }
 
 auto spectral_flux_python(bn::ndarray& first, bn::ndarray& second) {

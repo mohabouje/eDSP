@@ -51,8 +51,8 @@ namespace edsp { namespace feature { inline namespace spectral {
      * @see http://www.nyu.edu/classes/bello/MIR_files/timbre.pdf
      */
     template <typename ForwardIt>
-    constexpr auto spectral_spread(ForwardIt first1, ForwardIt last1) {
-        return statistics::spread(first1, last1);
+    constexpr auto spectral_spread(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
+        return statistics::weighted_spread(first1, last1, first2);
     }
 
 }}} // namespace edsp::feature::spectral

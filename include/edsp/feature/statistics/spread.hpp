@@ -63,6 +63,26 @@ namespace edsp { namespace feature { inline namespace statistics {
         return static_cast<value_type>(std::sqrt(weighted_sum / unweighted_sum));
     }
 
+    /**
+     * @param first1 Forward iterator defining the begin of the range to examine.
+     * @param last1 Forward iterator defining the end of the range to examine.
+     * @param first2 Forward iterator defining the beginning of the range representing the weights, \f$f(i)\f$.
+     * @returns The spread value of the input range.
+     */
+    template <typename ForwardIt>
+    constexpr meta::value_type_t<ForwardIt> weighted_spread(ForwardIt first1, ForwardIt last1, ForwardIt first2) {
+        using value_type    = typename std::iterator_traits<ForwardIt>::value_type;
+        const auto centroid = statistics::weighted_centroid(first1, last1, first2);
+        auto weighted_sum   = static_cast<value_type>(0);
+        auto unweighted_sum = static_cast<value_type>(0);
+        for (; first1 != last1; ++first1, ++first2) {
+            const auto diff = *first2 - centroid;
+            weighted_sum += (diff * diff) * (*first1);
+            unweighted_sum += *first1;
+        }
+        return static_cast<value_type>(std::sqrt(weighted_sum / unweighted_sum));
+    }
+
 }}} // namespace edsp::feature::statistics
 
 #endif //EDSP_SPREAD_HPP

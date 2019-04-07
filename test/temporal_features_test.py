@@ -5,6 +5,7 @@ import essentia.standard
 import pedsp.temporal as temporal
 import numpy as np
 import utility
+import pyAudioAnalysis.audioFeatureExtraction as extractor
 
 class TestTemporalFeatureMethods(unittest.TestCase):
 
@@ -48,25 +49,20 @@ class TestTemporalFeatureMethods(unittest.TestCase):
 
     def test_energy(self):
         for _, data in self.__database:
-            algo = essentia.standard.Energy()
             generated = temporal.energy(data)
-            reference = algo.compute(data.astype(np.float32))
-            error = utility.get_change(generated, reference)
-            self.assertTrue(error < 1)
+            reference = len(data) * extractor.stEnergy(data)
+            self.assertAlmostEqual(generated, reference)
 
     def test_power(self):
         for _, data in self.__database:
-            algo = essentia.standard.InstantPower()
             generated = temporal.power(data)
-            reference = algo.compute(data.astype(np.float32))
-            error = utility.get_change(generated, reference)
-            self.assertTrue(error < 1)
+            reference = extractor.stEnergy(data)
+            self.assertAlmostEqual(generated, reference)
 
     def test_azcr(self):
         for _, data in self.__database:
-            algo = essentia.standard.ZeroCrossingRate()
             generated = temporal.azcr(data)
-            reference = algo.compute(data.astype(np.float32))
+            reference = extractor.stZCR(data)
             self.assertAlmostEqual(generated, reference)
 
     def test_leq(self):

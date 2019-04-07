@@ -43,7 +43,7 @@ auto execute(Functor&& f, bn::ndarray& input, Args... arg) {
 }
 
 template <class Functor>
-auto execute(Functor&& f, bn::ndarray& first, bn::ndarray& second) {
+auto execute_two_inputs(Functor&& f, bn::ndarray& first, bn::ndarray& second) {
     if (first.get_nd() != 1 and second.get_nd() != 1) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
@@ -53,31 +53,29 @@ auto execute(Functor&& f, bn::ndarray& first, bn::ndarray& second) {
     return f(first_data, first_data + size, second_data);
 }
 
-auto crest_python(bn::ndarray& spectrum) {
+auto crest_python(bn::ndarray& data) {
     using callback = decltype(edsp::feature::statistics::crest<real_t*>);
-    return execute<callback>(edsp::feature::statistics::crest<real_t*>, spectrum);
+    return execute<callback>(edsp::feature::statistics::crest<real_t*>, data);
 }
 
-auto entropy_python(bn::ndarray& spectrum) {
+auto entropy_python(bn::ndarray& data) {
     using callback = decltype(edsp::feature::statistics::entropy<real_t*>);
-    return execute<callback>(edsp::feature::statistics::entropy<real_t*>, spectrum);
+    return execute<callback>(edsp::feature::statistics::entropy<real_t*>, data);
 }
 
-auto rolloff_python(bn::ndarray& spectrum, real_t percentage) {
-    using callback   = decltype(edsp::feature::statistics::rolloff<real_t*, real_t>);
-    const auto last  = execute<callback>(edsp::feature::statistics::rolloff<real_t*, real_t>, spectrum, percentage);
-    const auto first = reinterpret_cast<real_t*>(spectrum.get_data());
-    return std::distance(first, last);
+auto rolloff_python(bn::ndarray& data, real_t percentage) {
+    using callback = decltype(edsp::feature::statistics::rolloff<real_t*, real_t>);
+    return execute<callback>(edsp::feature::statistics::rolloff<real_t*, real_t>, data, percentage);
 }
 
-auto flatness_python(bn::ndarray& spectrum) {
+auto flatness_python(bn::ndarray& data) {
     using callback = decltype(edsp::feature::statistics::flatness<real_t*>);
-    return execute<callback>(edsp::feature::statistics::flatness<real_t*>, spectrum);
+    return execute<callback>(edsp::feature::statistics::flatness<real_t*>, data);
 }
 
-auto decrease_python(bn::ndarray& spectrum) {
+auto decrease_python(bn::ndarray& data) {
     using callback = decltype(edsp::feature::statistics::decrease<real_t*>);
-    return execute<callback>(edsp::feature::statistics::decrease<real_t*>, spectrum);
+    return execute<callback>(edsp::feature::statistics::decrease<real_t*>, data);
 }
 
 auto centroid_python(bn::ndarray& first) {
@@ -92,17 +90,23 @@ auto spread_python(bn::ndarray& first) {
 
 auto weighted_centroid_python(bn::ndarray& first, bn::ndarray& second) {
     using callback = decltype(edsp::feature::statistics::weighted_centroid<real_t*>);
-    return execute<callback>(edsp::feature::statistics::weighted_centroid<real_t*>, first, second);
+    return execute_two_inputs<callback>(edsp::feature::statistics::weighted_centroid<real_t*>, first, second);
+}
+
+auto weighted_spread_python(bn::ndarray& first, bn::ndarray& second) {
+    using callback = decltype(edsp::feature::statistics::weighted_spread<real_t*>);
+    return execute_two_inputs<callback>(edsp::feature::statistics::weighted_spread<real_t*>, first, second);
 }
 
 auto flux_python(bn::ndarray& first, bn::ndarray& second) {
     using callback = decltype(edsp::feature::statistics::flux<edsp::distances::euclidean, real_t*>);
-    return execute<callback>(edsp::feature::statistics::flux<edsp::distances::euclidean, real_t*>, first, second);
+    return execute_two_inputs<callback>(edsp::feature::statistics::flux<edsp::distances::euclidean, real_t*>, first,
+                                        second);
 }
 
 auto slope_python(bn::ndarray& first, bn::ndarray& second) {
     using callback = decltype(edsp::feature::statistics::slope<real_t*>);
-    return execute<callback>(edsp::feature::statistics::slope<real_t*>, first, second);
+    return execute_two_inputs<callback>(edsp::feature::statistics::slope<real_t*>, first, second);
 }
 
 void add_feature_statistics_package() {
@@ -121,4 +125,5 @@ void add_feature_statistics_package() {
     bp::def("rolloff", rolloff_python);
     bp::def("slope", slope_python);
     bp::def("spread", spread_python);
+    bp::def("weighted_spread", weighted_spread_python);
 }
