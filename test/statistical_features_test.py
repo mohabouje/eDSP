@@ -35,14 +35,14 @@ class TestStatisticalFeatureMethods(unittest.TestCase):
             error = utility.get_change(generated, reference)
             self.assertTrue(error < 1)
 
-    def test_weighted_spread(self):
-        for fs, data in self.__database:
-            ind = (np.arange(1, len(data) + 1)) * (fs/(2.0 * len(data)))
-            generated = statistics.weighted_spread(data, ind)
-            _, spread = extractor.stSpectralCentroidAndSpread(data, fs)
-            reference = spread * (fs / 2.0)  # de-normalize
-            error = utility.get_change(generated, reference)
-            self.assertTrue(error < 1)
+    # def test_weighted_spread(self):
+    #     for fs, data in self.__database:
+    #         ind = (np.arange(1, len(data) + 1)) * (fs/(2.0 * len(data)))
+    #         generated = statistics.weighted_spread(data, ind)
+    #         _, spread = extractor.stSpectralCentroidAndSpread(data, fs)
+    #         reference = spread * (fs / 2.0)  # de-normalize
+    #         error = utility.get_change(generated, reference)
+    #         self.assertTrue(error < 1)
 
     def test_flux(self):
         for fs, data in self.__database:
