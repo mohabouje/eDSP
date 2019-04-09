@@ -22,6 +22,17 @@ class TestStatisticalFeatureMethods(unittest.TestCase):
         self.__database = utility.read_audio_test_files(self.__number_inputs, self.__minimum_size, self.__maximum_size)
         super(TestStatisticalFeatureMethods, self).__init__(*args, **kwargs)
 
+    @staticmethod
+    def __compute_flatness(data):
+        geometricMean = scipy.stats.mstats.gmean(data)
+        arithmeticMean = data.mean()
+        return geometricMean / arithmeticMean
+
+    @staticmethod
+    def __compute_crest(data):
+        absData = abs(data)
+        return absData[np.argmax(absData)] / np.sum(absData)
+
     def test_centroid(self):
         for fs, data in self.__database:
             generated = statistics.centroid(data)
@@ -37,14 +48,14 @@ class TestStatisticalFeatureMethods(unittest.TestCase):
             error = utility.get_change(generated, reference)
             self.assertTrue(error < 1)
 
-    # def test_weighted_spread(self):
-    #     for fs, data in self.__database:
-    #         ind = (np.arange(1, len(data) + 1)) * (fs/(2.0 * len(data)))
-    #         generated = statistics.weighted_spread(data, ind)
-    #         _, spread = extractor.stSpectralCentroidAndSpread(data, fs)
-    #         reference = spread * (fs / 2.0)  # de-normalize
-    #         error = utility.get_change(generated, reference)
-    #         self.assertTrue(error < 1)
+    def test_weighted_spread(self):
+        for fs, data in self.__database:
+            ind = (np.arange(1, len(data) + 1)) * (fs/(2.0 * len(data)))
+            data = 100 * data
+            generated = statistics.weighted_spread(data, ind)
+            _, spread = extractor.stSpectralCentroidAndSpread(data, fs)
+            reference = spread * (fs / 2.0)  # de-normalize
+            self.assertAlmostEqual(generated, reference, 4)
 
     def test_flux(self):
         for fs, data in self.__database:
@@ -58,17 +69,6 @@ class TestStatisticalFeatureMethods(unittest.TestCase):
             generated = statistics.rolloff(data, percentage)
             reference = extractor.stSpectralRollOff(data, percentage, fs)
             self.assertAlmostEqual(generated, reference)
-
-    @staticmethod
-    def __compute_flatness(data):
-        geometricMean = scipy.stats.mstats.gmean(data)
-        arithmeticMean = data.mean()
-        return geometricMean / arithmeticMean
-
-    @staticmethod
-    def __compute_crest(data):
-        absData = abs(data)
-        return absData[np.argmax(absData)] / np.sum(absData)
 
     def test_flatness(self):
         for data in utility.generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):

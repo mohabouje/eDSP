@@ -23,6 +23,17 @@ class TestSpectralFeatureMethods(unittest.TestCase):
         self.__database = utility.read_audio_test_files(self.__number_inputs, self.__minimum_size, self.__maximum_size)
         super(TestSpectralFeatureMethods, self).__init__(*args, **kwargs)
 
+    @staticmethod
+    def __compute_flatness(data):
+        geometricMean = scipy.stats.mstats.gmean(data)
+        arithmeticMean = data.mean()
+        return geometricMean / arithmeticMean
+
+    @staticmethod
+    def __compute_crest(data):
+        absData = abs(data)
+        return absData[np.argmax(absData)] / np.sum(absData)
+
     def test_spectral_centroid(self):
         for fs, data in self.__database:
             _, data = scipy.signal.periodogram(data, fs)
@@ -34,14 +45,15 @@ class TestSpectralFeatureMethods(unittest.TestCase):
             error = utility.get_change(generated, reference)
             self.assertTrue(error < 1)
 
-    # def test_weighted_spread(self):
-    #     for fs, data in self.__database:
-    #         ind = (np.arange(1, len(data) + 1)) * (fs/(2.0 * len(data)))
-    #         generated = spectral.weighted_spread(data, ind)
-    #         _, spread = extractor.stSpectralCentroidAndSpread(data, fs)
-    #         reference = spread * (fs / 2.0)  # de-normalize
-    #         error = utility.get_change(generated, reference)
-    #         self.assertTrue(error < 1)
+    def test_spectral_spread(self):
+        for fs, data in self.__database:
+            _, data = scipy.signal.periodogram(data, fs)
+            data = data * 100
+            ind = (np.arange(1, len(data) + 1)) * (fs/(2.0 * len(data)))
+            generated = spectral.spectral_spread(data, ind)
+            _, spread = extractor.stSpectralCentroidAndSpread(data, fs)
+            reference = spread * (fs / 2.0)  # de-normalize
+            self.assertAlmostEqual(generated, reference, 4)
 
     def test_spectral_flux(self):
         for fs, data in self.__database:
@@ -59,17 +71,6 @@ class TestSpectralFeatureMethods(unittest.TestCase):
             generated = spectral.spectral_rolloff(data, percentage)
             reference = extractor.stSpectralRollOff(data, percentage, fs)
             self.assertAlmostEqual(generated, reference)
-
-    @staticmethod
-    def __compute_flatness(data):
-        geometricMean = scipy.stats.mstats.gmean(data)
-        arithmeticMean = data.mean()
-        return geometricMean / arithmeticMean
-
-    @staticmethod
-    def __compute_crest(data):
-        absData = abs(data)
-        return absData[np.argmax(absData)] / np.sum(absData)
 
     def test_spectral_flatness(self):
         for fs, data in self.__database:
