@@ -2,6 +2,7 @@ import unittest
 import random
 import scipy
 import scipy.signal
+import scipy.stats.mstats
 import utility
 import pedsp.spectral as spectral
 import numpy as np
@@ -84,4 +85,20 @@ class TestSpectralFeatureMethods(unittest.TestCase):
             data = data * 100
             generated = spectral.spectral_crest(data)
             reference = self.__compute_crest(data)
+            self.assertAlmostEqual(generated, reference)
+
+    def test_spectral_kurtosis(self):
+        for fs, data in self.__database:
+            _, data = scipy.signal.periodogram(data, fs)
+            data = data * 100
+            generated = spectral.spectral_kurtosis(data)
+            reference = scipy.stats.mstats.kurtosis(data, fisher=False)
+            self.assertAlmostEqual(generated, reference)
+
+    def test_spectral_skewness(self):
+        for fs, data in self.__database:
+            _, data = scipy.signal.periodogram(data, fs)
+            data = data * 100
+            generated = spectral.spectral_skewness(data)
+            reference = scipy.stats.mstats.skew(data)
             self.assertAlmostEqual(generated, reference)
