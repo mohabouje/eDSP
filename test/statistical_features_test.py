@@ -1,9 +1,11 @@
 import unittest
 import random
+import scipy
+import scipy.signal
+import utility
 import pedsp.statistics as statistics
 import numpy as np
 import scipy.ndimage.measurements as measure
-import utility
 import pyAudioAnalysis.audioFeatureExtraction as extractor
 
 class TestStatisticalFeatureMethods(unittest.TestCase):
@@ -14,7 +16,7 @@ class TestStatisticalFeatureMethods(unittest.TestCase):
     __database = []
 
     def __init__(self, *args, **kwargs):
-        self.__number_inputs = 10
+        self.__number_inputs = 1
         self.__maximum_size = 10000
         self.__minimum_size = 100
         self.__database = utility.read_audio_test_files(self.__number_inputs, self.__minimum_size, self.__maximum_size)
@@ -55,4 +57,27 @@ class TestStatisticalFeatureMethods(unittest.TestCase):
             percentage = random.uniform(0.0, 1.0)
             generated = statistics.rolloff(data, percentage)
             reference = extractor.stSpectralRollOff(data, percentage, fs)
+            self.assertAlmostEqual(generated, reference)
+
+    @staticmethod
+    def __compute_flatness(data):
+        geometricMean = scipy.stats.mstats.gmean(data)
+        arithmeticMean = data.mean()
+        return geometricMean / arithmeticMean
+
+    @staticmethod
+    def __compute_crest(data):
+        absData = abs(data)
+        return absData[np.argmax(absData)] / np.sum(absData)
+
+    def test_flatness(self):
+        for data in utility.generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            generated = statistics.flatness(data)
+            reference = self.__compute_flatness(data)
+            self.assertAlmostEqual(generated, reference)
+
+    def test_crest(self):
+        for data in utility.generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            generated = statistics.crest(data)
+            reference = self.__compute_crest(data)
             self.assertAlmostEqual(generated, reference)

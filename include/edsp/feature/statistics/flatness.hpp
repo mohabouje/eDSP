@@ -41,7 +41,7 @@ namespace edsp { namespace feature { inline namespace statistics {
      * @see mean, geometric_mean
      */
     template <typename ForwardIt>
-    constexpr meta::value_type_t<ForwardIt> flatness(ForwardIt first, ForwardIt last) {
+    constexpr auto flatness(ForwardIt first, ForwardIt last) {
         const auto computed_gmean = edsp::statistics::geometric_mean(first, last);
         const auto computed_mean  = edsp::statistics::mean(first, last);
         return computed_gmean / computed_mean;
