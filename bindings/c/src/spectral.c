@@ -26,7 +26,7 @@
 #include <edsp/spectral/correlation.hpp>
 #include <edsp/spectral/dct.hpp>
 #include <edsp/spectral/dft.hpp>
-#include <edsp/spectral/periodogram.hpp>
+#include <edsp/spectral/spectrum.hpp>
 #include <edsp/spectral/hilbert.hpp>
 #include <edsp/spectral/hartley.hpp>
 
@@ -54,14 +54,8 @@ void hartley(const real_t* data, int size, real_t* output) {
     edsp::hartley(data, data + size, output);
 }
 
-void periodogram(const real_t* data, int size, real_t* period, const char* type) {
-    edsp::spectral_scale t;
-    if (strcmp("spectrum", type) == 0) {
-        t = edsp::spectral_scale::spectrum;
-    } else {
-        t = edsp::spectral_scale::density;
-    }
-    edsp::periodogram(data, data + size, period, t);
+void spectrum(const real_t* data, int size, real_t* period) {
+    edsp::spectrum(data, data + size, period);
 }
 
 int get_fft_size(int real_data_size) {

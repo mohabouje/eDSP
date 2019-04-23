@@ -1,7 +1,9 @@
 import unittest
 import random
+import math
 import scipy
 import scipy.signal
+import scipy.stats
 import scipy.stats.mstats
 import utility
 import pedsp.spectral as spectral
@@ -33,6 +35,13 @@ class TestSpectralFeatureMethods(unittest.TestCase):
     def __compute_crest(data):
         absData = abs(data)
         return absData[np.argmax(absData)] / np.sum(absData)
+
+    @staticmethod
+    def __spectral_entropy(psd):
+        psd_norm = np.divide(psd, psd.sum())
+        se = -np.multiply(psd_norm, np.log2(psd_norm)).sum()
+        se /= np.log2(psd_norm.size)
+        return se
 
     def test_spectral_centroid(self):
         for fs, data in self.__database:
@@ -102,4 +111,13 @@ class TestSpectralFeatureMethods(unittest.TestCase):
             data = data * 100
             generated = spectral.spectral_skewness(data)
             reference = scipy.stats.mstats.skew(data)
+            self.assertAlmostEqual(generated, reference)
+
+    def test_spectral_entropy(self):
+        import math
+        for fs, data in self.__database:
+            _, data = scipy.signal.periodogram(data, fs)
+            data = data * 100
+            generated = spectral.spectral_entropy(data)
+            reference = self.__spectral_entropy(data)
             self.assertAlmostEqual(generated, reference)

@@ -33,6 +33,12 @@ class TestStatisticalFeatureMethods(unittest.TestCase):
         absData = abs(data)
         return absData[np.argmax(absData)] / np.sum(absData)
 
+    @staticmethod
+    def __compute_entropy(data):
+        se = -np.multiply(data, np.log2(data)).sum()
+        se /= np.log2(data.size)
+        return se
+
     def test_centroid(self):
         for fs, data in self.__database:
             generated = statistics.centroid(data)
@@ -80,4 +86,11 @@ class TestStatisticalFeatureMethods(unittest.TestCase):
         for data in utility.generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             generated = statistics.crest(data)
             reference = self.__compute_crest(data)
+            self.assertAlmostEqual(generated, reference)
+
+    def test_entropy(self):
+        import math
+        for data in utility.generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            generated = statistics.entropy(data)
+            reference = self.__compute_entropy(data)
             self.assertAlmostEqual(generated, reference)

@@ -58,7 +58,7 @@ bn::ndarray execute(Functor&& f, bn::ndarray& input) {
 }
 
 template <typename Functor>
-bn::ndarray execute_r2r_half(Functor&& f, bn::ndarray& input, const char* type) {
+bn::ndarray execute_r2r_half(Functor&& f, bn::ndarray& input) {
     if (input.get_nd() != 1) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
@@ -69,7 +69,7 @@ bn::ndarray execute_r2r_half(Functor&& f, bn::ndarray& input, const char* type) 
 
     auto* input_data = reinterpret_cast<real_t*>(input.get_data());
     auto result_data = reinterpret_cast<real_t*>(result.get_data());
-    f(input_data, size, result_data, type);
+    f(input_data, size, result_data);
     return result;
 }
 
@@ -157,8 +157,8 @@ bn::ndarray idct_python(bn::ndarray& data) {
     return execute(idct, data);
 }
 
-bn::ndarray periodogram_python(bn::ndarray& data) {
-    return execute_r2r_half(periodogram, data, "spectrum");
+bn::ndarray spectrum_python(bn::ndarray& data) {
+    return execute_r2r_half(spectrum, data);
 }
 
 bn::ndarray hartley_python(bn::ndarray& data) {
@@ -196,7 +196,7 @@ void add_spectral_package() {
     bp::def("cepstrum", cepstrum_python);
     bp::def("dct", dct_python);
     bp::def("idct", idct_python);
-    bp::def("periodogram", periodogram_python);
+    bp::def("spectrum", spectrum_python);
     bp::def("hilbert", hilbert_python);
     bp::def("hartley", hartley_python);
     bp::def("rfft", fft_python);

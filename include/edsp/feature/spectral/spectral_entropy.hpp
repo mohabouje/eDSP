@@ -54,10 +54,15 @@ namespace edsp { namespace feature { inline namespace spectral {
      */
     template <typename ForwardIt>
     constexpr auto spectral_entropy(ForwardIt first, ForwardIt last) {
-        using value_type = typename std::iterator_traits<ForwardIt>::value_type;
-        const auto acc   = std::accumulate(first, last, static_cast<value_type>(0));
-        std::for_each(first, last, std::bind(std::multiplies<value_type>(), std::placeholders::_1, acc));
-        return statistics::entropy(first, last);
+        using input_t        = meta::value_type_t<ForwardIt>;
+        const auto sum       = std::accumulate(first, last, static_cast<input_t>(0));
+        const auto predicate = [&](const input_t accumulated, const input_t current) {
+            const auto normalized = current / sum;
+            return (accumulated + std::log2(normalized) * normalized);
+        };
+        const auto size = static_cast<input_t>(std::distance(first, last));
+        const auto acc  = std::accumulate(first, last, static_cast<input_t>(0), predicate);
+        return -acc / std::log2(size);
     }
 
 }}}    // namespace edsp::feature::spectral

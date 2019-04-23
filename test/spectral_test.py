@@ -64,6 +64,6 @@ class TestSpectralMethods(unittest.TestCase):
     def test_periodogram(self):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             data = 10 * data
-            generated = spectral.periodogram(data)
+            generated = spectral.spectrum(data)
             reference = np.abs(np.fft.rfft(data)) ** 2
             np.testing.assert_array_almost_equal(generated, reference, 3)

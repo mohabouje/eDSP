@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License along width
  * this program.  If not, see <http://www.gnu.org/licenses/>
  *
- * File: periodogram.hpp
+ * File: spectrum.hpp
  * Author: Mohammed Boujemaoui
  * Date: 27/7/2018
  */
@@ -30,15 +30,9 @@
 namespace edsp { inline namespace spectral {
 
     /**
-    * @brief The SpectralScale enum represent the scale used to
-    * represent the power spectral density
-    */
-    enum class spectral_scale { density = 0, spectrum };
-
-    /**
-     * @brief Computes the periodogram of the range [first, last) and stores the result in another range, beginning at d_first.
+     * @brief Computes the spectrum of the range [first, last) and stores the result in another range, beginning at d_first.
      *
-     * The periodogram is an estimate of the spectral density of a signal.
+     * The spectrum is an estimate of the spectral density of a signal.
      *
      * \f[
      *
@@ -55,20 +49,14 @@ namespace edsp { inline namespace spectral {
      */
     template <typename InputIt, typename OutputIt,
               typename Allocator = std::allocator<std::complex<meta::value_type_t<OutputIt>>>>
-    inline void periodogram(InputIt first, InputIt last, OutputIt d_first, spectral_scale scale) {
+    inline void spectrum(InputIt first, InputIt last, OutputIt d_first) {
         meta::expects(std::distance(first, last) > 0, "Not expecting empty input");
         using value_type = meta::value_type_t<InputIt>;
         const auto size  = std::distance(first, last);
         std::vector<std::complex<value_type>, Allocator> fft_data_(make_fft_size(size));
         dft(first, last, std::begin(fft_data_));
-        if (scale == spectral_scale::density) {
-            // TODO: it should divide each frequency bin by the frequency in Hz
-            std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
-                           [](const auto val) { return math::square(std::abs(val)); });
-        } else {
-            std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
-                           [](const auto val) { return math::square(std::abs(val)); });
-        }
+        std::transform(std::cbegin(fft_data_), std::cend(fft_data_), d_first,
+                       [](const auto val) { return math::square(std::abs(val)); });
     }
 
 }} // namespace edsp::spectral

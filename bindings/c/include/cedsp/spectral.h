@@ -81,7 +81,7 @@ void hartley(const real_t* data, int size, real_t* hart);
  * @param size Length of the input array
  * @param hilb Output array storing the Hilbert transform
  */
-void hilbert(const real_t* data, int size, complex_t * hilb);
+void hilbert(const real_t* data, int size, complex_t* hilb);
 
 /**
  * @brief Computes the spectrogram of the input buffer
@@ -89,7 +89,7 @@ void hilbert(const real_t* data, int size, complex_t * hilb);
  * @param size Length of the input array
  * @param period Output array storing the spectrogram transform
  */
-void periodogram(const real_t* data, int size, real_t* period, const char* type);
+void spectrum(const real_t* data, int size, real_t* period);
 
 /**
  * @brief Computes the DCT transform of the input buffer
@@ -138,7 +138,6 @@ void complex_fft(const complex_t* input, int size, complex_t* output);
  * @param output Output array storing the inverse complex-FFT transform
  */
 void complex_ifft(const complex_t* input, int size, complex_t* output);
-
 
 #ifdef __cplusplus
 }
