@@ -121,9 +121,7 @@ namespace edsp { namespace filter {
 
     template <typename T, typename Allocator>
     typename moving_average<T, Allocator>::value_type moving_average<T, Allocator>::operator()(value_type tick) {
-        if (window_.full()) {
-            accumulated_ -= window_.front();
-        }
+        accumulated_ -= window_.front();
         accumulated_ += tick;
         window_.push_back(tick);
         return accumulated_ / static_cast<T>(window_.size());

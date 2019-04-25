@@ -112,20 +112,7 @@ namespace edsp { namespace filter {
     template <typename T, typename Allocator>
     template <typename InputIt, typename OutputIt>
     void moving_rms<T, Allocator>::filter(InputIt first, InputIt last, OutputIt d_first) {
-        if (window_.full()) {
-            for (; first != last; ++d_first, ++first) {
-                const auto sqr = (*first) * (*first);
-                accumulated_ -= window_.front();
-                accumulated_ += sqr;
-                window_.push_back(sqr)* d_first = std::sqrt(accumulated_ / static_cast<T>(window_.size()));
-            }
-        } else {
-            for (; first != last; ++d_first, ++first) {
-                const auto sqr = (*first) * (*first);
-                accumulated_ += sqr;
-                window_.push_back(sqr)* d_first = std::sqrt(accumulated_ / static_cast<T>(window_.size()));
-            }
-        };
+        std::transform(first, last, d_first, std::ref(*this));
     }
 
     template <typename T, typename Allocator>
@@ -135,10 +122,8 @@ namespace edsp { namespace filter {
 
     template <typename T, typename Allocator>
     typename moving_rms<T, Allocator>::value_type moving_rms<T, Allocator>::operator()(value_type tick) {
-        if (window_.full()) {
-            accumulated_ -= window_.front();
-        }
         const auto sqr = tick * tick;
+        accumulated_ -= window_.front();
         accumulated_ += sqr;
         window_.push_back(sqr);
         return std::sqrt(accumulated_ / static_cast<T>(window_.size()));

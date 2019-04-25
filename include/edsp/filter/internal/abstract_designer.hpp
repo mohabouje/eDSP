@@ -22,7 +22,6 @@
 #ifndef EDSP_POLEFILTER_HPP
 #define EDSP_POLEFILTER_HPP
 
-#include <edsp/meta/declfriend.hpp>
 #include <edsp/filter/internal/bilinear/layout_base.hpp>
 #include <edsp/filter/biquad_cascade.hpp>
 #include <complex>
