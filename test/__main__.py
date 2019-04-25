@@ -11,6 +11,7 @@ from auditory_test import TestAuditoryMethods
 from temporal_features_test import TestTemporalFeatureMethods
 from statistical_features_test import TestStatisticalFeatureMethods
 from spectral_features_test import TestSpectralFeatureMethods
+from filter_test import TestFilterMethods
 
 from sys import exit
 
@@ -22,7 +23,8 @@ if __name__ == "__main__":
         for test in (TestWindowingMethods, TestCoreMethods, TestConverterMethods,
                      TestStatisticsMethods, TestAlgorithmMethods, TestSpectralMethods,
                      TestStringMethods, TestOscillatorMethods, TestAuditoryMethods,
-                     TestTemporalFeatureMethods, TestStatisticalFeatureMethods, TestSpectralFeatureMethods)
+                     TestTemporalFeatureMethods, TestStatisticalFeatureMethods, TestSpectralFeatureMethods,
+                     TestFilterMethods)
     ]
     suite = TestSuite(tests)
 
