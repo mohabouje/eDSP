@@ -43,10 +43,10 @@ class TestFilterMethods(unittest.TestCase):
         f.resize(kernel)
         self.assertEqual(f.size(), kernel)
 
-    def test_average_filter(self):
-        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
-            kernel = random.randint(0, len(data))
-            f = flt.MovingAverageFilter(kernel)
-            generated = f.filter(data)
-            reference = self.__running_mean(data, kernel)
-            np.testing.assert_array_almost_equal(generated, reference)
+    # def test_average_filter(self):
+    #     for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+    #         kernel = random.randint(0, len(data))
+    #         f = flt.MovingAverageFilter(kernel)
+    #         generated = f.filter(data)
+    #         reference = self.__running_mean(data, kernel)
+    #         np.testing.assert_array_almost_equal(generated, reference)
