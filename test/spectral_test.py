@@ -2,6 +2,7 @@ import unittest
 import pedsp.spectral as spectral
 import numpy as np
 import scipy.fftpack as fftpack
+import scipy.signal as signal
 from utility import generate_pair_inputs, generate_inputs
 
 
@@ -28,6 +29,19 @@ class TestSpectralMethods(unittest.TestCase):
             reference = np.correlate(l, r, "full")
             np.testing.assert_array_almost_equal(
                 generated, reference[len(generated) - 1:])
+
+    def test_hilbert(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            reference = spectral.hilbert(data)
+            generated = signal.hilbert(data)
+            np.testing.assert_array_almost_equal(reference, generated)
+
+    def test_hartley(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            reference = spectral.hartley(data)
+            temporal = spectral.rfft(data)
+            generated = np.real(temporal) - np.imag(temporal)
+            np.testing.assert_array_almost_equal(reference[:len(generated)], generated)
 
     def test_dct(self):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
