@@ -24,6 +24,7 @@ option(USE_LIBPFFFT "Use the library PFFT to encode/decode audio files" OFF)
 option(USE_LIBFFTW "Use the library FFTW to encode/decode audio files" ON)
 option(USE_LIBSAMPLERATE "Use the library libsamplerate to resample audio data" ON)
 option(USE_LIBRESAMPLE "Use the library libresample to resample audio data" OFF)
+option(USE_TAGLIB "Use the library taglib to read audio metadata" ON)
 
 # TODO add an option to check if single or double precision
 
@@ -141,6 +142,17 @@ if (USE_LIBRESAMPLE)
         message(FATAL_ERROR "Library resample not found")
     endif(LIBRESAMPLE_LIB)
 endif(USE_LIBRESAMPLE)
+
+if (USE_TAGLIB)
+    find_library(TAGLIB_LIB NAMES ltag libtag tag)
+    if (TAGLIB_LIB)
+        set(EDSP_DEPENDENCIES "${EDSP_DEPENDENCIES};${TAGLIB_LIB}")
+        add_definitions(-DUSE_TAGLIB)
+    else()
+        message(FATAL_ERROR "Library taglib not found")
+    endif(TAGLIB_LIB)
+endif(USE_TAGLIB)
+
 
 add_library(${EDSP_LIBRARY} INTERFACE)
 target_sources(${EDSP_LIBRARY} INTERFACE

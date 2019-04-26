@@ -31,6 +31,7 @@
 #include "auditory.hpp"
 #include "feature.hpp"
 #include "filter.hpp"
+#include "io.hpp"
 #include "boost_numpy_dependencies.hpp"
 
 BOOST_PYTHON_MODULE(MODULE_NAME) {
@@ -48,4 +49,5 @@ BOOST_PYTHON_MODULE(MODULE_NAME) {
     add_feature_spectral_package();
     add_feature_statistics_package();
     add_filter_package();
+    add_io_package();
 }

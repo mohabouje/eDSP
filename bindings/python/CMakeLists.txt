@@ -65,7 +65,8 @@ set(HEADER
         include/oscillator.hpp
         include/auditory.hpp
         include/feature.hpp
-        include/filter.hpp)
+        include/filter.hpp
+        include/io.hpp)
 
 set(SRC
         src/package.cpp
@@ -81,7 +82,8 @@ set(SRC
         src/feature_temporal.cpp
         src/feature_spectral.cpp
         src/feature_statistics.cpp
-        src/filter.cpp)
+        src/filter.cpp
+        src/io.cpp)
 
 set(PEDSP_LIBRARY pedsp)
 add_library(${PEDSP_LIBRARY} SHARED ${HEADER} ${SRC})
