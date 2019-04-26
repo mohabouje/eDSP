@@ -2,6 +2,7 @@ import unittest
 import pedsp.windowing as windowing
 import numpy as np
 import scipy.signal as signal
+import scipy.signal.windows as spw
 from random import randint
 
 
@@ -44,6 +45,13 @@ class TestWindowingMethods(unittest.TestCase):
         for g, r in zip(generated, reference):
             self.assertAlmostEqual(g, r)
 
+    def test_triangular(self):
+        size = randint(0, 1000)
+        generated = windowing.triangular(size)
+        reference = spw.triang(size)
+        for g, r in zip(generated, reference):
+            self.assertAlmostEqual(g, r)
+
     def test_blackman_nuttall(self):
         size = randint(0, 1000)
         generated = windowing.blackman_nutall(size)
@@ -58,7 +66,7 @@ class TestWindowingMethods(unittest.TestCase):
         for g, r in zip(generated, reference):
             self.assertAlmostEqual(g, r)
 
-    # The returns value of the flat-top window differ depending of the version of scipy
+    # # Warning: The returns value of the flat-top window differ depending of the version of scipy
     # def test_flattop(self):
     #     size = randint(0, 1000)
     #     generated = windowing.flattop(size)

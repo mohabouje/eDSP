@@ -3,6 +3,7 @@ import pedsp.statistics as statistics
 import numpy as np
 import scipy.stats
 import scipy.stats.mstats
+from numpy import linalg as LA
 from utility import generate_inputs
 
 
@@ -14,6 +15,42 @@ class TestStatisticsMethods(unittest.TestCase):
 
     # TODO: test median
     # TODO: implement this list https://www.programcreek.com/python/example/66766/scipy.stats.kurtosis
+
+    def test_max(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            generated = statistics.max(data)
+            reference = max(data)
+            self.assertAlmostEqual(generated, reference)
+
+            generated = statistics.max_abs(data)
+            reference = max(data, key=abs)
+            self.assertAlmostEqual(generated, reference)
+
+    def test_min(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            generated = statistics.min(data)
+            reference = min(data)
+            self.assertAlmostEqual(generated, reference)
+
+            generated = statistics.min_abs(data)
+            reference = min(data, key=abs)
+            self.assertAlmostEqual(generated, reference)
+
+    def test_peak(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            generated, _ = statistics.peak(data)
+            reference = np.argmax(data)
+            self.assertAlmostEqual(generated, reference)
+
+            generated, _ = statistics.peak_abs(data)
+            reference = np.argmax(np.abs(data))
+            self.assertAlmostEqual(generated, reference)
+
+    def test_norm(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            generated = statistics.norm(data)
+            reference = LA.norm(data)
+            self.assertAlmostEqual(generated, reference)
 
     def test_harmonic_mean(self):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
