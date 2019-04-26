@@ -100,8 +100,8 @@ real_t azcr_python(bn::ndarray& input) {
 }
 
 bn::ndarray amdf_python(bn::ndarray& input) {
-    using callback_type = decltype(edsp::feature::temporal::asdf<real_t*, real_t*>);
-    return execute_numpy<callback_type>(edsp::feature::temporal::asdf<real_t*, real_t*>, input);
+    using callback_type = decltype(edsp::feature::temporal::amdf<real_t*, real_t*>);
+    return execute_numpy<callback_type>(edsp::feature::temporal::amdf<real_t*, real_t*>, input);
 }
 
 bn::ndarray asdf_python(bn::ndarray& input) {

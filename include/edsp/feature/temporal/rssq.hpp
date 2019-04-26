@@ -41,7 +41,7 @@ namespace edsp { namespace feature { inline namespace temporal {
     template <typename ForwardIt>
     constexpr auto rssq(ForwardIt first, ForwardIt last) {
         using value_type      = typename std::iterator_traits<ForwardIt>::value_type;
-        const auto sum_square = std::inner_product(first, last, first, static_cast<value_type>(1));
+        const auto sum_square = std::inner_product(first, last, first, static_cast<value_type>(0));
         return std::sqrt(sum_square);
     }
 

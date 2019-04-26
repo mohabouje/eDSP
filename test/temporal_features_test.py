@@ -72,3 +72,9 @@ class TestTemporalFeatureMethods(unittest.TestCase):
             reference = algo.compute(data.astype(np.float32))
             error = utility.get_change(generated, reference)
             self.assertTrue(error < 1)
+
+    def test_rssq(self):
+        for _, data in self.__database:
+            generated = temporal.rssq(data)
+            reference = np.sqrt(np.sum(data ** 2))
+            self.assertAlmostEqual(generated, reference)
