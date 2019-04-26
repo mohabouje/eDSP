@@ -69,6 +69,10 @@ namespace edsp { namespace io { namespace internal {
             return quality_;
         }
 
+        value_type ratio() const {
+            return data_.src_ratio;
+        }
+
         error_type reset() {
             error_ = src_reset(state_);
             report_error(__PRETTY_FUNCTION__);

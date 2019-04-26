@@ -122,6 +122,13 @@ namespace edsp { namespace io {
         }
 
         /**
+         * @brief Returns the resampling factor or ratio.
+         */
+        value_type ratio() const {
+            return impl.ratio();
+        }
+
+        /**
          * @brief Checks if a ratio is valid
          * @param ratio Ratio to be tested
          * @return true if the ratio is valid, false otherwise.

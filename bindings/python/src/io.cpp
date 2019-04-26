@@ -19,8 +19,56 @@
 
 #include "io.hpp"
 #include "boost_numpy_dependencies.hpp"
+
+#define ENABLE_SINGLE
 #include <cedsp/types.h>
+
 #include <edsp/io/metadata.hpp>
+#include <edsp/io/encoder.hpp>
+#include <edsp/io/decoder.hpp>
+#include <edsp/io/resampler.hpp>
+
+using encoder   = edsp::io::encoder<real_t>;
+using decoder   = edsp::io::decoder<real_t>;
+using resampler = edsp::io::resampler<real_t>;
+
+auto encoder_wrapper(encoder& enc, bn::ndarray& input) {
+    if (input.get_nd() != 1) {
+        throw std::invalid_argument("Expected one-dimensional arrays");
+    }
+
+    const auto size = input.shape(0);
+    auto in         = reinterpret_cast<real_t*>(input.get_data());
+    return enc.write(in, in + size);
+}
+
+bp::tuple decoder_wrapper(decoder& dec, unsigned int size) {
+    Py_intptr_t shape[1] = {size};
+    auto result          = bn::empty(1, shape, bn::dtype::get_builtin<real_t>());
+    auto data            = reinterpret_cast<real_t*>(result.get_data());
+    const auto total     = dec.read(data, data + size);
+    return bp::make_tuple(result, total);
+}
+
+std::string resampler_error_string_wrapper(resampler& res) {
+    return res.error_string().to_string();
+}
+
+bp::tuple resampler_process_wrapper(resampler& res, bn::ndarray& input) {
+    if (input.get_nd() != 1) {
+        throw std::invalid_argument("Expected one-dimensional arrays");
+    }
+
+    const auto size          = input.shape(0);
+    const auto expected_size = static_cast<unsigned int>(size * res.ratio());
+
+    Py_intptr_t shape[1] = {expected_size};
+    auto result          = bn::empty(1, shape, bn::dtype::get_builtin<real_t>());
+    auto data            = reinterpret_cast<real_t*>(result.get_data());
+    auto in              = reinterpret_cast<real_t*>(input.get_data());
+    const auto total     = res.process(in, in + size, data);
+    return bp::make_tuple(result, total);
+}
 
 void add_io_package() {
     std::string nested_name = bp::extract<std::string>(bp::scope().attr("__name__") + ".io");
@@ -35,4 +83,40 @@ void add_io_package() {
         .def("album", &edsp::io::metadata::album)
         .def("artist", &edsp::io::metadata::artist)
         .def("track", &edsp::io::metadata::track);
+
+    bp::class_<encoder>("Encoder", bp::init<std::size_t, std::size_t>())
+        .def("open", &encoder::open)
+        .def("is_open", &encoder::is_open)
+        .def("close", &encoder::close)
+        .def("channels", &encoder::channels)
+        .def("sample_rate", &encoder::sample_rate)
+        .def("write", encoder_wrapper);
+
+    bp::class_<decoder>("Decoder", bp::init<>())
+        .def("open", &decoder::open)
+        .def("is_open", &decoder::is_open)
+        .def("close", &decoder::close)
+        .def("channels", &decoder::channels)
+        .def("sample_rate", &decoder::sample_rate)
+        .def("duration", &decoder::duration)
+        .def("frames", &decoder::frames)
+        .def("seekable", &decoder::seekable)
+        .def("seek", &decoder::seek)
+        .def("write", decoder_wrapper);
+
+    bp::enum_<edsp::io::resample_quality>("ResampleQuality")
+        .value("Linear", edsp::io::resample_quality::linear)
+        .value("MediumQuality", edsp::io::resample_quality::medium_quality)
+        .value("BestQuality", edsp::io::resample_quality::best_quality)
+        .value("Fastest", edsp::io::resample_quality::sinc_fastest)
+        .value("ZeroOrderHold", edsp::io::resample_quality::zero_order_hold);
+
+    bp::class_<resampler>("Resampler", bp::init<std::size_t, edsp::io::resample_quality, real_t>())
+        .def("process", resampler_process_wrapper)
+        .def("error_string", resampler_error_string_wrapper)
+        .def("quality", &resampler::quality)
+        .def("reset", &resampler::reset)
+        .def("error", &resampler::error)
+        .def("valid_ratio", &resampler::valid_ratio)
+        .def("ratio", &resampler::ratio);
 }

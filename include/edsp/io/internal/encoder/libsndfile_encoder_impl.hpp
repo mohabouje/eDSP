@@ -46,7 +46,7 @@ namespace edsp { namespace io {
             using value_type            = float;
             static constexpr int FORMAT = SF_FORMAT_FLOAT;
 
-            std::ptrdiff_t write(SNDFILE* file, float* buffer, int length) {
+            std::ptrdiff_t write(SNDFILE* file, const float* buffer, int length) {
                 return sf_write_float(file, buffer, length);
             }
         };
@@ -56,7 +56,7 @@ namespace edsp { namespace io {
             using value_type            = double;
             static constexpr int FORMAT = SF_FORMAT_DOUBLE;
 
-            std::ptrdiff_t write(SNDFILE* file, double* buffer, int length) {
+            std::ptrdiff_t write(SNDFILE* file, const double* buffer, int length) {
                 return sf_write_double(file, buffer, length);
             }
         };
@@ -66,7 +66,7 @@ namespace edsp { namespace io {
             using value_type            = int;
             static constexpr int FORMAT = SF_FORMAT_PCM_32;
 
-            std::ptrdiff_t write(SNDFILE* file, int* buffer, int length) {
+            std::ptrdiff_t write(SNDFILE* file, const int* buffer, int length) {
                 return sf_write_int(file, buffer, length);
             }
         };
@@ -76,7 +76,7 @@ namespace edsp { namespace io {
             using value_type            = short;
             static constexpr int FORMAT = SF_FORMAT_PCM_16;
 
-            std::ptrdiff_t write(SNDFILE* file, short* buffer, int length) {
+            std::ptrdiff_t write(SNDFILE* file, const short* buffer, int length) {
                 return sf_write_short(file, buffer, length);
             }
         };

@@ -74,7 +74,7 @@ namespace edsp { namespace io {
 
     } // namespace internal
 
-    template <typename T, std::size_t N = 2048>
+    template <typename T, std::ptrdiff_t N = 2048>
     struct libsndfile_decoder {
         static_assert(std::is_arithmetic<T>::value, "Expected arithmetic types");
         using index_type = std::ptrdiff_t;

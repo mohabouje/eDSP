@@ -59,6 +59,10 @@ namespace edsp { namespace io { namespace internal {
             return output_size;
         }
 
+        value_type ratio() const {
+            return factor_;
+        }
+
         int quality() const {
             return quality_;
         }
