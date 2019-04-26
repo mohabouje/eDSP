@@ -23,6 +23,7 @@
 #include "algorithm.hpp"
 #include "boost_numpy_dependencies.hpp"
 #include <cedsp/algorithm.h>
+#include <edsp/algorithm.hpp>
 
 template <typename Functor, typename... Args>
 bn::ndarray execute_inplace(Functor&& f, bn::ndarray& input, Args... arg) {
@@ -37,6 +38,17 @@ bn::ndarray execute_inplace(Functor&& f, bn::ndarray& input, Args... arg) {
     auto out             = reinterpret_cast<real_t*>(result.get_data());
     f(in, size, out, arg...);
     return result;
+}
+
+template <typename Functor, typename... Args>
+auto execute(Functor&& f, bn::ndarray& input, Args... arg) {
+    if (input.get_nd() != 1) {
+        throw std::invalid_argument("Expected one-dimensional arrays");
+    }
+
+    const auto size = input.shape(0);
+    auto in         = reinterpret_cast<real_t*>(input.get_data());
+    return f(in, size, arg...);
 }
 
 template <typename Functor, typename... Args>
@@ -92,6 +104,34 @@ bn::ndarray logspace_python(real_t x1, real_t x2, long size) {
     return execute(array_logspace, size, x1, x2);
 }
 
+auto binary_search_python(bn::ndarray& input, real_t value) {
+    return execute(binary_search, input, value);
+}
+
+auto linear_search_python(bn::ndarray& input, real_t value) {
+    return execute(linear_search, input, value);
+}
+
+auto index_of_python(bn::ndarray& input, real_t value) {
+    return execute(index_of, input, value);
+}
+
+bool equal_python(bn::ndarray& first, bn::ndarray& second) {
+    if (first.get_nd() != 1 || second.get_nd() != 1) {
+        throw std::invalid_argument("Expected one-dimensional arrays");
+    }
+
+    const auto size  = first.shape(0);
+    const auto size2 = second.shape(0);
+    if (size != size2) {
+        return false;
+    }
+
+    auto* first_in  = reinterpret_cast<real_t*>(first.get_data());
+    auto* second_in = reinterpret_cast<real_t*>(second.get_data());
+    return equal(first_in, size, second_in);
+}
+
 bn::ndarray concatenate_python(bn::ndarray& first, bn::ndarray& second) {
     if (first.get_nd() != 1 || second.get_nd() != 1) {
         throw std::invalid_argument("Expected one-dimensional arrays");
@@ -143,4 +183,8 @@ void add_algorithm_package() {
     bp::def("normalize", normalize_python);
     bp::def("concatenate", concatenate_python);
     bp::def("pad", padder_python);
+    bp::def("linear_search", linear_search_python);
+    bp::def("binary_search", binary_search_python);
+    bp::def("index_of", index_of_python);
+    bp::def("equal", equal_python);
 }

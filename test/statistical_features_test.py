@@ -60,8 +60,9 @@ class TestStatisticalFeatureMethods(unittest.TestCase):
             data = 100 * data
             generated = statistics.weighted_spread(data, ind)
             _, spread = extractor.stSpectralCentroidAndSpread(data, fs)
-            reference = spread * (fs / 2.0)  # de-normalize
-            self.assertAlmostEqual(generated, reference, 4)
+            if not np.isnan(generated) and not np.isnan(spread):
+                reference = spread * (fs / 2.0)  # de-normalize
+                self.assertAlmostEqual(generated, reference, 4)
 
     def test_flux(self):
         for fs, data in self.__database:

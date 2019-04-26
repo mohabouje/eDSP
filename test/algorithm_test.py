@@ -32,7 +32,7 @@ class TestAlgorithmMethods(unittest.TestCase):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             minimum = randint(self.__minimum_size, self.__maximum_size)
             maximum = randint(minimum, self.__maximum_size)
-            generated = algorithm.clip(data,  minimum, maximum)
+            generated = algorithm.clip(data, minimum, maximum)
             reference = np.clip(data, minimum, maximum)
             np.testing.assert_array_almost_equal(generated, reference)
 
@@ -52,6 +52,12 @@ class TestAlgorithmMethods(unittest.TestCase):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             generated = algorithm.trunc(data)
             reference = np.trunc(data)
+            np.testing.assert_array_almost_equal(generated, reference)
+
+    def test_ceil(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            generated = algorithm.ceil(data)
+            reference = np.ceil(data)
             np.testing.assert_array_almost_equal(generated, reference)
 
     def test_abs(self):
@@ -76,12 +82,12 @@ class TestAlgorithmMethods(unittest.TestCase):
             reference = np.concatenate((first, second))
             np.testing.assert_array_almost_equal(generated, reference)
 
-    # def test_pad(self):
-    #     for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
-    #         size = randint(len(data), self.__maximum_size)
-    #         generated = algorithm.pad(data, size)
-    #         reference = np.pad(data, (0, size - len(data) % size), mode='constant', constant_values=0)
-    #         np.testing.assert_array_almost_equal(generated, reference)
+    def test_pad(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            size = randint(len(data), self.__maximum_size)
+            generated = algorithm.pad(data, size)
+            reference = np.pad(data, (0, size - len(data) % size), mode='constant', constant_values=0)
+            np.testing.assert_array_almost_equal(generated, reference)
 
     def test_logarithmic_space(self):
         for _ in range(1, self.__number_inputs):
@@ -100,3 +106,35 @@ class TestAlgorithmMethods(unittest.TestCase):
             generated = algorithm.linspace(minimum, maximum, size)
             reference = np.linspace(minimum, maximum, size)
             np.testing.assert_array_almost_equal(generated, reference)
+
+    def test_linear_search(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            value = data[randint(0, len(data) - 1)]
+            generated = algorithm.linear_search(data, value)
+            reference = list(data).index(value)
+            self.assertAlmostEqual(generated, reference)
+
+    def test_binary_search(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            data = np.sort(data)
+            value = data[randint(0, len(data) - 1)]
+            generated = algorithm.binary_search(data, value)
+            reference = list(data).index(value)
+            self.assertAlmostEqual(generated, reference)
+
+    def test_index_of(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            value = data[randint(0, len(data) - 1)]
+            generated = algorithm.index_of(data, value)
+            reference = list(data).index(value)
+            self.assertAlmostEqual(generated, reference)
+
+    def test_equal(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            duplicate = np.copy(data)
+            self.assertTrue(algorithm.equal(data, duplicate))
+            for _ in range(randint(0, len(data))):
+                index = randint(0, len(data) - 1)
+                duplicate[index] = 2 * duplicate[index]
+
+            self.assertFalse(algorithm.equal(data, duplicate))
