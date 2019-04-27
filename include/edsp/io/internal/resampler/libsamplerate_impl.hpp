@@ -26,7 +26,7 @@
 #include <edsp/core/logger.hpp>
 #include <samplerate.h>
 
-namespace edsp { namespace io { namespace internal {
+namespace edsp { namespace io {
 
     template <typename T>
     struct libsamplerate_impl {};
@@ -106,6 +106,6 @@ namespace edsp { namespace io { namespace internal {
         double ratio_{1};
     };
 
-}}} // namespace edsp::io::internal
+}} // namespace edsp::io
 
 #endif //EDSP_LIBSAMPLERATE_IMPL_HPP

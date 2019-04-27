@@ -134,11 +134,11 @@ namespace edsp { namespace io {
          * @return true if the ratio is valid, false otherwise.
          */
         static bool valid_ratio(value_type ratio) {
-            return internal::resampler_impl<T>::valid_ratio(ratio);
+            return resampler_impl<T>::valid_ratio(ratio);
         }
 
     private:
-        internal::resampler_impl<T> impl;
+        resampler_impl<T> impl;
     };
 
 }} // namespace edsp::io

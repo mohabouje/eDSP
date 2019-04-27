@@ -26,7 +26,7 @@
 #include <numeric>
 #include <cmath>
 
-namespace edsp { namespace feature { namespace statistics {
+namespace edsp { namespace feature { inline namespace statistics {
 
     /**
      * @brief Computes the normalized entropy of the probability mass function given in the range [first, last).

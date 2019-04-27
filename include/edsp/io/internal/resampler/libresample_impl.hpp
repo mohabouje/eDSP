@@ -26,7 +26,7 @@
 #include <edsp/core/logger.hpp>
 #include <libresample.h>
 
-namespace edsp { namespace io { namespace internal {
+namespace edsp { namespace io {
 
     template <typename T>
     struct libresample_impl {};
@@ -99,6 +99,6 @@ namespace edsp { namespace io { namespace internal {
         int quality_{0};
     };
 
-}}} // namespace edsp::io::internal
+}} // namespace edsp::io
 
 #endif //EDSP_LIBRESAMPLE_IMPL_HPP

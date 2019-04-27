@@ -20,11 +20,7 @@
 #ifndef EDSP_METADATA_HPP
 #define EDSP_METADATA_HPP
 
-#include <edsp/meta/data.hpp>
-#include <string>
-#include <taglib/fileref.h>
-#include <taglib/tag.h>
-#include <taglib/tpropertymap.h>
+#include <edsp/io/internal/metadata/metadata_impl.hpp>
 
 namespace edsp { namespace io {
 
@@ -37,7 +33,7 @@ namespace edsp { namespace io {
          * If no song name is present in the tag an empty string will be returned. 
          */
         std::string title() const {
-            return ref_.tag()->title().to8Bit();
+            return ref_.title();
         }
 
         /**
@@ -45,7 +41,7 @@ namespace edsp { namespace io {
          * If no artist name is present in the tag an empty string will be returned. 
          */
         std::string artist() const {
-            return ref_.tag()->artist().to8Bit();
+            return ref_.artist();
         }
 
         /**
@@ -53,7 +49,7 @@ namespace edsp { namespace io {
          * If no album name is present in the tag an empty string will be returned. 
          */
         std::string album() const {
-            return ref_.tag()->album().to8Bit();
+            return ref_.album();
         }
 
         /**
@@ -61,14 +57,14 @@ namespace edsp { namespace io {
          * If no album name is present in the tag an empty string will be returned. 
          */
         std::string genre() const {
-            return ref_.tag()->genre().to8Bit();
+            return ref_.genre();
         }
 
         /**
          * @brief Returns the track number
          */
         size_t track() const {
-            return ref_.tag()->track();
+            return ref_.track();
         }
 
         /**
@@ -76,11 +72,11 @@ namespace edsp { namespace io {
          * If there is no year set, this will return 0
          */
         size_t year() const {
-            return ref_.tag()->year();
+            return ref_.year();
         }
 
     private:
-        TagLib::FileRef ref_;
+        metadata_impl ref_;
     };
 
 }}     // namespace edsp::io

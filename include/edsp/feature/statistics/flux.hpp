@@ -27,7 +27,7 @@
 #include <edsp/meta/advance.hpp>
 #include <edsp/meta/iterator.hpp>
 
-namespace edsp { namespace feature { namespace statistics {
+namespace edsp { namespace feature { inline namespace statistics {
 
     /**
      * @brief Computes the flux between the elements in the range [first1, last1) and the

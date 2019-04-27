@@ -29,7 +29,7 @@
 
 #include <iterator>
 
-namespace edsp { namespace feature { namespace statistics {
+namespace edsp { namespace feature { inline namespace statistics {
 
     /**
      * @brief Computes the decrease factor of the elements in the range [first, last)
