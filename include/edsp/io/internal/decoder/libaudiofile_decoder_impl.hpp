@@ -78,9 +78,9 @@ namespace edsp { namespace io {
             return file_ != AF_NULL_FILEHANDLE;
         }
 
-        bool open(const edsp::string_view& filepath) {
+        bool open(const std::string& filepath) {
             close();
-            file_ = afOpenFile(filepath.data(), "r", NULL);
+            file_ = afOpenFile(filepath.c_str(), "r", NULL);
             if (file_ == AF_NULL_FILEHANDLE) {
                 eWarning() << "Could not open file " << filepath;
                 return false;

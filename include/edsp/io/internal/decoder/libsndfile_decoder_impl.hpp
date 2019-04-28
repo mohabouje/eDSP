@@ -85,10 +85,10 @@ namespace edsp { namespace io {
             close();
         }
 
-        bool open(const edsp::string_view& filepath) {
+        bool open(const std::string& filepath) {
             close();
 
-            file_ = sf_open(filepath.data(), SFM_READ, &info_);
+            file_ = sf_open(filepath.c_str(), SFM_READ, &info_);
             if (meta::is_null(file_)) {
                 eWarning() << "Could not open file " << filepath;
             }

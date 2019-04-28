@@ -49,7 +49,7 @@ namespace edsp { namespace io {
          * @param file_path Path to the file to be opened.
          * @return true if the file has been opened, false otherwise.
          */
-        bool open(const edsp::string_view& file_path) {
+        bool open(const std::string& file_path) {
             return impl_.open(file_path);
         }
 
@@ -77,7 +77,7 @@ namespace edsp { namespace io {
             return impl_.samples();
         }
 
-        /*
+        /**
          * @brief Returns the number of frames in the audio file.
          *
          * Each sample frame of audio consists of a fixed number of samples (equal to the number of audio channels in

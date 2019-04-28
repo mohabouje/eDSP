@@ -5,6 +5,8 @@ import utility
 import random
 import taglib
 import os.path
+from pysndfile import *
+
 
 class TestIOMethods(unittest.TestCase):
 
@@ -44,3 +46,22 @@ class TestIOMethods(unittest.TestCase):
                 self.assertEqual(metadata.year(), tfile.tags['YEAR'][0])
             else:
                 self.assertTrue(metadata.year() == 0)
+
+    def test_decoder(self):
+        repository, files = utility.get_list_test_files()
+        for filename in files:
+            f = os.path.join(repository, filename)
+            decoder = io.Decoder()
+            decoder.open(str(f))
+
+            sndfile = PySndfile(f)
+            frames = sndfile.read_frames(dtype=np.float32)
+            frame_count = frames.shape[0]
+
+            self.assertEqual(decoder.frames(), frame_count)
+
+            data, data_count = decoder.read(frames.size)
+            data = data.reshape(frames.shape)
+
+            self.assertEqual(data_count, frames.size)
+            np.testing.assert_array_almost_equal(frames, data)

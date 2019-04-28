@@ -48,7 +48,7 @@ namespace edsp { namespace io {
          * @param file_path Path to the file to be opened.
          * @return true if the file has been opened, false otherwise.
          */
-        bool open(const edsp::string_view& file_path) {
+        bool open(const std::string& file_path) {
             return impl_.open(file_path);
         }
 

@@ -101,7 +101,7 @@ namespace edsp { namespace io {
             close();
         }
 
-        bool open(const edsp::string_view& file_path) {
+        bool open(const std::string& file_path) {
             close();
 
             file_ = sf_open(file_path.data(), SFM_WRITE, &info_);

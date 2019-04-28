@@ -102,7 +102,7 @@ void add_io_package() {
         .def("frames", &decoder::frames)
         .def("seekable", &decoder::seekable)
         .def("seek", &decoder::seek)
-        .def("write", decoder_wrapper);
+        .def("read", decoder_wrapper);
 
     bp::enum_<edsp::io::resample_quality>("ResampleQuality")
         .value("Linear", edsp::io::resample_quality::linear)
