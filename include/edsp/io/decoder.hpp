@@ -102,14 +102,6 @@ namespace edsp { namespace io {
         }
 
         /**
-         * @brief Returns the duration of the audio file in seconds.
-         * @return Duration of the audio file in seconds.
-         */
-        double duration() const noexcept {
-            return impl_.duration();
-        }
-
-        /**
          * @brief Returns the sampling rate of the audio file in Hz.
          * @return Sampling rate of the audio file in Hz.
          */

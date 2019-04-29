@@ -56,6 +56,7 @@ class TestIOMethods(unittest.TestCase):
             decoder = io.Decoder()
             decoder.open(str(f))
             sndfile = PySndfile(f)
+            self.assertTrue(decoder.is_open())
             self.assertEqual(sndfile.channels(), decoder.channels())
             self.assertEqual(sndfile.samplerate(), decoder.samplerate())
 
@@ -117,6 +118,8 @@ class TestIOMethods(unittest.TestCase):
             f = os.path.join(repository, filename)
 
             encoder.open(f)
+            self.assertTrue(encoder.is_open())
+
             counter = encoder.write(data.astype(np.float32))
             self.assertEqual(data.size, counter)
 

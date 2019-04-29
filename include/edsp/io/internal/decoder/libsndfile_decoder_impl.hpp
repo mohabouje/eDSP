@@ -123,10 +123,6 @@ namespace edsp { namespace io {
             return info_.channels;
         }
 
-        double duration() const noexcept {
-            return static_cast<double>(info_.frames) / info_.samplerate;
-        }
-
         double sample_rate() const noexcept {
             return info_.samplerate;
         }

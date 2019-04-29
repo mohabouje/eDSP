@@ -98,7 +98,6 @@ void add_io_package() {
         .def("close", &decoder::close)
         .def("channels", &decoder::channels)
         .def("samplerate", &decoder::sample_rate)
-        .def("duration", &decoder::duration)
         .def("frames", &decoder::frames)
         .def("seekable", &decoder::seekable)
         .def("seek", &decoder::seek)
