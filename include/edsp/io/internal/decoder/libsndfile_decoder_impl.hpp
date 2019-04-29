@@ -155,7 +155,6 @@ namespace edsp { namespace io {
                 const auto counter = (remaining > N) ? N : remaining;
                 samples_read       = internal::reader<T>{}.read(file_, meta::data(buffer_), counter);
                 remaining -= samples_read;
-                std::cout << "Read: " << samples_read << " remaining " << remaining << std::endl;
                 first = std::copy(std::cbegin(buffer_), std::cbegin(buffer_) + samples_read, first);
             } while (remaining > 0 && samples_read > 0);
             return total - remaining;

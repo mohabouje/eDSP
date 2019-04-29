@@ -4,7 +4,9 @@ import numpy as np
 import utility
 import random
 import taglib
+import os
 import os.path
+import uuid
 from pysndfile import *
 
 
@@ -97,3 +99,38 @@ class TestIOMethods(unittest.TestCase):
 
             self.assertEqual(data_count, frames.size)
             np.testing.assert_array_almost_equal(frames, data)
+
+    def test_encoder(self):
+        repository, files = utility.get_list_test_files()
+        number_inputs = 10
+        minimum_size = 1 << 10
+        maximum_size = 1 << 20
+        sr = [8000, 11025, 22050, 32000, 44100, 48000]
+        for data in utility.generate_inputs(number_inputs, minimum_size, maximum_size):
+            samplerate = random.choice(sr)
+
+            encoder = io.Encoder(samplerate, 1)
+            self.assertEqual(samplerate, encoder.samplerate())
+            self.assertEqual(1, encoder.channels())
+
+            filename = str(uuid.uuid4()) + ".wav"
+            f = os.path.join(repository, filename)
+
+            encoder.open(f)
+            counter = encoder.write(data.astype(np.float32))
+            self.assertEqual(data.size, counter)
+
+            encoder.close()
+
+            decoder = io.Decoder()
+            decoder.open(f)
+            self.assertEqual(len(data), decoder.frames())
+            self.assertEqual(samplerate, decoder.samplerate())
+            self.assertEqual(1, decoder.channels())
+
+            recovery, data_count = decoder.read(len(data))
+            self.assertEqual(data_count, len(data))
+            np.testing.assert_array_almost_equal(recovery, data)
+
+            decoder.close()
+            os.remove(f)
