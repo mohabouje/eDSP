@@ -109,3 +109,25 @@ Distributed under the [GPLv3 license](https://www.gnu.org/licenses/gpl-3.0.html)
 [travis-link]: https://travis-ci.org/mohabouje/eDSP
 [codecov-badge]: https://codecov.io/gh/mohabouje/eDSP/branch/master/graph/badge.svg
 [codecov-link]: https://codecov.io/gh/mohabouje/eDSP
+
+### Donation
+
+This project is developed by [Mohammed Boujemaoui](mailto:mohabouje@gmail.com) on his free time to provide a
+fully integrated DSP framework for signal processing, speech processing or music information retrieval.
+
+If you feel this project is useful to you and want to support it and it's
+future development please consider donating money. 
+
+
+
+
+| [![Paypal](https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QMXHMYW9BY5C4&source=url) | [![](https://c5.patreon.com/external/logo/become_a_patron_button.png)](https://www.patreon.com/join/mohabouje) |
+
+
+
+
+
+
+
+
+
