@@ -89,7 +89,7 @@ void add_io_package() {
         .def("is_open", &encoder::is_open)
         .def("close", &encoder::close)
         .def("channels", &encoder::channels)
-        .def("sample_rate", &encoder::sample_rate)
+        .def("samplerate", &encoder::sample_rate)
         .def("write", encoder_wrapper);
 
     bp::class_<decoder>("Decoder", bp::init<>())
@@ -97,7 +97,7 @@ void add_io_package() {
         .def("is_open", &decoder::is_open)
         .def("close", &decoder::close)
         .def("channels", &decoder::channels)
-        .def("sample_rate", &decoder::sample_rate)
+        .def("samplerate", &decoder::sample_rate)
         .def("duration", &decoder::duration)
         .def("frames", &decoder::frames)
         .def("seekable", &decoder::seekable)

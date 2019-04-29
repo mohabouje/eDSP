@@ -92,8 +92,8 @@ namespace edsp { namespace io {
          * @param last Input iterator defining the ending of the input range.
          */
         template <typename InputIt>
-        void write(InputIt first, InputIt last) {
-            impl_.write(first, last);
+        auto write(InputIt first, InputIt last) {
+            return impl_.write(first, last);
         }
 
     private:

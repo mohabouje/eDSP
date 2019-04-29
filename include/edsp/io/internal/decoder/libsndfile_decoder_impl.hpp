@@ -146,20 +146,17 @@ namespace edsp { namespace io {
         template <typename OutputIt>
         index_type read(OutputIt first, OutputIt last) {
             using value_type = meta::value_type_t<OutputIt>;
-            static_assert(std::is_same<value_type, T>::value, "Expecting iterator of the same type");
+            static_assert(std::is_same<value_type, underlying_t>::value, "Expecting iterator of the same type");
 
             index_type total        = std::distance(first, last);
             index_type remaining    = total;
             index_type samples_read = 0;
             do {
-                const auto expected_samples = (remaining >= N) ? N : remaining;
-                const auto expected_frames  = std::trunc(expected_samples / info_.channels);
-                const auto frames_read = internal::reader<T>{}.read(file_, meta::data(buffer_), (int) expected_frames);
-                samples_read           = frames_read * info_.channels;
+                const auto counter = (remaining > N) ? N : remaining;
+                samples_read       = internal::reader<T>{}.read(file_, meta::data(buffer_), counter);
                 remaining -= samples_read;
-                for (auto i = 0; i < samples_read; ++i, ++first) {
-                    *first = static_cast<meta::value_type_t<OutputIt>>(buffer_[i]);
-                }
+                std::cout << "Read: " << samples_read << " remaining " << remaining << std::endl;
+                first = std::copy(std::cbegin(buffer_), std::cbegin(buffer_) + samples_read, first);
             } while (remaining > 0 && samples_read > 0);
             return total - remaining;
         }

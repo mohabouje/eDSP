@@ -136,13 +136,13 @@ namespace edsp { namespace io {
         }
 
         template <typename OutputIt>
-        void write(OutputIt first, OutputIt last) {
+        auto write(OutputIt first, OutputIt last) {
             using value_type = meta::value_type_t<OutputIt>;
             static_assert(std::is_same<value_type, T>::value, "Expecting iterator of the same type");
 
             const auto length = std::distance(first, last);
             const auto* data  = &(*first);
-            internal::writer<T>{}.write(file_, data, length);
+            return internal::writer<T>{}.write(file_, data, length);
         }
 
     private:
