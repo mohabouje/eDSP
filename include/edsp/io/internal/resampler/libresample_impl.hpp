@@ -50,13 +50,13 @@ namespace edsp { namespace io {
         }
 
         template <typename InputIt, typename OutputIt>
-        long process(InputIt first, InputIt last, OutputIt d_first) {
+        std::pair<size_type, size_type> process(InputIt first, InputIt last, OutputIt d_first) {
             const auto size = std::distance(first, last);
             int sr_used     = 0;
             const auto output_size =
                 resample_process(handle_, factor_, &(*first), (int) size, 0, &sr_used, &(*d_first), (int) size);
             report_error(__PRETTY_FUNCTION__);
-            return output_size;
+            return {size, output_size};
         }
 
         value_type ratio() const {
@@ -83,6 +83,10 @@ namespace edsp { namespace io {
 
         bool valid_ratio(float ratio) {
             return true;
+        }
+
+        size_type channels() const {
+            return channels_;
         }
 
     private:

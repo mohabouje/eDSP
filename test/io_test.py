@@ -7,10 +7,24 @@ import taglib
 import os
 import os.path
 import uuid
+import samplerate
+from samplerate.converters import ConverterType
 from pysndfile import *
 
 
 class TestIOMethods(unittest.TestCase):
+
+    __number_inputs = []
+    __maximum_size = []
+    __minimum_size = []
+    __database = []
+
+    def __init__(self, *args, **kwargs):
+        self.__number_inputs = 10
+        self.__maximum_size = 10000
+        self.__minimum_size = 100
+        self.__database = utility.read_audio_test_files(self.__number_inputs, self.__minimum_size, self.__maximum_size)
+        super(TestIOMethods, self).__init__(*args, **kwargs)
 
     def testing_metadata(self):
         repository, files = utility.get_list_test_files()
@@ -71,10 +85,8 @@ class TestIOMethods(unittest.TestCase):
             frames = sndfile.read_frames(dtype=np.float32)
             self.assertEqual(decoder.frames(), frames.shape[0])
 
-            data, data_count = decoder.read(frames.size)
+            data = decoder.read(frames.size)
             data = data.reshape(frames.shape)
-
-            self.assertEqual(data_count, frames.size)
             np.testing.assert_array_almost_equal(frames, data)
 
     def test_decoder_seek(self):
@@ -95,10 +107,8 @@ class TestIOMethods(unittest.TestCase):
 
             remaining = decoder.frames() - seek_counter_pedsp
             frames = sndfile.read_frames(remaining, dtype=np.float32)
-            data, data_count = decoder.read(frames.size)
+            data = decoder.read(frames.size)
             data = data.reshape(frames.shape)
-
-            self.assertEqual(data_count, frames.size)
             np.testing.assert_array_almost_equal(frames, data)
 
     def test_encoder(self):
@@ -131,9 +141,42 @@ class TestIOMethods(unittest.TestCase):
             self.assertEqual(samplerate, decoder.samplerate())
             self.assertEqual(1, decoder.channels())
 
-            recovery, data_count = decoder.read(len(data))
-            self.assertEqual(data_count, len(data))
+            recovery = decoder.read(len(data))
             np.testing.assert_array_almost_equal(recovery, data)
 
             decoder.close()
             os.remove(f)
+
+    def test_resampler(self):
+        sr = [8000, 11025, 22050, 32000, 44100, 48000]
+        q = [io.ResampleQuality.Linear,
+             io.ResampleQuality.MediumQuality,
+             io.ResampleQuality.BestQuality,
+             io.ResampleQuality.Fastest,
+             io.ResampleQuality.ZeroOrderHold]
+        eq = {io.ResampleQuality.Linear: ConverterType.linear,
+              io.ResampleQuality.MediumQuality: ConverterType.sinc_medium,
+              io.ResampleQuality.BestQuality: ConverterType.sinc_best,
+              io.ResampleQuality.Fastest: ConverterType.sinc_fastest,
+              io.ResampleQuality.ZeroOrderHold: ConverterType.zero_order_hold}
+
+        for old_samplerate, data in self.__database:
+            alternative_samplerates = list(filter(lambda x: x >= old_samplerate, sr))
+            new_samplerate = random.choice(alternative_samplerates)
+            ratio = new_samplerate / old_samplerate
+            self.assertTrue(io.Resampler.valid_ratio(ratio))
+
+            algorithm = random.choice(q)
+            channels = 1
+
+            resampler = io.Resampler(channels, algorithm, ratio)
+            self.assertEqual(algorithm, resampler.quality())
+            self.assertEqual(ratio, resampler.ratio())
+            self.assertEqual(0, resampler.error())
+
+            resampled, input_frames_used = resampler.process(data.astype(np.float32))
+            self.assertTrue(len(resampled) <= len(data) * ratio)
+
+            res = samplerate.Resampler(eq[algorithm], channels=channels)
+            reference = res.process(data, ratio, end_of_input=False)
+            np.testing.assert_array_almost_equal(resampled, reference)

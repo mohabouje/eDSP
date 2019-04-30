@@ -85,7 +85,7 @@ namespace edsp { namespace io {
          * @return Number of samples computed in the output range.
          */
         template <typename InputIt, typename OutputIt>
-        inline size_type process(InputIt first, InputIt last, OutputIt d_first) {
+        std::pair<size_type, size_type> process(InputIt first, InputIt last, OutputIt d_first) {
             return impl.process(first, last, d_first);
         }
 
@@ -126,6 +126,13 @@ namespace edsp { namespace io {
          */
         value_type ratio() const {
             return impl.ratio();
+        }
+
+        /**
+         * @brief Returns the number of channels
+         */
+        size_type channels() const {
+            return impl.channels();
         }
 
         /**

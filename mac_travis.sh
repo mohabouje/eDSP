@@ -45,7 +45,7 @@ pip3 install -U spectrum
 pip3 install -U cython
 pip3 install -U madmom
 pip3 install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
-pip3 install eyed3 pydub pyaudioanalysis pytaglib pysndfile
+pip3 install eyed3 pydub pyaudioanalysis pytaglib pysndfile samplerate
 python3 test/
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"

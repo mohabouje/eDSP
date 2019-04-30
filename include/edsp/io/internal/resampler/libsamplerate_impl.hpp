@@ -50,19 +50,19 @@ namespace edsp { namespace io {
         }
 
         template <typename InputIt, typename OutputIt>
-        inline size_type process(InputIt first, InputIt last, OutputIt d_first) {
-            const auto size         = std::distance(first, last);
-            data_.input_frames      = size / channels_;
-            data_.output_frames     = size / channels_;
-            data_.data_in           = const_cast<value_type*>(&(*first));
-            data_.data_out          = &(*d_first);
-            data_.src_ratio         = ratio_;
-            data_.input_frames_used = 0;
-            data_.output_frames_gen = 0;
-            data_.end_of_input      = 0;
-            error_                  = src_process(state_, &data_);
+        std::pair<size_type, size_type> process(InputIt first, InputIt last, OutputIt d_first) {
+            const auto size          = std::distance(first, last);
+            const auto input_frames  = size / channels_;
+            const auto output_frames = static_cast<std::size_t>(ratio_ * input_frames);
+            data_.input_frames       = input_frames;
+            data_.output_frames      = output_frames;
+            data_.data_in            = const_cast<value_type*>(&(*first));
+            data_.data_out           = &(*d_first);
+            data_.src_ratio          = ratio_;
+            data_.end_of_input       = 0;
+            error_                   = src_process(state_, &data_);
             report_error(__PRETTY_FUNCTION__);
-            return data_.output_frames_gen * channels_;
+            return {data_.input_frames_used, data_.output_frames_gen};
         }
 
         int quality() const {
@@ -70,7 +70,11 @@ namespace edsp { namespace io {
         }
 
         value_type ratio() const {
-            return data_.src_ratio;
+            return ratio_;
+        }
+
+        size_type channels() const {
+            return channels_;
         }
 
         error_type reset() {

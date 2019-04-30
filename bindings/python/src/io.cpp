@@ -42,19 +42,21 @@ auto encoder_wrapper(encoder& enc, bn::ndarray& input) {
     return enc.write(in, in + size);
 }
 
-bp::tuple decoder_wrapper(decoder& dec, unsigned int size) {
+auto decoder_wrapper(decoder& dec, unsigned int size) {
     Py_intptr_t shape[1] = {size};
     auto result          = bn::empty(1, shape, bn::dtype::get_builtin<real_t>());
     auto data            = reinterpret_cast<real_t*>(result.get_data());
-    const auto total     = dec.read(data, data + size);
-    return bp::make_tuple(result, total);
+    const auto sizes     = dec.read(data, data + size);
+    const auto frames    = sizes / dec.channels();
+    result.reshape(bp::make_tuple(frames, dec.channels()));
+    return result;
 }
 
 std::string resampler_error_string_wrapper(resampler& res) {
     return res.error_string().to_string();
 }
 
-bp::tuple resampler_process_wrapper(resampler& res, bn::ndarray& input) {
+auto resampler_process_wrapper(resampler& res, bn::ndarray& input) {
     if (input.get_nd() != 1) {
         throw std::invalid_argument("Expected one-dimensional arrays");
     }
@@ -66,8 +68,15 @@ bp::tuple resampler_process_wrapper(resampler& res, bn::ndarray& input) {
     auto result          = bn::empty(1, shape, bn::dtype::get_builtin<real_t>());
     auto data            = reinterpret_cast<real_t*>(result.get_data());
     auto in              = reinterpret_cast<real_t*>(input.get_data());
-    const auto total     = res.process(in, in + size, data);
-    return bp::make_tuple(result, total);
+    const auto sizes     = res.process(in, in + size, data);
+
+    Py_intptr_t final_shape[2] = {sizes.second, res.channels()};
+    const auto final_samples   = sizes.second * res.channels();
+    auto final_result          = bn::empty(1, final_shape, bn::dtype::get_builtin<real_t>());
+    auto final_data            = reinterpret_cast<real_t*>(final_result.get_data());
+    std::copy(data, data + final_samples, final_data);
+    final_result.reshape(bp::make_tuple(sizes.second, res.channels()));
+    return bp::make_tuple(final_result, sizes.first);
 }
 
 void add_io_package() {
@@ -117,5 +126,6 @@ void add_io_package() {
         .def("reset", &resampler::reset)
         .def("error", &resampler::error)
         .def("valid_ratio", &resampler::valid_ratio)
+        .staticmethod("valid_ratio")
         .def("ratio", &resampler::ratio);
 }
