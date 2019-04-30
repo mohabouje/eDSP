@@ -171,7 +171,7 @@ class TestIOMethods(unittest.TestCase):
 
             resampler = io.Resampler(channels, algorithm, ratio)
             self.assertEqual(algorithm, resampler.quality())
-            self.assertEqual(ratio, resampler.ratio())
+            self.assertEqual(ratio, resampler.ratio(), 5)
             self.assertEqual(0, resampler.error())
 
             resampled, input_frames_used = resampler.process(data.astype(np.float32))
