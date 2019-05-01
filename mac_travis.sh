@@ -40,12 +40,11 @@ cd ${TRAVIS_BUILD_DIR}
 pip3 install --upgrade pip
 pip3 install -U numpy
 pip3 install -U scipy
-pip3 install -U librosa
 pip3 install -U spectrum
 pip3 install -U cython
 pip3 install -U madmom
 pip3 install git+https://github.com/sdrobert/pydrobert-speech.git#egg=pydrobert-speech
-pip3 install eyed3 pydub pyaudioanalysis pytaglib pysndfile samplerate
+pip3 install eyed3 pydub pyaudioanalysis pytaglib pysndfile samplerate soundfile
 python3 test/
 if [ $? -ne 0 ]; then
     error "Error: there are some tests that failed!"

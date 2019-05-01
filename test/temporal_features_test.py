@@ -63,7 +63,7 @@ class TestTemporalFeatureMethods(unittest.TestCase):
         for _, data in self.__database:
             generated = temporal.azcr(data)
             reference = extractor.stZCR(data)
-            self.assertAlmostEqual(generated, reference)
+            self.assertAlmostEqual(generated, reference, 3)
 
     def test_leq(self):
         for _, data in self.__database:

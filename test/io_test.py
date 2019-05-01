@@ -171,7 +171,7 @@ class TestIOMethods(unittest.TestCase):
 
             resampler = io.Resampler(channels, algorithm, ratio)
             self.assertEqual(algorithm, resampler.quality())
-            self.assertAlmostEqual(ratio, resampler.ratio(), 5)
+            self.assertAlmostEqual(ratio, resampler.ratio(), 4)
             self.assertEqual(0, resampler.error())
 
             resampled, input_frames_used = resampler.process(data.astype(np.float32))
@@ -179,4 +179,4 @@ class TestIOMethods(unittest.TestCase):
 
             res = samplerate.Resampler(eq[algorithm], channels=channels)
             reference = res.process(data, ratio, end_of_input=False)
-            np.testing.assert_array_almost_equal(resampled, reference)
+            np.testing.assert_array_almost_equal(resampled, reference, 4)

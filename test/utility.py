@@ -1,9 +1,9 @@
 import scipy.signal as sp
 import numpy as np
 from random import randint, sample
-import librosa.core
 import os
 import os.path
+import soundfile as sf
 
 def get_list_test_files():
     file_path = os.path.abspath(__file__)
@@ -16,7 +16,10 @@ def read_audio_test_files(number_inputs, minimum_size, maximum_size):
     data = []
     for _ in range(number_inputs):
         path = os.path.join(dir_path, files[randint(0, len(files) - 1)])
-        wave, fs = librosa.core.load(path, mono=True, dtype=np.float64)
+        wave, fs = sf.read(str(path))
+        _, channels = wave.shape
+        wave = wave.sum(axis=1) / channels
+        wave = wave.astype(np.float64)
         size = randint(min(minimum_size, len(wave)), min(maximum_size, len(wave)))
         starting = randint(0, len(wave) - size)
         wave = wave[starting:starting + size]
