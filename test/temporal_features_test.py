@@ -1,6 +1,5 @@
 import unittest
 import random
-import string
 import essentia.standard
 import pedsp.temporal as temporal
 import numpy as np

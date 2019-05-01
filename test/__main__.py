@@ -14,7 +14,6 @@ from spectral_features_test import TestSpectralFeatureMethods
 from filter_test import TestFilterMethods
 from io_test import TestIOMethods
 
-from sys import exit
 
 if __name__ == "__main__":
 

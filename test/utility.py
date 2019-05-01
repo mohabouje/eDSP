@@ -1,6 +1,6 @@
 import scipy.signal as sp
 import numpy as np
-from random import randint, sample
+from random import randint
 import os
 import os.path
 import soundfile as sf

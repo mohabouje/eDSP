@@ -2,8 +2,6 @@ import unittest
 import random
 import pedsp.filter as flt
 import numpy as np
-import scipy.signal as sp
-from utility import generate_inputs
 
 class TestFilterMethods(unittest.TestCase):
 

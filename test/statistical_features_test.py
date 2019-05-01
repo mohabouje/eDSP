@@ -40,7 +40,7 @@ class TestStatisticalFeatureMethods(unittest.TestCase):
         return se
 
     def test_centroid(self):
-        for fs, data in self.__database:
+        for _, data in self.__database:
             generated = statistics.centroid(data)
             reference = measure.center_of_mass(data)
             self.assertAlmostEqual(generated, reference[0])
@@ -65,7 +65,7 @@ class TestStatisticalFeatureMethods(unittest.TestCase):
                 self.assertAlmostEqual(generated, reference, 4)
 
     def test_flux(self):
-        for fs, data in self.__database:
+        for _, data in self.__database:
             generated = statistics.flux(data, data)
             reference = extractor.stSpectralFlux(data, data)
             self.assertAlmostEqual(generated, reference)

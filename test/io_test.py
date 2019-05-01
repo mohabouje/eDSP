@@ -112,7 +112,7 @@ class TestIOMethods(unittest.TestCase):
             np.testing.assert_array_almost_equal(frames, data)
 
     def test_encoder(self):
-        repository, files = utility.get_list_test_files()
+        repository, _ = utility.get_list_test_files()
         number_inputs = 10
         minimum_size = 1 << 10
         maximum_size = 1 << 20
@@ -174,7 +174,7 @@ class TestIOMethods(unittest.TestCase):
             self.assertAlmostEqual(ratio, resampler.ratio(), 4)
             self.assertEqual(0, resampler.error())
 
-            resampled, input_frames_used = resampler.process(data.astype(np.float32))
+            resampled, _ = resampler.process(data.astype(np.float32))
             self.assertTrue(len(resampled) <= len(data) * ratio)
 
             res = samplerate.Resampler(eq[algorithm], channels=channels)

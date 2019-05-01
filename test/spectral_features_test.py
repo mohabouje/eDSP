@@ -1,6 +1,5 @@
 import unittest
 import random
-import math
 import scipy
 import scipy.signal
 import scipy.stats
@@ -8,7 +7,6 @@ import scipy.stats.mstats
 import utility
 import pedsp.spectral as spectral
 import numpy as np
-import scipy.ndimage.measurements as measure
 import pyAudioAnalysis.audioFeatureExtraction as extractor
 
 class TestSpectralFeatureMethods(unittest.TestCase):

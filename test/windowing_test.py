@@ -2,7 +2,6 @@ import unittest
 import pedsp.windowing as windowing
 import numpy as np
 import scipy.signal as signal
-import scipy.signal.windows as spw
 from random import randint
 
 
