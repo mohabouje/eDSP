@@ -68,7 +68,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
             data = (data + utility.epsilon) * 100
             generated = spectral.spectral_flux(data, data)
             reference = extractor.stSpectralFlux(data, data)
-            self.assertAlmostEqual(generated, reference.item(), 6)
+            self.assertAlmostEqual(generated, reference.item(), 5)
 
     def test_spectral_rolloff(self):
         for fs, data in self.__database:
@@ -77,7 +77,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
             data = (data + utility.epsilon) * 100
             generated = spectral.spectral_rolloff(data, percentage)
             reference = extractor.stSpectralRollOff(data, percentage, fs)
-            self.assertAlmostEqual(generated, reference.item(), 6)
+            self.assertAlmostEqual(generated, reference.item(), 5)
 
     def test_spectral_flatness(self):
         for fs, data in self.__database:
@@ -85,7 +85,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
             data = (data + utility.epsilon) * 100
             generated = spectral.spectral_flatness(data)
             reference = self.__compute_flatness(data)
-            self.assertAlmostEqual(generated, reference.item(), 6)
+            self.assertAlmostEqual(generated, reference.item(), 5)
 
     def test_spectral_crest(self):
         for fs, data in self.__database:
@@ -93,7 +93,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
             data = (data + utility.epsilon) * 100
             generated = spectral.spectral_crest(data)
             reference = self.__compute_crest(data)
-            self.assertAlmostEqual(generated, reference.item(), 6)
+            self.assertAlmostEqual(generated, reference.item(), 5)
 
     def test_spectral_kurtosis(self):
         for fs, data in self.__database:
@@ -101,7 +101,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
             data = (data + utility.epsilon) * 100
             generated = spectral.spectral_kurtosis(data)
             reference = scipy.stats.mstats.kurtosis(data, fisher=False)
-            self.assertAlmostEqual(generated, reference.item(), 6)
+            self.assertAlmostEqual(generated, reference.item(), 5)
 
     def test_spectral_skewness(self):
         for fs, data in self.__database:
@@ -109,7 +109,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
             data = (data + utility.epsilon) * 100
             generated = spectral.spectral_skewness(data)
             reference = scipy.stats.mstats.skew(data)
-            self.assertAlmostEqual(generated, reference.item(), 6)
+            self.assertAlmostEqual(generated, reference.item(), 5)
 
     def test_spectral_entropy(self):
         import math
@@ -118,4 +118,4 @@ class TestSpectralFeatureMethods(unittest.TestCase):
             data = (data + utility.epsilon) * 100
             generated = spectral.spectral_entropy(data)
             reference = self.__spectral_entropy(data)
-            self.assertAlmostEqual(generated, reference.item(), 6)
+            self.assertAlmostEqual(generated, reference.item(), 5)

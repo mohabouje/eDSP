@@ -180,4 +180,5 @@ class TestIOMethods(unittest.TestCase):
 
             res = samplerate.Resampler(eq[algorithm], channels=channels)
             reference = res.process(data, ratio, end_of_input=False)
-            np.testing.assert_array_almost_equal(np.round(resampled), np.round(reference))
+            error = utility.get_change(np.round(resampled), np.round(reference))
+            self.assertTrue(error < 1)
