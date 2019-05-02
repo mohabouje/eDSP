@@ -31,7 +31,7 @@ def read_audio_test_files(number_inputs, minimum_size, maximum_size):
 
 def get_change(current, previous):
     if current == previous:
-        return 100.0
+        return 0.0
     try:
         return (abs(current - previous) / previous) * 100.0
     except ZeroDivisionError:

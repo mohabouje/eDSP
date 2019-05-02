@@ -9,7 +9,7 @@ from utility import generate_inputs
 class TestAlgorithmMethods(unittest.TestCase):
 
     __number_inputs = 10
-    __minimum_size = 0
+    __minimum_size = 10
     __maximum_size = 1000
 
     def test_scale(self):
@@ -101,7 +101,7 @@ class TestAlgorithmMethods(unittest.TestCase):
     def test_linear_space(self):
         for _ in range(0, self.__number_inputs):
             size = randint(-self.__minimum_size, self.__maximum_size)
-            minimum = randint(self.__minimum_size, self.__maximum_size / 1000)
+            minimum = randint(self.__minimum_size, self.__maximum_size)
             maximum = randint(minimum, self.__maximum_size)
             generated = algorithm.linspace(minimum, maximum, size)
             reference = np.linspace(minimum, maximum, size)

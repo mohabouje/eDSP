@@ -180,5 +180,6 @@ class TestIOMethods(unittest.TestCase):
 
             res = samplerate.Resampler(eq[algorithm], channels=channels)
             reference = res.process(data, ratio, end_of_input=False)
-            error = utility.get_change(np.round(resampled), np.round(reference))
-            self.assertTrue(error < 1)
+            for l, r in zip(np.round(resampled), np.round(reference)):
+                error = utility.get_change(l, r)
+                self.assertTrue(error < 1)
