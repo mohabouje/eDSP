@@ -46,11 +46,11 @@ namespace edsp { namespace windowing {
     constexpr void flattop(OutputIt first, OutputIt last) {
         using value_type  = meta::value_type_t<OutputIt>;
         using size_type   = meta::diff_type_t<OutputIt>;
-        constexpr auto a0 = static_cast<value_type>(0.2156);
-        constexpr auto a1 = static_cast<value_type>(0.4160);
-        constexpr auto a2 = static_cast<value_type>(0.2781);
-        constexpr auto a3 = static_cast<value_type>(0.0836);
-        constexpr auto a4 = static_cast<value_type>(0.0069);
+        constexpr auto a0 = static_cast<value_type>(0.21557895);
+        constexpr auto a1 = static_cast<value_type>(0.41663158);
+        constexpr auto a2 = static_cast<value_type>(0.277263158);
+        constexpr auto a3 = static_cast<value_type>(0.083578947);
+        constexpr auto a4 = static_cast<value_type>(0.006947368);
         const auto size   = static_cast<size_type>(std::distance(first, last));
         const auto factor = constants<value_type>::two_pi / static_cast<value_type>(size - 1);
         for (size_type i = 0; i < size; ++i, ++first) {

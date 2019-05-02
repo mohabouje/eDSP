@@ -82,12 +82,12 @@ class TestAlgorithmMethods(unittest.TestCase):
             reference = np.concatenate((first, second))
             np.testing.assert_array_almost_equal(generated, reference)
 
-    # def test_pad(self):
-    #     for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
-    #         size = randint(len(data), self.__maximum_size)
-    #         generated = algorithm.pad(data, size)
-    #         reference = np.pad(data, (0, size - len(data) % size), mode='constant', constant_values=0)
-    #         np.testing.assert_array_almost_equal(generated, reference)
+    def test_pad(self):
+        for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
+            size = randint(len(data), self.__maximum_size)
+            generated = algorithm.pad(data, size)
+            reference = np.pad(data, (0, size - len(data) % size), mode='constant', constant_values=0)
+            np.testing.assert_array_almost_equal(generated, reference)
 
     def test_logarithmic_space(self):
         for _ in range(1, self.__number_inputs):
@@ -134,7 +134,7 @@ class TestAlgorithmMethods(unittest.TestCase):
             duplicate = np.copy(data)
             self.assertTrue(algorithm.equal(data, duplicate))
 
-            editions = random.randint(0, len(data) - 1)
+            editions = random.randint(1, len(data) - 1)
             indexes = random.sample(range(0, len(data) - 1), editions)
             duplicate[indexes] = 2 * duplicate[indexes]
             self.assertFalse(algorithm.equal(data, duplicate))
