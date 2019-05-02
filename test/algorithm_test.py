@@ -1,8 +1,8 @@
 import unittest
 import pedsp.algorithm as algorithm
 import numpy as np
+import random
 from random import randint
-
 from utility import generate_inputs
 
 
@@ -109,7 +109,7 @@ class TestAlgorithmMethods(unittest.TestCase):
 
     def test_linear_search(self):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
-            value = data[randint(0, len(data) - 1)]
+            value = random.choice(data)
             generated = algorithm.linear_search(data, value)
             reference = list(data).index(value)
             self.assertAlmostEqual(generated, reference)
@@ -117,14 +117,14 @@ class TestAlgorithmMethods(unittest.TestCase):
     def test_binary_search(self):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             data = np.sort(data)
-            value = data[randint(0, len(data) - 1)]
+            value = random.choice(data)
             generated = algorithm.binary_search(data, value)
             reference = list(data).index(value)
             self.assertAlmostEqual(generated, reference)
 
     def test_index_of(self):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
-            value = data[randint(0, len(data) - 1)]
+            value = random.choice(data)
             generated = algorithm.index_of(data, value)
             reference = list(data).index(value)
             self.assertAlmostEqual(generated, reference)
@@ -133,8 +133,8 @@ class TestAlgorithmMethods(unittest.TestCase):
         for data in generate_inputs(self.__number_inputs, self.__minimum_size, self.__maximum_size):
             duplicate = np.copy(data)
             self.assertTrue(algorithm.equal(data, duplicate))
-            for _ in range(randint(0, len(data))):
-                index = randint(0, len(data) - 1)
-                duplicate[index] = 2 * duplicate[index]
 
+            editions = random.randint(0, len(data) - 1)
+            indexes = random.sample(range(0, len(data) - 1), editions)
+            duplicate[indexes] = 2 * duplicate[indexes]
             self.assertFalse(algorithm.equal(data, duplicate))

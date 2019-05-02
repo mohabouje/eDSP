@@ -44,7 +44,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
     def test_spectral_centroid(self):
         for fs, data in self.__database:
             _, data = scipy.signal.periodogram(data, fs)
-            data = data * 100
+            data = (data + utility.epsilon) * 100
             ind = (np.arange(1, len(data) + 1)) * (fs/(2.0 * len(data)))
             generated = spectral.spectral_centroid(data, ind)
             centroid, _ = extractor.stSpectralCentroidAndSpread(data, fs)
@@ -55,7 +55,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
     def test_spectral_spread(self):
         for fs, data in self.__database:
             _, data = scipy.signal.periodogram(data, fs)
-            data = data * 100
+            data = (data + utility.epsilon) * 100
             ind = (np.arange(1, len(data) + 1)) * (fs/(2.0 * len(data)))
             generated = spectral.spectral_spread(data, ind)
             _, spread = extractor.stSpectralCentroidAndSpread(data, fs)
@@ -65,7 +65,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
     def test_spectral_flux(self):
         for fs, data in self.__database:
             _, data = scipy.signal.periodogram(data, fs)
-            data = data * 100
+            data = (data + utility.epsilon) * 100
             generated = spectral.spectral_flux(data, data)
             reference = extractor.stSpectralFlux(data, data)
             self.assertAlmostEqual(generated, reference)
@@ -74,7 +74,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
         for fs, data in self.__database:
             percentage = random.uniform(0.0, 1.0)
             _, data = scipy.signal.periodogram(data, fs)
-            data = data * 100
+            data = (data + utility.epsilon) * 100
             generated = spectral.spectral_rolloff(data, percentage)
             reference = extractor.stSpectralRollOff(data, percentage, fs)
             self.assertAlmostEqual(generated, reference)
@@ -82,7 +82,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
     def test_spectral_flatness(self):
         for fs, data in self.__database:
             _, data = scipy.signal.periodogram(data, fs)
-            data = data * 100
+            data = (data + utility.epsilon) * 100
             generated = spectral.spectral_flatness(data)
             reference = self.__compute_flatness(data)
             self.assertAlmostEqual(generated, reference)
@@ -90,7 +90,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
     def test_spectral_crest(self):
         for fs, data in self.__database:
             _, data = scipy.signal.periodogram(data, fs)
-            data = data * 100
+            data = (data + utility.epsilon) * 100
             generated = spectral.spectral_crest(data)
             reference = self.__compute_crest(data)
             self.assertAlmostEqual(generated, reference)
@@ -98,7 +98,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
     def test_spectral_kurtosis(self):
         for fs, data in self.__database:
             _, data = scipy.signal.periodogram(data, fs)
-            data = data * 100
+            data = (data + utility.epsilon) * 100
             generated = spectral.spectral_kurtosis(data)
             reference = scipy.stats.mstats.kurtosis(data, fisher=False)
             self.assertAlmostEqual(generated, reference)
@@ -106,7 +106,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
     def test_spectral_skewness(self):
         for fs, data in self.__database:
             _, data = scipy.signal.periodogram(data, fs)
-            data = data * 100
+            data = (data + utility.epsilon) * 100
             generated = spectral.spectral_skewness(data)
             reference = scipy.stats.mstats.skew(data)
             self.assertAlmostEqual(generated, reference)
@@ -115,7 +115,7 @@ class TestSpectralFeatureMethods(unittest.TestCase):
         import math
         for fs, data in self.__database:
             _, data = scipy.signal.periodogram(data, fs)
-            data = data * 100
+            data = (data + utility.epsilon) * 100
             generated = spectral.spectral_entropy(data)
             reference = self.__spectral_entropy(data)
             self.assertAlmostEqual(generated, reference)

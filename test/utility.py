@@ -5,6 +5,8 @@ import os
 import os.path
 import soundfile as sf
 
+epsilon = 0.1
+
 def get_list_test_files():
     file_path = os.path.abspath(__file__)
     root = os.path.dirname(file_path)
@@ -19,7 +21,7 @@ def read_audio_test_files(number_inputs, minimum_size, maximum_size):
         wave, fs = sf.read(str(path))
         _, channels = wave.shape
         wave = wave.sum(axis=1) / channels
-        wave = wave.astype(np.float64)
+        wave = wave.astype(np.float64) + epsilon
         size = randint(min(minimum_size, len(wave)), min(maximum_size, len(wave)))
         starting = randint(0, len(wave) - size)
         wave = wave[starting:starting + size]
@@ -43,7 +45,7 @@ def generate_inputs(number_inputs, minimum_size, maximum_size):
     data = []
     for _ in range(number_inputs):
         size = randint(minimum_size, maximum_size)
-        data.append(signals[randint(0, len(signals) - 1)](size).astype(np.float64) + 0.1)
+        data.append(signals[randint(0, len(signals) - 1)](size).astype(np.float64) + epsilon)
     return data
 
 def generate_pair_inputs(number_inputs, minimum_size, maximum_size):
@@ -52,8 +54,8 @@ def generate_pair_inputs(number_inputs, minimum_size, maximum_size):
     second = []
     for _ in range(number_inputs):
         size = randint(minimum_size, maximum_size)
-        first.append(signals[randint(0, len(signals) - 1)](size).astype(np.float64) + 0.1)
-        second.append(signals[randint(0, len(signals) - 1)](size).astype(np.float64) + 0.1)
+        first.append(signals[randint(0, len(signals) - 1)](size).astype(np.float64) + epsilon)
+        second.append(signals[randint(0, len(signals) - 1)](size).astype(np.float64) + epsilon)
     return first, second
 
 def generate_timestamps(init_t, n, sr):
