@@ -174,9 +174,10 @@ class TestIOMethods(unittest.TestCase):
             self.assertAlmostEqual(ratio, resampler.ratio(), 4)
             self.assertEqual(0, resampler.error())
 
+            data = (data + utility.epsilon) * 100
             resampled, _ = resampler.process(data.astype(np.float32))
             self.assertTrue(len(resampled) <= len(data) * ratio)
 
             res = samplerate.Resampler(eq[algorithm], channels=channels)
             reference = res.process(data, ratio, end_of_input=False)
-            np.testing.assert_array_almost_equal(resampled, reference, 4)
+            np.testing.assert_array_almost_equal(resampled, reference, 3)
