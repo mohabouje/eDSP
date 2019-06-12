@@ -84,7 +84,7 @@ namespace edsp { inline namespace math {
     /**
      * @brief Determines if the number is normal floating-point.
      * @param x Number to evaluate.
-     * @returns true if the number is even, false otherwise
+     * @returns true if the number is normal, false otherwise
      */
     template <typename T>
     constexpr bool is_normal(T x) {
