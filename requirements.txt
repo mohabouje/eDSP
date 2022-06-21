@@ -6,7 +6,7 @@ spectrum==0.7.5
 pysndfile==1.3.2
 pytaglib==1.4.5
 SoundFile==0.10.2
-numpy==1.16.1
+numpy==1.22.0
 python_dateutil==2.8.0
 pyAudioAnalysis==0.2.5
 
